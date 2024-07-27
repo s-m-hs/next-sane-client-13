@@ -48,7 +48,19 @@ useEffect(()=>{
 
   return ( 
     // <div className={`container  centerr ${styles.bcatitem}`}  >
-        <div className={`row row-cols-6  ${styles.bcatitem}`}  >
+    <>
+    <div data-aos="fade-up"
+        // data-aos-duration="700"
+        >
+             <div className='row mt-5'>
+          <div className='col' style={{marginRight:'50px'}}>
+            <h1 className={styles.title} >
+              دسته بندی ها :
+            </h1>
+          </div>
+        </div>
+        <div className={`row row-cols-6  ${styles.bcatitem}`} 
+        >
 
 {mainCategory.childs &&   mainCategory.childs.map((item,index)=>
   <CardA imgSrc={item.imageUrl} category={`category`} id={item.id}/>
@@ -59,6 +71,11 @@ useEffect(()=>{
   
         </div>
 
+    </div>
+ 
+
+    </>
+      
       //  </div>
   )
 }

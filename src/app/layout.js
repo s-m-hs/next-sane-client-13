@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/madules/Header/Header";
 import 'bootstrap/dist/css/bootstrap.css'
 import './globals.css'
-
+import AOSInit from "@/utils/Aos/aos";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -20,7 +20,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl" >
       <body className={inter.className} >
-        <Header/>
+<Header/>
+<AOSInit/>
         {children}</body>
     </html>
   );

@@ -1,3 +1,4 @@
+'use client'
 import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CardB from '../../Cards/CardB/CardB';
@@ -7,13 +8,15 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 // import styles from './SwiperC.module.css'
 
 
-export default function SwiperC({title,sliderDetailProp}) {
+export default function SwiperC({title,sliderDetailProp,dataos}) {
   console.log(sliderDetailProp);
 
   return (
     <>
-    <div  className='swipercomb-div'>
-          <span className='swipercomb-title'>{title}</span>
+    <div  className='swipercomb-div' data-aos={dataos} 
+    // data-aos-duration="1500" 
+     >
+          <span className='swipercomb-title' style={{marginRight:'50px'}}>{title}</span>
         <Swiper
             loop={true}
         // slidesPerView={1}
