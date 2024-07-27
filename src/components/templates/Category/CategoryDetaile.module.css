@@ -1,0 +1,27 @@
+.bcatitem{
+    margin-top: 80px;
+}
+.category_row{
+    width: 100%;
+}
+.category__cart_div{
+    align-items: center;
+}
+.category__cart_div span{
+    margin: 20px;
+    font-weight: 600;
+    font-size: 0.9cqi;
+    color: var(--black33b4359);
+}
+.mySwiperD{
+    margin-top: 30px;
+    height: 40vh;
+}
+.img{
+    width: 90%;
+    background-size: cover;
+    height: 95%;
+}
+.category_mySwiperD__hide{
+    display: none;
+}

@@ -1,0 +1,15 @@
+.table{
+    line-height: 50px;
+}
+
+.table> th{
+    padding: 5px;
+    font-size: 0.9cqi;
+    color: var(--black1464646)!important ;
+}
+
+.table>  td{
+    font-size: 0.8cqi;
+    color: var(--black33b4359)!important;
+
+}

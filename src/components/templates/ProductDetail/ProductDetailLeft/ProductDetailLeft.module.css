@@ -1,0 +1,97 @@
+
+.ProductDetailL_div__title{
+    font-size: 1.5cqi;
+    font-weight: 500;
+    color: var(--black33b4359);
+
+}
+.ProductDetailL_div__description{
+    font-size: 1cqi;
+    color: var(--black33b4359
+    );
+}
+.ProductDetailL_div__partn{
+    font-size: 1cqi;
+    color: var(--black33b4359);
+}
+.ProductDetailL_detail span{
+font-size: 0.8cqi;
+color: var(--black33b4359);
+}
+
+.ProductDetailL_divMiddle{
+    height: 100%;
+    line-height: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.ProductDetailL_divMiddle_offprice{
+font-size: 1.5cqi;
+color: var(--them);
+font-weight: 600;
+}
+.ProductDetailL_divMiddle_price{
+    font-size: 1cqi;
+    position: relative;
+    /* text-decoration: line-through solid #ff0000; */
+}
+.ProductDetailL_divMiddle_count{
+    font-size: 1cqi;
+    
+/* color: var(--them); */
+}
+
+.ProductDetailL_divMiddle_price::before{
+    content: '';
+position: absolute;
+text-decoration: line-through solid #ff0000;
+top: 15px;
+right: 0;
+left: 0;
+display: block;
+width: 70%;
+height: 3%;
+background-color: #ff0000;
+transform: rotate(-5deg);
+
+
+}
+.ProductDetailL_left{
+    height: 100%;
+    justify-content: center;
+}
+.ProductDetailL_left button{
+    border: none;
+    outline: none;
+    height: 20%;
+     background: linear-gradient(31deg, #14a5af 24%, #ffffff 100%)!important;
+     filter: drop-shadow(1px 7px 9px #14a5af);  
+    font-size: 1cqi;
+    transition: all 0.5s linear;
+    }
+    .ProductDetailL_left button:hover{
+        background: linear-gradient(31deg, #ffffff  24%, #14a5af 100%)!important;
+
+    }
+
+
+/* 
+    .bodyd {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      } */
+      
+    
+      .sphere span{
+        top: 40%;
+        right: 40%;
+        position: absolute;
+      }
+      .sphere img{
+        width: 30px;
+        height: 30px;
+      }
