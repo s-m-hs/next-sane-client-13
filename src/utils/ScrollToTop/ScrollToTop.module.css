@@ -1,0 +1,29 @@
+.circle{
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--them);
+    position: fixed;
+    z-index: 50;
+    bottom: 100px;
+    left: 10px;
+    cursor: pointer;
+    visibility: hidden;
+}
+.circle_visibil{
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--them);
+    position: fixed;
+    z-index: 50;
+    bottom: 100px;
+    left: 10px;
+    cursor: pointer;
+}
+.circle svg:hover{
+    opacity: 0.5;
+
+}
