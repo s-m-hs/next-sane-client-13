@@ -36,10 +36,10 @@ export default function Home() {
     <div className='col-12'><SwiperB/></div> 
     <CategorySectionA/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
-    <SwiperC dataos='fade-left'  title={'پرفروش ترین ها :'} sliderDetailProp={sliderDetail}/>
+    <SwiperC  title={'پرفروش ترین ها :'} sliderDetailProp={sliderDetail}/>
     <CategorySectionA/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    <SwiperC dataos='fade-right'  title={'پرفروش ترین های سخت افزار :'} sliderDetailProp={sliderDetail2}/>
+    <SwiperC   title={'پرفروش ترین های سخت افزار :'} sliderDetailProp={sliderDetail2}/>
 
 
     </div>

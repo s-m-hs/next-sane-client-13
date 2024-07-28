@@ -1,8 +1,9 @@
 .container{
     margin-top : 100px ;
     width: 100%;
-    height: 400px;
+    height: 500px;
     background-color: var(--white1ffffff);
+    position: relative;
 }
 .container>div{
     width: 80%;
@@ -34,5 +35,13 @@ margin: 10px;
   .eatadiv div a{
     color: var(--black33b4359);
   }
-  .div{
+.rowtop{
+  height: 30%;
+}
+  .rowbuttom{
+    height: 70%;
   }
+.col{
+  height: 80%;
+  justify-content: space-evenly;
+}

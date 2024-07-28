@@ -8,8 +8,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 // import styles from './SwiperC.module.css'
 
 
-export default function SwiperC({title,sliderDetailProp,dataos}) {
-  console.log(sliderDetailProp);
+export default function SwiperC({title,sliderDetailProp}) {
 
   return (
     <>
@@ -27,7 +26,7 @@ export default function SwiperC({title,sliderDetailProp,dataos}) {
           delay: 4000,
           disableOnInteraction: false,
         }}
-        navigation={true}
+        // navigation={true}
         breakpoints={{
           640: {
             slidesPerView: 2,
@@ -44,7 +43,7 @@ export default function SwiperC({title,sliderDetailProp,dataos}) {
         }}
         modules={[Autoplay, Pagination, Navigation]}
 
-        className="mySwiperB"
+        className= "mySwiperB"
       >
         {sliderDetailProp.map(item=>
   <SwiperSlide
