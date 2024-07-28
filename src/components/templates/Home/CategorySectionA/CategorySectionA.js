@@ -49,11 +49,11 @@ useEffect(()=>{
   return ( 
     // <div className={`container  centerr ${styles.bcatitem}`}  >
     <>
-    <div data-aos="fade-up"
+    <div 
         // data-aos-duration="700"
         >
              <div className='row mt-5'>
-          <div className='col' style={{marginRight:'50px'}}>
+          <div className='col' style={{marginRight:'50px',marginTop:'30px'}}>
             <h1 className={styles.title} >
               دسته بندی ها :
             </h1>

@@ -1,0 +1,38 @@
+.container{
+    margin-top : 100px ;
+    width: 100%;
+    height: 400px;
+    background-color: var(--white1ffffff);
+}
+.container>div{
+    width: 80%;
+    margin: 0 auto;
+    border-bottom: 1px solid #f0f0ff;
+}
+.logo{
+    width: 10%;
+    height: 10%;
+}
+.sphere {
+    padding: 4px;
+    width: 30px !important;
+    height: 30px;
+    background-color:green;
+    background: radial-gradient(circle at 30% 50%, #ffffff 10%, #d0d0d0 70%);
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* position: absolute;
+    left:5%; */
+  }
+  .eatadiv{
+    justify-content: flex-start !important;
+
+  }
+  .eatadiv div{
+margin: 10px;
+  }
+  .eatadiv div a{
+    color: var(--black33b4359);
+  }
+  .div{
+  }

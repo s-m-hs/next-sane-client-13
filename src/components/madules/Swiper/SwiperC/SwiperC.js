@@ -13,8 +13,7 @@ export default function SwiperC({title,sliderDetailProp,dataos}) {
 
   return (
     <>
-    <div  className='swipercomb-div' data-aos={dataos} 
-    // data-aos-duration="1500" 
+    <div  className='swipercomb-div'
      >
           <span className='swipercomb-title' style={{marginRight:'50px'}}>{title}</span>
         <Swiper

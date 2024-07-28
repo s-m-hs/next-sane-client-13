@@ -6,11 +6,11 @@ import "aos/dist/aos.css"
 export default function AOSInit() {
     useEffect(()=>{
 Aos.init(  {
-     offset: 300,
+     offset: 200,
     duration: 300,
     // easing: 'ease-in-sine',
     easing: 'linear',
-    delay: 200,
+    delay: 100,
   })
     })
   return null

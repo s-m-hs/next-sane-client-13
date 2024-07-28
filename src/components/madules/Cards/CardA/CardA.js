@@ -5,7 +5,7 @@ export default function CardA({imgSrc,category,id,changeIdProp}) {
 
   
   return (
-    <div className= {`${Styles.cardcat_container} centerc`}>
+    <div data-aos="fade-up"  className= {`${Styles.cardcat_container} centerc`}>
 
  <Link className={`${Styles.circle_wrapper} centerc`}
   href={category ? `${category}/${id}` : ''} onClick={changeIdProp} >

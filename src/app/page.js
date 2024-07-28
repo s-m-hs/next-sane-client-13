@@ -1,3 +1,4 @@
+import BrandArea from '@/components/madules/BrandArea/BrandArea';
 import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
 import CategorySectionA from '@/components/templates/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templates/Home/SwiperB/SwiperB';
@@ -23,13 +24,21 @@ export default function Home() {
     {img:"../../../images/products/lexar 512.jpg",title:'Lexar 512g',price:'2,335,000'},
     {img:"../../../images/products/main610.jpg",title:'ASUS H610 MA-WIFI',price:'5,320,000'},
     {img:"../../../images/products/12400 tray.jpg",title:' intel 12400 ',price:'7,935,000'},]
+    const brandLogA=[
+      'A4.jpg','rapoo.jpg','razer.jpg','tesco.jpg','proone.jpg','logitech.jpg'
+  ]
+  const brandLogoB=[
+    'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
+]
   return (
 <div className='container'>
   <div className='row'>
     <div className='col-12'><SwiperB/></div> 
     <CategorySectionA/>
+  <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC dataos='fade-left'  title={'پرفروش ترین ها :'} sliderDetailProp={sliderDetail}/>
     <CategorySectionA/>
+    <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
     <SwiperC dataos='fade-right'  title={'پرفروش ترین های سخت افزار :'} sliderDetailProp={sliderDetail2}/>
 
 
