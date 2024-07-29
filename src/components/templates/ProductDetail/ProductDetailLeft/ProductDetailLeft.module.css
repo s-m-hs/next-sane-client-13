@@ -1,4 +1,8 @@
 
+.ProductDetailL_divright{
+    height: 100%;
+}
+
 .ProductDetailL_div__title{
     font-size: 1.5cqi;
     font-weight: 500;
@@ -23,7 +27,7 @@ color: var(--black33b4359);
     height: 100%;
     line-height: 30px;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 .ProductDetailL_divMiddle_offprice{
 font-size: 1.5cqi;
@@ -63,14 +67,15 @@ transform: rotate(-5deg);
 .ProductDetailL_left button{
     border: none;
     outline: none;
-    height: 20%;
+    height: 50px;
      background: linear-gradient(31deg, #14a5af 24%, #ffffff 100%)!important;
      filter: drop-shadow(1px 7px 9px #14a5af);  
     font-size: 1cqi;
-    transition: all 0.5s linear;
+    transition: all 0.2s linear;
     }
     .ProductDetailL_left button:hover{
-        background: linear-gradient(31deg, #ffffff  24%, #14a5af 100%)!important;
+        opacity: 0.8;
+        /* background: linear-gradient(31deg, #ffffff  24%, #14a5af 100%)!important; */
 
     }
 

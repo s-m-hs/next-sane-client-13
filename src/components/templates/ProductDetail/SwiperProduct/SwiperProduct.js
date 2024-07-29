@@ -9,20 +9,21 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
-export default function SwiperProduct() {
+export default function SwiperProduct({src}) {
 
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
     <>
-    <Swiper
+    <div  className={`${Styles.swiper} centerc`}>
+        <Swiper
       style={{
         '--swiper-navigation-color': '#fff',
         '--swiper-pagination-color': '#fff',
       }}
       spaceBetween={10}
-      navigation={true}
+      // navigation={true}
       thumbs={{ swiper: thumbsSwiper }}
       modules={[FreeMode, Navigation, Thumbs]}
       className={Styles.mySwiperE2} 
@@ -30,11 +31,11 @@ export default function SwiperProduct() {
        <SwiperSlide className={Styles.swiper_slide}>
        <div>
             <ImageMagnifier 
-                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-652d0606eb21a6b54f50b1c9.webp"
-                width={400}
-                height={300}
-                magnifierHeight={200}
-                magnifierWidth={200}
+                src={src}
+                width={500}
+                height={400}
+                magnifierHeight={100}
+                magnifierWidth={80}
                 zoomLevel={3}
                 alt="Sample Image"
             />
@@ -45,10 +46,10 @@ export default function SwiperProduct() {
    <div>
             <ImageMagnifier 
                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp"
-                width={400}
-                height={300}
-                magnifierHeight={200}
-                magnifierWidth={200}
+               width={500}
+               height={400}
+               magnifierHeight={100}
+               magnifierWidth={80}
                 zoomLevel={3}
                 alt="Sample Image"
             />
@@ -59,10 +60,10 @@ export default function SwiperProduct() {
    <div>
             <ImageMagnifier 
                 src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1 (1).webp"
-                width={400}
-                height={300}
-                magnifierHeight={200}
-                magnifierWidth={200}
+                width={500}
+                height={400}
+                magnifierHeight={100}
+                magnifierWidth={80}
                 zoomLevel={3}
                 alt="Sample Image"
             />
@@ -73,10 +74,10 @@ export default function SwiperProduct() {
    <div>
             <ImageMagnifier 
                 src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1.webp" 
-                width={300}
-                height={200}
+                width={500}
+                height={400}
                 magnifierHeight={100}
-                magnifierWidth={100}
+                magnifierWidth={80}
                 zoomLevel={3}
                 alt="Sample Image"
             />
@@ -87,10 +88,10 @@ export default function SwiperProduct() {
    <div>
             <ImageMagnifier 
                 src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp"
-                width={400}
-                height={300}
-                magnifierHeight={200}
-                magnifierWidth={200}
+                width={500}
+                height={400}
+                magnifierHeight={100}
+                magnifierWidth={80}
                 zoomLevel={3}
                 alt="Sample Image"
             />
@@ -101,16 +102,6 @@ export default function SwiperProduct() {
 
     </Swiper>
 
-
-
-
-
-
-
-
-
-
-    
     <Swiper
       onSwiper={setThumbsSwiper}
       spaceBetween={10}
@@ -121,7 +112,7 @@ export default function SwiperProduct() {
       className={Styles.mySwiperE}
     >
         <SwiperSlide className={Styles.swiper_slide}>
-     <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-652d0606eb21a6b54f50b1c9.webp" />
+     <img src={src} />
    </SwiperSlide>
 
    <SwiperSlide className={Styles.swiper_slide}>
@@ -140,5 +131,7 @@ export default function SwiperProduct() {
      <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp" />
    </SwiperSlide>
     </Swiper>
+    </div>
+  
   </>  )
 }

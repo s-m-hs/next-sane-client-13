@@ -17,6 +17,7 @@
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18",
     "react-spinners": "^0.14.1",
+    "spinner": "^0.3.4",
     "spinners": "^1.2.2",
     "swiper": "^11.1.8"
   }
