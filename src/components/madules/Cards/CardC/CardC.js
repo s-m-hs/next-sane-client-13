@@ -5,7 +5,7 @@ import Styles from './CardC.module.css'
 
 export default function CardC({imgSrc,title,price }) {
   return (
-    <div className={`${Styles.cardprob_container} centerc`}>
+    <div data-aos='fade-up'  className={`${Styles.cardprob_container} centerc`}>
     <img src={imgSrc} alt="" />
     <span className={Styles.cardprob_title} > {title} </span>
     {/* <span>368,000</span> */}

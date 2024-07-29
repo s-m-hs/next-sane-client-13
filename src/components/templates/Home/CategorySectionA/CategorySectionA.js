@@ -1,81 +1,90 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import CardA from '@/components/madules/Cards/CardA/CardA'
-import styles from './CategorySectionA.module.css'
-import apiUrl from '@/utils/ApiUrl/apiUrl'
+"use client";
+import React, { useEffect, useState } from "react";
+import CardA from "@/components/madules/Cards/CardA/CardA";
+import styles from "./CategorySectionA.module.css";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
+import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 
 export default function CategorySectionA() {
-const [mainCategory,setMainCategory]=useState({}) 
+  const [mainCategory, setMainCategory] = useState({});
 
-
-
-const getCategoryById=()=>{
-  let obj={
-    gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    id: 2,
-    str: "string"
-  }
-async function myAppGet(){
-  const res=await fetch(`${apiUrl}/api/CyCategories/GetItemWChildAndRoot`,{
-    method:'POST',
-    headers:{
-      'Content-Type': 'application/json' 
-    },
-    body:JSON.stringify(obj)
-  }).then(res=>{
-    console.log(res)
-    return res.json()
-  }).then(
-    result=>{
-      // console.log(result)
-      setMainCategory(result)
-      console.log(mainCategory)
-      
+  const getCategoryById = () => {
+    let obj = {
+      gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      id: 2,
+      str: "string",
+    };
+    async function myAppGet() {
+      const res = await fetch(
+        `${apiUrl}/api/CyCategories/GetItemWChildAndRoot`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        }
+      )
+        .then((res) => {
+          // console.log(res)
+          return res.json();
+        })
+        .then((result) => {
+          // console.log(result)
+          setMainCategory(result);
+          // console.log(mainCategory)
+        });
     }
-  )
-}
-myAppGet()
-}
-// console.log(imgSrcProp); 
+    myAppGet();
+  };
+  // console.log(imgSrcProp);
 
+  ////////////////////////////
+  useEffect(() => {
+    getCategoryById();
+    // console.log(mainCategory.childs[0].imageUrl)
+  }, []);
 
-
-////////////////////////////
-useEffect(()=>{
-  getCategoryById()
-  // console.log(mainCategory.childs[0].imageUrl) 
-},[])
-
-  return ( 
+  return (
     // <div className={`container  centerr ${styles.bcatitem}`}  >
     <>
-    <div 
-        // data-aos-duration="700"
-        >
-             <div className='row mt-5'>
-          <div className='col' style={{marginRight:'50px',marginTop:'30px'}}>
-            <h1 className={styles.title} >
-              دسته بندی ها :
-            </h1>
+      <div
+      // data-aos-duration="700"
+      >
+        <div className="row mt-5">
+          <div
+            className="col"
+            style={{ marginRight: "50px", marginTop: "30px" }}
+          >
+            <h1 className={styles.title}>دسته بندی ها :</h1>
           </div>
         </div>
-        <div className={`row row-cols-6  ${styles.bcatitem}`} 
-        >
 
-{mainCategory.childs &&   mainCategory.childs.map((item,index)=>
-  <CardA imgSrc={item.imageUrl} category={`category`} id={item.id}/>
+        {!mainCategory.childs && (
+          <>
+            <div className="row">
+              <div className="col-12 centerr">
+                <SpinnerA size={300} />
+              </div>
+            </div>
+          </>
+        )}
 
-)}
-
-   
-  
-        </div>
-
-    </div>
- 
-
+        {mainCategory.childs && (
+          <div className={`row row-cols-6  ${styles.bcatitem}`}>
+            {mainCategory.childs.map((item, index) => (
+              <CardA
+                key={index}
+                imgSrc={item.imageUrl}
+                category={`category`}
+                id={item.id}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </>
-      
-      //  </div>
-  )
+
+    //  </div>
+  );
 }

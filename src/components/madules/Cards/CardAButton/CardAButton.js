@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import Styles from './CardAButton.module.css'
-export default function CardAButton({imgSrc,changeIdProp}) {
-
-  
+export default function CardAButton({imgSrc,changeIdProp}) {  
   return (
     <div className= {`${Styles.cardcat_container} centerc`}>
 

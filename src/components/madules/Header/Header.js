@@ -4,20 +4,19 @@ import styles from "./Header.module.css"
 import Link from "next/link";
 import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
 import { MagnifyingGlass,Phone,ShoppingCart,User,EnvelopeSimple} from "@phosphor-icons/react";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
 
-
-// import apiUrl from "../../utils/apiUrl";
 
 
 export default function Header() {
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
   const [fixTop,setFixTop]=useState(false)
+  const [flaga,setFlaga]=useState(true)
 useEffect(()=>{
 const fixNavbarToTop=()=>{
   // const currentScroll = window.pageYOffset;
   const currentScroll = window.scrollY;
-  console.log(currentScroll)
   if (currentScroll > 105) {
     setFixTop(true);
   } else {
@@ -40,7 +39,7 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
     };
     async function myAppGet() {
       const res = await fetch(
-        `http://sapi.sanecomputer.com/api/CyCategories/GetItemWChildAndRoot`,
+         `${apiUrl}/api/CyCategories/GetItemWChildAndRoot`,
         {
           method: "POST",
           headers: {
@@ -50,7 +49,7 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
         }
       )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           return res.json();
         })
         .then((result) => {
@@ -145,7 +144,8 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
                       {mainCategory.childs?.length &&
                         mainCategory.childs.map((item, index) => (
                           <Link
-                          href={'/'}
+                          key={index}
+                          href={`/category/${item.id}`}
                             className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                           >
                             <img src={item.imageUrl} alt="" />
@@ -159,7 +159,7 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
                 <li
                   value={2}
                   onMouseEnter={onmousHandle}
-                  className={valeS == 2 ?    `${styles.liiii2_a}` : `${styles.liiii2}`  }
+                  className={(valeS == 2 && flaga) ?    `${styles.liiii2_a}` : `${styles.liiii2}`  }
                 >
                   سخت افزار
                   <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
@@ -373,8 +373,8 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
                     >
                       {mainCategory.childs?.length &&
                         mainCategory.childs.map((item, index) => (
-                          <Link
-                          href={'/'}
+                          <Link key={index}
+                          href={`/category/${item.id}`}
                             className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                           >
                             <img src={item.imageUrl} alt="" />
