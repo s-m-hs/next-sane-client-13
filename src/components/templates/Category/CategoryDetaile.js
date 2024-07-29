@@ -39,7 +39,7 @@ export default function CategoryDetaile({param}) {
           return res.json();
         })
         .then((result) => {
-          console.log(result)
+          // console.log(result)
           if(result.childs?.length!=0){
             setMainCatChilds(result.childs);
             setMainCategory(result);
@@ -50,7 +50,7 @@ export default function CategoryDetaile({param}) {
           }
           // console.log(result)
           // console.log(mainCategory.childs);
-          console.log(mainCatChilds);
+          // console.log(mainCatChilds);
         });
     }
     myAppGet();
@@ -101,9 +101,8 @@ export default function CategoryDetaile({param}) {
   }, []);
 useEffect(()=>{
 if(mainCatChilds.length==0 && mainCategory.item?.code){
-console.log(mainCategory) 
+// console.log(mainCategory) 
 let code=mainCategory.item.code
-console.log(mainCategory.item?.code)
 let obj={
   cat:code ,
   pageNumber: 0,
@@ -118,7 +117,7 @@ getproductByCat(obj)
         {mainCatChilds != null &&
           mainCatChilds.map((item, index) => (
             <>
-              <div key={index} className={`centerc ${Styles.category__cart_div}`}>
+              <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
                 <CardAButton imgSrc={item.imageUrl}  changeIdProp={()=>changeId(item.code)} code={item.code}/>
                 <span>{item.text} </span>
               </div>
@@ -129,8 +128,9 @@ getproductByCat(obj)
 <div className={`row row-cols-4 centerr ${Styles.products_card}`}>
 
    {productByCat?.length==0 ? <SpinnerA size={200} /> : productByCat?.map((item,index)=>
-    <div key={index} className={`centerc ${Styles.products_col}`} >
+    <div key={item.id} className={`centerc ${Styles.products_col}`} >
       <CardC
+      id={item.id}
     imgSrc={item.smallImage
     } title={item.name} price={item.price}
     

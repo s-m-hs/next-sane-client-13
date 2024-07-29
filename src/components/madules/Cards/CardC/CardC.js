@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Styles from './CardC.module.css'
 
 
-export default function CardC({imgSrc,title,price }) {
+export default function CardC({imgSrc,title,price,id }) {
   return (
     <div data-aos='fade-up'  className={`${Styles.cardprob_container} centerc`}>
     <img src={imgSrc} alt="" />
@@ -16,7 +16,7 @@ export default function CardC({imgSrc,title,price }) {
 
     </div>
 <Link className={Styles.cardprob__link}
-  href='/products/id' >جزییات بیشتر...</Link>
+  href={`/product/${id}`} >جزییات بیشتر...</Link>
     <div>
 
     </div>

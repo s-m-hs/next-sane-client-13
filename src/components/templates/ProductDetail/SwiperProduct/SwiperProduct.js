@@ -16,7 +16,7 @@ export default function SwiperProduct() {
 
   return (
     <>
-    {/* <Swiper
+    <Swiper
       style={{
         '--swiper-navigation-color': '#fff',
         '--swiper-pagination-color': '#fff',
@@ -27,10 +27,10 @@ export default function SwiperProduct() {
       modules={[FreeMode, Navigation, Thumbs]}
       className={Styles.mySwiperE2} 
     >
-       <SwiperSlide>
+       <SwiperSlide className={Styles.swiper_slide}>
        <div>
             <ImageMagnifier 
-                src="../../images/products/mouse/2021-9-a4tech-bloody-a60-652d0606eb21a6b54f50b1c9.webp"
+                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-652d0606eb21a6b54f50b1c9.webp"
                 width={400}
                 height={300}
                 magnifierHeight={200}
@@ -41,10 +41,10 @@ export default function SwiperProduct() {
         </div>
    </SwiperSlide>
 
-   <SwiperSlide>
+   <SwiperSlide className={Styles.swiper_slide}>
    <div>
             <ImageMagnifier 
-               src="../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp"
+               src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp"
                 width={400}
                 height={300}
                 magnifierHeight={200}
@@ -55,10 +55,10 @@ export default function SwiperProduct() {
         </div>
    </SwiperSlide>
 
-   <SwiperSlide>
+   <SwiperSlide className={Styles.swiper_slide}>
    <div>
             <ImageMagnifier 
-                src="../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1 (1).webp"
+                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1 (1).webp"
                 width={400}
                 height={300}
                 magnifierHeight={200}
@@ -69,10 +69,10 @@ export default function SwiperProduct() {
         </div>
    </SwiperSlide>
 
-   <SwiperSlide>
+   <SwiperSlide className={Styles.swiper_slide}>
    <div>
             <ImageMagnifier 
-                src="../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1.webp" 
+                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1.webp" 
                 width={300}
                 height={200}
                 magnifierHeight={100}
@@ -83,10 +83,10 @@ export default function SwiperProduct() {
         </div>
    </SwiperSlide>
 
-   <SwiperSlide>
+   <SwiperSlide className={Styles.swiper_slide}>
    <div>
             <ImageMagnifier 
-                src="../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp"
+                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp"
                 width={400}
                 height={300}
                 magnifierHeight={200}
@@ -99,10 +99,18 @@ export default function SwiperProduct() {
 
 
 
-    </Swiper> */}
+    </Swiper>
 
 
-{/*     
+
+
+
+
+
+
+
+
+    
     <Swiper
       onSwiper={setThumbsSwiper}
       spaceBetween={10}
@@ -112,25 +120,25 @@ export default function SwiperProduct() {
       modules={[FreeMode, Navigation, Thumbs]}
       className={Styles.mySwiperE}
     >
-        <SwiperSlide>
-     <img src="../../images/products/mouse/2021-9-a4tech-bloody-a60-652d0606eb21a6b54f50b1c9.webp" />
+        <SwiperSlide className={Styles.swiper_slide}>
+     <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-652d0606eb21a6b54f50b1c9.webp" />
    </SwiperSlide>
 
-   <SwiperSlide>
-     <img src="../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp" />
+   <SwiperSlide className={Styles.swiper_slide}>
+     <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp" />
    </SwiperSlide>
 
-   <SwiperSlide>
-     <img src="../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1 (1).webp" />
+   <SwiperSlide className={Styles.swiper_slide}>
+     <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1 (1).webp" />
    </SwiperSlide>
 
-   <SwiperSlide>
-     <img src="../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1.webp" />
+   <SwiperSlide className={Styles.swiper_slide}>
+     <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1.webp" />
    </SwiperSlide>
 
-   <SwiperSlide>
-     <img src="../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp" />
+   <SwiperSlide className={Styles.swiper_slide}>
+     <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp" />
    </SwiperSlide>
-    </Swiper> */}
+    </Swiper>
   </>  )
 }

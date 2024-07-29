@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Styles from './ProductDetail.module.css'
 import Tab from 'react-bootstrap/Tab';
@@ -5,10 +6,11 @@ import Tabs from 'react-bootstrap/Tabs';
 import ProducyDetailRight from './ProducyDetailRight/ProducyDetailRight';
 import ProductDetailLeft from './ProductDetailLeft/ProductDetailLeft';
 
+
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
 
-export default function ProductDetail() {
-
+export default function ProductDetail({param}) {
+console.log(param);
 
   return (
     <div className={`container ${Styles.product_container}`} >
@@ -32,58 +34,60 @@ export default function ProductDetail() {
         <Tab eventKey="home" title="مشخصات" style={{ background: 'inherit' }}>
         <table className='table mt-5 table-striped '>
 <tbody>
-     <tr key="">
+
+
+     <tr key="1">
           <th>ارگونومی</th>
           <td>متقارن</td>
           {/* <button className='btn btn-danger'></button> */}
         </tr>
 
-        <tr key="">
+        {/* <tr key="2">
           <th>عمر مفید سوئیچ‌ها
           </th>
           <td>20 میلیون کلیک
           </td>
         </tr>
         
-        <tr key="">
+        <tr key="3">
           <th>سازنده سوئیچ‌ها
           </th>
           <td>LK</td>
         </tr>
 
-        <tr key="">
+        <tr key="4">
           <th>تعداد کلیدها
           </th>
           <td>8
           </td>
         </tr>
 
-        <tr key="">
+        <tr key="5">
           <th>نوع سنسور
           </th>
           <td>اپتیکال</td>
         </tr>
 
-        <tr key="">
+        <tr key="6">
           <th>حداکثر میزان دقت (حساسیت)
           </th>
           <td>6200DPI</td>
         </tr>
 
-        <tr key="">
+        <tr key="7">
           <th>حداکثر سرعت
           </th>
           <td>160IPS</td>
         </tr>
 
-        <tr key="">
+        <tr key="8">
           <th>نوع نورپردازی
 
           </th>
           <td>RGB</td>
         </tr>
 
-        <tr key="">
+        <tr key="9">
           <th>نوع اتصال
 
           </th>
@@ -91,12 +95,12 @@ export default function ProductDetail() {
           </td>
         </tr>
 
-        <tr key="">
+        <tr key="11">
           <th>طول کابل 
           </th>
           <td>1.8 متر
           </td>
-        </tr>
+        </tr> */}
 </tbody>
      
         

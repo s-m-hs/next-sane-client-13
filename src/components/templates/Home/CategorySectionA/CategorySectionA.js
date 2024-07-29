@@ -74,7 +74,7 @@ export default function CategorySectionA() {
           <div className={`row row-cols-6  ${styles.bcatitem}`}>
             {mainCategory.childs.map((item, index) => (
               <CardA
-                key={index}
+                key={item.id}
                 imgSrc={item.imageUrl}
                 category={`category`}
                 id={item.id}

@@ -32,6 +32,7 @@ export default function CategoryProducts() {
   {sliderDetail.map((item,index)=>
     <div key={index} className={`col  centerc ${Styles.products_col}`} >
       <CardC 
+      
     imgSrc={item.img} title={item.title} price={item.price}
     
     /></div>
