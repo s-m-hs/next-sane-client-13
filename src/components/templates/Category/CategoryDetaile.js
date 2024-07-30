@@ -15,6 +15,7 @@ export default function CategoryDetaile({param}) {
   const [mainCatChilds, setMainCatChilds] = useState([]);
   const [flagPro, setFlagPro] = useState(false);
   const[productByCat,setProductByCat]=useState([])
+  const [flag,setFlag]=useState(false)
 
   const styleRef = useRef();
   const getCategoryById = () => {
@@ -39,11 +40,11 @@ export default function CategoryDetaile({param}) {
           return res.json();
         })
         .then((result) => {
-          // console.log(result)
+          console.log(result)
           if(result.childs?.length!=0){
             setMainCatChilds(result.childs);
             setMainCategory(result);
-
+console.log(mainCatChilds[0]); 
           }else{
              setMainCatChilds([]);
              setMainCategory(result);
@@ -55,6 +56,7 @@ export default function CategoryDetaile({param}) {
     }
     myAppGet();
   };
+
   ////////////////////////////
   const getproductByCat=(obj)=>{
     async function myApppost(){
@@ -92,13 +94,20 @@ export default function CategoryDetaile({param}) {
     getproductByCat(obj)
     setFlagPro(true); 
   };
+  // console.log(mainCatChilds[0].id); 
 
   //////////////////////////////
   useEffect(() => {
     if (param!== null) {
       getCategoryById();
     }
+    setTimeout(() => {
+      setFlag(prev=>!prev)
+    }, 500);
+    
   }, []);
+
+
 useEffect(()=>{
 if(mainCatChilds.length==0 && mainCategory.item?.code){
 // console.log(mainCategory) 
@@ -111,6 +120,18 @@ let obj={
 getproductByCat(obj)
 }
 },[mainCatChilds])
+
+useEffect(()=>{
+  let obj={
+    cat:mainCatChilds[0]?.id ,
+    pageNumber: 0,
+    pageSize: 10
+  }
+    console.log(obj); 
+
+  getproductByCat(obj)
+
+},[flag])
   return (
     <div className={`container  centerc ${Styles.category}`} >
       <div className={`row row-cols-6  centerr ${Styles.category_row}`}>
