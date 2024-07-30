@@ -19,6 +19,7 @@
     "react-spinners": "^0.14.1",
     "spinner": "^0.3.4",
     "spinners": "^1.2.2",
+    "sweetalert2": "^11.12.3",
     "swiper": "^11.1.8"
   }
 }

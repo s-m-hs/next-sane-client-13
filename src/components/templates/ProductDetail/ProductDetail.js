@@ -6,6 +6,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import ProducyDetailRight from './ProducyDetailRight/ProducyDetailRight';
 import ProductDetailLeft from './ProductDetailLeft/ProductDetailLeft';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { HouseLine} from "@phosphor-icons/react";
 
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
@@ -23,7 +25,7 @@ export default function ProductDetail({ param }) {
           "Content-Type": "application/json",
         },
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         return res.json()
       }).then(result => {
         if (result) {
@@ -36,12 +38,50 @@ export default function ProductDetail({ param }) {
     }
     myAppPost()
   }
+  const getproductByCat = (obj) => {
+    async function myApppost() {
+      const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj)
+
+      }).then(res => {
+        console.log(res)
+        return res.json()
+      }).then(result => {
+        if (result.itemList?.length != 0) {
+console.log(result)
+        } else {
+
+        }
+      }
+      ).catch(err => console.log(err))
+    }
+    myApppost()
+  }
+
+
+
   useEffect(() => {
     getProductById(param)
   }, [param])
   console.log(productDetail)
   return (
     <div className={`container ${Styles.product_container}`} >
+
+<div className={`row ${Styles.breadcrumb_row}`} >
+  <div className={`${Styles.breadcrumb} col` } >
+    <Breadcrumb>
+      <Breadcrumb.Item href="/">خانه<HouseLine size={24}/>/</Breadcrumb.Item>
+      <Breadcrumb.Item active href="/">
+      {productDetailB?.name}
+        {/* {mainCategory.item?.text} */}
+      </Breadcrumb.Item>
+    </Breadcrumb>
+  </div>
+</div>
 
       <div className={`row ${Styles.product_row}`}  >
         <div className={`col-md-3  ${Styles.product_right_col}`} ><ProducyDetailRight spec={productDetail} /></div>
