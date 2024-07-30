@@ -98,6 +98,11 @@ transition: all 0.3s ease-in;
   visibility: visible;
   pointer-events: visible;
 }
+.ul_hidden{
+  visibility: hidden;
+  pointer-events: none;
+}
+
 
 
 

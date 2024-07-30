@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import styles from "./Header.module.css"
 import Link from "next/link";
 import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
@@ -13,6 +13,8 @@ export default function Header() {
   const [mainCategory, setMainCategory] = useState({});
   const [fixTop,setFixTop]=useState(false)
   const [flaga,setFlaga]=useState(true)
+  const ulRef=useRef()
+
 useEffect(()=>{
 const fixNavbarToTop=()=>{
   // const currentScroll = window.pageYOffset;
@@ -144,7 +146,10 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
                       {mainCategory.childs?.length &&
                         mainCategory.childs.map((item, index) => (
                           <Link
-                          key={index}
+                          onClick={()=>{
+                            ulRef.current.add.className('ul_hidden')
+                          }}
+                          key={item.id}
                           href={`/category/${item.id}`}
                             className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                           >
@@ -374,6 +379,9 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
                       {mainCategory.childs?.length &&
                         mainCategory.childs.map((item, index) => (
                           <Link key={index}
+                          onClick={()=>{
+                            ulRef.current.add.className('ul_hidden')
+                          }}
                           href={`/category/${item.id}`}
                             className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                           >

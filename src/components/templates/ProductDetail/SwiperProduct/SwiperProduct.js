@@ -16,7 +16,8 @@ export default function SwiperProduct({src}) {
 
   return (
     <>
-    <div  className={`${Styles.swiper} centerc`}>
+    {src && <>
+     <div  className={`${Styles.swiper} centerc`}>
         <Swiper
       style={{
         '--swiper-navigation-color': '#fff',
@@ -132,6 +133,8 @@ export default function SwiperProduct({src}) {
    </SwiperSlide>
     </Swiper>
     </div>
+    </>}
+   
   
   </>  )
 }

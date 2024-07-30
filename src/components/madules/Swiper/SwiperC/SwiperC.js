@@ -46,9 +46,9 @@ export default function SwiperC({title,sliderDetailProp}) {
         className= "mySwiperB"
       >
         {sliderDetailProp.map((item,index)=>
-  <SwiperSlide
+  <SwiperSlide key={index}
    >
-    <CardB key={index}
+    <CardB 
         imgSrc={item.img} title={item.title} price={item.price}
         /></SwiperSlide>
         )}

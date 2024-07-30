@@ -10,7 +10,7 @@ export default function CardB({imgSrc,title,price }) {
         <img src={imgSrc} alt="" />
         <span className={styles.title}  > {title} </span>
         {/* <span>368,000</span> */}
-        <span className={styles.price}  >{price}تومان </span>
+        <span className={styles.price}  >{price.toLocaleString()}ریال </span>
         <div className={`${styles.icon_div} centerr`}   >
         {/* <i class="fa-solid fa-cart-plus " style={{color:'#14a5af'}} ></i>
         <i class="fa-solid fa-heart " style={{color:'#14a5af'}} ></i> */}

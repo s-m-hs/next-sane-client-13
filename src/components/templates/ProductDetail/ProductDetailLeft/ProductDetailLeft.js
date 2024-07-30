@@ -8,8 +8,9 @@ export default function ProductDetailLeft({detail}) {
   return (
     <div className="container " style={{ height: '600px' }}>
       <div className="row mt-1" style={{ height: '600px' }}>
-
-        <div className="col-6">
+        {detail && 
+        <>
+          <div className="col-6">
           <div className={`${Styles.ProductDetailL_divright} centerc mt-5`}>
 
 
@@ -30,8 +31,8 @@ export default function ProductDetailLeft({detail}) {
             </div>
             <div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
 
-              <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price} تومان</span>
-              <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice} تومان</span>
+              <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} ریال</span>
+              <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} ریال</span>
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
             </div>
             <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
@@ -45,6 +46,10 @@ export default function ProductDetailLeft({detail}) {
         <div className="col-6">
           <SwiperProduct src={detail.mainImage} />
         </div>
+        </>
+        }
+
+      
 
       </div>
       {/* 
