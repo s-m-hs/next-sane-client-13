@@ -1,0 +1,39 @@
+.div_main{
+    align-items: center;
+}
+.button{
+    font-size: larger;
+    width: 50% !important;
+    height: 40px !important;
+    margin-top: 50px;
+    background-color: rgb(25,165,175);
+    color: #fff;
+}
+.div_main h1{
+    margin: 20px;
+    color: var(--black33b4359);
+
+}
+.div_main div{
+    color: var(--black33b4359);
+}
+.div_input{
+    width: 70%;
+    align-items: center;
+}
+.div_input_B{
+    width: 100%;
+    align-items: center;
+}
+.div_input_B div{
+    width: 100%;
+    margin: none !important;
+}
+.div_hr{
+    width: 80%;
+    align-items: center;
+}
+.div_hr hr{
+    color: var(--them);
+    width:30% ;
+}

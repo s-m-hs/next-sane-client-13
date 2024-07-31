@@ -263,6 +263,8 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
             <li>خدمات</li>
             <li> <Link href={'/'}style={{listStyle:'none',textDecoration:'none',color:'inherit'}} > تماس با ما</Link> </li>
             <li> <Link href={'/about'}style={{listStyle:'none',textDecoration:'none',color:'inherit'}} >درباره ما</Link> </li>
+            <li> <Link href={'/'}style={{listStyle:'none',textDecoration:'none',color:'inherit'}} >ورود </Link> </li>
+            <li> <Link href={'/register'}style={{listStyle:'none',textDecoration:'none',color:'inherit'}} >عضویت </Link> </li>
           </ul>
         </div>
 

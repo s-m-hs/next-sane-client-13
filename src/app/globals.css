@@ -75,6 +75,10 @@ a,ul,li{
   flex-direction: row;
   justify-content: center;
 }
+.boxSh{
+  box-shadow: 0 0 15px -10px rgb(0,0,0,.75);
+}
+
 .arrow_icon{
   position: relative;
 }
@@ -161,3 +165,66 @@ transition: all 0.3s ease-in;
   text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
   font-size: 1.5cqi;
 }
+
+
+
+.login_label_float{
+  position: relative;
+  padding-top: 13px;
+  width: 60%;
+}
+
+.login_label_float input{
+  
+  border-radius:10px;
+  width: 100%;
+  border: 1px solid rgba(168,168,168,0.550000011920929);
+  outline: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  transition: all .1s linear;
+  -webkit-transition: all .1s linear;
+  -moz-transition: all .1s linear;
+  -webkit-appearance:none;
+}
+
+.login_label_float input:focus{
+  border: 1px solid rgba(25,167,175);
+}
+
+.login_label_float input::placeholder{
+  color:transparent;
+}
+
+.login_label_float label{
+  border-radius: 10px;
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 15px;
+  font-size: large;
+  transition: all .1s linear;
+  -webkit-transition: all .1s linear;
+  -moz-transition: all .1s linear;
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.login_label_float input:required:invalid + label{
+  color: red;
+}
+.login_label_float input:focus:required:invalid{
+  border: 2px solid red;
+}
+.login_label_float input:required:invalid + label:before{
+  content: '*';
+}
+.login_label_float input:focus + label,
+.login_label_float input:not(:placeholder-shown) + label{
+  font-size: 13px;
+  top: 0;
+  color: #3951b2;
+}
+
+
