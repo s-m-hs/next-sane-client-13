@@ -3,12 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Styles from "./CategoryDetaile.module.css";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import CardAButton from "@/components/madules/Cards/CardAButton/CardAButton";
-import CategoryProducts from "./CategoryProducts/CategoryProducts";
 import CardC from "@/components/madules/Cards/CardC/CardC";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Swal from 'sweetalert2'
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine} from "@phosphor-icons/react";
+import DotLoader from "react-spinners/DotLoader";
 
 
 
@@ -18,6 +18,7 @@ export default function CategoryDetaile({ param }) {
   const [flagPro, setFlagPro] = useState(false);
   const [productByCat, setProductByCat] = useState([])
   const [flag, setFlag] = useState(false)
+  const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
 
   const styleRef = useRef();
   const getCategoryById = () => {
@@ -55,7 +56,6 @@ export default function CategoryDetaile({ param }) {
     }
     myAppGet();
   };
-console.log(mainCategory.item?.text)
   ////////////////////////////
   const getproductByCat = (obj) => {
     async function myApppost() {
@@ -110,12 +110,6 @@ console.log(mainCategory.item?.text)
     }).then(res=>setFlag(prev=>!prev))
   }, []);
   ///////////////////////////
-  const clickHan = () => {
-    setTimeout(() => {
-      setFlag(prev => !prev)
-    }, 500);
-  }
-
   useEffect(()=>{
   if(mainCatChilds.length==0 && mainCategory.item?.code){
   let code=mainCategory.item.code
@@ -140,8 +134,22 @@ console.log(mainCategory.item?.text)
     
 
   }, [flag])
+
+
   return (
     <div className={`container  centerc ${Styles.category}`} >
+
+      {flagSpinnerShow && <div className={`row ${Styles.spinner_row}`}>
+
+<div className="col">
+<DotLoader
+color="rgba(25, 167, 175)"
+size={250}
+/>
+</div>
+</div>}
+
+
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
@@ -170,12 +178,13 @@ console.log(mainCategory.item?.text)
 
         {productByCat?.length == 0 ? <SpinnerA size={200} /> : productByCat?.map((item, index) =>
           <div key={index}
-            className={`centerc ${Styles.products_col}`} >
+            className={`centerc ${Styles.products_col}`}
+            onClick={ ()=>setFlagSpinnerShow(true) } >
             <CardC
+            
               id={item.id}
               imgSrc={item.smallImage
               } title={item.name} price={item.price}
-
             /></div>
 
         )}
@@ -198,6 +207,7 @@ console.log(mainCategory.item?.text)
           </div>
         </div>
       )} */}
+ 
     </div>
   );
 }

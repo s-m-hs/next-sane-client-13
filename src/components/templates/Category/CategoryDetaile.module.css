@@ -53,3 +53,9 @@ width: fit-content;
 .breadcrumb a:hover{
     opacity: 0.7;
 }
+.spinner_row{
+    position: fixed;
+    top: 40vh;
+    right: 50vw;
+    z-index: 100;
+}

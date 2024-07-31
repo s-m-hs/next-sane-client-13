@@ -1,4 +1,4 @@
-'use clinet'
+
 import React from 'react'
 import Styles from './BrandArea.module.css'
 import CardBrand from '../Cards/CardBrand/CardBrand'

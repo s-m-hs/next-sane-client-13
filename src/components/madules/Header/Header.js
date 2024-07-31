@@ -5,6 +5,7 @@ import Link from "next/link";
 import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
 import { MagnifyingGlass,Phone,ShoppingCart,User,EnvelopeSimple} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
+import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 
 
 
@@ -39,35 +40,13 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
       id: 2,
       str: "string",
     };
-    async function myAppGet() {
-      const res = await fetch(
-         `${apiUrl}/api/CyCategories/GetItemWChildAndRoot`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(obj),
-        }
-      )
-        .then((res) => {
-          // console.log(res);
-          return res.json();
-        })
-        .then((result) => {
-          // console.log(result)
-          setMainCategory(result);
-          console.log(mainCategory);
-        });
-    }
-    myAppGet();
+    postApi('/api/CyCategories/GetItemWChildAndRoot',obj,setMainCategory)
+
   };
-  // console.log(imgSrcProp);
 
   ////////////////////////////
   useEffect(() => {
     getCategoryById();
-    // console.log(mainCategory.childs[0].imageUrl)
   }, []);
 
   const onmousHandle = (e) => {
@@ -91,7 +70,6 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
             <SwiperA/>
             </div>
           </div>
-{/* <div className={styles.search_div}> */}
     <div className={`${styles.Header_rightSide__div_search}  centerc`}>
             <input
               className={styles.Header_rightSide__div_search_input}

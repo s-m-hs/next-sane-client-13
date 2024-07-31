@@ -2,11 +2,19 @@
 import React, { useEffect, useState } from "react";
 import CardA from "@/components/madules/Cards/CardA/CardA";
 import styles from "./CategorySectionA.module.css";
-import apiUrl from "@/utils/ApiUrl/apiUrl";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
+import DotLoader from "react-spinners/DotLoader";
+import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
+
 
 export default function CategorySectionA() {
   const [mainCategory, setMainCategory] = useState({});
+  const [flagSpinnerShow, setFlagSpinnerShow] = useState( );
+
+
+const clickHandler=()=>{
+  setFlagSpinnerShow(true)
+}
 
   const getCategoryById = () => {
     let obj = {
@@ -14,43 +22,26 @@ export default function CategorySectionA() {
       id: 2,
       str: "string",
     };
-    async function myAppGet() {
-      const res = await fetch(
-        `${apiUrl}/api/CyCategories/GetItemWChildAndRoot`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(obj),
-        }
-      )
-        .then((res) => {
-          // console.log(res)
-          return res.json();
-        })
-        .then((result) => {
-          // console.log(result)
-          setMainCategory(result);
-          // console.log(mainCategory)
-        });
-    }
-    myAppGet();
+postApi('/api/CyCategories/GetItemWChildAndRoot',obj,setMainCategory)
   };
-  // console.log(imgSrcProp);
 
   ////////////////////////////
   useEffect(() => {
     getCategoryById();
-    // console.log(mainCategory.childs[0].imageUrl)
   }, []);
 
   return (
-    // <div className={`container  centerr ${styles.bcatitem}`}  >
     <>
-      <div
-      // data-aos-duration="700"
-      >
+         {flagSpinnerShow && <div className={`row ${styles.spinner_row}`}>
+
+<div className="col">
+<DotLoader
+color="rgba(25, 167, 175)"
+size={250}
+/>
+</div>
+</div>}
+      <div>
         <div className="row mt-5">
           <div
             className="col"
@@ -74,6 +65,7 @@ export default function CategorySectionA() {
           <div className={`row row-cols-6  ${styles.bcatitem}`}>
             {mainCategory.childs.map((item, index) => (
               <CardA
+              click={clickHandler}
                 key={item.id}
                 imgSrc={item.imageUrl}
                 category={`category`}

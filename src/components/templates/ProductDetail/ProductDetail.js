@@ -7,7 +7,7 @@ import ProducyDetailRight from './ProducyDetailRight/ProducyDetailRight';
 import ProductDetailLeft from './ProductDetailLeft/ProductDetailLeft';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { HouseLine} from "@phosphor-icons/react";
+import { HouseLine,Dresser} from "@phosphor-icons/react";
 
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
@@ -15,6 +15,8 @@ import { HouseLine} from "@phosphor-icons/react";
 export default function ProductDetail({ param }) {
   const [productDetail, setProductDetail] = useState([])
   const [productDetailB, setProductDetailB] = useState({})
+  const [idCategory,setIdCategory]=useState('')
+  const [nameCategory,setNameCategory]=useState('')
   console.log(param);
 
   const getProductById = (id) => {
@@ -29,8 +31,8 @@ export default function ProductDetail({ param }) {
         return res.json()
       }).then(result => {
         if (result) {
-          console.log(result)
           setProductDetail(result.spec)
+          setIdCategory(result.cyCategoryId)
           setProductDetailB(result)
         }
 
@@ -38,43 +40,42 @@ export default function ProductDetail({ param }) {
     }
     myAppPost()
   }
-  const getproductByCat = (obj) => {
-    async function myApppost() {
-      const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj)
-
-      }).then(res => {
-        console.log(res)
-        return res.json()
-      }).then(result => {
-        if (result.itemList?.length != 0) {
-console.log(result)
-        } else {
-
-        }
-      }
-      ).catch(err => console.log(err))
-    }
-    myApppost()
+const getCategory=(id)=>{
+  async function myAppGet(){
+    const res=await fetch(`${apiUrl}/api/CyCategories/${id}`,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(res=>{
+      console.log(res)
+      return res.json()
+    }).then(result=>{
+      setNameCategory(result.text)
+    })
   }
-
+  myAppGet()
+}
+useEffect(()=>{
+  if(idCategory){
+    getCategory(idCategory)
+  }
+},[idCategory])
 
 
   useEffect(() => {
     getProductById(param)
   }, [param])
   console.log(productDetail)
+  console.log(idCategory);
   return (
     <div className={`container ${Styles.product_container}`} >
 
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-      <Breadcrumb.Item href="/">خانه<HouseLine size={24}/>/</Breadcrumb.Item>
+      <Breadcrumb.Item href="/"><HouseLine size={18}/>خانه/</Breadcrumb.Item>
+      {nameCategory && idCategory && <Breadcrumb.Item href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}/</Breadcrumb.Item>}  
       <Breadcrumb.Item active href="/">
       {productDetailB?.name}
         {/* {mainCategory.item?.text} */}
