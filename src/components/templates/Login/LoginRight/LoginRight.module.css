@@ -47,9 +47,3 @@
     width: 100% !important;
     align-items: center;
 }
-.spinner_row{
-    position: fixed;
-    top: 40vh;
-    right: 50vw;
-    z-index: 100;
-}

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import style from "./RegisterRight.module.css";
+import style from "./LoginRight.module.css";
 import Link from "next/link";
 import { User, Key, EyeSlash } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
@@ -8,10 +8,15 @@ import Swal from "sweetalert2";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import postApiByAlert from "@/utils/ApiUrl/apiCallBack/apiPostByAlert";
 import { useRouter } from 'next/navigation'
+import {sha512} from "js-sha512";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
+import getLocalStorage from "@/utils/localStorag/localStorage";
 
 
 
-export default function RegisterRight() {
+
+export default function LoginRight() {
+const [rgister,setRegister]=useState('')
 const router = useRouter()
 
   const {
@@ -38,7 +43,7 @@ const router = useRouter()
     Swal.fire({
       position: "center",
       icon: "success",
-      title: " ثبت نام با موفقیت انجام شد",
+      title: " خوش آمدید",
       showConfirmButton: false,
       timer: 1500,
     }).then((res) => {
@@ -49,18 +54,46 @@ router.push('/')
       Swal.fire({
         position: "center",
         icon: "error",
-        title: " ثبت نام انجام نشد دوباره تلاش کنید...",
+        title: "دوباره امتحان کنید...",
         showConfirmButton: false,
         timer: 1500,
       })
       ////////////////////////////
+const login=(obj)=>{
+  async function myAppPost(){
+    const res=await fetch(`${apiUrl}/api/Customer/login`,{
+      method:'POST',
+      headers:{
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${getLocalStorage}` ,
+      },
+      body:JSON.stringify(obj)
+    }).then(res=>{
+      if(res.status==200){
+        return res.json()
+      }
+    }).then(result=>{
+      if(result){
+        localStorage.setItem('loginToken',result.token)
+        localStorage.setItem('user',obj.un)
+        alertA()
+      }else{
+        alertB()
+      }
+    })
+  }
+  myAppPost()
+
+}
+
 const handleRegistration=(data)=>{
   console.log(data);
 let obj={
-    un: data.userName,
-  pw:data.password
+ un: data.userName,
+  pw:sha512(data.password )  
 }
-  postApiByAlert('/api/Customer/register',obj,alertA,alertB)
+login(obj)
+
 }
 
 
@@ -69,12 +102,12 @@ let obj={
     <div className={`${style.div_main} centerc`}>
       <div className={`${style.div_hr} centerr`}>
         <hr />
-        <h1>ثبت نام کنید :</h1>
+        <h1> وارد شوید  :</h1>
 
         <hr />
       </div>
       <h1>
-        از قبل حساب کاربری دارید؟ <Link href={'/login'}>وارد شوید...</Link>
+        حساب کاربری ندارید؟ <Link href={"/register"}>ثبت نام کنید ...</Link>
       </h1>
 
       <div className={`${style.div_input} centerc`}>
@@ -113,7 +146,7 @@ let obj={
           </div>
 
    <div>
-        <h1>
+        {/* <h1>
           <input
           name="checkbox"
            type="checkbox"
@@ -121,7 +154,7 @@ let obj={
 
            />
           من شرایط سرویس و خط‌مشی رازداری را می‌پذیرم .
-        </h1>
+        </h1> */}
       </div>
 
     <button type="submit" className={`${style.button} btn btn-info`}

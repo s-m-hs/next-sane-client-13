@@ -9,7 +9,7 @@ import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 
 export default function CategorySectionA() {
   const [mainCategory, setMainCategory] = useState({});
-  const [flagSpinnerShow, setFlagSpinnerShow] = useState( );
+  const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
 
 
 const clickHandler=()=>{

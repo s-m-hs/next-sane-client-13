@@ -20,10 +20,11 @@ const postApiByAlert=(url,obj,alert,alertB)=>{
             alertB()
         }
       }).then(result=>{
-        localStorage.setItem('loginToken',result.token)
+        if(result){
+            localStorage.setItem('loginToken',result.token)
         localStorage.setItem('user',obj.un)
         alert();
-        ;
+        }
       }).catch(err=>console.log(err))
   }
   myAppGet();
