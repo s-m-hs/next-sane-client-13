@@ -1,10 +1,70 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import style from "./RegisterRight.module.css";
 import Link from "next/link";
 import { User, Key, EyeSlash } from "@phosphor-icons/react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
+import postApiByAlert from "@/utils/ApiUrl/apiCallBack/apiPostByAlert";
+import { useRouter } from 'next/navigation'
+
 
 export default function RegisterRight() {
+const [rgister,setRegister]=useState('')
+const router = useRouter()
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {},
+  });
+  const registerOptions = {
+    userName: { required: "text is required" },
+    password: { required: "code is password" },
+    checkbox: { required: "code is checkbox" },
+  };
+
+  const handleError = (errors) => {
+
+  };
+
+  //////////////////////
+  const alertA = () =>
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: " ثبت نام با موفقیت انجام شد",
+      showConfirmButton: false,
+      timer: 1500,
+    }).then((res) => {
+reset(setValue(''))
+router.push('/') 
+});
+    const alertB = () =>
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: " ثبت نام انجام نشد دوباره تلاش کنید...",
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      ////////////////////////////
+const handleRegistration=(data)=>{
+  console.log(data);
+let obj={
+    un: data.userName,
+  pw:data.password
+}
+  postApiByAlert('/api/Customer/register',obj,alertA,alertB)
+}
+
+
+
   return (
     <div className={`${style.div_main} centerc`}>
       <div className={`${style.div_hr} centerr`}>
@@ -18,35 +78,65 @@ export default function RegisterRight() {
       </h1>
 
       <div className={`${style.div_input} centerc`}>
-
-        <div className={`${style.div_input_B} centerr`}>
-          <User size={40} color="#19a5af" weight="fill" />
-          <div className="login_label_float">
-            <input type="text" placeholder=" " />
-            <label>نام کاربری </label>
+        <form
+        className={`${style.form} centerc`}
+          action=""
+          onSubmit={handleSubmit(handleRegistration, handleError)}
+        >
+          <div className={`${style.div_input_B} centerr`}>
+            <User size={40} color="#19a5af" weight="fill" />
+            <div className="login_label_float">
+              <input
+              minLength={3}
+                name="userName"
+                type="userName"
+                placeholder=" "
+                {...register(`userName`, registerOptions.userName)}
+              />
+              <label>نام کاربری </label>
+            </div>
           </div>
-        </div>
 
-        <div className={`${style.div_input_B} centerr`}>
-          <Key size={40} color="#19a5af" weight="fill" />
-          <div className="login_label_float">
-            <input type="password" placeholder=" " />
-            <label>رمزعبور</label>
+          <div className={`${style.div_input_B} centerr`}>
+            <Key size={40} color="#19a5af" weight="fill" />
+            <div className="login_label_float">
+              <input 
+              minLength={6}
+              name="password"
+               type="password"
+                placeholder=" "
+                {...register(`password`, registerOptions.password)}
+                 />
+              <label>رمزعبور</label>
+            </div>
+            {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
           </div>
-          {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
 
-        </div>
-
-      </div>
-
-      <div>
+   <div>
         <h1>
-          <input type="checkbox" />
+          <input
+          name="checkbox"
+           type="checkbox"
+           {...register(`checkbox`, registerOptions.checkbox)}
+
+           />
           من شرایط سرویس و خط‌مشی رازداری را می‌پذیرم .
         </h1>
       </div>
 
-      <button className={`${style.button} btn btn-info`}>تایید</button>
+    <button type="submit" className={`${style.button} btn btn-info`}
+      >تایید</button>
+
+        </form>
+      </div>
+
+   
+
+  
+
+
+
+      
     </div>
   );
 }

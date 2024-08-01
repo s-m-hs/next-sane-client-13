@@ -15,6 +15,10 @@ export default function Header() {
   const [fixTop,setFixTop]=useState(false)
   const [flaga,setFlaga]=useState(true)
   const ulRef=useRef()
+  const getLocalStorage=localStorage.getItem('loginToken')
+  const getLocalStorageUser=localStorage.getItem('user')
+  const [userName,setUserName]=useState('')
+  const [flag,setFlag]=useState(false)
 
 useEffect(()=>{
 const fixNavbarToTop=()=>{
@@ -32,8 +36,31 @@ window.addEventListener('scroll',fixNavbarToTop)
 return()=>window.removeEventListener('scroll',fixNavbarToTop)
 },[])
 
-
-
+console.log(getLocalStorageUser);
+console.log(userName); 
+///////////////////////////////
+const getProfile=()=>{
+  async function myAppGet(){
+    const res=await fetch(`${apiUrl}/api/Customer/GetProfile`,{
+      method:'GET',
+      headers:{
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${getLocalStorage}` ,
+      }
+    }).then(res=>{
+      console.log(res);
+      if(res.status==200){
+        setUserName(getLocalStorageUser)
+        setFlag(true) 
+      }
+    })
+  }
+  myAppGet()
+}
+useEffect(()=>{
+  getProfile()
+},[userName])
+/////////////////////////////////
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -90,7 +117,7 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
           </div>
           <div className={`${styles.Header_leftSide__div} centerr`}  >
             {" "}
-            <User size={24} color="#14a5af" />
+            {userName ? <span>{userName}</span> :  <User size={24} color="#14a5af" />} 
           </div>
 
           <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
@@ -325,7 +352,7 @@ return()=>window.removeEventListener('scroll',fixNavbarToTop)
           </div>
           <div className={`${styles.Header_leftSide__div} centerr`}  >
             {" "}
-            <User size={24} color="#14a5af" />
+            {userName ? <h1>'username'</h1> :  <User size={24} color="#14a5af" />} 
           </div>
 
           <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
