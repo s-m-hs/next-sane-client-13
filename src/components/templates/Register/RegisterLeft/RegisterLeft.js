@@ -3,7 +3,9 @@ import style from './RegisterLeft.module.css'
 export default function RegisterLeft() {
   return (
     <div className={style.div}>
-      <img className={style.img} src="../../../../../images/register/user-privacy-control-icon-design-vector.jpg" alt="" />
+      {/* <img className={style.img} src="../../../../../images/register/login-570317_1280.jpg" alt="" /> */}
+      <img className={style.img} src="../../../../../images/register/password-7476798_1280.png" alt="" />
+      {/* <img className={style.img} src="../../../../../images/register/user-privacy-control-icon-design-vector.jpg" alt="" /> */}
       {/* <img className={style.img} src="../../../../../images/register/11168381.png" alt="" /> */}
       {/* <img className={style.img} src="../../../../../images/register/3893155.png" alt="" /> */}
     </div>

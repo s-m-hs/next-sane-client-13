@@ -3,7 +3,7 @@
 }
 .button{
     font-size: larger;
-    width: 50% !important;
+    width: 80% !important;
     height: 40px !important;
     margin-top: 50px;
     background-color: rgb(25,165,175);
@@ -26,9 +26,11 @@
     align-items: center;
 }
 .div_input_B div{
+    position: relative;
     width: 100%;
     margin: none !important;
 }
+
 .div_hr{
     width: 80%;
     align-items: center;
@@ -37,3 +39,7 @@
     color: var(--them);
     width:30% ;
 }
+ /* .eyeicon{
+    position: absolute;
+    right: 40%;
+} */
