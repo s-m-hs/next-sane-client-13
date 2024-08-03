@@ -6,6 +6,8 @@ import AOSInit from "@/utils/Aos/aos";
 import Footer from "@/components/templates/Footer/Footer";
 import ScrollToTopt from "@/utils/ScrollToTop/ScrollToTop";
 import Loading from "./loading";
+import { MainProvider } from "@/context/MainContext";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,16 +19,21 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="fa" dir="rtl">
       <body className={inter.className}>
-       
-            <Header />
+
+        <MainProvider>
+        <Header />
         <AOSInit />
         {children}
         <ScrollToTopt/>
         <Footer />
+        </MainProvider>
+       
       
+     
       
       </body>
     </html>

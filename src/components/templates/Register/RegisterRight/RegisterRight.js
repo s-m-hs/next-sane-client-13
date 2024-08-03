@@ -1,18 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./RegisterRight.module.css";
 import Link from "next/link";
 import { User, Key, EyeSlash } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import postApiByAlert from "@/utils/ApiUrl/apiCallBack/apiPostByAlert";
 import { useRouter } from 'next/navigation'
+import { MainContext } from "@/context/MainContext";
+import alertN from "@/utils/Alert/AlertA";
 
 
 
 export default function RegisterRight() {
 const router = useRouter()
+let {xtFlag,setXtFlag}=useContext(MainContext)
+
 
   const {
     register,
@@ -32,27 +35,13 @@ const router = useRouter()
   const handleError = (errors) => {
 
   };
-
-  //////////////////////
-  const alertA = () =>
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: " ثبت نام با موفقیت انجام شد",
-      showConfirmButton: false,
-      timer: 1500,
-    }).then((res) => {
+ const alertA=()=>alertN('center','success','ثبت نام با موفقیت انجام شد',1500).then((res) => {
+    setXtFlag(prev=>!prev)
 reset(setValue(''))
 router.push('/') 
 });
-    const alertB = () =>
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: " ثبت نام انجام نشد دوباره تلاش کنید...",
-        showConfirmButton: false,
-        timer: 1500,
-      })
+const alertB=()=>alertN('center','error'," ثبت نام انجام نشد دوباره تلاش کنید...",1500)
+
       ////////////////////////////
 const handleRegistration=(data)=>{
   console.log(data);

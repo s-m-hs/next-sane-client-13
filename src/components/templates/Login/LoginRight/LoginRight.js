@@ -1,16 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./LoginRight.module.css";
 import Link from "next/link";
 import { User, Key, EyeSlash } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
-import postApiByAlert from "@/utils/ApiUrl/apiCallBack/apiPostByAlert";
 import { useRouter } from 'next/navigation'
 import {sha512} from "js-sha512";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import getLocalStorage from "@/utils/localStorag/localStorage";
+import { MainContext } from "@/context/MainContext";
+import alertN from "@/utils/Alert/AlertA";
+
 
 
 
@@ -18,6 +19,8 @@ import getLocalStorage from "@/utils/localStorag/localStorage";
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const router = useRouter()
+let {xtFlag,setXtFlag}=useContext(MainContext)
+
 
   const {
     register,
@@ -37,27 +40,14 @@ const router = useRouter()
   const handleError = (errors) => {
 
   };
-
+console.log(xtFlag)
   //////////////////////
-  const alertA = () =>
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: " خوش آمدید",
-      showConfirmButton: false,
-      timer: 1500,
-    }).then((res) => {
+  const alertA=()=>alertN('center','success'," خوش آمدید",1500).then((res) => {
+    setXtFlag(prev=>!prev)
 reset(setValue(''))
 router.push('/') 
 });
-    const alertB = () =>
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "دوباره امتحان کنید...",
-        showConfirmButton: false,
-        timer: 1500,
-      })
+const alertB=()=>alertN('center','error',"دوباره امتحان کنید...",1500)
       ////////////////////////////
 const login=(obj)=>{
   async function myAppPost(){

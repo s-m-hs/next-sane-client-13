@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import style from './ScrollToTop.module.css'
-import {CaretUp} from "@phosphor-icons/react";
+import {CaretUp,CaretDown} from "@phosphor-icons/react";
 
 
 export default function ScrollToTopt() {
@@ -12,6 +12,12 @@ export default function ScrollToTopt() {
         window.scrollTo({
           top:0,
           behavior:'smooth'
+        })
+      }
+      const goToBottom=()=>{
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
         })
       }
       useEffect(()=>{
@@ -30,9 +36,10 @@ export default function ScrollToTopt() {
     
  <div data-aos="fade-right"
   className={!fixTop ? `${style.circle} centerc` : `${style.circle_visibil} centerc`} 
-    onClick={goToTop}
+    
     >
-      <CaretUp size={32} color="#fff" />
+      <CaretUp  onClick={goToTop} size={28} color="#fff" />
+      <CaretDown onClick={goToBottom} size={28} color="#fff" />
       </div>
 
     

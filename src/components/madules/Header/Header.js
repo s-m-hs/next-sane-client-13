@@ -1,11 +1,12 @@
 "use client"
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import Link from "next/link";
 import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
 import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
+import { MainContext } from "@/context/MainContext";
 
 
 
@@ -20,7 +21,8 @@ export default function Header() {
   const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
-
+let {xtFlag}=useContext(MainContext)
+ 
 
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -59,7 +61,7 @@ export default function Header() {
   }
   useEffect(() => {
     getProfile()
-  }, [userName])
+  }, [userName,xtFlag])
   /////////////////////////////////
   const getCategoryById = () => {
     let obj = {
