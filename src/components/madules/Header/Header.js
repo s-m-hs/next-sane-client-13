@@ -21,7 +21,7 @@ export default function Header() {
   const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
-let {xtFlag}=useContext(MainContext)
+let {xtFlag,setXtFlag}=useContext(MainContext)
  
 
   useEffect(() => {
@@ -54,6 +54,8 @@ let {xtFlag}=useContext(MainContext)
         if (res.status == 200) {
           setUserName(getLocalStorageUser)
           setFlag(true)
+          setXtFlag(true)
+          
         }
       })
     }
@@ -84,7 +86,7 @@ let {xtFlag}=useContext(MainContext)
     }
     console.log(valeS)
   };
-
+console.log(xtFlag);
   return (
 
     <>
@@ -112,6 +114,7 @@ let {xtFlag}=useContext(MainContext)
             </div>
 
             <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
+{xtFlag && <h1><span>{userName}</span> </h1>}              
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <ShoppingCart size={24} color="#14a5af" />        </div>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
@@ -119,7 +122,7 @@ let {xtFlag}=useContext(MainContext)
               </div>
               <div className={`${styles.Header_leftSide__div} centerr`}  >
                 {" "}
-                {userName ? <span>{userName}</span> : <User size={24} color="#14a5af" />}
+                <User size={24} color="#14a5af" />
               </div>
 
               <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
@@ -291,11 +294,20 @@ let {xtFlag}=useContext(MainContext)
                 <li className="nav_link">فروش اقساط   </li>
                 <li>خدمات</li>
                 <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
-                <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
-                <li> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+              
+              {
+                !xtFlag ? <>
+                     <li> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                 >ورود </Link> </li>
                 <li> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                 >عضویت </Link> </li>
+                </>  : 
+                      <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+                      >پنل کاربری </Link> </li>
+            
+              }
+                <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
+               
               </ul>
             </div>
 
@@ -349,6 +361,10 @@ let {xtFlag}=useContext(MainContext)
             </div>
 
             <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
+
+            <div className="centerc">
+
+            </div>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <ShoppingCart size={24} color="#14a5af" />        </div>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
@@ -362,6 +378,8 @@ let {xtFlag}=useContext(MainContext)
               <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                 <span>02191005457</span>
                 <Phone size={24} color="#ededed" weight="duotone" />      </div>
+
+
             </div>
 
           </div>

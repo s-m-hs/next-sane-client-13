@@ -40,10 +40,9 @@ let {xtFlag,setXtFlag}=useContext(MainContext)
   const handleError = (errors) => {
 
   };
-console.log(xtFlag)
   //////////////////////
   const alertA=()=>alertN('center','success'," خوش آمدید",1500).then((res) => {
-    setXtFlag(prev=>!prev)
+    setXtFlag(true)
 reset(setValue(''))
 router.push('/') 
 });

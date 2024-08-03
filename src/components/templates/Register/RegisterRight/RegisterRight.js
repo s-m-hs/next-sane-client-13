@@ -36,7 +36,7 @@ let {xtFlag,setXtFlag}=useContext(MainContext)
 
   };
  const alertA=()=>alertN('center','success','ثبت نام با موفقیت انجام شد',1500).then((res) => {
-    setXtFlag(prev=>!prev)
+    setXtFlag(true)
 reset(setValue(''))
 router.push('/') 
 });
