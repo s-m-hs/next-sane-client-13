@@ -7,6 +7,8 @@ import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple } from "@pho
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 
 
@@ -39,6 +41,12 @@ let {xtFlag,setXtFlag}=useContext(MainContext)
 
     return () => window.removeEventListener('scroll', fixNavbarToTop)
   }, [])
+
+const exitHandler=()=>{
+  localStorage.removeItem('loginToken')
+setXtFlag(false)
+console.log('object')
+}
 
   ///////////////////////////////
   const getProfile = () => {
@@ -114,20 +122,46 @@ console.log(xtFlag);
             </div>
 
             <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
-{xtFlag && <h1><span>{userName}</span> </h1>}              
-              <div className={` ${styles.Header_leftSide__div} centerr`}>
-                <ShoppingCart size={24} color="#14a5af" />        </div>
-              <div className={` ${styles.Header_leftSide__div} centerr`}>
-                <EnvelopeSimple size={24} color="#14a5af" />
-              </div>
-              <div className={`${styles.Header_leftSide__div} centerr`}  >
-                {" "}
+
+{xtFlag && 
+
+
+<>
+<Dropdown className={styles.user_button}>
+      <Dropdown.Toggle variant="info" id="dropdown-basic">
+      <span className={styles.user_span}>{userName.toUpperCase()}</span>      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="/">پنل کاربری </Dropdown.Item>
+        <Dropdown.Item  onClick={exitHandler}>خروج</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+</>
+
+} 
+
+
+
+
+
+<div className={`${styles.Header_leftSide__div} centerr`}  >
                 <User size={24} color="#14a5af" />
               </div>
 
+              <div className={` ${styles.Header_leftSide__div} centerr`}>
+                <ShoppingCart size={24} color="#14a5af" />
+                </div>
+
+              <div className={` ${styles.Header_leftSide__div} centerr`}>
+                <EnvelopeSimple size={24} color="#14a5af" />
+              </div>
+
+             
+
               <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                 <span>02191005457</span>
-                <Phone size={24} color="#ededed" weight="duotone" />      </div>
+                <Phone size={24} color="#ededed" weight="duotone" />
+                </div>
             </div>
 
           </div>
@@ -365,15 +399,19 @@ console.log(xtFlag);
             <div className="centerc">
 
             </div>
+            {xtFlag && <span className={styles.user_span}>{userName.toUpperCase()}</span>} 
+
+            <div className={`${styles.Header_leftSide__div} centerr`}  >
+               
+               <User size={24} color="#14a5af" />
+             </div>
+
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <ShoppingCart size={24} color="#14a5af" />        </div>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <EnvelopeSimple size={24} color="#14a5af" />
               </div>
-              <div className={`${styles.Header_leftSide__div} centerr`}  >
-                {" "}
-                {userName ? <h1>'username'</h1> : <User size={24} color="#14a5af" />}
-              </div>
+             
 
               <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                 <span>02191005457</span>

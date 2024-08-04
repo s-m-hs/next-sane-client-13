@@ -11,7 +11,8 @@ export default function RegisterLeft() {
       {/* <img className={style.img} src="../../../../../images/register/11667128_20943446.jpg" alt="" /> */}
       {/* <img className={style.img} src="../../../../../images/register/11667132_20943447.jpg" alt="" /> */}
       {/* <img className={style.img} src="../../../../../images/register/3316536_491859-PHBH2C-303.jpg" alt="" /> */}
-      <img className={style.img} src="../../../../../images/register/3410197_495622-PI4N2F-700.jpg" alt="" />
+      {/* <img className={style.img} src="../../../../../images/register/3410197_495622-PI4N2F-700.jpg" alt="" /> */}
+      <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="" />
     </div>
   )
 }

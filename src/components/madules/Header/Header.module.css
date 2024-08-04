@@ -404,3 +404,15 @@ transition:transform 0.1s linear;
     opacity: 0.5;
 
 }
+.user_span{
+    color: var(--them);
+    margin: 5px;
+    text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+
+}
+.user_button button{
+    background-color: white !important;
+    border: none!important;
+    outline: none!important;
+    font-size: large;
+}
