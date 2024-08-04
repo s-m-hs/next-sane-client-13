@@ -8,6 +8,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { DotLoader } from "react-spinners";
 
 
 
@@ -23,7 +24,8 @@ export default function Header() {
   const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
-let {xtFlag,setXtFlag}=useContext(MainContext)
+
+let {xtFlag,setXtFlag,xtflagSpinnerShow, setXtFlagSpinnerShow}=useContext(MainContext)
  
 
   useEffect(() => {
@@ -101,6 +103,17 @@ console.log(xtFlag);
       {!fixTop ?
 
         <div className={`container ${styles.Header}`}>
+      {xtflagSpinnerShow && <div className={`row ${styles.spinner_row}`}>
+
+<div className="col">
+<DotLoader
+color="rgba(25, 167, 175)"
+size={250}
+/>
+</div>
+</div>}
+
+
           <div className={`row ${styles.Header_top} centerr`}>
 
             <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
@@ -132,7 +145,7 @@ console.log(xtFlag);
       <span className={styles.user_span}>{userName.toUpperCase()}</span>      </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="/">پنل کاربری </Dropdown.Item>
+        <Dropdown.Item href="/p-user">پنل کاربری </Dropdown.Item>
         <Dropdown.Item  onClick={exitHandler}>خروج</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
@@ -149,7 +162,10 @@ console.log(xtFlag);
               </div>
 
               <div className={` ${styles.Header_leftSide__div} centerr`}>
-                <ShoppingCart size={24} color="#14a5af" />
+                <Link href='/basket'
+                 onClick={()=>setXtFlagSpinnerShow(true)}
+                ><ShoppingCart size={24} color="#14a5af" />
+                </Link>
                 </div>
 
               <div className={` ${styles.Header_leftSide__div} centerr`}>
@@ -336,7 +352,7 @@ console.log(xtFlag);
                 <li> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                 >عضویت </Link> </li>
                 </>  : 
-                      <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+                      <li> <Link href={'/p-user'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                       >پنل کاربری </Link> </li>
             
               }
@@ -407,7 +423,8 @@ console.log(xtFlag);
              </div>
 
               <div className={` ${styles.Header_leftSide__div} centerr`}>
-                <ShoppingCart size={24} color="#14a5af" />        </div>
+              <Link href='/basket'><ShoppingCart size={24} color="#14a5af" />
+              </Link>    </div>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <EnvelopeSimple size={24} color="#14a5af" />
               </div>

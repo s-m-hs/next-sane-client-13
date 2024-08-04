@@ -179,9 +179,10 @@ size={250}
         {productByCat?.length == 0 ? <SpinnerA size={200} /> : productByCat?.map((item, index) =>
           <div key={index}
             className={`centerc ${Styles.products_col}`}
-            onClick={ ()=>setFlagSpinnerShow(true) } >
+            // onClick={ ()=>setFlagSpinnerShow(true) } 
+            >
             <CardC
-            
+            clickSpinner={()=>setFlagSpinnerShow(true)}
               id={item.id}
               imgSrc={item.smallImage
               } title={item.name} price={item.price}

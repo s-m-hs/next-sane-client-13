@@ -42,9 +42,12 @@
     font-size: 1.9rem;
   left: 5px;
   }
-  .cardprob__icon_div i{
-    margin: 5px;
+  .cardprob__icon_div svg{
+    padding: 5px;
     cursor: pointer;
+  }
+  .cardprob__icon_div svg:hover {
+   opacity: 0.7;
   }
   
   .cardprob_container a{
