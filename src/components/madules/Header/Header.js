@@ -25,7 +25,7 @@ export default function Header() {
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
-let {xtFlag,setXtFlag,xtflagSpinnerShow, setXtFlagSpinnerShow}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagLoginSpinnerShow}=useContext(MainContext)
  
 
   useEffect(() => {
@@ -46,7 +46,7 @@ let {xtFlag,setXtFlag,xtflagSpinnerShow, setXtFlagSpinnerShow}=useContext(MainCo
 
 const exitHandler=()=>{
   localStorage.removeItem('loginToken')
-setXtFlag(false)
+setXtFlagLogin(false)
 console.log('object')
 }
 
@@ -64,7 +64,7 @@ console.log('object')
         if (res.status == 200) {
           setUserName(getLocalStorageUser)
           setFlag(true)
-          setXtFlag(true)
+          setXtFlagLogin(true)
           
         }
       })
@@ -73,7 +73,7 @@ console.log('object')
   }
   useEffect(() => {
     getProfile()
-  }, [userName,xtFlag])
+  }, [userName,xtFlagLogin])
   /////////////////////////////////
   const getCategoryById = () => {
     let obj = {
@@ -96,7 +96,7 @@ console.log('object')
     }
     console.log(valeS)
   };
-console.log(xtFlag);
+console.log(xtFlagLogin);
   return (
 
     <>
@@ -136,7 +136,7 @@ size={250}
 
             <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
 
-{xtFlag && 
+{xtFlagLogin && 
 
 
 <>
@@ -163,7 +163,7 @@ size={250}
 
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <Link href='/basket'
-                 onClick={()=>setXtFlagSpinnerShow(true)}
+                 onClick={()=>setXtFlagLoginSpinnerShow(true)}
                 ><ShoppingCart size={24} color="#14a5af" />
                 </Link>
                 </div>
@@ -346,7 +346,7 @@ size={250}
                 <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
               
               {
-                !xtFlag ? <>
+                !xtFlagLogin ? <>
                      <li> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                 >ورود </Link> </li>
                 <li> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
@@ -415,7 +415,7 @@ size={250}
             <div className="centerc">
 
             </div>
-            {xtFlag && <span className={styles.user_span}>{userName.toUpperCase()}</span>} 
+            {xtFlagLogin && <span className={styles.user_span}>{userName.toUpperCase()}</span>} 
 
             <div className={`${styles.Header_leftSide__div} centerr`}  >
                

@@ -12,13 +12,16 @@ import React, { createContext, useState } from 'react';
 const MainContext = createContext();
 
 const MainProvider = ({ children }) => {
-    const [xtFlag, setXtFlag] = useState(false);
+    const [xtFlagLogin, setXtFlagLogin] = useState(false);
     const [xtflagSpinnerShow, setXtFlagSpinnerShow] = useState(false);
     const [cartCounter, setCartCounter] = useState(0)
+    const [localUpdateBasket,setLocalUpdateBasket]=useState([])
+
 
 
     return (
-        <MainContext.Provider value={{xtFlag, setXtFlag,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter}}>
+        <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
+            setLocalUpdateBasket,}}>
             {children}
         </MainContext.Provider>
     );

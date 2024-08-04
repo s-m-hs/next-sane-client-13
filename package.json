@@ -20,6 +20,7 @@
     "react-hook-form": "^7.52.2",
     "react-icons": "^5.2.1",
     "react-spinners": "^0.14.1",
+    "react-toastify": "^10.0.5",
     "spinner": "^0.3.4",
     "spinners": "^1.2.2",
     "sweetalert2": "^11.12.3",

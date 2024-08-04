@@ -19,7 +19,7 @@ import alertN from "@/utils/Alert/AlertA";
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const router = useRouter()
-let {xtFlag,setXtFlag}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin}=useContext(MainContext)
 
 
   const {
@@ -42,7 +42,7 @@ let {xtFlag,setXtFlag}=useContext(MainContext)
   };
   //////////////////////
   const alertA=()=>alertN('center','success'," خوش آمدید",1500).then((res) => {
-    setXtFlag(true)
+    setXtFlagLogin(true)
 reset(setValue(''))
 router.push('/') 
 });

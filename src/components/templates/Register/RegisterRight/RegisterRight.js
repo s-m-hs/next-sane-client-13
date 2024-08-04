@@ -14,7 +14,7 @@ import alertN from "@/utils/Alert/AlertA";
 
 export default function RegisterRight() {
 const router = useRouter()
-let {xtFlag,setXtFlag}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin}=useContext(MainContext)
 
 
   const {
@@ -36,7 +36,7 @@ let {xtFlag,setXtFlag}=useContext(MainContext)
 
   };
  const alertA=()=>alertN('center','success','ثبت نام با موفقیت انجام شد',1500).then((res) => {
-    setXtFlag(true)
+    setXtFlagLogin(true)
 reset(setValue(''))
 router.push('/') 
 });
