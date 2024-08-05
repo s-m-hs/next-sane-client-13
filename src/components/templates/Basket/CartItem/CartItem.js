@@ -1,3 +1,4 @@
+import { MainContext } from "@/context/MainContext";
 import { useContext, useState,useEffect } from "react";
 // import { CounterContext } from "../../Context/CounterContext";
 // import { MenuContext } from "../../Context/MenuContext";
@@ -7,6 +8,8 @@ import { useContext, useState,useEffect } from "react";
 const CartItem = (props) => {
   const[quantity,setQuantity]=useState( props.quantity)
   const getLocalStorage=localStorage.getItem('loginToken')
+  let {  xtFlagLogin } = useContext(MainContext);
+
 //   let { basketFlag,setGetBasket } = useContext(CounterContext)
 // let{flagLogin}=useContext(MenuContext)
 const addClick = () => {
@@ -100,7 +103,7 @@ const handleRemove=(e,id)=>{
         </td>
         <td className="tp-cart-quantity">
           <div className="tp-product-quantity mt-10 mb-10">
-            <span className="tp-cart-minus" 
+            {xtFlagLogin &&  <span className="tp-cart-minus" 
             onClick={()=>minesClick()}
             >
               <svg
@@ -118,14 +121,14 @@ const handleRemove=(e,id)=>{
                   strokeLinejoin="round" 
                 />
               </svg>
-            </span>
+            </span>}
+           
             <input class="tp-cart-input" type="text" 
             value={quantity}
             onChange={(e)=>changeHandler(e)}
             ></input>
 
-
-            <span className="tp-cart-plus" onClick={()=>addClick()}>
+{xtFlagLogin &&  <span className="tp-cart-plus" onClick={()=>addClick()}>
             
               <svg
                 width="10"
@@ -149,7 +152,8 @@ const handleRemove=(e,id)=>{
                   strokeLinejoin="round"
                 />
               </svg>
-            </span>
+            </span>}
+           
           </div>
         </td>
         {/* <!-- action --> */}

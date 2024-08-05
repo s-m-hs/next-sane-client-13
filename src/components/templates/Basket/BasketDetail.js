@@ -1,9 +1,9 @@
-import { MainContext } from '@/context/MainContext'
+import style from './BasketDetail.module.css'
+import { MainContext } from '@/context/MainContext';
 import apiCallProdDetails from '@/utils/ApiUrl/apiCallProDetails';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import CartItem from './CartItem/CartItem';
 import { ToastContainer, Zoom, toast } from "react-toastify";
-
 
 export default function BasketDetail() {
   let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket } = useContext(MainContext);
@@ -37,43 +37,49 @@ export default function BasketDetail() {
     } else {
       let uniqueItemsMap = new Map();
 
+      // افزودن آیتم‌های قبلی
+      localUpdateBasket.forEach((item) => {
+        uniqueItemsMap.set(item.value.value, item);
+      });
+
+      // افزودن آیتم‌های جدید
       basket.forEach((item) => {
         let newKey = `cartObj${item.cyProductID}`;
         let newValue = {
           value: item.cyProductID,
           quan: item.quantity.toString(),
         };
-      
         uniqueItemsMap.set(item.cyProductID, {
           key: newKey,
           value: newValue,
         });
       });
-      
+
       let uniqueItemsArray = Array.from(uniqueItemsMap.values());
-      
       setBasket2(uniqueItemsArray);
       setLocalUpdateBasket(uniqueItemsArray);
-      
+
       uniqueItemsArray.forEach((item) => {
         localStorage.setItem(item.key, JSON.stringify(item.value));
       });
+
       setFlagUpdate(false);
+      notify();
     }
-    // notify();
   };
-  console.log(localUpdateBasket)
+
   const updateQuantity = (id, newQuantity) => {
     let basketArray = [];
-    let filterBasket = basket.filter((item) => {
-      item.cyProductID !== id && basketArray.push(item);
+    basket.forEach((item) => {
+      if (item.cyProductID !== id) {
+        basketArray.push(item);
+      }
     });
     basketArray.push({ cyProductID: id, quantity: newQuantity });
     setBasket(basketArray);
     setFlagUpdate(true);
   };
 
-  /////////////////////////
   const loadCartItem = () => {
     const item = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -86,9 +92,17 @@ export default function BasketDetail() {
   };
 
   useEffect(() => {
+    const cyProductIDs = basket.map((item) => item.cyProductID);
+    const uniqueArray = cartItem.filter(
+      (item) => !cyProductIDs.includes(item.value.value)
+    );
+    setBasket2(uniqueArray);
+  }, [basket]);
+
+  useEffect(() => {
     loadCartItem();
   }, []);
-////////////////////////////
+
   useEffect(() => {
     const processedKeys = new Set();
 
@@ -113,6 +127,7 @@ export default function BasketDetail() {
       <div className='row'>
         <div className='col-8'>
           <div>
+            <button onClick={() => { localStorage.clear(); setToBuy([]); setBasket([]);setLocalUpdateBasket([]) }}>clear</button>
             <table className='table table-hove'>
               <thead>
                 <tr key="">
@@ -124,7 +139,7 @@ export default function BasketDetail() {
               <tbody>
                 {!xtFlagLogin && toBuy.length !== 0 && toBuy.map((item) => (
                   <CartItem
-                    key={item.id} // Added a key prop to avoid React warnings
+                    key={item.id}
                     name={item["name"]}
                     smallImage={item["smallImage"]}
                     price={item["price"]}
@@ -139,23 +154,37 @@ export default function BasketDetail() {
                         )[0]?.value.quan || 1
                     }
                     updateQuantity={updateQuantity}
-                    // handleRemove={removeFromCart}
                   />
                 ))}
               </tbody>
             </table>
+        
+          </div>
+        </div>
+        <div className= {`col-4 centerc ${style.col_4}`} >
 
-            <button
+          <div>
+            <div>  
+                <button
               type="button"
               className={flagUpdate ? "btn btn-info" : "tp-cart-update-btn-hide"}
               onClick={updateBasketHandler}
             >
               به روز رسانی سبد خرید
-            </button>
+            </button></div>
+            <div>
+            <div>  
+                <button
+              type="button"
+              className={flagUpdate ? "btn btn-info" : "tp-cart-update-btn-hide"}
+              onClick={updateBasketHandler}
+            >
+              به روز رسانی سبد خرید
+            </button></div>
+            </div>
           </div>
         </div>
-        <div className='col-4'></div>
       </div>
     </div>
-  )
+  );
 }
