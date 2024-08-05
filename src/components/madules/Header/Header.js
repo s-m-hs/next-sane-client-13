@@ -1,7 +1,6 @@
 "use client"
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
-import Link from "next/link";
 import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
 import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
@@ -9,6 +8,7 @@ import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DotLoader } from "react-spinners";
+import Link from "next/link";
 
 
 
@@ -25,7 +25,7 @@ export default function Header() {
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
-let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagLoginSpinnerShow}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow}=useContext(MainContext)
  
 
   useEffect(() => {
@@ -160,14 +160,16 @@ size={250}
 <div className={`${styles.Header_leftSide__div} centerr`}  >
                 <User size={24} color="#14a5af" />
               </div>
-
-              <div className={` ${styles.Header_leftSide__div} centerr`}>
-                <Link href='/basket'
-                 onClick={()=>setXtFlagLoginSpinnerShow(true)}
-                ><ShoppingCart size={24} color="#14a5af" />
-                </Link>
+ <Link href='/basket'
+                 
+                 > 
+              <div 
+              onClick={()=>setXtFlagSpinnerShow(true)}
+              className={` ${styles.Header_leftSide__div} centerr`}>
+               <ShoppingCart size={24} color="#14a5af" />
+             
                 </div>
-
+   </Link>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <EnvelopeSimple size={24} color="#14a5af" />
               </div>
