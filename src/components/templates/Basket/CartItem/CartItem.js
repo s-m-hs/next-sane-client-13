@@ -1,3 +1,4 @@
+import style from './CartItem.module.css'
 import { MainContext } from "@/context/MainContext";
 import { useContext, useState,useEffect } from "react";
 // import { CounterContext } from "../../Context/CounterContext";
@@ -31,7 +32,7 @@ const changeHandler = (e) => {
   props.updateQuantity(props.cyProductID, e.target.value);
 };
 const handleRemove=(e,id)=>{
-  flagLogin ?
+  xtFlagLogin ?
   props.remove(id) : props.handleRemove(id)
 
 }
@@ -59,7 +60,7 @@ const handleRemove=(e,id)=>{
 // },[basketFlag])
   return (
     <>
-      <tr>
+      <tr className= {`${style.tr}`}>
         {/* <!-- img --> */}
         <td className="tp-cart-img">
           <a href="product-details.html">
@@ -69,7 +70,7 @@ const handleRemove=(e,id)=>{
         </td>
         {/* <!-- title --> */}
         <td className="tp-cart-title">
-          <a href="product-details.html">{props.name}</a>
+          <a href={`/product/${props.id}`} >{props.name}</a>
         </td>
         {/* <!-- price --> */}
         <td className="tp-cart-price">
@@ -123,7 +124,8 @@ const handleRemove=(e,id)=>{
               </svg>
             </span>}
            
-            <input class="tp-cart-input" type="text" 
+            <input 
+            class={style.quantity} 
             value={quantity}
             onChange={(e)=>changeHandler(e)}
             ></input>

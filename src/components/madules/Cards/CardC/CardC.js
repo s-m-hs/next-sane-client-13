@@ -1,13 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import Styles from './CardC.module.css'
 import { Heart, ShoppingCart } from '@phosphor-icons/react'
 import addToCart from '@/utils/Functions/addToCart'
 import { MainContext } from '@/context/MainContext'
+import {getLocalStorage} from '@/utils/localStorag/localStorage'
+import alertN from '@/utils/Alert/AlertA'
+import updateBasket from '@/utils/ApiUrl/updateBasket'
 
 
 export default function CardC({imgSrc,title,price,id,clickSpinner }) {
-  let {setCartCounter}=useContext(MainContext)
+  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
+
+
+  const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {
+
+});
+console.log(getLocalStorage);
 
   return (
     <div data-aos='fade-up'  className={`${Styles.cardprob_container} centerc`}>
@@ -18,12 +27,12 @@ export default function CardC({imgSrc,title,price,id,clickSpinner }) {
     <div className={`${Styles.cardprob__icon_div} centerr`} >
     <ShoppingCart size={32} color="#19a7af" weight="duotone"
         onClick={()=>{
-          // let obj=[{
-          //   cyProductID: props.id,
-          //   quantity: 1
-          // }] 
-          // flagLogin==true ?  updateBasket(getLocalStorage,obj,setBasketFlag,alert) 
-          // :
+          let obj=[{
+            cyProductID: id,
+            quantity: 1
+          }] 
+          xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+          :
 
              addToCart(id,'1',setCartCounter)
           

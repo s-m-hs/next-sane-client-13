@@ -1,9 +1,18 @@
+'use client'
 import BrandArea from '@/components/madules/BrandArea/BrandArea';
 import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
 import CategorySectionA from '@/components/templates/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templates/Home/SwiperB/SwiperB';
+import { MainContext } from '@/context/MainContext';
+import alertN from '@/utils/Alert/AlertA';
+import updateBasket from '@/utils/ApiUrl/updateBasket';
+import {getLocalStorage} from '@/utils/localStorag/localStorage';
+import { useContext, useEffect } from 'react';
 
 export default function Home() {
+  let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,setBasketFlag } = useContext(MainContext);
+  const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
+
   const sliderDetail=[
     {img:"../../../images/products/c8f4ce37fea7a15300a2264c73b4ccd925d20dac_1697010738.jpg",title:'هدفون بی سیم',price:'327,000'},
     {img:"../../../images/products/d2c991565182fb5bdc10abd2576e454d9f54ad10_1685442773.jpg",title:' موس A4Teach ',price:'468,000'},
@@ -30,6 +39,29 @@ export default function Home() {
   const brandLogoB=[
     'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
 ]
+useEffect(() => {
+  if(xtFlagLogin){
+      for (let i = 0; i < localStorage.length; i++) {
+
+    const key = localStorage.key(i);
+    if (key.startsWith('cartObj')) {
+      const keyy=JSON.parse(localStorage.getItem(key))
+      const value = localStorage.getItem(key);
+      let obj=[{
+        cyProductID:keyy.value,
+        quantity: keyy.quan
+      }] 
+      updateBasket(getLocalStorage,obj,setBasketFlag,alertA)
+      localStorage.removeItem(key)
+      setLocalUpdateBasket([])
+      setCartCounter(0)
+      // apiCallProdDetails(value, addItem, setIsApiCalled)
+    }
+  }
+  }
+
+},[xtFlagLogin]); 
+console.log(getLocalStorage); 
   return (
 <div className='container'>
   <div className='row'>

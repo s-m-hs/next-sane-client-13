@@ -9,6 +9,7 @@ import { MainContext } from "@/context/MainContext";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DotLoader } from "react-spinners";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
@@ -25,8 +26,8 @@ export default function Header() {
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
-let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow}=useContext(MainContext)
- 
+let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter}=useContext(MainContext)
+ const rout=useRouter()
 
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -47,6 +48,7 @@ let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow}=useCont
 const exitHandler=()=>{
   localStorage.removeItem('loginToken')
 setXtFlagLogin(false)
+rout.push('/')
 console.log('object')
 }
 
@@ -97,8 +99,9 @@ console.log('object')
     console.log(valeS)
   };
 console.log(xtFlagLogin);
-  return (
 
+
+  return (
     <>
       {!fixTop ?
 
@@ -153,22 +156,17 @@ size={250}
 
 } 
 
-
-
-
-
 <div className={`${styles.Header_leftSide__div} centerr`}  >
                 <User size={24} color="#14a5af" />
               </div>
- <Link href='/basket'
-                 
-                 > 
+
+ <Link href='/basket'> 
               <div 
               onClick={()=>setXtFlagSpinnerShow(true)}
-              className={` ${styles.Header_leftSide__div} centerr`}>
+              className={`${styles.Header_leftSide__div } centerr`}>
                <ShoppingCart size={24} color="#14a5af" />
-             
-                </div>
+               {cartCounter!=0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}
+               </div>
    </Link>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <EnvelopeSimple size={24} color="#14a5af" />
@@ -423,10 +421,14 @@ size={250}
                
                <User size={24} color="#14a5af" />
              </div>
-
+ <Link href='/basket'>
               <div className={` ${styles.Header_leftSide__div} centerr`}>
-              <Link href='/basket'><ShoppingCart size={24} color="#14a5af" />
-              </Link>    </div>
+             
+              <ShoppingCart size={24} color="#14a5af" />
+              {cartCounter!=0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}
+              
+
+                </div> </Link> 
               <div className={` ${styles.Header_leftSide__div} centerr`}>
                 <EnvelopeSimple size={24} color="#14a5af" />
               </div>

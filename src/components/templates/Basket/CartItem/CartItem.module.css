@@ -1,0 +1,14 @@
+
+.tr a{
+ text-decoration: none;
+ list-style: none;
+ color: inherit;
+ text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+
+}
+.quantity{
+text-align: center;
+border: none;
+border-bottom: 1px dotted;  
+outline:none;
+}

@@ -87,6 +87,7 @@ left: 0; */
     height: 2cqi;
     box-shadow: 0 0 15px -10px rgb(0, 0, 0, 0.75);
     cursor: pointer;
+    position: relative;
 }
 .header_bottom{
     height: 30px;
@@ -202,7 +203,17 @@ left: 0; */
     width: 80%;
 }
 
-
+.shopicon_baget{
+    align-items: center;
+    position: absolute;
+    left: -2px;
+    top: -5px;
+    border-radius: 50%;
+    width: 15px;
+    color: #fff;
+height: 15px;    background-color:rgb(226 105 214);
+  }
+  
 
 @keyframes move {
     0% {
