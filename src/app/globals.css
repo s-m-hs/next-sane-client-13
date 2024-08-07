@@ -1,3 +1,5 @@
+
+
 html{
   box-sizing: border-box;
   font-size: 62.5%;
@@ -61,7 +63,29 @@ a,ul,li{
 
 
 
+input[type=number] {
+  /*for absolutely positioning spinners*/
+  position: relative; 
+  padding: 5px;
+  padding-right: 25px;
+  
+}
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  background-color: #14a5af !important;
+  opacity: 0.7;
+}
+
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: inner-spin-button !important;
+  width: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
 
 
 

@@ -63,10 +63,10 @@ const handleRemove=(e,id)=>{
       <tr className= {`${style.tr}`}>
         {/* <!-- img --> */}
         <td className="tp-cart-img">
-          <a href="product-details.html">
+          
             {" "}
             <img src={props.smallImage} alt="" style={{width:'50px'}} />
-          </a>
+         
         </td>
         {/* <!-- title --> */}
         <td className="tp-cart-title">
@@ -104,7 +104,7 @@ const handleRemove=(e,id)=>{
         </td>
         <td className="tp-cart-quantity">
           <div className="tp-product-quantity mt-10 mb-10">
-            {xtFlagLogin &&  <span className="tp-cart-minus" 
+            {/* {xtFlagLogin &&  <span className="tp-cart-minus" 
             onClick={()=>minesClick()}
             >
               <svg
@@ -122,15 +122,16 @@ const handleRemove=(e,id)=>{
                   strokeLinejoin="round" 
                 />
               </svg>
-            </span>}
+            </span>} */}
            
             <input 
+            type='number'
             class={style.quantity} 
             value={quantity}
             onChange={(e)=>changeHandler(e)}
             ></input>
 
-{xtFlagLogin &&  <span className="tp-cart-plus" onClick={()=>addClick()}>
+{/* {xtFlagLogin &&  <span className="tp-cart-plus" onClick={()=>addClick()}>
             
               <svg
                 width="10"
@@ -154,7 +155,7 @@ const handleRemove=(e,id)=>{
                   strokeLinejoin="round"
                 />
               </svg>
-            </span>}
+            </span>} */}
            
           </div>
         </td>

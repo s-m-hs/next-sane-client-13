@@ -112,7 +112,7 @@ const alertN = (position,icon,title,timer) =>
       });
 
       setFlagUpdate(false);
-      notify();
+      // notify();
     }
   };
 
@@ -263,7 +263,7 @@ const alertN = (position,icon,title,timer) =>
             <div className='centerc' style={{alignItems:'center'}}>  
                 <button
               type="button"
-              className={flagUpdate ?   `${style.btn} btn btn-info` :  `${style.btn_hide}` }
+              className={flagUpdate ?   `${style.btn} btn btn-outline-info` :  `${style.btn_hide}` }
               onClick={updateBasketHandler}
             >
               به روز رسانی سبد خرید
@@ -273,7 +273,7 @@ const alertN = (position,icon,title,timer) =>
             <div  className='centerc' style={{alignItems:'center'}}>  
                 <button
               type="button"
-              className={flagUpdate ?  `${style.btn_hide}`  :  `${style.btn} btn btn-info` }
+              className={flagUpdate ?  `${style.btn_hide}`  :  `${style.btn} btn btn-outline-info` }
               onClick={paymentHandler}
             >
                 رفتن به پرداخت 

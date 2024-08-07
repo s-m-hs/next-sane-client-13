@@ -8,6 +8,7 @@ import ProductDetailLeft from './ProductDetailLeft/ProductDetailLeft';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine,Dresser} from "@phosphor-icons/react";
+import Link from 'next/link';
 
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
@@ -74,15 +75,15 @@ useEffect(()=>{
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-      <Breadcrumb.Item href="/"><HouseLine size={18}/>خانه/</Breadcrumb.Item>
-      {nameCategory && idCategory && <Breadcrumb.Item href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}/</Breadcrumb.Item>}  
+    <Breadcrumb.Item ><Link href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
+    {nameCategory && idCategory && <Breadcrumb.Item ><Link href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}</Link></Breadcrumb.Item>}  
       <Breadcrumb.Item active href="/">
       {productDetailB?.name}
-        {/* {mainCategory.item?.text} */}
       </Breadcrumb.Item>
     </Breadcrumb>
   </div>
 </div>
+
 
       <div className={`row ${Styles.product_row}`}  >
         <div className={`col-md-3  ${Styles.product_right_col}`} ><ProducyDetailRight spec={productDetail} /></div>

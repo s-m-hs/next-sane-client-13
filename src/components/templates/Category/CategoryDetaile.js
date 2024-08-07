@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine} from "@phosphor-icons/react";
 import DotLoader from "react-spinners/DotLoader";
+import Link from "next/link";
 
 
 
@@ -153,7 +154,7 @@ size={250}
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-      <Breadcrumb.Item href="/">خانه<HouseLine size={24}/>/</Breadcrumb.Item>
+    <Breadcrumb.Item ><Link href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
       <Breadcrumb.Item active href="/">
         {mainCategory.item?.text}
       </Breadcrumb.Item>
