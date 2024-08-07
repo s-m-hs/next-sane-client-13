@@ -343,7 +343,7 @@ size={250}
                 </li>
                 <li className="nav_link">فروش اقساط   </li>
                 <li>خدمات</li>
-                <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+                <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
               
               {
                 !xtFlagLogin ? <>
@@ -597,7 +597,7 @@ size={250}
                 </li>
                 <li className="nav_link">فروش اقساط   </li>
                 <li>خدمات</li>
-                <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+                <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
                 <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
               </ul>
             </div>

@@ -1,0 +1,39 @@
+.row{
+    margin: 10px auto;
+    height:100%;
+    width: 90%;
+}
+.col_right{
+    background-color: var(--white1ffffff);
+    justify-content: flex-start;
+}
+
+
+/* .col_right h1{
+    font-size: 2.5cqi;
+}
+.col_right h3{
+    font-size: 1.5cqi;
+}
+.col_right h5{
+    font-size: 1cqi;
+} */
+
+.col_left{
+    height: 100%;
+    background-color: var(--white1ffffff);
+
+}
+
+
+.map {
+    border-radius: 10px;
+    height: 500px;
+    width: 100%;
+    z-index: 0;
+  }
+  
+.img{
+    width: -webkit-fill-available;
+}
+  
