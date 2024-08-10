@@ -32,13 +32,13 @@ const Sidebar = () => {
           <>
             <Link href={"/p-user"} className={styles.sidebar_link_active}>
               <ImReply />
-              پیشخوان
+              پروفایل من
             </Link>
             <Link href={"/p-user/orders"}>
               <FaShoppingBag />
               سفارش ها
             </Link>
-            <Link href={"/p-user/tickets"}>
+            <Link href={"/p-user/ticket"}>
               <MdSms />
               تیکت های پشتیبانی
             </Link>

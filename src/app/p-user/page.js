@@ -1,13 +1,12 @@
 import React from "react";
-import UserPanelLayout from "@/components/layouts/UserPanelLayout";
 import Sidebar from "@/components/madules/p-user/Sidebar";
+import Layout from "@/components/layouts/UserPanelLayout";
 
 function Index() {
   return (
-    <UserPanelLayout>
-        <Sidebar/>
-
-    </UserPanelLayout>
+    <Layout>
+<div>sdsa</div>
+    </Layout>
   );
 }
 
