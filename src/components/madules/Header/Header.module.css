@@ -433,3 +433,26 @@ transition:transform 0.1s linear;
     right: 50vw;
     z-index: 100;
 }
+
+
+@media only screen and (max-width:900px){
+    .A{
+        display: none;
+    }
+    .B{
+        display: inline !important;
+    }
+}
+
+.B{
+    display: none;
+}
+
+.mobi_header{
+    height: 100px;
+    width: 100%;
+}
+/* .mobi_header img{
+    width: 400px;
+    height: 400px;
+} */

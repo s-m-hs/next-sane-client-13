@@ -42,7 +42,7 @@ size={250}
 </div>
 </div>}
       <div>
-        <div className="row mt-5">
+        <div  className="row mt-5">
           <div
             className="col"
             style={{ marginRight: "50px", marginTop: "30px" }}
