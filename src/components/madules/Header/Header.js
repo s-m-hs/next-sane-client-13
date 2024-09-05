@@ -405,7 +405,8 @@ size={250}
         </div>
       </div>
       <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-      <img src="./2.png" />
+
+      {/* <img src="images/2.png" /> */}
 
         <input
           className={styles.Header_rightSide__div_search_input}
@@ -646,10 +647,28 @@ size={250}
   <div className="container">
 
 <div className={`${styles.mobi_header} row` }  >
-<img src="./sound.jpg" alt="" />
+<img src="images/photo_2024-05-30_19-08-29.jpg" alt="" />
 
 </div>
   </div>
+</section>
+
+<section className={styles.C}>
+  <div className={`container left-0 ${styles.C_Contaner} `} >
+
+    <div className={`${styles.mobi_bottomHeader} row`} >
+<div className="col">
+<ul className={`${styles.bottomHeader_ul} centerr`}>
+  <li>خانه</li>
+  <li>دسته بندی</li>
+  <li>سبدخرید</li>
+  <li>پروفایل من</li>
+  <li>جسنجو </li>
+</ul>
+</div>
+    </div>
+  </div>
+
 </section>
     </>
 
