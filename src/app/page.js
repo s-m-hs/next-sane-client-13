@@ -6,7 +6,7 @@ import SwiperB from '@/components/templates/Home/SwiperB/SwiperB';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 import updateBasket from '@/utils/ApiUrl/updateBasket';
-import {getLocalStorage} from '@/utils/localStorag/localStorage';
+import getLocalStorage from '@/utils/localStorag/localStorage';
 import { useContext, useEffect } from 'react';
 
 export default function Home() {

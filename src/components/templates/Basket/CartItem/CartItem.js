@@ -73,35 +73,7 @@ const handleRemove=(e,id)=>{
           <a href={`/product/${props.id}`} >{props.name}</a>
         </td>
         {/* <!-- price --> */}
-        <td className="tp-cart-price">
-          {
-          props.noOffPrice === null ? (
-            props.totalPrice === null ? (
-              <div className="tp-product-badge" style={{ position: "static" }}>
-                <span className="product-hot">نا موجود</span>
-              </div>
-            ) : (
-              <span className="tp-product-details-price new-price">
-                {props.totalPrice}
-              </span>
-            )
-          ) : props.totalprice === null ? (
-            <span className="tp-product-details-price new-price">
-              {props.noOffPrice}
-            </span>
-          ) : (
-            <div>
-              <span className="tp-product-details-price old-price">
-                {props.noOffPrice}
-              </span>
-              <br/>
-              <span className="tp-product-details-price new-price">
-                {props.totalPrice}
-              </span>
-            </div>
-          )
-          }
-        </td>
+    
         <td className="tp-cart-quantity">
           <div className="tp-product-quantity mt-10 mb-10">
             {/* {xtFlagLogin &&  <span className="tp-cart-minus" 
@@ -159,6 +131,42 @@ const handleRemove=(e,id)=>{
            
           </div>
         </td>
+
+        <td className="tp-cart-price">
+          {
+          props.unitPrice === null ? (
+            props.totalPrice === null ? (
+              <div className="tp-product-badge" style={{ position: "static" }}>
+                <span className="product-hot">نا موجود</span>
+              </div>
+            ) : (
+              <span className="tp-product-details-price new-price">
+                {props.totalPrice}
+              </span>
+            )
+          ) : props.totalprice === null ? (
+            <span className="tp-product-details-price new-price">
+              {props.unitPrice}
+            </span>
+          ) : (
+            <div>
+              <span className="tp-product-details-price old-price">
+                {props.unitPrice}
+              </span>
+              {/* <br/>
+              <span className="tp-product-details-price new-price">
+                {props.offerPrice}
+              </span> */}
+            </div>
+          )
+          }
+        </td>
+<td>
+<span className="tp-product-details-price new-price">
+                {props.totalPrice}
+              </span>
+</td>
+
         {/* <!-- action --> */}
         <td className="tp-cart-action">
           <button className="btn btn-danger"

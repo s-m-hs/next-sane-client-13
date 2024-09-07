@@ -19,7 +19,7 @@ import alertN from "@/utils/Alert/AlertA";
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const router = useRouter()
-let {xtFlagLogin,setXtFlagLogin}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag}=useContext(MainContext)
 
 
   const {
@@ -65,7 +65,9 @@ const login=(obj)=>{
       if(result){
         localStorage.setItem('loginToken',result.token)
         localStorage.setItem('user',obj.un)
+        setLocalToken(result.token)
         alertA()
+        setBasketFlag(prev=>!prev)
       }else{
         alertB()
       }

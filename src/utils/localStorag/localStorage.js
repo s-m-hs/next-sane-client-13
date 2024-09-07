@@ -3,4 +3,4 @@ const getLocalStorage=localStorage.getItem('loginToken')
 
 
 
-export  {getLocalStorage}
+export default getLocalStorage

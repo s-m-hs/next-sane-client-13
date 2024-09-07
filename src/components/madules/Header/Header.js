@@ -26,7 +26,7 @@ export default function Header() {
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
-let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter,setCartCounter,localToken}=useContext(MainContext)
  const rout=useRouter()
 
   useEffect(() => {
@@ -48,6 +48,7 @@ let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCoun
 const exitHandler=()=>{
   localStorage.removeItem('loginToken')
 setXtFlagLogin(false)
+setCartCounter('')
 rout.push('/')
 console.log('object')
 }
@@ -98,7 +99,6 @@ console.log('object')
     }
     console.log(valeS)
   };
-console.log(xtFlagLogin);
 
 
   return (

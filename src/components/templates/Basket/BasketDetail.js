@@ -8,8 +8,9 @@ import Swal from "sweetalert2";
 import { useRouter } from 'next/navigation'
 import { DotLoader } from 'react-spinners';
 import RemoveApi from '@/utils/ApiUrl/apiCallBack/apiRemove';
-import { getLocalStorage } from '@/utils/localStorag/localStorage';
+// import getLocalStorage from '@/utils/localStorag/localStorage';
 import alertN from '@/utils/Alert/AlertA';
+import updateBasket from '@/utils/ApiUrl/updateBasket';
 
 
 export default function BasketDetail() {
@@ -21,8 +22,11 @@ export default function BasketDetail() {
   const [basket2, setBasket2] = useState([]);
   const [cartItem, setCartItem] = useState([]);
   const rout=useRouter()
+  const getLocalStorage=localStorage.getItem('loginToken')
 
+console.log(getLocalStorage)
   const AlertA=()=>alertN('center','info',"حذف با موفقیت انجام شد...",1000).then((res) => setBasketFlag((prev) => !prev));
+  const AlertB=()=>alertN('center','success'," سبد خرید با موفقیت به روزرسانی شد...",500).then((res) => setBasketFlag((prev) => !prev));
   const removeHan = (id) => {
     RemoveApi(
       "api/CyOrders/deleteItem",
@@ -80,8 +84,8 @@ const alertN = (position,icon,title,timer) =>
 
   const updateBasketHandler = () => {
     if (xtFlagLogin) {
-      // updateBasket(getLocalStorage, basket, setBasketFlag);
-      // setFlagUpdate(false);
+      updateBasket(getLocalStorage, basket, setBasketFlag,AlertB);
+      setFlagUpdate(false);
     } else {
       let uniqueItemsMap = new Map();
 
@@ -117,6 +121,7 @@ const alertN = (position,icon,title,timer) =>
   };
 
   const updateQuantity = (id, newQuantity) => {
+    console.log('updateQuantity')
     let basketArray = [];
     basket.forEach((item) => {
       if (item.cyProductID !== id) {
@@ -125,6 +130,7 @@ const alertN = (position,icon,title,timer) =>
     });
     basketArray.push({ cyProductID: id, quantity: newQuantity });
     setBasket(basketArray);
+    console.log(basketArray)
     setFlagUpdate(true);
   };
 
@@ -187,8 +193,9 @@ const alertN = (position,icon,title,timer) =>
                 <tr key="">
                   <th>تصویر کالا</th>
                   <th>عنوان کالا</th>
-                  <th>قیمت</th>
                   <th>تعداد</th>
+                  <th>قیمت واحد</th>
+                  <th>قیمت کل</th>
                   <th>حذف</th>
                 </tr>
               </thead>
@@ -232,11 +239,10 @@ const alertN = (position,icon,title,timer) =>
                   <>
                     <CartItem
                     products={getBasket}
-                    name={item.cyProductID}
-                    // name={item.cyProductName}
+                    name={item.partNumber}
                     smallImage={item.cyProductImgUrl}
                     totalPrice={item.totalPrice}
-                    noOffPrice={item.unitPrice}
+                    unitPrice={item.unitPrice}
                     id={item.id}
                     cyProductID={item.cyProductID}
                     quantity={item.cyQuantity}

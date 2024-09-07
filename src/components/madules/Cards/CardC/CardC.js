@@ -4,26 +4,29 @@ import Styles from './CardC.module.css'
 import { Heart, ShoppingCart } from '@phosphor-icons/react'
 import addToCart from '@/utils/Functions/addToCart'
 import { MainContext } from '@/context/MainContext'
-import {getLocalStorage} from '@/utils/localStorag/localStorage'
+// import getLocalStorage from '@/utils/localStorag/localStorage'
 import alertN from '@/utils/Alert/AlertA'
 import updateBasket from '@/utils/ApiUrl/updateBasket'
+const getLocalStorage=localStorage.getItem('loginToken')
 
 
-export default function CardC({imgSrc,title,price,id,clickSpinner }) {
+export default function CardC({imgSrc,title,price,id,clickSpinner }) { 
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
 
 
-  const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {
+  const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  
 
 });
-console.log(getLocalStorage);
 
   return (
     <div data-aos='fade-up'  className={`${Styles.cardprob_container} centerc`}>
     <img src={imgSrc} alt="" />
+
     <span className={Styles.cardprob_title} > {title} </span>
+
     {/* <span>368,000</span> */}
     <span className={Styles.cardprob_price}>{price?.toLocaleString()}ریال </span>
+    
     <div className={`${Styles.cardprob__icon_div} centerr`} >
     <ShoppingCart size={32} color="#19a7af" weight="duotone"
         onClick={()=>{
