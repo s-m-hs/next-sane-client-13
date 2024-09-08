@@ -106,7 +106,7 @@ useEffect(()=>{
                 <table className='table mt-5 table-striped' >
                   <tbody>
 
-                    {productDetail?.length != 0 && productDetail.map(item =>
+                    {productDetail?.length != 0 && productDetail?.map(item =>
                       <tr key={item.id}>
                         <th>{item.name}</th>
                         <td>{item.value}</td>

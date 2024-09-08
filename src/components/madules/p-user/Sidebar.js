@@ -28,13 +28,14 @@ const Sidebar = () => {
         <p>خوش اومدی کاربر عزیز</p>
       </div>
       <ul className={styles.sidebar_main}>
-        {path.includes("/p-user") ? (
+        {/* {path.includes("/p-user") ? ( */}
           <>
-            <Link href={"/p-user"} className={styles.sidebar_link_active}>
+            <Link href={"/p-user/profile"} className={styles.sidebar_link_active}>
               <ImReply />
               پروفایل من
             </Link>
-            <Link href={"/p-user/orders"}>
+            
+            <Link href={"/p-user/order"}>
               <FaShoppingBag />
               سفارش ها
             </Link>
@@ -42,20 +43,14 @@ const Sidebar = () => {
               <MdSms />
               تیکت های پشتیبانی
             </Link>
-            <Link href={"/p-user/comments"}>
+            <Link href={"/p-user"}>
               <FaComments />
               کامنت ها
             </Link>
-            <Link href={"/p-user/wishlist"}>
-              <FaHeart />
-              علاقه مندی
-            </Link>
-            <Link href={"/p-user/account-details"}>
-              <TbListDetails />
-              جزئیات اکانت
-            </Link>
+           
           </>
-        ) : (
+        {/* )
+         : (
           <>
             <Link href={"/p-admin"} className={styles.sidebar_link_active}>
               <ImReply />
@@ -84,7 +79,7 @@ const Sidebar = () => {
               تخفیفات
             </Link>
           </>
-        )}
+        )} */}
       </ul>
       <div className={styles.logout} >
         <MdLogout />

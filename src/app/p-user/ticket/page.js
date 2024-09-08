@@ -6,10 +6,6 @@ import Tabs from 'react-bootstrap/Tabs';
 
 export default function Ticket() {
   return (
-    <Layout>
- <TabCom  />
-
-      
-    </Layout>
+<div>Ticket</div>
   )
 }

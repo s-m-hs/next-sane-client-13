@@ -10,6 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { DotLoader } from "react-spinners";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import alertN from "@/utils/Alert/AlertA";
 
 
 
@@ -28,6 +29,7 @@ export default function Header() {
 
 let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter,setCartCounter,localToken}=useContext(MainContext)
  const rout=useRouter()
+ const AlertA=()=>alertN('center','info',"محصولی در سبد خرید شما موجود نیست...",1500);
 
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -48,7 +50,7 @@ let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCoun
 const exitHandler=()=>{
   localStorage.removeItem('loginToken')
 setXtFlagLogin(false)
-setCartCounter('')
+setCartCounter(0)
 rout.push('/')
 console.log('object')
 }
@@ -163,9 +165,17 @@ size={250}
         <User size={24} color="#14a5af" />
       </div>
 
-<Link href='/basket'> 
+<Link href={cartCounter!=0 ? '/basket' : '#'}  > 
       <div 
-      onClick={()=>setXtFlagSpinnerShow(true)}
+      onClick={()=>{
+        if(cartCounter!=0){
+          setXtFlagSpinnerShow(true)
+        }else{
+          AlertA()
+        } 
+
+
+      } }
       className={`${styles.Header_leftSide__div } centerr`}>
        <ShoppingCart size={24} color="#14a5af" />
        {cartCounter!=0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}

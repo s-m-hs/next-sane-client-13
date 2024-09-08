@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
-import getLocalStorage from '@/utils/localStorag/localStorage';
+// import getLocalStorage from '@/utils/localStorag/localStorage';
 const MainContext = createContext();
 
 const MainProvider = ({ children }) => {
@@ -13,6 +13,8 @@ const MainProvider = ({ children }) => {
     const [basketFlag,setBasketFlag]=useState(false)
     const [getBasket,setGetBasket]=useState([])
     const [localToken,setLocalToken]=useState('')
+    const getLocalStorage=localStorage.getItem('loginToken')
+
 
     const getBaskett=()=>{  
         setGetBasket([])  

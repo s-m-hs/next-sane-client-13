@@ -11,20 +11,29 @@ import RemoveApi from '@/utils/ApiUrl/apiCallBack/apiRemove';
 // import getLocalStorage from '@/utils/localStorag/localStorage';
 import alertN from '@/utils/Alert/AlertA';
 import updateBasket from '@/utils/ApiUrl/updateBasket';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+
 
 
 export default function BasketDetail() {
-  let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,getBasket,setBasketFlag } = useContext(MainContext);
+  let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,getBasket,setBasketFlag,xtflagSpinnerShow } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
   const [basket, setBasket] = useState([]);
   const [flagUpdate, setFlagUpdate] = useState(false);
   const [basket2, setBasket2] = useState([]);
   const [cartItem, setCartItem] = useState([]);
+  const [total, setTotal] = useState(0);  
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const rout=useRouter()
   const getLocalStorage=localStorage.getItem('loginToken')
 
-console.log(getLocalStorage)
   const AlertA=()=>alertN('center','info',"حذف با موفقیت انجام شد...",1000).then((res) => setBasketFlag((prev) => !prev));
   const AlertB=()=>alertN('center','success'," سبد خرید با موفقیت به روزرسانی شد...",500).then((res) => setBasketFlag((prev) => !prev));
   const removeHan = (id) => {
@@ -53,17 +62,18 @@ console.log(getLocalStorage)
 
 const paymentHandler=()=>{
   if(!xtFlagLogin){
-
 const alertN = (position,icon,title,timer) =>
     Swal.fire({
       position:'center' ,
       icon:'info' ,
-      title:'لطفا ابتدا ثبت نام کنید...' ,
+      title:'لطفا ابتدا ثبت نام کنید(کمتراز 1 دقیقه ...) ' ,
       showConfirmButton: true,
       confirmButtonText:'تایید'    }).then(res=>{
       rout.push('/register')
     })
     alertN()
+  }else{
+    handleShow()
   }
 }
 
@@ -170,24 +180,37 @@ const alertN = (position,icon,title,timer) =>
         apiCallProdDetails(parsedValue.value, addItem, setIsApiCalled);
       }
     }
-  }, []);
+  }, [xtFlagLogin]);
+
+  ///to add total price
+useEffect(()=>{
+  const data = getBasket.map(item => ({  
+    totalPrice: item.totalPrice,  
+    // manufacturer: item.manufacturer  
+})); 
+const calculateTotalPrice = () => {  
+  const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);  
+  setTotal(totalPrice);  
+};  
+calculateTotalPrice()
+console.log(total)  
+},[getBasket])
+
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
-  }, []);
+  }, [xtflagSpinnerShow]); 
   console.log(getBasket); 
 
   return (
-    <div className='container'>
+    <div className='container mt-5'>
 
-
-
-      <div className='row'>
+      <div className='row '>
         <div className='col-8'>
           <div>
-            <button onClick={() => {
+            {/* <button onClick={() => {
               setCartCounter(0)
-              localStorage.clear(); setToBuy([]); setBasket([]);setLocalUpdateBasket([]) }}>clear</button>
+              localStorage.clear(); setToBuy([]); setBasket([]);setLocalUpdateBasket([]) }}>clear</button> */}
             <table className='table table-hover'>
               <thead>
                 <tr key="">
@@ -263,9 +286,10 @@ const alertN = (position,icon,title,timer) =>
         
           </div>
         </div>
-        <div className= {`col-4 centerc ${style.col_4}`} >
+        <div className= {`col-4 centerc ${style.col_4} boxSh`} >
 
-          <div>
+          <div >
+      
             <div className='centerc' style={{alignItems:'center'}}>  
                 <button
               type="button"
@@ -282,12 +306,56 @@ const alertN = (position,icon,title,timer) =>
               className={flagUpdate ?  `${style.btn_hide}`  :  `${style.btn} btn btn-outline-info` }
               onClick={paymentHandler}
             >
-                رفتن به پرداخت 
+                تکمیل خرید   
             </button></div>
+            </div>
+
+            <div className={`centerr ${style.colPrice}`}>
+              <button className={`btn btn-outline-warning ${style.btn1}`}disabled>
+<img src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png" alt="" className={style.shopimg} />
+
+              <span>مجموع سبد خرید :</span>
+              <br/>
+<span>{total.toLocaleString()} ریال</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      <>
+      {/* <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button> */}
+
+      <Modal 
+              size="lg"
+ show={show} onHide={handleClose} >
+        <Modal.Header closeButton>
+        </Modal.Header>
+
+        <Modal.Body style={{fontSize:'35px'}}>در صورت تمایل آدرس خود را انتخاب کنید :
+        <Form.Select aria-label="Default select example">
+      <option>Open this select menu</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </Form.Select>
+
+
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" size="lg" onClick={handleClose}>
+            بستن
+          </Button>
+          <Button variant="primary " size="lg" onClick={handleClose}>
+            تایید خرید 
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+
     </div>
   );
 }

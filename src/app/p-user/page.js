@@ -4,9 +4,7 @@ import Layout from "@/components/layouts/UserPanelLayout";
 
 function Index() {
   return (
-    <Layout>
-<div>sdsa</div>
-    </Layout>
+<div></div>
   );
 }
 

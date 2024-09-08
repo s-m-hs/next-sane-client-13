@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.layout}>
 
-      <section className={styles.section}>
+      {/* <section className={styles.section}>
                       <Sidebar />
 
         <div className={styles.contents}>
@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
         </div>
 
         
-      </section>
+      </section> */}
     </div>
   );
 };

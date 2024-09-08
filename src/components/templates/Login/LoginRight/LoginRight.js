@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useRouter } from 'next/navigation'
 import {sha512} from "js-sha512";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
-import getLocalStorage from "@/utils/localStorag/localStorage";
+// import getLocalStorage from "@/utils/localStorag/localStorage";
 import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
 
@@ -19,6 +19,7 @@ import alertN from "@/utils/Alert/AlertA";
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const router = useRouter()
+const getLocalStorage=localStorage.getItem('loginToken')
 let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag}=useContext(MainContext)
 
 
