@@ -1,0 +1,35 @@
+.row{
+margin: 0 auto;
+}
+.col{
+    width: 80%;
+    height: 500px;
+    border-radius: 8px;
+    background-color: var(--white1ffffff);
+    margin-left: 10%;
+}
+
+.input{
+    position: relative;
+    margin: 20px;
+    width: 80%;
+}
+.input input {
+    padding-left: 40px; /* Adjust input padding to make space for the icon */
+  }
+.icon {
+    position: absolute;
+    left: 10px; /* Position the icon inside the input */
+    top: 60%;
+    transform: translateY(-50%); /* Center the icon vertically */
+    pointer-events: none; /* Ensure the icon does not interfere with input interactions */
+  }
+.col_button{
+    text-align: center;
+}
+.button{
+    margin-top: 45px;
+    width: 60% !important;
+    font-size: 1.5cqi;
+    color: #fff;
+}

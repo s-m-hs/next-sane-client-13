@@ -13,6 +13,12 @@ const MainProvider = ({ children }) => {
     const [basketFlag,setBasketFlag]=useState(false)
     const [getBasket,setGetBasket]=useState([])
     const [localToken,setLocalToken]=useState('')
+    const[cyUserID,setCyUserID]=useState('')
+    const[username,setUsername]=useState('')
+    const [name,setName]=useState('')
+    const [family,setFamily]=useState('')
+    const [email,setEmail]=useState('')
+    const [mobile,setMobile]=useState('')
     const getLocalStorage=localStorage.getItem('loginToken')
 
 
@@ -39,7 +45,39 @@ const MainProvider = ({ children }) => {
           }
           myAppGet()
         }
-        console.log(getBasket.length) 
+
+const getProfile=()=>{
+async function myApp(){
+  const res=await fetch(`${apiUrl}/api/Customer/GetProfile`,{
+    method:'GET',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
+    },
+  }).then(res=>{
+    console.log(res)
+    if(res.status==200){
+    return  res.json()
+    }
+  }).then(result=>{
+    if(result){
+   setCyUserID(result.cyUserID)
+    setUsername(result.username)
+    setName(result.name)
+    setFamily(result.family) 
+    setEmail(result.email)
+    setMobile(result.mobile)   
+    }
+   
+    console.log(result)
+  }) 
+}
+myApp()
+}
+/////////////////////////
+useEffect(()=>{
+  getProfile()
+},[xtFlagLogin])
 
         useEffect(()=>{ 
           getBaskett()
@@ -48,7 +86,7 @@ const MainProvider = ({ children }) => {
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
-            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken}}>
+            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile}}>
             {children}
         </MainContext.Provider>
     );
