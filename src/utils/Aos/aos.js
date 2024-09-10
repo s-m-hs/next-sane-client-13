@@ -7,10 +7,10 @@ export default function AOSInit() {
     useEffect(()=>{
 Aos.init(  {
      offset: 100,
-    duration: 300,
+    duration: 100,
     // easing: 'ease-in-sine',
     easing: 'linear',
-    delay: 100,
+    delay: 10,
   })
     })
   return null

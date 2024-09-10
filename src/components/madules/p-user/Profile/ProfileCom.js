@@ -1,10 +1,10 @@
 'use client'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import style from './Prifile.module.css'
 import { useForm } from "react-hook-form";
-import { IdentificationBadge,IdentificationCard,UserCircle ,DeviceMobile ,EnvelopeSimple ,CheckCircle,CheckFat   } from "@phosphor-icons/react";
+import { IdentificationBadge,IdentificationCard,UserCircle ,DeviceMobile ,EnvelopeSimple ,CheckCircle,CheckFat,Asterisk   } from "@phosphor-icons/react";
 import { useRouter } from 'next/navigation';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import { MainContext } from '@/context/MainContext';
@@ -14,7 +14,7 @@ import alertN from '@/utils/Alert/AlertA';
 
 export default function ProfileCom() {
   const getLocalStorage=localStorage.getItem('loginToken')
-let {cyUserID,username,name,family,email,mobile,xtFlagLogin}=useContext(MainContext)
+let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile}=useContext(MainContext)
   const {
     register,
     handleSubmit,
@@ -24,14 +24,9 @@ let {cyUserID,username,name,family,email,mobile,xtFlagLogin}=useContext(MainCont
   } = useForm({
     defaultValues: {},
   });
-  const registerOptions = {
-    userName: { required: "text is required" },
-    password: { required: "code is password" },
-    checkbox: { required: "code is checkbox" },
-  };
-  
+ 
   const handleError = (errors) => {
-  
+  alertB()
   };
   //////////////////////
   const alertA=()=>alertN('center','success'," اطلاعات با موفقیت ثبت شد",1500).then((res) => {
@@ -39,11 +34,16 @@ let {cyUserID,username,name,family,email,mobile,xtFlagLogin}=useContext(MainCont
   reset(setValue(''))
   router.push('/') 
   });
+  const alertB=()=>alertN('center','error'," اطلاعات مورد نیاز را به درستی وارد کنید...",1000).then((res) => {
+ 
+  });
   const router = useRouter()
+  console.log(errors?.update)
 ////////////////////////
 const handleRegistration=(data)=>{
   // console.log(data);
-let obj={
+ 
+      let obj={
   id: 0,
   cyUserID: cyUserID,
   name: data.update.name,
@@ -71,13 +71,17 @@ if(res.status==200){
   return res.json()
 }
   }
-  ).then(result=>console.log(result))
+  ).then(result=>{
+    setFlagProfile(prev=>!prev)
+    // console.log(result)
+  })
 }
 
 myApp()
+    }
 
-}
-console.log(name)
+
+
 
 
 const update = () => {
@@ -92,11 +96,16 @@ const update = () => {
   });
 };
 useEffect(()=>{
+  setFlagProfile(prev=>!prev)
+
+},[])
+
+useEffect(()=>{
   update() 
 
-},[xtFlagLogin])
+},[mobile,xtFlagLogin])
 
-
+// console.log(errors.update.mobile)
   return (
     
         <div >
@@ -122,26 +131,32 @@ useEffect(()=>{
 
 <div className={ `login_label_float ${style.input} centerr`}  >
               <input
+              className={errors?.update?.name ? style.error : ''}
               minLength={3}
                 name="update.name"
                 type="userName"
                 placeholder=" "
                 // value={name}
-                {...register(`update.name`,)}
+                {...register(`update.name`, {
+                  required: true,minLength: 3
+                })}
               />
-              <label>نام  </label>
+              <label><Asterisk size={12} color="#14a5af" weight="thin" />  نام  </label>
               <IdentificationBadge size={38} color="#14a5af" weight="duotone"className={style.icon} />
             </div>  
 
 <div className={ `login_label_float ${style.input}`}>
               <input
+               className={errors?.update?.family ? style.error : ''}
               minLength={3}
                 name="update.family"
                 type="userName"
                 placeholder=" "
-                {...register(`update.family`, registerOptions.family)}
+                {...register(`update.family`, {
+                  required: true,minLength: 3
+                })}
               />
-              <label>نام خانوادگی </label>
+              <label><Asterisk size={12} color="#14a5af" weight="thin" />نام خانوادگی </label>
               <IdentificationCard  size={38} color="#14a5af" weight="duotone"className={style.icon} />
 
             </div>  
@@ -161,13 +176,14 @@ useEffect(()=>{
 <div className={` col-md-12 col-lg-6 ${style.colB}` }>
 <div className={ `login_label_float ${style.input}`}>
               <input
+               className={errors?.update?.mobile ? style.error : ''}
               minLength={3}
                 name="update.mobile"
                 type="number"
                 placeholder=" "
-                {...register(`update.mobile`, registerOptions.mobile)}
+                {...register(`update.mobile`,{ required: true,minLength: 11 })}
               />
-              <label> موبایل  </label>
+              <label><Asterisk size={12} color="#14a5af" weight="thin" /> موبایل  </label>
               <DeviceMobile  size={38} color="#14a5af" weight="duotone"className={style.icon} />
 
             </div>  

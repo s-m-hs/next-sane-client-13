@@ -10,7 +10,11 @@ export default function CardA({imgSrc,category,id,click}) {
 
   
   return (
-    <div data-aos="fade-up"  className= {`${Styles.cardcat_container} centerc`}
+    <div
+    // data-aos='zoom-in-up'
+
+    data-aos="fade-up"
+      className= {`${Styles.cardcat_container} centerc`}
    
     >
 

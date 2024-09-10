@@ -33,3 +33,6 @@ margin: 0 auto;
     font-size: 1.5cqi;
     color: #fff;
 }
+.error{
+    border: 1px solid red !important
+}

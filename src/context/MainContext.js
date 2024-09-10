@@ -8,6 +8,7 @@ const MainContext = createContext();
 const MainProvider = ({ children }) => {
     const [xtFlagLogin, setXtFlagLogin] = useState(false);
     const [xtflagSpinnerShow, setXtFlagSpinnerShow] = useState(false);
+    const [flagProfile,setFlagProfile]=useState(false)
     const [cartCounter, setCartCounter] = useState(0)
     const [localUpdateBasket,setLocalUpdateBasket]=useState([])
     const [basketFlag,setBasketFlag]=useState(false)
@@ -77,7 +78,7 @@ myApp()
 /////////////////////////
 useEffect(()=>{
   getProfile()
-},[xtFlagLogin])
+},[xtFlagLogin,flagProfile])
 
         useEffect(()=>{ 
           getBaskett()
@@ -86,7 +87,7 @@ useEffect(()=>{
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
-            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile}}>
+            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile}}>
             {children}
         </MainContext.Provider>
     );

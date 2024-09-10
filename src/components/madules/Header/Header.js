@@ -153,7 +153,7 @@ size={250}
 <span className={styles.user_span}>{userName.toUpperCase()}</span>      </Dropdown.Toggle>
 
 <Dropdown.Menu>
-<Dropdown.Item href="/p-user">پنل کاربری </Dropdown.Item>
+<Dropdown.Item href="/p-user/profile">پنل کاربری </Dropdown.Item>
 <Dropdown.Item  onClick={exitHandler}>خروج</Dropdown.Item>
 </Dropdown.Menu>
 </Dropdown>
@@ -365,7 +365,7 @@ size={250}
         <li> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
         >عضویت </Link> </li>
         </>  : 
-              <li> <Link href={'/p-user'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+              <li> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
               >پنل کاربری </Link> </li>
     
       }

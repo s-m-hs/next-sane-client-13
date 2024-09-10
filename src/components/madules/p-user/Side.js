@@ -1,17 +1,34 @@
 // components/Sidebar.js
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './Side.module.css';
 import Link from 'next/link';
 import { UserList,AddressBook,ShoppingBagOpen,PaperPlaneTilt,SignOut } from "@phosphor-icons/react";
+import { MainContext } from '@/context/MainContext';
+import { useRouter } from 'next/navigation';
+import alertKey from '@/utils/Alert/AlertKey';
 
 const Side = () => {
-  const [activeLink, setActiveLink] = useState(null); // Track the active link
+  const [activeLink, setActiveLink] = useState('profile'); // Track the active link
+let {setXtFlagLogin,setCartCounter}=useContext(MainContext)
+const rout=useRouter()
+
 
   const handleLinkClick = (link) => {
     setActiveLink(link); // Set the active link when clicked
   };
+  const exitHandler=()=>{
+ 
+  alertKey("question",'برای خروج از پنل کاربری اطمینان دارید؟؟؟').then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem('loginToken')
+      setXtFlagLogin(false)
+      setCartCounter(0)
+      rout.push('/')
 
+    }
+  });
+}
 
   return (
     <aside className={styles.sidebar}>
@@ -42,9 +59,12 @@ const Side = () => {
       <PaperPlaneTilt size={32} weight="light" />        تیکت ها
       </Link>
 
-      <Link href={'/'}>
-      <SignOut size={32} weight="light" />        خروج
-      </Link>
+      {/* <Link href={'/'}  onClick={exitHandler}> */}
+      <span className={styles.span} onClick={exitHandler}>
+      <SignOut size={32} weight="light"   />        خروج
+
+      </span>
+      {/* </Link> */}
     </aside>
   );
 };

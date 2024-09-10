@@ -19,7 +19,10 @@ export default function CardC({imgSrc,title,price,id,clickSpinner }) {
 });
 
   return (
-    <div data-aos='fade-up'  className={`${Styles.cardprob_container} centerc`}>
+    <div
+     data-aos='fade-up'
+      
+     className={`${Styles.cardprob_container} centerc`}>
     <img src={imgSrc} alt="" />
 
     <span className={Styles.cardprob_title} > {title} </span>
