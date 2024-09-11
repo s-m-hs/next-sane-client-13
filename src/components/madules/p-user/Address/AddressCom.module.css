@@ -1,0 +1,68 @@
+.row{
+    margin: 0 auto;
+    }
+    .col{
+        width: 80%;
+        min-height: 500px;
+        border-radius: 8px;
+        background-color: var(--white1ffffff);
+        margin-left: 10%;
+    }
+    .input{
+        position: relative;
+        margin: 20px;
+        width: 80%;
+    }
+    
+     /* input[type=number] {
+        -moz-appearance: textfield;
+      } */
+    
+      .input  input[type=number]::-webkit-inner-spin-button,
+      .input input[type=number]::-webkit-outer-spin-button {
+        pointer-events:none;
+      /* background-color: #14a5af !important; */
+      opacity: 0;
+    }
+    .input input {
+        padding-left: 40px; /* Adjust input padding to make space for the icon */
+      }
+    .icon {
+        position: absolute;
+        left: 10px; /* Position the icon inside the input */
+        top: 60%;
+        transform: translateY(-50%); /* Center the icon vertically */
+        pointer-events: none; /* Ensure the icon does not interfere with input interactions */
+      }
+    .col_button{
+        text-align: center;
+    }
+    .button{
+        margin-top: 45px;
+        width: 60% !important;
+        font-size: 1.5cqi;
+        color: #fff;
+    }
+    .error{
+        border: 1px solid red !important
+    }
+    .input_state{
+        position: relative;
+        margin: 20px;
+        width: 80%;
+        border: 1px solid rgba(168, 168, 168, 0.550000011920929);
+        border-radius: 10px;
+        outline: none;
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    .col_button{
+        text-align: center;
+    }
+    .button{
+        margin: 0 auto;
+        margin-top: 45px;
+        width: 30% !important;
+        font-size: 1.5cqi;
+        color: #fff;
+    }

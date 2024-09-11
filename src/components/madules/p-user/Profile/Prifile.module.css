@@ -14,6 +14,17 @@ margin: 0 auto;
     margin: 20px;
     width: 80%;
 }
+
+ /* input[type=number] {
+    -moz-appearance: textfield;
+  } */
+
+  .input  input[type=number]::-webkit-inner-spin-button,
+  .input input[type=number]::-webkit-outer-spin-button {
+    pointer-events:none;
+  /* background-color: #14a5af !important; */
+  opacity: 0;
+}
 .input input {
     padding-left: 40px; /* Adjust input padding to make space for the icon */
   }

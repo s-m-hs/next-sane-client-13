@@ -4,6 +4,7 @@
 
 
 .col_4{
+    max-height: 500px;
     align-items: center;
     background-color: #fff;
     /* background-image: url('../../../../public//images/shop photo/12083346_Wavy_Bus-17_Single-09.png');; */
@@ -11,6 +12,7 @@
 .col_4 button{
     margin: 50px;
 }
+
 .btn{
     width: 100% !important;
     height: 40px;

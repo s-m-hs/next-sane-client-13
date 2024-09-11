@@ -89,6 +89,7 @@ useEffect(()=>{
           getBaskett()
         },[basketFlag])
   
+        console.log(cyUserID) 
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
