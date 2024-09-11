@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
-// import getLocalStorage from '@/utils/localStorag/localStorage';
+import getLocalStorage from '@/utils/localStorag/localStorage';
 const MainContext = createContext();
 
 const MainProvider = ({ children }) => {
@@ -31,7 +31,7 @@ const MainProvider = ({ children }) => {
               method:'GET', 
                headers: {
                 "Content-Type": "application/json",
-                // Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
+                Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
               },
             }).then(res=>{
               console.log(res)
@@ -54,7 +54,7 @@ async function myApp(){
     method:'GET',
     headers: {
       "Content-Type": "application/json",
-      // Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
+      Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
     },
   }).then(res=>{
     console.log(res)
