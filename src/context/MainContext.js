@@ -21,7 +21,7 @@ const MainProvider = ({ children }) => {
     const [email,setEmail]=useState('')
     const [mobile,setMobile]=useState('')
     const [address,setAddress]=useState(null)
-    const getLocalStorage=localStorage.getItem('loginToken')
+    // const getLocalStorage=localStorage.getItem('loginToken')
 
 
     const getBaskett=()=>{  
@@ -31,7 +31,7 @@ const MainProvider = ({ children }) => {
               method:'GET', 
                headers: {
                 "Content-Type": "application/json",
-                Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
+                // Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
               },
             }).then(res=>{
               console.log(res)
@@ -54,7 +54,7 @@ async function myApp(){
     method:'GET',
     headers: {
       "Content-Type": "application/json",
-      Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
+      // Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
     },
   }).then(res=>{
     console.log(res)

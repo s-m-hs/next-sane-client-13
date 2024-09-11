@@ -1,3 +1,4 @@
+'use client'
 import style from './CartItem.module.css'
 import { MainContext } from "@/context/MainContext";
 import Link from 'next/link';

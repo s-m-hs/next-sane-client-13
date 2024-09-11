@@ -1,3 +1,4 @@
+'use client'
 import React, { useContext, useEffect } from 'react'
 import Link from 'next/link'
 import Styles from './CardC.module.css'

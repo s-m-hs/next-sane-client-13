@@ -22,8 +22,8 @@ export default function Header() {
   const [fixTop, setFixTop] = useState(false)
   const [flaga, setFlaga] = useState(true)
   const ulRef = useRef()
-  const getLocalStorage = localStorage.getItem('loginToken')
-  const getLocalStorageUser = localStorage.getItem('user')
+  // const getLocalStorage = localStorage.getItem('loginToken')
+  // const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
@@ -57,6 +57,10 @@ console.log('object')
 
   ///////////////////////////////
   const getProfile = () => {
+    const getLocalStorage = localStorage.getItem('loginToken')
+    const getLocalStorageUser = localStorage.getItem('user')
+
+
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {
         method: 'GET',

@@ -12,7 +12,7 @@ import { useContext, useEffect } from 'react';
 export default function Home() {
   let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,setBasketFlag } = useContext(MainContext);
   const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
-  const getLocalStorage=localStorage.getItem('loginToken')
+  // const getLocalStorage=localStorage.getItem('loginToken')
 
   const sliderDetail=[
     {img:"../../../images/products/c8f4ce37fea7a15300a2264c73b4ccd925d20dac_1697010738.jpg",title:'هدفون بی سیم',price:'327,000'},
@@ -41,6 +41,7 @@ export default function Home() {
     'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
 ]
 useEffect(() => {
+  const getLocalStorage=localStorage.getItem('loginToken')
   if(xtFlagLogin){
       for (let i = 0; i < localStorage.length; i++) {
 
@@ -62,7 +63,6 @@ useEffect(() => {
   }
 
 },[xtFlagLogin]); 
-console.log(getLocalStorage); 
   return (
 <div className='container'>
   <div className='row'>

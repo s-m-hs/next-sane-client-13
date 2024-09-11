@@ -19,7 +19,7 @@ import alertN from "@/utils/Alert/AlertA";
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const router = useRouter()
-const getLocalStorage=localStorage.getItem('loginToken')
+// const getLocalStorage=localStorage.getItem('loginToken')
 let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
 
 
@@ -51,6 +51,7 @@ const alertB=()=>alertN('center','error',"دوباره امتحان کنید..."
       ////////////////////////////
 const login=(obj)=>{
   async function myAppPost(){
+    const getLocalStorage=localStorage.getItem('loginToken')
     const res=await fetch(`${apiUrl}/api/Customer/login`,{
       method:'POST',
       headers:{

@@ -1,5 +1,4 @@
-// components/Sidebar.js
-
+'use client'
 import React, { useContext, useState } from 'react';
 import styles from './Side.module.css';
 import Link from 'next/link';

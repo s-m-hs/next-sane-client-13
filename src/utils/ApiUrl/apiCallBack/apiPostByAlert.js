@@ -1,3 +1,4 @@
+'use client'
 import apiUrl from "../apiUrl";
 
 const postApiByAlert=(url,obj,alert,alertB)=>{

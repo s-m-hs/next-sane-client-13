@@ -1,3 +1,4 @@
+'use client'
 import Swal from 'sweetalert2'
 
 const addToCart = (val, quantity, setFun) => {

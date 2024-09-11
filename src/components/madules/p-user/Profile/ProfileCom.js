@@ -13,7 +13,7 @@ import alertN from '@/utils/Alert/AlertA';
 
 
 export default function ProfileCom() {
-  const getLocalStorage=localStorage.getItem('loginToken')
+  // const getLocalStorage=localStorage.getItem('loginToken')
 let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
   const {
     register,
@@ -57,6 +57,7 @@ const handleRegistration=(data)=>{
 }
 console.log(obj)
 async function myApp(){
+  const getLocalStorage=localStorage.getItem('loginToken')
   const res=await fetch(`${apiUrl}/api/Customer/UpdateProfile`,{
     method:'POST',
     headers: {

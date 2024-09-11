@@ -1,3 +1,4 @@
+'use client'
 import style from './BasketDetail.module.css'
 import { MainContext } from '@/context/MainContext';
 import apiCallProdDetails from '@/utils/ApiUrl/apiCallProDetails';
@@ -35,7 +36,7 @@ export default function BasketDetail() {
   const handleShow = () => setShow(true);
 
   const rout=useRouter()
-  const getLocalStorage=localStorage.getItem('loginToken')
+  // const getLocalStorage=localStorage.getItem('loginToken')
 
 
   const AlertA=()=>alertN('center','info',"حذف با موفقیت انجام شد...",1000).then((res) => setBasketFlag((prev) => !prev));
@@ -44,6 +45,7 @@ export default function BasketDetail() {
 
   const AlertB=()=>alertN('center','success'," سبد خرید با موفقیت به روزرسانی شد...",500).then((res) => setBasketFlag((prev) => !prev));
   const removeHan = (id) => {
+    const getLocalStorage=localStorage.getItem('loginToken')
     RemoveApi(
       "api/CyOrders/deleteItem",
       id,
@@ -54,6 +56,7 @@ export default function BasketDetail() {
   }; 
 ///////////////////////////////
 const handleRegisterShop=()=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
   async function myApp(){
     const res=await fetch(`${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}`,{
       method:'PUT',
@@ -130,6 +133,7 @@ const alertN = (position,icon,title,timer) =>
   };
 
   const updateBasketHandler = () => {
+    const getLocalStorage=localStorage.getItem('loginToken')
     if (xtFlagLogin) {
       updateBasket(getLocalStorage, basket, setBasketFlag,AlertB);
       setFlagUpdate(false);
