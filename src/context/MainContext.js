@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
-import getLocalStorage from '@/utils/localStorag/localStorage';
+// import getLocalStorage from '@/utils/localStorag/localStorage';
 const MainContext = createContext();
 
 const MainProvider = ({ children }) => {
@@ -25,6 +25,8 @@ const MainProvider = ({ children }) => {
 
 
     const getBaskett=()=>{  
+          const getLocalStorage=localStorage.getItem('loginToken')
+
         setGetBasket([])  
           async function myAppGet(){
             const res=await fetch(`${apiUrl}/api/CyOrders/GetBasketForUser`,{
@@ -49,6 +51,8 @@ const MainProvider = ({ children }) => {
         }
 
 const getProfile=()=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+
 async function myApp(){
   const res=await fetch(`${apiUrl}/api/Customer/GetProfile`,{
     method:'GET',
