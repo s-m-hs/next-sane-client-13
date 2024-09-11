@@ -1,3 +1,8 @@
+.col_8{
+    margin-right: 30px;
+}
+
+
 .col_4{
     align-items: center;
     background-color: #fff;
@@ -50,4 +55,34 @@ border: none;
 .spinner_row > div{
     background-color: inherit;
 
+}
+.btn_modal_ok{
+    width: 30%;
+    color: #fff;
+    font-size: 1.2cqi;
+}
+.btn_modal_ok_disable{
+    width: 30%;
+    color: #fff;
+    font-size: 1.2cqi;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
+.btn_modal_close{
+    width: 10%;
+    font-size: 1.2cqi;
+}
+
+.mobileAdd_div{
+    justify-content:space-between;
+}
+.mobileAdd_div h1{
+    font-size: 35px;
+}
+.btnGoToMobile{
+    width: 30%;
+    font-size: 1cqi;
+    ;
 }

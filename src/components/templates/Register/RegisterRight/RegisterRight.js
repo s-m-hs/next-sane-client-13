@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./RegisterRight.module.css";
 import Link from "next/link";
 import { User, Key, EyeSlash } from "@phosphor-icons/react";
@@ -14,7 +14,7 @@ import alertN from "@/utils/Alert/AlertA";
 
 export default function RegisterRight() {
 const router = useRouter()
-let {xtFlagLogin,setXtFlagLogin}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
 
 
   const {
@@ -52,7 +52,9 @@ let obj={
   postApiByAlert('/api/Customer/register',obj,alertA,alertB)
 }
 
-
+useEffect(()=>{
+setXtFlagSpinnerShow(false)
+},[xtflagSpinnerShow])
 
   return (
     <div className={`${style.div_main} centerc`}>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./LoginRight.module.css";
 import Link from "next/link";
 import { User, Key, EyeSlash } from "@phosphor-icons/react";
@@ -20,7 +20,7 @@ export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const router = useRouter()
 const getLocalStorage=localStorage.getItem('loginToken')
-let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
 
 
   const {
@@ -87,7 +87,9 @@ let obj={
 login(obj)
 
 }
-
+useEffect(()=>{
+  setXtFlagSpinnerShow(false)
+},[xtflagSpinnerShow])
 
 
   return (

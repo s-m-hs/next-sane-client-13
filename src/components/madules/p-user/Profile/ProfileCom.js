@@ -14,7 +14,7 @@ import alertN from '@/utils/Alert/AlertA';
 
 export default function ProfileCom() {
   const getLocalStorage=localStorage.getItem('loginToken')
-let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile}=useContext(MainContext)
+let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
   const {
     register,
     handleSubmit,
@@ -95,6 +95,12 @@ const update = () => {
     // userName: getProfile.username ? `${username}` : "",
   });
 };
+
+//////////////////////
+useEffect(()=>{
+  setXtFlagSpinnerShow(false)
+  },[xtflagSpinnerShow])
+    
 useEffect(()=>{
   setFlagProfile(prev=>!prev)
 

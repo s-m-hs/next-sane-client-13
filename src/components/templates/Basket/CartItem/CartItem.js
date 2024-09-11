@@ -111,18 +111,17 @@ const handleRemove=(e,id)=>{
         {/* <!-- action --> */}
         <td className="tp-cart-action">
           <Link href={xtFlagLogin ? `product/${props.cyProductID}` : `product/${props.id}`}>
-           <button className="btn btn-primary m-1"
+           <button className={`btn btn-primary m-1 ${style.btn_product}`}
          >
-            <span>جزییات محصول...</span>
+          جزییات محصول...
 
           </button>
           </Link>
        
-          <button className="btn btn-danger"
+          <button className={`btn btn-danger m-1 ${style.btn_product}`}
           onClick={(e)=>{ handleRemove(e,props.id) }}>
            
-            <span>حذف</span>
-
+حذف
           </button>
         </td>
       </tr>

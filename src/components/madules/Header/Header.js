@@ -153,7 +153,8 @@ size={250}
 <span className={styles.user_span}>{userName.toUpperCase()}</span>      </Dropdown.Toggle>
 
 <Dropdown.Menu>
-<Dropdown.Item href="/p-user/profile">پنل کاربری </Dropdown.Item>
+<Dropdown.Item href="/p-user/profile" 
+onClick={()=>setXtFlagSpinnerShow(true)}>پنل کاربری </Dropdown.Item>
 <Dropdown.Item  onClick={exitHandler}>خروج</Dropdown.Item>
 </Dropdown.Menu>
 </Dropdown>
@@ -356,16 +357,16 @@ size={250}
         </li>
         <li className="nav_link">فروش اقساط   </li>
         <li>خدمات</li>
-        <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+        <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
       
       {
         !xtFlagLogin ? <>
-             <li> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+             <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
         >ورود </Link> </li>
-        <li> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+        <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
         >عضویت </Link> </li>
         </>  : 
-              <li> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+              <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
               >پنل کاربری </Link> </li>
     
       }

@@ -14,11 +14,14 @@ import updateBasket from '@/utils/ApiUrl/updateBasket';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import apiUrl from '@/utils/ApiUrl/apiUrl';
+import { HandTap,CheckCircle  } from "@phosphor-icons/react";
+
 
 
 
 export default function BasketDetail() {
-  let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,getBasket,setBasketFlag,xtflagSpinnerShow } = useContext(MainContext);
+  let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,getBasket,setGetBasket,setBasketFlag,xtflagSpinnerShow,mobile,cyUserID,address } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
   const [basket, setBasket] = useState([]);
@@ -34,7 +37,11 @@ export default function BasketDetail() {
   const rout=useRouter()
   const getLocalStorage=localStorage.getItem('loginToken')
 
+
   const AlertA=()=>alertN('center','info',"حذف با موفقیت انجام شد...",1000).then((res) => setBasketFlag((prev) => !prev));
+
+  const AlertC=()=>alertN('center','success',"خرید شما با موفقیت انجام شد",1500).then((res) => rout.push('/'));
+
   const AlertB=()=>alertN('center','success'," سبد خرید با موفقیت به روزرسانی شد...",500).then((res) => setBasketFlag((prev) => !prev));
   const removeHan = (id) => {
     RemoveApi(
@@ -45,6 +52,36 @@ export default function BasketDetail() {
     );
 
   }; 
+///////////////////////////////
+const handleRegisterShop=()=>{
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}`,{
+      method:'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${getLocalStorage}`
+      },
+
+    }).then(res=>{
+      console.log(res)
+      if(res.status==200){
+        return res.json()
+      }
+    }).then(result=>{
+      setGetBasket([])
+      setCartCounter(0)
+      handleClose()
+      AlertC()
+    })
+  }
+  myApp()
+}
+
+const handleGoToProfile=()=>{
+rout.push('/p-user/profile')
+}
+
+
 
   const removeFromCart = (id) => {
     setCartCounter((prevCounter) => prevCounter - 1);
@@ -201,12 +238,12 @@ console.log(total)
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]); 
   console.log(getBasket); 
-
+console.log(mobile)
   return (
     <div className='container mt-5'>
 
-      <div className='row '>
-        <div className='col-8'>
+      <div className='row  '>
+        <div className= {`col-8 centerc ${style.col_8} boxSh`}>
           <div>
             {/* <button onClick={() => {
               setCartCounter(0)
@@ -286,7 +323,7 @@ console.log(total)
         
           </div>
         </div>
-        <div className= {`col-4 centerc ${style.col_4} boxSh`} >
+        <div className= {`col-3 centerc ${style.col_4} boxSh`} >
 
           <div >
       
@@ -342,16 +379,25 @@ console.log(total)
       <option value="3">Three</option>
     </Form.Select>
 
+    {!mobile && <div className={`${style.mobileAdd_div} centerr`}>
+      <h1>شما موبایل ثبت شده ای ندارید!!!</h1>
+           <button className={`btn btn-success ${style.btnGoToMobile}`}
+           onClick={handleGoToProfile}
+           ><HandTap size={32} weight="thin" /> ثبت شماره موبایل</button>
+      </div>} 
+
 
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" size="lg" onClick={handleClose}>
+          <button className={`btn btn-danger ${style.btn_modal_close}`}  onClick={handleClose}>
             بستن
-          </Button>
-          <Button variant="primary " size="lg" onClick={handleClose}>
+          </button>
+          <button className={mobile ? `btn btn-info ${style.btn_modal_ok}` : `btn btn-info ${style.btn_modal_ok_disable}`}  onClick={handleRegisterShop}>
+          <CheckCircle  size={32} color="#fff" weight="duotone" />
+
             تایید خرید 
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

@@ -1,16 +1,17 @@
 "use client";
 
 
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import style from './Contact.module.css'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { icon } from "leaflet"
 import { HouseLine,Dresser} from "@phosphor-icons/react";
+import { MainContext } from '@/context/MainContext';
 
 export default function Contact() {
-
+let {setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
     // let  position={[35.72021225108499, 51.42222691580869]}
     // let  center={[35.72021225108499, 51.42222691580869]}
     const ICON = icon({
@@ -18,7 +19,11 @@ export default function Contact() {
         iconSize: [32, 32],
         
       })
-  
+      //////////////////////
+      useEffect(()=>{
+        setXtFlagSpinnerShow(false)
+        },[xtflagSpinnerShow])
+        
   return (
     <div className='container'>
         <div className='row'>
