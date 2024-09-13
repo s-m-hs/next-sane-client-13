@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 
 
-export default function CardA({imgSrc,category,id,click}) {
+export default function CardA({imgSrc,category,id,click,text}) {
 
 
   
@@ -27,8 +27,8 @@ export default function CardA({imgSrc,category,id,click}) {
     <div className={`${Styles.success} `} >
         
     </div>
-
    </Link> 
+   <span className={`${Styles.cardcat__span} `}>{text}</span>
 
     </div>
   )

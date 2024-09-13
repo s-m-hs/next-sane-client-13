@@ -11,6 +11,9 @@ import { DotLoader } from "react-spinners";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
+import { Tooltip } from "react-bootstrap";
+import { motion , useScroll,AnimatePresence} from "framer-motion"
+
 
 
 
@@ -26,6 +29,8 @@ export default function Header() {
   // const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
+
+  const { scrollYProgress } = useScroll()
 
 let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter,setCartCounter,localToken}=useContext(MainContext)
  const rout=useRouter()
@@ -165,10 +170,17 @@ onClick={()=>setXtFlagSpinnerShow(true)}>پنل کاربری </Dropdown.Item>
 </>
 
 } 
-
-<div className={`${styles.Header_leftSide__div} centerr`}  >
+<Link href={!xtFlagLogin ? '/login' : '/p-user/profile'}>
+<div 
+onClick={()=>setXtFlagSpinnerShow(true)}
+className={`${styles.Header_leftSide__div} centerr`}  >
         <User size={24} color="#14a5af" />
+      {!xtFlagLogin ?
+       <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
+       ''}  
       </div>
+</Link>
+
 
 <Link href={cartCounter!=0 ? '/basket' : '#'}  > 
       <div 
@@ -190,12 +202,60 @@ onClick={()=>setXtFlagSpinnerShow(true)}>پنل کاربری </Dropdown.Item>
         <EnvelopeSimple size={24} color="#14a5af" />
       </div>
 
-     
+  
 
-      <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
+
+<div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
+<motion.div
+  // animate={{ x: 10 }}
+
+  // transition={{ delay: 1 }}
+
+  // transition={{ type: "spring", stiffness: 100 ,}}
+
+  // transition={{
+  //   ease: "linear",
+  //   duration: 2,
+  //   x: { duration: 1 }
+  // }}
+
+  // animate={{ rotate: 360 }}
+  // transition={{ repeat: Infinity, duration: 2 }}
+
+
+  // animate={{ rotate: 180 }}
+  // transition={{
+  //   repeat: 1,
+  //   repeatType: "reverse",
+  //   duration: 2
+  // }}
+
+  // animate={{ pathLength: 1 }}
+  // transition={{ duration: 2, type: "tween" }}
+
+  animate={{ opacity: 0.9 }}
+  transition={{ repeat: Infinity,ease:"easeInOut" }}
+
+  // animate={{ scale: [0, 1, 0.5, 1] }}
+  // transition={{ times: [0, 0.1, 0.9, 1] }}
+
+  // animate={{ scale: [0, 1, 0.5, 1] }}
+  // transition={{ times: [0, 0.1, 0.9, 1] }}
+
+  // animate={{ rotate: 180 }}
+  // transition={{ type: 'spring' }}
+
+
+>
         <span>02191005457</span>
+        </motion.div>
         <Phone size={24} color="#ededed" weight="duotone" />
         </div>
+ 
+
+      
+
+
     </div>
 
   </div>

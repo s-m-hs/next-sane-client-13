@@ -15,7 +15,7 @@ export default function CategorySectionA() {
 const clickHandler=()=>{
   setFlagSpinnerShow(true)
 }
-
+// console.log(mainCategory);
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -70,6 +70,7 @@ size={250}
                 imgSrc={item.imageUrl}
                 category={`category`}
                 id={item.id}
+                text={item.text}
               />
             ))}
           </div>

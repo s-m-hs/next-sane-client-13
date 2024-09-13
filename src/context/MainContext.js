@@ -80,9 +80,29 @@ async function myApp(){
 }
 myApp()
 }
+const getAddress=()=>{
+  const getLocalStorage =localStorage.getItem('loginToken')
+  async function myApp(){
+    const res =await fetch(`${apiUrl}/api/CyAddress`,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
+      }, 
+    }).then(res=>{
+      console.log(res);
+      return res.json()
+    }).then(result=>{
+      console.log(result);
+      setAddress(result)    })
+  }
+  myApp()
+}
+
 /////////////////////////
 useEffect(()=>{
   getProfile()
+  getAddress()
 },[xtFlagLogin,flagProfile])
 
         useEffect(()=>{ 

@@ -10,6 +10,11 @@ import apiUrl from '@/utils/ApiUrl/apiUrl';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 export default function AddressCom() {
+
+  let{address,setAddress}=useContext(MainContext)
+
+
+
     const {
         register,
         handleSubmit,
@@ -50,9 +55,42 @@ export default function AddressCom() {
         { id: 25, name: 'خراسان جنوبی' },
         { id: 26, name: 'تهران بزرگ' }
       ];
+      const handleRegistration = (data) => {
+        const getLocalStorage=localStorage.getItem('loginToken')
 
+        let obj = {
+          id: 0,
+          address: data.address,
+          city: data.city,
+          state: data.state,
+          postalCode: data.postalCode,
+          phone: data.phone,
+          mobile: data.mobile
+        }
+        async function myAppPost() {
+          const res = await fetch(`${apiUrl}/api/CyAddress/PostAddress
+    `, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getLocalStorage}`,
+            },
+            body: JSON.stringify(obj)
+          }).then(res => {
+            console.log(res)
+            if (res.ok) {
+              return res.json()
+            }
+          }).then(result => {
+            // setAddress(result)
+           
+            reset(setValue(''))
+          }).catch(err => console.log(err))
+        }
+        myAppPost()
+      }
 
-
+console.log(address);
 
   return (
     
@@ -71,48 +109,53 @@ className="mb-2"
 
 <div className={`col ${style.col} boxSh` }>
 
+<div className='row'>
 
+<div className={`col-md-6 col-lg-6 ${style.col_6} `} >
 
-<div className={`col-md-12 col-lg-6 ${style.col_6} `} >
-
-<form    >
+<form   action=""
+                onSubmit={handleSubmit(handleRegistration, handleError)}  >
 <select 
                       className={ `login_label_float ${style.input_state} `}
                     //   style={{border:' 1px solid #EAEAEF' , width:'100%', color:'rgb(172 172 173)',outline:'none'}}
                       {...register("state")}>
-                        <option value="">استان</option>
                         {provinces.map((item,index) => <option key={index} value={`${item.name}`}>{item.name}</option>
                         )}
                       </select>
 
             <div className={ `login_label_float ${style.input} centerr`}  >
               <input
-              className={errors?.update?.name ? style.error : ''}
-              minLength={3}
-                name="update.city"
+                name="city"
                 type="userName"
                 placeholder=" "
                 // value={name}
-                {...register(`update.city`, {
-                  required: true,minLength: 3
-                })}
+                {...register(`city`)}
               />
-              <label> شهر ... </label>
+              <label> شهر  </label>
               <City  size={38} color="#14a5af" weight="duotone"className={style.icon} />
             </div> 
 
 
+
             <div className={ `login_label_float ${style.input} centerr`}  >
               <input
-              className={errors?.update?.name ? style.error : ''}
-              minLength={3}
-                name="update.postalCode"
+                name="address"
                 type="userName"
                 placeholder=" "
                 // value={name}
-                {...register(`update.postalCode`, {
-                  required: true,minLength: 3
-                })}
+                {...register(`address`)}
+              />
+              <label> آدرس ... </label>
+              <City  size={38} color="#14a5af" weight="duotone"className={style.icon} />
+            </div> 
+
+            <div className={ `login_label_float ${style.input} centerr`}  >
+              <input
+                name="postalCode"
+                type="userName"
+                placeholder=" "
+                // value={name}
+                {...register(`postalCode`)}
               />
               <label>  کد پستی  </label>
               <Mailbox  size={38} color="#14a5af" weight="duotone"className={style.icon} />
@@ -120,15 +163,11 @@ className="mb-2"
 
             <div className={ `login_label_float ${style.input} centerr`}  >
               <input
-              className={errors?.update?.name ? style.error : ''}
-              minLength={3}
-                name="update.phone"
+                name="phone"
                 type="userName"
                 placeholder=" "
                 // value={name}
-                {...register(`update.phone`, {
-                  required: true,minLength: 3
-                })}
+                {...register(`phone`)}
               />
               <label>  شماره ثابت  </label>
               <PhoneCall  size={38} color="#14a5af" weight="duotone"className={style.icon} />
@@ -136,15 +175,11 @@ className="mb-2"
 
             <div className={ `login_label_float ${style.input} centerr`}  >
               <input
-              className={errors?.update?.name ? style.error : ''}
-              minLength={3}
-                name="update.mobile"
+                name="mobile"
                 type="userName"
                 placeholder=" "
                 // value={name}
-                {...register(`update.mobile`, {
-                  required: true,minLength: 3
-                })}
+                {...register(`mobile`)}
               />
               <label>  شماره همراه  </label>
               <DeviceMobile  size={38} color="#14a5af" weight="duotone"className={style.icon} />
@@ -163,10 +198,39 @@ className="mb-2"
 </div>
 
 
-<div className={`col-md-12 col-lg-6 ${style.col_6}`} >
+<div className={`col-md-6 col-lg-6 ${style.col_6}`} >
+<table className='table'>
 
+  <thead>
+    <tr key="">
+      <th>آدرس</th>
+      <th>کدپستی</th>
+      <th>تلفن ثابت/تلفن همراه</th>
+      <th>حذف</th>
+    </tr>
+  </thead>
+
+<tbody>
+
+{address && address.map(item=>(
+    <tr key="">
+  <td> {item.state}-{item.city}-{item.address}  </td>
+  <td>{item.postalCode}</td>
+  <td>{item.phone}-{item.mobile}</td>
+  <td><button className='btn btn-danger'>حذف</button></td>
+  </tr>
+))
+}
+
+
+</tbody>
+
+</table>
 
 </div>
+</div>
+
+
 
 
 
