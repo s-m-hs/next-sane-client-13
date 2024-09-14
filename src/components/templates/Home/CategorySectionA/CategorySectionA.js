@@ -19,10 +19,10 @@ const clickHandler=()=>{
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      id: 2,
+      id: 3,
       str: "string",
     };
-postApi('/api/CyCategories/GetItemWChildAndRoot',obj,setMainCategory)
+postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
   };
 
   ////////////////////////////
@@ -30,6 +30,7 @@ postApi('/api/CyCategories/GetItemWChildAndRoot',obj,setMainCategory)
     getCategoryById();
   }, []);
 
+  console.log(mainCategory)
   return (
     <>
          {flagSpinnerShow && <div className={`row ${styles.spinner_row}`}>
@@ -70,7 +71,8 @@ size={250}
                 imgSrc={item.imageUrl}
                 category={`category`}
                 id={item.id}
-                text={item.text}
+                text={item.name
+                }
               />
             ))}
           </div>

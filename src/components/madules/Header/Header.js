@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
 import { Tooltip } from "react-bootstrap";
-import { motion , useScroll,AnimatePresence} from "framer-motion"
+// import { motion , useScroll,AnimatePresence} from "framer-motion"
 
 
 
@@ -30,7 +30,7 @@ export default function Header() {
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
-  const { scrollYProgress } = useScroll()
+  // const { scrollYProgress } = useScroll()
 
 let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter,setCartCounter,localToken}=useContext(MainContext)
  const rout=useRouter()
@@ -92,10 +92,10 @@ console.log('object')
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      id: 2,
+      id: 3,
       str: "string",
     };
-    postApi('/api/CyCategories/GetItemWChildAndRoot', obj, setMainCategory)
+    postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategory)
 
   };
 
@@ -205,49 +205,8 @@ className={`${styles.Header_leftSide__div} centerr`}  >
 
 
 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-<motion.div
-  // animate={{ x: 10 }}
 
-  // transition={{ delay: 1 }}
-
-  // transition={{ type: "spring", stiffness: 100 ,}}
-
-  // transition={{
-  //   ease: "linear",
-  //   duration: 2,
-  //   x: { duration: 1 }
-  // }}
-
-  // animate={{ rotate: 360 }}
-  // transition={{ repeat: Infinity, duration: 2 }}
-
-
-  // animate={{ rotate: 180 }}
-  // transition={{
-  //   repeat: 1,
-  //   repeatType: "reverse",
-  //   duration: 2
-  // }}
-
-  // animate={{ pathLength: 1 }}
-  // transition={{ duration: 2, type: "tween" }}
-
-  // animate={{ opacity: 0.9 }}
-  // transition={{ repeat: Infinity,ease:"easeInOut" }}
-
-  // animate={{ scale: [0, 1, 0.5, 1] }}
-  // transition={{ times: [0, 0.1, 0.9, 1] }}
-
-  // animate={{ scale: [0, 1, 0.5, 1] }}
-  // transition={{ times: [0, 0.1, 0.9, 1] }}
-
-  // animate={{ rotate: 180 }}
-  // transition={{ type: 'spring' }}
-
-
->
         <span>02191005457</span>
-        </motion.div>
         <Phone size={24} color="#ededed" weight="duotone" />
         </div>
  
@@ -293,8 +252,8 @@ className={`${styles.Header_leftSide__div} centerr`}  >
                      
                       }}
                     >
-                      <img src={item.imageUrl} alt={item.text || 'Category image'} />
-                      {item.text}
+                      <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                      {item.name}
                     </Link>
 
 
@@ -585,8 +544,8 @@ className={`${styles.Header_leftSide__div} centerr`}  >
                       //   ulRef.current.classList.add('ul_hidden'); // Updated way to add a class
                       // }}
                     >
-                      <img src={item.imageUrl} alt={item.text || 'Category image'} />
-                      {item.text}
+                      <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                      {item.name}
                     </Link>
 
 

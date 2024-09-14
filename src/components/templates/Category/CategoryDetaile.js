@@ -30,7 +30,7 @@ export default function CategoryDetaile({ param }) {
     };
     async function myAppGet() {
       const res = await fetch(
-        `${apiUrl}/api/CyCategories/GetItemWChildAndRoot`,
+        `${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,
         {
           method: "POST",
           headers: {
@@ -60,7 +60,7 @@ export default function CategoryDetaile({ param }) {
   ////////////////////////////
   const getproductByCat = (obj) => {
     async function myApppost() {
-      const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
+      const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByProductCat`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -71,6 +71,7 @@ export default function CategoryDetaile({ param }) {
         console.log(res)
         return res.json()
       }).then(result => {
+        console.log(result)
         if (result.itemList?.length != 0) {
           setProductByCat(result.itemList)
         } else {
@@ -136,7 +137,7 @@ export default function CategoryDetaile({ param }) {
 
   }, [flag])
 
-
+console.log(mainCatChilds)
   return (
     <div className={`container  centerc ${Styles.category}`} >
 
@@ -156,7 +157,7 @@ size={250}
     <Breadcrumb>
     <Breadcrumb.Item ><Link href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
       <Breadcrumb.Item active href="/">
-        {mainCategory.item?.text}
+        {mainCategory.item?.name}
       </Breadcrumb.Item>
     </Breadcrumb>
   </div>
