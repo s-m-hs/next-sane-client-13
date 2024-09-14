@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import SwiperProduct from "../SwiperProduct/SwiperProduct";
 import Styles from './ProductDetailLeft.module.css'
+import { MainContext } from "@/context/MainContext";
+import updateBasket from "@/utils/ApiUrl/updateBasket";
+import addToCart from "@/utils/Functions/addToCart";
+import alertN from "@/utils/Alert/AlertA";
 
 
 export default function ProductDetailLeft({detail}) {
+  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
+  const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000)
+  
   return (
     <div className="container " style={{ height: '600px' }}>
       <div className="row mt-1" style={{ height: '600px' }}>
@@ -36,7 +43,20 @@ export default function ProductDetailLeft({detail}) {
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
             </div>
             <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
-              <button className="btn btn-primary ">افزودن به سبد خرید</button>
+              <button className="btn btn-primary "
+                      onClick={()=>{
+                        const getLocalStorage=localStorage.getItem('loginToken')
+                        let obj=[{
+                          cyProductID:detail.id,
+                          quantity: 1
+                        }] 
+                        xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+                        :
+              
+                           addToCart(detail.id,'1',setCartCounter)
+                        
+                      }}
+              >افزودن به سبد خرید</button>
 
             </div>
 

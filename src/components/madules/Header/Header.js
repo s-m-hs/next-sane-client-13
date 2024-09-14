@@ -108,10 +108,9 @@ console.log('object')
     if (e.target.value) {
       setValue(e.target.value);
     }
-    console.log(valeS)
   };
 
-
+console.log(cartCounter)
   return (
     <>
     <section className={styles.A}>
@@ -177,7 +176,7 @@ className={`${styles.Header_leftSide__div} centerr`}  >
         <User size={24} color="#14a5af" />
       {!xtFlagLogin ?
        <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
-       ''}  
+       <span className={`${styles.Header_leftSide__div_span} `} >وارد پنل کاربری خود شوید...</span>}  
       </div>
 </Link>
 
@@ -233,8 +232,8 @@ className={`${styles.Header_leftSide__div} centerr`}  >
   // animate={{ pathLength: 1 }}
   // transition={{ duration: 2, type: "tween" }}
 
-  animate={{ opacity: 0.9 }}
-  transition={{ repeat: Infinity,ease:"easeInOut" }}
+  // animate={{ opacity: 0.9 }}
+  // transition={{ repeat: Infinity,ease:"easeInOut" }}
 
   // animate={{ scale: [0, 1, 0.5, 1] }}
   // transition={{ times: [0, 0.1, 0.9, 1] }}
@@ -270,7 +269,9 @@ className={`${styles.Header_leftSide__div} centerr`}  >
         <li className="nav_link arrow_icon"  >
 
           دسته بندی ها
-          <ul className={`${styles.header_bottom__col__ul__ul} centerc`}>
+          <ul className={`${styles.header_bottom__col__ul__ul} centerc`}
+          ref={ulRef}
+          >
             <li
               value={1}
               onMouseEnter={onmousHandle}
@@ -284,16 +285,31 @@ className={`${styles.Header_leftSide__div} centerr`}  >
                   {mainCategory.childs?.length &&
                     mainCategory.childs.map((item, index) => (
                       <Link
-                        onClick={() => {
-                          ulRef.current.add.className('ul_hidden')
-                        }}
-                        key={item.id}
-                        href={`/category/${item.id}`}
-                        className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                      >
-                        <img src={item.imageUrl} alt="" />
-                        {item.text}
-                      </Link>
+                      key={index}
+                      href={`/category/${item.id}`}
+                      className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                      onClick={() => {
+                        // ulRef.current.classList.add(`${styles.nohover}`);
+                     
+                      }}
+                    >
+                      <img src={item.imageUrl} alt={item.text || 'Category image'} />
+                      {item.text}
+                    </Link>
+
+
+
+                      // <Link
+                      //   onClick={() => {
+                      //     ulRef.current.add.className('ul_hidden')
+                      //   }}
+                      //   key={item.id}
+                      //   href={`/category/${item.id}`}
+                      //   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                      // >
+                      //   <img src={item.imageUrl} alt="" />
+                      //   {item.text}
+                      // </Link>
                     ))}
                 </div>
               </div>
@@ -418,6 +434,9 @@ className={`${styles.Header_leftSide__div} centerr`}  >
               </div>
             </li>
           </ul>
+
+
+
         </li>
         <li className="nav_link">فروش اقساط   </li>
         <li>خدمات</li>
@@ -501,10 +520,17 @@ className={`${styles.Header_leftSide__div} centerr`}  >
     </div>
     {xtFlagLogin && <span className={styles.user_span}>{userName.toUpperCase()}</span>} 
 
-    <div className={`${styles.Header_leftSide__div} centerr`}  >
-       
-       <User size={24} color="#14a5af" />
-     </div>
+    <Link href={!xtFlagLogin ? '/login' : '/p-user/profile'}>
+<div 
+onClick={()=>setXtFlagSpinnerShow(true)}
+className={`${styles.Header_leftSide__div} centerr`}  >
+        <User size={24} color="#14a5af" />
+      {!xtFlagLogin ?
+       <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
+       <span className={`${styles.Header_leftSide__div_span} `} >وارد پنل کاربری خود شوید...</span>}  
+      </div>
+</Link>
+
 <Link href='/basket'>
       <div className={` ${styles.Header_leftSide__div} centerr`}>
      
@@ -550,16 +576,30 @@ className={`${styles.Header_leftSide__div} centerr`}  >
                 >
                   {mainCategory.childs?.length &&
                     mainCategory.childs.map((item, index) => (
-                      <Link key={index}
-                        onClick={() => {
-                          ulRef.current.add.className('ul_hidden')
-                        }}
-                        href={`/category/${item.id}`}
-                        className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                      >
-                        <img src={item.imageUrl} alt="" />
-                        {item.text}
-                      </Link>
+
+                      <Link
+                      key={index}
+                      href={`/category/${item.id}`}
+                      className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                      // onClick={() => {
+                      //   ulRef.current.classList.add('ul_hidden'); // Updated way to add a class
+                      // }}
+                    >
+                      <img src={item.imageUrl} alt={item.text || 'Category image'} />
+                      {item.text}
+                    </Link>
+
+
+                      // <Link key={index}
+                      //   onClick={() => {
+                      //     ulRef.current.add.className('ul_hidden')
+                      //   }}
+                      //   href={`/category/${item.id}`}
+                      //   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                      // >
+                      //   <img src={item.imageUrl} alt="" />
+                      //   {item.text}
+                      // </Link>
                     ))}
                 </div>
               </div>
@@ -684,6 +724,33 @@ className={`${styles.Header_leftSide__div} centerr`}  >
         <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
         <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
       </ul>
+      
+      <div className={styles.header_bottom__col_logo}  >
+      <Link href={'/'}>
+        <img
+          className={styles.sphere3}
+          src="../../../images/eitaa-icon-colorful.png"
+          alt=""
+        />
+      </Link>
+      <Link href={'/'}>
+        {" "}
+        <img
+          className={styles.sphere2}
+          src="../../../images/icons8-instagram-2048.png"
+          alt=""
+        />
+      </Link>
+      <Link href={'/'}>
+        {" "}
+        <img
+          className={styles.sphere}
+          src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
+          alt=""
+        />
+      </Link>
+    </div>
+
     </div>
     {/* 
 <div className={styles.header_bottom__col_logo}  >
@@ -740,6 +807,8 @@ className={`${styles.Header_leftSide__div} centerr`}  >
   <li>پروفایل من</li>
   <li>جسنجو </li>
 </ul>
+
+
 </div>
     </div>
   </div>

@@ -1,18 +1,19 @@
 'use client'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './Side.module.css';
 import Link from 'next/link';
 import { UserList,AddressBook,ShoppingBagOpen,PaperPlaneTilt,SignOut } from "@phosphor-icons/react";
 import { MainContext } from '@/context/MainContext';
-import { useRouter } from 'next/navigation';
+import { useRouter,usePathname } from 'next/navigation';
 import alertKey from '@/utils/Alert/AlertKey';
 
 const Side = () => {
   const [activeLink, setActiveLink] = useState('profile'); // Track the active link
 let {setXtFlagLogin,setCartCounter}=useContext(MainContext)
 const rout=useRouter()
+const pathname = usePathname();
 
-
+console.log(pathname)
   const handleLinkClick = (link) => {
     setActiveLink(link); // Set the active link when clicked
   };
@@ -28,6 +29,20 @@ const rout=useRouter()
     }
   });
 }
+
+useEffect(()=>{
+  if(pathname==='/p-user/address'){
+    setActiveLink('address')
+  }
+
+  else if(pathname==='/p-user/order'){
+    setActiveLink('order')
+  }
+   else if(pathname==='/p-user/ticket'){
+    setActiveLink('ticket')
+  }
+},[])
+
 
   return (
     <aside className={styles.sidebar}>

@@ -5,10 +5,8 @@ import Styles from './CardC.module.css'
 import { Heart, ShoppingCart } from '@phosphor-icons/react'
 import addToCart from '@/utils/Functions/addToCart'
 import { MainContext } from '@/context/MainContext'
-// import getLocalStorage from '@/utils/localStorag/localStorage'
 import alertN from '@/utils/Alert/AlertA'
 import updateBasket from '@/utils/ApiUrl/updateBasket'
-const getLocalStorage=localStorage.getItem('loginToken')
 
 
 export default function CardC({imgSrc,title,price,id,clickSpinner }) { 
@@ -34,6 +32,8 @@ export default function CardC({imgSrc,title,price,id,clickSpinner }) {
     <div className={`${Styles.cardprob__icon_div} centerr`} >
     <ShoppingCart size={32} color="#19a7af" weight="duotone"
         onClick={()=>{
+          const getLocalStorage=localStorage.getItem('loginToken')
+
           let obj=[{
             cyProductID: id,
             quantity: 1

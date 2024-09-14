@@ -7,6 +7,8 @@ import Footer from "@/components/templates/Footer/Footer";
 import ScrollToTopt from "@/utils/ScrollToTop/ScrollToTop";
 import Loading from "./loading";
 import { MainProvider } from "@/context/MainContext";
+import Error from "@/components/madules/Error/Error";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +29,9 @@ export default function RootLayout({ children }) {
         <MainProvider>
         <Header />
         <AOSInit />
+        <ErrorBoundary fallback={<Error/>}>
         {children}
+        </ErrorBoundary>
         <ScrollToTopt/>
         <Footer />
         </MainProvider>
