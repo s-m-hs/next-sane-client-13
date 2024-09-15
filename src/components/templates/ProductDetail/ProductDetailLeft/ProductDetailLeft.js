@@ -12,6 +12,8 @@ export default function ProductDetailLeft({detail}) {
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000)
   
+
+
   return (
     <div className="container " style={{ height: '600px' }}>
       <div className="row mt-1" style={{ height: '600px' }}>
@@ -64,7 +66,7 @@ export default function ProductDetailLeft({detail}) {
         </div>
 
         <div className="col-6">
-          <SwiperProduct src={detail.mainImage} />
+          <SwiperProduct src={detail.mainImage} srcB={detail.images?.split('*,*')} />
         </div>
         </>
         }

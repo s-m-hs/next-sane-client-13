@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Styles from './ProductDetail.module.css'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -9,6 +9,7 @@ import apiUrl from '@/utils/ApiUrl/apiUrl';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine,Dresser} from "@phosphor-icons/react";
 import Link from 'next/link';
+import { MainContext } from '@/context/MainContext';
 
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
@@ -17,7 +18,8 @@ export default function ProductDetail({ param }) {
   const [productDetail, setProductDetail] = useState([])
   const [productDetailB, setProductDetailB] = useState({})
   const [idCategory,setIdCategory]=useState('')
-  const [nameCategory,setNameCategory]=useState('')
+  let{nameCategory}=useContext(MainContext)
+
   console.log(param);
 
   const getProductById = (id) => {
@@ -32,8 +34,9 @@ export default function ProductDetail({ param }) {
         return res.json()
       }).then(result => {
         if (result) {
+          console.log(result)
           setProductDetail(result.spec)
-          setIdCategory(result.cyCategoryId)
+          setIdCategory(result.cyProductCategoryId)
           setProductDetailB(result)
         }
 
@@ -41,34 +44,35 @@ export default function ProductDetail({ param }) {
     }
     myAppPost()
   }
-const getCategory=(id)=>{
-  async function myAppGet(){
-    const res=await fetch(`${apiUrl}/api/CyCategories/${id}`,{
-      method:'GET',
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(res=>{
-      console.log(res)
-      return res.json()
-    }).then(result=>{
-      setNameCategory(result.text)
-    })
-  }
-  myAppGet()
-}
-useEffect(()=>{
-  if(idCategory){
-    getCategory(idCategory)
-  }
-},[idCategory])
+// const getCategory=(id)=>{
+//   async function myAppGet(){
+//     const res=await fetch(`${apiUrl}/api/CyCategories/${id}`,{
+//       method:'GET',
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     }).then(res=>{
+//       console.log(res)
+//       return res.json()
+//     }).then(result=>{
+//       // console.log(result)
+//       // setNameCategory(result.text)
+//     })
+//   }
+//   myAppGet()
+// }
+// useEffect(()=>{
+//   if(idCategory){
+//     getCategory(idCategory)
+//   }
+// },[idCategory])
 
 
   useEffect(() => {
     getProductById(param)
   }, [param])
-  console.log(productDetail)
-  console.log(idCategory);
+  // console.log(productDetail)
+  // console.log(idCategory);
   return (
     <div className={`container ${Styles.product_container}`} >
 
@@ -78,7 +82,7 @@ useEffect(()=>{
     <Breadcrumb.Item ><Link href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
     {nameCategory && idCategory && <Breadcrumb.Item ><Link href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}</Link></Breadcrumb.Item>}  
       <Breadcrumb.Item active href="/">
-      {productDetailB?.name}
+      {nameCategory}
       </Breadcrumb.Item>
     </Breadcrumb>
   </div>

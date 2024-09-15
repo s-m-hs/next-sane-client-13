@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Styles from "./CategoryDetaile.module.css";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import CardAButton from "@/components/madules/Cards/CardAButton/CardAButton";
@@ -10,6 +10,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine} from "@phosphor-icons/react";
 import DotLoader from "react-spinners/DotLoader";
 import Link from "next/link";
+import { MainContext } from "@/context/MainContext";
 
 
 
@@ -20,7 +21,7 @@ export default function CategoryDetaile({ param }) {
   const [productByCat, setProductByCat] = useState([])
   const [flag, setFlag] = useState(false)
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-
+let{setNameCategory}=useContext(MainContext)
   const styleRef = useRef();
   const getCategoryById = () => {
     let obj = {
@@ -122,6 +123,7 @@ export default function CategoryDetaile({ param }) {
   }
   getproductByCat(obj)
   }
+  setNameCategory(mainCategory.item?.name)
   },[mainCatChilds])
 
   useEffect(() => {

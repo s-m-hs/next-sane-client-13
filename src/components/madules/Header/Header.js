@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple } from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple, House} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -31,6 +31,14 @@ export default function Header() {
   const [flag, setFlag] = useState(false)
 
   // const { scrollYProgress } = useScroll()
+
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  // Function to toggle the menu
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
 
 let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter,setCartCounter,localToken}=useContext(MainContext)
  const rout=useRouter()
@@ -754,18 +762,91 @@ className={`${styles.Header_leftSide__div} centerr`}  >
   </div>
 </section>
 
+<section className={styles.D} >
+{isMenuOpen && (
+          <div className="dropdownMenu">
+  <div className={` container centerr ${styles.mobile_dropdownMenu_li}`}>
+                <div
+                // className='row-cols-6 '
+                  className={`row-cols-1 ${styles.ishover}` }
+                >
+                  {mainCategory.childs?.length &&
+                    mainCategory.childs.map((item, index) => (
+                      <Link
+                      key={index}
+                      href={`/category/${item.id}`}
+                      className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                      onClick={() => {
+                        // ulRef.current.classList.add(`${styles.nohover}`);
+                     
+                      }}
+                    >
+                      <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                      {item.name}
+                    </Link>
+
+
+
+                      // <Link
+                      //   onClick={() => {
+                      //     ulRef.current.add.className('ul_hidden')
+                      //   }}
+                      //   key={item.id}
+                      //   href={`/category/${item.id}`}
+                      //   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                      // >
+                      //   <img src={item.imageUrl} alt="" />
+                      //   {item.text}
+                      // </Link>
+                    ))}
+                </div>
+              </div>
+{/* <div>
+            <button className="btn btn-outline-info">              لوازم جانبی 
+            </button>
+         
+            <button className="btn btn-outline-info">              لوازم جانبی 
+            </button>          
+</div> */}
+           
+           
+          </div>
+        )}
+
+</section>
+
 <section className={styles.C}>
   <div className={`container left-0 ${styles.C_Contaner} `} >
 
     <div className={`${styles.mobi_bottomHeader} row`} >
 <div className="col">
+
+
 <ul className={`${styles.bottomHeader_ul} centerr`}>
-  <li>خانه</li>
-  <li>دسته بندی</li>
-  <li>سبدخرید</li>
-  <li>پروفایل من</li>
-  <li>جسنجو </li>
-</ul>
+      <li className={`${styles.hamburger_li}centerr`}>
+      <House size={20} />
+        <Link href={'/'}
+        style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}>خانه
+        </Link>
+      </li>
+      <li className={`${styles.hamburger_li} centerr`} onClick={toggleMenu}>
+        {/* Hamburger/Close icon */}
+        <button  className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </button>
+دسته بندی
+      </li>
+      <li>
+      <ShoppingCart size={20} />سبدخرید</li>
+      <li>
+      <User size={20} />
+        پروفایل من</li>
+      <li>
+      <MagnifyingGlass size={20} />
+        جسنجو</li>
+    </ul>
 
 
 </div>

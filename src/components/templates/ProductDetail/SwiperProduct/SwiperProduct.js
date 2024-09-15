@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
-export default function SwiperProduct({src}) {
+export default function SwiperProduct({src,srcB}) {
 
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -43,61 +43,21 @@ export default function SwiperProduct({src}) {
         </div>
    </SwiperSlide>
 
-   <SwiperSlide className={Styles.swiper_slide}>
-   <div>
-            <ImageMagnifier 
-               src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp"
-               width={500}
-               height={400}
-               magnifierHeight={100}
-               magnifierWidth={80}
-                zoomLevel={3}
-                alt="Sample Image"
-            />
-        </div>
-   </SwiperSlide>
-
-   <SwiperSlide className={Styles.swiper_slide}>
-   <div>
-            <ImageMagnifier 
-                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1 (1).webp"
-                width={500}
-                height={400}
-                magnifierHeight={100}
-                magnifierWidth={80}
-                zoomLevel={3}
-                alt="Sample Image"
-            />
-        </div>
-   </SwiperSlide>
-
-   <SwiperSlide className={Styles.swiper_slide}>
-   <div>
-            <ImageMagnifier 
-                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-side-652d0605eb21a6b54f50b1c1.webp" 
-                width={500}
-                height={400}
-                magnifierHeight={100}
-                magnifierWidth={80}
-                zoomLevel={3}
-                alt="Sample Image"
-            />
-        </div>
-   </SwiperSlide>
-
-   <SwiperSlide className={Styles.swiper_slide}>
-   <div>
-            <ImageMagnifier 
-                src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp"
-                width={500}
-                height={400}
-                magnifierHeight={100}
-                magnifierWidth={80}
-                zoomLevel={3}
-                alt="Sample Image"
-            />
-        </div>
-   </SwiperSlide>
+{srcB && srcB.map(item=>(
+ <SwiperSlide className={Styles.swiper_slide}>
+ <div>
+          <ImageMagnifier 
+             src={item}
+             width={500}
+             height={400}
+             magnifierHeight={100}
+             magnifierWidth={80}
+              zoomLevel={3}
+              alt="Sample Image"
+          />
+      </div>
+ </SwiperSlide>
+))}
 
 
 
@@ -116,7 +76,18 @@ export default function SwiperProduct({src}) {
      <img src={src} />
    </SwiperSlide>
 
-   <SwiperSlide className={Styles.swiper_slide}>
+
+{srcB && srcB.map(item=>(
+  <SwiperSlide className={Styles.swiper_slide}>
+  <img src={item} />
+</SwiperSlide>
+)) 
+}
+
+
+
+
+   {/* <SwiperSlide className={Styles.swiper_slide}>
      <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-left-652d06068716201626d0f36e.webp" />
    </SwiperSlide>
 
@@ -130,7 +101,7 @@ export default function SwiperProduct({src}) {
 
    <SwiperSlide className={Styles.swiper_slide}>
      <img src="../../../../../images/products/mouse/2021-9-a4tech-bloody-a60-bottom-652d06058716201626d0f36a.webp" />
-   </SwiperSlide>
+   </SwiperSlide> */}
     </Swiper>
     </div>
     </>}

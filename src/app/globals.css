@@ -265,3 +265,94 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px var(--bg-menu) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+
+/* Base styling for the button */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 15px;
+  padding: 0;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger .bar {
+  width: 60%;
+  height: 2px;      
+  background-color: black;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* First bar (top) */
+.hamburger.open .bar:nth-child(1) {
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  transform-origin: center;
+}
+
+/* Second bar (middle, invisible when open) */
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Third bar (bottom) */
+.hamburger.open .bar:nth-child(3) {
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 50%;
+  transform-origin: center;
+}
+
+/* Dropdown menu */
+.dropdownMenu {
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+  width: 100vw;
+  height:100vh;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  animation: move 0.3s 1 alternate ease-in-out;
+  overflow: auto;
+
+}
+
+.dropdownMenu a {
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdownMenu a:hover {
+  background-color: #f1f1f1;
+}
+
+
+
+/* div{
+    animation: move 2000ms 1 alternate ease-in-out;
+} */
+  @keyframes move {
+    0% {
+      width: 0px;
+        /* top: -800px; */
+        opacity: 0;
+    }
+
+    100% {
+      width: 100%;
+        /* top: 0px; */
+        opacity: 1;
+    }
+}
