@@ -69,10 +69,10 @@ useEffect(() => {
     <div className='col-12 '><SwiperB/></div> 
     <CategorySectionA  categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
-    <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} sliderDetailProp={sliderDetail}/>
+    <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
     <CategorySectionA  categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    {/* <SwiperC   title={'پرفروش ترین های سخت افزار :'} sliderDetailProp={sliderDetail2}/> */}
+    <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
 
  
     </div>

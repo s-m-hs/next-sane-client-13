@@ -11,6 +11,8 @@ import apiUrl from '@/utils/ApiUrl/apiUrl';
 
 export default function SwiperC({title,categoryCode}) {
   const [productByCatArray,setProductByCatArray]=useState([])
+  const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
+
 
 const getProductByCat=()=>{
   let obj={
@@ -80,6 +82,8 @@ console.log(productByCatArray)
   <SwiperSlide key={index}
    >
     <CardB 
+      clickSpinner={()=>setFlagSpinnerShow(true)}
+      id={item.id}
         imgSrc={item.mainImage} title={item.name} price={item.price}
         /></SwiperSlide>
         )}
