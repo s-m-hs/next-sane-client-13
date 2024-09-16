@@ -7,7 +7,7 @@ import DotLoader from "react-spinners/DotLoader";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 
 
-export default function CategorySectionA() {
+export default function CategorySectionA({categoryId}) {
   const [mainCategory, setMainCategory] = useState({});
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
 
@@ -19,7 +19,7 @@ const clickHandler=()=>{
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      id: 3,
+      id: categoryId,
       str: "string",
     };
 postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)

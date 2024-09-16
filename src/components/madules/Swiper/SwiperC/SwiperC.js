@@ -1,15 +1,46 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CardB from '../../Cards/CardB/CardB';
 // import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import apiUrl from '@/utils/ApiUrl/apiUrl';
 // import styles from './SwiperC.module.css'
 
 
-export default function SwiperC({title,sliderDetailProp}) {
+export default function SwiperC({title,categoryCode}) {
+  const [productByCatArray,setProductByCatArray]=useState([])
 
+const getProductByCat=()=>{
+  let obj={
+    cat:categoryCode,
+    pageNumber: 0,
+    pageSize: 100
+  }
+  console.log(obj)
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`,{
+      method:'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify(obj)
+    }).then(res=>{
+      console.log(res)
+      return res.json()
+    }).then(result=>{
+      console.log(result)
+      setProductByCatArray(result)
+    }).catch(err=>console.log(err))
+  }
+  myApp() 
+}
+useEffect(()=>{
+  getProductByCat()
+},[])
+
+console.log(productByCatArray)
   return (
     <>
     <div  className='swipercomb-div'
@@ -45,11 +76,11 @@ export default function SwiperC({title,sliderDetailProp}) {
 
         className= "mySwiperB"
       >
-        {sliderDetailProp.map((item,index)=>
+        {productByCatArray?.itemList?.map((item,index)=> 
   <SwiperSlide key={index}
    >
     <CardB 
-        imgSrc={item.img} title={item.title} price={item.price}
+        imgSrc={item.mainImage} title={item.name} price={item.price}
         /></SwiperSlide>
         )}
       

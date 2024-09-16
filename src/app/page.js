@@ -1,8 +1,8 @@
 'use client'
 import BrandArea from '@/components/madules/BrandArea/BrandArea';
 import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
-import CategorySectionA from '@/components/templates/Home/CategorySectionA/CategorySectionA';
-import SwiperB from '@/components/templates/Home/SwiperB/SwiperB';
+import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
+import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 import updateBasket from '@/utils/ApiUrl/updateBasket';
@@ -65,16 +65,16 @@ useEffect(() => {
 },[xtFlagLogin]); 
   return (
 <div className='container'>
-  <div className='row'>
-    <div className='col-12'><SwiperB/></div> 
-    <CategorySectionA/>
+  <div className='row '>
+    <div className='col-12 '><SwiperB/></div> 
+    <CategorySectionA  categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
-    <SwiperC  title={'پرفروش ترین ها :'} sliderDetailProp={sliderDetail}/>
-    <CategorySectionA/>
+    <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} sliderDetailProp={sliderDetail}/>
+    <CategorySectionA  categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    <SwiperC   title={'پرفروش ترین های سخت افزار :'} sliderDetailProp={sliderDetail2}/>
+    {/* <SwiperC   title={'پرفروش ترین های سخت افزار :'} sliderDetailProp={sliderDetail2}/> */}
 
-
+ 
     </div>
     </div>
    );

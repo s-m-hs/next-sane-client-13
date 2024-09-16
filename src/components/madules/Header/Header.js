@@ -1,7 +1,7 @@
 "use client"
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
-import SwiperA from "@/components/templates/Home/SwiperA/SwiperA";
+import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
 import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple, House} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";

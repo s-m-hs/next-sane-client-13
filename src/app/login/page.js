@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginTemplate from '@/components/templates/Login/LoginTemplate'
+import LoginTemplate from '@/components/templatess/Login/LoginTemplate'
 
 export default function LoginPage
 () {
