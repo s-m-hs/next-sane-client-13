@@ -172,7 +172,7 @@ size={250}
             <>
               <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
                 <CardAButton imgSrc={item.imageUrl} changeIdProp={() => changeId(item.code)} code={item.code} />
-                <span>{item.text} </span>
+                <span>{item.name} </span>
               </div>
             </>
           ))}
