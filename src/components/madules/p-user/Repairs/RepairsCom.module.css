@@ -1,0 +1,10 @@
+.row{
+    margin: 0 auto;
+    }
+    .col{
+        width: 80%;
+        min-height: 500px;
+        border-radius: 8px;
+        background-color: var(--white1ffffff);
+        margin-left: 10%;
+    }

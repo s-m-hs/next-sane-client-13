@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styles from './Side.module.css';
 import Link from 'next/link';
-import { UserList,AddressBook,ShoppingBagOpen,PaperPlaneTilt,SignOut } from "@phosphor-icons/react";
+import { UserList,AddressBook,ShoppingBagOpen,PaperPlaneTilt,SignOut,Wrench,Barcode  } from "@phosphor-icons/react";
 import { MainContext } from '@/context/MainContext';
 import { useRouter,usePathname } from 'next/navigation';
 import alertKey from '@/utils/Alert/AlertKey';
@@ -40,6 +40,12 @@ useEffect(()=>{
   }
    else if(pathname==='/p-user/ticket'){
     setActiveLink('ticket')
+  } 
+  else if(pathname==='/p-user/warranty'){
+    setActiveLink('warranty')
+  }
+   else if(pathname==='/p-user/repairs'){
+    setActiveLink('repairs')
   }
 },[])
 
@@ -66,6 +72,19 @@ useEffect(()=>{
         className={activeLink === 'order' ? styles.active : ''}
         onClick={() => handleLinkClick('order')}>
       <ShoppingBagOpen size={32} weight="light" />سفارشات      </Link>
+
+      <Link href={"/p-user/warranty"}
+        className={activeLink === 'warranty' ? styles.active : ''}
+        onClick={() => handleLinkClick('warranty')}>
+      <Barcode  size={32} weight="light" />گارانتی      </Link>
+
+
+      <Link href={"/p-user/repairs"}
+        className={activeLink === 'repairs' ? styles.active : ''}
+        onClick={() => handleLinkClick('repairs')}>
+      <Wrench size={32} weight="light" />تعمیرات      </Link>
+
+
 
       <Link href={"/p-user/ticket"}
            className={activeLink === 'ticket' ? styles.active : ''}

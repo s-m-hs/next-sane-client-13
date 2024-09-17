@@ -1,0 +1,64 @@
+.row{
+    margin: 0 auto;
+    }
+    .col{
+        width: 80%;
+        min-height: 500px;
+        border-radius: 8px;
+        background-color: var(--white1ffffff);
+        margin-left: 10%;
+    }
+    .button_code{
+        font-size: 1.5cqi;
+    }
+
+    .input{
+        position: relative;
+        margin: 20px;
+        width: 80%;
+    }
+    
+     /* input[type=number] {
+        -moz-appearance: textfield;
+      } */
+    
+      .input    input[type=number]::-webkit-inner-spin-button,
+      .input input[type=number]::-webkit-outer-spin-button {
+        pointer-events:none;
+      /* background-color: #14a5af !important; */
+      opacity: 0;
+    }
+    .input  input {
+        padding-left: 40px; /* Adjust input padding to make space for the icon */
+      }
+
+  
+     
+    .icon {
+        position: absolute;
+        left: 10px; /* Position the icon inside the input */
+        top: 60%;
+        transform: translateY(-50%); /* Center the icon vertically */
+        pointer-events: none; /* Ensure the icon does not interfere with input interactions */
+      }
+
+
+      .textarea_div{
+    
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+      }
+      .textarea_div label{
+        position: absolute;
+        top: -10px;
+        right: 10px;
+      }
+      .textarea_div button{
+        font-size: 0.8cqi;
+        font-weight: bold;
+      }
+      .textarea_div textarea{
+        width: 100%;
+      }

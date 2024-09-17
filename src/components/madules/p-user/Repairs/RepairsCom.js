@@ -1,15 +1,16 @@
+
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import style from './OrderCom.module.css'
+import style from './RepairsCom.module.css'
 import { useForm } from "react-hook-form";
 import { IdentificationBadge,IdentificationCard,UserCircle ,DeviceMobile ,EnvelopeSimple ,CheckCircle,CheckFat,Asterisk   } from "@phosphor-icons/react";
 import { useRouter } from 'next/navigation';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
-export default function OrderCom() {
+export default function RepairsCom() {
   return (
     
     <div >
@@ -21,7 +22,7 @@ className="mb-2"
 // onSelect={ffc}
 // onClick={()=>ffc(id)}
 >
-<Tab eventKey="home" title="  لیست سفارشات" style={{ background: 'inherit' }}>
+<Tab eventKey="home" title="  لیست تعمیرات" style={{ background: 'inherit' }}>
 <div className={`container ${style.container}`}>
 <div className={ `row ${style.row}`}>
 

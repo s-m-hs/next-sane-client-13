@@ -7,7 +7,7 @@ import DotLoader from "react-spinners/DotLoader";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 
 
-export default function CategorySectionA({categoryId}) {
+export default function CategorySectionA({categoryId,title}) {
   const [mainCategory, setMainCategory] = useState({});
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
 
@@ -48,7 +48,7 @@ size={250}
             className="col"
             style={{ marginRight: "50px", marginTop: "30px" }}
           >
-            <h1 className={styles.title}>دسته بندی ها :</h1>
+            <h1 className={styles.title}>{`دسته بندی ${title}:`}</h1>
           </div>
         </div>
 

@@ -182,7 +182,7 @@ transition: all 0.3s ease-in;
 
 
 .swipercomb-div{
-  margin-top: 80px;
+  margin-top: 150px !important;
   background-color: #fff;
   margin: 80px auto;
   width: 90%;

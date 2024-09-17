@@ -405,8 +405,25 @@ className={`${styles.Header_leftSide__div} centerr`}  >
 
 
         </li>
-        <li className="nav_link">فروش اقساط   </li>
-        <li>خدمات</li>
+        {/* <li className="nav_link">فروش اقساط   </li> */}
+
+        <li className="nav_link arrow_icon" >خدمات
+          <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
+<li  
+value={11}
+onMouseEnter={onmousHandle}
+className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+><Link href={'/p-user/warranty'}>گارانتی</Link></li>
+
+
+<li 
+value={12}
+onMouseEnter={onmousHandle}
+className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+><Link  href={'/p-user/repairs'}>تعمیرات</Link></li>
+
+          </ul>
+        </li>
         <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
       
       {
@@ -686,9 +703,36 @@ className={`${styles.Header_leftSide__div} centerr`}  >
             </li>
           </ul>
         </li>
-        <li className="nav_link">فروش اقساط   </li>
-        <li>خدمات</li>
-        <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+        {/* <li className="nav_link">فروش اقساط   </li> */}
+<li className="nav_link arrow_icon" >خدمات
+          <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
+          <li  
+value={11}
+onMouseEnter={onmousHandle}
+className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+><Link href={'/p-user/warranty'}>گارانتی</Link></li>
+<li 
+value={12}
+onMouseEnter={onmousHandle}
+className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+><Link href={'/p-user/repairs'}>تعمیرات</Link></li>
+
+          </ul>
+        </li>        <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+
+        {
+        !xtFlagLogin ? <>
+             <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+        >ورود </Link> </li>
+        <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+        >عضویت </Link> </li>
+        </>  : 
+              <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+              >پنل کاربری </Link> </li>
+    
+      }
+
+
         <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
       </ul>
       
