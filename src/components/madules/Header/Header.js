@@ -34,6 +34,10 @@ export default function Header() {
 
   const [isMenuOpen, setMenuOpen] = useState(false);
 
+  const [searchType,setSearchType]=useState('')
+  const [searchBoxArr,setSearchBoxArr]=useState([])
+  const[flagSearch,setFlagSearch]=useState(false)
+
   // Function to toggle the menu
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -44,6 +48,51 @@ let {xtFlagLogin,setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCoun
  const rout=useRouter()
  const AlertA=()=>alertN('center','info',"محصولی در سبد خرید شما موجود نیست...",1500);
 
+  /////////////////////////////////
+  const searchChange=(e)=>{
+    setSearchType(e.target.value)
+    
+    }
+    const searchBox=()=>{
+      const getLocalStorage = localStorage.getItem('loginToken')
+
+      async function myApp(){
+        let obj={
+          name: searchType,
+          productCategoryCode: null,
+          productCategoryId: null,
+          categoryCode: null,
+          manufacturerName: null,
+          pageNumber: 0,
+          pageSize: 1000
+        }
+        console.log(obj)
+        const res=await fetch(`${apiUrl}/api/CyProducts/SearchProducts`,{
+          method:'POST',
+          headers: {
+            Authorization: `Bearer ${getLocalStorage}`,
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify(obj)
+            }).then(res=>{
+              console.log(res)
+              if(res.status==200){
+                 return res.json()
+              }
+            }).then(result=>{
+              if(result){
+                setFlagSearch(true)
+                setSearchBoxArr(result)
+              }else{
+                setFlagSearch(false)
+              }
+            //   console.log(result)
+            })
+      }
+      myApp()
+    }
+    console.log(searchBoxArr)
+    ////////////////////////////  
   useEffect(() => {
     const fixNavbarToTop = () => {
       // const currentScroll = window.pageYOffset;
@@ -118,7 +167,6 @@ console.log('object')
     }
   };
 
-console.log(cartCounter)
   return (
     <>
     <section className={styles.A}>
@@ -146,13 +194,29 @@ size={250}
           <SwiperA />
         </div>
       </div>
+
       <div className={`${styles.Header_rightSide__div_search}  centerc`}>
         <input
           className={styles.Header_rightSide__div_search_input}
           type="text"
           placeholder="دنبال چی میگردی...؟"
+          value={searchType}
+          onChange={searchChange}
         />
-        <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass} />
+        <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass} 
+        onClick={()=>{searchBox()}}/>
+        <div className={`${styles.Header_rightSide__div_searchbox} centerc`} >
+
+          {searchBoxArr.itemList?.length !=0 ? searchBoxArr.itemList?.map(item=>(
+            <div className={`${styles.Header_rightSide__div_searchbox_div} centerr`} >
+  <span>{item.name}</span>
+  <img src={item.smallImage} alt="" />
+</div>   
+          ))  :  ''}
+
+
+
+        </div>
       </div>
       {/* </div> */}
 
@@ -491,9 +555,12 @@ className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
           className={styles.Header_rightSide__div_search_input}
           type="text"
           placeholder="دنبال چی میگردی...؟"
+          value={searchType}
+onChange={searchChange}
         />
 
-        <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass} />
+        <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
+          onClick={()=>{searchBox()}} />
       </div>
 
     </div>

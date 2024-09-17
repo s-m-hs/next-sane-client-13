@@ -292,7 +292,29 @@ left: 0; */
     background-color: transparent;
     width: 80%;
 }
-
+.Header_rightSide__div_searchbox{
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    min-height: 300px;
+    z-index: 100;
+top: 65px;
+}
+.Header_rightSide__div_searchbox  div{
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted gray;
+}
+.Header_rightSide__div_searchbox span{
+    margin: 10px;
+    color: #14a5af;
+    font-size: 1cqi;
+    font-weight: 500;
+}
+.Header_rightSide__div_searchbox img {
+    width: 80px;
+    height: 80px;
+}
 .shopicon_baget{
     align-items: center;
     position: absolute;
@@ -449,6 +471,7 @@ transition:transform 0.1s linear;
   .magnifyingGlass{
     position: absolute;
     left: 10px;
+    cursor: pointer;
   }
   /* .swiper {
     width: 600px;
