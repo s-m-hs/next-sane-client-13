@@ -409,18 +409,19 @@ className={`${styles.Header_leftSide__div} centerr`}  >
 
         <li className="nav_link arrow_icon" >خدمات
           <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
+          <Link href={'/p-user/warranty'}>
 <li  
 value={11}
 onMouseEnter={onmousHandle}
 className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-><Link href={'/p-user/warranty'}>گارانتی</Link></li>
+>گارانتی</li></Link>
 
-
+<Link  href={'/p-user/repairs'}>
 <li 
 value={12}
 onMouseEnter={onmousHandle}
 className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-><Link  href={'/p-user/repairs'}>تعمیرات</Link></li>
+>تعمیرات</li></Link>
 
           </ul>
         </li>
