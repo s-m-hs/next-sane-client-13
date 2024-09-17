@@ -139,17 +139,7 @@ export default function WarrantyCom() {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-4">
-                        <div
-                          className={`login_label_float ${style.input} centerr`}
-                        >
-                          <input disabled/>
-                          <label>
-                           
-                            ایراد کالا طبق اظهار مشتری
-                          </label>
-                        </div>
-                      </div>
+              
                       <div className="col-md-4">
                         <div
                           className={`login_label_float ${style.input} centerr`}
@@ -173,6 +163,16 @@ export default function WarrantyCom() {
                     </div>
 
                     <div className="row">
+                    <div className="col-12">
+                        <div className={`${style.textarea_div} centerr`} >
+                        <label> <button className="btn btn-light" disabled>ایراد کالا طبق اظهار مشتری:
+                        </button>  </label>
+                          <textarea disabled
+                            className={`login_label_float ${style.input} centerr`}
+                          />
+                        </div>
+                      </div>
+
                       <div className="col-12">
                         <div className={`${style.textarea_div} centerr`} >
                         <label> <button className="btn btn-light" disabled>ملاحظات:
