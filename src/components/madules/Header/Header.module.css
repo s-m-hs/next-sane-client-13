@@ -297,13 +297,22 @@ left: 0; */
     width: 100%;
     background-color: #fff;
     min-height: 300px;
+    max-height: 600px;
     z-index: 100;
+    border-radius: 8px;
 top: 65px;
+overflow: auto;
+animation: moveB 300ms normal linear;
+
 }
 .Header_rightSide__div_searchbox  div{
     justify-content: space-between;
     margin-bottom: 10px;
     border-bottom: 1px dotted gray;
+    cursor: pointer;
+}
+.Header_rightSide__div_searchbox div:hover{
+opacity: 0.7;
 }
 .Header_rightSide__div_searchbox span{
     margin: 10px;
@@ -314,6 +323,12 @@ top: 65px;
 .Header_rightSide__div_searchbox img {
     width: 80px;
     height: 80px;
+}
+.Header_rightSide__div_search  svg{
+    cursor: pointer;
+}
+.Header_rightSide__div_search svg:hover{
+    opacity: 0.7;
 }
 .shopicon_baget{
     align-items: center;
@@ -328,7 +343,21 @@ height: 15px;
  background-color:rgb(226 105 214);
   }
   
+  @keyframes moveB {
+    0% {
+        top: -800px;
+        opacity: 0;
+        /* right: 0; */
+        /* background-color: rgb(255, 255, 255); */
+    }
 
+    100% {
+        top: 0px;
+        opacity: 1;
+        /* right: 100; */
+        /* background-color: rgb(20, 165, 175); */
+    }
+}
 @keyframes move {
     0% {
         /* top: -800px; */
@@ -470,7 +499,7 @@ transition:transform 0.1s linear;
 
   .magnifyingGlass{
     position: absolute;
-    left: 10px;
+    left: 20px;
     cursor: pointer;
   }
   /* .swiper {
