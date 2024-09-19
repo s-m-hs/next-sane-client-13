@@ -8,7 +8,6 @@ import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Swal from 'sweetalert2'
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine} from "@phosphor-icons/react";
-import DotLoader from "react-spinners/DotLoader";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
 
@@ -20,8 +19,8 @@ export default function CategoryDetaile({ param }) {
   const [flagPro, setFlagPro] = useState(false);
   const [productByCat, setProductByCat] = useState([])
   const [flag, setFlag] = useState(false)
-  const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-let{setNameCategory}=useContext(MainContext)
+  // const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
+let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
   const styleRef = useRef();
   const getCategoryById = () => {
     let obj = {
@@ -138,26 +137,17 @@ let{setNameCategory}=useContext(MainContext)
     
 
   }, [flag])
-
+useEffect(()=>{
+  setXtFlagSpinnerShow(false)
+},[])
 console.log(mainCatChilds)
   return (
     <div className={`container  centerc ${Styles.category}`} >
-
-      {flagSpinnerShow && <div className={`row ${Styles.spinner_row}`}>
-
-<div className="col">
-<DotLoader
-color="rgba(25, 167, 175)"
-size={250}
-/>
-</div>
-</div>}
-
-
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-    <Breadcrumb.Item ><Link href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
+    <Breadcrumb.Item ><Link onClick={()=>setXtFlagSpinnerShow(true)}
+ href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
       <Breadcrumb.Item active href="/">
         {mainCategory.item?.name}
       </Breadcrumb.Item>
@@ -185,7 +175,7 @@ size={250}
             // onClick={ ()=>setFlagSpinnerShow(true) } 
             >
             <CardC
-            clickSpinner={()=>setFlagSpinnerShow(true)}
+            // clickSpinner={()=>setFlagSpinnerShow(true)}
               id={item.id}
               imgSrc={item.smallImage
               } title={item.name} price={item.price}

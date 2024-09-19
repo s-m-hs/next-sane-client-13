@@ -9,7 +9,7 @@ import alertKey from '@/utils/Alert/AlertKey';
 
 const Side = () => {
   const [activeLink, setActiveLink] = useState('profile'); // Track the active link
-let {setXtFlagLogin,setCartCounter}=useContext(MainContext)
+let {setXtFlagLogin,setCartCounter,setXtFlagSpinnerShow}=useContext(MainContext)
 const rout=useRouter()
 const pathname = usePathname();
 
@@ -56,39 +56,65 @@ useEffect(()=>{
 
       <Link href="/p-user/profile"
        className={activeLink === 'profile' ? styles.active : ''}
-       onClick={() => handleLinkClick('profile')}
+       onClick={() =>{
+        setXtFlagSpinnerShow(true)
+        handleLinkClick('profile')
+       }}
       >
       <UserList size={32} weight="light" />       پروفایل من
       </Link>
 
       <Link href={"/p-user/address"}
            className={activeLink === 'address' ? styles.active : ''}
-           onClick={() => handleLinkClick('address')}
+           onClick={() =>{
+            setXtFlagSpinnerShow(true)
+            handleLinkClick('address')
+           }}
       >
       <AddressBook size={32} weight="light" />        آدرس
       </Link>
 
       <Link href={"/p-user/order"}
         className={activeLink === 'order' ? styles.active : ''}
-        onClick={() => handleLinkClick('order')}>
+        onClick={() =>{
+          setXtFlagSpinnerShow(true)
+          handleLinkClick('order')
+         }}
+        
+      >
       <ShoppingBagOpen size={32} weight="light" />سفارشات      </Link>
 
       <Link href={"/p-user/warranty"}
         className={activeLink === 'warranty' ? styles.active : ''}
-        onClick={() => handleLinkClick('warranty')}>
+        onClick={() =>{
+          setXtFlagSpinnerShow(true)
+          handleLinkClick('warranty')
+         }}
+
+        >
       <Barcode  size={32} weight="light" />گارانتی      </Link>
 
 
       <Link href={"/p-user/repairs"}
         className={activeLink === 'repairs' ? styles.active : ''}
-        onClick={() => handleLinkClick('repairs')}>
+        onClick={() =>{
+          setXtFlagSpinnerShow(true)
+          handleLinkClick('repairs')
+         }}
+
+        >
       <Wrench size={32} weight="light" />تعمیرات      </Link>
 
 
 
       <Link href={"/p-user/ticket"}
            className={activeLink === 'ticket' ? styles.active : ''}
-           onClick={() => handleLinkClick('ticket')}>
+           onClick={() =>{
+            setXtFlagSpinnerShow(true)
+            handleLinkClick('ticket')
+           }}
+
+           >
       <PaperPlaneTilt size={32} weight="light" />        تیکت ها
       </Link>
 

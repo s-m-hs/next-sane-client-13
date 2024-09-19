@@ -102,7 +102,8 @@ useEffect(()=>{
         <hr />
       </div>
       <h1>
-        حساب کاربری ندارید؟ <Link href={"/register"}>ثبت نام کنید ...</Link>
+        حساب کاربری ندارید؟ < Link onClick={()=>setXtFlagSpinnerShow(true)}
+ href={"/register"}>ثبت نام کنید ...</Link>
       </h1>
 
       <div className={`${style.div_input} centerc`}>

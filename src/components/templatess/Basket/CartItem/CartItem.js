@@ -11,7 +11,7 @@ import { useContext, useState,useEffect } from "react";
 const CartItem = (props) => {
   const[quantity,setQuantity]=useState( props.quantity)
   const getLocalStorage=localStorage.getItem('loginToken')
-  let {  xtFlagLogin } = useContext(MainContext);
+  let {  xtFlagLogin,setXtFlagSpinnerShow } = useContext(MainContext);
 
 //   let { basketFlag,setGetBasket } = useContext(CounterContext)
 // let{flagLogin}=useContext(MenuContext)
@@ -54,7 +54,10 @@ const handleRemove=(e,id)=>{
          
         </td>
         {/* <!-- title --> */}
-        <td className="tp-cart-title">
+        <td className="tp-cart-title" 
+        onClick={()=>setXtFlagSpinnerShow(true)}
+>
+          
           <a href={xtFlagLogin ? `product/${props.cyProductID}` : `product/${props.id}`} >{props.name}</a>
         </td>
         {/* <!-- price --> */}
@@ -113,6 +116,8 @@ const handleRemove=(e,id)=>{
         <td className="tp-cart-action">
           <Link href={xtFlagLogin ? `product/${props.cyProductID}` : `product/${props.id}`}>
            <button className={`btn btn-primary m-1 ${style.btn_product}`}
+           onClick={()=>setXtFlagSpinnerShow(true)}
+
          >
           جزییات محصول...
 

@@ -18,7 +18,7 @@ export default function ProductDetail({ param }) {
   const [productDetail, setProductDetail] = useState([])
   const [productDetailB, setProductDetailB] = useState({})
   const [idCategory,setIdCategory]=useState('')
-  let{nameCategory}=useContext(MainContext)
+  let{nameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
 
   console.log(param);
 
@@ -73,14 +73,21 @@ export default function ProductDetail({ param }) {
   }, [param])
   // console.log(productDetail)
   // console.log(idCategory);
+
+  useEffect(()=>{
+    setXtFlagSpinnerShow(false)
+  },[])
   return (
     <div className={`container ${Styles.product_container}`} >
 
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-    <Breadcrumb.Item ><Link href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
-    {nameCategory && idCategory && <Breadcrumb.Item ><Link href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}</Link></Breadcrumb.Item>}  
+    <Breadcrumb.Item ><Link href="/"onClick={()=>setXtFlagSpinnerShow(true)}
+    ><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
+    {nameCategory && idCategory && <Breadcrumb.Item ><Link 
+    onClick={()=>setXtFlagSpinnerShow(true)}
+    href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}</Link></Breadcrumb.Item>}  
       <Breadcrumb.Item active href="/">
       {nameCategory}
       </Breadcrumb.Item>

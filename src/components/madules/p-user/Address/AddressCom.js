@@ -21,7 +21,7 @@ import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
 import RemoveApi from "@/utils/ApiUrl/apiCallBack/apiRemove";
 export default function AddressCom() {
-  let { address, setFlagAddress } = useContext(MainContext);
+  let { address, setFlagAddress,setXtFlagSpinnerShow } = useContext(MainContext);
 
 
 
@@ -119,6 +119,10 @@ export default function AddressCom() {
 
     RemoveApi("api/CyAddress", id, getLocalStorage, AlertB);
   };
+
+  useEffect(()=>{
+    setXtFlagSpinnerShow(false)
+  },[])
 console.log(address)
   return (
     <div>

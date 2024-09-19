@@ -11,6 +11,11 @@ import apiUrl from '@/utils/ApiUrl/apiUrl';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 export default function RepairsCom() {
+let{setXtFlagSpinnerShow}=useContext(MainContext)
+  useEffect(()=>{
+  setXtFlagSpinnerShow(false)
+
+  },[])
   return (
     
     <div >

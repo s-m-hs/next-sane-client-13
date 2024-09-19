@@ -7,11 +7,11 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
 import Dropdown from 'react-bootstrap/Dropdown';
-import { DotLoader } from "react-spinners";
+import { DotLoader, PuffLoader } from "react-spinners";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
-import { Tooltip } from "react-bootstrap";
+import { Modal, Tooltip } from "react-bootstrap";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 
 
@@ -22,6 +22,7 @@ import { Tooltip } from "react-bootstrap";
 export default function Header() {
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
+  const [mainCategoryB, setMainCategoryB] = useState({});
   const [fixTop, setFixTop] = useState(false)
   const [flaga, setFlaga] = useState(true)
   const ulRef = useRef()
@@ -162,19 +163,26 @@ setSearchType('')
     getProfile()
   }, [userName, xtFlagLogin])
   /////////////////////////////////
-  const getCategoryById = () => {
+  const getCategoryById = (id) => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      id: 3,
+      id: id,
       str: "string",
     };
-    postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategory)
+    if(id==3){
+      postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategory)
+    }else if(id==2){
+      postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategoryB)
+
+    }
+    
 
   };
 
   ////////////////////////////
   useEffect(() => {
-    getCategoryById();
+    getCategoryById(3);
+    getCategoryById(2);
   }, []);
 
   const onmousHandle = (e) => {
@@ -185,20 +193,26 @@ setSearchType('')
 
   return (
     <>
+ {xtflagSpinnerShow && 
+ <div className={`${styles.DotLoader_div}`}><DotLoader
+className={`${styles.DotLoader}`}
+    color="rgba(25, 165, 175)"
+    size='280px'
+    speedMultiplier={1}
+  />
+   </div>
+  }
+
+
+
+
       <section className={styles.A}>
 
         {!fixTop ?
 
           <div className={`container ${styles.Header}`}>
-            {xtflagSpinnerShow && <div className={`row ${styles.spinner_row}`}>
 
-              <div className="col">
-                <DotLoader
-                  color="rgba(25, 167, 175)"
-                  size={250}
-                />
-              </div>
-            </div>}
+
 
 
 
@@ -227,10 +241,14 @@ setSearchType('')
                       setSearchType('')
                       }} /></span>
                     {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                      <Link href={`/product/${item.id}`} onClick={()=>setXtFlagSpinnerShow(true)}
+> 
+                       <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                         <span>{item.name}</span>
                         <img src={item.smallImage} alt="" />
                       </div>
+                      </Link>
+                    
                     )) : ''}
 
 
@@ -289,6 +307,7 @@ setSearchType('')
                     {cartCounter != 0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}
                   </div>
                 </Link>
+
                 <div className={` ${styles.Header_leftSide__div} centerr`}>
                   <EnvelopeSimple size={24} color="#14a5af" />
                 </div>
@@ -314,7 +333,8 @@ setSearchType('')
               <div className={`col ${styles.header_bottom__col}`}  >
 
                 <ul className={`${styles.header_bottom__col__ul} centerr`}  >
-                  <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
+                  <li   onClick={() => setXtFlagSpinnerShow(true)}
+                  > <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
 
 
                   <li className="nav_link arrow_icon"  >
@@ -337,30 +357,14 @@ setSearchType('')
                               mainCategory.childs.map((item, index) => (
                                 <Link
                                   key={index}
+                                  onClick={()=>setXtFlagSpinnerShow(true)}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                                  onClick={() => {
-                                    // ulRef.current.classList.add(`${styles.nohover}`);
-
-                                  }}
                                 >
                                   <img src={item.imageUrl} alt={item.name || 'Category image'} />
                                   {item.name}
                                 </Link>
 
-
-
-                                // <Link
-                                //   onClick={() => {
-                                //     ulRef.current.add.className('ul_hidden')
-                                //   }}
-                                //   key={item.id}
-                                //   href={`/category/${item.id}`}
-                                //   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                                // >
-                                //   <img src={item.imageUrl} alt="" />
-                                //   {item.text}
-                                // </Link>
                               ))}
                           </div>
                         </div>
@@ -378,77 +382,24 @@ setSearchType('')
 
                           // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/hard .jpg" alt="" />
-                              هارد
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}  >
-                              <img src="../../images/hard ext.jpg" alt="" />
-                              هارد اکسترنال
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/rom.jpg" alt="" />
-                              رم
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}  >
-                              <img src="../../images/cpu.jpg" alt="" />
-                              سی پی یو
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/main.jpg" alt="" />
-                              مادربرد
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/cooler.jpg" alt="" />
-                              خنک کننده
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/power.jpg" alt="" />
-                              پاور
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2} >
-                              <img src="../../images/kase.jpg" alt="" />
-                              کیس
-                            </Link>
-                          </div>
-                        </div>
-                      </li>
-                      <li
-                        value={4}
-                        onMouseEnter={onmousHandle}
-                        className={valeS == 4 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
-                      >
-                        {" "}
-                        مبدل ها
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`} >
-                          <div
-                            className={valeS == 4 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
+                           {mainCategoryB.childs?.length &&
+                              mainCategoryB.childs.map((item, index) => (
+                                <Link
+                                  key={index}
+                                  onClick={()=>setXtFlagSpinnerShow(true)}
+                                  href={`/category/${item.id}`}
+                                  className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                                >
+                                  <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                                  {item.name}
+                                </Link>
 
-                          // className={valeS == 4 ? "row-cols-4 ishover" : " nohover"}
-                          >
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/pci.jpg" alt="" />
-                              کارت ها
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/vga.jpg" alt="" />
-                              VGA
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/hdmi.jpg" alt="" />
-                              HTMI
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/display.jpg" alt="" />
-                              DISPLAY PORT
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/sound.jpg" alt="" />
-                              SOUND
-                            </Link>
+                              ))}
                           </div>
                         </div>
                       </li>
+
+
                       <li
                         value={6}
                         onMouseEnter={onmousHandle}
@@ -493,19 +444,27 @@ setSearchType('')
 
                   <li className="nav_link arrow_icon" >خدمات
                     <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
-                      <Link href={'/p-user/warranty'}>
+
+
+                      <Link
+                       href={'/p-user/warranty'}>
                         <li
+                      onClick={() => setXtFlagSpinnerShow(true)}
                           value={11}
                           onMouseEnter={onmousHandle}
                           className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
                         >گارانتی</li></Link>
 
+
+
                       <Link href={'/p-user/repairs'}>
-                        <li
+                        <li                   
+                          onClick={() => setXtFlagSpinnerShow(true)}
                           value={12}
                           onMouseEnter={onmousHandle}
                           className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
                         >تعمیرات</li></Link>
+
 
                     </ul>
                   </li>
@@ -522,7 +481,7 @@ setSearchType('')
                       >پنل کاربری </Link> </li>
 
                   }
-                  <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
+                  <li> <Link  href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
 
                 </ul>
               </div>
@@ -568,9 +527,6 @@ setSearchType('')
                   </div>
                 </div>
                 <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-
-                  {/* <img src="images/2.png" /> */}
-
                   <input
                     className={styles.Header_rightSide__div_search_input}
                     type="text"
@@ -578,9 +534,29 @@ setSearchType('')
                     value={searchType}
                     onChange={searchChange}
                   />
-
                   <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
                     onClick={() => { searchBox() }} />
+                  {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
+                    <span><XCircle size={24} onClick={() => {
+                      setFlagSearch(false)
+                      setSearchType('')
+                      }} /></span>
+                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
+                      <Link
+                      onClick={()=>setXtFlagSpinnerShow(true)}
+                      href={`/product/${item.id}`}> 
+                       <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                        <span>{item.name}</span>
+                        <img src={item.smallImage} alt="" />
+                      </div>
+                      </Link>
+                    
+                    )) : ''}
+
+
+
+                  </div>}
+
                 </div>
 
               </div>
@@ -603,14 +579,26 @@ setSearchType('')
                   </div>
                 </Link>
 
-                <Link href='/basket'>
-                  <div className={` ${styles.Header_leftSide__div} centerr`}>
+              
+                <Link href={cartCounter != 0 ? '/basket' : '#'}  >
+                  <div
+                    onClick={() => {
+                      if (cartCounter != 0) {
+                        setXtFlagSpinnerShow(true)
+                      } else {
+                        AlertA()
+                      }
 
+
+                    }}
+                    className={`${styles.Header_leftSide__div} centerr`}>
                     <ShoppingCart size={24} color="#14a5af" />
                     {cartCounter != 0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}
+                  </div>
+                </Link>
 
 
-                  </div> </Link>
+
                 <div className={` ${styles.Header_leftSide__div} centerr`}>
                   <EnvelopeSimple size={24} color="#14a5af" />
                 </div>
@@ -629,7 +617,7 @@ setSearchType('')
               <div className={`col ${styles.header_bottom__col}`}  >
 
                 <ul className={`${styles.header_bottom__col__ul_fix} centerr`}  >
-                  <li> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
+                  <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
 
 
                   <li className="nav_link arrow_icon"  >
@@ -650,12 +638,11 @@ setSearchType('')
                               mainCategory.childs.map((item, index) => (
 
                                 <Link
+                                onClick={()=>setXtFlagSpinnerShow(true)}
                                   key={index}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                                // onClick={() => {
-                                //   ulRef.current.classList.add('ul_hidden'); // Updated way to add a class
-                                // }}
+                          
                                 >
                                   <img src={item.imageUrl} alt={item.name || 'Category image'} />
                                   {item.name}
@@ -680,82 +667,34 @@ setSearchType('')
                       <li
                         value={2}
                         onMouseEnter={onmousHandle}
-                        className={valeS == 2 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
+                        className={(valeS == 2 && flaga) ? `${styles.liiii2_a}` : `${styles.liiii2}`}
                       >
                         سخت افزار
                         <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
                           <div
                             className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
+
+                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/hard .jpg" alt="" />
-                              هارد
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}  >
-                              <img src="../../images/hard ext.jpg" alt="" />
-                              هارد اکسترنال
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/rom.jpg" alt="" />
-                              رم
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}  >
-                              <img src="../../images/cpu.jpg" alt="" />
-                              سی پی یو
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/main.jpg" alt="" />
-                              مادربرد
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/cooler.jpg" alt="" />
-                              خنک کننده
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/power.jpg" alt="" />
-                              پاور
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2} >
-                              <img src="../../images/kase.jpg" alt="" />
-                              کیس
-                            </Link>
+                           {mainCategoryB.childs?.length &&
+                              mainCategoryB.childs.map((item, index) => (
+                                <Link
+                                onClick={()=>setXtFlagSpinnerShow(true)}
+                                  key={index}
+                                  href={`/category/${item.id}`}
+                                  className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                               
+                                >
+                                  <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                                  {item.name}
+                                </Link>
+
+                              ))}
                           </div>
                         </div>
                       </li>
-                      <li
-                        value={4}
-                        onMouseEnter={onmousHandle}
-                        className={valeS == 4 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
-                      >
-                        {" "}
-                        مبدل ها
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`} >
-                          <div
-                            className={valeS == 4 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
-                          >
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/pci.jpg" alt="" />
-                              کارت ها
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/vga.jpg" alt="" />
-                              VGA
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/hdmi.jpg" alt="" />
-                              HTMI
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/display.jpg" alt="" />
-                              DISPLAY PORT
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/sound.jpg" alt="" />
-                              SOUND
-                            </Link>
-                          </div>
-                        </div>
-                      </li>
+
+                    
                       <li
                         value={6}
                         onMouseEnter={onmousHandle}
@@ -794,16 +733,29 @@ setSearchType('')
                   {/* <li className="nav_link">فروش اقساط   </li> */}
                   <li className="nav_link arrow_icon" >خدمات
                     <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
-                      <li
-                        value={11}
-                        onMouseEnter={onmousHandle}
-                        className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                      ><Link href={'/p-user/warranty'}>گارانتی</Link></li>
-                      <li
-                        value={12}
-                        onMouseEnter={onmousHandle}
-                        className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                      ><Link href={'/p-user/repairs'}>تعمیرات</Link></li>
+
+
+                   <Link
+                       href={'/p-user/warranty'}>
+                        <li
+                      onClick={() => setXtFlagSpinnerShow(true)}
+                          value={11}
+                          onMouseEnter={onmousHandle}
+                          className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+                        >گارانتی</li></Link>
+
+
+
+<Link href={'/p-user/repairs'}>
+                        <li                   
+                          onClick={() => setXtFlagSpinnerShow(true)}
+                          value={12}
+                          onMouseEnter={onmousHandle}
+                          className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+                        >تعمیرات</li></Link>
+
+
+
 
                     </ul>
                   </li>        <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
@@ -905,13 +857,11 @@ setSearchType('')
                 {mainCategory.childs?.length &&
                   mainCategory.childs.map((item, index) => (
                     <Link
+                    onClick={()=>setXtFlagSpinnerShow(true)}
                       key={index}
                       href={`/category/${item.id}`}
                       className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                      onClick={() => {
-                        // ulRef.current.classList.add(`${styles.nohover}`);
-
-                      }}
+                
                     >
                       <img src={item.imageUrl} alt={item.name || 'Category image'} />
                       {item.name}

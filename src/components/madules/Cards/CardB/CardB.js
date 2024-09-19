@@ -10,7 +10,7 @@ import addToCart from '@/utils/Functions/addToCart'
 
 
 export default function CardB({imgSrc,title,price,id,clickSpinner }) {
-  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
+  let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket}=useContext(MainContext)
 
 
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  
@@ -44,7 +44,8 @@ export default function CardB({imgSrc,title,price,id,clickSpinner }) {
 
         </div>
         <Link className={styles.link}
-onClick={clickSpinner}
+// onClick={clickSpinner}
+onClick={()=>setXtFlagSpinnerShow(true)}
   href={`/product/${id}`} >جزییات بیشتر...</Link>
 {/* 
 <Link className={styles.link}

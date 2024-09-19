@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import CardA from "@/components/madules/Cards/CardA/CardA";
 import styles from "./CategorySectionA.module.css";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
-import DotLoader from "react-spinners/DotLoader";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 
 
@@ -35,12 +34,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
     <>
          {flagSpinnerShow && <div className={`row ${styles.spinner_row}`}>
 
-<div className="col">
-<DotLoader
-color="rgba(25, 167, 175)"
-size={250}
-/>
-</div>
+
 </div>}
       <div>
         <div  className="row mt-5">
@@ -66,7 +60,7 @@ size={250}
           <div className={`row row-cols-6  ${styles.bcatitem}`}>
             {mainCategory.childs.map((item, index) => (
               <CardA
-              click={clickHandler}
+              // click={clickHandler}
                 key={item.id}
                 imgSrc={item.imageUrl}
                 category={`category`}

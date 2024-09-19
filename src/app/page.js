@@ -10,7 +10,7 @@ import updateBasket from '@/utils/ApiUrl/updateBasket';
 import { useContext, useEffect } from 'react';
 
 export default function Home() {
-  let { setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,setBasketFlag } = useContext(MainContext);
+  let { xtflagSpinnerShow,setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,setBasketFlag } = useContext(MainContext);
   const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
   // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -63,6 +63,9 @@ useEffect(() => {
   }
 
 },[xtFlagLogin]); 
+useEffect(()=>{
+  setXtFlagSpinnerShow(false)
+},[xtflagSpinnerShow])
   return (
 <div className='container'>
   <div className='row '>

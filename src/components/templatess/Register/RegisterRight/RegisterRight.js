@@ -65,7 +65,9 @@ setXtFlagSpinnerShow(false)
         <hr />
       </div>
       <h1>
-        از قبل حساب کاربری دارید؟ <Link href={'/login'}>وارد شوید...</Link>
+        از قبل حساب کاربری دارید؟ <Link 
+        onClick={()=>setXtFlagSpinnerShow(true)}
+        href={'/login'}>وارد شوید...</Link>
       </h1>
 
       <div className={`${style.div_input} centerc`}>
