@@ -33,40 +33,48 @@ export default function SwiperB() {
       className={styles.swiper}
     >
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1716709858-JGyzwBKMcFnB1hwC.webp" alt="" />
+        <img src="../../images/1716709858-JGyzwBKMcFnB1hwC.jpg
+        " alt="" />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
         <img
-          src="../../images/5c1368231b513102c4a36cd6451fc754ac1f0e27_1717321983.webp"
+          src="../../images/5c1368231b513102c4a36cd6451fc754ac1f0e27_1717321983.jpg
+          "
           alt=""
         />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1716709629-A16kTiqMKXJgrkGg.webp" alt="" />
+        <img src="../../images/1716709629-A16kTiqMKXJgrkGg.jpg
+        " alt="" />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1716709827-KEhJoJJI1Hu7tK1z.webp" alt="" />
+        <img src="../../images/1716709827-KEhJoJJI1Hu7tK1z.jpg
+        " alt="" />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1716709786-ghYx4RfUKFUkwARR.webp" alt="" />
+        <img src="../../images/1716709786-ghYx4RfUKFUkwARR.jpg
+        " alt="" />
       </SwiperSlide>
 
      
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1716709720-4rJpWx6QonnC9gKx.webp" alt="" />
+        <img src="../../images/1716709720-4rJpWx6QonnC9gKx.jpg
+        " alt="" />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1716709753-eoa35FOD8ndk4hZB.webp" alt="" />
+        <img src="../../images/1716709753-eoa35FOD8ndk4hZB.jpg
+        " alt="" />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img src="../../images/1717333598-Dfzufas1vPjEoxC2.webp" alt="" />
+        <img src="../../images/1717333598-Dfzufas1vPjEoxC2.jpg
+        " alt="" />
       </SwiperSlide>
 
       {/* <div className="autoplay_progress" slot="container-end">

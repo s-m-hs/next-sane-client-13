@@ -65,7 +65,7 @@ useEffect(() => {
 },[xtFlagLogin]); 
 useEffect(()=>{
   setXtFlagSpinnerShow(false)
-},[xtflagSpinnerShow])
+},[])
   return (
 <div className='container'>
   <div className='row '>
