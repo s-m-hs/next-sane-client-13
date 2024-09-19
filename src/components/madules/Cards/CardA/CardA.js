@@ -6,7 +6,7 @@ import { MainContext } from '@/context/MainContext'
 
 
 
-export default function CardA({imgSrc,category,id,click,text}) {
+export default function CardA({imgSrc,category,id,click,text,datos}) {
 let{setXtFlagSpinnerShow}=useContext(MainContext)
 
   
@@ -14,7 +14,7 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
     <div
     // data-aos='zoom-in-up'
 
-    data-aos="fade-up"
+    data-aos={`${datos}`}
       className= {`${Styles.cardcat_container} centerc`}
    
     >

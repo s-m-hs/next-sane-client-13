@@ -61,6 +61,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
             {mainCategory.childs.map((item, index) => (
               <CardA
               // click={clickHandler}
+              datos='fade-up'
                 key={item.id}
                 imgSrc={item.imageUrl}
                 category={`category`}

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
 import { Modal, Tooltip } from "react-bootstrap";
+import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 
 
@@ -803,32 +804,7 @@ className={`${styles.DotLoader}`}
                 </div>
 
               </div>
-              {/* 
-<div className={styles.header_bottom__col_logo}  >
-  <Link href={'/'}>
-    <img
-      className={styles.sphere3}  
-      src="../../../images/eitaa-icon-colorful.png"
-      alt=""
-    />
-  </Link>
-  <Link href={'/'}>
-    {" "}
-    <img
-      className={styles.sphere2}   
-      src="../../../images/icons8-instagram-2048.png"
-      alt=""
-    />
-  </Link>
-  <Link href={'/'}>
-    {" "}
-    <img
-      className={styles.sphere}
-      src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-      alt=""
-    />
-  </Link>
-</div>  */}
+
             </div>
           </div>
         }
@@ -852,9 +828,10 @@ className={`${styles.DotLoader}`}
             <div className={` container centerr ${styles.mobile_dropdownMenu_li}`}>
               <div
                 // className='row-cols-6 '
-                className={`row-cols-1 ${styles.ishover}`}
+                className={`row ${styles.ishover}`}
               >
-                {mainCategory.childs?.length &&
+                <div className="col-2">
+                   {mainCategory.childs?.length &&
                   mainCategory.childs.map((item, index) => (
                     <Link
                     onClick={()=>setXtFlagSpinnerShow(true)}
@@ -866,21 +843,32 @@ className={`${styles.DotLoader}`}
                       <img src={item.imageUrl} alt={item.name || 'Category image'} />
                       {item.name}
                     </Link>
-
-
-
-                    // <Link
-                    //   onClick={() => {
-                    //     ulRef.current.add.className('ul_hidden')
-                    //   }}
-                    //   key={item.id}
-                    //   href={`/category/${item.id}`}
-                    //   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                    // >
-                    //   <img src={item.imageUrl} alt="" />
-                    //   {item.text}
-                    // </Link>
                   ))}
+                  </div>
+                <div className="col-10">
+
+
+{mainCategory.childs && (
+          <div className={`row row-cols-2 ${styles.bcatitem}`}>
+            {mainCategory.childs.map((item, index) => (
+              <CardA
+              // click={clickHandler}
+              datos={''}
+                key={item.id}
+                imgSrc={item.imageUrl}
+                category={`category`}
+                id={item.id}
+                text={item.name
+                }
+              />
+            ))}
+          </div>
+        )}
+
+
+
+                </div>
+               
               </div>
             </div>
             {/* <div>
