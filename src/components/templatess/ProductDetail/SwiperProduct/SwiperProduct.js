@@ -44,19 +44,24 @@ export default function SwiperProduct({src,srcB}) {
    </SwiperSlide>
 
 {srcB && srcB.map(item=>(
- <SwiperSlide className={Styles.swiper_slide}>
- <div>
-          <ImageMagnifier 
-             src={item}
-             width={500}
-             height={400}
-             magnifierHeight={100}
-             magnifierWidth={80}
-              zoomLevel={3}
-              alt="Sample Image"
-          />
-      </div>
- </SwiperSlide>
+  <>
+
+  <SwiperSlide className={Styles.swiper_slide}>
+  <div>
+           <ImageMagnifier 
+              src={item}
+              width={500}
+              height={400}
+              magnifierHeight={100}
+              magnifierWidth={80}
+               zoomLevel={3}
+               alt="Sample Image"
+           />
+       </div>
+  </SwiperSlide>
+  </>
+  
+
 ))}
 
 
@@ -78,9 +83,12 @@ export default function SwiperProduct({src,srcB}) {
 
 
 {srcB && srcB.map(item=>(
-  <SwiperSlide className={Styles.swiper_slide}>
+  <>
+  {item &&   <SwiperSlide className={Styles.swiper_slide}>
   <img src={item} />
-</SwiperSlide>
+</SwiperSlide>}
+  </>
+
 )) 
 }
 

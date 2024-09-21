@@ -8,10 +8,10 @@ const brandLogo=[
 ]
   return (
     <div className={`container ${Styles.container }`}  >
-        <div className='row row-cols-6 centerr'>
+        <div className='row '>
            
                 {brandArray.map((item,index)=>
-                <CardBrand key={index} src={item} fileRoot={fileRoot}  aos={'fade-right'}/>  
+             <CardBrand key={index} src={item} fileRoot={fileRoot}  aos={'fade-right'}/>  
                 )}
 
             

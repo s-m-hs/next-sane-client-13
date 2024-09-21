@@ -91,4 +91,11 @@ color: var(--white1ffffff);
     place-content: center;
   } */
   
-
+  @media only screen and (max-width:900px){
+  .title{
+    font-size:15px !important ;
+  }
+  .price{
+    font-size: 15px !important;
+}
+  }

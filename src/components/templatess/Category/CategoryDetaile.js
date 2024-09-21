@@ -156,7 +156,7 @@ console.log(mainCatChilds)
 </div>
 
 
-      <div className={`row row-cols-6  centerr ${Styles.category_row}`}>
+      <div className={`row row-cols-auto  centerr ${Styles.category_row}`}>
         {mainCatChilds != null &&
           mainCatChilds.map((item, index) => (
             <>

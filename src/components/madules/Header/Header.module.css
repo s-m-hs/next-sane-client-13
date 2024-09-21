@@ -2,13 +2,14 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
-    background-image: linear-gradient(-45deg, #fffdf9 0%, #fffdf9 25%, rgb(214, 218, 212) 51%, #dadada 100%);
-    opacity: 0.8;
+    background-image: linear-gradient(-45deg, #fff 0%, #fff 25%, rgb(234, 234, 234) 51%, #f4f4f4 100%);
+    opacity: 0.9;
     z-index: 1000;
 }
 .DotLoader{
     right: 45%;
     top: 40%;
+    opacity: 1 !important;
 }
 
 .Header {

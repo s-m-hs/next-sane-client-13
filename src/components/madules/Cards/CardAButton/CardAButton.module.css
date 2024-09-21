@@ -71,4 +71,8 @@
     }
     
     
-   
+   @media only screen and (max-width:900px) {
+    .circle_wrapper {
+      width: 12rem !important;
+      height: 12rem !important;}
+   }

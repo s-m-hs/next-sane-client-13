@@ -339,11 +339,11 @@ export default function Header() {
 
                 <ul className={`${styles.header_bottom__col__ul} centerr`}  >
                   <li onClick={() => setXtFlagSpinnerShow(true)}
-                  > <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
+                  > <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > <House size={15} /> خانه</Link> </li>
 
 
                   <li className="nav_link arrow_icon"  >
-
+                  <TextIndent size={15} />
                     دسته بندی ها
                     <ul className={`${styles.header_bottom__col__ul__ul} centerc`}
                       ref={ulRef}
@@ -447,7 +447,10 @@ export default function Header() {
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
 
-                  <li className="nav_link arrow_icon" >خدمات
+                  <li className="nav_link arrow_icon" >
+                  <Wrench size={15} />
+
+                    خدمات
                     <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
 
 
@@ -473,21 +476,27 @@ export default function Header() {
 
                     </ul>
                   </li>
-                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+              
 
                   {
                     !xtFlagLogin ? <>
                       <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >ورود </Link> </li>
+                      >
+                         <SignIn size={15} />ورود </Link> </li>
                       <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >عضویت </Link> </li>
+                      >
+                        <UserCheck size={15} />عضویت </Link> </li>
                     </> :
                       <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >پنل کاربری </Link> </li>
+                      >
+                         <User size={15} />پنل کاربری </Link> </li>
 
                   }
-                  <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
-
+                  {/* <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >
+                  <BuildingApartment size={20} />
+                  درباره ما</Link> </li> */}
+    <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
+    تماس با ما</Link> </li>
                 </ul>
               </div>
 
@@ -622,10 +631,11 @@ export default function Header() {
               <div className={`col ${styles.header_bottom__col}`}  >
 
                 <ul className={`${styles.header_bottom__col__ul_fix} centerr`}  >
-                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
+                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >
+                  <House size={15} /> خانه</Link> </li>
 
 
-                  <li className="nav_link arrow_icon"  >
+                  <li className="nav_link arrow_icon"  ><TextIndent size={15} />
 
                     دسته بندی ها
                     <ul className={`${styles.header_bottom__col__ul__ul} centerc`}>
@@ -736,7 +746,8 @@ export default function Header() {
                     </ul>
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
-                  <li className="nav_link arrow_icon" >خدمات
+                  <li className="nav_link arrow_icon" >
+                  <Wrench size={15} />خدمات
                     <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
 
 
@@ -763,22 +774,25 @@ export default function Header() {
 
 
                     </ul>
-                  </li>        <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > تماس با ما</Link> </li>
+                  </li>        
 
                   {
                     !xtFlagLogin ? <>
                       <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >ورود </Link> </li>
+                      ><SignIn size={15} />ورود </Link> </li>
+
                       <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >عضویت </Link> </li>
+                      ><UserCheck size={15} />عضویت </Link> </li>
+
                     </> :
                       <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >پنل کاربری </Link> </li>
+                      ><User size={15} />پنل کاربری </Link> </li>
 
                   }
 
 
-                  <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
+                  {/* <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li> */}
+                  <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} ><BuildingApartment size={15} /> تماس با ما</Link> </li>
                 </ul>
 
                 <div className={styles.header_bottom__col_logo}  >
