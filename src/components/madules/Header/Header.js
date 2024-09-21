@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, ShoppingCart, User, EnvelopeSimple, House, XCircle } from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone,SignIn,BuildingApartment,Barcode,UserCheck, SignOut,Wrench,Fingerprint ,ShoppingCart, User, EnvelopeSimple, House,TextIndent , XCircle } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -26,7 +26,11 @@ export default function Header() {
   const [mainCategoryB, setMainCategoryB] = useState({});
   const [fixTop, setFixTop] = useState(false)
   const [flaga, setFlaga] = useState(true)
+  const [flagCateMobile,setFlagCateMobile]=useState(true)
   const ulRef = useRef()
+  const ulRefA = useRef()
+
+  console.log(ulRefA.current);
   // const getLocalStorage = localStorage.getItem('loginToken')
   // const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
@@ -831,7 +835,19 @@ className={`${styles.DotLoader}`}
                 className={`row ${styles.ishover}`}
               >
                 <div className="col-2">
-                   {mainCategory.childs?.length &&
+                             <div>
+            <button className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob }`: `btn btn-outline-info ${styles.active_button_header }`} 
+            onClick={()=>setFlagCateMobile(true)}
+            >              لوازم جانبی 
+            </button>
+         
+            <button className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob }`: `btn btn-outline-info ${styles.active_button_header }`} 
+                        onClick={()=>setFlagCateMobile(false)}
+
+            >              سخت افزار  
+            </button>          
+</div> 
+                   {/* {mainCategory.childs?.length &&
                   mainCategory.childs.map((item, index) => (
                     <Link
                     onClick={()=>setXtFlagSpinnerShow(true)}
@@ -843,12 +859,12 @@ className={`${styles.DotLoader}`}
                       <img src={item.imageUrl} alt={item.name || 'Category image'} />
                       {item.name}
                     </Link>
-                  ))}
+                  ))} */}
                   </div>
                 <div className="col-10">
 
 
-{mainCategory.childs && (
+{flagCateMobile ?   mainCategory.childs && (
           <div className={`row row-cols-2 ${styles.bcatitem}`}>
             {mainCategory.childs.map((item, index) => (
               <CardA
@@ -863,7 +879,22 @@ className={`${styles.DotLoader}`}
               />
             ))}
           </div>
-        )}
+        )  :  mainCategoryB.childs && (
+          <div className={`row row-cols-1 ${styles.bcatitem}`}>
+            {mainCategoryB.childs.map((item, index) => (
+              <CardA
+              // click={clickHandler}
+              datos={''}
+                key={item.id}
+                imgSrc={item.imageUrl}
+                category={`category`}
+                id={item.id}
+                text={item.name
+                }
+              />
+            ))}
+          </div>
+        ) }
 
 
 
@@ -899,6 +930,7 @@ className={`${styles.DotLoader}`}
                     style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}>خانه
                   </Link>
                 </li>
+
                 <li className={`${styles.hamburger_li} centerr`} onClick={toggleMenu}>
                   {/* Hamburger/Close icon */}
                   <button className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
@@ -906,13 +938,91 @@ className={`${styles.DotLoader}`}
                     <span className="bar"></span>
                     <span className="bar"></span>
                   </button>
-                  دسته بندی
+                  محصولات 
                 </li>
+
+                <li className={`${styles.bottomHeader_ul_category}`}
+                onClick={()=>{
+                  console.log(ulRefA.current.classList.value);
+if(ulRefA.current.classList.value === 'Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA'){
+  ulRefA.current.classList.remove('header_hidden_ulRefA')
+}else {
+  ulRefA.current.classList.add('header_hidden_ulRefA')
+
+}
+                   
+                }}>
+                <TextIndent  size={20} />دسته بندی ها
+                
+                <div className={`${styles.bottomHeader_ul_category_div}`}
+                ref={ulRefA}
+                >
+
+                  {xtFlagLogin ?  
+                  <Link href={'/p-user/warranty'}>
+                  <span onClick={() => setXtFlagSpinnerShow(true)}
+                       
+                          > 
+                        پروفایل من</span></Link> :
+
+                        
+                        <Link href={'/p-user/warranty'}>
+                          <SignIn  size={15} />
+                        <span onClick={() => setXtFlagSpinnerShow(true)}
+                             
+                                > 
+                             ورود</span></Link>}
+
+
+  <Link href={'/p-user/warranty'}>
+       <UserCheck  size={15} />
+                  <span onClick={() => setXtFlagSpinnerShow(true)}
+                       
+                          > 
+                         عضویت</span></Link>
+
+                        <Link href={'/p-user/warranty'}>
+                        <Barcode size={15} />
+                  <span onClick={() => setXtFlagSpinnerShow(true)}
+                       
+                          > 
+                        گارانتی</span></Link>
+
+
+   <Link href={'/p-user/warranty'}>
+   <Wrench size={15} />
+                  <span onClick={() => setXtFlagSpinnerShow(true)}
+                       
+                          > 
+                        خدمات</span></Link>
+  
+   <Link href={'/p-user/warranty'}>
+   <BuildingApartment size={15} />
+
+
+                  <span onClick={() => setXtFlagSpinnerShow(true)}
+                       
+                          > 
+                        تماس با ما</span></Link>
+
+  
+   <Link href={'/p-user/warranty'}>
+   <SignOut size={15} />
+                  <span onClick={() => setXtFlagSpinnerShow(true)}
+                       
+                          > 
+                        خروج</span></Link>
+
+                </div>
+                
+                </li>
+
+
                 <li>
                   <ShoppingCart size={20} />سبدخرید</li>
-                <li>
-                  <User size={20} />
-                  پروفایل من</li>
+          
+
+
                 <li>
                   <MagnifyingGlass size={20} />
                   جسنجو</li>
