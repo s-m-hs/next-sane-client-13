@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone,SignIn,BuildingApartment,Barcode,UserCheck, SignOut,Wrench,Fingerprint ,ShoppingCart, User, EnvelopeSimple, House,TextIndent , XCircle } from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -11,7 +11,7 @@ import { DotLoader, PuffLoader } from "react-spinners";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
-import { Modal, Tooltip } from "react-bootstrap";
+import { Alert, Modal, Tooltip } from "react-bootstrap";
 import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 
@@ -26,7 +26,7 @@ export default function Header() {
   const [mainCategoryB, setMainCategoryB] = useState({});
   const [fixTop, setFixTop] = useState(false)
   const [flaga, setFlaga] = useState(true)
-  const [flagCateMobile,setFlagCateMobile]=useState(true)
+  const [flagCateMobile, setFlagCateMobile] = useState(true)
   const ulRef = useRef()
   const ulRefA = useRef()
 
@@ -149,19 +149,19 @@ export default function Header() {
     myAppGet()
   }
 
-  useEffect(()=>{
-    const chekKey2=(e)=>{
+  useEffect(() => {
+    const chekKey2 = (e) => {
       console.log(e)
-      if(e.keyCode==13 && searchType!==''){
+      if (e.keyCode == 13 && searchType !== '') {
         searchBox()
-      }else if(e.keyCode==27 && flagSearch){
-setFlagSearch(false)
-setSearchType('')
+      } else if (e.keyCode == 27 && flagSearch) {
+        setFlagSearch(false)
+        setSearchType('')
       }
 
     }
-    window.addEventListener('keydown',chekKey2)
-    return()=>window.removeEventListener('keydown',chekKey2)
+    window.addEventListener('keydown', chekKey2)
+    return () => window.removeEventListener('keydown', chekKey2)
   })
 
   useEffect(() => {
@@ -174,13 +174,13 @@ setSearchType('')
       id: id,
       str: "string",
     };
-    if(id==3){
+    if (id == 3) {
       postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategory)
-    }else if(id==2){
+    } else if (id == 2) {
       postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategoryB)
 
     }
-    
+
 
   };
 
@@ -198,15 +198,15 @@ setSearchType('')
 
   return (
     <>
- {xtflagSpinnerShow && 
- <div className={`${styles.DotLoader_div}`}><DotLoader
-className={`${styles.DotLoader}`}
-    color="rgba(25, 165, 175)"
-    size='280px'
-    speedMultiplier={1}
-  />
-   </div>
-  }
+      {xtflagSpinnerShow &&
+        <div className={`${styles.DotLoader_div}`}><DotLoader
+          className={`${styles.DotLoader}`}
+          color="rgba(25, 165, 175)"
+          size='280px'
+          speedMultiplier={1}
+        />
+        </div>
+      }
 
 
 
@@ -244,16 +244,16 @@ className={`${styles.DotLoader}`}
                     <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
-                      }} /></span>
+                    }} /></span>
                     {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={()=>setXtFlagSpinnerShow(true)}
-> 
-                       <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                        <span>{item.name}</span>
-                        <img src={item.smallImage} alt="" />
-                      </div>
+                      <Link href={`/product/${item.id}`} onClick={() => setXtFlagSpinnerShow(true)}
+                      >
+                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                          <span>{item.name}</span>
+                          <img src={item.smallImage} alt="" />
+                        </div>
                       </Link>
-                    
+
                     )) : ''}
 
 
@@ -338,7 +338,7 @@ className={`${styles.DotLoader}`}
               <div className={`col ${styles.header_bottom__col}`}  >
 
                 <ul className={`${styles.header_bottom__col__ul} centerr`}  >
-                  <li   onClick={() => setXtFlagSpinnerShow(true)}
+                  <li onClick={() => setXtFlagSpinnerShow(true)}
                   > <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
 
 
@@ -362,7 +362,7 @@ className={`${styles.DotLoader}`}
                               mainCategory.childs.map((item, index) => (
                                 <Link
                                   key={index}
-                                  onClick={()=>setXtFlagSpinnerShow(true)}
+                                  onClick={() => setXtFlagSpinnerShow(true)}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                                 >
@@ -387,11 +387,11 @@ className={`${styles.DotLoader}`}
 
                           // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
-                           {mainCategoryB.childs?.length &&
+                            {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
                                 <Link
                                   key={index}
-                                  onClick={()=>setXtFlagSpinnerShow(true)}
+                                  onClick={() => setXtFlagSpinnerShow(true)}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                                 >
@@ -452,9 +452,9 @@ className={`${styles.DotLoader}`}
 
 
                       <Link
-                       href={'/p-user/warranty'}>
+                        href={'/p-user/warranty'}>
                         <li
-                      onClick={() => setXtFlagSpinnerShow(true)}
+                          onClick={() => setXtFlagSpinnerShow(true)}
                           value={11}
                           onMouseEnter={onmousHandle}
                           className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
@@ -463,7 +463,7 @@ className={`${styles.DotLoader}`}
 
 
                       <Link href={'/p-user/repairs'}>
-                        <li                   
+                        <li
                           onClick={() => setXtFlagSpinnerShow(true)}
                           value={12}
                           onMouseEnter={onmousHandle}
@@ -486,7 +486,7 @@ className={`${styles.DotLoader}`}
                       >پنل کاربری </Link> </li>
 
                   }
-                  <li> <Link  href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
+                  <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li>
 
                 </ul>
               </div>
@@ -545,17 +545,17 @@ className={`${styles.DotLoader}`}
                     <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
-                      }} /></span>
+                    }} /></span>
                     {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
                       <Link
-                      onClick={()=>setXtFlagSpinnerShow(true)}
-                      href={`/product/${item.id}`}> 
-                       <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                        <span>{item.name}</span>
-                        <img src={item.smallImage} alt="" />
-                      </div>
+                        onClick={() => setXtFlagSpinnerShow(true)}
+                        href={`/product/${item.id}`}>
+                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                          <span>{item.name}</span>
+                          <img src={item.smallImage} alt="" />
+                        </div>
                       </Link>
-                    
+
                     )) : ''}
 
 
@@ -584,7 +584,7 @@ className={`${styles.DotLoader}`}
                   </div>
                 </Link>
 
-              
+
                 <Link href={cartCounter != 0 ? '/basket' : '#'}  >
                   <div
                     onClick={() => {
@@ -622,7 +622,7 @@ className={`${styles.DotLoader}`}
               <div className={`col ${styles.header_bottom__col}`}  >
 
                 <ul className={`${styles.header_bottom__col__ul_fix} centerr`}  >
-                  <li onClick={()=>setXtFlagSpinnerShow(true)}> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
+                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > خانه</Link> </li>
 
 
                   <li className="nav_link arrow_icon"  >
@@ -643,11 +643,11 @@ className={`${styles.DotLoader}`}
                               mainCategory.childs.map((item, index) => (
 
                                 <Link
-                                onClick={()=>setXtFlagSpinnerShow(true)}
+                                  onClick={() => setXtFlagSpinnerShow(true)}
                                   key={index}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                          
+
                                 >
                                   <img src={item.imageUrl} alt={item.name || 'Category image'} />
                                   {item.name}
@@ -681,14 +681,14 @@ className={`${styles.DotLoader}`}
 
                           // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
-                           {mainCategoryB.childs?.length &&
+                            {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
                                 <Link
-                                onClick={()=>setXtFlagSpinnerShow(true)}
+                                  onClick={() => setXtFlagSpinnerShow(true)}
                                   key={index}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                               
+
                                 >
                                   <img src={item.imageUrl} alt={item.name || 'Category image'} />
                                   {item.name}
@@ -699,7 +699,7 @@ className={`${styles.DotLoader}`}
                         </div>
                       </li>
 
-                    
+
                       <li
                         value={6}
                         onMouseEnter={onmousHandle}
@@ -740,10 +740,10 @@ className={`${styles.DotLoader}`}
                     <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
 
 
-                   <Link
-                       href={'/p-user/warranty'}>
+                      <Link
+                        href={'/p-user/warranty'}>
                         <li
-                      onClick={() => setXtFlagSpinnerShow(true)}
+                          onClick={() => setXtFlagSpinnerShow(true)}
                           value={11}
                           onMouseEnter={onmousHandle}
                           className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
@@ -751,8 +751,8 @@ className={`${styles.DotLoader}`}
 
 
 
-<Link href={'/p-user/repairs'}>
-                        <li                   
+                      <Link href={'/p-user/repairs'}>
+                        <li
                           onClick={() => setXtFlagSpinnerShow(true)}
                           value={12}
                           onMouseEnter={onmousHandle}
@@ -819,10 +819,35 @@ className={`${styles.DotLoader}`}
       <section className={styles.B}>
         <div className="container">
 
-          <div className={`${styles.mobi_header} row`}  >
+          <div className={`${styles.mobi_header} row `}  >
             <img src="images/photo_2024-05-30_19-08-29.jpg" alt="" />
-
+            <div className={styles.header_bottom__col_logo}  >
+                  <Link href={'/'}>
+                    <img
+                      className={styles.sphere3}
+                      src="../../../images/eitaa-icon-colorful.png"
+                      alt=""
+                    />
+                  </Link>
+                  <Link href={'/'}>
+                    {" "}
+                    <img
+                      className={styles.sphere2}
+                      src="../../../images/icons8-instagram-2048.png"
+                      alt=""
+                    />
+                  </Link>
+                  <Link href={'/'}>
+                    {" "}
+                    <img
+                      className={styles.sphere}
+                      src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
+                      alt=""
+                    />
+                  </Link>
+                </div>
           </div>
+          
         </div>
       </section>
 
@@ -835,19 +860,19 @@ className={`${styles.DotLoader}`}
                 className={`row ${styles.ishover}`}
               >
                 <div className="col-2">
-                             <div>
-            <button className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob }`: `btn btn-outline-info ${styles.active_button_header }`} 
-            onClick={()=>setFlagCateMobile(true)}
-            >              لوازم جانبی 
-            </button>
-         
-            <button className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob }`: `btn btn-outline-info ${styles.active_button_header }`} 
-                        onClick={()=>setFlagCateMobile(false)}
+                  <div>
+                    <button className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                      onClick={() => setFlagCateMobile(true)}
+                    >              لوازم جانبی
+                    </button>
 
-            >              سخت افزار  
-            </button>          
-</div> 
-                   {/* {mainCategory.childs?.length &&
+                    <button className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                      onClick={() => setFlagCateMobile(false)}
+
+                    >              سخت افزار
+                    </button>
+                  </div>
+                  {/* {mainCategory.childs?.length &&
                   mainCategory.childs.map((item, index) => (
                     <Link
                     onClick={()=>setXtFlagSpinnerShow(true)}
@@ -860,46 +885,46 @@ className={`${styles.DotLoader}`}
                       {item.name}
                     </Link>
                   ))} */}
-                  </div>
+                </div>
                 <div className="col-10">
 
 
-{flagCateMobile ?   mainCategory.childs && (
-          <div className={`row row-cols-2 ${styles.bcatitem}`}>
-            {mainCategory.childs.map((item, index) => (
-              <CardA
-              // click={clickHandler}
-              datos={''}
-                key={item.id}
-                imgSrc={item.imageUrl}
-                category={`category`}
-                id={item.id}
-                text={item.name
-                }
-              />
-            ))}
-          </div>
-        )  :  mainCategoryB.childs && (
-          <div className={`row row-cols-1 ${styles.bcatitem}`}>
-            {mainCategoryB.childs.map((item, index) => (
-              <CardA
-              // click={clickHandler}
-              datos={''}
-                key={item.id}
-                imgSrc={item.imageUrl}
-                category={`category`}
-                id={item.id}
-                text={item.name
-                }
-              />
-            ))}
-          </div>
-        ) }
+                  {flagCateMobile ? mainCategory.childs && (
+                    <div className={`row row-cols-auto ${styles.bcatitem}`}>
+                      {mainCategory.childs.map((item, index) => (
+                        <CardA
+                          // click={clickHandler}
+                          datos={''}
+                          key={item.id}
+                          imgSrc={item.imageUrl}
+                          category={`category`}
+                          id={item.id}
+                          text={item.name
+                          }
+                        />
+                      ))}
+                    </div>
+                  ) : mainCategoryB.childs && (
+                    <div className={`row row-cols-1 ${styles.bcatitem}`}>
+                      {mainCategoryB.childs.map((item, index) => (
+                        <CardA
+                          // click={clickHandler}
+                          datos={''}
+                          key={item.id}
+                          imgSrc={item.imageUrl}
+                          category={`category`}
+                          id={item.id}
+                          text={item.name
+                          }
+                        />
+                      ))}
+                    </div>
+                  )}
 
 
 
                 </div>
-               
+
               </div>
             </div>
             {/* <div>
@@ -925,9 +950,11 @@ className={`${styles.DotLoader}`}
 
               <ul className={`${styles.bottomHeader_ul} centerr`}>
                 <li className={`${styles.hamburger_li}centerr`}>
-                  <House size={20} />
+                  
+                  
                   <Link href={'/'}
-                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}>خانه
+                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}>
+                      <House size={20} />خانه
                   </Link>
                 </li>
 
@@ -938,89 +965,116 @@ className={`${styles.DotLoader}`}
                     <span className="bar"></span>
                     <span className="bar"></span>
                   </button>
-                  محصولات 
+                  محصولات
                 </li>
 
                 <li className={`${styles.bottomHeader_ul_category}`}
-                onClick={()=>{
-                  console.log(ulRefA.current.classList.value);
-if(ulRefA.current.classList.value === 'Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA'){
-  ulRefA.current.classList.remove('header_hidden_ulRefA')
-}else {
-  ulRefA.current.classList.add('header_hidden_ulRefA')
+                  onClick={() => {
+                    console.log(ulRefA.current.classList.value);
+                    if (ulRefA.current.classList.value === 'Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA') {
+                      ulRefA.current.classList.remove('header_hidden_ulRefA')
+                    } else {
+                      ulRefA.current.classList.add('header_hidden_ulRefA')
 
-}
-                   
-                }}>
-                <TextIndent  size={20} />دسته بندی ها
-                
-                <div className={`${styles.bottomHeader_ul_category_div}`}
-                ref={ulRefA}
-                >
+                    }
 
-                  {xtFlagLogin ?  
-                  <Link href={'/p-user/warranty'}>
-                  <span onClick={() => setXtFlagSpinnerShow(true)}
-                       
-                          > 
-                        پروفایل من</span></Link> :
+                  }}>
+                  <TextIndent size={20} />دسته بندی ها
 
-                        
-                        <Link href={'/p-user/warranty'}>
-                          <SignIn  size={15} />
+                  <div className={`${styles.bottomHeader_ul_category_div}`}
+                    ref={ulRefA}
+                  >
+
+                    {xtFlagLogin ?
+                      <Link href={'/p-user/profile'}>
+                        <User size={15} />
                         <span onClick={() => setXtFlagSpinnerShow(true)}
-                             
-                                > 
-                             ورود</span></Link>}
+
+                        >
+                          پروفایل من</span></Link> :
 
 
-  <Link href={'/p-user/warranty'}>
-       <UserCheck  size={15} />
-                  <span onClick={() => setXtFlagSpinnerShow(true)}
-                       
-                          > 
-                         عضویت</span></Link>
+                      <Link href={'/login'}>
+                        <SignIn size={15} />
+                        <span onClick={() => setXtFlagSpinnerShow(true)}
 
-                        <Link href={'/p-user/warranty'}>
-                        <Barcode size={15} />
-                  <span onClick={() => setXtFlagSpinnerShow(true)}
-                       
-                          > 
+                        >
+                          ورود</span></Link>}
+
+
+                    <Link href={'/register'}>
+                      <UserCheck size={15} />
+                      <span onClick={() => setXtFlagSpinnerShow(true)}
+
+                      >
+                        عضویت</span></Link>
+
+                    <Link href={'/p-user/warranty'}>
+                      <Barcode size={15} />
+                      <span onClick={() => setXtFlagSpinnerShow(true)}
+
+                      >
                         گارانتی</span></Link>
 
 
-   <Link href={'/p-user/warranty'}>
-   <Wrench size={15} />
-                  <span onClick={() => setXtFlagSpinnerShow(true)}
-                       
-                          > 
-                        خدمات</span></Link>
-  
-   <Link href={'/p-user/warranty'}>
-   <BuildingApartment size={15} />
+                    <Link href={'/p-user/repairs'}>
+                      <Wrench size={15} />
+                      <span onClick={() => setXtFlagSpinnerShow(true)}
+
+                      >
+                        تعمیرات</span></Link>
+
+                    <Link href={'/contactus'}>
+                      <BuildingApartment size={15} />
 
 
-                  <span onClick={() => setXtFlagSpinnerShow(true)}
-                       
-                          > 
+                      <span onClick={() => setXtFlagSpinnerShow(true)}
+
+                      >
                         تماس با ما</span></Link>
 
-  
-   <Link href={'/p-user/warranty'}>
-   <SignOut size={15} />
-                  <span onClick={() => setXtFlagSpinnerShow(true)}
-                       
-                          > 
-                        خروج</span></Link>
+{
+  xtFlagLogin &&  <Link href={'/'}>
+                      <SignOut size={15} />
+                      <span onClick={() => setXtFlagSpinnerShow(true)}
 
-                </div>
-                
+                      >
+                        خروج</span></Link>
+}
+                   
+
+                  </div>
+
                 </li>
 
 
                 <li>
-                  <ShoppingCart size={20} />سبدخرید</li>
-          
+                <Link 
+                  onClick={() => {
+                    if (cartCounter != 0) {
+                      setXtFlagSpinnerShow(true)
+                    } else {
+                      AlertA()
+                    }
+
+
+                  }}
+                className={`${styles.bottomHeader_ul_category_a} centerr`}
+                href={cartCounter != 0 ? '/basket' : '#'} 
+                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+                >
+                  <div
+                  
+                    className={`${styles.Header_leftSide__div_mobile} centerr`}>
+                    {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`} >{cartCounter}</span>}
+                  </div>
+                  <ShoppingCart size={20} />سبدخرید
+
+                </Link>
+
+                 </li>
+
+
 
 
                 <li>

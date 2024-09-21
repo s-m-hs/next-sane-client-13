@@ -61,3 +61,16 @@
     stroke-dasharray: 125.6;
     transform: rotate(-90deg);
   }
+  .swiper_img_B{
+    display: none;
+  }
+  @media only screen and (max-width:900px){
+    .swiper_img_A{
+      display: none !important;
+    }
+    .swiper_img_B{
+      width: 90%;
+      height: 90%;
+      display: inline !important;
+    }
+  }

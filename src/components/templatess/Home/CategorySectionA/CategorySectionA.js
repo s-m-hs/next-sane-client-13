@@ -251,6 +251,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
         )}
 
         {mainCategory.childs && (
+     <>
           <div className={`row row-cols-6  ${styles.bcatitem}`}>
             {mainCategory.childs.map((item, index) => (
               <CardA
@@ -265,6 +266,21 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
               />
             ))}
           </div>
+             <div className={`row row-cols-auto  ${styles.bcatitemB}`}>
+             {mainCategory.childs.map((item, index) => (
+               <CardA
+               // click={clickHandler}
+               datos=''
+                 key={item.id}
+                 imgSrc={item.imageUrl}
+                 category={`category`}
+                 id={item.id}
+                 text={item.name
+                 }
+               />
+             ))}
+           </div>
+     </>
         )}
       </div>
     </>

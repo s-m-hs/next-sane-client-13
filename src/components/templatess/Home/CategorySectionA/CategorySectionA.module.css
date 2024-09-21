@@ -7,3 +7,16 @@
     right: 50vw;
     z-index: 100;
 }
+.bcatitemB{
+    margin-top: 80px;
+    display: none;
+}
+
+@media only screen and (max-width:900px){
+.bcatitem{
+    display: none !important;
+}
+.bcatitemB{
+    display: flex !important;
+}
+}

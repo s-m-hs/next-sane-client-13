@@ -101,6 +101,8 @@
       height: 100%;
       border-radius: 50%;
       padding: 5px;
+      background: white;
+      z-index: -1;
       background-clip: content-box;
       animation: spin 20s linear infinite;
       /* background-color: #4BB543; */
@@ -115,11 +117,17 @@
    
     @media only screen and (max-width:900px){
       .cardcat__img{
-        width: 80%;
-        height: 80%;
+        width: 90%;
+        height: 90%;
       }
       .circle_wrapper{
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
         width: 12rem;
         height: 12rem;
       }
+  }
+   @media only screen and (max-width:900px){
+
   }
