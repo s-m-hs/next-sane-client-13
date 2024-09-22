@@ -19,7 +19,7 @@ export default function ProductDetailLeft({detail}) {
       <div className="row mt-1" style={{ height: '600px' }}>
         {detail && 
         <>
-          <div className="col-6">
+          <div className= {`col-6 ${Styles.ProductDetailL_main_divright} centerc mt-5`} >
           <div className={`${Styles.ProductDetailL_divright} centerc mt-5`}>
 
 
@@ -65,9 +65,60 @@ export default function ProductDetailLeft({detail}) {
           </div>
         </div>
 
-        <div className="col-6">
+        <div className={`${Styles.ProductDetailL_divright_swiper} col-12 col-md-6`}>
           <SwiperProduct src={detail.mainImage} srcB={detail.images?.split('*,*')} />
         </div>
+
+<div className={`${Styles.ProductDetailL_divright_swiper_bottom} col-12`}  >
+
+  <div className="container">
+    <div className="row">
+      <div className="col-6"></div>
+      <div className="col-6"></div>
+    </div>
+  </div>
+
+</div>
+
+        {/* <div className="col-12">
+        <div className={`${Styles.ProductDetailL_divright} centerc mt-5`}>
+
+
+
+<span className={Styles.ProductDetailL_div__title} >{detail.name}</span>
+<span className={Styles.ProductDetailL_div__description}  >{detail.description}</span>
+<div className={`${Styles.ProductDetailL_detail} centerc mt-5`}>
+{detail.spec?.slice(0,3).map(item=> 
+<span> {`${item.name} : ${item.value}`}</span>
+)
+}
+</div>
+<div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
+
+  <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} ریال</span>
+  <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} ریال</span>
+  <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
+</div>
+<div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
+  <button className="btn btn-primary "
+          onClick={()=>{
+            const getLocalStorage=localStorage.getItem('loginToken')
+            let obj=[{
+              cyProductID:detail.id,
+              quantity: 1
+            }] 
+            xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+            :
+  
+               addToCart(detail.id,'1',setCartCounter)
+            
+          }}
+  >افزودن به سبد خرید</button>
+
+</div>
+
+</div>
+        </div> */}
         </>
         }
 

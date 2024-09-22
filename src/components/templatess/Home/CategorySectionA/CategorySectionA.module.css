@@ -18,5 +18,7 @@
 }
 .bcatitemB{
     display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-evenly !important;
 }
 }

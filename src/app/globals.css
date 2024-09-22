@@ -370,6 +370,9 @@ select:-webkit-autofill:focus {
 }
 
 @media only screen and (max-width:900px){
+  /* .container{
+    --bs-gutter-x:none !important
+  } */
   .swipercomb-title{
       font-size: 20px !important;
   }

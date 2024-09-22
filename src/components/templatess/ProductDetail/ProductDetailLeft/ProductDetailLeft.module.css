@@ -100,3 +100,23 @@ transform: rotate(-5deg);
         width: 30px;
         height: 30px;
       }
+.ProductDetailL_divright_swiper_bottom{
+    display: none;
+}
+      @media only screen and (max-width: 765px) {
+        .ProductDetailL_main_divright{
+            display: none !important;
+            
+        }
+.ProductDetailL_divright_swiper_bottom{
+    display: inline;
+}
+        .ProductDetailL_divright_swiper{
+            height: 60% !important;
+        }
+      }
+      @media only screen and (max-width: 575px) {
+        .ProductDetailL_divright_swiper{
+            height: 50% !important;
+        }
+      }
