@@ -68,8 +68,9 @@ transform: rotate(-5deg);
     border: none;
     outline: none;
     height: 50px;
-     background: linear-gradient(31deg, #14a5af 24%, #ffffff 100%)!important;
-     filter: drop-shadow(1px 7px 9px #14a5af);  
+    color: #fff;
+     /* background: linear-gradient(31deg, #14a5af 24%, #ffffff 100%)!important;
+     filter: drop-shadow(1px 7px 9px #14a5af);   */
     font-size: 1cqi;
     transition: all 0.2s linear;
     }
@@ -77,6 +78,11 @@ transform: rotate(-5deg);
         opacity: 0.8;
         /* background: linear-gradient(31deg, #ffffff  24%, #14a5af 100%)!important; */
 
+    }
+    .ProductDetailL_divright_swiper_button{
+        width: 100%;
+        color: #fff;
+        display: none;
     }
 
 
@@ -103,18 +109,74 @@ transform: rotate(-5deg);
 .ProductDetailL_divright_swiper_bottom{
     display: none;
 }
-      @media only screen and (max-width: 765px) {
-        .ProductDetailL_main_divright{
-            display: none !important;
-            
-        }
-.ProductDetailL_divright_swiper_bottom{
-    display: inline;
+.ProductDetailL_left_price{
+    display: none;
 }
+@media only screen and (max-width: 900px) {
+    .ProductDetailL_main_divright{
+        display: none !important;
+        
+    }
+    .ProductDetailL_divright_swiper_button{
+        display: inline !important;
+    }
+    .ProductDetailL_left{
+        display: none !important;
+    }
+    .ProductDetailL_left_price{
+        display: flex;
+    }
+.ProductDetailL_divright_swiper_bottom{
+display: inline;
+}
+    .ProductDetailL_divright_swiper{
+        height: 60% !important;
+        width: 100% !important;
+    }
+    .ProductDetailL_divMiddle_offprice{
+        font-size: 20px;
+    }
+    .ProductDetailL_divMiddle_price{
+        width: fit-content;
+        font-size: 1.5rem;
+        /* text-decoration: line-through solid #ff0000; */
+    }
+    .ProductDetailL_divMiddle_price::before{
+        content: '';
+    position: absolute;
+    text-decoration: line-through solid #ff0000;
+    top: 10px;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 70%;
+    height: 3%;
+    background-color: #ff0000;
+    transform: rotate(-5deg);
+    }
+    .ProductDetailL_divMiddle_count{
+        font-size: 15px;
+    }
+.ProductDetailL_div__title{
+font-size: 15px;
+font-weight: 600;
+}
+.ProductDetailL_div__description{
+font-size: 10px;
+}
+.ProductDetailL_detail span{
+font-size: 13px;
+}
+}
+
+
+      @media only screen and (max-width: 765px) {
         .ProductDetailL_divright_swiper{
             height: 60% !important;
         }
       }
+
+
       @media only screen and (max-width: 575px) {
         .ProductDetailL_divright_swiper{
             height: 50% !important;

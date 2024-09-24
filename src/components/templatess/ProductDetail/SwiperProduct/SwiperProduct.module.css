@@ -85,8 +85,8 @@
 
   @media only screen and (max-width: 900px) {
     .mySwiperE2 .swiper_slide img {
-      width: 70% !important;
-      height: 70% !important;
+      width: 50% !important;
+      height: 50% !important;
     }
   }
 
@@ -97,10 +97,10 @@
     }
   } */
 
-  @media only screen and (max-width: 760px) {
+  /* @media only screen and (max-width: 760px) {
 
     .mySwiperE2 .swiper_slide img {
       width: 50% !important;
       height: 50% !important;
     }
-  }
+  } */

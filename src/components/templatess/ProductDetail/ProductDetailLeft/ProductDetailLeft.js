@@ -45,7 +45,7 @@ export default function ProductDetailLeft({detail}) {
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
             </div>
             <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
-              <button className="btn btn-primary "
+              <button className="btn btn-info "
                       onClick={()=>{
                         const getLocalStorage=localStorage.getItem('loginToken')
                         let obj=[{
@@ -67,18 +67,64 @@ export default function ProductDetailLeft({detail}) {
 
         <div className={`${Styles.ProductDetailL_divright_swiper} col-12 col-md-6`}>
           <SwiperProduct src={detail.mainImage} srcB={detail.images?.split('*,*')} />
+          <button className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
+             onClick={()=>{
+              const getLocalStorage=localStorage.getItem('loginToken')
+              let obj=[{
+                cyProductID:detail.id,
+                quantity: 1
+              }] 
+              xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+              :
+    
+                 addToCart(detail.id,'1',setCartCounter)
+              
+            }}
+          >افزودن به سبد خرید</button>
         </div>
 
 <div className={`${Styles.ProductDetailL_divright_swiper_bottom} col-12`}  >
 
   <div className="container">
     <div className="row">
-      <div className="col-6"></div>
-      <div className="col-6"></div>
+
+
+      <div className="col-6 centerc">
+              <span className={Styles.ProductDetailL_div__title} >{detail.name}</span>
+<span className={Styles.ProductDetailL_div__description}  >{detail.description}</span>
+<div className={`${Styles.ProductDetailL_detail} centerc mt-5`}>
+{detail.spec?.slice(0,3).map(item=> 
+<span> {`${item.name} : ${item.value}`}</span>
+)
+}
+</div>
+      </div>
+
+
+      <div className="col-6">
+      <div className={`${Styles.ProductDetailL_left_price} centerc mt-5`} >
+      <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} ریال</span>
+              <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} ریال</span>
+              <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
+
+</div>
+
+      </div>
     </div>
   </div>
 
-</div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
 
         {/* <div className="col-12">
         <div className={`${Styles.ProductDetailL_divright} centerc mt-5`}>

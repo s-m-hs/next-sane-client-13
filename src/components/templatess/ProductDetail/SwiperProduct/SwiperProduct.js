@@ -13,7 +13,7 @@ export default function SwiperProduct({src,srcB}) {
 
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
+console.log(srcB)
   return (
     <>
     {src && <>
@@ -43,10 +43,10 @@ export default function SwiperProduct({src,srcB}) {
         </div>
    </SwiperSlide>
 
-{srcB && srcB.map(item=>(
+{srcB  && srcB.map(item=>(
   <>
-
-  <SwiperSlide className={Styles.swiper_slide}>
+{<>
+{item &&   <SwiperSlide className={Styles.swiper_slide}>
   <div>
            <ImageMagnifier 
               src={item}
@@ -58,7 +58,9 @@ export default function SwiperProduct({src,srcB}) {
                alt="Sample Image"
            />
        </div>
-  </SwiperSlide>
+  </SwiperSlide>}
+</>}
+
   </>
   
 

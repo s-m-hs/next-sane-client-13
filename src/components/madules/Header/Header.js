@@ -246,7 +246,11 @@ export default function Header() {
                       setSearchType('')
                     }} /></span>
                     {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={() => setXtFlagSpinnerShow(true)}
+                      <Link href={`/product/${item.id}`} onClick={() => {
+                        setFlagSearch(false)
+                        setSearchBoxArr([])
+                        setSearchType('')
+                        setXtFlagSpinnerShow(true)}}
                       >
                         <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                           <span>{item.name}</span>
@@ -907,8 +911,8 @@ export default function Header() {
                     <div className={`row row-cols-auto ${styles.bcatitem}`}>
                       {mainCategory.childs.map((item, index) => (
                         <CardA
-                          // click={clickHandler}
-                          datos={''}
+                        click={ toggleMenu}
+                        datos={''}
                           key={item.id}
                           imgSrc={item.imageUrl}
                           category={`category`}
@@ -922,8 +926,8 @@ export default function Header() {
                     <div className={`row row-cols-1 ${styles.bcatitem}`}>
                       {mainCategoryB.childs.map((item, index) => (
                         <CardA
-                          // click={clickHandler}
-                          datos={''}
+                        click={toggleMenu}
+                        datos={''}
                           key={item.id}
                           imgSrc={item.imageUrl}
                           category={`category`}

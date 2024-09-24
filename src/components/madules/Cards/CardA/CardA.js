@@ -20,9 +20,15 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
     >
 
  <Link
- onClick={()=>setXtFlagSpinnerShow(true)}
+ onClick={()=>{
+  if(click){
+    click()
+
+  }
+  setXtFlagSpinnerShow(true)
+ }}
   className={`${Styles.circle_wrapper} centerc`}
-  href={category ? `${category}/${id}` : ''}  >
+  href={category ? `/${category}/${id}` : ''}  >
 <img className={Styles.cardcat__img} src={imgSrc} alt="" />
 
     <div className={`${Styles.success} `} >
