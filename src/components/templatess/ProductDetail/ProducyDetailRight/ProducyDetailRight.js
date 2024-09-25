@@ -8,8 +8,12 @@ export default function ProducyDetailRight({spec}) {
 <tbody>
 {spec?.length != 0 && spec?.map(item =>
                       <tr key={item.id}>
-                        <th>{item.name}</th>
-                        <td>{item.value}</td>
+                        <td style={{display:'flex',flexWrap:'wrap',justifyContent:'space-between'}}>
+                          <div style={{fontWeight:'bolder',marginLeft:'10px'}} >{item.name} :</div>
+                          <div>{item.value}</div>
+                        </td>
+                        {/* <th></th>
+                        <td></td> */}
                       </tr>
                     )}
 </tbody>

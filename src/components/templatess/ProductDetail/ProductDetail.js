@@ -85,9 +85,12 @@ export default function ProductDetail({ param }) {
     <Breadcrumb>
     <Breadcrumb.Item ><Link href="/"onClick={()=>setXtFlagSpinnerShow(true)}
     ><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
+
     {nameCategory && idCategory && <Breadcrumb.Item ><Link 
     onClick={()=>setXtFlagSpinnerShow(true)}
     href={`/category/${idCategory}`}><Dresser size={18} />{nameCategory}</Link></Breadcrumb.Item>}  
+
+    
       <Breadcrumb.Item active href="/">
       {nameCategory}
       </Breadcrumb.Item>

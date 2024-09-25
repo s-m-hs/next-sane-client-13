@@ -838,12 +838,12 @@ export default function Header() {
         <div className="container">
 
           <div className={`${styles.mobi_header} row `}  >
-            <img src="images/photo_2024-05-30_19-08-29.jpg" alt="" />
+            <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="" />
             <div className={styles.header_bottom__col_logo}  >
                   <Link href={'/'}>
                     <img
                       className={styles.sphere3}
-                      src="../../../images/eitaa-icon-colorful.png"
+                      src="/images/eitaa-icon-colorful.png"
                       alt=""
                     />
                   </Link>
@@ -851,7 +851,7 @@ export default function Header() {
                     {" "}
                     <img
                       className={styles.sphere2}
-                      src="../../../images/icons8-instagram-2048.png"
+                      src="/images/icons8-instagram-2048.png"
                       alt=""
                     />
                   </Link>
@@ -859,7 +859,7 @@ export default function Header() {
                     {" "}
                     <img
                       className={styles.sphere}
-                      src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
+                      src="/images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
                       alt=""
                     />
                   </Link>

@@ -45,7 +45,7 @@ width: fit-content;
 }
 .breadcrumb a{
     color: inherit;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 .breadcrumb a:hover{
     opacity: 0.7;
