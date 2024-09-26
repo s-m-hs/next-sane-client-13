@@ -2,7 +2,9 @@
 import style from './CartItem.module.css'
 import { MainContext } from "@/context/MainContext";
 import Link from 'next/link';
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState,useEffect, useRef } from "react";
+import { X,DotsThreeVertical   } from "@phosphor-icons/react";
+
 // import { CounterContext } from "../../Context/CounterContext";
 // import { MenuContext } from "../../Context/MenuContext";
 // import RemoveApi from "../../jsUtils/ApiCallBack/ApiRemove";
@@ -42,7 +44,6 @@ const handleRemove=(e,id)=>{
 
 }
   /////////////////////////////////////////////////
-
   return (
     <>
       <tr className= {`${style.tr}`}>
@@ -106,8 +107,8 @@ const handleRemove=(e,id)=>{
           )
           }
         </td>
-<td>
-<span className="tp-product-details-price new-price">
+<td className={style.td_totalPrice}>
+<span className= "tp-product-details-price new-price">
                 {props.totalPrice}
               </span>
 </td>
@@ -115,11 +116,20 @@ const handleRemove=(e,id)=>{
         {/* <!-- action --> */}
         <td className="tp-cart-action">
           <Link href={xtFlagLogin ? `product/${props.cyProductID}` : `product/${props.id}`}>
-           <button className={`btn btn-primary m-1 ${style.btn_product}`}
+           <button  className={`btn btn-primary m-1 ${style.btn_product}`}
            onClick={()=>setXtFlagSpinnerShow(true)}
 
          >
+
           جزییات محصول...
+
+          </button>
+
+          <button  className={`btn btn-primary m-1 ${style.btn_product_hide}`}
+           onClick={()=>setXtFlagSpinnerShow(true)}
+
+         >
+                               <DotsThreeVertical size={10} color="#fff" />
 
           </button>
           </Link>
@@ -128,6 +138,13 @@ const handleRemove=(e,id)=>{
           onClick={(e)=>{ handleRemove(e,props.id) }}>
            
 حذف
+          </button>
+
+          <button className={`btn btn-danger m-1 ${style.btn_product_hide}`}
+          onClick={(e)=>{ handleRemove(e,props.id) }}>
+                               <X size={10} color="#fff" />
+
+
           </button>
         </td>
       </tr>

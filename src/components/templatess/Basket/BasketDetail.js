@@ -277,7 +277,7 @@ export default function BasketDetail() {
                   <th>عنوان کالا</th>
                   <th>تعداد</th>
                   <th>قیمت واحد</th>
-                  <th>قیمت کل</th>
+                  <th className={`${style.th}`}>قیمت کل</th>
                   <th>حذف</th>
                 </tr>
               </thead>

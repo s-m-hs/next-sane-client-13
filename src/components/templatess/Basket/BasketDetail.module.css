@@ -103,6 +103,7 @@ border: none;
     }
 .col_8{
     overflow: auto !important;
+    margin-right: 0 !important;
 }
 .col_8_bottom_div_1{
     display: flex !important;
@@ -141,12 +142,12 @@ flex-direction: column !important;
 }
 .colPrice_mobile_btn1 span{
     margin-top: 10px;
-    font-size: 15px;
+    font-size: 3.5cqi;
 }
 .colPrice_mobile_span2{
     position: absolute;
     top: 50%;
-    font-size: 20px !important;
+    font-size: 5cqi !important;
 
 }
 .btn{
@@ -158,4 +159,11 @@ flex-direction: column !important;
     font-size:15px;
 
 }
+}
+
+
+@media only screen and (max-width:450px){
+    .th{
+        display: none !important;
+    }
 }

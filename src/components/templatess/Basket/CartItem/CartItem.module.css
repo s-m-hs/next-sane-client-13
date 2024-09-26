@@ -16,3 +16,25 @@ outline:none;
 .btn_product{
     font-size: 0.8cqi;
 }
+
+.btn_product_hide{
+    display: none;
+}
+@media only screen and (max-width:900px){
+    .btn_product{
+        width: 50% !important;
+    }
+    .btn_product_hide{
+        display: inline !important;
+    }
+    .btn_product{
+        display: none !important;
+    }
+}
+
+
+@media only screen and (max-width:450px){
+    .td_totalPrice{
+        display: none !important;
+    }
+} 
