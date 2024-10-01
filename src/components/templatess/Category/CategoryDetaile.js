@@ -10,6 +10,8 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import { HouseLine} from "@phosphor-icons/react";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
+import Pagination from '@mui/material/Pagination';
+
 
 
 
@@ -19,9 +21,46 @@ export default function CategoryDetaile({ param }) {
   const [flagPro, setFlagPro] = useState(false);
   const [productByCat, setProductByCat] = useState([])
   const [flag, setFlag] = useState(false)
+  const [page, setPage] = React.useState(1);
+  const [paginationArray, setPaginationArray] = useState([]);
+  const pageCount=10
+  const [allCount, setAllCount] = useState([]);
+
+
+
   // const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
 let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
   const styleRef = useRef();
+  const goToTop=()=>{
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    })
+  }
+  const handleChange = (event, value) => {
+    goToTop()
+    setPage(value);
+    let code=mainCategory?.item.code
+    let obj = {
+      cat: code,
+      pageNumber: value-1,
+      pageSize: pageCount
+    
+  }
+    getproductByCat(obj);
+};
+useEffect(() => {
+  if (productByCat?.length != 0 ) {
+    let x = allCount;
+    let countInPage = pageCount; 
+    let z = Math.ceil(x / countInPage);
+    z
+      ? setPaginationArray(Array.from({ length: z }))
+      : setPaginationArray([]);
+  }
+}, [productByCat]);
+
+
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -48,9 +87,11 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
           if (result.childs?.length != 0) {
             setMainCatChilds(result.childs);
             setMainCategory(result);
-          } else {
+
+          } else { 
             setMainCatChilds([]);
             setMainCategory(result);
+
           }
    
         });
@@ -74,8 +115,12 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
         console.log(result)
         if (result.itemList?.length != 0) {
           setProductByCat(result.itemList)
+          setAllCount(result.allCount)
+
         } else {
           setProductByCat([])
+          setAllCount(result.allCount)
+
 
         }
       }
@@ -87,8 +132,8 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
   const changeId = (code) => {
     let obj = {
       cat: code,
-      pageNumber: 0,
-      pageSize: 10
+      pageNumber:page-1,
+      pageSize: pageCount
     }
     getproductByCat(obj)
     setFlagPro(true);
@@ -115,10 +160,12 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
   useEffect(()=>{
   if(mainCatChilds.length==0 && mainCategory.item?.code){
   let code=mainCategory.item.code
-  let obj={
-    cat:code ,
-    pageNumber: 0,
-    pageSize: 10
+
+    let obj = {
+      cat: code,
+      pageNumber: page-1,
+      pageSize: pageCount
+    
   }
   getproductByCat(obj)
   }
@@ -129,9 +176,10 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
     if(mainCatChilds.length!==0){
       let obj = {
       cat: mainCatChilds[0]?.code,
-      pageNumber: 0,
-      pageSize: 10
+     pageNumber: page-1,
+      pageSize: pageCount
     }
+    
     getproductByCat(obj)
     }
     
@@ -140,6 +188,8 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
 useEffect(()=>{
   setXtFlagSpinnerShow(false)
 },[])
+console.log(paginationArray)
+console.log(page)
 console.log(mainCatChilds)
   return (
     <div className={`container  centerc ${Styles.category}`} >
@@ -153,7 +203,21 @@ console.log(mainCatChilds)
       </Breadcrumb.Item>
     </Breadcrumb>
   </div>
+
 </div>
+
+{
+   paginationArray.length > 1 &&
+             
+   <div className='pagination-div' >
+   <Pagination count={ paginationArray.length}  page={page}
+    //  ref={classRefB}
+    onChange={handleChange}
+    color="primary"
+     shape="rounded"
+    style={{direction:'ltr'}}
+     />
+   </div>}
 
 
       <div className={`row row-cols-auto  centerr ${Styles.category_row}`}>
@@ -184,7 +248,18 @@ console.log(mainCatChilds)
         )}
         {/* <button onClick={clickHan}></button> */}
       </div>
-
+      {
+   paginationArray.length > 1 &&
+             
+   <div className='pagination-div' >
+   <Pagination count={ paginationArray.length}  page={page}
+    //  ref={classRefB}
+    onChange={handleChange}
+    color="primary"
+     shape="rounded"
+    style={{direction:'ltr'}}
+     />
+   </div>}
 
       {/* {mainCategory.childs !== 0 && (
         <div className="row">

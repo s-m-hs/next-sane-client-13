@@ -351,7 +351,15 @@ select:-webkit-autofill:focus {
 .header_Active_ulRefA{
   display:inline;
 }
-
+.pagination-div{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination-div >nav{
+}
 /* div{
     animation: move 2000ms 1 alternate ease-in-out;
 } */
