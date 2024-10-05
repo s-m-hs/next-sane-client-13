@@ -59,3 +59,17 @@ width: fit-content;
     right: 50vw;
     z-index: 100;
 }
+
+.right_maindiv{
+    height: fit-content;
+    background-color: var(--white1ffffff);
+    border-radius: 8px;
+    line-height: 2.3;
+
+}
+.right_div span{
+    margin-right: 10px;
+font-size: 20px;
+cursor: pointer;
+border-bottom: 1px solid var(--graydcdee1);
+}

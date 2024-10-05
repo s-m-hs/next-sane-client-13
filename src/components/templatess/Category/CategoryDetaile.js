@@ -11,6 +11,8 @@ import { HouseLine} from "@phosphor-icons/react";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
 import Pagination from '@mui/material/Pagination';
+import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
+import { style } from "@mui/system";
 
 
 
@@ -25,6 +27,8 @@ export default function CategoryDetaile({ param }) {
   const [paginationArray, setPaginationArray] = useState([]);
   const pageCount=10
   const [allCount, setAllCount] = useState([]);
+  const [mainCat, setMainCat] = useState({});
+
 
 
 
@@ -139,8 +143,19 @@ useEffect(() => {
     setFlagPro(true);
   };
 
-
+  const getCategory = () => {
+    let obj = {
+      gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      id: 3,
+      str: "string",
+    };
+postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCat)
+  };
   //////////////////////////////
+useEffect(()=>{
+  getCategory()
+},[])
+
   useEffect(() => {
     if (param !== null) {
       getCategoryById();
@@ -189,11 +204,29 @@ useEffect(()=>{
   setXtFlagSpinnerShow(false)
 },[])
 console.log(paginationArray)
-console.log(page)
+console.log(mainCat)
 console.log(mainCatChilds)
   return (
     <div className={`container  centerc ${Styles.category}`} >
-<div className={`row ${Styles.breadcrumb_row}`} >
+<div className="row">
+  <div className={`col-2 boxSh ${Styles.right_maindiv} centerc`} >
+
+<h1>دسته بندی ها:</h1>
+<div className={`${Styles.right_div} centerc`}>
+ {mainCat?.childs?.length!=0 && mainCat?.childs?.map(item=>(
+  <span>{item.name}</span>
+  
+
+  ))}
+
+</div>
+ 
+
+  </div>
+
+
+  <div className="col-10">
+  <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
     <Breadcrumb.Item ><Link onClick={()=>setXtFlagSpinnerShow(true)}
@@ -261,21 +294,10 @@ console.log(mainCatChilds)
      />
    </div>}
 
-      {/* {mainCategory.childs !== 0 && (
-        <div className="row">
-          <div className="col-12">
-            <CategoryProducts />
-          </div>
-        </div>
-      )}
+  </div>
+</div>
 
-      {flagPro && (
-        <div className="row">
-          <div className="col-12">
-            <CategoryProducts />
-          </div>
-        </div>
-      )} */}
+
  
     </div>
   );
