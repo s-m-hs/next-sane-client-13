@@ -37,7 +37,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
 
 </div>}
       <div className="container">
-        <div  className="row mt-5">
+        <div  className={`row mt-5 ${styles.title_row}`}>
           <div
             className="col"
             style={{ marginRight: "50px", marginTop: "30px" }}

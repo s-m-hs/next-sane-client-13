@@ -7,10 +7,18 @@
     position: relative;
     box-shadow: 0 0 15px -10px rgb(0,0,0,0.75);
   }
-  
-  .cardprob_container img{
+  .cardprob_container_linkA{
+    text-align: center;
     position: absolute;
     top: 5px;
+    width: 100%;
+    animation: zoom1 4s linear infinite;
+    
+  }
+
+  .cardprob_container img{
+    /* position: absolute;
+    top: 5px; */
     width: 60%;
     animation: zoom1 4s linear infinite;
   border-radius: 25%;
@@ -50,7 +58,7 @@
    opacity: 0.7;
   }
   
-  .cardprob_container a{
+  .cardprob__link{
   position: absolute;
   bottom: 0;
   text-decoration: none;
@@ -67,7 +75,7 @@
       transition: all 0.3s linear;
       height: 8%;
   }
-  .cardprob_container:hover a{
+  .cardprob_container:hover .cardprob__link{
     background-color: var(--them);
     color: var(--white1ffffff);
   }
@@ -76,7 +84,7 @@
     animation: zoom .4s linear 1;
   
   }
-  .cardprob_container a:hover{
+  .cardprob__link:hover{
     background-color: var(--them);
     color: var(--white1ffffff);
     }

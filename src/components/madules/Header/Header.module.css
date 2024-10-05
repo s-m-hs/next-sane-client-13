@@ -651,19 +651,23 @@ transition:transform 0.1s linear;
         /* left: 85px; */
         cursor: pointer;
       }
-
+      .bottomHeader_ul{
+        justify-content: space-between;
+        padding: 0 ;
+    
+    }
 
 }
 
 @media only screen and (max-width:500px){
+    .bottomHeader_ul{
+        justify-content: space-between;
+
+    }
     .bottomHeader_ul li{
         padding: none;
-        font-size: 7px;
+        font-size: 10px;
         }
-      
-
-
-
 }
 
 .B{
@@ -698,12 +702,10 @@ transition:transform 0.1s linear;
 .mobi_bottomHeader{
     /* position: absolute;
     bottom: 0; */
-    height: 60px;
+    /* height: 60px; */
     width: 100%;
 }
-.bottomHeader_ul{
-    justify-content: space-between;
-}
+
 .bottomHeader_ul li{
     cursor: pointer;
 padding: 1cqi;

@@ -21,4 +21,7 @@
     flex-wrap: wrap !important;
     justify-content: space-evenly !important;
 }
+.title_row{
+    margin: 0 !important;
+}
 }

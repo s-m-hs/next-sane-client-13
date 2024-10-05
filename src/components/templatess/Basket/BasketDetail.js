@@ -377,7 +377,7 @@ onClick={paymentHandler}
                 >
                   <span>مجموع سبد خرید :</span>
                   <br />
-                  <span className={`  ${style.colPrice_mobile_span2}`} >{total.toLocaleString()} ریال</span>
+                  <span className={`  ${style.colPrice_mobile_span2}`} >{total.toLocaleString()} تومان</span>
                   <img
                     src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
                     alt=""
@@ -434,7 +434,7 @@ onClick={paymentHandler}
 
                 <span>مجموع سبد خرید :</span>
                 <br />
-                <span>{total.toLocaleString()} ریال</span>
+                <span>{total.toLocaleString()} تومان</span>
               </button>
             </div>
           </div>

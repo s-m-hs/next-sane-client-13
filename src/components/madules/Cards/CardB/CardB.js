@@ -19,10 +19,12 @@ export default function CardB({imgSrc,title,price,id,clickSpinner }) {
 
   return (
     <div className={`${styles.container} centerc`  } >
-        <img src={imgSrc} alt="" />
+      <Link  href={`/product/${id}`} onClick={()=>setXtFlagSpinnerShow(true)}> <img src={imgSrc} alt="" 
+  /></Link>
+
         <span className={styles.title}  > {title} </span>
         {/* <span>368,000</span> */}
-        <span className={styles.price}  >{price?.toLocaleString()}ریال </span>
+        <span className={styles.price}  >{price?.toLocaleString()}تومان </span>
         <div className={`${styles.icon_div} centerr`}   >
         <ShoppingCart size={32} color="#19a7af" weight="duotone"
         onClick={()=>{

@@ -12,12 +12,12 @@
 
 }
 .product_right_col{
-    
+    border-left: 1px solid var(--graydcdee1);
     background-color:var(--white1ffffff);
     /* box-shadow: 0 0 15px -10px rgb(0,0,0,0.75); */
     /* height: 80vh; */
     overflow: auto;
-    height: 100%;
+    height: 600px !important;
 }
 .product-_eft_col{
     background-color:var(--white1ffffff);

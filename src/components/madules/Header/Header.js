@@ -966,7 +966,7 @@ export default function Header() {
             <div className="col">
 
 
-              <ul className={`${styles.bottomHeader_ul} centerr`}>
+              <ul className={`${styles.bottomHeader_ul} centerr `} >
                 <li className={`${styles.hamburger_li}centerr`}>
                   
                   

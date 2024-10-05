@@ -69,7 +69,7 @@ useEffect(()=>{
   return (
 <div className='container'>
   <div className='row '>
-    <div className='col-12 '><SwiperB/></div> 
+    <div className='col-12'><SwiperB/></div> 
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />

@@ -22,12 +22,18 @@ export default function CardC({imgSrc,title,price,id,clickSpinner }) {
      data-aos='fade-up'
       
      className={`${Styles.cardprob_container} centerc`}>
-    <img src={imgSrc} alt="" />
+
+      <Link  className={`${Styles.cardprob_container_linkA}`} 
+      onClick={()=>setXtFlagSpinnerShow(true)}
+  href={`/product/${id}`}>
+      <img src={imgSrc} alt="" />
+
+      </Link>
 
     <span className={Styles.cardprob_title} > {title} </span>
 
     {/* <span>368,000</span> */}
-    <span className={Styles.cardprob_price}>{price?.toLocaleString()}ریال </span>
+    <span className={Styles.cardprob_price}>{price?.toLocaleString()}تومان </span>
     
     <div className={`${Styles.cardprob__icon_div} centerr`} >
     <ShoppingCart size={32} color="#19a7af" weight="duotone"
