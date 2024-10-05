@@ -84,12 +84,13 @@ transition: all 0.2s ease-in-out;
 
 }
 .right_div a:hover{
-    background-color: var(--them);
+    /* background-color: var(--them); */
+    background-color: #cfe2ff;
     color: var(--white1ffffff);
 }
 
 .AccordionCom button{
-    font-size: 25px !important;
+    font-size: 22px !important;
     /* background-color:var(--them) !important */
 }
 
