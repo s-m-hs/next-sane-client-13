@@ -65,11 +65,37 @@ width: fit-content;
     background-color: var(--white1ffffff);
     border-radius: 8px;
     line-height: 2.3;
+    /* margin-top: 20px; */
 
+}
+.right_div a{
+     text-decoration: none !important;
+    list-style: none !important;
+    cursor: pointer;
+border-bottom: 1px solid var(--graydcdee1);
+border-radius: 5px;
+color: var(--black33b4359);
 }
 .right_div span{
     margin-right: 10px;
 font-size: 20px;
-cursor: pointer;
-border-bottom: 1px solid var(--graydcdee1);
+
+transition: all 0.2s ease-in-out;
+
+}
+.right_div a:hover{
+    background-color: var(--them);
+    color: var(--white1ffffff);
+}
+
+.AccordionCom button{
+    font-size: 25px !important;
+    /* background-color:var(--them) !important */
+}
+
+
+@media only screen and (max-width:900px){
+    .right_maindiv{
+        display: none;
+    }
 }

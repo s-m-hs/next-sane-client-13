@@ -13,6 +13,8 @@ import { MainContext } from "@/context/MainContext";
 import Pagination from '@mui/material/Pagination';
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { style } from "@mui/system";
+import Accordion from 'react-bootstrap/Accordion';
+
 
 
 
@@ -27,7 +29,8 @@ export default function CategoryDetaile({ param }) {
   const [paginationArray, setPaginationArray] = useState([]);
   const pageCount=10
   const [allCount, setAllCount] = useState([]);
-  const [mainCat, setMainCat] = useState({});
+  const [mainCatA, setMainCatA] = useState({});
+  const [mainCatB, setMainCatB] = useState({});
 
 
 
@@ -143,17 +146,26 @@ useEffect(() => {
     setFlagPro(true);
   };
 
-  const getCategory = () => {
+  const getCategoryAccesory = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       id: 3,
       str: "string",
     };
-postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCat)
+postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatA)
+  };
+  const getCategoryHard = () => {
+    let obj = {
+      gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      id: 2,
+      str: "string",
+    };
+postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatB)
   };
   //////////////////////////////
 useEffect(()=>{
-  getCategory()
+  getCategoryAccesory()
+  getCategoryHard()
 },[])
 
   useEffect(() => {
@@ -204,28 +216,53 @@ useEffect(()=>{
   setXtFlagSpinnerShow(false)
 },[])
 console.log(paginationArray)
-console.log(mainCat)
 console.log(mainCatChilds)
   return (
     <div className={`container  centerc ${Styles.category}`} >
-<div className="row">
+<div className="row mt-5">
   <div className={`col-2 boxSh ${Styles.right_maindiv} centerc`} >
 
 <h1>دسته بندی ها:</h1>
-<div className={`${Styles.right_div} centerc`}>
- {mainCat?.childs?.length!=0 && mainCat?.childs?.map(item=>(
-  <span>{item.name}</span>
-  
 
+<Accordion defaultActiveKey={['0']} alwaysOpen>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header className={`${Styles.AccordionCom}`}>لوازم جانبی</Accordion.Header>
+        <Accordion.Body>
+        <div className={`${Styles.right_div} centerc`}>
+ {mainCatA?.childs?.length!=0 && mainCatA?.childs?.map(item=>(
+  <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
   ))}
 
 </div>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header className={`${Styles.AccordionCom}`}>سخت افزار</Accordion.Header>
+        <Accordion.Body>
+        <div className={`${Styles.right_div} centerc`}>
+ {mainCatB?.childs?.length!=0 && mainCatB?.childs?.map(item=>(
+  <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
+  ))}
+
+</div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+
+
+
+{/* <div className={`${Styles.right_div} centerc`}>
+ {mainCatA?.childs?.length!=0 && mainCatA?.childs?.map(item=>(
+  <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
+  ))}
+
+</div> */}
  
 
   </div>
 
 
-  <div className="col-10">
+  <div className="col-12 col-md-10">
   <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
