@@ -1,0 +1,14 @@
+.container{
+    height: 600px;
+    margin-top: 100px;
+}
+
+
+
+@media only screen and (max-width:900px){
+.container{
+   height: 100vh;
+    background-color: #fff;
+margin-top: 0px;
+}
+}

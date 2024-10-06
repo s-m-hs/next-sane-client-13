@@ -6,9 +6,9 @@ import LoginRight from './LoginRight/LoginRight'
 export default function LoginTemplate() {
   return (
     <>
-         <div className={`row ${style.row}`} >
-            <div className={`col-6 centerc boxSh ${style.col_right}`}><LoginRight/></div>
-            <div className={`col-6 centerc boxSh ${style.col_left}`} ><LoginLeft/></div>
+         <div className={`row ${style.row} centerc`} >
+            <div className={`col-12  col-lg-6 centerc  ${style.col_right}`}><LoginRight/></div>
+            <div className={`col-12  col-lg-6 centerc  ${style.col_left}`} ><LoginLeft/></div>
         </div>
     </>
   )

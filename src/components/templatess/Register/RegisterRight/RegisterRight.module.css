@@ -53,3 +53,22 @@
     right: 50vw;
     z-index: 100;
 }
+.img{
+    display: none;
+}
+
+@media only screen and (max-width:900px){
+    .img{
+        display: block;
+        width: 50%;
+    }
+    .div_hr{
+        width: 100%;
+    }
+    .div_input{
+        width: 90%;
+    }
+    .button{
+        width: 100% !important;
+    }
+}

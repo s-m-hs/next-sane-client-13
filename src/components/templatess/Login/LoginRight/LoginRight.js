@@ -95,6 +95,8 @@ useEffect(()=>{
 
   return (
     <div className={`${style.div_main} centerc`}>
+      <img className={style.img} src="../../../../../images/register/photo_2024-08-05_16-37-06.jpg" alt="" />
+
       <div className={`${style.div_hr} centerr`}>
         <hr />
         <h1> وارد شوید  :</h1>
