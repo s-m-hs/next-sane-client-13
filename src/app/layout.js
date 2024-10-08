@@ -1,3 +1,6 @@
+import 'primereact/resources/themes/saga-blue/theme.css';  // Theme
+import 'primereact/resources/primereact.min.css';          // Core CSS
+import 'primeicons/primeicons.css';                        // PrimeIcons
 import { Inter } from "next/font/google";
 import Header from "@/components/madules/Header/Header";
 import "bootstrap/dist/css/bootstrap.css";
