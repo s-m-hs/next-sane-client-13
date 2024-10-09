@@ -37,3 +37,13 @@
     opacity: 0.5 ;
 
 }
+
+
+@media only screen and (max-width:600px){
+    .circle{
+        display: none;
+    }
+    .circle_visibil{
+        display: none;
+    }
+}

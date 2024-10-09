@@ -4,69 +4,32 @@ import { SpeedDial } from 'primereact/speeddial';
 import { useRouter } from 'next/navigation';
 import { Toast } from 'primereact/toast';
 import Sidebar from '@/components/madules/p-user/Sidebar'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './puser.module.css'
 // import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Button } from 'primereact/button';
+import Link from 'next/link';
+import {  List ,X } from "@phosphor-icons/react";
+
 
 
 export default function layout({ children }) {
-  const toast = useRef(null);
-  const router = useRouter();
-  const items = [
-      {
-          label: 'Addsdfsdfsdf',
-          icon: 'pi pi-pencil',
-          command: () => {
-              toast.current.show({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-          }
-      },
-      {
-          label: 'Update',
-          icon: 'pi pi-refresh',
-          command: () => {
-              toast.current.show({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-          }
-      },
-      {
-          label: 'Delete',
-          icon: 'pi pi-trash',
-          command: () => {
-              toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-          }
-      },
-      {
-          label: 'Upload',
-          icon: 'pi pi-upload',
-          command: () => {
-              router.push('/fileupload');
-          }
-      },
-      {
-          label: 'React Website',
-          icon: 'pi pi-external-link',
-          command: () => {
-              window.location.href = 'https://react.dev/';
-          }
-      }
-  ];
+  const [flagButton,setFlagButton]=useState(true)
 
 
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+// useEffect(()=>{
+//   window.addEventListener('click',function name() {
+//     setFlagButton(false)
+//   })
+// })
+  
 
   return (
-    <div className='container'>
-      <div className='row'>
+    <div className={ `container ${style.container}`} >
+      <div className={ `row ${style.row}`}  >
         <div className={ `col-3 ${style.sidebar}`} > <Sidebar />
 
   
@@ -76,16 +39,38 @@ export default function layout({ children }) {
         <div className='col-lg-9' style={{marginTop:'50px'}}> 
 
      
-            <div className={` ${style.speeddial_div}`} style={{ position: 'relative',  }}>
+            {/* <div className={` ${style.speeddial_div}`} style={{ position: 'relative',  }}>
               <span className={` ${style.span} centerc`} >پروفایل </span>
                 <Toast ref={toast} />
-                {/* <SpeedDial model={items} radius={80} type="semi-circle" direction="up" style={{ left: 'calc(50% - 2rem)', bottom: 0 }} /> */}
                 <SpeedDial aria-labelledby="Options"  className={` ${style.speeddial}`} model={items} radius={80} type="semi-circle" direction="down" style={{ left: 'calc(50% - 2rem)', top: 0 }} ></SpeedDial>
-                {/* <SpeedDial model={items} radius={80} type="semi-circle" direction="left" style={{ top: 'calc(50% - 2rem)', right: 0 }} />
-                <SpeedDial model={items} radius={80} type="semi-circle" direction="right" style={{ top: 'calc(50% - 2rem)', left: 0 }} /> */}
-            </div>
-      
+            </div> */}
+      {flagButton &&   <span className={`spannn ${style.span1} centerc`} ><Link href={'/p-user/profile'}  
+      onClick={()=>setFlagButton(false)}
+      >پروفایل</Link> </span>}
+    
+{flagButton &&  <span className={` ${style.span2} centerc`} ><Link href={'/p-user/address'} 
+      onClick={()=>setFlagButton(false)}
+      >آدرس</Link> </span>}
+     
+     {flagButton &&     <span className={` ${style.span3} centerc`} ><Link href={'/p-user/order'}  
+           onClick={()=>setFlagButton(false)}
 
+     >سفارشات</Link> </span>}
+   {flagButton &&    <span className={` ${style.span4} centerc`} ><Link href={'/p-user/warranty'}
+         onClick={()=>setFlagButton(false)}
+         >گارانتی</Link> </span>}
+   
+
+      {flagButton &&  <span className={` ${style.span5} centerc`} ><Link href={'/p-user/repairs'} 
+            onClick={()=>setFlagButton(false)}
+            >خدمات</Link> </span>}
+
+     <button  onClick={()=>setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
+      {flagButton ? <X size={32} /> :  <List size={32} />}
+    
+     </button>
+                {/* <SpeedDial onClick={()=>setFlagButton(!flagButton)} aria-labelledby="Options" model={items}className={` ${style.speeddial}`}  direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" /> */}
+        
 
         {/* <div className={ `${style.menuebutton}`}>
       <Button

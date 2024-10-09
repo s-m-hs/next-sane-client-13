@@ -399,3 +399,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 }
 
+/* .p-speeddial-opened::after .spannn{
+  content: '';
+  background-color: #030303 !important;
+} */
