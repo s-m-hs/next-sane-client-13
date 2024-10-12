@@ -66,10 +66,7 @@
         font-size: 1.5cqi;
         color: #fff;
     }
-    .table td{
-        fon
-    }
-
+    
     @media only screen and (max-width:900px){
         .col{
           height: 100%;
