@@ -143,7 +143,7 @@ console.log(address)
             <div className={`row ${style.row}`}>
               <div className={`col ${style.col} boxSh`}>
                 <div className="row">
-                  <div className={`col-md-6 col-lg-6 ${style.col_6} `}>
+                  <div className={`col col-lg-6 ${style.col_6} `}>
                     <form
                       action=""
                       onSubmit={handleSubmit(handleRegistration, handleError)}
@@ -269,8 +269,8 @@ console.log(address)
                     </form>
                   </div>
 
-                  <div className={`col-md-6 col-lg-6 ${style.col_6}`}>
-                    <table className="table">
+                  <div className={`col-12 col-lg-6 ${style.col_6}`}>
+                    <table className={`table ${style.table}`}>
                       <thead>
                         <tr key="">
                           <th>آدرس</th>

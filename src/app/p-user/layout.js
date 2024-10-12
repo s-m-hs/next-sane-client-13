@@ -38,13 +38,8 @@ export default function layout({ children }) {
         </div>
         <div className='col-lg-9' style={{marginTop:'50px'}}> 
 
-     
-            {/* <div className={` ${style.speeddial_div}`} style={{ position: 'relative',  }}>
-              <span className={` ${style.span} centerc`} >پروفایل </span>
-                <Toast ref={toast} />
-                <SpeedDial aria-labelledby="Options"  className={` ${style.speeddial}`} model={items} radius={80} type="semi-circle" direction="down" style={{ left: 'calc(50% - 2rem)', top: 0 }} ></SpeedDial>
-            </div> */}
-      {flagButton &&   <span className={`spannn ${style.span1} centerc`} ><Link href={'/p-user/profile'}  
+     <div className={ ` ${style.sidebar_menue}`}>
+  {flagButton &&   <span className={`spannn ${style.span1} centerc`} ><Link href={'/p-user/profile'}  
       onClick={()=>setFlagButton(false)}
       >پروفایل</Link> </span>}
     
@@ -69,6 +64,8 @@ export default function layout({ children }) {
       {flagButton ? <X size={32} /> :  <List size={32} />}
     
      </button>
+     </div >
+    
                 {/* <SpeedDial onClick={()=>setFlagButton(!flagButton)} aria-labelledby="Options" model={items}className={` ${style.speeddial}`}  direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" /> */}
         
 

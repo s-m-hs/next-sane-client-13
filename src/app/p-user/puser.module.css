@@ -6,15 +6,23 @@
 
 
 
-
-
-
+.sidebar_menue{
+    display: none;
+}
 .menuebutton{
     display: none;
 }
 
 @media only screen and (max-width:900px){
- 
+    .container{
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    
+    .sidebar_menue{
+        display: inline;
+    }
     .container{
 height: 100vh;
 text-align: center;
