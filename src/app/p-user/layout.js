@@ -58,7 +58,7 @@ export default function layout({ children }) {
 
       {flagButton &&  <span className={` ${style.span5} centerc`} ><Link href={'/p-user/repairs'} 
             onClick={()=>setFlagButton(false)}
-            >خدمات</Link> </span>}
+            >تعمیرات</Link> </span>}
 
      <button  onClick={()=>setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
       {flagButton ? <X size={32} /> :  <List size={32} />}

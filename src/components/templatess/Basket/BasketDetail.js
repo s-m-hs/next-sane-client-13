@@ -322,7 +322,7 @@ export default function BasketDetail() {
                         unitPrice={item.unitPrice}
                         id={item.id}
                         cyProductID={item.cyProductID}
-                        quantity={item.cyQuantity}
+                        quantity={item.quantity}
                         updateQuantity={updateQuantity}
                         remove={removeHan}
                         // handleRemove={removeFromCart}

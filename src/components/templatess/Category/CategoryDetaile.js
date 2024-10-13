@@ -22,7 +22,6 @@ import Accordion from 'react-bootstrap/Accordion';
 export default function CategoryDetaile({ param }) {
   const [mainCategory, setMainCategory] = useState({});
   const [mainCatChilds, setMainCatChilds] = useState([]);
-  const [flagPro, setFlagPro] = useState(false);
   const [productByCat, setProductByCat] = useState([])
   const [flag, setFlag] = useState(false)
   const [page, setPage] = React.useState(1);
@@ -31,8 +30,10 @@ export default function CategoryDetaile({ param }) {
   const [allCount, setAllCount] = useState([]);
   const [mainCatA, setMainCatA] = useState({});
   const [mainCatB, setMainCatB] = useState({});
+  const [codePro,setCodePro]=useState('')
 
-
+console.log(mainCategory)
+// console.log(mainCategory?.item.code)
 
 
   // const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
@@ -47,7 +48,8 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
   const handleChange = (event, value) => {
     goToTop()
     setPage(value);
-    let code=mainCategory?.item.code
+    // let code=mainCategory?.item.code
+    let code=codePro
     let obj = {
       cat: code,
       pageNumber: value-1,
@@ -56,6 +58,19 @@ let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
   }
     getproductByCat(obj);
 };
+const changeId = (code) => {
+  // console.log(code)
+  setCodePro(code)
+  setPage(1)
+  let obj = {
+    cat: code,
+    pageNumber:0,
+    pageSize: pageCount
+  }
+  getproductByCat(obj)
+};
+
+
 useEffect(() => {
   if (productByCat?.length != 0 ) {
     let x = allCount;
@@ -86,12 +101,13 @@ useEffect(() => {
         }
       )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           return res.json();
         })
         .then((result) => {
-          console.log(result)
+          // console.log(result)
           if (result.childs?.length != 0) {
+            // console.log(result)
             setMainCatChilds(result.childs);
             setMainCategory(result);
 
@@ -116,10 +132,10 @@ useEffect(() => {
         body: JSON.stringify(obj)
 
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         return res.json()
       }).then(result => {
-        console.log(result)
+        // console.log(result)
         if (result.itemList?.length != 0) {
           setProductByCat(result.itemList)
           setAllCount(result.allCount)
@@ -136,16 +152,9 @@ useEffect(() => {
     myApppost()
   }
 
-  const changeId = (code) => {
-    let obj = {
-      cat: code,
-      pageNumber:page-1,
-      pageSize: pageCount
-    }
-    getproductByCat(obj)
-    setFlagPro(true);
-  };
 
+
+/////////////////////////////////sidebar==>>
   const getCategoryAccesory = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -162,11 +171,15 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatA)
     };
 postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatB)
   };
+
+  useEffect(()=>{
+    getCategoryAccesory()
+    getCategoryHard()
+  },[])
+  
+////////////////////////////////sidebar
+
   //////////////////////////////
-useEffect(()=>{
-  getCategoryAccesory()
-  getCategoryHard()
-},[])
 
   useEffect(() => {
     if (param !== null) {
@@ -183,6 +196,7 @@ useEffect(()=>{
       timer: 500
     }).then(res=>setFlag(prev=>!prev))
   }, []);
+
   ///////////////////////////
   useEffect(()=>{
   if(mainCatChilds.length==0 && mainCategory.item?.code){
@@ -197,7 +211,7 @@ useEffect(()=>{
   getproductByCat(obj)
   }
   setNameCategory(mainCategory.item?.name)
-  },[mainCatChilds])
+  },[mainCatChilds,page])
 
   useEffect(() => {
     if(mainCatChilds.length!==0){
@@ -209,14 +223,15 @@ useEffect(()=>{
     
     getproductByCat(obj)
     }
-    
 
+    ////for first to setcodePro==>>
+setCodePro(mainCatChilds[0]?.code)
   }, [flag])
 useEffect(()=>{
   setXtFlagSpinnerShow(false)
 },[])
-console.log(paginationArray)
-console.log(mainCatChilds)
+
+
   return (
     <div className={`container  centerc ${Styles.category}`} >
 <div className="row mt-5">
@@ -262,7 +277,7 @@ console.log(mainCatChilds)
   </div>
 
 
-  <div className="col-12 col-md-10">
+  <div className={`col-12 col-md-10 ${Styles.category_col}`}>
   <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
@@ -321,7 +336,7 @@ console.log(mainCatChilds)
       {
    paginationArray.length > 1 &&
              
-   <div className='pagination-div' >
+   <div className={`pagination-div ${Styles.pagination_div}`} >
    <Pagination count={ paginationArray.length}  page={page}
     //  ref={classRefB}
     onChange={handleChange}
@@ -330,6 +345,7 @@ console.log(mainCatChilds)
     style={{direction:'ltr'}}
      />
    </div>}
+
 
   </div>
 </div>

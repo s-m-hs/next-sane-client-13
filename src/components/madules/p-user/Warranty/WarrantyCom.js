@@ -3,26 +3,47 @@ import React, { useContext, useEffect, useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import style from "./WarrantyCom.module.css";
-import { useForm } from "react-hook-form";
-import {
-  IdentificationBadge,
-  IdentificationCard,
-  UserCircle,
-  DeviceMobile,
-  EnvelopeSimple,
-  CheckCircle,
-  CheckFat,
-  Asterisk,
-} from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { MainContext } from "@/context/MainContext";
-import alertN from "@/utils/Alert/AlertA";
+import { Accordion, AccordionTab } from 'primereact/accordion';
+
+
+
 export default function WarrantyCom() {
+  const [warantyArray,setWarantyArray]=useState([])
+  const [warrantyDetail,setWarrantyDetail]=useState({})
+  
   let{setXtFlagSpinnerShow}=useContext(MainContext)
+
+const getWarranty=()=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+  async function myApp(){
+    const res = await fetch(`${apiUrl}/api/CyGuarantee/getForUser`,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${getLocalStorage}`
+      },
+
+    }).then(res=>{
+      console.log(res)
+      if(res.status==200){
+        return res.json()
+      }
+    }).then(result=>{
+      console.log(result)
+      setWarantyArray(result)
+    })
+  }
+  myApp()
+}
+
+
+useEffect(()=>{
+getWarranty()
+},[warantyArray])
   useEffect(()=>{
   setXtFlagSpinnerShow(false)
-
   },[])
   return (
     <div>
@@ -43,80 +64,58 @@ export default function WarrantyCom() {
             <div className={`row ${style.row}`}>
               <div className={`col ${style.col} boxSh`}>
                 <div className="row">
-                  <div className="col-md-2 centerc">
+                  <div className={`col-md-2 centerc ${style.warrantyCod_col_right}`}>
                     <button
                       className={`btn btn-outline-success m-2  ${style.button_code}`}
                       disabled
                     >
                       شماره پذیرش
                     </button>
-                    <button
+
+
+                   {warantyArray?.length!=0 && warantyArray?.map((item=>(
+                          <button
                       className={`btn btn-outline-info m-1 ${style.button_code}`}
+                      onClick={()=>{setWarrantyDetail(item)
+                  
+                      }}
                     >
-                      25386
+                      {item.guaranteeID}
                     </button>
-                    <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>
-                    <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>
-                    <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>
-                    <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>  <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
-                    >
-                      25386
-                    </button>
+                   )))}
+                
                   </div>
                   <div className=" col-md-10">
                     <div className="row">
+                    <div className="card">
+            <Accordion activeIndex={0}>
+                <AccordionTab className={`${style.AccordionTab}`} header="شماره پذیرش">
+                {warantyArray?.length!=0 && warantyArray?.map((item=>(
+                          <button
+                      className={`btn btn-outline-info m-1 ${style.button_codeB}`}
+                      onClick={()=>{setWarrantyDetail(item)
+                  
+                      }}
+                    >
+                      {item.guaranteeID}
+                    </button>
+                   )))}
+                </AccordionTab>
+            </Accordion>
+        </div>
                     <button
                       className={`btn btn-info m-1 ${style.button_code}`}
                       disabled
                     >
-                      25386
+                      {warrantyDetail.guaranteeID}
                     </button>
                       <div className="col-md-4">
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled/>
+                          <input disabled
+                          value={warrantyDetail?.productName}
+                          />
                           <label>
                             نام محصول
                           </label>
@@ -126,7 +125,10 @@ export default function WarrantyCom() {
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled/>
+                          <input disabled
+                           value={warrantyDetail?.guaranteeCompany}
+
+                          />
                           <label>
                             شرکت گارانتی کننده
                           </label>
@@ -136,7 +138,9 @@ export default function WarrantyCom() {
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled/>
+                          <input disabled
+                          value={warrantyDetail?.createDate}
+                          />
                           <label>
                             تاریخ تحویل
                           </label>
@@ -149,7 +153,9 @@ export default function WarrantyCom() {
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled/>
+                          <input disabled
+                          value={warrantyDetail?.productStatus}
+                          />
                           <label>
                             وضعیت کالا
                           </label>
@@ -159,7 +165,9 @@ export default function WarrantyCom() {
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled/>
+                          <input disabled
+                          value={warrantyDetail?.guarantreePrice}
+                          />
                           <label>
                             هزینه گارانتی
                           </label>
@@ -172,7 +180,9 @@ export default function WarrantyCom() {
                         <div className={`${style.textarea_div} centerr`} >
                         <label> <button className="btn btn-light" disabled>ایراد کالا طبق اظهار مشتری:
                         </button>  </label>
-                          <textarea disabled
+                          <textarea 
+                          value={warrantyDetail?.productProblem}
+                          disabled
                             className={`login_label_float ${style.input} centerr`}
                           />
                         </div>
@@ -182,7 +192,9 @@ export default function WarrantyCom() {
                         <div className={`${style.textarea_div} centerr`} >
                         <label> <button className="btn btn-light" disabled>ملاحظات:
                         </button>  </label>
-                          <textarea disabled
+                          <textarea 
+                          value={warrantyDetail?.details}
+                          disabled
                             className={`login_label_float ${style.input} centerr`}
                           />
                         </div>
@@ -191,11 +203,17 @@ export default function WarrantyCom() {
                         <div  className={`${style.textarea_div} centerr`} >
                           <label> <button className="btn btn-light" disabled>توضیحات شرکت گارانتی کننده:
                             </button>  </label>
-                          <textarea disabled
+                          <textarea 
+                          bvalue={warrantyDetail?.companyExplaination}
+                          disabled
                             className={`login_label_float ${style.input} centerr`}
                           />
                         </div>
                       </div>
+                      <hr/>
+                      <hr/>
+                      <hr/>
+                      <hr/>
                     </div>
                   </div>
                 </div>

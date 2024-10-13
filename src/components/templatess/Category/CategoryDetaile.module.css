@@ -4,6 +4,9 @@
 .category_row{
     width: 100%;
 }
+.category_col{
+    background-color: #fff;
+}
 .category__cart_div{
     align-items: center;
 }
@@ -98,5 +101,11 @@ transition: all 0.2s ease-in-out;
 @media only screen and (max-width:900px){
     .right_maindiv{
         display: none;
+    }
+    .breadcrumb_row{
+        display: none;
+    }
+    .pagination_div{
+        margin-bottom: 80px;
     }
 }

@@ -39,6 +39,9 @@ border: none;
     align-items: center;
     width: 100%;
 }
+.colPrice button{
+    font-size: 2cqi;
+}
 .btn_hide{
     width: 80% !important;
     height: 35px;
