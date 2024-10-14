@@ -14,7 +14,7 @@ import alertN from "@/utils/Alert/AlertA";
 import { Alert, Modal, Tooltip } from "react-bootstrap";
 import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
-
+import { Sidebar } from 'primereact/sidebar';
 
 
 
@@ -29,6 +29,8 @@ export default function Header() {
   const [flagCateMobile, setFlagCateMobile] = useState(true)
   const ulRef = useRef()
   const ulRefA = useRef()
+  const [visible, setVisible] = useState(false);
+  const [visibleB, setVisibleB] = useState(false);
 
   console.log(ulRefA.current);
   // const getLocalStorage = localStorage.getItem('loginToken')
@@ -41,6 +43,7 @@ export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const [searchType, setSearchType] = useState('')
+  const [searchTypeB, setSearchTypeB] = useState('')
   const [searchBoxArr, setSearchBoxArr] = useState([])
   const [flagSearch, setFlagSearch] = useState(false)
 
@@ -59,12 +62,16 @@ export default function Header() {
     setSearchType(e.target.value)
 
   }
+  const searchChangeB = (e) => {
+    setSearchTypeB(e.target.value)
+
+  }
   const searchBox = () => {
     const getLocalStorage = localStorage.getItem('loginToken')
     setFlagSearch(false)
     async function myApp() {
       let obj = {
-        name: searchType,
+        name: searchType  ? searchType : searchTypeB ,
         productCategoryCode: null,
         productCategoryId: null,
         categoryCode: null,
@@ -154,9 +161,16 @@ export default function Header() {
       console.log(e)
       if (e.keyCode == 13 && searchType !== '') {
         searchBox()
+   setVisible(true)
+
+        
+      }  else if(e.keyCode == 13 && searchTypeB !== ''){
+        searchBox()
+        setVisibleB(true)
       } else if (e.keyCode == 27 && flagSearch) {
         setFlagSearch(false)
         setSearchType('')
+        setSearchTypeB('')
       }
 
     }
@@ -239,8 +253,10 @@ export default function Header() {
                     onChange={searchChange}
                   />
                   <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
-                    onClick={() => { searchBox() }} />
-                  {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
+                    onClick={() => { 
+                      setVisible(true)
+                      searchBox() }} />
+                  {/* {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
                     <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
@@ -262,8 +278,58 @@ export default function Header() {
 
 
 
-                  </div>}
+                  </div>} */}
+                  <div  className={`${styles.sidebar_input_div} `} >
+                                    <Sidebar 
+                 
+                  visible={visible} onHide={() => setVisible(false)} fullScreen>
+                  {flagSearch &&
+                  
+                  <div className="container"> 
+                  <div className={`${styles.Header_rightSide__div_search}  centerc`}>   <input
+                    className={styles.Header_rightSide__div_search_input}
+                    type="text"
+                    placeholder="دنبال چی میگردی...؟"
+                    value={searchType}
+                    onChange={searchChange}
+                  />
+                  <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
+                    onClick={() => { 
+                      setVisible(true)
+                      searchBox() }} /></div>
 
+
+                  <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `} >
+                    {/* <span><XCircle size={24} onClick={() => {
+                      setFlagSearch(false)
+                      setSearchType('')
+                    }} /></span> */}
+                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
+                      <Link href={`/product/${item.id}`} onClick={() => {
+                        setFlagSearch(false)
+                        setSearchBoxArr([])
+                        setSearchType('')
+                        setXtFlagSpinnerShow(true)
+                      setVisible(false)
+                      }}
+                      >
+                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                          <span>{item.name}</span>
+                          <img src={item.smallImage} alt="" />
+                        </div>
+                      </Link>
+
+                    )) : ''}
+
+
+
+                  </div></div>
+              
+                  
+                 }
+</Sidebar>
+                  </div>
+  
                 </div>
                 {/* </div> */}
 
@@ -553,16 +619,21 @@ export default function Header() {
                     onChange={searchChange}
                   />
                   <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
-                    onClick={() => { searchBox() }} />
-                  {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
+                    onClick={() => { 
+                      setVisible(true)
+                      searchBox() }} />
+                  {/* {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
                     <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
                     }} /></span>
                     {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link
-                        onClick={() => setXtFlagSpinnerShow(true)}
-                        href={`/product/${item.id}`}>
+                      <Link href={`/product/${item.id}`} onClick={() => {
+                        setFlagSearch(false)
+                        setSearchBoxArr([])
+                        setSearchType('')
+                        setXtFlagSpinnerShow(true)}}
+                      >
                         <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                           <span>{item.name}</span>
                           <img src={item.smallImage} alt="" />
@@ -573,8 +644,38 @@ export default function Header() {
 
 
 
-                  </div>}
+                  </div>} */}
+                  <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+                  {flagSearch &&
+                  
+                  <div className="container"> 
+                  <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `} >
+                    {/* <span><XCircle size={24} onClick={() => {
+                      setFlagSearch(false)
+                      setSearchType('')
+                    }} /></span> */}
+                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
+                      <Link href={`/product/${item.id}`} onClick={() => {
+                        setFlagSearch(false)
+                        setSearchBoxArr([])
+                        setSearchType('')
+                        setXtFlagSpinnerShow(true)}}
+                      >
+                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                          <span>{item.name}</span>
+                          <img src={item.smallImage} alt="" />
+                        </div>
+                      </Link>
 
+                    )) : ''}
+
+
+
+                  </div></div>
+              
+                  
+                 }
+</Sidebar>
                 </div>
 
               </div>
@@ -1054,7 +1155,10 @@ export default function Header() {
 {
   xtFlagLogin &&  <Link href={'/'}>
                       <SignOut size={15} />
-                      <span onClick={() => setXtFlagSpinnerShow(true)}
+                      <span onClick={() => {
+                        exitHandler()
+                        setXtFlagSpinnerShow(true)
+                      }}
 
                       >
                         خروج</span></Link>
@@ -1086,7 +1190,7 @@ export default function Header() {
                     className={`${styles.Header_leftSide__div_mobile} centerr`}>
                     {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`} >{cartCounter}</span>}
                   </div>
-                  <ShoppingCart size={20} />سبدخرید
+                  <ShoppingCart size={20}  />سبدخرید
 
                 </Link>
 
@@ -1095,9 +1199,56 @@ export default function Header() {
 
 
 
-                <li>
-                  <MagnifyingGlass size={20} />
+                <li onClick={() => setVisibleB(true)}>
+                  <MagnifyingGlass size={20}  />
                   جسنجو</li>
+<div className={`${styles.sidebar_mobile} `}>
+     <Sidebar   visible={visibleB} onHide={() => setVisibleB(false)} fullScreen>
+                  <div className={`${styles.Header_rightSide__div_search}  centerc`}>
+
+                  <input
+                    className={styles.Header_rightSide__div_search_input}
+                    type="text"
+                    placeholder="دنبال چی میگردی...؟"
+                    value={searchTypeB}
+                    onChange={searchChangeB}
+                  />
+                  <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
+                    onClick={() => { searchBox() }} />
+
+                  {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
+                    {/* <span><XCircle size={24} onClick={() => {
+                      setFlagSearch(false)
+                      setSearchTypeB('')
+                    }} 
+                    /></span> */}
+                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
+                      <Link href={`/product/${item.id}`} onClick={() => {
+                        setFlagSearch(false)
+                        setSearchBoxArr([])
+                        setSearchTypeB('')
+                        setXtFlagSpinnerShow(true)
+                        setVisibleB(false)
+                      }
+                      
+                      }
+                      >
+                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
+                          <span>{item.name}</span>
+                          <img src={item.smallImage} alt="" />
+                        </div>
+                      </Link>
+
+                    )) : ''}
+
+
+
+                  </div>}
+
+                </div>
+                  </Sidebar>
+</div>
+               
               </ul>
 
 
