@@ -10,11 +10,15 @@ import { useRouter } from 'next/navigation';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import alertN from '@/utils/Alert/AlertA';
 import DateFormat from '@/utils/DateFormat';
+import { Sidebar } from 'primereact/sidebar';
 
 export default function OrderCom() {
   const [allOrder, setAllOrder] = useState([])
-  const reverceAllOrder = allOrder.slice().reverse()
-  const [stateId, setStateId] = useState(1);
+  const reverceAllOrder = allOrder?.slice().reverse()
+  const [OrderId, setOrderId] = useState(1);
+  const [visible, setVisible] = useState(false);
+  const [orderArrayByDetail, setorderArrayByDetail] = useState([])
+
 
 
   let { setXtFlagSpinnerShow } = useContext(MainContext)
@@ -30,6 +34,30 @@ export default function OrderCom() {
     { id: 7, state: " همه سفارشات" },
   ];
 
+  const getOrderByOrderID = (id) => {
+    const getLocalStorage = localStorage.getItem('loginToken')
+
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyOrders/GetOrderDetails?OrderId=${id}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${getLocalStorage}`,
+            "Content-Type": "application/json",
+          }
+        }
+      ).then(res => {
+        console.log(res)
+        if (res.status == 200) {
+          return res.json()
+        }
+      }).then(result => {
+        console.log(result)
+        setorderArrayByDetail(result)
+      }).catch(err => console.log(err))
+    }
+    myApp()
+  }
   const getAllOrder = () => {
     const getLocalStorage = localStorage.getItem('loginToken')
     async function myApp() {
@@ -124,7 +152,52 @@ export default function OrderCom() {
                         <td>{item.id}</td>
                         <td><DateFormat dateString={`${item.orderDate}`} /></td>
                         {/* <td>{item.statusText}</td> */}
-                        <td><button className='btn btn-primary'>جزيیات سفارش</button></td>
+                        <td><button className='btn btn-primary' onClick={() => {
+                          getOrderByOrderID(item.id)
+                          setOrderId(item.id)
+                          setVisible(true)
+                        }}>جزيیات سفارش</button>
+                          <Sidebar
+
+                            visible={visible} onHide={() => setVisible(false)} >
+
+                            <div className='container'>
+                              <div className='row'>
+                                <div className='col'>
+
+                                  {orderArrayByDetail?.length != 0 &&
+                                    <div className={`table table-striped table-hover ${style.basket_table}`}>
+
+                                      <thead>
+                                        <tr>
+                                          <th>تصویر کالا</th>
+                                          <th>عنوان کالا</th>
+                                          <th>تعداد</th>
+                                          <th>قیمت واحد</th>
+                                          <th className={`${style.th}`}>قیمت کل</th>  </tr>
+                                      </thead>
+
+                                      <tbody>
+                                        {orderArrayByDetail?.map((item)=>(
+                                            <tr>
+                                        <td><img className={` ${style.image} boxSh`} src={`${item.cyProductImgUrl}`} alt="" /></td>  
+                                        <td>{item.partNumber}</td>  
+                                        <td>{item.quantity}</td>  
+                                        <td>{item.unitOfferPrice ? item.unitOfferPrice: item.unitPrice }</td>  
+                                        <td>{item.totalPrice}</td>  
+                                        </tr>
+                                        ))}
+                                      
+                                      </tbody>
+
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+
+                          </Sidebar>
+                        </td>
                       </tr>
                     )))}
 

@@ -19,3 +19,12 @@
     .order_allorder th{
         margin-left: 35px !important;
     }
+    .image{
+        width: 100px;
+    }
+    .basket_table {
+        margin: 0 auto;
+        width: fit-content;
+        text-align: center;
+        font-size: 15px;
+    }
