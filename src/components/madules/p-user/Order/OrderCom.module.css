@@ -8,4 +8,14 @@
         background-color: var(--white1ffffff);
         margin-left: 10%;
     }
-    
+    .order_allorder {
+      text-align: center;
+        width: fit-content;
+        margin: 0 auto;
+    }
+    .order_allorder td{
+        font-size: 25px;
+    }
+    .order_allorder th{
+        margin-left: 35px !important;
+    }

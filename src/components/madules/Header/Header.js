@@ -659,7 +659,9 @@ export default function Header() {
                         setFlagSearch(false)
                         setSearchBoxArr([])
                         setSearchType('')
-                        setXtFlagSpinnerShow(true)}}
+                        setXtFlagSpinnerShow(true)
+                        setVisible(false)
+                      }}
                       >
                         <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                           <span>{item.name}</span>
