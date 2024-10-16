@@ -35,6 +35,7 @@ export default function OrderCom() {
   ];
 
   const getOrderByOrderID = (id) => {
+    setorderArrayByDetail([])
     const getLocalStorage = localStorage.getItem('loginToken')
 
     async function myApp() {
@@ -137,6 +138,7 @@ export default function OrderCom() {
                       <th> شناسه مشتری</th>
                       <th>شناسه سفارش</th>
                       <th>تاریخ ثبت سفارش</th>
+                      <th>مبلغ نهایی </th>
                       {/* <th>وضعیت سفارش</th> */}
                       <th>تغییر وضعیت </th>
                     </tr>
@@ -151,6 +153,7 @@ export default function OrderCom() {
                         <td>{item.cyUserID}</td>
                         <td>{item.id}</td>
                         <td><DateFormat dateString={`${item.orderDate}`} /></td>
+                        <td>{`${(item.totalAmount).toLocaleString()}`} تومان</td>
                         {/* <td>{item.statusText}</td> */}
                         <td><button className='btn btn-primary' onClick={() => {
                           getOrderByOrderID(item.id)
@@ -159,7 +162,7 @@ export default function OrderCom() {
                         }}>جزيیات سفارش</button>
                           <Sidebar
 
-                            visible={visible} onHide={() => setVisible(false)} >
+                            visible={visible} onHide={() => setVisible(false)} fullScreen>
 
                             <div className='container'>
                               <div className='row'>
@@ -173,18 +176,18 @@ export default function OrderCom() {
                                           <th>تصویر کالا</th>
                                           <th>عنوان کالا</th>
                                           <th>تعداد</th>
-                                          <th>قیمت واحد</th>
-                                          <th className={`${style.th}`}>قیمت کل</th>  </tr>
+                                          <th>قیمت واحد(تومان)</th>
+                                          <th className={`${style.th}`}>قیمت کل(تومان)</th>  </tr>
                                       </thead>
-
+                                     
                                       <tbody>
                                         {orderArrayByDetail?.map((item)=>(
                                             <tr>
                                         <td><img className={` ${style.image} boxSh`} src={`${item.cyProductImgUrl}`} alt="" /></td>  
                                         <td>{item.partNumber}</td>  
                                         <td>{item.quantity}</td>  
-                                        <td>{item.unitOfferPrice ? item.unitOfferPrice: item.unitPrice }</td>  
-                                        <td>{item.totalPrice}</td>  
+                                        <td>{item.unitOfferPrice ?  `${(item.unitOfferPrice).toLocaleString()} `: `${item.unitPrice.toLocaleString()} ` }</td>  
+                                        <td>{item.totalPrice} </td>  
                                         </tr>
                                         ))}
                                       

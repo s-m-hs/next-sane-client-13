@@ -4,7 +4,7 @@ import Contact from '@/components/templatess/Contact/Contact'
 
 export default function ContactUs() {
   return (
-    <></>
-    // <Contact/>
+    // <></>
+    <Contact/>
   )
 }
