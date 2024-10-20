@@ -13,7 +13,7 @@ let {setXtFlagLogin,setCartCounter,setXtFlagSpinnerShow}=useContext(MainContext)
 const rout=useRouter()
 const pathname = usePathname();
 
-console.log(pathname)
+// console.log(pathname)
   const handleLinkClick = (link) => {
     setActiveLink(link); // Set the active link when clicked
   };

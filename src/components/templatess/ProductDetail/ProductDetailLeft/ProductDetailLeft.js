@@ -12,7 +12,7 @@ export default function ProductDetailLeft({detail}) {
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000)
   
-
+// console.log(detail)
 
   return (
     <div className="container " style={{ height: '600px' }}>
@@ -39,10 +39,15 @@ export default function ProductDetailLeft({detail}) {
               <span>سرعت رد‌گیری: 650 اینچ بر ثانیه</span> */}
             </div>
             <div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
-
-              <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} تومان</span>
+{detail.supply !=0 ? <>
+  <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} تومان</span>
               <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} تومان</span>
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
+</> :
+              <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: استعلام موجودی وقیمت</span>
+
+}
+             
             </div>
             <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
               <button className="btn btn-info "
@@ -58,7 +63,10 @@ export default function ProductDetailLeft({detail}) {
                            addToCart(detail.id,'1',setCartCounter)
                         
                       }}
-              >افزودن به سبد خرید</button>
+              >
+        {detail.supply !=0 ? 'فزودن به سبد خرید' : 'استعلام موجودی و قیمت'}
+                
+                </button>
 
             </div>
 
@@ -80,7 +88,8 @@ export default function ProductDetailLeft({detail}) {
                  addToCart(detail.id,'1',setCartCounter)
               
             }}
-          >افزودن به سبد خرید</button>
+          >           {detail.supply !=0 ? 'فزودن به سبد خرید' : 'استعلام موجودی و قیمت'}
+</button>
         </div>
 
 <div className={`${Styles.ProductDetailL_divright_swiper_bottom} col-12`}  >
@@ -103,9 +112,17 @@ export default function ProductDetailLeft({detail}) {
 
       <div className="col-6">
       <div className={`${Styles.ProductDetailL_left_price} centerc mt-5`} >
-      <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} تومان</span>
+
+        {detail.supply !=0 ? <>
+          <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} تومان</span>
               <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} تومان</span>
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
+        </> :
+                      <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: استعلام موجودی وقیمت</span>
+
+        }
+
+    
 
 </div>
 

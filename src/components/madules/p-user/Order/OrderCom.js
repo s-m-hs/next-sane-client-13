@@ -48,12 +48,12 @@ export default function OrderCom() {
           }
         }
       ).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.status == 200) {
           return res.json()
         }
       }).then(result => {
-        console.log(result)
+        // console.log(result)
         setorderArrayByDetail(result)
       }).catch(err => console.log(err))
     }
@@ -69,12 +69,12 @@ export default function OrderCom() {
           "Content-Type": "application/json",
         },
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.status == 200) {
           return res.json()
         }
       }).then(result => {
-        console.log(result)
+        // console.log(result)
         setAllOrder(result)
       }).catch(err => console.log(err))
     }

@@ -99,7 +99,7 @@ export default function AddressCom() {
         }
       )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.ok) {
             AlertA();
             return res.json();
@@ -123,7 +123,7 @@ export default function AddressCom() {
   useEffect(()=>{
     setXtFlagSpinnerShow(false)
   },[])
-console.log(address)
+// console.log(address)
   return (
     <div>
       <Tabs

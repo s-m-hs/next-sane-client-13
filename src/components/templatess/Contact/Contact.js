@@ -53,7 +53,7 @@ let {setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
 <h1>اطلاعات تماس:</h1>
 <h3>استان قم</h3>
 <h3>بلوار سمیه نبش کوچه 6</h3>
-<h3>شماره تماس: 37835457</h3>
+<h3>شماره تماس: 37839322 -37835456- 37835457</h3>
 
 
 

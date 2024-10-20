@@ -78,6 +78,7 @@ border: none;
 .btn_modal_close{
     width: 10%;
     font-size: 1.2cqi;
+    width: 20%;
 }
 
 .mobileAdd_div{
@@ -91,11 +92,17 @@ border: none;
     font-size: 1cqi;
     ;
 }
+.cath_input{
+    color: var(--graydcdee1);
+    font-size: 15px;
+}
 
 .col_8_bottom_div_1{
     display: none;
 }
-
+.cath_div_mobile{
+    display: none;
+}
 @media only screen and (max-width:900px){
 .container{
     overflow: hidden;
@@ -112,7 +119,7 @@ border: none;
     display: flex !important;
     position: fixed;
     bottom: 70px;
-    width: 80%;
+    width: 95%;
 
 }
 .col_8_div_table{
@@ -159,7 +166,17 @@ flex-direction: column !important;
 }
 .btn_hide{
     margin-bottom: 30px !important;
-    font-size:15px;
+    font-size:12px;
+
+}
+.cath_div_mobile{
+    display: flex;
+}
+.btn_modal_ok{
+    font-size: 13px;
+}
+.btn_modal_close{
+    font-size: 13px;
 
 }
 }

@@ -26,22 +26,22 @@ const getWarranty=()=>{
       },
 
     }).then(res=>{
-      console.log(res)
+      // console.log(res)
       if(res.status==200){
         return res.json()
       }
     }).then(result=>{
-      console.log(result)
+      // console.log(result)
       setWarantyArray(result)
     })
   }
   myApp()
 }
-
+console.log(warantyArray)
 
 useEffect(()=>{
 getWarranty()
-},[warantyArray])
+},[])
   useEffect(()=>{
   setXtFlagSpinnerShow(false)
   },[])
@@ -74,8 +74,10 @@ getWarranty()
 
 
                    {warantyArray?.length!=0 && warantyArray?.map((item=>(
+// {warantyArray?.}
+                  
                           <button
-                      className={`btn btn-outline-info m-1 ${style.button_code}`}
+                      className={item.type== 0 ? `btn btn-outline-info m-1 ${style.button_code}` : `${style.btn_hide}`}
                       onClick={()=>{setWarrantyDetail(item)
                   
                       }}
@@ -87,12 +89,12 @@ getWarranty()
                   </div>
                   <div className=" col-md-10">
                     <div className="row">
-                    <div className="card">
+                    <div  className={ `card ${style.AccordionTab_card}`}>
             <Accordion activeIndex={0}>
                 <AccordionTab className={`${style.AccordionTab}`} header="شماره پذیرش">
                 {warantyArray?.length!=0 && warantyArray?.map((item=>(
                           <button
-                      className={`btn btn-outline-info m-1 ${style.button_codeB}`}
+                      className={item.type== 0 ? `btn btn-outline-info m-1 ${style.button_codeB}` :`${style.btn_hide}`}
                       onClick={()=>{setWarrantyDetail(item)
                   
                       }}

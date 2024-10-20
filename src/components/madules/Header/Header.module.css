@@ -680,7 +680,10 @@ transition:transform 0.1s linear;
 .Header_rightSide__div_searchbox span {
     font-size: 15px;
 }
-
+.DotLoader{
+    right: 20%;
+    top: 40%; 
+}
 
 }
 

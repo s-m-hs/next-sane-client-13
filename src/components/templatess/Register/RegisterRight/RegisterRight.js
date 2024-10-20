@@ -44,7 +44,7 @@ const alertB=()=>alertN('center','error'," ثبت نام انجام نشد دو�
 
       ////////////////////////////
 const handleRegistration=(data)=>{
-  console.log(data);
+  // console.log(data);
 let obj={
     un: data.userName,
   pw:data.password

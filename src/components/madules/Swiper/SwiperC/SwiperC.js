@@ -20,7 +20,7 @@ const getProductByCat=()=>{
     pageNumber: 0,
     pageSize: 100
   }
-  console.log(obj)
+  // console.log(obj)
   async function myApp(){
     const res=await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`,{
       method:'POST',
@@ -29,10 +29,10 @@ const getProductByCat=()=>{
       },
       body:JSON.stringify(obj)
     }).then(res=>{
-      console.log(res)
+      // console.log(res)
       return res.json()
     }).then(result=>{
-      console.log(result)
+      // console.log(result)
       setProductByCatArray(result)
     }).catch(err=>console.log(err))
   }
@@ -42,7 +42,7 @@ useEffect(()=>{
   getProductByCat()
 },[])
 
-console.log(productByCatArray)
+// console.log(productByCatArray)
   return (
     <>
     <div  className='swipercomb-div'

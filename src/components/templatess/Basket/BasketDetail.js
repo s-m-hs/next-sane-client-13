@@ -16,7 +16,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
-import { HandTap, CheckCircle } from "@phosphor-icons/react";
+import { HandTap, CheckCircle,X } from "@phosphor-icons/react";
 
 export default function BasketDetail() {
   let {
@@ -54,7 +54,7 @@ export default function BasketDetail() {
     );
 
   const AlertC = () =>
-    alertN("center", "success", "خرید شما با موفقیت انجام شد", 1500).then(
+    alertN("center", "success", "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید", 3500).then(
       (res) => rout.push("/")
     );
 
@@ -84,7 +84,7 @@ export default function BasketDetail() {
         }
       )
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status == 200) {
             return res.json();
           }
@@ -107,9 +107,9 @@ export default function BasketDetail() {
     setCartCounter((prevCounter) => prevCounter - 1);
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      console.log(id);
+      // console.log(id);
       const toRemoveId = JSON.parse(localStorage.getItem(key));
-      console.log(toRemoveId);
+      // console.log(toRemoveId);
       if (key.startsWith("cartObj") && toRemoveId.value == id) {
         removeItem(id);
         localStorage.removeItem(key);
@@ -191,7 +191,7 @@ export default function BasketDetail() {
   };
 
   const updateQuantity = (id, newQuantity) => {
-    console.log("updateQuantity");
+    // console.log("updateQuantity");
     let basketArray = [];
     basket.forEach((item) => {
       if (item.cyProductID !== id) {
@@ -200,7 +200,7 @@ export default function BasketDetail() {
     });
     basketArray.push({ cyProductID: id, quantity: newQuantity });
     setBasket(basketArray);
-    console.log(basketArray);
+    // console.log(basketArray);
     setFlagUpdate(true);
   };
 
@@ -253,14 +253,14 @@ export default function BasketDetail() {
       setTotal(totalPrice);
     };
     calculateTotalPrice();
-    console.log(total);
+    // console.log(total);
   }, [getBasket]);
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
-  console.log(getBasket);
-  console.log(toBuy);
+  // console.log(getBasket);
+  // console.log(toBuy);
 
   return (
     <div className={` ${style.container}`} >
@@ -325,6 +325,7 @@ export default function BasketDetail() {
                         quantity={item.quantity}
                         updateQuantity={updateQuantity}
                         remove={removeHan}
+                        supply={item.supply}
                         // handleRemove={removeFromCart}
                       />
                     </>
@@ -367,7 +368,7 @@ onClick={paymentHandler}
 تکمیل خرید
 </button>
               </div>
-
+           
 
 
               <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
@@ -390,6 +391,14 @@ onClick={paymentHandler}
           
           </div>
         </div>
+
+        <div className={`centerc ${style.cath_div_mobile}`}>
+              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
+              </span>
+              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
+              </span>
+            </div>
+
         <div className={`col-lg-3 centerc ${style.col_4} boxSh`}>
           <div>
             <div className="centerc" style={{ alignItems: "center" }}>
@@ -405,6 +414,7 @@ onClick={paymentHandler}
                 به روز رسانی سبد خرید
               </button>
             </div>
+
             <div>
               <div className="centerc" style={{ alignItems: "center" }}>
                 <button
@@ -420,6 +430,13 @@ onClick={paymentHandler}
                 </button>
               </div>
             </div>
+            <div className={`centerc ${style.cath_div}`}>
+              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
+              </span>
+              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
+              </span>
+            </div>
+        
 
             <div className={`centerr ${style.colPrice}`}>
               <button
@@ -475,6 +492,7 @@ onClick={paymentHandler}
               className={`btn btn-danger ${style.btn_modal_close}`}
               onClick={handleClose}
             >
+              <X size={16} color="#fff" weight="duotone" />
               بستن
             </button>
             <button
@@ -485,7 +503,7 @@ onClick={paymentHandler}
               }
               onClick={handleRegisterShop}
             >
-              <CheckCircle size={32} color="#fff" weight="duotone" />
+              <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید
             </button>
           </Modal.Footer>

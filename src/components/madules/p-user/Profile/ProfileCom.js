@@ -38,7 +38,7 @@ let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile,setXt
  
   });
   const router = useRouter()
-  console.log(errors?.update)
+  // console.log(errors?.update)
 ////////////////////////
 const handleRegistration=(data)=>{
   // console.log(data);
@@ -55,7 +55,7 @@ const handleRegistration=(data)=>{
   userImageUrl: "string",
   username:username
 }
-console.log(obj)
+// console.log(obj)
 async function myApp(){
   const getLocalStorage=localStorage.getItem('loginToken')
   const res=await fetch(`${apiUrl}/api/Customer/UpdateProfile`,{
@@ -66,7 +66,7 @@ async function myApp(){
     },
     body:JSON.stringify(obj)
   }).then(res=>{
-    console.log(res)
+    // console.log(res)
 if(res.status==200){
   alertA()
   return res.json()

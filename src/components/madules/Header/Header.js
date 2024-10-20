@@ -32,7 +32,7 @@ export default function Header() {
   const [visible, setVisible] = useState(false);
   const [visibleB, setVisibleB] = useState(false);
 
-  console.log(ulRefA.current);
+  // console.log(ulRefA.current);
   // const getLocalStorage = localStorage.getItem('loginToken')
   // const getLocalStorageUser = localStorage.getItem('user')
   const [userName, setUserName] = useState('')
@@ -79,7 +79,7 @@ export default function Header() {
         pageNumber: 0,
         pageSize: 1000
       }
-      console.log(obj)
+      // console.log(obj)
       const res = await fetch(`${apiUrl}/api/CyProducts/SearchProducts`, {
         method: 'POST',
         headers: {
@@ -88,7 +88,7 @@ export default function Header() {
         },
         body: JSON.stringify(obj)
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.status == 200) {
           return res.json()
         }
@@ -104,7 +104,7 @@ export default function Header() {
     }
     myApp()
   }
-  console.log(searchBoxArr)
+  // console.log(searchBoxArr)
   ////////////////////////////  
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -127,7 +127,7 @@ export default function Header() {
     setXtFlagLogin(false)
     setCartCounter(0)
     rout.push('/')
-    console.log('object')
+    // console.log('object')
   }
 
   ///////////////////////////////
@@ -144,7 +144,7 @@ export default function Header() {
           Authorization: `Bearer ${getLocalStorage}`,
         }
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.status == 200) {
           setUserName(getLocalStorageUser)
           setFlag(true)
@@ -158,7 +158,7 @@ export default function Header() {
 
   useEffect(() => {
     const chekKey2 = (e) => {
-      console.log(e)
+      // console.log(e)
       if (e.keyCode == 13 && searchType !== '') {
         searchBox()
    setVisible(true)

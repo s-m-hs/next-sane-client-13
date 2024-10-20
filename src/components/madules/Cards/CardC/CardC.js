@@ -9,14 +9,17 @@ import alertN from '@/utils/Alert/AlertA'
 import updateBasket from '@/utils/ApiUrl/updateBasket'
 
 
-export default function CardC({imgSrc,title,price,id,clickSpinner }) { 
+export default function CardC({imgSrc,title,price,id,clickSpinner,supply }) { 
   let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket}=useContext(MainContext)
 
 
-  const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  
-
-});
-
+  const AlertA=()=> {
+if(supply!=0){
+  alertN('center','success'," به سبد خرید اضافه شد...",1500)
+}
+else if(supply==0){alertN('center','success'," برای استعلام قیمت به سبد خرید اضافه شد...",1500);}
+  } ;
+// console.log(supply)
   return (
     <div
      data-aos='fade-up'
@@ -28,12 +31,19 @@ export default function CardC({imgSrc,title,price,id,clickSpinner }) {
   href={`/product/${id}`}>
       <img src={imgSrc} alt="" />
 
-      </Link>
+      </Link> 
 
     <span className={Styles.cardprob_title} > {title} </span>
 
     {/* <span>368,000</span> */}
+{supply!=0  ?  
     <span className={Styles.cardprob_price}>{price?.toLocaleString()}تومان </span>
+:
+<span className={Styles.cardprob_price}>استعلام قیمت</span>
+
+
+  }
+
     
     <div className={`${Styles.cardprob__icon_div} centerr`} >
     <ShoppingCart size={32} color="#19a7af" weight="duotone"
@@ -44,9 +54,8 @@ export default function CardC({imgSrc,title,price,id,clickSpinner }) {
             cyProductID: id,
             quantity: 1
           }] 
-          xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+          xtFlagLogin  ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
           :
-
              addToCart(id,'1',setCartCounter)
           
         }}

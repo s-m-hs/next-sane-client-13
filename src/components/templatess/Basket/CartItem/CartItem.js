@@ -78,6 +78,7 @@ const handleRemove=(e,id)=>{
           </div>
         </td>
 
+
         <td className="tp-cart-price">
           {
           props.unitPrice === null ? (

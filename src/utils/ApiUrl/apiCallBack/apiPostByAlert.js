@@ -14,7 +14,7 @@ const postApiByAlert=(url,obj,alert,alertB)=>{
       }
     )
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         if(res.ok && res.status!=400){
      return res.json();
         } else {

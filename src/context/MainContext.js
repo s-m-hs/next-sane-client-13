@@ -38,10 +38,10 @@ const MainProvider = ({ children }) => {
                 Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
               },
             }).then(res=>{
-              console.log(res)
+              // console.log(res)
               return res.json()
             }).then(result=>{
-              console.log(result)
+              // console.log(result)
               if(result.cyOrderItems){
                 setGetBasket(result.cyOrderItems)  
                 setCartCounter(result.cyOrderItems?.length)
@@ -63,7 +63,7 @@ async function myApp(){
       Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
     },
   }).then(res=>{
-    console.log(res)
+    // console.log(res)
     if(res.status==200){
     return  res.json()
     }
@@ -77,7 +77,7 @@ async function myApp(){
     setMobile(result.mobile)   
     }
    
-    console.log(result)
+    // console.log(result)
   }) 
 }
 myApp()
@@ -92,10 +92,10 @@ const getAddress=()=>{
         Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
       }, 
     }).then(res=>{
-      console.log(res);
+      // console.log(res);
       return res.json()
     }).then(result=>{
-      console.log(result);
+      // console.log(result);
       setAddress(result)    })
   }
   myApp()
@@ -111,7 +111,7 @@ useEffect(()=>{
           getBaskett()
         },[basketFlag])
   
-        console.log(cyUserID) 
+        // console.log(cyUserID) 
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,

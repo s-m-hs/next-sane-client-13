@@ -70,7 +70,18 @@
       .button_codeB{
         display: none;
       }
+
+
+      .btn_hide{
+        display: none;
+      }
+      /* .AccordionTab_card{
+        display: none !important;
+      } */
       @media only screen and (max-width:900px){
+        /* .AccordionTab_card{
+          display: inline;
+        } */
         .warrantyCod_col_right{
 display: none;        }
 

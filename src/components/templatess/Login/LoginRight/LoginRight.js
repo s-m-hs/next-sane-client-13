@@ -80,7 +80,7 @@ const login=(obj)=>{
 }
 
 const handleRegistration=(data)=>{
-  console.log(data);
+  // console.log(data);
 let obj={
  un: data.userName,
   pw:sha512(data.password )  

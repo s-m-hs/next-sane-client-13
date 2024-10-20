@@ -20,7 +20,7 @@ export default function ProductDetail({ param }) {
   const [idCategory,setIdCategory]=useState('')
   let{nameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
 
-  console.log(param);
+  // console.log(param);
 
   const getProductById = (id) => {
     async function myAppPost() {
@@ -34,7 +34,7 @@ export default function ProductDetail({ param }) {
         return res.json()
       }).then(result => {
         if (result) {
-          console.log(result)
+          // console.log(result)
           setProductDetail(result.spec)
           setIdCategory(result.cyProductCategoryId)
           setProductDetailB(result)

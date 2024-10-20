@@ -13,7 +13,7 @@ export default function SwiperProduct({src,srcB}) {
 
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-console.log(srcB)
+// console.log(srcB)
   return (
     <>
     {src && <>

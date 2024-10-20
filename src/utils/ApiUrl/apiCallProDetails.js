@@ -12,7 +12,7 @@ const apiCallProdDetails = (prodId,saveRes, isCalled)=>{
             console.log(res);
             return res.json()
         }).then(result=>{
-            console.log(result);
+            // console.log(result);
             saveRes(result)
             isCalled(true)
         }).catch(err=>console.log(err))

@@ -32,7 +32,7 @@ export default function CategoryDetaile({ param }) {
   const [mainCatB, setMainCatB] = useState({});
   const [codePro,setCodePro]=useState('')
 
-console.log(mainCategory)
+// console.log(mainCategory)
 // console.log(mainCategory?.item.code)
 
 
@@ -81,7 +81,8 @@ useEffect(() => {
       : setPaginationArray([]);
   }
 }, [productByCat]);
-
+productByCat?.sort((a, b) => b.supply - a.supply); 
+// sorted_products = sorted(productByCat, key=lambda x: x['supply'], reverse=True)
 console.log(productByCat)
   const getCategoryById = () => {
     let obj = {
@@ -327,7 +328,7 @@ useEffect(()=>{
             // clickSpinner={()=>setFlagSpinnerShow(true)}
               id={item.id}
               imgSrc={item.smallImage
-              } title={item.name} price={item.price}
+              } title={item.name} price={item.price} supply={item.supply}
             /></div>
 
         )}

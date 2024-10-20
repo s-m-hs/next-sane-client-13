@@ -9,7 +9,7 @@ import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 export default function CategorySectionA({categoryId,title}) {
   const [mainCategory, setMainCategory] = useState({});
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-console.log(mainCategory);
+// console.log(mainCategory);
 
 const clickHandler=()=>{
   setFlagSpinnerShow(true)
@@ -29,7 +29,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
     getCategoryById();
   }, []);
 
-  console.log(mainCategory)
+  // console.log(mainCategory)
   return (
     <>
          {flagSpinnerShow && <div className={`row ${styles.spinner_row}`}>
