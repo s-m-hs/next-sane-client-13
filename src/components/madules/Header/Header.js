@@ -9,7 +9,7 @@ import { MainContext } from "@/context/MainContext";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DotLoader, PuffLoader } from "react-spinners";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
 import { Alert, Modal, Tooltip } from "react-bootstrap";
 import CardA from "../Cards/CardA/CardA";
@@ -126,7 +126,7 @@ export default function Header() {
     localStorage.removeItem('loginToken')
     setXtFlagLogin(false)
     setCartCounter(0)
-    rout.push('/')
+    // rout.push('/')
     // console.log('object')
   }
 
@@ -1155,12 +1155,12 @@ export default function Header() {
                         تماس با ما</span></Link>
 
 {
-  xtFlagLogin &&  <Link href={'/'}>
+  xtFlagLogin &&  <Link href={'/'} onClick={() => {
+    exitHandler()
+    setXtFlagSpinnerShow(true)
+  }}>
                       <SignOut size={15} />
-                      <span onClick={() => {
-                        exitHandler()
-                        setXtFlagSpinnerShow(true)
-                      }}
+                      <span 
 
                       >
                         خروج</span></Link>

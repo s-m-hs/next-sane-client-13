@@ -372,6 +372,12 @@ onClick={paymentHandler}
 
 
               <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
+              <div className={`centerc ${style.cath_div_mobile}`}>
+              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
+              </span>
+              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
+              </span>
+            </div>
                 <button
                   className={`btn btn-outline-warning  ${style.colPrice_mobile_btn1}`}
                   disabled
@@ -386,18 +392,14 @@ onClick={paymentHandler}
                   />
                 </button>
               </div></div>
+
             </div>
 
           
           </div>
         </div>
 
-        <div className={`centerc ${style.cath_div_mobile}`}>
-              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
-              </span>
-              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
-              </span>
-            </div>
+     
 
         <div className={`col-lg-3 centerc ${style.col_4} boxSh`}>
           <div>
@@ -430,6 +432,7 @@ onClick={paymentHandler}
                 </button>
               </div>
             </div>
+            
             <div className={`centerc ${style.cath_div}`}>
               <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
               </span>

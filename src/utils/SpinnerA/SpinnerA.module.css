@@ -1,0 +1,9 @@
+
+
+@media only screen and (max-width:900px){
+
+.PuffLoader{
+    position: fixed;
+    left: 50%;
+}
+}

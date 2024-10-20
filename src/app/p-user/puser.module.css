@@ -175,7 +175,7 @@ text-align: center;
     animation: move 700ms 1 alternate ease-in-out;
 }
 .container span{
-    opacity: 0.7;
+    opacity: 0.9;
 }
 .container span:active{
     background-color: #fff;

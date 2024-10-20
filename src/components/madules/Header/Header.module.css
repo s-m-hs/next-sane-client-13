@@ -526,6 +526,7 @@ transition:transform 0.1s linear;
 
 
   .containerfix{
+    max-width: none !important;
     height: 70px;
     background: #ffff;
     position: fixed;
@@ -774,7 +775,7 @@ padding: 1cqi;
   }
   .bottomHeader_ul_category_div{
     position: absolute;
-    width: 100%;
+    width: 100px;
 bottom: 35px;  
 border-radius: 8px;  
 background-color: #fff;
@@ -795,6 +796,10 @@ align-items: center;
   }
   .bottomHeader_ul_category_div a:hover{
     opacity: 0.7;
+  }
+
+  .bottomHeader_ul_category_div span{
+font-size: 15px;
   }
   .bottomHeader_ul_category_div svg{
     margin-left: 10px;

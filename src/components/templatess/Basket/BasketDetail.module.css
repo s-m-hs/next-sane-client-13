@@ -104,6 +104,7 @@ border: none;
     display: none;
 }
 @media only screen and (max-width:900px){
+
 .container{
     overflow: hidden;
 }
@@ -118,7 +119,7 @@ border: none;
 .col_8_bottom_div_1{
     display: flex !important;
     position: fixed;
-    bottom: 70px;
+    bottom: 120px;
     width: 95%;
 
 }

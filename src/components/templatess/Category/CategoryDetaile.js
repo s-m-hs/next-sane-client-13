@@ -312,13 +312,14 @@ useEffect(()=>{
             <>
               <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
                 <CardAButton imgSrc={item.imageUrl} changeIdProp={() => changeId(item.code)} code={item.code} />
-                <span>{item.name} </span>
+                <span >{item.name} </span>
               </div>
             </>
           ))}
       </div>
 
       <div className={`row row-cols-4 centerr ${Styles.products_card}`}>
+        
         {productByCat?.length == 0 ? <SpinnerA size={200} /> : productByCat?.map((item, index) =>
           <div key={index}
             className={`centerc ${Styles.products_col}`}

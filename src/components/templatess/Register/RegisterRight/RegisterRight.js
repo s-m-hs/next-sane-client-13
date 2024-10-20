@@ -2,18 +2,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./RegisterRight.module.css";
 import Link from "next/link";
-import { User, Key, EyeSlash } from "@phosphor-icons/react";
+import { User, Key, EyeSlash,DeviceMobile  } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import postApiByAlert from "@/utils/ApiUrl/apiCallBack/apiPostByAlert";
 import { useRouter } from 'next/navigation'
 import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
+import { InputOtp } from 'primereact/inputotp';
 
 
 
 export default function RegisterRight() {
 const router = useRouter()
+const [token, setTokens] = useState('09');
+const [err1,setErr1]=useState('')
+
+const customInput = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-input" />;
+
+
 let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
 
 
@@ -33,7 +40,11 @@ let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useConte
   };
 
   const handleError = (errors) => {
+    if(errors.password){
+      setErr1(errors.password.message)
 
+    }else(setErr1(''))
+console.log(err1)
   };
  const alertA=()=>alertN('center','success','ثبت نام با موفقیت انجام شد',1500).then((res) => {
     setXtFlagLogin(true)
@@ -46,9 +57,10 @@ const alertB=()=>alertN('center','error'," ثبت نام انجام نشد دو�
 const handleRegistration=(data)=>{
   // console.log(data);
 let obj={
-    un: data.userName,
+    un: token,
   pw:data.password
 }
+console.log(obj)
   postApiByAlert('/api/Customer/register',obj,alertA,alertB)
 }
 
@@ -78,30 +90,44 @@ setXtFlagSpinnerShow(false)
           onSubmit={handleSubmit(handleRegistration, handleError)}
         >
           <div className={`${style.div_input_B} centerr`}>
-            <User size={40} color="#19a5af" weight="fill" />
-            <div className="login_label_float">
-              <input
+            <DeviceMobile  size={40} color="#19a5af" weight="fill" />
+            {/* <div className="login_label_float">
+               <input
               minLength={3}
                 name="userName"
                 type="userName"
                 placeholder=" "
                 {...register(`userName`, registerOptions.userName)}
               />
-              <label>نام کاربری </label>
-            </div>
+  
+            </div> */}
+
+            <div className={`${style.card_div} card flex justify-content-center`} >
+            <style scoped>
+          
+            </style>
+
+            <InputOtp value={token} length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
+        </div>
           </div>
 
           <div className={`${style.div_input_B} centerr`}>
             <Key size={40} color="#19a5af" weight="fill" />
             <div className="login_label_float">
               <input 
-              minLength={6}
+              // minLength={6}
               name="password"
-               type="password"
-                placeholder=" "
-                {...register(`password`, registerOptions.password)}
+               type="text"
+                placeholder="adsdsa "
+               
+                {...register(`password`, {
+                  minLength : {
+                    value: 6,
+                    message: 'رمز عبور وارد شده نباید کمتر از 6 کاراکتر باشد ' // JS only: <p>error message</p> TS only support string
+                  }
+              })}
                  />
-              <label>رمزعبور</label>
+                 {err1 && <p className={`${style.err_p}`} >{err1}</p>}
             </div>
             {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
           </div>

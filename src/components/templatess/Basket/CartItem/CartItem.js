@@ -32,7 +32,7 @@ const minesClick = () => {
 };
 
 const changeHandler = (e) => {
-  if(e.target.value>0){
+  if(e.target.value>=0){
     setQuantity(e.target.value)
 
   }

@@ -56,6 +56,13 @@
 .img{
     display: none;
 }
+.card_div{
+    border: none;
+    direction: ltr;
+}
+.err_p{
+    color: #ff0000;
+}
 
 @media only screen and (max-width:900px){
     .img{

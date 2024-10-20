@@ -6,11 +6,14 @@ import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 import updateBasket from '@/utils/ApiUrl/updateBasket';
+import { usePathname } from 'next/navigation';
 
 // import getLocalStorage from '@/utils/localStorag/localStorage';
 import { useContext, useEffect } from 'react';
 
 export default function Home() {
+  const pathname = usePathname();
+
   let { xtflagSpinnerShow,setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,setBasketFlag } = useContext(MainContext);
   const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
   // const getLocalStorage=localStorage.getItem('loginToken')
@@ -65,8 +68,10 @@ useEffect(() => {
 
 },[xtFlagLogin]); 
 useEffect(()=>{
-  setXtFlagSpinnerShow(false)
-},[])
+  if(  pathname==='/'){
+    setXtFlagSpinnerShow(false)
+  }
+},[xtflagSpinnerShow])
   return (
 <div className='container'>
   <div className='row '>

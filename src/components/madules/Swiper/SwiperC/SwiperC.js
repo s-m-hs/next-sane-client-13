@@ -45,9 +45,11 @@ useEffect(()=>{
 // console.log(productByCatArray)
   return (
     <>
+
     <div  className='swipercomb-div'
      >
-          <span className='swipercomb-title' style={{marginRight:'50px'}}>{title}</span>
+                    <span className='swipercomb-title' style={{marginRight:'50px'}}>{title}</span>
+
         <Swiper
             loop={true}
         // slidesPerView={1}

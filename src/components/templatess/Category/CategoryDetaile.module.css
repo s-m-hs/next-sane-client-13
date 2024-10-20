@@ -108,4 +108,8 @@ transition: all 0.2s ease-in-out;
     .pagination_div{
         margin-bottom: 80px;
     }
+    .category__cart_div span{
+      
+        font-size:12px;
+    }
 }
