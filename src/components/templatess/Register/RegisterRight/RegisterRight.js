@@ -52,16 +52,28 @@ reset(setValue(''))
 router.push('/') 
 });
 const alertB=()=>alertN('center','error'," ثبت نام انجام نشد دوباره تلاش کنید...",1500)
+const alertC=()=>alertN('center','error',"  شماره همراه را به درستی وارد نشده است ...",1500)
 
       ////////////////////////////
+console.log(token.length)
+
 const handleRegistration=(data)=>{
-  // console.log(data);
-let obj={
+
+     let obj={
     un: token,
-  pw:data.password
+  pw:data.password,
+    name:data.name
 }
 console.log(obj)
-  postApiByAlert('/api/Customer/register',obj,alertA,alertB)
+  if(token.length==11){
+    postApiByAlert('/api/Customer/register',obj,alertA,alertB)
+
+
+  }else(
+    alertC()
+  )
+  // console.log(data);
+
 }
 
 useEffect(()=>{
@@ -89,38 +101,48 @@ setXtFlagSpinnerShow(false)
           action=""
           onSubmit={handleSubmit(handleRegistration, handleError)}
         >
-          <div className={`${style.div_input_B} centerr`}>
-            <DeviceMobile  size={40} color="#19a5af" weight="fill" />
-            {/* <div className="login_label_float">
+       <div className={`${style.div_input_B} centerr`}>
+            <User size={40} color="#19a5af" weight="fill" />
+          <div >
                <input
+               className={`${style.div_input_div} `}
               minLength={3}
-                name="userName"
-                type="userName"
-                placeholder=" "
-                {...register(`userName`, registerOptions.userName)}
+                name="name"
+                type="name"
+                placeholder="نام "
+                {...register(`name`, registerOptions.userName)}
               />
   
-            </div> */}
+            </div>
+            {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
+          </div>
+
+
+          <div className={`${style.div_input_B} centerr`}>
+            <DeviceMobile  size={40} color="#19a5af" weight="fill" />
+          
 
             <div className={`${style.card_div} card flex justify-content-center`} >
             <style scoped>
           
             </style>
 
-            <InputOtp value={token} length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
+            <InputOtp value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
         </div>
           </div>
 
           <div className={`${style.div_input_B} centerr`}>
             <Key size={40} color="#19a5af" weight="fill" />
-            <div className="login_label_float">
+            <div >
               <input 
+              className={`${style.div_input_div} `}
               // minLength={6}
               name="password"
                type="text"
-                placeholder="adsdsa "
+                placeholder="رمزعبور "
                
                 {...register(`password`, {
+                  required: "رمز عبور را وارد نمایید (حداقل 6 کاراکتر ) ",
                   minLength : {
                     value: 6,
                     message: 'رمز عبور وارد شده نباید کمتر از 6 کاراکتر باشد ' // JS only: <p>error message</p> TS only support string

@@ -429,3 +429,10 @@ input[type=number]::-webkit-inner-spin-button {
   content: '';
   background-color: #030303 !important;
 } */
+
+@media only screen and (max-width:500px){
+  .custom-otp-input {
+    width: 7%;
+    font-size: 22px;
+  }
+}

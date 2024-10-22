@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import style from "./LoginRight.module.css";
 import Link from "next/link";
-import { User, Key, EyeSlash } from "@phosphor-icons/react";
+import { User, Key, EyeSlash,DeviceMobile } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useRouter } from 'next/navigation'
@@ -11,6 +11,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 // import getLocalStorage from "@/utils/localStorag/localStorage";
 import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
+import { InputOtp } from 'primereact/inputotp';
 
 
 
@@ -18,6 +19,12 @@ import alertN from "@/utils/Alert/AlertA";
 
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
+const [token, setTokens] = useState('09');
+const [err1,setErr1]=useState('')
+
+const customInput = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-input" />;
+
+
 const router = useRouter()
 // const getLocalStorage=localStorage.getItem('loginToken')
 let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
@@ -48,6 +55,8 @@ reset(setValue(''))
 router.push('/') 
 });
 const alertB=()=>alertN('center','error',"دوباره امتحان کنید...",1500)
+const alertC=()=>alertN('center','error',"  شماره همراه را به درستی وارد نشده است ...",1500)
+
       ////////////////////////////
 const login=(obj)=>{
   async function myAppPost(){
@@ -82,10 +91,16 @@ const login=(obj)=>{
 const handleRegistration=(data)=>{
   // console.log(data);
 let obj={
- un: data.userName,
+ un: token,
   pw:sha512(data.password )  
 }
-login(obj)
+if(token.length==11){
+  login(obj)
+
+}else{
+  alertC()
+
+}
 
 }
 useEffect(()=>{
@@ -114,7 +129,7 @@ useEffect(()=>{
           action=""
           onSubmit={handleSubmit(handleRegistration, handleError)}
         >
-          <div className={`${style.div_input_B} centerr`}>
+          {/* <div className={`${style.div_input_B} centerr`}>
             <User size={40} color="#19a5af" weight="fill" />
             <div className="login_label_float">
               <input
@@ -126,6 +141,19 @@ useEffect(()=>{
               />
               <label>نام کاربری </label>
             </div>
+          </div> */}
+
+<div className={`${style.div_input_B} centerr`}>
+            <DeviceMobile  size={40} color="#19a5af" weight="fill" />
+          
+
+            <div className={`${style.card_div} card flex justify-content-center`} >
+            <style scoped>
+          
+            </style>
+
+            <InputOtp value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
+        </div>
           </div>
 
           <div className={`${style.div_input_B} centerr`}>

@@ -51,6 +51,11 @@
 .img{
     display: none;
 }
+
+.card_div{
+    border: none;
+    direction: ltr;
+}
 @media only screen and (max-width:900px){
     .img{
         display: block;
