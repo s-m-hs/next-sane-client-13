@@ -53,6 +53,7 @@ const handleRegistration=(data)=>{
   mobile: data.update.mobile,
   description: "string",
   userImageUrl: "string",
+  // username:data.update.userName
   username:username
 }
 // console.log(obj)
@@ -91,6 +92,7 @@ const update = () => {
     family: family ? `${family}` : "",
     email: email ? `${email}` : "",
     mobile: mobile ? `${mobile}` : "",
+
     // website: website ? `${website}` : "",
     // description: description ? `${description}` : "",
     // userName: getProfile.username ? `${username}` : "",
@@ -168,16 +170,17 @@ useEffect(()=>{
 
             </div>  
 
-            <div className={ `login_label_float ${style.input}`}>
+            {/* <div className={ `login_label_float ${style.input}`}>
               <input
             value={username.toUpperCase()}
+            name="update.userName"
+
             disabled
-                // {...register(`userName`, registerOptions.userName)}
               />
               <label>نام کاربری </label>
               <UserCircle  size={38} color="#14a5af" weight="duotone"className={style.icon} />
 
-            </div>  
+            </div>   */}
             
             </div>
 <div className={` col-md-12 col-lg-6 ${style.colB}` }>

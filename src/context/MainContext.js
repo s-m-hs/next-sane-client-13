@@ -68,6 +68,7 @@ async function myApp(){
     return  res.json()
     }
   }).then(result=>{
+    console.log(result)
     if(result){
    setCyUserID(result.cyUserID)
     setUsername(result.username)

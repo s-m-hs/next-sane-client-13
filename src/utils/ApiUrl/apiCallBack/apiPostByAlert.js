@@ -23,7 +23,7 @@ const postApiByAlert=(url,obj,alert,alertB)=>{
       }).then(result=>{
         if(result){
             localStorage.setItem('loginToken',result.token)
-        localStorage.setItem('user',obj.un)
+        localStorage.setItem('user',obj.name)
         alert();
         }
       }).catch(err=>console.log(err))

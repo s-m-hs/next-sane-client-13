@@ -6,13 +6,16 @@ import style from "./RepairsCom.module.css";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { MainContext } from "@/context/MainContext";
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import DataFormatUnHoure from "@/utils/DataFormatUnHoure";
+import { usePathname } from "next/navigation";
 
 
 
 export default function WarrantyCom() {
   const [warantyArray,setWarantyArray]=useState([])
   const [warrantyDetail,setWarrantyDetail]=useState({})
-  
+  const pathname = usePathname();
+
   let{setXtFlagSpinnerShow}=useContext(MainContext)
 
 const getWarranty=()=>{
@@ -38,6 +41,11 @@ const getWarranty=()=>{
   myApp()
 }
 
+useEffect(()=>{
+  if(pathname==='/p-user/repairs'){
+    setXtFlagSpinnerShow(false)
+  }
+})
 
 useEffect(()=>{
 getWarranty()
@@ -126,12 +134,10 @@ getWarranty()
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled
-                          value={warrantyDetail?.createDate}
-                          />
-                          <label>
-                            تاریخ تحویل
-                          </label>
+                            <div className={`${style.date_div} centerc`} >
+                            <span >تاریخ تحویل :</span>
+                                       <DataFormatUnHoure dateString={`${warrantyDetail?.recievedDate}`} />      
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -166,8 +172,8 @@ getWarranty()
                     <div className="row">
                     <div className="col-12">
                         <div className={`${style.textarea_div} centerr`} >
-                        <label> <button className="btn btn-light" disabled>ایراد دستگاه طبق اظهار مشتری:
-                        </button>  </label>
+                        <label> ایراد دستگاه طبق اظهار مشتری:
+                        </label>
                           <textarea 
                           value={warrantyDetail?.productProblem}
                           disabled
@@ -176,10 +182,10 @@ getWarranty()
                         </div>
                       </div>
 
-                      <div className="col-12">
+                      <div className={`${style.detail_div} col-12`}>
                         <div className={`${style.textarea_div} centerr`} >
-                        <label> <button className="btn btn-light" disabled>ملاحظات:
-                        </button>  </label>
+                        <label> ملاحظات:
+                         </label>
                           <textarea 
                           value={warrantyDetail?.details}
                           disabled
@@ -188,10 +194,7 @@ getWarranty()
                         </div>
                       </div>
             
-                      <hr/>
-                      <hr/>
-                      <hr/>
-                      <hr/>
+                    
                     </div>
                   </div>
                 </div>

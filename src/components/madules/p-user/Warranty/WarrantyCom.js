@@ -6,12 +6,17 @@ import style from "./WarrantyCom.module.css";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { MainContext } from "@/context/MainContext";
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import DateFormat from "@/utils/DateFormat";
+import DataFormatUnHoure from "@/utils/DataFormatUnHoure";
+import { usePathname } from "next/navigation";
 
 
 
 export default function WarrantyCom() {
   const [warantyArray,setWarantyArray]=useState([])
   const [warrantyDetail,setWarrantyDetail]=useState({})
+  const pathname = usePathname();
+
   
   let{setXtFlagSpinnerShow}=useContext(MainContext)
 
@@ -38,6 +43,12 @@ const getWarranty=()=>{
   myApp()
 }
 console.log(warantyArray)
+useEffect(()=>{
+  if(pathname==='/p-user/warranty'){
+    setXtFlagSpinnerShow(false)
+  }
+})
+
 
 useEffect(()=>{
 getWarranty()
@@ -140,12 +151,13 @@ getWarranty()
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
-                          <input disabled
-                          value={warrantyDetail?.createDate}
-                          />
-                          <label>
-                            تاریخ تحویل
-                          </label>
+                       
+                          <div className={`${style.date_div} centerc`} >
+                            <span >تاریخ تحویل :</span>
+                                       <DataFormatUnHoure dateString={`${warrantyDetail?.recievedDate}`} />      
+                          </div>
+         
+                          
                         </div>
                       </div>
                     </div>

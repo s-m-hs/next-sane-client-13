@@ -53,7 +53,7 @@ export default function Header() {
   };
 
 
-  let { xtFlagLogin, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, localToken } = useContext(MainContext)
+  let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, localToken } = useContext(MainContext)
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
 
@@ -343,7 +343,7 @@ export default function Header() {
                   <>
                     <Dropdown className={styles.user_button}>
                       <Dropdown.Toggle variant="info" id="dropdown-basic">
-                        <span className={styles.user_span}>{userName.toUpperCase()}</span>      </Dropdown.Toggle>
+                        <span className={styles.user_span}>{name?.toUpperCase()}</span>      </Dropdown.Toggle>
 
                       <Dropdown.Menu>
                         <Dropdown.Item href="/p-user/profile"
@@ -1074,7 +1074,9 @@ export default function Header() {
                   
                   
                   <Link href={'/'}
-                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}>
+                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
+                    onClick={()=>setMenuOpen(false)}
+                    >
                       <House size={20} />خانه
                   </Link>
                 </li>
@@ -1107,49 +1109,75 @@ export default function Header() {
                   >
 
                     {xtFlagLogin ?
-                      <Link href={'/p-user/profile'}>
+                      <Link href={'/p-user/profile'}
+                      onClick={() => {
+                        setMenuOpen(false)
+setXtFlagSpinnerShow(true)
+                        
+                      }}>
                         <User size={15} />
-                        <span onClick={() => setXtFlagSpinnerShow(true)}
+                        <span 
 
                         >
                           پروفایل من</span></Link> :
 
 
-                      <Link href={'/login'}>
+                      <Link href={'/login'}
+                      onClick={() => setXtFlagSpinnerShow(true)}>
                         <SignIn size={15} />
-                        <span onClick={() => setXtFlagSpinnerShow(true)}
+                        <span 
 
                         >
                           ورود</span></Link>}
 
-
-                    <Link href={'/register'}>
+{!xtFlagLogin && <Link href={'/register'} 
+      onClick={() => {
+        setMenuOpen(false)
+setXtFlagSpinnerShow(true)
+        
+      }}>
                       <UserCheck size={15} />
-                      <span onClick={() => setXtFlagSpinnerShow(true)}
+                      <span 
 
                       >
-                        عضویت</span></Link>
+                        عضویت</span></Link>}
+                    
 
-                    <Link href={'/p-user/warranty'}>
+                    <Link href={'/p-user/warranty'}
+                          onClick={() => {
+                            setMenuOpen(false)
+    setXtFlagSpinnerShow(true)
+                            
+                          }}>
                       <Barcode size={15} />
-                      <span onClick={() => setXtFlagSpinnerShow(true)}
+                      <span 
 
                       >
                         گارانتی</span></Link>
 
 
-                    <Link href={'/p-user/repairs'}>
+                    <Link href={'/p-user/repairs'}
+                         onClick={() => {
+                          setMenuOpen(false)
+  setXtFlagSpinnerShow(true)
+                          
+                        }}>
                       <Wrench size={15} />
-                      <span onClick={() => setXtFlagSpinnerShow(true)}
+                      <span 
 
                       >
                         تعمیرات</span></Link>
 
-                    <Link href={'/contactus'}>
+                    <Link href={'/contactus'}
+                         onClick={() => {
+                          setMenuOpen(false)
+  setXtFlagSpinnerShow(true)
+                          
+                        }}>
                       <BuildingApartment size={15} />
 
 
-                      <span onClick={() => setXtFlagSpinnerShow(true)}
+                      <span 
 
                       >
                         تماس با ما</span></Link>
@@ -1158,6 +1186,8 @@ export default function Header() {
   xtFlagLogin &&  <Link href={'/'} onClick={() => {
     exitHandler()
     setXtFlagSpinnerShow(true)
+    setMenuOpen(false)
+
   }}>
                       <SignOut size={15} />
                       <span 
@@ -1177,8 +1207,11 @@ export default function Header() {
                   onClick={() => {
                     if (cartCounter != 0) {
                       setXtFlagSpinnerShow(true)
+                      setMenuOpen(false)
                     } else {
                       AlertA()
+                      setMenuOpen(false)
+
                     }
 
 
@@ -1201,7 +1234,10 @@ export default function Header() {
 
 
 
-                <li onClick={() => setVisibleB(true)}>
+                <li onClick={() =>{
+     setMenuOpen(false)
+setVisibleB(true)
+                } }>
                   <MagnifyingGlass size={20}  />
                   جسنجو</li>
 <div className={`${styles.sidebar_mobile} `}>

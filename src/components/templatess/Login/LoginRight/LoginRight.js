@@ -75,7 +75,7 @@ const login=(obj)=>{
     }).then(result=>{
       if(result){
         localStorage.setItem('loginToken',result.token)
-        localStorage.setItem('user',obj.un)
+        // localStorage.setItem('user',obj.name)
         setLocalToken(result.token)
         alertA()
         setBasketFlag(prev=>!prev)
