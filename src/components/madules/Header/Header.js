@@ -31,6 +31,7 @@ export default function Header() {
   const ulRefA = useRef()
   const [visible, setVisible] = useState(false);
   const [visibleB, setVisibleB] = useState(false);
+  const pathname=usePathname()
 
   // console.log(ulRefA.current);
   // const getLocalStorage = localStorage.getItem('loginToken')
@@ -56,7 +57,7 @@ export default function Header() {
   let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, localToken } = useContext(MainContext)
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
-
+  const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
   /////////////////////////////////
   const searchChange = (e) => {
     setSearchType(e.target.value)
@@ -210,6 +211,15 @@ export default function Header() {
     }
   };
 
+
+  useEffect(()=>{
+    const getLocalStorage = localStorage.getItem('loginToken')
+
+    if( pathname.startsWith('/p-user') && !getLocalStorage){
+      rout.push('/')
+      AlertB()
+    }
+  },[])
   return (
     <>
       {xtflagSpinnerShow &&
@@ -687,7 +697,7 @@ export default function Header() {
                 <div className="centerc">
 
                 </div>
-                {xtFlagLogin && <span className={styles.user_span}>{userName.toUpperCase()}</span>}
+                {xtFlagLogin && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
 
                 <Link href={!xtFlagLogin ? '/login' : '/p-user/profile'}>
                   <div
@@ -943,6 +953,13 @@ export default function Header() {
           <div className={`${styles.mobi_header} row `}  >
             <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="" />
             <div className={styles.header_bottom__col_logo}  >
+
+              {
+                name &&        <Link href={'/p-user'}>
+              <span className={styles.sphere3} >{name?.toUpperCase()}</span>
+</Link>
+              }
+     
                   <Link href={'/'}>
                     <img
                       className={styles.sphere3}

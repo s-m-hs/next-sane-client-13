@@ -779,7 +779,11 @@ padding: 1cqi;
     width: 100px;
 bottom: 35px;  
 border-radius: 8px;  
-background-color: #fff;
+border :1px solid #d0d1d2;
+/* border-top: 1px solid #d0d1d2;
+    border-left: 1px solid #d0d1d2;
+    border-right: 1px solid #d0d1d2; */
+background-color: #f2f6fc;
 animation: moveC 300ms normal linear;
 display: none;
 flex-direction: column;

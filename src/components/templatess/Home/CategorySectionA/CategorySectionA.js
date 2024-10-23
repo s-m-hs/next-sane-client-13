@@ -45,7 +45,11 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
             <h1 className={styles.title}>{`دسته بندی ${title}:`}</h1>
           </div>
         </div>
-
+        {/* <div className="row">
+              <div className="col-12 centerr">
+                <SpinnerA size={300} />
+              </div>
+            </div> */}
         {!mainCategory.childs && (
           <>
             <div className="row">

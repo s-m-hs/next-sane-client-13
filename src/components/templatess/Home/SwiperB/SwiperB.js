@@ -24,6 +24,7 @@ export default function SwiperB() {
         delay: 2500,
         disableOnInteraction: false,
       }}
+
       pagination={{
         clickable: true,
       }}

@@ -142,10 +142,10 @@ setXtFlagSpinnerShow(false)
                 placeholder="رمزعبور "
                
                 {...register(`password`, {
-                  required: "رمز عبور را وارد نمایید (حداقل 6 کاراکتر ) ",
+                  required: "رمز عبور را وارد نمایید (حداقل 4 کاراکتر ) ",
                   minLength : {
-                    value: 6,
-                    message: 'رمز عبور وارد شده نباید کمتر از 6 کاراکتر باشد ' // JS only: <p>error message</p> TS only support string
+                    value: 4,
+                    message: 'رمز عبور وارد شده نباید کمتر از 4 کاراکتر باشد ' // JS only: <p>error message</p> TS only support string
                   }
               })}
                  />

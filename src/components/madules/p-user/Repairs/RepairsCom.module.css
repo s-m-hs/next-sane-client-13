@@ -10,6 +10,7 @@
     }
     .button_code{
         font-size: 1.5cqi;
+        justify-content: space-around;
     }
 
     .input{
@@ -95,7 +96,13 @@ color: #3951b2;
 display: none;        }
 
 .button_code{
-  display: none;
+  /* display: none; */
+}
+.button_code span{
+  font-size: 12px ;
+}
+.button_code div{
+  font-size: 12px;
 }
 .button_codeB{
   display: inline;

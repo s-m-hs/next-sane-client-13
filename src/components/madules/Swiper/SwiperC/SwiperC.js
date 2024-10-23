@@ -52,8 +52,8 @@ useEffect(()=>{
 
         <Swiper
             loop={true}
-        // slidesPerView={1}
-        spaceBetween={10}
+        slidesPerView={1}
+        spaceBetween={30}
         pagination={{
           clickable: true,
         }}
@@ -61,8 +61,13 @@ useEffect(()=>{
           delay: 4000,
           disableOnInteraction: false,
         }}
+        
         // navigation={true}
         breakpoints={{
+          450: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
           640: {
             slidesPerView: 2,
             spaceBetween: 20,

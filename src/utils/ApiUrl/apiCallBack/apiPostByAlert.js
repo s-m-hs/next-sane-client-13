@@ -21,12 +21,16 @@ const postApiByAlert=(url,obj,alert,alertB)=>{
             alertB()
         }
       }).then(result=>{
+        console.log(result)
         if(result){
             localStorage.setItem('loginToken',result.token)
         localStorage.setItem('user',obj.name)
         alert();
         }
-      }).catch(err=>console.log(err))
+      }).catch(err=>{
+        console.log(err.code)
+        // console.log(err.status.code)
+      } )
   }
   myAppGet();
 }

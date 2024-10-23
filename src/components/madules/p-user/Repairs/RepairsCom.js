@@ -111,13 +111,37 @@ getWarranty()
                 </AccordionTab>
             </Accordion>
         </div>
-                    <button
-                      className={`btn btn-info m-1 ${style.button_code}`}
+        <button
+                      className={`btn btn-info m-1 ${style.button_code} centerr`}
                       disabled
                     >
-                      {warrantyDetail.guaranteeID}
+                    <div>
+                    <span>شماره پذیرش :</span>
+                    {warrantyDetail.guaranteeID}
+                    </div>
+
+                    <div>
+                        <span>تاریخ تحویل:</span>
+                      <DataFormatUnHoure dateString={`${warrantyDetail?.recievedDate}`} /> 
+                    </div>
+                    
                     </button>
-                      <div className="col-md-4">
+                
+                 
+                      {/* <div className="col-md-4">
+                        <div
+                          className={`login_label_float ${style.input} centerr`}
+                        >
+                            <div className={`${style.date_div} centerc`} >
+                            <span >تاریخ تحویل :</span>
+                                       <DataFormatUnHoure dateString={`${warrantyDetail?.recievedDate}`} />      
+                          </div>
+                        </div>
+                      </div> */}
+                    </div>
+                    <div className="row">
+              
+                    <div className="col-md-6">
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
@@ -129,21 +153,9 @@ getWarranty()
                           </label>
                         </div>
                       </div>
-                 
-                      <div className="col-md-4">
-                        <div
-                          className={`login_label_float ${style.input} centerr`}
-                        >
-                            <div className={`${style.date_div} centerc`} >
-                            <span >تاریخ تحویل :</span>
-                                       <DataFormatUnHoure dateString={`${warrantyDetail?.recievedDate}`} />      
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-              
-                      <div className="col-md-4">
+
+
+                      <div className="col-md-6">
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >
@@ -155,7 +167,7 @@ getWarranty()
                           </label>
                         </div>
                       </div>
-                      <div className="col-md-4">
+                      <div className="col-md-6">
                         <div
                           className={`login_label_float ${style.input} centerr`}
                         >

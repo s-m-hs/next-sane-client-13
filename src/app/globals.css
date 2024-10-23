@@ -139,7 +139,7 @@ transition: all 0.3s ease-in;
 .mySwiperB{
   margin-top: 25px;
   border-radius: 0px;
-  width: 80% !important;
+  width: 70% !important;
   padding-bottom: 30px;
   height: 100% !important;
   /* background-color: var(--them) !important; */
