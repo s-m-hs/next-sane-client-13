@@ -160,7 +160,7 @@ useEffect(()=>{
             <Key size={40} color="#19a5af" weight="fill" />
             <div className="login_label_float">
               <input 
-              minLength={6}
+              minLength={4}
               name="password"
                type="password"
                 placeholder=" "

@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation'
 import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
 import { InputOtp } from 'primereact/inputotp';
+// import axios from "axios";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
 
 
 
@@ -51,8 +53,8 @@ console.log(err1)
 reset(setValue(''))
 router.push('/') 
 });
-const alertB=()=>alertN('center','error'," ثبت نام انجام نشد دوباره تلاش کنید...",1500)
-const alertC=()=>alertN('center','error',"  شماره همراه را به درستی وارد نشده است ...",1500)
+const alertB=()=>alertN('center','error',"با این شماره همراه قبلا  ثبت نام انجام شده است...",2000)
+const alertC=()=>alertN('center','error',"  شماره همراه به درستی وارد نشده است ...",1500)
 
       ////////////////////////////
 console.log(token.length)
@@ -66,6 +68,35 @@ const handleRegistration=(data)=>{
 }
 console.log(obj)
   if(token.length==11){
+    // axios.post(`${apiUrl}/api/Customer/register`,
+    //   {
+    //     un: token,
+    //     pw:data.password,
+    //       name:data.name
+    //    },
+    //   {
+    //      headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //   }
+    // ).then( res=> {
+    //   // console.log(res.data)
+    //   console.log(res.response)
+
+    //   if(res){
+    //       localStorage.setItem('loginToken',result.token)
+    //   localStorage.setItem('user',obj.name)
+    //   alertA()
+    //   }
+    
+      
+    // }).catch(err=>console.log(err))
+
+
+
+
+
+
     postApiByAlert('/api/Customer/register',obj,alertA,alertB)
 
 

@@ -105,6 +105,17 @@ export default function Header() {
     }
     myApp()
   }
+
+useEffect(()=>{
+  if(searchTypeB.length>2){
+    searchBox()
+
+  }else if(searchTypeB.length<3){
+    setSearchBoxArr([])
+  }
+},[searchTypeB])
+
+
   // console.log(searchBoxArr)
   ////////////////////////////  
   useEffect(() => {
@@ -485,7 +496,7 @@ export default function Header() {
                       </li>
 
 
-                      <li
+                      {/* <li
                         value={6}
                         onMouseEnter={onmousHandle}
                         className={valeS == 6 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
@@ -519,7 +530,7 @@ export default function Header() {
                             </Link>
                           </div>
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
 
 
@@ -527,7 +538,7 @@ export default function Header() {
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
 
-                  <li className="nav_link arrow_icon" >
+{xtFlagLogin &&   <li className="nav_link arrow_icon" >
                   <Wrench size={15} />
 
                     خدمات
@@ -556,7 +567,9 @@ export default function Header() {
 
                     </ul>
                   </li>
-              
+              }
+
+                
 
                   {
                     !xtFlagLogin ? <>
@@ -827,7 +840,7 @@ export default function Header() {
                       </li>
 
 
-                      <li
+                      {/* <li
                         value={6}
                         onMouseEnter={onmousHandle}
                         className={valeS == 6 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
@@ -859,12 +872,14 @@ export default function Header() {
                             </Link>
                           </div>
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
-                  <li className="nav_link arrow_icon" >
-                  <Wrench size={15} />خدمات
+                  {xtFlagLogin &&   <li className="nav_link arrow_icon" >
+                  <Wrench size={15} />
+
+                    خدمات
                     <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
 
 
@@ -888,10 +903,9 @@ export default function Header() {
                         >تعمیرات</li></Link>
 
 
-
-
                     </ul>
-                  </li>        
+                  </li>
+              }     
 
                   {
                     !xtFlagLogin ? <>
@@ -1159,8 +1173,8 @@ setXtFlagSpinnerShow(true)
                       >
                         عضویت</span></Link>}
                     
-
-                    <Link href={'/p-user/warranty'}
+{xtFlagLogin &&   
+<><Link href={'/p-user/warranty'}
                           onClick={() => {
                             setMenuOpen(false)
     setXtFlagSpinnerShow(true)
@@ -1184,6 +1198,10 @@ setXtFlagSpinnerShow(true)
 
                       >
                         تعمیرات</span></Link>
+</>
+}
+
+                
 
                     <Link href={'/contactus'}
                          onClick={() => {

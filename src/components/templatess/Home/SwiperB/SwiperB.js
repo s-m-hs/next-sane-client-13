@@ -36,7 +36,7 @@ export default function SwiperB() {
     <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A} src="../../images/31240.jpg
     " alt="" />
-            <img className={styles.swiper_img_B} src="../../images/Computer-Accessories.jpg" alt="" />
+            <img className={styles.swiper_img_B} src="../../images/26763361_2111.i211.036.F.m012.c9.jpg" alt="" />
 
       </SwiperSlide>
 
@@ -45,14 +45,19 @@ export default function SwiperB() {
         <img className={styles.swiper_img_A}
           src="../../images/163924.jpg " alt=""
         />
-                <img className={styles.swiper_img_B} src="../../images/1480096-فروش-برچسب-50٪-تخفیف.jpg" alt="" />
+                <img className={styles.swiper_img_B} src="../../images/acernitrolaptop-1650914214505.jpg" alt="" />
 
       </SwiperSlide>
+
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A}src="../../images/2149829123.jpg" alt="" />
-        <img className={styles.swiper_img_B} src="../../images/computer-4795765_1920.jpg" alt="" />
+        <img className={styles.swiper_img_A} src="../../images/26763361_2111.i211.036.F.m012.c9.jpg
+        " alt="" />
+        <img className={styles.swiper_img_B} src="../../images/sp_a80_2tbb.jpg" alt="" />
+
       </SwiperSlide>
+
+   
 
 
       <SwiperSlide className={styles.swiper_slide}>
@@ -61,11 +66,12 @@ export default function SwiperB() {
         <img className={styles.swiper_img_B} src="../../images/pick-the-best-parts-for-your-pc-within-your-budget.jpg" alt="" />
 
       </SwiperSlide>
+     
 
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A}src="../../images/2149529371.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/make-a-pc-parts-list-for-work-or-gaming.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/15462.jpg" alt="" />
 
       </SwiperSlide>
 
@@ -74,20 +80,25 @@ export default function SwiperB() {
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A}src="../../images/2149417048.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/PC-components-User2Computers.jpeg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/2149402395.jpg" alt="" />
 
+      </SwiperSlide>
+
+       <SwiperSlide className={styles.swiper_slide}>
+        <img className={styles.swiper_img_A}src="../../images/2149829123.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/2149529371 (1).jpg" alt="" />
       </SwiperSlide>
 
       <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A} src="../../images/rendering-smart-home-device.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/1000x1000__computerrepair1000x1000-1641973311858.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/571.jpg" alt="" />
 
       </SwiperSlide>
 
 
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A} src="../../images/2149055981.jpg
+        <img className={styles.swiper_img_A} src="../../images/2149402395 (2).jpg
         " alt="" />
         <img className={styles.swiper_img_B} src="../../images/236790_Apple_watch_9_Ultra_2_AKrales_0356.jpg" alt="" />
 
