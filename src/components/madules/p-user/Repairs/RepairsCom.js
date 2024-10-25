@@ -167,6 +167,20 @@ getWarranty()
                           </label>
                         </div>
                       </div>
+
+
+      <div className="col-md-6 centerc">
+                     
+                       
+                          <div className={`${style.date_div} centerc`} >
+                            <span >تاریخ آماده تحویل به مشتری :   </span>
+                            <DataFormatUnHoure dateString={`${warrantyDetail?.guaranteeCompany}`} /> 
+                                          
+                          </div>
+         
+                          
+                       
+                      </div>
                       <div className="col-md-6">
                         <div
                           className={`login_label_float ${style.input} centerr`}

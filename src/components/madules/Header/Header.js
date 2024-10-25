@@ -116,7 +116,7 @@ useEffect(()=>{
 },[searchTypeB])
 
 
-  // console.log(searchBoxArr)
+  console.log(cartCounter)
   ////////////////////////////  
   useEffect(() => {
     const fixNavbarToTop = () => {

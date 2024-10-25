@@ -31,7 +31,8 @@ export default function CardB({imgSrc,title,price,id,clickSpinner }) {
           const getLocalStorage=localStorage.getItem('loginToken')
           let obj=[{
             cyProductID: id,
-            quantity: 1
+            quantity: 1,
+            orderItemID:0
           }] 
           xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
           :

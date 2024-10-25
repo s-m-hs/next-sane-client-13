@@ -140,7 +140,7 @@ setXtFlagSpinnerShow(false)
               minLength={3}
                 name="name"
                 type="name"
-                placeholder="نام "
+                placeholder="نام خانوادگی "
                 {...register(`name`, registerOptions.userName)}
               />
   
