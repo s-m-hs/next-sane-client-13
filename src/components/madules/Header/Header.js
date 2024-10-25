@@ -138,6 +138,7 @@ useEffect(()=>{
     localStorage.removeItem('loginToken')
     setXtFlagLogin(false)
     setCartCounter(0)
+    rout.push('/')
     // rout.push('/')
     // console.log('object')
   }
@@ -594,14 +595,14 @@ useEffect(()=>{
               </div>
 
               <div className={styles.header_bottom__col_logo}  >
-                <Link href={'/'}>
+                <Link href={'https://eitaa.com/sane_camputer'}>
                   <img
                     className={styles.sphere3}
                     src="../../../images/eitaa-icon-colorful.png"
                     alt=""
                   />
                 </Link>
-                <Link href={'/'}>
+                <Link href={'https://instagram.com/sane_computer_'}>
                   {" "}
                   <img
                     className={styles.sphere2}
@@ -609,7 +610,7 @@ useEffect(()=>{
                     alt=""
                   />
                 </Link>
-                <Link href={'/'}>
+                <Link href={'https://t.me/SANE_IT'}>
                   {" "}
                   <img
                     className={styles.sphere}
@@ -927,14 +928,14 @@ useEffect(()=>{
                 </ul>
 
                 <div className={styles.header_bottom__col_logo}  >
-                  <Link href={'/'}>
+                  <Link href={'https://eitaa.com/sane_camputer'}>
                     <img
                       className={styles.sphere3}
                       src="../../../images/eitaa-icon-colorful.png"
                       alt=""
                     />
                   </Link>
-                  <Link href={'/'}>
+                  <Link href={'https://instagram.com/sane_computer_'}>
                     {" "}
                     <img
                       className={styles.sphere2}
@@ -942,7 +943,7 @@ useEffect(()=>{
                       alt=""
                     />
                   </Link>
-                  <Link href={'/'}>
+                  <Link href={'https://t.me/SANE_IT'}>
                     {" "}
                     <img
                       className={styles.sphere}
@@ -965,23 +966,27 @@ useEffect(()=>{
         <div className="container">
 
           <div className={`${styles.mobi_header} row `}  >
-            <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="" />
+
+          <Link href={'/'}>
+<img src="/images/photo_2024-05-30_19-08-29.jpg" alt="" />
+          </Link>
+
             <div className={styles.header_bottom__col_logo}  >
 
               {
-                name &&        <Link href={'/p-user'}>
-              <span className={styles.sphere3} >{name?.toUpperCase()}</span>
+                name && xtFlagLogin &&       <Link href={'/p-user'}>
+              <span className={styles.sphere4} >{name?.toUpperCase()}</span>
 </Link>
               }
      
-                  <Link href={'/'}>
+                  <Link href={'https://eitaa.com/sane_camputer'}>
                     <img
                       className={styles.sphere3}
                       src="/images/eitaa-icon-colorful.png"
                       alt=""
                     />
                   </Link>
-                  <Link href={'/'}>
+                  <Link href={'https://instagram.com/sane_computer_'}>
                     {" "}
                     <img
                       className={styles.sphere2}
@@ -989,7 +994,7 @@ useEffect(()=>{
                       alt=""
                     />
                   </Link>
-                  <Link href={'/'}>
+                  <Link href={'https://t.me/SANE_IT'}>
                     {" "}
                     <img
                       className={styles.sphere}

@@ -38,6 +38,7 @@ color: var(--white1ffffff);
 
 
 .title{
+  font-family: auto;
     align-self: flex-start !important;
     color: var(--black33b4359);
     /* text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff; */

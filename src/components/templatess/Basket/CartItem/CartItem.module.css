@@ -20,6 +20,10 @@ outline:none;
 .btn_product_hide{
     display: none;
 }
+.title{
+    font-family: auto;
+}
+
 @media only screen and (max-width:900px){
     .btn_product{
         width: 50% !important;

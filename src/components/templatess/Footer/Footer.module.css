@@ -45,9 +45,26 @@ margin: 10px;
   height: 80%;
   justify-content: space-evenly;
 }
+.col h3{
+  text-align: justify;
+}
 
 @media only screen and (max-width:900px) {
   .container{
+height: auto;
+padding-bottom: 80px;
+
+}
+  .empty_col{
     display: none;
+  }
+  .eatadiv{
+    flex-direction: column ;
+  }
+  .logo{
+    display: none;
+  }
+  .Footer_rowbuttom{
+   height: auto;
   }
 }

@@ -52,7 +52,8 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 
           let obj=[{
             cyProductID: id,
-            quantity: 1
+            quantity: 1,
+            orderItemID: 0,
           }] 
           xtFlagLogin  ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
           :

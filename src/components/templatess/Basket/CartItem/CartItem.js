@@ -54,8 +54,10 @@ const handleRemove=(e,id)=>{
             <img src={props.smallImage} alt="" style={{width:'50px'}} />
          
         </td>
+
+
         {/* <!-- title --> */}
-        <td className="tp-cart-title" 
+        <td className= {` tp-cart-title ${style.title}`}
         onClick={()=>setXtFlagSpinnerShow(true)}
 >
           
