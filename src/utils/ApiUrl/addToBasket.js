@@ -1,9 +1,9 @@
 import apiUrl from "./apiUrl"
 
-const updateBasket=(header,obj,setFun,alert)=>{
+const addToBasket=(header,obj,setFun,alert)=>{
     async function myAppput(){
-      const res=fetch(`${apiUrl}/api/CyOrders/UpdateBasket`,{
-    method:"PUT",
+      const res=fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+    method:"POST",
     headers: {
       "Content-Type": "application/json",
       Authorization:`Bearer ${header}`
@@ -20,4 +20,4 @@ const updateBasket=(header,obj,setFun,alert)=>{
     myAppput()
   
   }
-  export default updateBasket
+  export default addToBasket

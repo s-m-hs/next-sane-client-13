@@ -7,6 +7,7 @@ import addToCart from '@/utils/Functions/addToCart'
 import { MainContext } from '@/context/MainContext'
 import alertN from '@/utils/Alert/AlertA'
 import updateBasket from '@/utils/ApiUrl/updateBasket'
+import apiUrl from '@/utils/ApiUrl/apiUrl'
 
 
 export default function CardC({imgSrc,title,price,id,clickSpinner,supply }) { 
@@ -19,6 +20,38 @@ if(supply!=0){
 }
 else if(supply==0){alertN('center','success'," برای استعلام قیمت به سبد خرید اضافه شد...",1500);}
   } ;
+
+  const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
+  const addToBasket=()=>{
+    const getLocalStorage =localStorage.getItem('loginToken')
+    let obj={
+      cyProductID: id,
+      quantity: 1,
+      orderItemID:0
+    }
+    console.log(obj)
+    async function myApp(){
+      const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+        method:'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${ getLocalStorage }`
+        }, 
+        body:JSON.stringify(obj)
+      }).then(res=>{
+        console.log(res)
+        if (res.status==200){
+          setBasketFlag(prev=>!prev)
+          AlertA()      }else if(res.status==400){
+            AlertB()
+          }
+      }
+    
+    )
+    }
+    myApp()
+  }
+
 // console.log(supply)
   return (
     <div
@@ -48,14 +81,17 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
     <div className={`${Styles.cardprob__icon_div} centerr`} >
     <ShoppingCart size={32} color="#19a7af" weight="duotone"
         onClick={()=>{
-          const getLocalStorage=localStorage.getItem('loginToken')
+          // const getLocalStorage=localStorage.getItem('loginToken')
 
-          let obj=[{
-            cyProductID: id,
-            quantity: 1,
-            orderItemID: 0,
-          }] 
-          xtFlagLogin  ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+          // let obj=[{
+          //   cyProductID: id,
+          //   quantity: 1,
+          //   orderItemID: 0,
+          // }] 
+          xtFlagLogin  ?  
+          addToBasket()
+
+          // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
           :
              addToCart(id,'1',setCartCounter)
           

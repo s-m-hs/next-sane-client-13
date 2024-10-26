@@ -6,12 +6,43 @@ import { MainContext } from "@/context/MainContext";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
 import addToCart from "@/utils/Functions/addToCart";
 import alertN from "@/utils/Alert/AlertA";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
 
 
 export default function ProductDetailLeft({detail}) {
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000)
-  
+  const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
+  const addToBasket=()=>{
+    const getLocalStorage =localStorage.getItem('loginToken')
+    let obj={
+      cyProductID: detail.id,
+      quantity: 1,
+      orderItemID:0
+    }
+    console.log(obj)
+    async function myApp(){
+      const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+        method:'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${ getLocalStorage }`
+        }, 
+        body:JSON.stringify(obj)
+      }).then(res=>{
+        console.log(res)
+        if (res.status==200){
+          setBasketFlag(prev=>!prev)
+          AlertA()    
+          }else if(res.status==400){
+            AlertB()
+          }
+      }
+    
+    )
+    }
+    myApp()
+  }
 // console.log(detail)
 
   return (
@@ -52,12 +83,14 @@ export default function ProductDetailLeft({detail}) {
             <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
               <button className="btn btn-info "
                       onClick={()=>{
-                        const getLocalStorage=localStorage.getItem('loginToken')
-                        let obj=[{
-                          cyProductID:detail.id,
-                          quantity: 1
-                        }] 
-                        xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+                        // const getLocalStorage=localStorage.getItem('loginToken')
+                        // let obj=[{
+                        //   cyProductID:detail.id,
+                        //   quantity: 1
+                        // }] 
+                        xtFlagLogin ? 
+                        addToBasket()
+                        // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
                         :
               
                            addToCart(detail.id,'1',setCartCounter)
@@ -77,12 +110,15 @@ export default function ProductDetailLeft({detail}) {
           <SwiperProduct src={detail.mainImage} srcB={detail.images?.split('*,*')} />
           <button className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
              onClick={()=>{
-              const getLocalStorage=localStorage.getItem('loginToken')
-              let obj=[{
-                cyProductID:detail.id,
-                quantity: 1
-              }] 
-              xtFlagLogin ?  updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
+              // const getLocalStorage=localStorage.getItem('loginToken')
+              // let obj=[{
+              //   cyProductID:detail.id,
+              //   quantity: 1
+              // }] 
+              xtFlagLogin ? 
+              addToBasket()
+
+              // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
               :
     
                  addToCart(detail.id,'1',setCartCounter)
