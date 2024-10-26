@@ -15,7 +15,8 @@ body{
   min-height: 100vh;
   text-decoration: none;
   list-style: none ;   
-  background-color: var(--gray1f2f6fc) !important;
+  /* background-color: var(--gray1f2f6fc) !important; */
+  background-color: #fff !important;
   direction: rtl;
   /* font-family:Persian-Yekan !important; */
   font-family:Yekan,calibri !important;
