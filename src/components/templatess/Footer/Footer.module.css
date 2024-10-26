@@ -4,10 +4,13 @@
     height: 500px;
     background-color: var(--white1ffffff);
     position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 .container>div{
     width: 80%;
     margin: 0 auto;
+ 
     border-bottom: 1px solid #f0f0ff;
 }
 .logo{

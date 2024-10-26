@@ -17,6 +17,7 @@ body{
   list-style: none ;   
   background-color: var(--gray1f2f6fc) !important;
   direction: rtl;
+  /* font-family:Persian-Yekan !important; */
   font-family:Yekan,calibri !important;
 
 }
@@ -26,7 +27,18 @@ body{
   font-weight: normal;
   src: url('../../fonts/Yekan.woff') format('woff2');
 }
-
+@font-face {
+  font-family: vazir;
+  src: url(../../fonts/webfonts/Vazirmatn-RD-FD-NL-Regular.woff2);
+}
+@font-face {
+  font-family: vazirEn;
+  src: url(../../fonts/webfonts/Vazirmatn-Regular.woff2);
+}
+@font-face {
+  font-family: Persian-Yekan;
+  src: url(../../fonts/YEKAN/Yekan.woff);
+}
 a,ul,li{
   text-decoration: none;
   list-style: none;
@@ -137,9 +149,11 @@ transition: all 0.3s ease-in;
 
 
 .mySwiperB{
+  /* direction: ltr !important; */
+
   margin-top: 25px;
   border-radius: 0px;
-  width: 70% !important;
+  /* width: 70% !important; */
   padding-bottom: 30px;
   height: 100% !important;
   /* background-color: var(--them) !important; */
@@ -153,8 +167,7 @@ transition: all 0.3s ease-in;
 }
 
 .mySwiperB >.swiper-wrapper >.swiper-slide{
-  width: 24rem !important;
-  height: 45rem;
+  height: 85%;
   border-radius: 10px;
 }
 
@@ -184,10 +197,10 @@ transition: all 0.3s ease-in;
 
 .swipercomb-div{
   position: relative;
-  margin-top: 150px !important;
+  margin-top: 40px !important;
   background-color: #fff;
-  margin: 80px auto;
-  width: 90%;
+  /* margin: 80px auto; */
+  /* width: 90%; */
   border-radius: 35px;
   border: 1px solid #ffffff;
   /* border: 1px solid #ffffff; */

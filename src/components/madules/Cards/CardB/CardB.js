@@ -19,7 +19,9 @@ export default function CardB({imgSrc,title,price,id,clickSpinner }) {
 
   return (
     <div className={`${styles.container} centerc`  } >
-      <Link  href={`/product/${id}`} onClick={()=>setXtFlagSpinnerShow(true)}> <img src={imgSrc} alt="" 
+      <Link  href={`/product/${id}`} onClick={()=>setXtFlagSpinnerShow(true)}> <img 
+      className={`${styles.img}`  }
+      src={imgSrc} alt="" 
   /></Link>
 
         <span className={styles.title}  > {title} </span>
@@ -46,10 +48,9 @@ export default function CardB({imgSrc,title,price,id,clickSpinner }) {
         <i class="fa-solid fa-heart " style={{color:'#14a5af'}} ></i> */}
 
         </div>
-        <Link className={styles.link}
-// onClick={clickSpinner}
+        {/* <Link className={styles.link}
 onClick={()=>setXtFlagSpinnerShow(true)}
-  href={`/product/${id}`} >جزییات بیشتر...</Link>
+  href={`/product/${id}`} >جزییات بیشتر...</Link> */}
 {/* 
 <Link className={styles.link}
 href={'/'}

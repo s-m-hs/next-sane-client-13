@@ -67,10 +67,10 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 
 
     </div>
-<Link className={Styles.cardprob__link}
+{/* <Link className={Styles.cardprob__link}
 // onClick={clickSpinner}
 onClick={()=>setXtFlagSpinnerShow(true)}
-  href={`/product/${id}`} >جزییات بیشتر...</Link>
+  href={`/product/${id}`} >جزییات بیشتر...</Link> */}
     <div>
 
     </div>

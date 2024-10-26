@@ -1,23 +1,23 @@
 .swiperCC{
     margin-top: 25px;
     border-radius: 0px;
-    width: 80% !important;
+    /* width: 80% !important; */
     height: 100% !important;
 
 }
 
 .swiperCC >.swiper_wrapper{
-    width: 100% !important;;
+    width: 80% !important;;
     height: 100% !important;;
 
 }
 
-.swiperCC >.swiper_wrapper >.swiper_slide{
+/* .swiperCC >.swiper_wrapper >.swiper_slide{
  
-    width: 24rem !important;
+    width: 253px !important ;
     height: 45rem !important;;
     border-radius: 10px ;
-}
+}  */
 
 
 .swiperCC >.swiper_slide{

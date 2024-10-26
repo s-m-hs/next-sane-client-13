@@ -33,13 +33,7 @@ export default function SwiperB() {
     //   onAutoplayTimeLeft={onAutoplayTimeLeft}
       className={styles.swiper}
     >
-    <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A} src="../../images/31240.jpg
-    " alt="" />
-            <img className={styles.swiper_img_B} src="../../images/26763361_2111.i211.036.F.m012.c9.jpg" alt="" />
-
-      </SwiperSlide>
-
+   
 
       <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A}
@@ -49,11 +43,18 @@ export default function SwiperB() {
 
       </SwiperSlide>
 
+      <SwiperSlide className={styles.swiper_slide}>
+        <img className={styles.swiper_img_A} src="../../images/31240.jpg
+    " alt="" />
+            <img className={styles.swiper_img_B} src="../../images/2148109745.jpg" alt="" />
+
+      </SwiperSlide>
+
 
       <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A} src="../../images/26763361_2111.i211.036.F.m012.c9.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/sp_a80_2tbb.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/sp_a80_2tbbded.jpg" alt="" />
 
       </SwiperSlide>
 
@@ -80,7 +81,7 @@ export default function SwiperB() {
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A}src="../../images/2149417048.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/2149402395.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/360_F_152798966_cuJOMvClJogsecqVK08fmrqw5Zy4soEL.jpg" alt="" />
 
       </SwiperSlide>
 
@@ -92,7 +93,7 @@ export default function SwiperB() {
       <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A} src="../../images/rendering-smart-home-device.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/571.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/168838.jpg" alt="" />
 
       </SwiperSlide>
 
