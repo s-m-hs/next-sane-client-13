@@ -251,7 +251,7 @@ useEffect(()=>{
 
         {!fixTop ?
 
-          <div className={`container ${styles.Header}`}>
+          <div className={`container ${styles.Header} boxSh`}>
 
 
 

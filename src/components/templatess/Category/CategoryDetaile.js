@@ -236,7 +236,7 @@ useEffect(()=>{
   return (
     <div className={`container  centerc ${Styles.category}`} >
 <div className="row mt-5">
-  <div className={`col-2 boxSh ${Styles.right_maindiv} centerc`} >
+  <div className={`col-2  ${Styles.right_maindiv} centerc`} >
 
 <h1>دسته بندی ها:</h1>
 
@@ -318,7 +318,7 @@ useEffect(()=>{
           ))}
       </div>
 
-      <div className={`row row-cols-4 centerr ${Styles.products_card}`}>
+      <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh`}>
         
         {productByCat?.length == 0 ?
         
