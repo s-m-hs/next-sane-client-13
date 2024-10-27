@@ -81,7 +81,7 @@ export default function ProductDetailLeft({detail}) {
              
             </div>
             <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
-              <button className="btn btn-info "
+              <button className={`${Styles.addButton} btn btn-info`}  
                       onClick={()=>{
                         // const getLocalStorage=localStorage.getItem('loginToken')
                         // let obj=[{

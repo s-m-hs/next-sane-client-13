@@ -56,16 +56,11 @@ const addToBasket=()=>{
         <span className={styles.title}  > {title} </span>
         {/* <span>368,000</span> */}
         <span className={styles.price}  >{price?.toLocaleString()}تومان </span>
-        <div className={`${styles.icon_div} centerr`}   >
+
+        
+        {/* <div className={`${styles.icon_div} centerr`}   >
         <ShoppingCart size={32} color="#19a7af" weight="duotone"
         onClick={()=>{
-          // const getLocalStorage=localStorage.getItem('loginToken')
-          // let obj=[{
-          //   cyProductID: id,
-          //   quantity: 1,
-          //   orderItemID:0
-          // }] 
-          // console.log(obj)
           xtFlagLogin ? 
           addToBasket()
           // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
@@ -76,10 +71,10 @@ const addToBasket=()=>{
         }}
     />
         <Heart size={32} color="#19a7af" weight="duotone" />
-        {/* <i class="fa-solid fa-cart-plus " style={{color:'#14a5af'}} ></i>
-        <i class="fa-solid fa-heart " style={{color:'#14a5af'}} ></i> */}
+  
 
-        </div>
+        </div> */}
+
         {/* <Link className={styles.link}
 onClick={()=>setXtFlagSpinnerShow(true)}
   href={`/product/${id}`} >جزییات بیشتر...</Link> */}

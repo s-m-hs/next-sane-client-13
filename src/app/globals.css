@@ -156,7 +156,7 @@ transition: all 0.3s ease-in;
   border-radius: 0px;
   /* width: 70% !important; */
   padding-bottom: 30px;
-  height: 100% !important;
+  height: 95% !important;
   /* background-color: var(--them) !important; */
 
 }
@@ -449,4 +449,7 @@ input[type=number]::-webkit-inner-spin-button {
     width: 7%;
     font-size: 22px;
   }
+
+
+
 }

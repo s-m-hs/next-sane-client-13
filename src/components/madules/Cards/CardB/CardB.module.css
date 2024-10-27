@@ -5,9 +5,9 @@
     align-items: center;
     border:1px solid #e5e5e5
 }
-.container span{
+/* .container span{
 margin: 15px;
-}
+} */
 .icon_div{
     width: 100%;
     justify-content: flex-end !important;
@@ -39,7 +39,7 @@ color: var(--white1ffffff);
 
 
 .title{
-  font-family: Persian-Yekan;
+  font-family: vazirEn;
     align-self: flex-start !important;
     color: var(--black33b4359);
     /* text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff; */
@@ -49,13 +49,14 @@ color: var(--white1ffffff);
     align-self: flex-end !important;
     color: var(--black33b4359);
     text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+    padding-bottom: 20px;
 }
 /* .img{
   width: 60%;
 } */
 .container img{
   padding-top: 50px;
-    width: 80%;
+    width: 75%;
     animation: zoom1 4s linear infinite;
     text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
 cursor: pointer;
