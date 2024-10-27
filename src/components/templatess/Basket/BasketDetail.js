@@ -263,7 +263,7 @@ export default function BasketDetail() {
   // console.log(toBuy);
 
   return (
-    <div className={` ${style.container}`} >
+    <div className={`container ${style.container}`} >
       <div className="row mt-5 ">
         <div className={`col-lg-8 centerc  ${style.col_8} boxSh`}>
           <div className={` ${style.col_8_div_table} `}>
@@ -335,7 +335,7 @@ export default function BasketDetail() {
             </table>
           </div>
 
-          <div className={` container ${style.col_8_bottom_div_1} centerc`}>
+          {/* <div className={` container ${style.col_8_bottom_div_1} centerc`}>
 
             <div className="row">
 
@@ -396,12 +396,73 @@ onClick={paymentHandler}
             </div>
 
           
-          </div>
+          </div> */}
         </div>
+        <div className={` container  ${style.col_8_bottom_div_1} centerc`}>
 
+<div className="row">
+
+  <div className="col-6">
+
+  <div className={`  ${style.col_8_bottom_div_2} centerr`}>
+
+<button
+type="button"
+className={
+flagUpdate
+? `${style.btn} btn btn-outline-info`
+: `${style.btn_hide}`
+}
+onClick={updateBasketHandler}
+>
+به روز رسانی سبد خرید
+</button>
+</div>
+
+<button
+type="button"
+className={
+flagUpdate
+? `${style.btn_hide}`
+: `${style.btn} btn btn-outline-info`
+}
+onClick={paymentHandler}
+>
+تکمیل خرید
+</button>
+  </div>
+
+
+
+  <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
+  <div className={`centerc ${style.cath_div_mobile}`}>
+  <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
+  </span>
+  <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
+  </span>
+</div>
+    <button
+      className={`btn btn-outline-warning  ${style.colPrice_mobile_btn1}`}
+      disabled
+    >
+      <span>مجموع سبد خرید :</span>
+      <br />
+      <span className={`  ${style.colPrice_mobile_span2}`} >{total.toLocaleString()} تومان</span>
+      <img
+        src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
+        alt=""
+        className={style.colPrice_mobile_shopimg}
+      />
+    </button>
+  </div></div>
+
+</div>
+
+
+</div>
      
 
-        <div className={`col-lg-3 centerc ${style.col_4} boxSh`}>
+        <div className={`col-lg-4 centerc ${style.col_4} boxSh`}>
           <div>
             <div className="centerc" style={{ alignItems: "center" }}>
               <button

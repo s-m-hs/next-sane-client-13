@@ -1,9 +1,9 @@
 .col_8{
-    margin-right: 30px;
 }
 
 
 .col_4{
+    
     max-height: 500px;
     align-items: center;
     background-color: #fff;
@@ -118,9 +118,10 @@ border: none;
 }
 .col_8_bottom_div_1{
     display: flex !important;
-    position: fixed;
+    /* position: fixed; */
     bottom: 120px;
     width: 95%;
+    height: 250px;
 
 }
 .col_8_div_table{

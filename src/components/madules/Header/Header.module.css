@@ -518,7 +518,7 @@ transition:transform 0.1s linear;
     height: 30px;
     background-color:green;
     background: radial-gradient(circle at 30% 50%, #ffffff 10%, #d0d0d0 70%);
-    border-radius: 50%;
+    border-radius: 15%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     /* position: absolute; */
     /* left: 85px; */

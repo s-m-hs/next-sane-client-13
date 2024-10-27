@@ -8,6 +8,7 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <div className={`container  ${style.container}`} >
+      <hr />
         <div className={`row centerc ${style.rowtop}`} >
             <div className='col-md-8'>
                 <div className= 'centerc'>
