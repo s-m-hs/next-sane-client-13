@@ -58,8 +58,8 @@ const addToBasket=()=>{
         <span className={styles.price}  >{price?.toLocaleString()}تومان </span>
 
         
-        {/* <div className={`${styles.icon_div} centerr`}   >
-        <ShoppingCart size={32} color="#19a7af" weight="duotone"
+        <div className={`${styles.icon_div} centerr`}   >
+        <ShoppingCart size={24} color="#19a7af" weight="duotone"
         onClick={()=>{
           xtFlagLogin ? 
           addToBasket()
@@ -70,10 +70,10 @@ const addToBasket=()=>{
           
         }}
     />
-        <Heart size={32} color="#19a7af" weight="duotone" />
+        <Heart size={24} color="#19a7af" weight="duotone" />
   
 
-        </div> */}
+        </div>
 
         {/* <Link className={styles.link}
 onClick={()=>setXtFlagSpinnerShow(true)}

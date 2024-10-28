@@ -49,7 +49,7 @@
     position: absolute;
     top: 85%;
     font-size: 1.9rem;
-  left: 5px;
+  right: 5px;
   }
   .cardprob__icon_div svg{
     padding: 5px;
