@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle } from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -54,10 +54,36 @@ export default function Header() {
   };
 
 
-  let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, localToken } = useContext(MainContext)
+  let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem} = useContext(MainContext)
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
+  /////////////////////////////theming
+  
+  const changeTheme=()=>{
+    setFlagThem(prev=>!prev)
+    
+    console.log(flagThem)
+    }
+  
+  
+    useEffect(()=>{
+  if(flagThem){
+      document.documentElement.style.setProperty('--white1ffffff','#393939')
+    document.documentElement.style.setProperty('--white1ffffff2','#464646')
+    document.documentElement.style.setProperty('--gray3','#9b9b9b')
+    document.documentElement.style.setProperty('--white2','#d6d6d6')
+    document.documentElement.style.setProperty('--black0','#ffffff')
+
+  }else{
+    document.documentElement.style.setProperty('--white1ffffff','#ffffff')
+    document.documentElement.style.setProperty('--white1ffffff2','#ffffff')
+    document.documentElement.style.setProperty('--gray3','#555')
+    document.documentElement.style.setProperty('--white2','#ffffff')
+    document.documentElement.style.setProperty('--black0','#000000')
+  }
+    },[flagThem]) 
+  
   /////////////////////////////////
   const searchChange = (e) => {
     setSearchType(e.target.value)
@@ -409,8 +435,11 @@ useEffect(()=>{
                   <EnvelopeSimple size={24} color="#14a5af" />
                 </div>
 
-
-
+                <div className={` ${styles.Header_leftSide__div} centerr`}
+                onClick={changeTheme}
+                >
+                <SunDim size={24} color="#14a5af"  />
+                </div>
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
 
@@ -748,6 +777,11 @@ useEffect(()=>{
                   <EnvelopeSimple size={24} color="#14a5af" />
                 </div>
 
+                <div className={` ${styles.Header_leftSide__div} centerr`}
+                onClick={changeTheme}
+                >
+                <SunDim size={24} color="#14a5af"  />
+                </div>
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <span>02191005457</span>

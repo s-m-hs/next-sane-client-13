@@ -23,6 +23,8 @@ const MainProvider = ({ children }) => {
     const [mobile,setMobile]=useState('')
     const [address,setAddress]=useState(null)
     const [nameCategory,setNameCategory]=useState('')
+    const[flagThem,setFlagThem]=useState(false)
+
     // const getLocalStorage=localStorage.getItem('loginToken')
 
 
@@ -116,7 +118,7 @@ useEffect(()=>{
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
-            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile,address,setAddress,flagAddress,setFlagAddress,nameCategory,setNameCategory}}>
+            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile,address,setAddress,flagAddress,setFlagAddress,nameCategory,setNameCategory,flagThem,setFlagThem}}>
             {children}
         </MainContext.Provider>
     );

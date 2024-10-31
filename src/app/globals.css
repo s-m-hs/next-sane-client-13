@@ -16,7 +16,7 @@ body{
   text-decoration: none;
   list-style: none ;   
   /* background-color: var(--gray1f2f6fc) !important; */
-  background-color: #fff !important;
+  background-color: var(--white1ffffff) !important;
   direction: rtl;
   /* font-family:Persian-Yekan !important; */
   font-family:Yekan,calibri !important;
@@ -51,12 +51,14 @@ a,ul,li{
 
 :root{
   --white1ffffff:#ffffff;
+  --white1ffffff2:#ffffff;
   --white2fafaff:#fafaff;
   --graydcdee1:#dcdee1;
   --gray3bbcbbb:#bbcbbb;
   --gray2f0f0ff: #f0f0ff;
   --gray1f2f6fc:#f2f6fc;
   /* --black:#101011; */
+  --black0:#0000;
   --black1464646:#464646;
   --black22e2e2e:#2e2e2e;
   --black33b4359:#747575;
@@ -199,7 +201,7 @@ transition: all 0.3s ease-in;
 .swipercomb-div{
   position: relative;
   margin-top: 40px !important;
-  background-color: #fff;
+  background-color: var(--white1ffffff2);
   /* margin: 80px auto; */
   /* width: 90%; */
   border-radius: 35px;

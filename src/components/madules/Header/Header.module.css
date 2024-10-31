@@ -18,9 +18,11 @@
     height: 130px ;
     align-items: center;
     margin-bottom: 50px;
-    background-color: var(--white1ffffff);
+    background-color: var(--white1ffffff2);
     width: 95%;
     box-sizing: 0 0 15px -10px rgb(0,0,0,0.75);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 
 }
 
@@ -543,7 +545,7 @@ transition:transform 0.1s linear;
   .containerfix{
     max-width: none !important;
     height: 70px;
-    background: #ffff;
+    background: var(--white1ffffff2);
     position: fixed;
     z-index: 100;
     top: 0;
@@ -552,7 +554,7 @@ transition:transform 0.1s linear;
     height: 30px;
     margin-top: 20px !important;
     position: relative;
-    background-color: #ffffff;
+    background-color: var(--white1ffffff2);
   }
 
   .header_bottom__col__ul_fix>li {
