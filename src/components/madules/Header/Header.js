@@ -74,6 +74,8 @@ export default function Header() {
     document.documentElement.style.setProperty('--gray3','#9b9b9b')
     document.documentElement.style.setProperty('--white2','#d6d6d6')
     document.documentElement.style.setProperty('--black0','#ffffff')
+    document.documentElement.style.setProperty('--black33b4359','#ffffff')
+
 
   }else{
     document.documentElement.style.setProperty('--white1ffffff','#ffffff')
@@ -81,6 +83,7 @@ export default function Header() {
     document.documentElement.style.setProperty('--gray3','#555')
     document.documentElement.style.setProperty('--white2','#ffffff')
     document.documentElement.style.setProperty('--black0','#000000')
+    document.documentElement.style.setProperty('--black33b4359','#747575')
   }
     },[flagThem]) 
   

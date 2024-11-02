@@ -16,7 +16,7 @@ export default function Footer() {
 
                     <div className={`${style.eatadiv} centerr`} >
 
-<div>
+<div className={`${style.eatadiv_number} centerr`}>
 <Phone className={style.sphere} size={24} color='rgb(20, 165, 175)'
  weight="duotone" /> 
     021-91005457</div>

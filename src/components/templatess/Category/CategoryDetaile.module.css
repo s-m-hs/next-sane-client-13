@@ -5,7 +5,8 @@
     width: 100%;
 }
 .category_col{
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: var(--white1ffffff);
 }
 .category__cart_div{
     align-items: center;
@@ -70,6 +71,9 @@ width: fit-content;
     line-height: 2.3;
     /* margin-top: 20px; */
 
+}
+.right_maindiv h1{
+color: var(--black33b4359);
 }
 .right_div a{
      text-decoration: none !important;

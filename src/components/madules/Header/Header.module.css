@@ -73,7 +73,7 @@ left: 0; */
     align-items: center;
     background-color: rgb(20, 165, 175);
     font-size: 0.9cqi;
-    color: var(--white1ffffff);
+    color: var(--black33b4359);
     position: relative;
     /* background: linear-gradient(to right,rgba(20,165,175,0.1)30%,rgba(250,240,240,0.4)); */
 
@@ -306,6 +306,7 @@ left: 0; */
     border: none;
     outline: none;
     background-color: transparent;
+   color: var(--black33b4359);
     width: 80%;
 }
 .Header_rightSide__div_searchbox{

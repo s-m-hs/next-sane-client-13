@@ -48,8 +48,19 @@ margin: 10px;
   height: 80%;
   justify-content: space-evenly;
 }
+.col h1 {
+  color: var(--black33b4359);
+}
+.col h5 {
+  color: var(--black33b4359);
+}
 .col h3{
   text-align: justify;
+  color: var(--black33b4359);
+}
+
+.eatadiv_number{
+  color: var(--black33b4359);
 }
 
 @media only screen and (max-width:900px) {
