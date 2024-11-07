@@ -676,7 +676,7 @@ transition:transform 0.1s linear;
       }
       .bottomHeader_ul{
         justify-content: space-between;
-        padding: 0 ;
+        /* padding: 0 ; */
     
     }
 .Header_rightSide__div_search{
@@ -713,8 +713,9 @@ transition:transform 0.1s linear;
 
     }
     .bottomHeader_ul li{
-        padding: none;
+        /* padding: none; */
         font-size: 10px;
+        font-weight: 600;
         }
 }
 
@@ -750,7 +751,7 @@ transition:transform 0.1s linear;
 .mobi_bottomHeader{
     /* position: absolute;
     bottom: 0; */
-    /* height: 60px; */
+    height: 60px;
     width: 100%;
 }
 

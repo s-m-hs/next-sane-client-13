@@ -1053,7 +1053,7 @@ useEffect(()=>{
                 // className='row-cols-6 '
                 className={`row ${styles.ishover}`}
               >
-                <div className="col-2">
+                <div className="col-2 ">
                   <div>
                     <button className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(true)}
@@ -1150,7 +1150,7 @@ useEffect(()=>{
                     style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                     onClick={()=>setMenuOpen(false)}
                     >
-                      <House size={20} />خانه
+                      <House size={28}  weight="duotone"  color="#14a5af"/>
                   </Link>
                 </li>
 
@@ -1161,7 +1161,7 @@ useEffect(()=>{
                     <span className="bar"></span>
                     <span className="bar"></span>
                   </button>
-                  محصولات
+                  
                 </li>
 
                 <li className={`${styles.bottomHeader_ul_category}`}
@@ -1175,7 +1175,7 @@ useEffect(()=>{
                     }
 
                   }}>
-                  <TextIndent size={20} />دسته بندی ها
+                  <User size={28} weight="duotone"  color="#14a5af"/>
 
                   <div className={`${styles.bottomHeader_ul_category_div}`}
                     ref={ulRefA}
@@ -1188,7 +1188,7 @@ useEffect(()=>{
 setXtFlagSpinnerShow(true)
                         
                       }}>
-                        <User size={15} />
+                        <User size={15} color="#14a5af"/>
                         <span 
 
                         >
@@ -1197,7 +1197,7 @@ setXtFlagSpinnerShow(true)
 
                       <Link href={'/login'}
                       onClick={() => setXtFlagSpinnerShow(true)}>
-                        <SignIn size={15} />
+                        <SignIn size={15} color="#14a5af"/>
                         <span 
 
                         >
@@ -1209,7 +1209,7 @@ setXtFlagSpinnerShow(true)
 setXtFlagSpinnerShow(true)
         
       }}>
-                      <UserCheck size={15} />
+                      <UserCheck size={15} color="#14a5af"/>
                       <span 
 
                       >
@@ -1222,7 +1222,7 @@ setXtFlagSpinnerShow(true)
     setXtFlagSpinnerShow(true)
                             
                           }}>
-                      <Barcode size={15} />
+                      <Barcode size={15} color="#14a5af"/>
                       <span 
 
                       >
@@ -1235,7 +1235,7 @@ setXtFlagSpinnerShow(true)
   setXtFlagSpinnerShow(true)
                           
                         }}>
-                      <Wrench size={15} />
+                      <Wrench size={15} color="#14a5af"/>
                       <span 
 
                       >
@@ -1251,7 +1251,7 @@ setXtFlagSpinnerShow(true)
   setXtFlagSpinnerShow(true)
                           
                         }}>
-                      <BuildingApartment size={15} />
+                      <BuildingApartment size={15} color="#14a5af"/>
 
 
                       <span 
@@ -1266,7 +1266,7 @@ setXtFlagSpinnerShow(true)
     setMenuOpen(false)
 
   }}>
-                      <SignOut size={15} />
+                      <SignOut size={15} color="#14a5af"/>
                       <span 
 
                       >
@@ -1302,7 +1302,7 @@ setXtFlagSpinnerShow(true)
                     className={`${styles.Header_leftSide__div_mobile} centerr`}>
                     {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`} >{cartCounter}</span>}
                   </div>
-                  <ShoppingCart size={20}  />سبدخرید
+                  <ShoppingCart size={28}   weight="duotone"  color="#14a5af"/>
 
                 </Link>
 
@@ -1315,8 +1315,8 @@ setXtFlagSpinnerShow(true)
      setMenuOpen(false)
 setVisibleB(true)
                 } }>
-                  <MagnifyingGlass size={20}  />
-                  جسنجو</li>
+                  <MagnifyingGlass size={28}   weight="duotone"  color="#14a5af"/>
+                  </li>
 <div className={`${styles.sidebar_mobile} `}>
      <Sidebar   visible={visibleB} onHide={() => setVisibleB(false)} fullScreen>
                   <div className={`${styles.Header_rightSide__div_search}  centerc`}>

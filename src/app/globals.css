@@ -315,7 +315,7 @@ select:-webkit-autofill:focus {
 .hamburger .bar {
   width: 60%;
   height: 2px;      
-  background-color: black;
+  background-color: #14a5af;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
 }
