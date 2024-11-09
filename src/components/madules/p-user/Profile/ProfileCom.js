@@ -188,6 +188,7 @@ useEffect(()=>{
               <input
                className={errors?.update?.mobile ? style.error : ''}
               minLength={3}
+              disabled
                 name="update.mobile"
                 type="number"
                 placeholder=" "

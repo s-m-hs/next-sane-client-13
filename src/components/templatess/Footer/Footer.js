@@ -69,9 +69,12 @@ export default function Footer() {
             </div>
             <div className='col-md-4'></div>
             <div className='col-md-3'>
-              <img src="../../../../../../images/brand/enamad.png"     alt="namad" />
-            </div>
+              <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='' style={{cursor:'pointer'}} code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'/>
+              {/* <img src="../../../../../../images/brand/enamad.png"     alt="namad" /> */}
 
+              </Link>
+            </div>
+            {/* <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='' style='cursor:pointer' code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'></a> */}
         </div>
 
         </div>
