@@ -1,6 +1,7 @@
 'use client'
 import Layout from '@/components/layouts/UserPanelLayout'
 import TabCom from '@/components/madules/p-user/TabCom';
+import TicketCom from '@/components/madules/p-user/Ticket/TicketCom';
 import { MainContext } from '@/context/MainContext';
 import React, { useContext, useEffect } from 'react'
 import Tab from 'react-bootstrap/Tab';
@@ -13,6 +14,6 @@ export default function Ticket() {
     setXtFlagSpinnerShow(false)
   },[])
   return (
-<div>Ticket</div>
+<TicketCom/>
   )
 }

@@ -417,7 +417,10 @@ select:-webkit-autofill:focus {
 }
 
 
+.create_ticket{
+  display: none;
 
+}
 
 
 @media only screen and (max-width:900px){

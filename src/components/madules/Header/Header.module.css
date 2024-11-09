@@ -516,19 +516,19 @@ transition:transform 0.1s linear;
   }
 
   .sphere4{
-    padding: 4px;
+    padding: 2px;
     width: 30px !important;
     height: 30px;
     background-color:green;
     background: radial-gradient(circle at 30% 50%, #ffffff 10%, #d0d0d0 70%);
-    border-radius: 15%;
+    border-radius: 50%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     /* position: absolute; */
     /* left: 85px; */
     cursor: pointer;
-    padding-left: 25px;
-    margin: 10px;
-    padding-right: 25px;
+    /* padding-left: 25px; */
+    /* margin: 10px; */
+    /* padding-right: 25px; */
   }
 
   .magnifyingGlass{
@@ -633,13 +633,13 @@ transition:transform 0.1s linear;
         width: fit-content;
         left: 5%;
         top: 10px;
-        width: fit-content !important;
+        /* width: fit-content !important; */
     
     }
     .sphere {
-        padding: 4px;
-        width: 30px !important;
-        height: 30px!important;
+        padding: 0px;
+        width: 33px !important;
+        height: 33px!important;
         background-color:green;
         background: radial-gradient(circle at 30% 50%, #ffffff 10%, #d0d0d0 70%);
         border-radius: 50%;
@@ -663,7 +663,7 @@ transition:transform 0.1s linear;
         cursor: pointer;
       }
       .sphere3 {    
-        padding: 4px;
+        padding: 5px;
         width: 30px !important;
         height: 30px!important;
         background-color:green;
@@ -673,6 +673,21 @@ transition:transform 0.1s linear;
         /* position: absolute; */
         /* left: 85px; */
         cursor: pointer;
+      }
+      .sphere4{
+        padding: 2px;
+        width: 35px !important;
+        height: 35px;
+        background-color:green;
+        background: radial-gradient(circle at 30% 50%, #ffffff 10%, #d0d0d0 70%);
+        border-radius: 50%;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        /* position: absolute; */
+        /* left: 85px; */
+        cursor: pointer;
+        /* padding-left: 25px; */
+        /* margin: 10px; */
+        /* padding-right: 25px; */
       }
       .bottomHeader_ul{
         justify-content: space-between;

@@ -1,0 +1,14 @@
+.textarea{
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid rgba(168, 168, 168, 0.550000011920929); 
+    outline: none;
+}
+.create_ticket{
+    display: none;
+}
+.createbutton{
+    width: 100%;
+    color:var(--white1ffffff);
+    font-size: 15px;
+}

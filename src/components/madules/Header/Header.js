@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim } from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -1011,11 +1011,23 @@ useEffect(()=>{
             <div className={styles.header_bottom__col_logo}  >
 
               {
-                name && xtFlagLogin &&       <Link href={'/p-user'}>
-              <span className={styles.sphere4} >{name?.toUpperCase()}</span>
+                name && xtFlagLogin &&       <Link href={'/p-user/profile'}>
+              <span className={styles.sphere4} >
+                <UserCircleGear size={35} color="#14a5af" weight="duotone" />
+                </span>
+              {/* <span className={styles.sphere4} >{name?.toUpperCase()}</span> */}
 </Link>
               }
-     
+
+
+<Link href={'/p-user/ticket'}>
+                  
+{/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
+<ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
+
+                </Link>
+            
+{/*      
                   <Link href={'https://eitaa.com/sane_camputer'}>
                     <img
                       className={styles.sphere3}
@@ -1023,6 +1035,7 @@ useEffect(()=>{
                       alt=""
                     />
                   </Link>
+
                   <Link href={'https://instagram.com/sane_computer_'}>
                     {" "}
                     <img
@@ -1031,14 +1044,17 @@ useEffect(()=>{
                       alt=""
                     />
                   </Link>
+
                   <Link href={'https://t.me/SANE_IT'}>
+                  
                     {" "}
                     <img
                       className={styles.sphere}
                       src="/images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
                       alt=""
                     />
-                  </Link>
+                  </Link> */}
+
                 </div>
           </div>
           
