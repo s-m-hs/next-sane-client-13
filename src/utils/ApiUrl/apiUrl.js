@@ -1,4 +1,4 @@
-const apiUrl=`http://sapi.sanecomputer.com`
+const apiUrl=`https://sapi.sanecomputer.com`
 
 
 
