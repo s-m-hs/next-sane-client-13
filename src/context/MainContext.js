@@ -96,7 +96,10 @@ const getAddress=()=>{
       }, 
     }).then(res=>{
       // console.log(res);
-      return res.json()
+      if(res.status==200){
+        return res.json()
+
+      }
     }).then(result=>{
       // console.log(result);
       setAddress(result)    })

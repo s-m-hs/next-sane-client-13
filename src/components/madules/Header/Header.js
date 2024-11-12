@@ -58,6 +58,7 @@ export default function Header() {
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
+  const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 2500);
   /////////////////////////////theming
   
   const changeTheme=()=>{
@@ -1011,7 +1012,7 @@ useEffect(()=>{
             <div className={styles.header_bottom__col_logo}  >
 
               {
-                name && xtFlagLogin &&       <Link href={'/p-user/profile'}>
+                 xtFlagLogin &&       <Link href={'/p-user/profile'}>
               <span className={styles.sphere4} >
                 <UserCircleGear size={35} color="#14a5af" weight="duotone" />
                 </span>
@@ -1020,12 +1021,21 @@ useEffect(()=>{
               }
 
 
-<Link href={'/p-user/ticket'}>
+{
+                 xtFlagLogin ?  <Link href={'/p-user/ticket'}>
                   
-{/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
-<ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
+                 {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
+                 <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
+                 
+                                 </Link> :  
+     <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
+     onClick={()=>{
+      AlertC()
+     }}
+     />
+                                                }
 
-                </Link>
+
             
 {/*      
                   <Link href={'https://eitaa.com/sane_camputer'}>
