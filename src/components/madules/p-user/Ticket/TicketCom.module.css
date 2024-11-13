@@ -12,3 +12,14 @@
     color:var(--white1ffffff);
     font-size: 15px;
 }
+/* .login_label_float input::placeholder{
+    color:yellow !important;
+  } */
+  .input input::placeholder{
+    color:var(--gray3) !important;
+
+  }
+  .textarea::placeholder{
+    color:var(--gray3) !important;
+
+  }

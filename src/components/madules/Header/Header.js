@@ -58,7 +58,7 @@ export default function Header() {
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
-  const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 2500);
+  const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 3000);
   /////////////////////////////theming
   
   const changeTheme=()=>{
@@ -435,9 +435,20 @@ useEffect(()=>{
                   </div>
                 </Link>
 
-                <div className={` ${styles.Header_leftSide__div} centerr`}>
-                  <EnvelopeSimple size={24} color="#14a5af" />
-                </div>
+               
+{
+                 xtFlagLogin ?  <Link href={'/p-user/ticket'}>
+                  
+                 {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
+                 <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
+                 
+                                 </Link> :  
+     <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
+     onClick={()=>{
+      AlertC()
+     }}
+     />
+                                                }
 
                 <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
@@ -530,41 +541,7 @@ useEffect(()=>{
                       </li>
 
 
-                      {/* <li
-                        value={6}
-                        onMouseEnter={onmousHandle}
-                        className={valeS == 6 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
-                      >
-                        لپ تاپ
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}  >
-                          <div
-                            className={valeS == 6 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}
-
-                          // className={valeS == 6 ? "row-cols-4 ishover" : " nohover"}
-                          >
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/asus.jpg" alt="" />
-                              ASUS
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/lenovo.jpg" alt="" />
-                              LENOVO
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/hp.jpg" alt="" />
-                              HP
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/acer.jpg" alt="" />
-                              ACER
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/microsoft.jpg" alt="" />
-                              MICROSOFT
-                            </Link>
-                          </div>
-                        </div>
-                      </li> */}
+            
                     </ul>
 
 
@@ -679,29 +656,7 @@ useEffect(()=>{
                     onClick={() => { 
                       setVisible(true)
                       searchBox() }} />
-                  {/* {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
-                    <span><XCircle size={24} onClick={() => {
-                      setFlagSearch(false)
-                      setSearchType('')
-                    }} /></span>
-                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={() => {
-                        setFlagSearch(false)
-                        setSearchBoxArr([])
-                        setSearchType('')
-                        setXtFlagSpinnerShow(true)}}
-                      >
-                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                          <span>{item.name}</span>
-                          <img src={item.smallImage} alt="" />
-                        </div>
-                      </Link>
-
-                    )) : ''}
-
-
-
-                  </div>} */}
+          
                   <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
                   {flagSearch &&
                   
@@ -777,9 +732,19 @@ useEffect(()=>{
 
 
 
-                <div className={` ${styles.Header_leftSide__div} centerr`}>
-                  <EnvelopeSimple size={24} color="#14a5af" />
-                </div>
+                {
+                 xtFlagLogin ?  <Link href={'/p-user/ticket'}>
+                  
+                 {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
+                 <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
+                 
+                                 </Link> :  
+     <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
+     onClick={()=>{
+      AlertC()
+     }}
+     />
+                                                }
 
                 <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
