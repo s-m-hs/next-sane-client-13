@@ -152,7 +152,7 @@ useEffect(()=>{
             </div>
         </div>
 
-        <div className='row mt-5'>
+        <div className='row mt-5 boxSh'>
 
           <div className='col'>
 <div className={`table table-striped table-hover ${style.table}`}  >
