@@ -438,22 +438,25 @@ useEffect(()=>{
                
 {
                  xtFlagLogin ?  <Link href={'/p-user/ticket'}>
-                  
-                 {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
-                 <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
-                 
+                                                      <div className={` ${styles.Header_leftSide__div} centerr`}>
+
+                 <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
+                 {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
+                 </div>
                                  </Link> :  
-     <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
+                                    <div className={` ${styles.Header_leftSide__div} centerr`}>
+     <ChatCircleText size={28}  color="#14a5af" weight="duotone" 
      onClick={()=>{
       AlertC()
      }}
      />
+     </div>
                                                 }
 
                 <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
                 >
-                <SunDim size={24} color="#14a5af"  />
+                <SunDim size={28} color="#14a5af" weight="duotone" />
                 </div>
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
@@ -731,25 +734,27 @@ useEffect(()=>{
                 </Link>
 
 
-
                 {
                  xtFlagLogin ?  <Link href={'/p-user/ticket'}>
-                  
-                 {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
-                 <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
-                 
+                                                      <div className={` ${styles.Header_leftSide__div} centerr`}>
+
+                 <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
+                 {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
+                 </div>
                                  </Link> :  
-     <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
+                                    <div className={` ${styles.Header_leftSide__div} centerr`}>
+     <ChatCircleText size={28}  color="#14a5af" weight="duotone" 
      onClick={()=>{
       AlertC()
      }}
      />
+     </div>
                                                 }
 
                 <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
                 >
-                <SunDim size={24} color="#14a5af"  />
+                <SunDim size={24} color="#14a5af" weight="duotone" />
                 </div>
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>

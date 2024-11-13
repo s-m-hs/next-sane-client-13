@@ -28,7 +28,7 @@
 
 .Header_top {
     position: relative;
-    width: 90%;
+    width: 98%;
     margin: 0 auto !important;
     padding-top: 10px;
     border-radius: 15px;
@@ -38,6 +38,7 @@
 }
 
 .Header_rightSide {
+    width: 60%;
     justify-content: space-between !important;
     align-items: center;
     height: 80%;
@@ -52,6 +53,7 @@
 .Header_leftSide {
     /* position: absolute;
 left: 0; */
+width: 35%;
     justify-content: flex-end;
     align-items: center;
 }
@@ -68,7 +70,7 @@ left: 0; */
     -webkit-animation: AnimateBG 20s ease infinite;
             animation: AnimateBG 20s ease infinite;
     border-radius: 10px;
-    width: 9cqi !important;
+    width: 7cqi !important;
     height: 2.5cqi;
     align-items: center;
     background-color: rgb(20, 165, 175);
@@ -133,8 +135,8 @@ left: 0; */
     background: linear-gradient(to right, rgba(20, 165, 175, 0.1)30%, rgba(250, 240, 240, 0.4));
     background-color: var(--gray1f2f6fc);
     border-radius: 50%;
-    width: 2cqi;
-    height: 2cqi;
+    width: 40px;
+    height: 40px;
     box-shadow: 0 0 15px -10px rgb(0, 0, 0, 0.75);
     cursor: pointer;
     position: relative;
@@ -281,7 +283,7 @@ left: 0; */
 }
 .Header_rightSide__div_search{
     border-radius: 10px;
-    width: 25cqi !important;
+    width: 60% !important;
     height: 2.5cqi;
     align-items: center;
     background-color: var(--gray1f2f6fc);

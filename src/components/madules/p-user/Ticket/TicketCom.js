@@ -1,11 +1,13 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import style from './TicketCom.module.css'
 import { useForm } from "react-hook-form";
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import { MainContext } from '@/context/MainContext';
+import DateFormat from '@/utils/DateFormat';
 
 export default function TicketCom() {
 let{cyUserID,mobile}=useContext(MainContext)
+const [ticketArray,setTicketArray]=useState([])
 
     const {
         register,
@@ -23,6 +25,31 @@ let{cyUserID,mobile}=useContext(MainContext)
 
 
     const classRefA=useRef()
+
+const getAllTicket=()=>{
+  const getLocalStorage = localStorage.getItem('loginToken')
+
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CyTicket/getUserTickets`,{
+      method:'GET',
+      headers: {
+        Authorization: `Bearer ${getLocalStorage}`,
+        "Content-Type": "application/json",
+      },
+      // body:JSON.stringify(obj)
+    }).then(res=>{
+      console.log(res);
+      if(res.status==200){
+        return res.json()
+      }
+    }).then(result=>{
+      console.log(result);
+      setTicketArray(result)
+      classRefA.current.classList.add('create_ticket')
+    })
+  }
+  myApp()
+}
 
 const handleRegistration=(data)=>{
   const getLocalStorage = localStorage.getItem('loginToken')
@@ -54,16 +81,18 @@ console.log(obj)
           res.json()
         }
       }).then(result=>{
-        console.log(result)
-        async function myApp(){
-          const res=await fetch(``)
-        }
+        getAllTicket()
 
       })
     }
     myApp()
 
 }
+
+
+useEffect(()=>{
+  getAllTicket()
+},[])
 
 
 
@@ -123,7 +152,49 @@ console.log(obj)
             </div>
         </div>
 
-        <div className='row'></div>
+        <div className='row mt-5'>
+
+          <div className='col'>
+<div className={`table table-striped table-hover ${style.table}`}  >
+
+<thead>
+<tr>
+<th>شماره تیکت</th>
+<th>عنوان تیکت</th>
+<th>تاریخ ایجاد</th>
+<th>تاریخ بستن تیکت</th>
+<th>وضعیت  تیکت</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+  {
+    ticketArray?.length!=0 && ticketArray.map(item=>(
+      <tr>
+
+  <td>{item.id}</td>
+  <td>{item.title}</td>
+  <td><DateFormat dateString={`${item.openedAt}`} /></td>
+  <td><DateFormat dateString={`${item.closedAt}`} /></td>
+
+  <td><button className='btn btn-info' >
+    {item.status}
+    </button> </td>
+</tr>
+    )) 
+  }
+
+
+</tbody>
+
+</div>
+
+          </div>
+        </div>
     </div>
   )
 }
