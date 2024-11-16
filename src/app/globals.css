@@ -605,7 +605,7 @@ left: 10px;
   padding: 5px;
   border: 1px dotted;
   border-radius: 10px;
-  background-color: var(--gray1); 
+  background-color: var(--gray3); 
   position: relative;
   color: #fff;
   /* justify-self: flex-start !important; */

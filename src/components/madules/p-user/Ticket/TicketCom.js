@@ -6,6 +6,7 @@ import { MainContext } from '@/context/MainContext';
 import DateFormat from '@/utils/DateFormat';
 import Modal from 'react-bootstrap/Modal';
 import { Toast } from 'primereact/toast';
+import Swal from 'sweetalert2';
 
 export default function TicketCom() {
 let{cyUserID,mobile}=useContext(MainContext)
@@ -17,10 +18,11 @@ const [guIdC, setGuIdC] = useState("");
 const [stateId, setStateID] = useState(1);
 const [ticketId,setTicketId]=useState('')
 const [getChats,setGetChats]=useState([])
-const [userId, setUserId] = useState(cyUserID);
+const [userId, setUserId] = useState('');
 const [flag, setFlag] = useState(false);
 const [file, setFile] = useState({});
-
+console.log(userId) 
+console.log(cyUserID)
 const classRefD = useRef();
 
 const toastB = useRef(null);
@@ -100,7 +102,7 @@ const notify = () => {
   setFlag((prev) => !prev);
   setTextArea("");
   setGuIdC('')
-  setFile('')
+  setFile({})
   classRefD.current.classList.add("ticket-hide");
   if(stateId==1){
     setGetChats([])
@@ -124,18 +126,9 @@ const fileChange = (e) => {
   setFile(e.target.files[0]);
 
 };
-const sendTicket=()=>{
-  let obj={
-      id: 0,
-      senderID: 0,
-      senderName: "string",
-      ticketID: ticketId,
-      description: textArea ? textArea : guIdC? 'ارسال فایل':'' ,
-      status: 1,
-      sentDate: "2024-11-05T08:26:17.313Z",
-      seenDate: "2024-11-05T08:26:17.313Z",
-      fileID: guIdC ? guIdC : null,
-    }
+
+const sendTicket=(obj)=>{
+
 console.log(obj)
 async function myApp(){
   const getLocalStorage = localStorage.getItem('loginToken')
@@ -155,8 +148,6 @@ async function myApp(){
           classRefD.current.classList.add("ticket-hide");
           return res.json()
       }
-  }).then(result=>{
-      setFile({})
   }).catch(err=>console.log(err))
 }
 myApp()
@@ -302,12 +293,27 @@ console.log(obj)
       }).then(res=>{
         console.log(res)
         if(res.status==200){
-          res.json()
+         return res.json().then(result=>{
+        console.log(result)
+              let obj2={
+            id: 0,
+  senderID: 0,
+  senderName: "string",
+  ticketID: result.id,
+  description: result.topic ? result.topic : guIdC? 'ارسال فایل':'' ,
+  status: 1,
+  // sentDate: "2024-11-05T08:26:17.313Z",
+  // seenDate: "2024-11-05T08:26:17.313Z",
+  fileID: guIdC ? guIdC : null,
         }
-      }).then(result=>{
-        getAllTicket()
-
+        sendTicket(obj2)
       })
+        }
+      })
+
+        // getAllTicket()
+
+      
     }
     myApp()
 
@@ -316,7 +322,7 @@ console.log(obj)
 
 useEffect(()=>{
   getAllTicket()
-},[])
+},[flag])
 
 useEffect(()=>{
   getThicketById()
@@ -326,7 +332,9 @@ useEffect(() => {
     changeUplode();
   }
 }, [file]);
-
+useEffect(()=>{
+  setUserId(cyUserID)
+},[cyUserID])
 
   return (
     <div className='container'>
@@ -351,7 +359,7 @@ useEffect(() => {
                           className={`login_label_float ${style.input} centerr`}
                         >
                           <input 
-                          placeholder='یک عنوان به دلخواه برای پیام خود بنویس...'
+                          placeholder='یک عنوان به دلخواه برای پیامت بنویس...'
                           name='title'
                           {...register('title')}
                           />
@@ -470,7 +478,20 @@ useEffect(() => {
               </div>
 
               <button className={(textArea || guIdC)  ? "btn btn-info" : 'btn btn-info ticket-disable'}  
-              onClick={sendTicket}
+              onClick={()=>{
+                let obj={
+  id: 0,
+  senderID: 0,
+  senderName: "string",
+  ticketID: ticketId,
+  description: textArea ? textArea : guIdC? 'ارسال فایل':'' ,
+  status: 1,
+  sentDate: "2024-11-05T08:26:17.313Z",
+  seenDate: "2024-11-05T08:26:17.313Z",
+  fileID: guIdC ? guIdC : null,
+}
+sendTicket(obj)
+              }}
               >
                 ارسال پیام
               </button>
