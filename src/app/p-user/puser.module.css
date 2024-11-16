@@ -22,6 +22,10 @@
     
     .sidebar_menue{
         display: inline;
+        z-index: 1000;
+        position: fixed;
+        bottom: 0px;
+        right: 0;
     }
     .container{
 height: 100vh;
@@ -174,6 +178,24 @@ text-align: center;
     z-index: 1000;
     animation: move 700ms 1 alternate ease-in-out;
 }
+
+.span6{
+    right: 18px;
+    text-align: center;
+        position: absolute;
+        color: #fff;
+        background-color:#0dcaf0;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        /* left: calc(50% - 11rem); */
+        /* left: 327px; */
+        bottom:536px;
+        font-size: 17px;
+        z-index: 1000;
+        animation: move 850ms 1 alternate ease-in-out;
+}
+
 .container span{
     opacity: 0.9;
 }

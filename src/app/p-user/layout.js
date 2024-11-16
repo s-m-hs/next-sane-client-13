@@ -60,6 +60,11 @@ export default function layout({ children }) {
             onClick={()=>setFlagButton(false)}
             >تعمیرات</Link> </span>}
 
+            
+      {flagButton &&  <span className={` ${style.span6} centerc`} ><Link href={'/p-user/ticket'} 
+            onClick={()=>setFlagButton(false)}
+            >پیام ها</Link> </span>}
+
      <button  onClick={()=>setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
       {flagButton ? <X size={32} /> :  <List size={32} />}
     

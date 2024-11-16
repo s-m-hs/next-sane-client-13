@@ -7,10 +7,12 @@ import DateFormat from '@/utils/DateFormat';
 import Modal from 'react-bootstrap/Modal';
 import { Toast } from 'primereact/toast';
 import Swal from 'sweetalert2';
+import {DownloadSimple,CloudArrowDown } from "@phosphor-icons/react"
 
 export default function TicketCom() {
 let{cyUserID,mobile}=useContext(MainContext)
 const [ticketArray,setTicketArray]=useState([])
+const ticketArrayRevers = ticketArray.slice().reverse()
 
 const [lgShow, setLgShow] = useState(false);
 const [textArea, setTextArea] = useState("");
@@ -18,6 +20,8 @@ const [guIdC, setGuIdC] = useState("");
 const [stateId, setStateID] = useState(1);
 const [ticketId,setTicketId]=useState('')
 const [getChats,setGetChats]=useState([])
+const getChatsRevers = getChats?.slice().reverse()
+
 const [userId, setUserId] = useState('');
 const [flag, setFlag] = useState(false);
 const [file, setFile] = useState({});
@@ -81,17 +85,18 @@ const changeUplode = () => {
       body: formData,
     })
       .then((res) => {
+        console.log(res)
         if (res.status == 200) {
-          classRefD.current.classList.remove("ticket-hide");
+          // classRefD.current.classList.remove("ticket-hide");
           // classRefC.current.classList.add('order-show')
           return res.json();
         }
       })
       .then((result) => {
-        // console.log(result);
-        if (result) {
+        console.log(result);
+         if (result) {
           setGuIdC(result.id);
-          classRefD.current.classList.remove("ticket-hide");
+          // classRefD.current.classList.remove("ticket-hide");
           // classRefC.current.classList.add('order-show')
         }
       }).catch(err=>console.log(err))
@@ -103,6 +108,11 @@ const notify = () => {
   setTextArea("");
   setGuIdC('')
   setFile({})
+
+  setGetChats([])
+  setTicketId('')
+  setLgShow(false)
+  setFlagMessageNotification(prev=>!prev)
   classRefD.current.classList.add("ticket-hide");
   if(stateId==1){
     setGetChats([])
@@ -176,7 +186,7 @@ const getThicketById=()=>{
   }
   myApp()
 }
-
+console.log(getChats)
 const closeChat=()=>{
   const getLocalStorage = localStorage.getItem('loginToken')
 
@@ -306,6 +316,7 @@ console.log(obj)
   // seenDate: "2024-11-05T08:26:17.313Z",
   fileID: guIdC ? guIdC : null,
         }
+        console.log(obj2)
         sendTicket(obj2)
       })
         }
@@ -318,8 +329,8 @@ console.log(obj)
     myApp()
 
 }
-
-
+console.log(guIdC)
+ 
 useEffect(()=>{
   getAllTicket()
 },[flag])
@@ -329,6 +340,8 @@ useEffect(()=>{
 },[ticketId,flag])
 useEffect(() => {
   if (file) {
+    console.log(file)
+    console.log(guIdC)  
     changeUplode();
   }
 }, [file]);
@@ -378,8 +391,39 @@ useEffect(()=>{
                           name='detail'
                           {...register('detail')}
                           className={`login_label_float ${style.textarea} centerr`}
-                    placeholder='پیامت اینجا بنویس'
+                    placeholder='پیامت اینجا بنویس ...'
                           />
+
+<div className="ticket-right-message-file-div">
+                <input
+                  type="file"
+                  className="ticket-right-message-file-input"
+                  onChange={fileChange}
+                />
+                {/* <div className="order-file-i ticket-hide "
+                 ref={classRefD}
+                 >
+                  <i class="fa-solid fa-file-circle-check fa-2xl fa-beat-fade" style={{ color:'#63E6BE' ,  marginRight:'40px'}}></i>
+                </div> */}
+              </div>
+
+              {/* <button className={(textArea || guIdC)  ? "btn btn-info" : 'btn btn-info ticket-disable'}  
+              onClick={()=>{
+                let obj={
+  id: 0,
+  senderID: 0,
+  senderName: "string",
+  ticketID: ticketId,
+  description: textArea ? textArea : guIdC? 'ارسال فایل':'' ,
+  status: 1,
+  sentDate: "2024-11-05T08:26:17.313Z",
+  seenDate: "2024-11-05T08:26:17.313Z",
+  fileID: guIdC ? guIdC : null,
+}
+sendTicket(obj)
+              }}
+              /> */}
+
                    
                         </div>
 
@@ -394,17 +438,18 @@ useEffect(()=>{
         </div>
 
         <div className='row mt-5 boxSh'>
+{ ticketArray?.length!=0 && 
 
           <div className='col'>
 <div className={`table table-striped table-hover ${style.table}`}  >
 
 <thead>
 <tr>
-<th>شماره تیکت</th>
-<th>عنوان تیکت</th>
-<th>تاریخ ایجاد</th>
-<th>تاریخ بستن تیکت</th>
-<th>وضعیت  تیکت</th>
+<th>شماره </th>
+<th>عنوان </th>
+<th> تاریخ ایجاد 
+</th>
+<th>وضعیت  </th>
 
 </tr>
 
@@ -414,15 +459,24 @@ useEffect(()=>{
 <tbody>
 
   {
-    ticketArray?.length!=0 && ticketArray.map(item=>(
+    ticketArray?.length!=0 && ticketArrayRevers?.map(item=>(
       <tr>
 
   <td>{item.id}</td>
   <td>{item.title}</td>
   <td><DateFormat dateString={`${item.openedAt}`} /></td>
-  <td><DateFormat dateString={`${item.closedAt}`} /></td>
+  {/* <td><DateFormat dateString={`${item.closedAt}`} /></td> */}
 
-  <td><button className='btn btn-info' onClick={()=>{
+  <td><button className={
+    item.status==1 ?'btn btn-info' :
+    item.status==2 ? 'btn btn-warning' :
+    item.status== 3? 'btn btn-danger' : ''
+
+  }   
+  
+  onClick={()=>{
+    setFile({})
+    setGuIdC('')
     setStateID(item.status)
     setTicketId(item.id)
     setLgShow(true)
@@ -438,7 +492,7 @@ useEffect(()=>{
 
 </div>
 
-          </div>
+          </div>}
         </div>
 
         <>
@@ -517,16 +571,12 @@ sendTicket(obj)
 
 
 <span className='ticket-id-span' >شماره تیکت :  {ticketId}</span>
-{stateId!=3 && ticketId && <button className='btn btn-danger ticket-closemessage-button'
-onClick={()=>{
-  closeChat()
-}}
-> بستن تیکت </button>
-}
 
 </div>
-<div className='centerc ticket-chat-div'>
-{getChats?.length!=0 && getChats?.map(item=>(
+<div className='centerc ticket-chat-div p-5'>
+{getChats?.length!=0 && getChatsRevers?.map(item=>(
+<>
+
         <div className={
             item.senderID === userId
             ? "ticket-messeage-desc-div-sender centerr"
@@ -574,7 +624,7 @@ onClick={()=>{
                
               })
               // downloadFileB(item.fileID)
-            }}><i class="fa-solid fa-file-arrow-down fa-bounce fa-2xl" style={{color:'#74C0FC'}}  ></i></button>: ''
+            }}><CloudArrowDown  size={32} weight="duotone" color='#14a5af'/></button>: ''
             }
             </h5>
         
@@ -597,6 +647,8 @@ onClick={()=>{
               </span>
             )}
           </div>
+</>
+
 ))}
 
 </div>

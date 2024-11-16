@@ -57,6 +57,7 @@ a,ul,li{
   --gray3bbcbbb:#bbcbbb;
   --gray2f0f0ff: #f0f0ff;
   --gray1f2f6fc:#f2f6fc;
+  --yellow:#ffebcd;
   /* --black:#101011; */
   --black0:#0000;
   --black1464646:#464646;
@@ -549,6 +550,7 @@ left: 10px;
   justify-content: flex-end !important;
   margin-bottom: 30px;
   padding-top: 30px;
+
 }
 
 .ticket-right-message-divB{
@@ -605,7 +607,7 @@ left: 10px;
   padding: 5px;
   border: 1px dotted;
   border-radius: 10px;
-  background-color: var(--gray3); 
+  background-color: var(--them); 
   position: relative;
   color: #fff;
   /* justify-self: flex-start !important; */
@@ -617,7 +619,7 @@ left: 10px;
   padding: 5px;
   border: 1px dotted;
   border-radius: 10px;
-  background-color: var(--white); 
+  background-color: var(--yellow); 
   position: relative;
   color: var(--gray1);
   /* justify-self: flex-end !important; */
@@ -638,17 +640,18 @@ left: 10px;
   position: absolute;
   top: -24px;
   right: 30%;
-  background-color: #d0d0d0;
+  background-color: var(--gray3);
   border-radius: 5px;
   font-size: smaller;
   color: #fff;
 }
 .ticket-downlod-button{
   position: absolute;
-  bottom: -18px;
+  bottom: -25px;
   border: none;
   outline: none;
   left: 0;
+  background-color: unset;
 }
 
 .ticket-disable{
