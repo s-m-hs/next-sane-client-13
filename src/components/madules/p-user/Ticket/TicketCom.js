@@ -8,9 +8,11 @@ import Modal from 'react-bootstrap/Modal';
 import { Toast } from 'primereact/toast';
 import Swal from 'sweetalert2';
 import {DownloadSimple,CloudArrowDown } from "@phosphor-icons/react"
+import { usePathname } from 'next/navigation';
 
 export default function TicketCom() {
-let{cyUserID,mobile}=useContext(MainContext)
+
+let{cyUserID,mobil,setXtFlagSpinnerShow}=useContext(MainContext)
 const [ticketArray,setTicketArray]=useState([])
 const ticketArrayRevers = ticketArray.slice().reverse()
 
@@ -25,8 +27,9 @@ const getChatsRevers = getChats?.slice().reverse()
 const [userId, setUserId] = useState('');
 const [flag, setFlag] = useState(false);
 const [file, setFile] = useState({});
-console.log(userId) 
-console.log(cyUserID)
+const pathname = usePathname();
+
+
 const classRefD = useRef();
 
 const toastB = useRef(null);
@@ -348,6 +351,15 @@ useEffect(() => {
 useEffect(()=>{
   setUserId(cyUserID)
 },[cyUserID])
+useEffect(()=>{
+  if(pathname==='/p-user/ticket'){
+    setXtFlagSpinnerShow(false)
+  }
+})
+
+useEffect(()=>{
+  setXtFlagSpinnerShow(false)
+  },[])
 
   return (
     <div className='container'>

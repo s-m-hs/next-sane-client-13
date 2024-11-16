@@ -438,8 +438,10 @@ useEffect(()=>{
 
                
 {
-                 xtFlagLogin ?  <Link href={'/p-user/ticket'}>
-                                                      <div className={` ${styles.Header_leftSide__div} centerr`}>
+                 xtFlagLogin ?  <Link href={'/p-user/ticket'} >
+                                                      <div className={` ${styles.Header_leftSide__div} centerr`}
+                                                      onClick={()=>setXtFlagSpinnerShow(true)}
+                                                      >
 
                  <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
                  {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
@@ -478,7 +480,8 @@ useEffect(()=>{
               <div className={`col ${styles.header_bottom__col}`}  >
 
                 <ul className={`${styles.header_bottom__col__ul} centerr`}  >
-                  <li onClick={() => setXtFlagSpinnerShow(true)}
+                  <li 
+                  // onClick={() => setXtFlagSpinnerShow(true)}
                   > <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > <House size={15} /> خانه</Link> </li>
 
 
