@@ -7,17 +7,18 @@ import DateFormat from '@/utils/DateFormat';
 import Modal from 'react-bootstrap/Modal';
 import { Toast } from 'primereact/toast';
 import Swal from 'sweetalert2';
-import {DownloadSimple,CloudArrowDown } from "@phosphor-icons/react"
+import {DownloadSimple,CloudArrowDown,ArrowsClockwise, } from "@phosphor-icons/react"
 import { usePathname } from 'next/navigation';
 
 export default function TicketCom() {
 
-let{cyUserID,mobil,setXtFlagSpinnerShow}=useContext(MainContext)
+let{cyUserID,mobil,setXtFlagSpinnerShow,setFlagMessageNotification}=useContext(MainContext)
 const [ticketArray,setTicketArray]=useState([])
 const ticketArrayRevers = ticketArray.slice().reverse()
 
 const [lgShow, setLgShow] = useState(false);
 const [textArea, setTextArea] = useState("");
+const [textAreaB, setTextAreaB] = useState("");
 const [guIdC, setGuIdC] = useState("");
 const [stateId, setStateID] = useState(1);
 const [ticketId,setTicketId]=useState('')
@@ -88,7 +89,6 @@ const changeUplode = () => {
       body: formData,
     })
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           // classRefD.current.classList.remove("ticket-hide");
           // classRefC.current.classList.add('order-show')
@@ -96,7 +96,6 @@ const changeUplode = () => {
         }
       })
       .then((result) => {
-        console.log(result);
          if (result) {
           setGuIdC(result.id);
           // classRefD.current.classList.remove("ticket-hide");
@@ -134,6 +133,10 @@ const notifyB = () => {
 const changeTextArea = (e) => {
   setTextArea(e.target.value);
 };
+const changeTextAreaB = (e) => {
+  setTextAreaB(e.target.value);
+};
+
 const fileChange = (e) => {
      
   setFile(e.target.files[0]);
@@ -142,7 +145,6 @@ const fileChange = (e) => {
 
 const sendTicket=(obj)=>{
 
-console.log(obj)
 async function myApp(){
   const getLocalStorage = localStorage.getItem('loginToken')
 
@@ -154,7 +156,6 @@ async function myApp(){
         },
         body:JSON.stringify(obj)
   }).then(res=>{
-    console.log(res)
       if(res.status==200){
           show("info",' پیام با موفقیت ارسال شد')
           notify(); 
@@ -189,7 +190,6 @@ const getThicketById=()=>{
   }
   myApp()
 }
-console.log(getChats)
 const closeChat=()=>{
   const getLocalStorage = localStorage.getItem('loginToken')
 
@@ -266,12 +266,10 @@ const getAllTicket=()=>{
       },
       // body:JSON.stringify(obj)
     }).then(res=>{
-      console.log(res);
       if(res.status==200){
         return res.json()
       }
     }).then(result=>{
-      console.log(result);
       setTicketArray(result)
       classRefA.current.classList.add('create_ticket')
     })
@@ -282,7 +280,6 @@ const getAllTicket=()=>{
 const handleRegistration=(data)=>{
   const getLocalStorage = localStorage.getItem('loginToken')
 
-    console.log(data)
 let obj={
   id: 0,
   topic: data.detail,
@@ -293,7 +290,6 @@ let obj={
   openedAt: "2024-11-13T13:52:11.320Z",
   closedAt: "2024-11-13T13:52:11.320Z"
 }
-console.log(obj)
     async function myApp(){
       const res= await fetch(`${apiUrl}/api/CyTicket/createTicket`,{
         method:'POST',
@@ -304,10 +300,8 @@ console.log(obj)
           },
           body: JSON.stringify(obj)
       }).then(res=>{
-        console.log(res)
         if(res.status==200){
          return res.json().then(result=>{
-        console.log(result)
               let obj2={
             id: 0,
   senderID: 0,
@@ -319,7 +313,6 @@ console.log(obj)
   // seenDate: "2024-11-05T08:26:17.313Z",
   fileID: guIdC ? guIdC : null,
         }
-        console.log(obj2)
         sendTicket(obj2)
       })
         }
@@ -332,7 +325,6 @@ console.log(obj)
     myApp()
 
 }
-console.log(guIdC)
  
 useEffect(()=>{
   getAllTicket()
@@ -343,8 +335,7 @@ useEffect(()=>{
 },[ticketId,flag])
 useEffect(() => {
   if (file) {
-    console.log(file)
-    console.log(guIdC)  
+ 
     changeUplode();
   }
 }, [file]);
@@ -370,7 +361,6 @@ useEffect(()=>{
             <div className='col-lg-1'>
                 <button className='btn btn-primary btn-lg'
                 onClick={()=>{
-                    console.log('object')
                     classRefA.current.classList.remove('create_ticket')
                 }}
                 > ایجاد پیام جدید </button>
@@ -402,6 +392,8 @@ useEffect(()=>{
                           <textarea
                           name='detail'
                           {...register('detail')}
+                          onChange={changeTextAreaB}
+
                           className={`login_label_float ${style.textarea} centerr`}
                     placeholder='پیامت اینجا بنویس ...'
                           />
@@ -439,7 +431,8 @@ sendTicket(obj)
                    
                         </div>
 
-                        <button className={`btn btn-info ${style.createbutton}`}
+                        {/* <button className={`btn btn-info ticket-disable ${style.createbutton}`} */}
+                        <button className={(textAreaB || guIdC)  ? `btn btn-info ${style.createbutton}` : `btn btn-info ticket-disable ${style.createbutton}`}
                         
                         >ارسال پیام</button>
                     
@@ -575,10 +568,7 @@ sendTicket(obj)
     notify()          
   }}
 >
-  <i
-    class="fa-solid fa-rotate fa-xl"
-    style={{ color: "green" }}
-  ></i>
+<ArrowsClockwise  color='#14a5af' size={22} />
 </div>}
 
 

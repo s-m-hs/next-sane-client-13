@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText} from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,flagMessageNotification} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -53,21 +53,49 @@ export default function Header() {
     setMenuOpen(!isMenuOpen);
   };
 
-
-  let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem} = useContext(MainContext)
+  let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,setFlagMessageNotification} = useContext(MainContext)
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
   const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 3000);
   /////////////////////////////theming
   
+  const getAllTicket=()=>{
+    const getLocalStorage = localStorage.getItem('loginToken')
+  
+    async function myApp(){
+      const res=await fetch(`${apiUrl}/api/CyTicket/getUserTickets`,{
+        method:'GET',
+        headers: {
+          Authorization: `Bearer ${getLocalStorage}`,
+          "Content-Type": "application/json",
+        },
+        // body:JSON.stringify(obj)
+      }).then(res=>{
+        console.log(res);
+        if(res.status==200){
+          return res.json().then(result=>{
+            setMessageNotification(result)
+         
+          })
+        }
+      }).catch(err=>console.log(err))
+    }
+    myApp()
+  }
+// useEffect(()=>{
+//   setFlagMessageNotification(prev=>!prev)
+// },[])
+  useEffect(()=>{
+    getAllTicket()
+  },[flagMessageNotification,xtFlagLogin])
+
   const changeTheme=()=>{
     setFlagThem(prev=>!prev)
     
-    console.log(flagThem)
     }
-  
-  
+
+   
     useEffect(()=>{
   if(flagThem){
       document.documentElement.style.setProperty('--white1ffffff','#393939')
@@ -147,7 +175,6 @@ useEffect(()=>{
 },[searchTypeB])
 
 
-  console.log(cartCounter)
   ////////////////////////////  
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -401,7 +428,11 @@ useEffect(()=>{
                       <Dropdown.Menu>
                         <Dropdown.Item href="/p-user/profile"
                           onClick={() => setXtFlagSpinnerShow(true)}>پنل کاربری </Dropdown.Item>
-                        <Dropdown.Item onClick={exitHandler}>خروج</Dropdown.Item>
+                        <Dropdown.Item onClick={()=>{
+                           exitHandler()
+                            setMessageNotification([])
+                            setFlagMessageNotification(prev=!prev)
+                        }}>خروج</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </>
@@ -444,6 +475,7 @@ useEffect(()=>{
                                                       >
 
                  <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
+                 {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && <span className={`${styles.shopicon_baget} centerc`} > !</span>}  
                  {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                  </div>
                                  </Link> :  
@@ -743,6 +775,7 @@ useEffect(()=>{
                                                       <div className={` ${styles.Header_leftSide__div} centerr`}>
 
                  <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
+                 {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && <span className={`${styles.shopicon_baget} centerc`} > !</span>}  
                  {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                  </div>
                                  </Link> :  
@@ -765,7 +798,7 @@ useEffect(()=>{
                   <span>02191005457</span>
                   <Phone size={24} color="#ededed" weight="duotone" />      </div>
 
-
+   
               </div>
 
             </div>
@@ -1000,6 +1033,10 @@ useEffect(()=>{
                   
                  {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
                  <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
+                 {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && 
+                 <ExclamationMark size={28} weight="bold"  className={`${styles.shopicon_bagetB} centerc`}/>
+                //  <span className={`${styles.shopicon_baget} centerc`} > !</span>
+                 }  
                  
                                  </Link> :  
      <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
@@ -1262,8 +1299,10 @@ setXtFlagSpinnerShow(true)
 {
   xtFlagLogin &&  <Link href={'/'} onClick={() => {
     exitHandler()
-    setXtFlagSpinnerShow(true)
+    // setXtFlagSpinnerShow(true)
     setMenuOpen(false)
+    setMessageNotification([])
+    setFlagMessageNotification(prev=!prev)
 
   }}>
                       <SignOut size={15} color="#14a5af"/>

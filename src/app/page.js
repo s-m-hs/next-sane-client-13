@@ -9,7 +9,7 @@ import updateBasket from '@/utils/ApiUrl/updateBasket';
 import { usePathname } from 'next/navigation';
 
 // import getLocalStorage from '@/utils/localStorag/localStorage';
-import { useContext, useEffect } from 'react';
+import { use, useContext, useEffect } from 'react';
 
 export default function Home() {
   const pathname = usePathname();
@@ -48,6 +48,10 @@ useEffect(() => {
   }
 
 },[xtFlagLogin]); 
+
+// useEffect(()=>{
+//   setXtFlagSpinnerShow(false)
+// },[])
 
 // useEffect(()=>{
 //   if(  pathname==='/'){

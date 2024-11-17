@@ -16,7 +16,7 @@ margin: 15px;
     width: 100%;
     justify-content: flex-start !important;
     position: absolute;
-  bottom: 0;
+  bottom: -10px;
     
 }
 .icon_div svg{

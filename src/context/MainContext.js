@@ -24,9 +24,13 @@ const MainProvider = ({ children }) => {
     const [address,setAddress]=useState(null)
     const [nameCategory,setNameCategory]=useState('')
     const[flagThem,setFlagThem]=useState(false)
+    const [flagMessageNotification,setFlagMessageNotification]=useState(false)
+    const[messageNotification,setMessageNotification]=useState([])
+
 
     // const getLocalStorage=localStorage.getItem('loginToken')
 
+    
 
     const getBaskett=()=>{  
           const getLocalStorage=localStorage.getItem('loginToken')
@@ -107,6 +111,7 @@ const getAddress=()=>{
   myApp()
 }
 
+
 /////////////////////////
 useEffect(()=>{
   getProfile()
@@ -121,7 +126,7 @@ useEffect(()=>{
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
-            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile,address,setAddress,flagAddress,setFlagAddress,nameCategory,setNameCategory,flagThem,setFlagThem}}>
+            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile,address,setAddress,flagAddress,setFlagAddress,nameCategory,setNameCategory,flagThem,setFlagThem,flagMessageNotification,setFlagMessageNotification,messageNotification,setMessageNotification}}>
             {children}
         </MainContext.Provider>
     );
