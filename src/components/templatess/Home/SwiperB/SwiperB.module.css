@@ -15,7 +15,8 @@
   } */
   
   .swiper_slide {
-    
+    /* width: 1500px !important;
+    height: 965px !important; */
     text-align: center;
     font-size: 18px;
     background: #fff;
@@ -28,8 +29,8 @@
   
   .swiper_img_B , .swiper_img_A {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 984px;
+    height: 650px;
     object-fit: fill;
   }
   

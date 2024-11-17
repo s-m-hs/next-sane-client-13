@@ -228,6 +228,17 @@ transition: all 0.3s ease-in;
   font-size: 1.5cqi;
 }
 
+.p-galleria-item-wrapper>.p-galleria-item-container> .p-galleria-content  img{
+  height: 325px !important;
+}
+
+
+
+
+
+
+
+
 
 
 .login_label_float{

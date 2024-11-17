@@ -3,6 +3,7 @@ import BrandArea from '@/components/madules/BrandArea/BrandArea';
 import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
 import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
+import SwiperF from '@/components/templatess/Home/SwiperF/SwiperF';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 import updateBasket from '@/utils/ApiUrl/updateBasket';
@@ -62,7 +63,11 @@ useEffect(() => {
   return (
 <div className='container'>
   <div className='row '>
-    <div className='col-12'><SwiperB/></div> 
+    <div className='col-8'><SwiperB/></div> 
+    <div className='col-4'>
+       <SwiperF/>
+       <SwiperF/>
+     </div> 
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
