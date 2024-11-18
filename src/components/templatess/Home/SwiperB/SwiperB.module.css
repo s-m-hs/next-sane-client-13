@@ -4,7 +4,7 @@
   } */
   .swiper {
     /* width: 98%; */
-    height:650px;
+    max-height:650px;
     border-radius: 25px;
     box-shadow: 0 0 25px -9px rgb(0, 0, 0, 0.75);
 
@@ -29,8 +29,9 @@
   
   .swiper_img_B , .swiper_img_A {
     display: block;
-    width: 984px;
-    height: 650px;
+    width: 100%;
+    /* width: 984px;
+    height: 650px; */
     object-fit: fill;
   }
   

@@ -4,6 +4,7 @@ import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
 import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
 import SwiperF from '@/components/templatess/Home/SwiperF/SwiperF';
+import VerticalSlideshow from '@/components/templatess/Home/VerticalSlideshow/VerticalSlideshow';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
 import updateBasket from '@/utils/ApiUrl/updateBasket';
@@ -65,7 +66,8 @@ useEffect(() => {
   <div className='row '>
     <div className='col-8'><SwiperB/></div> 
     <div className='col-4 home-miniSwiper'>
-       <SwiperF/>
+      <VerticalSlideshow/>
+       {/* <SwiperF/> */}
        {/* <SwiperF/> */}
      </div> 
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
