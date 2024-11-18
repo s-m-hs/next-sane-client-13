@@ -64,9 +64,9 @@ useEffect(() => {
 <div className='container'>
   <div className='row '>
     <div className='col-8'><SwiperB/></div> 
-    <div className='col-4'>
+    <div className='col-4 home-miniSwiper'>
        <SwiperF/>
-       <SwiperF/>
+       {/* <SwiperF/> */}
      </div> 
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />

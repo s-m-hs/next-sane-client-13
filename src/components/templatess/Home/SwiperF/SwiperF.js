@@ -69,7 +69,7 @@ export default function SwiperF() {
                 })}
             </div> */}
             <Galleria style={{ maxWidth: '640px' }} value={images} responsiveOptions={responsiveOptions} numVisible={5} item={itemTemplate} thumbnailsPosition={position} thumbnail={thumbnailTemplate} 
-            // circular autoPlay transitionInterval={2000}
+            circular autoPlay transitionInterval={2000}
             />
         </div>
     )

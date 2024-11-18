@@ -228,6 +228,18 @@ transition: all 0.3s ease-in;
   font-size: 1.5cqi;
 }
 
+.home-miniSwiper .card{
+  border-radius: 8px !important;
+}
+.p-galleria .p-galleria-thumbnail-container{
+  background-color:#fff !important;
+}
+.p-galleria-item img{
+  height: 100% !important;
+}
+.p-galleria-thumbnail-container button{
+  display: none !important;
+}
 .p-galleria-item-wrapper>.p-galleria-item-container> .p-galleria-content  img{
   height: 325px !important;
 }
