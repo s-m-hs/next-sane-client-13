@@ -455,6 +455,9 @@ select:-webkit-autofill:focus {
 
 
 @media only screen and (max-width:900px){
+  .home-miniSwiper{
+    display: none;
+  }
   /* .container{
     --bs-gutter-x:none !important
   } */

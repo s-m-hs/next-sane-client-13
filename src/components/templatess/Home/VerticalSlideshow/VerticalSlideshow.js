@@ -27,10 +27,10 @@ const VerticalSlideshow = () => {
           slidesPerView={1}
           pagination={{ clickable: true }}
         //   navigation
-        // autoplay={{
-        //     delay: 2000,
-        //     disableOnInteraction: false,
-        //   }}
+        autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
         scrollbar={{ draggable: true }}
           style={{ width: "100%",  maxHeight:'350px' }}
           modules={[Pagination, Navigation, Scrollbar,Autoplay]}
@@ -178,7 +178,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/Dryft-Mini-V12.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/WD My Passport 500 GB External Hard Disk-1200x900.jpg" style={{width:'100%'}}alt="" />
               </div>
             </SwiperSlide>
       

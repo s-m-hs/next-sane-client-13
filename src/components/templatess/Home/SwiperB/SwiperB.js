@@ -20,39 +20,40 @@ export default function SwiperB() {
       loop={true}
       spaceBetween={30}
       centeredSlides={true}
-      // autoplay={{
-      //   delay: 2000,
-      //   disableOnInteraction: false,
-      // }}
+      autoplay={{
+        delay: 2000,
+        disableOnInteraction: false,
+      }}
 
       pagination={{
         clickable: true,
       }}
-      navigation={true}
+      // navigation={true}
       modules={[Autoplay, Pagination, Navigation]}
     //   onAutoplayTimeLeft={onAutoplayTimeLeft}
       className={styles.swiper}
     >
    
-
+{/* 1 */}
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A}
-          src="../../images/163924.jpg " alt=""
-        />
+      
+              <img className={styles.swiper_img_A} src="../../images/2149829123.jpg
+    " alt="" />
                 <img className={styles.swiper_img_B} src="../../images/acernitrolaptop-1650914214505.jpg" alt="" />
 
       </SwiperSlide>
-
+{/* 2 */}
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A} src="../../images/31240.jpg
-    " alt="" />
+      <img className={styles.swiper_img_A}
+          src="../../images/gradient-translucent-glass-molten-body-headset.jpg " alt=""
+        />
             <img className={styles.swiper_img_B} src="../../images/2148109745.jpg" alt="" />
 
       </SwiperSlide>
 
-
+{/* 3 */}
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A} src="../../images/26763361_2111.i211.036.F.m012.c9.jpg
+        <img className={styles.swiper_img_A} src="../../images/168838.jpg
         " alt="" />
         <img className={styles.swiper_img_B} src="../../images/sp_a80_2tbbded.jpg" alt="" />
 
@@ -60,7 +61,7 @@ export default function SwiperB() {
 
    
 
-
+{/* 4 */}
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A} src="../../images/2148994197.jpg
         " alt="" />
@@ -68,7 +69,7 @@ export default function SwiperB() {
 
       </SwiperSlide>
      
-
+{/* 5 */}
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A}src="../../images/2149529371.jpg
         " alt="" />
@@ -77,19 +78,22 @@ export default function SwiperB() {
       </SwiperSlide>
 
      
-
+{/* 6 */}
       <SwiperSlide className={styles.swiper_slide}>
-        <img  className={styles.swiper_img_A}src="../../images/2149417048.jpg
+        <img  className={styles.swiper_img_A}src="../../images/15462.jpg
         " alt="" />
         <img className={styles.swiper_img_B} src="../../images/360_F_152798966_cuJOMvClJogsecqVK08fmrqw5Zy4soEL.jpg" alt="" />
 
       </SwiperSlide>
 
+
+{/* 7 */}
        <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A}src="../../images/2149829123.jpg" alt="" />
+        <img className={styles.swiper_img_A}src="../../images/20240326013834.png" alt="" />
         <img className={styles.swiper_img_B} src="../../images/2149529371 (1).jpg" alt="" />
       </SwiperSlide>
 
+{/* 8 */}
       <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A} src="../../images/rendering-smart-home-device.jpg
         " alt="" />
@@ -97,9 +101,9 @@ export default function SwiperB() {
 
       </SwiperSlide>
 
-
+{/* 9 */}
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A} src="../../images/2149402395 (2).jpg
+        <img className={styles.swiper_img_A} src="../../images/earphones-with-minimalist-monochrome-background.jpg
         " alt="" />
         <img className={styles.swiper_img_B} src="../../images/236790_Apple_watch_9_Ultra_2_AKrales_0356.jpg" alt="" />
 
