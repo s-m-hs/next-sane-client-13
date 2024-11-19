@@ -4,6 +4,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import './VerticalSlideshow.module.css'
 
 import { Pagination, Navigation, Scrollbar,Autoplay } from "swiper/modules";
 
@@ -22,7 +23,7 @@ const VerticalSlideshow = () => {
         <Swiper
           key={index}
           direction="vertical"
-          spaceBetween={10}
+          spaceBetween={100}
           slidesPerView={1}
           pagination={{ clickable: true }}
         //   navigation
@@ -34,7 +35,106 @@ const VerticalSlideshow = () => {
           style={{ width: "100%",  maxHeight:'350px' }}
           modules={[Pagination, Navigation, Scrollbar,Autoplay]}
         >
-       
+             <SwiperSlide >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                  marginBottom:'120px'
+
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/rog-strix-z790-h-gaming-wifi-image-10-600x6002.jpg"style={{width:'100%'}} alt="" />
+              </div>
+            </SwiperSlide>
+            
+            <SwiperSlide >
+              <div
+                style={{
+                    borderRadius:'8px',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                  marginBottom:'120px'
+
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/download2.png" style={{width:'100%'}} alt="" />
+              </div>
+            </SwiperSlide>
+
+      
+
+            <SwiperSlide >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                  marginBottom:'120px'
+
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/LD00061243592.png" style={{width:'100%'}}alt="" />
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                  marginBottom:'120px'
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/81sfez9WktL2.jpg" style={{width:'100%'}}alt="" />
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/71E7Nnlt-JL._AC_UF1000,1000_QL80_2.jpg"style={{width:'100%'}} alt="" />
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/Xgaming-27-inch-165Hz-144Hz-Curved-Gaming-Monitor-Ultra-Wide-16-9-1440p-PC-Monitor-Laptop-2-Speakers-1ms-AMD-QHD2K-2560-x-1440p-HDR-Computer-Support_be788a05-2e83-43a2.jpg" style={{width:'100%'}}alt="" />
+              </div>
+            </SwiperSlide>
+
             <SwiperSlide >
               <div
                 style={{
@@ -47,82 +147,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/sp_a80_2tbbded2.jpg" style={{width:'100%'}} alt="" />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  backgroundColor: "#f4f4f4",
-                //   border: "1px solid #ccc",
-                }}
-              >
-               <img src="../../images/mini_swiper/pick-the-best-parts-for-your-pc-within-your-budget2.jpg"style={{width:'100%'}} alt="" />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  backgroundColor: "#f4f4f4",
-                //   border: "1px solid #ccc",
-                }}
-              >
-               <img src="../../images/mini_swiper/photo_2024-11-18_20-16-3402.jpg" style={{width:'100%'}}alt="" />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  backgroundColor: "#f4f4f4",
-                //   border: "1px solid #ccc",
-                }}
-              >
-               <img src="../../images/mini_swiper/photo_2024-11-18_20-16-2702.jpg" style={{width:'100%'}}alt="" />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  backgroundColor: "#f4f4f4",
-                //   border: "1px solid #ccc",
-                }}
-              >
-               <img src="../../images/mini_swiper/sp_a80_2tbbded2.jpg"style={{width:'100%'}} alt="" />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  backgroundColor: "#f4f4f4",
-                //   border: "1px solid #ccc",
-                }}
-              >
-               <img src="../../images/mini_swiper/sp_a80_2tbbded2.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/sp_a80_2tbbded.jpg" style={{width:'100%'}}alt="" />
               </div>
             </SwiperSlide>
 
@@ -138,7 +163,22 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/sp_a80_2tbbded2.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/9c27637ac04643a7c3a5cd8704994332-hi2.jpg" style={{width:'100%'}}alt="" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide >
+              <div
+                style={{
+                    borderRadius:'8px',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/Dryft-Mini-V12.jpg" style={{width:'100%'}}alt="" />
               </div>
             </SwiperSlide>
       
