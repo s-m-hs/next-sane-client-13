@@ -12,7 +12,7 @@ import Typewriter from "typewriter-effect";
 import style from './SwiperF.module.css';
 
 // import required modules
-import { EffectFlip, Pagination, Navigation } from 'swiper/modules';
+import { EffectFlip, Pagination, Navigation,Autoplay } from 'swiper/modules';
 
 export default function App() {
   return (
@@ -22,7 +22,11 @@ export default function App() {
         grabCursor={true}
         pagination={true}
         // navigation={true}
-        modules={[EffectFlip, Pagination, Navigation]}
+        // autoplay={{
+        //   delay: 4000,
+        //   disableOnInteraction: false,
+        // }}
+        modules={[EffectFlip, Pagination, Navigation,Autoplay]}
         className="mySwiperF"
       >
      <SwiperSlide>
@@ -30,7 +34,8 @@ export default function App() {
        <h1 className={`${style.type_h2}`}>
                       <Typewriter
                         options={{
-                            strings: ["مشاوره ،فروش واسمبل انواع سیستمهای خانگی ،اداری،گیمینگ ،مهندسی و ... "],
+                          strings: [" فروش انواع لوازم جانبی کامپیوتر و ملزومات آن با تنوع کم نظیر شامل انواع موس ،کیبرد ،اسپیکر،هدست،پاور بانک و ..."],
+
                             autoStart: true,
                           loop: true,
                         }}
@@ -47,7 +52,8 @@ export default function App() {
        <h1 className={`${style.type_h3}`}>
                       <Typewriter
                         options={{
-                          strings: [" فروش انواع لوازم جانبی کامپیوتر و ملزومات آن با تنوع کم نظیر شامل انواع موس ،کیبرد ،اسپیکر،هدست،پاور بانک و ..."],
+                          strings: ["مشاوره ،فروش واسمبل انواع سیستمهای خانگی ،اداری،گیمینگ ،مهندسی و ... "],
+
                           autoStart: true,
                           loop: true,
                         }}
@@ -55,6 +61,23 @@ export default function App() {
                     </h1>
 
     
+</div>
+
+ 
+        </SwiperSlide>
+
+        <SwiperSlide>
+<div className={`${style.type_div}`}>
+       <h1 className={`${style.type_h1}`}>
+                      <Typewriter
+                        options={{
+                            strings: ["پخش همکار و ارسال سفارش به تمام نقاط کشور..."],
+
+                          autoStart: true,
+                          loop: true,
+                        }}
+                      />
+                    </h1>
 </div>
 
  
@@ -78,6 +101,8 @@ export default function App() {
         </SwiperSlide>
    
 
+
+
         <SwiperSlide>
 <div className={`${style.type_div4}`}>
        <h1 className={`${style.type_h4}`}>
@@ -95,22 +120,7 @@ export default function App() {
         </SwiperSlide>
 
    
-        <SwiperSlide>
-<div className={`${style.type_div}`}>
-       <h1 className={`${style.type_h1}`}>
-                      <Typewriter
-                        options={{
-                            strings: [" ارايه انواع خدمات نرم افزاری وسخت افزاری جهت ارتقا انواع سیستمهای PC و لپ تاپ "],
 
-                          autoStart: true,
-                          loop: true,
-                        }}
-                      />
-                    </h1>
-</div>
-
- 
-        </SwiperSlide>
   
       </Swiper>
     </>
