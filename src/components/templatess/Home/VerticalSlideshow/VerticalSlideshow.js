@@ -31,7 +31,7 @@ const VerticalSlideshow = () => {
             delay: 2000,
             disableOnInteraction: false,
           }}
-        scrollbar={{ draggable: true }}
+        // scrollbar={{ draggable: true }}
           style={{ width: "100%",  maxHeight:'350px' }}
           modules={[Pagination, Navigation, Scrollbar,Autoplay]}
         >

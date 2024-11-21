@@ -67,6 +67,7 @@ useEffect(() => {
     <div className='col-lg-8'><SwiperB/></div> 
     <div className='col-4 home-miniSwiper'>
       <VerticalSlideshow/>
+      <SwiperF/>
        {/* <SwiperF/> */}
        {/* <SwiperF/> */}
      </div> 

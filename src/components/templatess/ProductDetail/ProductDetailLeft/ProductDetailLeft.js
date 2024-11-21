@@ -71,8 +71,8 @@ export default function ProductDetailLeft({detail}) {
             </div>
             <div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
 {detail.supply !=0 ? <>
-  <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} تومان</span>
-              <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} تومان</span>
+  <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+              <span className={Styles.ProductDetailL_divMiddle_price}  >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
 </> :
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: استعلام موجودی وقیمت</span>

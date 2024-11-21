@@ -295,7 +295,7 @@ export default function BasketDetail() {
                       name={item["name"]}
                       smallImage={item["smallImage"]}
                       // totalPrice={item.noOffPrice}
-                      unitPrice={item.price}
+                      unitPrice={Number(item.price)/10}
                       id={item["id"]}
                       cyProductID={item.id}
                       quantity={
@@ -318,8 +318,8 @@ export default function BasketDetail() {
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
-                        totalPrice={item.totalPrice}
-                        unitPrice={item.unitPrice}
+                        totalPrice={Number(item.totalPrice)/10}
+                        unitPrice={Number(item.unitPrice)/10}
                         id={item.id}
                         cyProductID={item.cyProductID}
                         quantity={item.quantity}
@@ -447,7 +447,7 @@ onClick={paymentHandler}
     >
       <span>مجموع سبد خرید :</span>
       <br />
-      <span className={`  ${style.colPrice_mobile_span2}`} >{total.toLocaleString()} تومان</span>
+      <span className={`  ${style.colPrice_mobile_span2}`} >{(Number(total)/10).toLocaleString()} تومان</span>
       <img
         src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
         alt=""
@@ -515,7 +515,7 @@ onClick={paymentHandler}
 
                 <span>مجموع سبد خرید :</span>
                 <br />
-                <span>{total.toLocaleString()} تومان</span>
+                <span>{(Number(total)/10).toLocaleString()} تومان</span>
               </button>
             </div>
           </div>

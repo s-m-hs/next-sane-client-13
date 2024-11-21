@@ -26,7 +26,7 @@ export default function CategoryDetaile({ param }) {
   const [flag, setFlag] = useState(false)
   const [page, setPage] = React.useState(1);
   const [paginationArray, setPaginationArray] = useState([]);
-  const pageCount=10
+  const pageCount=20
   const [allCount, setAllCount] = useState([]);
   const [mainCatA, setMainCatA] = useState({});
   const [mainCatB, setMainCatB] = useState({});
@@ -68,6 +68,10 @@ const changeId = (code) => {
     pageSize: pageCount
   }
   getproductByCat(obj)
+  window.scrollTo({
+    top:300,
+    behavior:'smooth'
+  })
 };
 
 
@@ -282,7 +286,8 @@ useEffect(()=>{
   <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-    <Breadcrumb.Item ><Link onClick={()=>setXtFlagSpinnerShow(true)}
+    <Breadcrumb.Item ><Link 
+    // onClick={()=>setXtFlagSpinnerShow(true)}
  href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
       <Breadcrumb.Item active href="/">
         {mainCategory.item?.name}
@@ -338,7 +343,7 @@ useEffect(()=>{
             // clickSpinner={()=>setFlagSpinnerShow(true)}
               id={item.id}
               imgSrc={item.smallImage
-              } title={item.name} price={item.price} supply={item.supply}
+              } title={item.name} price={Number(item.price)/10} supply={item.supply}
             /></div>
 
         )}

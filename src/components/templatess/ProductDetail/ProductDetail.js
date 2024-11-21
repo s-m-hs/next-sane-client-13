@@ -83,7 +83,8 @@ export default function ProductDetail({ param }) {
 <div className={`row ${Styles.breadcrumb_row}`} >
   <div className={`${Styles.breadcrumb} col` } >
     <Breadcrumb>
-    <Breadcrumb.Item ><Link href="/"onClick={()=>setXtFlagSpinnerShow(true)}
+    <Breadcrumb.Item ><Link href="/"
+    // onClick={()=>setXtFlagSpinnerShow(true)}
     ><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
 
     {nameCategory && idCategory && <Breadcrumb.Item ><Link 

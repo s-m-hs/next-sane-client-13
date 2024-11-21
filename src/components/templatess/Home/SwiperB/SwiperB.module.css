@@ -4,6 +4,7 @@
   } */
   .swiper {
     /* width: 98%; */
+    height: 100%;
     max-height:650px;
     border-radius: 25px;
     box-shadow: 0 0 25px -9px rgb(0, 0, 0, 0.75);
@@ -67,11 +68,10 @@
   .swiper_img_B{
     display: none ;
   }
-  @media(max-width:900px){
+  @media(max-width:600px){
     .swiper{
       margin-top: 60px;
-      height:300px;
-
+height: 60%;
     }
     .swiper_img_A{
       display: none ;
@@ -79,6 +79,6 @@
     .swiper_img_B{
       /* width: 90%;
       height: 90%; */
-      display: inline ;
+      display: block ;
     }
   }

@@ -247,6 +247,31 @@ transition: all 0.3s ease-in;
 
 
 
+.mySwiperF{
+  /* margin-top: 5px; */
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  height: 100%;
+
+}
+.mySwiperF .swiper {
+  width: 300px;
+  height: 300px;
+  padding: 50px;
+}
+
+.mySwiperF .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  max-height: 290px;
+  /* height: 100%; */
+}
+
+.mySwiperF .swiper-slide img {
+  display: block;
+  width: 100%;
+}
 
 
 
@@ -453,11 +478,16 @@ select:-webkit-autofill:focus {
 
 }
 
-
-@media only screen and (max-width:900px){
+@media only screen and (max-width:990px){
+  .mySwiperF{
+    display: none;
+  }
   .home-miniSwiper{
     display: none;
   }
+}
+@media only screen and (max-width:900px){
+ 
   /* .container{
     --bs-gutter-x:none !important
   } */

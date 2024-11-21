@@ -20,10 +20,10 @@ export default function SwiperB() {
       loop={true}
       spaceBetween={30}
       centeredSlides={true}
-      autoplay={{
-        delay: 2000,
-        disableOnInteraction: false,
-      }}
+      // autoplay={{
+      //   delay: 2000,
+      //   disableOnInteraction: false,
+      // }}
 
       pagination={{
         clickable: true,
@@ -39,15 +39,15 @@ export default function SwiperB() {
       
               <img className={styles.swiper_img_A} src="../../images/2149829123.jpg
     " alt="" />
-                <img className={styles.swiper_img_B} src="../../images/acernitrolaptop-1650914214505.jpg" alt="" />
+                <img className={styles.swiper_img_B} src="../../images/acernitrolaptop-16509142145052.jpg" alt="" />
 
       </SwiperSlide>
 {/* 2 */}
       <SwiperSlide className={styles.swiper_slide}>
       <img className={styles.swiper_img_A}
-          src="../../images/gradient-translucent-glass-molten-body-headset.jpg " alt=""
+          src="../../images/gradient-translucent-glass-molten-body-headset2.jpg" alt=""
         />
-            <img className={styles.swiper_img_B} src="../../images/2148109745.jpg" alt="" />
+            <img className={styles.swiper_img_B} src="../../images/gradient-translucent-glass-molten-body-headset22.jpg" alt="" />
 
       </SwiperSlide>
 
@@ -73,7 +73,7 @@ export default function SwiperB() {
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A}src="../../images/2149529371.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/15462.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/154622.jpg" alt="" />
 
       </SwiperSlide>
 
@@ -82,7 +82,7 @@ export default function SwiperB() {
       <SwiperSlide className={styles.swiper_slide}>
         <img  className={styles.swiper_img_A}src="../../images/15462.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/360_F_152798966_cuJOMvClJogsecqVK08fmrqw5Zy4soEL.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/habib-dadkhah-S0B-pmGjdVA-unsplash (2).jpg" alt="" />
 
       </SwiperSlide>
 
@@ -90,20 +90,20 @@ export default function SwiperB() {
 {/* 7 */}
        <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A}src="../../images/20240326013834.png" alt="" />
-        <img className={styles.swiper_img_B} src="../../images/2149529371 (1).jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/2149529371 (1)2.jpg" alt="" />
       </SwiperSlide>
 
 {/* 8 */}
       <SwiperSlide className={styles.swiper_slide}>
         <img className={styles.swiper_img_A} src="../../images/rendering-smart-home-device.jpg
         " alt="" />
-        <img className={styles.swiper_img_B} src="../../images/168838.jpg" alt="" />
+        <img className={styles.swiper_img_B} src="../../images/1688382.jpg" alt="" />
 
       </SwiperSlide>
 
 {/* 9 */}
       <SwiperSlide className={styles.swiper_slide}>
-        <img className={styles.swiper_img_A} src="../../images/earphones-with-minimalist-monochrome-background.jpg
+        <img className={styles.swiper_img_A} src="../../images/2150763360.jpg
         " alt="" />
         <img className={styles.swiper_img_B} src="../../images/236790_Apple_watch_9_Ultra_2_AKrales_0356.jpg" alt="" />
 

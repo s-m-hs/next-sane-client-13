@@ -55,7 +55,7 @@ const addToBasket=()=>{
 
         <span className={styles.title}  > {title} </span>
         {/* <span>368,000</span> */}
-        <span className={styles.price}  >{price?.toLocaleString()}تومان </span>
+        <span className={styles.price}  >{(Number(price)/10)?.toLocaleString()}تومان </span>
 
         
         <div className={`${styles.icon_div} centerr`}   >
