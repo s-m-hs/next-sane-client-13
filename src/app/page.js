@@ -1,9 +1,11 @@
 'use client'
+import BanerA from '@/components/madules/Baner/BanerA';
 import BrandArea from '@/components/madules/BrandArea/BrandArea';
 import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
 import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
 import SwiperF from '@/components/templatess/Home/SwiperF/SwiperF';
+import SwiperG from '@/components/templatess/Home/SwiperG/SwiperG';
 import VerticalSlideshow from '@/components/templatess/Home/VerticalSlideshow/VerticalSlideshow';
 import { MainContext } from '@/context/MainContext';
 import alertN from '@/utils/Alert/AlertA';
@@ -74,6 +76,8 @@ useEffect(() => {
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
+    {/* <SwiperG/> */}
+<BanerA />
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
     <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />

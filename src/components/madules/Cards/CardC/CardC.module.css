@@ -5,7 +5,7 @@
     width: 85%;
     height: 100%;
     position: relative;
-    box-shadow: 0 0 15px -10px rgb(0,0,0,0.75);
+    /* box-shadow: 0 0 15px -10px rgb(0,0,0,0.75); */
   }
   .cardprob_container_linkA{
     text-align: center;
@@ -44,11 +44,12 @@
   text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
   
   }
+
   
   .cardprob__icon_div{
     position: absolute;
     top: 85%;
-    font-size: 1.9rem;
+    /* font-size: 1.9rem; */
   right: 5px;
   }
   .cardprob__icon_div svg{
@@ -119,9 +120,83 @@
    
    */
   
+   @keyframes rgb-light {
+    0% {
+      color: rgb(130, 239, 239); /* قرمز */
+    }
+    8% {
+      color: rgb(70, 237, 237); /* سبز */
+    }
+    15% {
+      color: rgb(37, 234, 234);; /* آبی */
+    }
+    23% {
+      color: rgb(0, 241, 241);; /* بازگشت به قرمز */
+    }
+    31% {
+      color: rgb(85, 192, 228);; /* بازگشت به قرمز */
+    } 
+     39% {
+      color: rgb(158, 99, 230);; /* بازگشت به قرمز */
+    }  
+    48% {
+      color: rgb(111, 66, 188);; /* بازگشت به قرمز */
+    } 
+     58% {
+      color: rgb(125, 22, 234);; /* بازگشت به قرمز */
+    }  
+    65% {
+      color: #ddb7eb;; /* بازگشت به قرمز */
+    } 
+     75% {
+      color: #d757eb;; /* بازگشت به قرمز */
+    } 
+     83% {
+      color: rgb(152, 27, 187);; /* بازگشت به قرمز */
+    }
+      90% {
+      color: rgb(217, 0, 241);; /* بازگشت به قرمز */
+    }
+    100% {
+      color: rgb(152, 27, 187);; /* بازگشت به قرمز */
+    }
+  }
+  
+  .rgb_icon {
+    animation: rgb-light 6s infinite ease-in-out; /* 2 ثانیه زمان انیمیشن و تکرار بی‌نهایت */
+  }
   
   
+  @keyframes rainbow {
+    0% {
+      color: rgb(255, 0, 0); /* قرمز */
+    }
+    16% {
+      color: rgb(255, 127, 0); /* نارنجی */
+    }
+    32% {
+      color: rgb(255, 255, 0); /* زرد */
+    }
+    48% {
+      color: rgb(0, 255, 0); /* سبز */
+    }
+    64% {
+      color: rgb(0, 0, 255); /* آبی */
+    }
+    80% {
+      color: rgb(75, 0, 130); /* نیلی */
+    }
+    100% {
+      color: rgb(148, 0, 211); /* بنفش */
+    }
+  }
   
+  .rainbow_icon {
+    animation: rainbow 6s infinite ease-in-out; /* 5 ثانیه برای یک چرخه */
+  }
+
+
+
   
     @keyframes zoom { 
       0%{

@@ -36,7 +36,7 @@
     margin: 80px auto !important;
 }
 .products_col{
-    box-shadow: 0 0 14px -6px rgb(12 255 188 / 87%);
+    box-shadow: 0 0 14px -6px rgba(36, 184, 201, 0.87);
     min-width: 35rem !important;
     height: 40rem;
     margin-bottom: 50px;
@@ -47,7 +47,7 @@
 .breadcrumb{
     width: fit-content !important;
     margin-right: 100px !important;
-    border-bottom: 1px solid var(--black33b4359);
+    border-bottom: 1px solid #14a5af;
 }
 .breadcrumb_row{
 width: fit-content;

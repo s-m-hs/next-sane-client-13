@@ -288,7 +288,7 @@ useEffect(()=>{
     <Breadcrumb>
     <Breadcrumb.Item ><Link 
     // onClick={()=>setXtFlagSpinnerShow(true)}
- href="/"><HouseLine size={24}/>خانه/</Link></Breadcrumb.Item>
+ href="/"><HouseLine size={24} color="#24b8c9de"/>خانه/</Link></Breadcrumb.Item>
       <Breadcrumb.Item active href="/">
         {mainCategory.item?.name}
       </Breadcrumb.Item>
@@ -323,7 +323,7 @@ useEffect(()=>{
           ))}
       </div>
 
-      <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh`}>
+      <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>
         
         {productByCat?.length == 0 ?
         

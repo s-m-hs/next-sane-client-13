@@ -79,7 +79,10 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 
     
     <div className={`${Styles.cardprob__icon_div} centerr`} >
-    <ShoppingCart size={32} color="#19a7af" weight="duotone"
+    <ShoppingCart size={32}
+     color="#24b8c9de"
+
+      weight="fill"
         onClick={()=>{
           // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -97,9 +100,9 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
           
         }}
     />
-    {/* <ShoppingCart size={32} color="#19a7af" weight="fill" /> */}
-    <Heart size={32} color="#19a7af" weight="duotone" />
-    {/* <Heart size={32} color="#19a7af" weight="fill" /> */}
+    {/* <Heart size={32}
+     color="#d757eb"
+    weight="thin" /> */}
 
 
     </div>
