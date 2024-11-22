@@ -57,7 +57,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
     <div
      data-aos='fade-up'
       
-     className={`${Styles.cardprob_container} centerc`}>
+     className={`${Styles.cardprob_container} centerc `}>
 
       <Link  className={`${Styles.cardprob_container_linkA}`} 
       onClick={()=>setXtFlagSpinnerShow(true)}
