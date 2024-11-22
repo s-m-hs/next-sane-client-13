@@ -6,7 +6,7 @@ export default function BanerA() {
   return (
     <div className='contaner'>
         <div className='row '>
-            <div className={ ` col ${style.main_div} mt-5`}  >
+            <div className={ ` col-2 ${style.main_div} mt-5`}  >
                 <div className={style.div}>
                     <SwiperG/>
                 </div>

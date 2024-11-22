@@ -307,7 +307,7 @@ transition: all 0.3s ease-in;
 }
 
 .mySwiperG .swiper-slide {
-
+  height: 320px !important;
   display: flex;
   align-items: center;
   justify-content: center;
