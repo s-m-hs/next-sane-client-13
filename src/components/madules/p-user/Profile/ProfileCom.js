@@ -13,6 +13,10 @@ import alertN from '@/utils/Alert/AlertA';
 
 
 export default function ProfileCom() {
+  const [file, setFile] = useState({});
+  const [imgUrl, setImgUrl] = useState("");
+
+
   // const getLocalStorage=localStorage.getItem('loginToken')
 let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
   const {
@@ -40,6 +44,57 @@ let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile,setXt
   const router = useRouter()
   // console.log(errors?.update)
 ////////////////////////
+function fileUploadHandler(file,setImgUrlll){
+
+  // event.preventDefault()
+  let formData = new FormData();
+  formData.append('File', file)
+  formData.append('Name', '')
+  formData.append('Description', '')
+  formData.append('IsPrivate', false)
+  // console.log(formData.get('File')); 
+  async function myAppPostFile() {
+    const res = await fetch(`${apiUrl}/api/CyFiles/upload`, {
+      method: 'POST',
+      // headers: {
+      //   // Authorization: `Bearer ${cmsContext.token.token}`,
+      //   // 'accept': '*/*',
+      //   // 'Content-Type': 'multipart/form-data',
+      //   // // "Content-Type": "application/json",
+
+      // },
+      body: formData
+    }).then(res => {
+      // console.log(res)
+      return res.json()
+    }).then(
+      (result) => {
+        // console.log(result)
+       setImgUrlll(result.adress)
+       
+      }
+    ).catch(err=>console.log(err))
+  }
+  myAppPostFile()
+}
+
+
+const fileChange = (e) => {
+  setFile(e.target.files[0]);
+};
+
+const fileChange2 = (e) => {
+  setFile("");
+  setImgUrl(e.target.value);
+};
+
+useEffect(() => {
+  if (file) {
+    fileUploadHandler(file, setImgUrl);
+  }
+}, [file]);
+
+
 const handleRegistration=(data)=>{
   // console.log(data);
  
@@ -213,13 +268,22 @@ useEffect(()=>{
             </div>  
 
             <div className={ `login_label_float ${style.input}`}>
-              <input
-              minLength={3}
-                name="userImageUrl"
-                type="userName"
-                placeholder=" "
-              />
               <label>عکس پروفایل</label>
+              
+              <input
+                    type="file"
+                    placeholder="عکس کوچک"
+                    className="category-img-input"
+                    onChange={fileChange}
+                  />
+
+                  <span>
+                    <img
+                      className="category-img-image"
+                      src={`${apiUrl}/${imgUrl}`}
+                      alt=""
+                    />{" "}
+                  </span>
               <IdentificationBadge size={38} color="#14a5af" weight="duotone"className={style.icon} />
 
             </div>  

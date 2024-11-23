@@ -72,10 +72,10 @@ export default function ProductDetailLeft({detail}) {
             <div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
 {detail.supply !=0 ? <>
   <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
-              <span className={Styles.ProductDetailL_divMiddle_price}  >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
+              {/* <span className={Styles.ProductDetailL_divMiddle_price}  >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span> */}
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
 </> :
-              <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: استعلام موجودی وقیمت</span>
+              <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: ناموجود  </span>
 
 }
              
@@ -97,7 +97,7 @@ export default function ProductDetailLeft({detail}) {
                         
                       }}
               >
-        {detail.supply !=0 ? 'فزودن به سبد خرید' : 'استعلام موجودی و قیمت'}
+        {detail.supply !=0 ? 'افزودن به سبد خرید' : 'افزودن به سبد خرید (جهت استعلام موجودی )'}
                 
                 </button>
 
@@ -124,7 +124,7 @@ export default function ProductDetailLeft({detail}) {
                  addToCart(detail.id,'1',setCartCounter)
               
             }}
-          >           {detail.supply !=0 ? 'فزودن به سبد خرید' : 'استعلام موجودی و قیمت'}
+          >           {detail.supply !=0 ? 'افزودن به سبد خرید' : 'افزودن به سبد خرید ( استعلام موجودی )'}
 </button>
         </div>
 
@@ -150,11 +150,11 @@ export default function ProductDetailLeft({detail}) {
       <div className={`${Styles.ProductDetailL_left_price} centerc mt-5`} >
 
         {detail.supply !=0 ? <>
-          <span className={Styles.ProductDetailL_divMiddle_offprice} >{detail.price?.toLocaleString()} تومان</span>
-              <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} تومان</span>
+          <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+              {/* <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} تومان</span> */}
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
         </> :
-                      <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: استعلام موجودی وقیمت</span>
+                      <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول:ناموجود</span>
 
         }
 

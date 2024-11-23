@@ -488,11 +488,11 @@ useEffect(()=>{
      </div>
                                                 }
 
-                <div className={` ${styles.Header_leftSide__div} centerr`}
+                {/* <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
                 >
                 <SunDim size={28} color="#14a5af" weight="duotone" />
-                </div>
+                </div> */}
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
 
@@ -772,7 +772,9 @@ useEffect(()=>{
 
                 {
                  xtFlagLogin ?  <Link href={'/p-user/ticket'}>
-                                                      <div className={` ${styles.Header_leftSide__div} centerr`}>
+                                                      <div className={` ${styles.Header_leftSide__div} centerr`}
+                                                       onClick={()=>setXtFlagSpinnerShow(true)}
+                                                      >
 
                  <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
                  {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && <span className={`${styles.shopicon_baget} centerc`} > !</span>}  
@@ -787,12 +789,12 @@ useEffect(()=>{
      />
      </div>
                                                 }
-
+{/* 
                 <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
                 >
                 <SunDim size={24} color="#14a5af" weight="duotone" />
-                </div>
+                </div> */}
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <span>02191005457</span>
@@ -1029,7 +1031,7 @@ useEffect(()=>{
 
 
 {
-                 xtFlagLogin ?  <Link href={'/p-user/ticket'}>
+                 xtFlagLogin ?  <Link href={'/p-user/ticket'}  onClick={()=>setXtFlagSpinnerShow(true)}>
                   
                  {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
                  <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />

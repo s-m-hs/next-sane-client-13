@@ -37,7 +37,6 @@
     "spinners": "^1.2.2",
     "sweetalert2": "^11.12.3",
     "swiper": "^11.1.8",
-    "typeit-react": "^2.7.7",
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {

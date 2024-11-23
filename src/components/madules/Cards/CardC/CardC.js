@@ -72,7 +72,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 {supply!=0  ?  
     <span className={Styles.cardprob_price}>{price?.toLocaleString()}تومان </span>
 :
-<span className={Styles.cardprob_price}>استعلام قیمت</span>
+<span className={Styles.cardprob_price}>ناموجود</span>
 
 
   }
