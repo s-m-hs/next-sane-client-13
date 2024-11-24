@@ -70,8 +70,7 @@ useEffect(() => {
     <div className='col-4 home-miniSwiper'>
       <VerticalSlideshow/>
       <SwiperF/>
-       {/* <SwiperF/> */}
-       {/* <SwiperF/> */}
+   
      </div> 
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />

@@ -21,12 +21,23 @@ export default function SwiperG() {
         autoplay={{
             delay: 2000,
             disableOnInteraction: false,
-          }}      >
-        <SwiperSlide className={style.div}></SwiperSlide>
-        <SwiperSlide className={style.div2}></SwiperSlide>
-        <SwiperSlide className={style.div3}></SwiperSlide>
-        <SwiperSlide className={style.div4}></SwiperSlide>
-        <SwiperSlide className={style.div5}></SwiperSlide>
+          }}  
+              >
+        <SwiperSlide className={style.div}>
+{/* <img src='../../../../../../images/Slider/photo_2024-11-22_22-34-322.jpg' alt="" /> */}
+
+        </SwiperSlide>
+
+        <SwiperSlide className={style.div2}>
+        {/* <img src='../../../../../../images/Slider/photo_2024-11-22_22-34-39.jpg' alt="" /> */}
+        </SwiperSlide>
+
+        <SwiperSlide className={style.div3}>
+        {/* <img src='../../../../../../images/Slider/photo_2024-11-22_22-34-45.jpg' alt="" /> */}
+        </SwiperSlide>
+        <SwiperSlide className={style.div4}>
+        {/* <img src='../../../../../../images/Slider/photo_2024-11-22_22-34-322.jpg' alt="" /> */}
+        </SwiperSlide>
    
       </Swiper>
     </>

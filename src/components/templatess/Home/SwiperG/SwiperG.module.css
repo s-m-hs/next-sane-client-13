@@ -1,19 +1,35 @@
 .div{
+    border: 2px solid red;
     background-image: url('./61E8GAFVRLL.jpg');
     height: 320px;
     width: 198px;
+  position: relative;
+  
+}
+ .img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    top: 5px;
 }
 .div2{
+    border: 2px solid rgb(250, 250, 56);
+
     background-image: url('./photo_2024-11-22_22-34-322.jpg');
     height: 320px;
     width: 198px;
 }
 .div3{
+    border: 2px solid rgb(68, 192, 30);
+
     background-image: url('./photo_2024-11-22_22-34-39.jpg');
     height: 320px;
     width: 198px;
 }
 .div4{
+    border: 2px solid rgb(122, 62, 201);
+
     background-image: url('./photo_2024-11-22_22-34-45.jpg');
     height: 320px;
     width: 198px;
@@ -22,4 +38,54 @@
     background-image: url('./photo_2024-11-22_22-34-322.jpg');
     height: 320px;
     width: 198px;
+}
+
+
+@media only screen and (max-width:992px){
+
+    .div{
+        border: 2px solid red;
+        background-image: url('./61E8GAFVRLL.jpg');
+        width:100px;
+        /* height: ; */
+      position: relative;
+    }
+     .img{
+    
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        top: 5px;
+    }
+    .div2{
+        border: 2px solid rgb(250, 250, 56);
+    
+        background-image: url('./photo_2024-11-22_22-34-322.jpg');
+        height: 100px;
+        width: 100px;
+    }
+    .div3{
+        border: 2px solid rgb(68, 192, 30);
+    
+        background-image: url('./photo_2024-11-22_22-34-39.jpg');
+        height: 100px;
+        width: 100px;
+    }
+    .div4{
+        border: 2px solid rgb(122, 62, 201);
+    
+        background-image: url('./photo_2024-11-22_22-34-45.jpg');
+        height: 100px;
+        width: 100px;
+    }
+    .div5{
+        background-image: url('./photo_2024-11-22_22-34-322.jpg');
+        height: 100px;
+        width: 100px;
+    }
+    
+    
+   
+
 }

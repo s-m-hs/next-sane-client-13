@@ -573,6 +573,13 @@ select:-webkit-autofill:focus {
   .home-miniSwiper{
     display: none;
   }
+  .mySwiperG  {
+    /* position: absolute; */
+    width: 200px  !important;
+    height: 95%;
+    /* left: 0 !important; */
+    opacity: 0.5 !important; 
+  }
   
 }
 @media only screen and (max-width:900px){
