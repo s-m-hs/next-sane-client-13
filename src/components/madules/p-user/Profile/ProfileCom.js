@@ -18,7 +18,7 @@ export default function ProfileCom() {
 
 
   // const getLocalStorage=localStorage.getItem('loginToken')
-let {cyUserID,username,name,family,email,mobile,xtFlagLogin,setFlagProfile,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
+let {cyUserID,username,name,family,email,mobile,userSrc,xtFlagLogin,setFlagProfile,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
   const {
     register,
     handleSubmit,
@@ -94,7 +94,7 @@ useEffect(() => {
   }
 }, [file]);
 
-
+console.log(`${apiUrl}/${imgUrl}`)
 const handleRegistration=(data)=>{
   // console.log(data);
  
@@ -107,7 +107,7 @@ const handleRegistration=(data)=>{
   website: "string",
   mobile: data.update.mobile,
   description: "string",
-  userImageUrl: "string",
+  userImageUrl: `${apiUrl}/${imgUrl}`,
   // username:data.update.userName
   username:username
 }
@@ -267,24 +267,26 @@ useEffect(()=>{
 
             </div>  
 
-            <div className={ `login_label_float ${style.input}`}>
-              <label>عکس پروفایل</label>
-              
-              <input
+            <div className={ `login_label_float ${style.input_img}`}>
+                <div className={ ` ${style.profile_img_div}`}>
+                    <input
                     type="file"
-                    placeholder="عکس کوچک"
-                    className="category-img-input"
+                    placeholder="برای پروفایل خود یک عکس انتخاب کن..."
+                    className={ ` ${style.profile_img_input}`} 
                     onChange={fileChange}
                   />
+                </div  >
+            
 
                   <span>
+                  
                     <img
-                      className="category-img-image"
-                      src={`${apiUrl}/${imgUrl}`}
+                      className={ ` ${style.profile_img_image}`} 
+                      src= {userSrc ? userSrc :`${apiUrl}/${imgUrl}`}
                       alt=""
                     />{" "}
                   </span>
-              <IdentificationBadge size={38} color="#14a5af" weight="duotone"className={style.icon} />
+           
 
             </div>  
 </div>

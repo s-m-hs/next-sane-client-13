@@ -298,6 +298,39 @@ transition: all 0.3s ease-in;
   display: block;
   width: 100%;
 }
+.swiper-button-prev{
+  top: 90% !important;
+  bottom: 0 !important;
+  border: 1px solid;
+  border-radius: 50%;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 10px !important;
+}
+.swiper-button-next{
+  top: 90% !important;
+  bottom: 0 !important;
+  left: 10px !important;
+  border: 1px solid;
+  border-radius: 50%;
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 10px !important;
+}
+.swiper-button-prev:after , .swiper-button-next:after{
+  font-size: 13px !important;
+}
+.swiper-button-prev:after {
+  position: absolute;
+  /* left: 80%; */
+}
+.swiper-button-next:after{
+  position: absolute;
+  /* right: 80%; */
+
+}
+
+
 
 
 
@@ -599,6 +632,12 @@ select:-webkit-autofill:focus {
 
 
 @media only screen and (max-width:600px){
+.home-swiperB-col{
+  height: 35vh;
+
+}
+
+
   input[type=number]::-webkit-outer-spin-button, 
 input[type=number]::-webkit-inner-spin-button {
   display: none !important;

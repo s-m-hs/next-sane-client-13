@@ -22,6 +22,7 @@ const MainProvider = ({ children }) => {
     const [email,setEmail]=useState('')
     const [mobile,setMobile]=useState('')
     const [address,setAddress]=useState(null)
+    const [userSrc,setUserSrc]=useState('')
     const [nameCategory,setNameCategory]=useState('')
     const[flagThem,setFlagThem]=useState(false)
     const [flagMessageNotification,setFlagMessageNotification]=useState(false)
@@ -81,7 +82,8 @@ async function myApp(){
     setName(result.name)
     setFamily(result.family) 
     setEmail(result.email)
-    setMobile(result.mobile)   
+    setMobile(result.mobile) 
+    setUserSrc(result.userImageUrl)  
     }
    
     // console.log(result)
@@ -126,7 +128,7 @@ useEffect(()=>{
 
     return (
         <MainContext.Provider value={{xtFlagLogin, setXtFlagLogin,xtflagSpinnerShow, setXtFlagSpinnerShow,cartCounter, setCartCounter, localUpdateBasket,
-            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile,address,setAddress,flagAddress,setFlagAddress,nameCategory,setNameCategory,flagThem,setFlagThem,flagMessageNotification,setFlagMessageNotification,messageNotification,setMessageNotification}}>
+            setLocalUpdateBasket,basketFlag,setBasketFlag,getBasket,setGetBasket,localToken,setLocalToken,cyUserID,setCyUserID,username,setUsername,name,family,email,mobile,setFlagProfile,address,setAddress,flagAddress,setFlagAddress,nameCategory,setNameCategory,flagThem,setFlagThem,flagMessageNotification,setFlagMessageNotification,messageNotification,setMessageNotification,userSrc}}>
             {children}
         </MainContext.Provider>
     );

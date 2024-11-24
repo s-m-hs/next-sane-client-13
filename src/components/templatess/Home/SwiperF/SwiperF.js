@@ -23,11 +23,11 @@ export default function App() {
         effect={'flip'}
         grabCursor={true}
         pagination={true}
-        // navigation={true}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
+        navigation={true}
+        // autoplay={{
+        //   delay: 4000,
+        //   disableOnInteraction: false,
+        // }}
         modules={[EffectFlip, Pagination, Navigation,Autoplay]}
         className="mySwiperF"
       >

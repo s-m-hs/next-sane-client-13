@@ -48,6 +48,37 @@ margin: 0 auto;
 .error{
     border: 1px solid red !important
 }
+
+.profile_img_div{
+  background-image: url();
+}
+
+.input_img{
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+.icon_img{
+  position: absolute;
+  right: 100px;
+}
+.profile_img_input{
+  padding: 0px !important;
+opacity: 0; 
+ cursor: pointer;
+  width: 100% !important;
+  height: 100% ;
+}
+.profile_img_input::placeholder{
+  color:gray !important;
+
+}
+.profile_img_image{
+  width: 80px ;
+  border-radius: 15px;
+}
+
 @media only screen and (max-width:900px){
 .col{
   height: 100%;

@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
         {children}
         </ErrorBoundary>
         <ScrollToTopt/>
-        <Footer />
+        <Footer/>
         </MainProvider>
        
       
