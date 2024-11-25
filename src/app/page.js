@@ -1,7 +1,11 @@
 'use client'
+import dynamic from 'next/dynamic'
+const SwiperC = dynamic(() => import('@/components/madules/Swiper/SwiperC/SwiperC'), { ssr: false })
+
+
 import BanerA from '@/components/madules/Baner/BanerA';
 import BrandArea from '@/components/madules/BrandArea/BrandArea';
-import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
+// import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
 import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
 import SwiperF from '@/components/templatess/Home/SwiperF/SwiperF';
