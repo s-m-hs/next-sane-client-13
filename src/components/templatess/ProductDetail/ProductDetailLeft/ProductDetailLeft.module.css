@@ -16,6 +16,9 @@
     color: var(--black33b4359
     );
 }
+.ProductDetailL_main_divright{
+    background-color: #efefef;
+}
 .ProductDetailL_div__partn{
     font-size: 1cqi;
     color: var(--black33b4359);

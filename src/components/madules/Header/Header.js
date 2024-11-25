@@ -53,7 +53,7 @@ export default function Header() {
     setMenuOpen(!isMenuOpen);
   };
 
-  let { xtFlagLogin,name, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,setFlagMessageNotification} = useContext(MainContext)
+  let { xtFlagLogin,name,userSrc, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,setFlagMessageNotification} = useContext(MainContext)
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
@@ -442,7 +442,11 @@ useEffect(()=>{
                   <div
                     onClick={() => setXtFlagSpinnerShow(true)}
                     className={`${styles.Header_leftSide__div} centerr`}  >
+{userSrc ? <img src={userSrc} alt=""  className={`${styles.Header_user_img}`}/> :
                     <User size={24} color="#14a5af" />
+
+}
+
                     {!xtFlagLogin ?
                       <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
                       <span className={`${styles.Header_leftSide__div_span} `} >وارد پنل کاربری خود شوید...</span>}
@@ -744,8 +748,10 @@ useEffect(()=>{
                   <div
                     onClick={() => setXtFlagSpinnerShow(true)}
                     className={`${styles.Header_leftSide__div} centerr`}  >
+{userSrc ? <img src={userSrc} alt=""  className={`${styles.Header_user_img}`}/> :
                     <User size={24} color="#14a5af" />
-                    {!xtFlagLogin ?
+
+}                    {!xtFlagLogin ?
                       <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
                       <span className={`${styles.Header_leftSide__div_span} `} >وارد پنل کاربری خود شوید...</span>}
                   </div>
@@ -1023,6 +1029,11 @@ useEffect(()=>{
               {
                  xtFlagLogin &&       <Link href={'/p-user/profile'}>
               <span className={styles.sphere4} >
+
+              {userSrc && <img src={userSrc} alt=""  className={`${styles.Header_user_img_mobile}`}/> 
+                  
+
+}
                 <UserCircleGear size={35} color="#14a5af" weight="duotone" />
                 </span>
               {/* <span className={styles.sphere4} >{name?.toUpperCase()}</span> */}

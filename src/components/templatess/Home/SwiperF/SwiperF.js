@@ -41,10 +41,10 @@ export default function App() {
             <TypeIt
                 options={{
                   strings: [" فروش انواع لوازم جانبی کامپیوتر و ملزومات آن با تنوع کم نظیر شامل انواع موس ،کیبرد ،اسپیکر،هدست،پاور بانک و ..."],
-                  speed: 10,
+                  speed: 20,
                   loop:true,
                     waitUntilVisible: true,
-                    deleteSpeed:20
+                    deleteSpeed:40
                 }}
             />
         </div>
@@ -75,10 +75,10 @@ deleteSpeed:100,
             <TypeIt
                 options={{
                   strings: ["مشاوره ،فروش واسمبل انواع سیستمهای خانگی ،اداری،گیمینگ ،مهندسی و ... "],
-                  speed: 10,
+                  speed: 20,
                   loop:true,
                   waitUntilVisible: true,
-                  deleteSpeed:20
+                  deleteSpeed:40
                 }}
             />
         </div>
@@ -109,10 +109,10 @@ deleteSpeed:100,
             <TypeIt
                 options={{
                   strings: ["پخش همکار و ارسال سفارش به تمام نقاط کشور..."],
-                  speed: 10,
+                  speed: 20,
                   loop:true,
                   waitUntilVisible: true,
-                  deleteSpeed:20
+                  deleteSpeed:40
                 }}
             />
         </div>
@@ -143,10 +143,10 @@ deleteSpeed:100,
             <TypeIt
                 options={{
                   strings: [" مشاوره و فروش انواع لپ تاپ های خانگی ،اداری ،گیمینگ ،مهندسی و..."],
-                  speed: 10,
+                  speed: 20,
                   loop:true,
                   waitUntilVisible: true,
-                  deleteSpeed:20
+                  deleteSpeed:40
                 }}
             />
         </div>
@@ -177,10 +177,10 @@ deleteSpeed:100,
             <TypeIt
                 options={{
                   strings: [" ارايه انواع خدمات نرم افزاری وسخت افزاری جهت ارتقا انواع سیستمهای PC و لپ تاپ "],
-                  speed: 10,
+                  speed: 20,
                   loop:true,
                   waitUntilVisible: true,
-                  deleteSpeed:20
+                  deleteSpeed:40
                 }}
             />
         </div>

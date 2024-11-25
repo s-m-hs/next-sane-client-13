@@ -10,7 +10,7 @@ export default function BanerA() {
           <div class={`${style.text_container}`} >
     <div>مشاوره ، فروش و اسمبل </div>
     <div>انواع سیستم های </div>
-    <div>خانگی ، اداری ،گیمینگ و مهندسی</div>
+    <div>خانگی  اداری گیمینگ و مهندسی</div>
     <div>مطابق با نیاز کاربر</div>
     <div>
       {/* در کمترین زمان ممکن */}

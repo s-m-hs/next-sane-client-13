@@ -74,8 +74,8 @@ width: 35%;
     height: 2.5cqi;
     align-items: center;
     background-color: rgb(20, 165, 175);
-    font-size: 0.9cqi;
-    color: var(--black33b4359);
+    font-size: 1cqi;
+    color: var(--white1ffffff);
     position: relative;
     /* background: linear-gradient(to right,rgba(20,165,175,0.1)30%,rgba(250,240,240,0.4)); */
 
@@ -140,6 +140,16 @@ width: 35%;
     box-shadow: 0 0 15px -10px rgb(0, 0, 0, 0.75);
     cursor: pointer;
     position: relative;
+}
+.Header_user_img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.Header_user_img_mobile{
+    width: 32px !important;
+    height: 32px!important;
+    border-radius: 50%;
 }
 .Header_leftSide__div_span{
     position: absolute;

@@ -194,6 +194,8 @@ transition: all 0.3s ease-in;
 
 }
 
+
+
 .mySwiperB >.swiper-wrapper{
   width: 100%;
   height: 100%;
@@ -227,7 +229,13 @@ transition: all 0.3s ease-in;
 .mySwiperB >.swiper-wrapper >.swiper-slide:hover {
   --_i: 100%;
   transition: .3s, background-size .3s .3s;
+
 }
+
+.mySwiperB >.swiper-wrapper >.swiper-slide:hover :nth-child(1){
+  border: none !important;
+}
+
 
 
 
@@ -394,6 +402,10 @@ transition: all 0.3s ease-in;
 
 
 
+
+.SwiperProduct_mySwiperE2__bz41F .SwiperProduct_swiper_slide__RgNGb img {
+  width: 70% !important;
+}
 
 
 .login_label_float{

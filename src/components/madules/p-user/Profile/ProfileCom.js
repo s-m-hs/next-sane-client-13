@@ -4,7 +4,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import style from './Prifile.module.css'
 import { useForm } from "react-hook-form";
-import { IdentificationBadge,IdentificationCard,UserCircle ,DeviceMobile ,EnvelopeSimple ,CheckCircle,CheckFat,Asterisk   } from "@phosphor-icons/react";
+import { IdentificationBadge,IdentificationCard,UserCircle ,DeviceMobile ,EnvelopeSimple ,CheckCircle,CheckFat,Asterisk ,CloudArrowUp ,Image } from "@phosphor-icons/react";
 import { useRouter } from 'next/navigation';
 import apiUrl from '@/utils/ApiUrl/apiUrl';
 import { MainContext } from '@/context/MainContext';
@@ -269,26 +269,39 @@ useEffect(()=>{
 
             <div className={ `login_label_float ${style.input_img}`}>
                 <div className={ ` ${style.profile_img_div}`}>
+                <CloudArrowUp size={48} color='#fff' weight="duotone" />
                     <input
                     type="file"
                     placeholder="برای پروفایل خود یک عکس انتخاب کن..."
                     className={ ` ${style.profile_img_input}`} 
                     onChange={fileChange}
                   />
-                </div  >
-            
-
-                  <span>
+                  <h3>عکس پروفایل خود را انتخاب کنید...</h3>
+                 
                   
-                    <img
-                      className={ ` ${style.profile_img_image}`} 
-                      src= {userSrc ? userSrc :`${apiUrl}/${imgUrl}`}
-                      alt=""
-                    />{" "}
-                  </span>
-           
-
+                  <img
+                    className={ ` ${style.profile_img_image}`} 
+                    src= {userSrc ? userSrc :`${apiUrl}/${imgUrl}`}
+                    alt=""
+                  />{" "}
+             
+                </div  >
+    
             </div>  
+            <div  className={ ` ${style.url_image_div}`} >
+
+              { imgUrl ? 
+                <img 
+                                className={ ` ${style.url_image}`} 
+
+            src= { `${apiUrl}/${imgUrl}`} alt="profile-Image" /> :
+<Image size={48} weight="duotone"  color='#14a5af'/>
+
+              }
+               
+
+            </div>
+           
 </div>
 </div>
 </div>

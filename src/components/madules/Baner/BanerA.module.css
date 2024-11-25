@@ -1,7 +1,8 @@
 .row{
     /* background-image: url('./90384.jpg'); */
-    background-image: linear-gradient(-45deg, #14a5af 0%, #14a5af 25%, rgb(115, 255, 0) 51%, #358dff 100%);
+    /* background-image: linear-gradient(-45deg, #14a5af 0%, #14a5af 25%, rgb(115, 255, 0) 51%, #358dff 100%); */
 
+    background-image: linear-gradient(-45deg, #14a5af 0%, #14a5af 25%, rgb(0 255 198) 51%, #358dff 100%);
     height: 327px;
        border-radius: 8px; 
        position: relative;
