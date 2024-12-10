@@ -55,7 +55,7 @@ export default function ProductDetailLeft({detail}) {
 
 
 
-            <span className={Styles.ProductDetailL_div__title} >{detail.name}</span>
+            <h1 className={Styles.ProductDetailL_div__title} >{detail.name}</h1>
             <span className={Styles.ProductDetailL_div__description}  >{detail.description}</span>
             {/* <span className={Styles.ProductDetailL_div__partn}  >پارت نامبر: 90MP03F0-BMUA00</span> */}
             <div className={`${Styles.ProductDetailL_detail} centerc mt-5`}>
