@@ -183,7 +183,7 @@ export default function OrderCom() {
                                       <tbody>
                                         {orderArrayByDetail?.map((item)=>(
                                             <tr>
-                                        <td><img className={` ${style.image} boxSh`} src={`${item.cyProductImgUrl}`} alt="" /></td>  
+                                        <td><img className={` ${style.image} boxSh`} src={`${item.cyProductImgUrl}`} alt={item.partNumber} /></td>  
                                         <td>{item.partNumber}</td>  
                                         <td>{item.quantity}</td>  
                                         <td>{item.unitOfferPrice ?  `${(item.unitOfferPrice).toLocaleString()} `: `${item.unitPrice.toLocaleString()} ` }</td>  

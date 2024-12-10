@@ -113,7 +113,7 @@ setXtFlagSpinnerShow(false)
 
   return (
     <div className={`${style.div_main} centerc`}>
-       <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="" />
+       <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="image" />
       <div className={`${style.div_hr} centerr`}>
         <hr />
         <h1>ثبت نام کنید </h1>

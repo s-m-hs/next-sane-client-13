@@ -282,7 +282,7 @@ useEffect(()=>{
                   <img
                     className={ ` ${style.profile_img_image}`} 
                     src= {userSrc ? userSrc :`${apiUrl}/${imgUrl}`}
-                    alt=""
+                    alt="user-profile"
                   />{" "}
              
                 </div  >

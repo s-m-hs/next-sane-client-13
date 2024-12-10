@@ -50,7 +50,7 @@ const addToBasket=()=>{
     <div className={`${styles.container} centerc`  } >
       <Link  href={`/product/${id}`} onClick={()=>setXtFlagSpinnerShow(true)}> <img 
       className={`${styles.img}`  }
-      src={imgSrc} alt="" 
+      src={imgSrc} alt={`${title}`} 
   /></Link>
 
         <span className={styles.title}  > {title} </span>

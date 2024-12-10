@@ -450,7 +450,7 @@ onClick={paymentHandler}
       <span className={`  ${style.colPrice_mobile_span2}`} >{(Number(total)/10).toLocaleString()} تومان</span>
       <img
         src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-        alt=""
+        alt="basket-image"
         className={style.colPrice_mobile_shopimg}
       />
     </button>
@@ -509,7 +509,7 @@ onClick={paymentHandler}
               >
                 <img
                   src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-                  alt=""
+                  alt="basket-image"
                   className={style.shopimg}
                 />
 

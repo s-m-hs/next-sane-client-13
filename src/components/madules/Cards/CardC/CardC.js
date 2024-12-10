@@ -62,7 +62,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
       <Link  className={`${Styles.cardprob_container_linkA}`} 
       onClick={()=>setXtFlagSpinnerShow(true)}
   href={`/product/${id}`}>
-      <img src={imgSrc} alt="" />
+      <img src={imgSrc} alt={`${title}`} />
 
       </Link> 
 

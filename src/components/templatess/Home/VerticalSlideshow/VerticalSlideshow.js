@@ -48,7 +48,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/rog-strix-z790-h-gaming-wifi-image-10-600x6002.jpg"style={{width:'100%'}} alt="" />
+               <img src="../../images/mini_swiper/rog-strix-z790-h-gaming-wifi-image-10-600x6002.jpg"style={{width:'100%'}} alt="rog-strix" />
               </div>
             </SwiperSlide>
             
@@ -66,7 +66,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/download2.png" style={{width:'100%'}} alt="" />
+               <img src="../../images/mini_swiper/download2.png" style={{width:'100%'}} alt="download2" />
               </div>
             </SwiperSlide>
 
@@ -85,7 +85,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/LD00061243592.png" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/LD00061243592.png" style={{width:'100%'}}alt="LD00061243592" />
               </div>
             </SwiperSlide>
 
@@ -101,7 +101,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/81sfez9WktL2.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/81sfez9WktL2.jpg" style={{width:'100%'}}alt="81sfez9WktL2" />
               </div>
             </SwiperSlide>
 
@@ -116,7 +116,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/71E7Nnlt-JL._AC_UF1000,1000_QL80_2.jpg"style={{width:'100%'}} alt="" />
+               <img src="../../images/mini_swiper/71E7Nnlt-JL._AC_UF1000,1000_QL80_2.jpg"style={{width:'100%'}} alt="AC_UF1000" />
               </div>
             </SwiperSlide>
 
@@ -131,23 +131,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/Xgaming-27-inch-165Hz-144Hz-Curved-Gaming-Monitor-Ultra-Wide-16-9-1440p-PC-Monitor-Laptop-2-Speakers-1ms-AMD-QHD2K-2560-x-1440p-HDR-Computer-Support_be788a05-2e83-43a2.jpg" style={{width:'100%'}}alt="" />
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide >
-              <div
-                style={{
-                    borderRadius:'8px',
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "100%",
-                  backgroundColor: "#f4f4f4",
-                //   border: "1px solid #ccc",
-                }}
-              >
-               <img src="../../images/mini_swiper/sp_a80_2tbbded.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/Xgaming-27-inch-165Hz-144Hz-Curved-Gaming-Monitor-Ultra-Wide-16-9-1440p-PC-Monitor-Laptop-2-Speakers-1ms-AMD-QHD2K-2560-x-1440p-HDR-Computer-Support_be788a05-2e83-43a2.jpg" style={{width:'100%'}}alt="Curved-Gaming" />
               </div>
             </SwiperSlide>
 
@@ -163,7 +147,23 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/9c27637ac04643a7c3a5cd8704994332-hi2.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/sp_a80_2tbbded.jpg" style={{width:'100%'}}alt="sp_a80" />
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide >
+              <div
+                style={{
+                    borderRadius:'8px',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                  backgroundColor: "#f4f4f4",
+                //   border: "1px solid #ccc",
+                }}
+              >
+               <img src="../../images/mini_swiper/9c27637ac04643a7c3a5cd8704994332-hi2.jpg" style={{width:'100%'}}alt="mini_swiper" />
               </div>
             </SwiperSlide>
             <SwiperSlide >
@@ -178,7 +178,7 @@ const VerticalSlideshow = () => {
                 //   border: "1px solid #ccc",
                 }}
               >
-               <img src="../../images/mini_swiper/WD My Passport 500 GB External Hard Disk-1200x900.jpg" style={{width:'100%'}}alt="" />
+               <img src="../../images/mini_swiper/WD My Passport 500 GB External Hard Disk-1200x900.jpg" style={{width:'100%'}}alt="WD My Passport" />
               </div>
             </SwiperSlide>
       

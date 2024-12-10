@@ -395,7 +395,7 @@ useEffect(()=>{
                       >
                         <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                           <span>{item.name}</span>
-                          <img src={item.smallImage} alt="" />
+                          <img src={item.smallImage} alt={item.name} />
                         </div>
                       </Link>
 
@@ -442,7 +442,7 @@ useEffect(()=>{
                   <div
                     onClick={() => setXtFlagSpinnerShow(true)}
                     className={`${styles.Header_leftSide__div} centerr`}  >
-{userSrc ? <img src={userSrc} alt=""  className={`${styles.Header_user_img}`}/> :
+{userSrc ? <img src={userSrc} alt="user-profile"  className={`${styles.Header_user_img}`}/> :
                     <User size={24} color="#14a5af" />
 
 }
@@ -652,7 +652,7 @@ useEffect(()=>{
                   <img
                     className={styles.sphere3}
                     src="../../../images/eitaa-icon-colorful.png"
-                    alt=""
+                    alt="eitaa"
                   />
                 </Link>
                 <Link href={'https://instagram.com/sane_computer_'}>
@@ -660,7 +660,7 @@ useEffect(()=>{
                   <img
                     className={styles.sphere2}
                     src="../../../images/icons8-instagram-2048.png"
-                    alt=""
+                    alt="instagram"
                   />
                 </Link>
                 <Link href={'https://t.me/SANE_IT'}>
@@ -668,7 +668,7 @@ useEffect(()=>{
                   <img
                     className={styles.sphere}
                     src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-                    alt=""
+                    alt="telegram"
                   />
                 </Link>
               </div>
@@ -720,7 +720,7 @@ useEffect(()=>{
                       >
                         <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                           <span>{item.name}</span>
-                          <img src={item.smallImage} alt="" />
+                          <img src={item.smallImage} alt={item.name} />
                         </div>
                       </Link>
 
@@ -748,7 +748,7 @@ useEffect(()=>{
                   <div
                     onClick={() => setXtFlagSpinnerShow(true)}
                     className={`${styles.Header_leftSide__div} centerr`}  >
-{userSrc ? <img src={userSrc} alt=""  className={`${styles.Header_user_img}`}/> :
+{userSrc ? <img src={userSrc} alt="user-profile"  className={`${styles.Header_user_img}`}/> :
                     <User size={24} color="#14a5af" />
 
 }                    {!xtFlagLogin ?
@@ -985,7 +985,7 @@ useEffect(()=>{
                     <img
                       className={styles.sphere3}
                       src="../../../images/eitaa-icon-colorful.png"
-                      alt=""
+                      alt="eitaa"
                     />
                   </Link>
                   <Link href={'https://instagram.com/sane_computer_'}>
@@ -993,7 +993,7 @@ useEffect(()=>{
                     <img
                       className={styles.sphere2}
                       src="../../../images/icons8-instagram-2048.png"
-                      alt=""
+                      alt="instagram"
                     />
                   </Link>
                   <Link href={'https://t.me/SANE_IT'}>
@@ -1001,7 +1001,7 @@ useEffect(()=>{
                     <img
                       className={styles.sphere}
                       src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-                      alt=""
+                      alt="telegram"
                     />
                   </Link>
                 </div>
@@ -1021,7 +1021,7 @@ useEffect(()=>{
           <div className={`${styles.mobi_header} row `}  >
 
           <Link href={'/'}>
-<img src="/images/photo_2024-05-30_19-08-29.jpg" alt="" />
+<img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
           </Link>
 
             <div className={styles.header_bottom__col_logo}  >
@@ -1030,7 +1030,7 @@ useEffect(()=>{
                  xtFlagLogin &&       <Link href={'/p-user/profile'}>
               <span className={styles.sphere4} >
 
-              {userSrc && <img src={userSrc} alt=""  className={`${styles.Header_user_img_mobile}`}/> 
+              {userSrc && <img src={userSrc} alt="user-profile"  className={`${styles.Header_user_img_mobile}`}/> 
                   
 
 }
@@ -1402,7 +1402,7 @@ setVisibleB(true)
                       >
                         <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
                           <span>{item.name}</span>
-                          <img src={item.smallImage} alt="" />
+                          <img src={item.smallImage} alt={item.name} />
                         </div>
                       </Link>
 

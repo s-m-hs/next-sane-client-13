@@ -316,7 +316,7 @@ useEffect(()=>{
           mainCatChilds.map((item, index) => (
             <>
               <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
-                <CardAButton imgSrc={item.imageUrl} changeIdProp={() => changeId(item.code)} code={item.code} />
+                <CardAButton imgSrc={item.imageUrl} text={item.name} changeIdProp={() => changeId(item.code)} code={item.code} />
                 <span >{item.name} </span>
               </div>
             </>

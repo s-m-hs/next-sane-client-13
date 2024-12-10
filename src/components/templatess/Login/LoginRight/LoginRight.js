@@ -110,7 +110,7 @@ useEffect(()=>{
 
   return (
     <div className={`${style.div_main} centerc`}>
-      <img className={style.img} src="../../../../../images/register/photo_2024-08-05_16-37-06.jpg" alt="" />
+      <img className={style.img} src="../../../../../images/register/photo_2024-08-05_16-37-06.jpg" alt="photo_2024" />
 
       <div className={`${style.div_hr} centerr`}>
         <hr />

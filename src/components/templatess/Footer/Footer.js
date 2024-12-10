@@ -26,7 +26,7 @@ export default function Footer() {
             <img
               className={style.sphere}  
               src="../../../../../../images/eitaa-icon-colorful.png"
-              alt=""
+              alt="eitaa"
             />
             eitaa.com/Sane_camputer
           </Link> 
@@ -38,7 +38,7 @@ export default function Footer() {
             <img
               className={style.sphere}  
               src="../../../../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-              alt=""
+              alt="telgram"
             />
             t.me/SANE_IT
           </Link> 
@@ -49,7 +49,7 @@ export default function Footer() {
             <img
               className={style.sphere}  
               src="../../../../../../images/icons8-instagram-2048.png"
-              alt=""
+              alt="instagram"
             />
            instagram.com/sane_computer
           </Link> 
@@ -69,7 +69,7 @@ export default function Footer() {
             </div>
             <div className='col-md-4'></div>
             <div className='col-md-3'>
-              <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='' style={{cursor:'pointer'}} code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'/>
+              <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='enamad' style={{cursor:'pointer'}} code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'/>
               {/* <img src="../../../../../../images/brand/enamad.png"     alt="namad" /> */}
 
               </Link>

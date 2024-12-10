@@ -29,7 +29,7 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
  }}
   className={`${Styles.circle_wrapper} centerc`}
   href={category ? `/${category}/${id}` : ''}  >
-<img className={Styles.cardcat__img} src={imgSrc} alt="" />
+<img className={Styles.cardcat__img} src={imgSrc} alt={`${text}`} />
 
     <div className={`${Styles.success} `} >
         

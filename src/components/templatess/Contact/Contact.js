@@ -46,7 +46,7 @@ let {setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
         <div className={`row ${style.row}`} >
             <div className={`col-md-6 centerc boxSh ${style.col_right}`}>
             <div >
-    <img  className={style.img} src="../../../../../images/photo_2024-06-07_23-49-30.jpg" alt="" />
+    <img  className={style.img} src="../../../../../images/photo_2024-06-07_23-49-30.jpg" alt="sane-contact" />
 </div>
 
 <h5>تماس با ما</h5>

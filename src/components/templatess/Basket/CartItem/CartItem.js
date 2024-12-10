@@ -51,7 +51,7 @@ const handleRemove=(e,id)=>{
         <td className="tp-cart-img">
           
             {" "}
-            <img src={props.smallImage} alt="" style={{width:'50px'}} />
+            <img src={props.smallImage} alt={props.name} style={{width:'50px'}} />
          
         </td>
 
