@@ -82,10 +82,10 @@ useEffect(() => {
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
     {/* <SwiperG/> */}
     <SubjecArea /> 
-<BanerA />
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
     <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
+    <BanerA />
 
  
     </div>

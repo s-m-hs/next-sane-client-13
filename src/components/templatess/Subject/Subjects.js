@@ -1,7 +1,10 @@
 import React from 'react'
 
-export default function Subjects() {
+export default function Subjects({subjectDetail}) {
   return (
-    <div>Subjects</div>
+    <div dangerouslySetInnerHTML={{__html:`${subjectDetail?.body}`}}>
+
+
+    </div>
   )
 }
