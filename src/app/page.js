@@ -18,6 +18,7 @@ import { usePathname } from 'next/navigation';
 
 // import getLocalStorage from '@/utils/localStorag/localStorage';
 import { use, useContext, useEffect } from 'react';
+import SubjecArea from '@/components/madules/SubjecArea/SubjecArea';
 
 export default function Home() {
   const pathname = usePathname();
@@ -80,6 +81,7 @@ useEffect(() => {
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
     {/* <SwiperG/> */}
+    <SubjecArea /> 
 <BanerA />
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
