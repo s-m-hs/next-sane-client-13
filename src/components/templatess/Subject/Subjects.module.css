@@ -1,0 +1,13 @@
+
+.col img{
+}
+
+
+
+
+@media only screen and (max-width:550px){
+    .col img{
+        width: 100% !important;
+        }
+        
+}

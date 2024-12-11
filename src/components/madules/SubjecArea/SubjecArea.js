@@ -1,12 +1,13 @@
 'use client'
 import apiUrl from '@/utils/ApiUrl/apiUrl'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import style from './SubjecArea.module.css'
 import CardSub from '../Cards/CardSub/CardSub'
+import { MainContext } from '@/context/MainContext'
 
 export default function SubjecArea() {
     const[allSubjects,setAllSubjects]=useState([])
-
+ 
 const getAllSubject=()=>{
     const getLocalStorage=localStorage.getItem('loginToken')
     async function myApp(){
@@ -37,9 +38,10 @@ useEffect(()=>{
   return (
     <div className={`container ${style.container} boxSh `}>
         
-        <div className={`row  ${style.row} centerr`}>
+        <div className={`row row-cols-auto  ${style.row} centerr`}>
             {allSubjects?.length!=0 && allSubjects.map(item=>(
-                <CardSub item={item}/>
+                <CardSub item={item} 
+/>
             ))}
         </div>
     </div>

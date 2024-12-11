@@ -87,7 +87,6 @@ useEffect(() => {
 }, [productByCat]);
 productByCat?.sort((a, b) => b.supply - a.supply); 
 // sorted_products = sorted(productByCat, key=lambda x: x['supply'], reverse=True)
-console.log(productByCat)
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",

@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import style from './CardSub.module.css'
 import Link from 'next/link'
+import { MainContext } from '@/context/MainContext'
 
 export default function CardSub({item}) {
+  let {setXtFlagSpinnerShow}=useContext(MainContext)
+
   return (
-    <div className={` centerr ${style.main_div}`}>
-<Link href={`/subject/${item.id}`}> 
+    <div className={`col centerr ${style.main_div}`}>
+<Link href={`/subject/${item.id}`}
+onClick={()=>setXtFlagSpinnerShow(true)}> 
 <div className={`centerc ${style.div_R}`}>
 <h2>{item.title}</h2>
 <hr />
