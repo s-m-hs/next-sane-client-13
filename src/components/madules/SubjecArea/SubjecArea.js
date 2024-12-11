@@ -37,8 +37,8 @@ useEffect(()=>{
 
   return (
     <div className={`container ${style.container} boxSh `}>
-        
-        <div className={`row row-cols-auto  ${style.row} centerr`}>
+        {/* <h2>مقالات صانع :</h2> */}
+        <div className={`row row-cols-auto mt-3  ${style.row} centerr`}>
             {allSubjects?.length!=0 && allSubjects.map(item=>(
                 <CardSub item={item} 
 />
