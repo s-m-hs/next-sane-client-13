@@ -10,7 +10,7 @@ export default function CardSub({item}) {
 <h2>{item.title}</h2>
 <hr />
 <h3>{item.describtion}</h3>
-<img src={item.smallImg} alt="" />
+<img src={item.smallImg} alt={item.title} />
 
 </div>
 </Link>
