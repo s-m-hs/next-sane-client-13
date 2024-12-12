@@ -1,3 +1,4 @@
+import SubjectPage from '@/components/templatess/SubjectPage/SubjectPage';
 import React from 'react'
 export const metadata = {
   title: "مقالات کامپیوترصانع",
@@ -8,6 +9,6 @@ export const metadata = {
 };
 export default function page() {
   return (
-    <div>page</div>
+<SubjectPage/>
   )
 }

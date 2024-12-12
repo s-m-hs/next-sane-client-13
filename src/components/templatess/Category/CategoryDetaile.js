@@ -338,6 +338,7 @@ useEffect(()=>{
             className={`centerc ${Styles.products_col}`}
             // onClick={ ()=>setFlagSpinnerShow(true) } 
             >
+              
             <CardC 
             // clickSpinner={()=>setFlagSpinnerShow(true)}
               id={item.id}

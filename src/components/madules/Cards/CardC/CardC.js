@@ -64,7 +64,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
   href={`/product/${id}`}>
       <img src={imgSrc} alt={`${title}`} />
 
-      </Link> 
+     
 
     <span className={Styles.cardprob_title} > {title} </span>
 
@@ -77,9 +77,9 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 
   }
 
-    
+     </Link> 
     <div className={`${Styles.cardprob__icon_div} centerr`} >
-    <ShoppingCart size={32}
+    {/* <ShoppingCart size={32}
      color="#24b8c9de"
 
       weight="fill"
@@ -99,7 +99,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
              addToCart(id,'1',setCartCounter)
           
         }}
-    />
+    /> */}
     {/* <Heart size={32}
      color="#d757eb"
     weight="thin" /> */}

@@ -12,7 +12,8 @@
     position: absolute;
     top: 5px;
     width: 100%;
-    animation: zoom1 4s linear infinite;
+    /* animation: zoom1 4s linear infinite; */
+    height: 100%;
     
   }
 
@@ -30,7 +31,7 @@
   }
   .cardprob_title{
     position: absolute;
-    top: 60%;
+    bottom: 50px;
     font-size: 1.7rem;
     right: 5px;
     font-family: vazirEn;
@@ -38,7 +39,7 @@
   }
   .cardprob_price{
     position: absolute;
-    top: 70%;
+    bottom: 10px;
     font-size: 1.9rem;
   left: 5px;
   text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
