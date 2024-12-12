@@ -7,7 +7,7 @@ export default function CardSub({item}) {
   let {setXtFlagSpinnerShow}=useContext(MainContext)
 
   return (
-    <div className={`col centerr ${style.main_div}`}>
+    <div className={`col centerr ${style.main_div} boxSh`}>
 <Link href={`/subject/${item.id}`}
 onClick={()=>setXtFlagSpinnerShow(true)}> 
 <div className={`centerc ${style.div_R}`}>

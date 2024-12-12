@@ -1,12 +1,15 @@
 'use client'
 import dynamic from 'next/dynamic'
 const SwiperC = dynamic(() => import('@/components/madules/Swiper/SwiperC/SwiperC'), { ssr: false })
+const CategorySectionA = dynamic(() => import('@/components/templatess/Home/CategorySectionA/CategorySectionA'), { ssr: false })
+const BrandArea = dynamic(() => import('@/components/madules/BrandArea/BrandArea'), { ssr: false })
+const BanerA = dynamic(() => import('@/components/madules/Baner/BanerA'), { ssr: false })
 
 
-import BanerA from '@/components/madules/Baner/BanerA';
-import BrandArea from '@/components/madules/BrandArea/BrandArea';
+// import BanerA from '@/components/madules/Baner/BanerA';
+// import BrandArea from '@/components/madules/BrandArea/BrandArea';
 // import SwiperC from '@/components/madules/Swiper/SwiperC/SwiperC';
-import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
+// import CategorySectionA from '@/components/templatess/Home/CategorySectionA/CategorySectionA';
 import SwiperB from '@/components/templatess/Home/SwiperB/SwiperB';
 import SwiperF from '@/components/templatess/Home/SwiperF/SwiperF';
 import SwiperG from '@/components/templatess/Home/SwiperG/SwiperG';
