@@ -1,0 +1,53 @@
+.detail{
+    margin-top: 50px;
+
+}
+.detail li{
+    list-style: inside !important;
+}
+
+.li_click{
+    color: blue;
+    cursor: pointer;
+}
+.li_click svg{
+    rotate: 90deg
+}
+.td_number input{
+    border: none;
+    outline: none;
+    text-align: center;
+    width: 80px;
+}
+
+.total_div{
+    width: 100%;
+
+    align-items: center;
+}
+.total_div input{
+    outline: none;
+border:1px dotted #14a5af;
+border-radius: 3px;
+margin: 10px;}
+
+.total_div button{
+    width: 100px;
+    margin: 5px;
+}
+@media only screen and (max-width:500px){
+.table{
+    font-size: 12px;
+}
+.th_number{
+    width: 30px !important;
+}
+
+.td_number{
+    width: 50px !important;
+}
+.td_number input{
+  
+    width: 30px !important;
+}
+}

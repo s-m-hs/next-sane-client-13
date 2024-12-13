@@ -2,7 +2,10 @@
 import { MainContext } from '@/context/MainContext'
 import hardWareData from '@/utils/exelData';
 import SearchBoxB from '@/utils/SearchBoxB';
+import {DownloadSimple,HandPointing,ArrowCounterClockwise} from "@phosphor-icons/react";
+
 import React, { useContext, useEffect, useState } from 'react'
+import style from './SystemPart.module.css'
 export default function SystemPart() {
     const [prices, setPrices] = useState([]); // لیست قیمت‌ها
     const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
@@ -79,16 +82,27 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
     }, []);
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-7">
+        <div className="container ">
+            <div className="row boxSh ">
+
+            <div className= {`col-md-5 ${style.detail} p-5`}>
+<ul>
+    <li>قیمت اعلام شده صرفا جهت اطلاع شما مشتری گرامی از قیمت تقریبی تمام شده سیستم میباشد ...</li>
+    <li>بدیهی است قیمت نهایی سیستم بعد از تایید نهایی همکاران ما اعلام میشود...</li>
+    <li>قیمت اعلام شده شامل هزینه اسمبل و راه اندازی سیستم (نصب سیستم عامل ویندوز- درایور- آنتی ویروس اورجینال و برنامه های کاربردی از قبیل  مجموعه آفیس ، پلیر ،مرورگر و ... می باشد)...</li>
+    <li>جهت مشاوره و یا تایید نهایی سیستم فایل ذخیره شده را برای همکاران ما تیکت نمایید ...</li>
+    <li className= {` ${style.li_click}`}>جهت راهنمایی و توضیحات بیشتر کلیک کنید ...<HandPointing size={32} /></li>
+</ul>
+            </div>
+
+                <div className="col-md-7 p-5">
                     <div>
-                        <table className="table table-striped">
+                        <table className={`table table-hover ${style.table}`} >
                             <thead>
                                 <tr>
                                     <th>قطعه</th>
                                     <th>مشخصات</th>
-                                    <th>تعداد</th>
+                                    <th className={`${style.th_number}`}>تعداد</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,17 +118,8 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
                                                 onClear={() => handleClear(index)}
                                             />
                                         </td>
-                                        <td>
-                                            {/* <input
-                                                type="number"
-                                                placeholder="1"
-                                                min="1"
-                                                value={quantities[index] || ''}
-                                                onChange={(e) => handleQuantityChange(e.target.value, index)}
-                                                onBlur={(e) =>
-                                                    !e.target.value && handleQuantityChange(1, index) // پیش‌فرض مقدار 1
-                                                }
-                                            /> */}
+                                        <td className={`${style.td_number}`}>
+                                    
                                                <input
                                                 type="number"
                                                 placeholder="1"
@@ -130,17 +135,22 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
                                 ))}
                             </tbody>
                         </table>
-                        <div className="systemAs-total-but">
-                            <h6>مجموع کل:</h6>
+                        <div className={`${style.total_div} systemAs-total-but centerr`}>
+                            <h3>مجموع کل:</h3>
                             <input
                                 type="text"
                                 readOnly
                                 placeholder={`${calculateTotal().toLocaleString()} تومان`}
                             />
+                            <button className='btn btn-primary'>ذخیره
+                            <DownloadSimple size={32} />
+                            </button>
+                            <button className='btn btn-warning'>بازنشانی
+                            <ArrowCounterClockwise size={32} />
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div className="col-5"></div>
             </div>
         </div>
     );

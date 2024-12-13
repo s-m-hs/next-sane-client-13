@@ -76,13 +76,13 @@ console.log(searchTermPrice)
                 onFocus={() => setShowOptions(true)}
                 onBlur={handleBlur}
             />
-            <input
+            {/* <input
             className='sistemAssembly-input2'
                 type="text"
                 placeholder={searchTermPrice}
                 value={searchTermPrice}
                 onChange={handleManualPriceChange} // مدیریت تغییر دستی قیمت
-            />
+            /> */}
             {showOptions && (
                 <div className="dropdown-options">
                     {filteredCategoryItems?.length > 0 ? (
@@ -94,7 +94,7 @@ console.log(searchTermPrice)
                                     handleOptionClick(item);
                                 }}
                             >
-                                {id === 'manufacturerNameForAdd' ? `${item.name}**${item.price}`    : ''}
+                                {id === 'manufacturerNameForAdd' ? `${item.name}`    : ''}
                             </div>
                         ))
                     ) : (

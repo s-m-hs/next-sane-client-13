@@ -640,7 +640,7 @@ useEffect(()=>{
 
                   }
                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
-                   محاسیه گر سیستم</Link> </li>
+                   محاسبه گر سیستم</Link> </li>
 
     <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
     تماس با ما</Link> </li>
