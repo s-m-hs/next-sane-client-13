@@ -9,7 +9,6 @@ const apiCallProdDetails = (prodId,saveRes, isCalled)=>{
                 accept: "text/plain",
               },
         }).then(res=>{
-            console.log(res);
             return res.json()
         }).then(result=>{
             // console.log(result);

@@ -5,7 +5,6 @@ export default function SearchBoxB({ array, placeholder, id, onPriceChange,onCle
     const [showOptions, setShowOptions] = useState(false);
     const [activeIndex, setActiveIndex] = useState(-1);
     // let { resetSearchbox } = useContext(CmsSistemAssembly);
-console.log(searchTermPrice)
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
         setShowOptions(true);
@@ -16,7 +15,6 @@ console.log(searchTermPrice)
         setShowOptions(false);
         setActiveIndex(-1);
         if (id === 'manufacturerNameForAdd') {
-            console.log(Number(item.price))
             setSearchTerm(item.name);
             setSearchTermPrice(item.price);
             onPriceChange((Number((item.price).replace(/,/g, '')))*1000 || 0); // گزارش مقدار به والد

@@ -46,7 +46,6 @@ let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useConte
       setErr1(errors.password.message)
 
     }else(setErr1(''))
-console.log(err1)
   };
  const alertA=()=>alertN('center','success','ثبت نام با موفقیت انجام شد',1500).then((res) => {
     setXtFlagLogin(true)
@@ -57,7 +56,6 @@ const alertB=()=>alertN('center','error',"با این شماره همراه قب
 const alertC=()=>alertN('center','error',"  شماره همراه به درستی وارد نشده است ...",1500)
 
       ////////////////////////////
-console.log(token.length)
 
 const handleRegistration=(data)=>{
 
@@ -66,7 +64,6 @@ const handleRegistration=(data)=>{
   pw:data.password,
     name:data.name
 }
-console.log(obj)
   if(token.length==11){
     // axios.post(`${apiUrl}/api/Customer/register`,
     //   {

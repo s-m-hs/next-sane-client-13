@@ -10,7 +10,6 @@ const updateBasket=(header,obj,setFun,alert)=>{
     },
     body:JSON.stringify(obj)
       }).then(res=>{
-        console.log(res)
         if(res.status==200){
            setFun(prev=>!prev)
         alert()

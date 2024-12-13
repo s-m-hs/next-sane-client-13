@@ -42,7 +42,6 @@ const getWarranty=()=>{
   }
   myApp()
 }
-console.log(warantyArray)
 useEffect(()=>{
   if(pathname==='/p-user/warranty'){
     setXtFlagSpinnerShow(false)

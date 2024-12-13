@@ -18,7 +18,6 @@ const getAllSubject=()=>{
                 Authorization: `Bearer ${getLocalStorage}`,
               },
         }).then(res=>{
-            console.log(res)
             if(res.ok){
              return   res.json()
             }
@@ -30,7 +29,6 @@ const getAllSubject=()=>{
     }
     myApp() 
 }
-console.log(allSubjects);  
 useEffect(()=>{
     getAllSubject()
 },[])

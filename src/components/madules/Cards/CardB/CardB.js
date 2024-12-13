@@ -23,7 +23,6 @@ const addToBasket=()=>{
     quantity: 1,
     orderItemID:0
   }
-  console.log(obj)
   async function myApp(){
     const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
       method:'POST',
@@ -33,7 +32,6 @@ const addToBasket=()=>{
       }, 
       body:JSON.stringify(obj)
     }).then(res=>{
-      console.log(res)
       if (res.status==200){
         setBasketFlag(prev=>!prev)
         AlertA()      }else if(res.status==400){

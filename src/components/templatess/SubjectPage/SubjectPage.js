@@ -20,7 +20,6 @@ export default function SubjectPage() {
                       Authorization: `Bearer ${getLocalStorage}`,
                     },
               }).then(res=>{
-                  console.log(res)
                   if(res.ok){
                    return   res.json()
                   }
@@ -32,7 +31,6 @@ export default function SubjectPage() {
           }
           myApp() 
       }
-console.log(allSubjects)
       useEffect(()=>{
         getAllSubject()
 },[]) 

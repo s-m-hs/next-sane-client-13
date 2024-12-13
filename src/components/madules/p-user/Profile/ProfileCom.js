@@ -94,7 +94,7 @@ useEffect(() => {
   }
 }, [file]);
 
-console.log(`${apiUrl}/${imgUrl}`)
+// console.log(`${apiUrl}/${imgUrl}`)
 const handleRegistration=(data)=>{
   // console.log(data);
  
@@ -107,7 +107,7 @@ const handleRegistration=(data)=>{
   website: "string",
   mobile: data.update.mobile,
   description: "string",
-  userImageUrl: `${apiUrl}/${imgUrl}`,
+  userImageUrl:imgUrl? `${apiUrl}/${imgUrl}`:'',
   // username:data.update.userName
   username:username
 }

@@ -3,10 +3,17 @@ import { MainContext } from '@/context/MainContext'
 import hardWareData from '@/utils/exelData';
 import SearchBoxB from '@/utils/SearchBoxB';
 import {DownloadSimple,HandPointing,ArrowCounterClockwise} from "@phosphor-icons/react";
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import React, { useContext, useEffect, useState } from 'react'
 import style from './SystemPart.module.css'
+import SpinnerA from '@/utils/SpinnerA/SpinnerA';
+import Modal from 'react-bootstrap/Modal';
+
 export default function SystemPart() {
+    const [lgShow, setLgShow] = useState(false);
+    
+    // const [isSaving, setIsSaving] = useState(false);
     const [prices, setPrices] = useState([]); // لیست قیمت‌ها
     const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
 let{setXtFlagSpinnerShow}=useContext(MainContext)
@@ -26,6 +33,27 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
     // { id: 12, name: 'DVD_R' },
     // { id: 13, name: 'OTHER' },
 ];
+const generatePDF = () => {
+    // setIsSaving(true); // نمایش اسپینر
+    setXtFlagSpinnerShow(true); // نمایش اسپینر
+    const element = document.querySelector('.systemTable'); // بخش فاکتور
+    html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('قطعات سیستم.pdf'); // ذخیره فایل
+        // setIsSaving(false); // مخفی کردن اسپینر پس از ذخیره شدن
+        setXtFlagSpinnerShow(false); // مخفی کردن اسپینر پس از ذخیره شدن
+    }).catch(() => {
+        // setIsSaving(false); // در صورت خطا نیز اسپینر غیرفعال شود
+        setXtFlagSpinnerShow(false); // در صورت خطا نیز اسپینر غیرفعال شود
+        alert('خطایی رخ داد. لطفاً دوباره تلاش کنید.');
+    });
+};
+
     const handlePriceChange = (price, index) => {
         setPrices((prevPrices) => {
             const newPrices = [...prevPrices];
@@ -83,6 +111,11 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
 
     return (
         <div className="container ">
+             {/* {isSaving && (
+            <div className="spinner-overlay">
+                <SpinnerA size={50} />
+            </div>
+        )} */}
             <div className="row boxSh ">
 
             <div className= {`col-md-5 ${style.detail} p-5`}>
@@ -91,11 +124,13 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
     <li>بدیهی است قیمت نهایی سیستم بعد از تایید نهایی همکاران ما اعلام میشود...</li>
     <li>قیمت اعلام شده شامل هزینه اسمبل و راه اندازی سیستم (نصب سیستم عامل ویندوز- درایور- آنتی ویروس اورجینال و برنامه های کاربردی از قبیل  مجموعه آفیس ، پلیر ،مرورگر و ... می باشد)...</li>
     <li>جهت مشاوره و یا تایید نهایی سیستم فایل ذخیره شده را برای همکاران ما تیکت نمایید ...</li>
-    <li className= {` ${style.li_click}`}>جهت راهنمایی و توضیحات بیشتر کلیک کنید ...<HandPointing size={32} /></li>
+    <li className= {` ${style.li_click}`}
+    onClick={()=>setLgShow(true)}
+    >جهت راهنمایی و توضیحات بیشتر کلیک کنید ...<HandPointing size={32} /></li>
 </ul>
             </div>
 
-                <div className="col-md-7 p-5">
+                <div className="col-md-7 p-5 systemTable">
                     <div>
                         <table className={`table table-hover ${style.table}`} >
                             <thead>
@@ -142,9 +177,10 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
                                 readOnly
                                 placeholder={`${calculateTotal().toLocaleString()} تومان`}
                             />
-                            <button className='btn btn-primary'>ذخیره
-                            <DownloadSimple size={32} />
-                            </button>
+                       <button className="btn btn-primary" onClick={generatePDF}>
+    ذخیره
+    <DownloadSimple size={32} />
+</button>
                             <button className='btn btn-warning'>بازنشانی
                             <ArrowCounterClockwise size={32} />
                             </button>
@@ -152,6 +188,34 @@ let{setXtFlagSpinnerShow}=useContext(MainContext)
                     </div>
                 </div>
             </div>
+            <Modal
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+      
+
+      
+        </Modal.Header>
+        <Modal.Body>
+            <div className={`${style.modal_div}`} >
+<h5>بعد از انتخاب کلید ذخیره ،لیست قطعات درخواستی شما به صورت فایل pdf در دستگاه شما ذخیره میشود...</h5>
+<img src="../../../../images/help/help1.png" alt="" />
+<hr/>
+<img src="../../../../images/help/help2.png" alt="" />
+
+<h5>سپس با حساب کاربری خود وارد شوید (در صورت نداشتن حساب از قسمت عضویت یک حساب کاربری بسازید ) و وارد قسمت تیکتها شوید...</h5>
+<img src="../../../../images/help/help3.png" alt="" />
+<hr/>
+
+<h5>در این بخش با انتخاب کلید ایجاد پیام جدید و سپس انتخاب یک عنوان دلخواه برای پیام خود و در آخر با انتخاب فایل ذخیره از دستگاه خود گزینه ارسال پیام را کلیک کنید،بعد از این مرحله همکاران ما بعد از بررسی قطعات درخواستی شما نتیجه را از همین بخش تیکتها به اطلاع شما میرسانند.</h5>
+<img src="../../../../images/help/help4.png" alt="" />
+
+</div>
+</Modal.Body>
+      </Modal>
         </div>
     );
 }

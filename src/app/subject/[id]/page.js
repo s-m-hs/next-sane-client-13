@@ -25,7 +25,7 @@ const pathname=usePathname()
                   Authorization: `Bearer ${getLocalStorage}`,
                 },
           }).then(res=>{
-              console.log(res)
+              // console.log(res)
               if(res.ok){
                return   res.json()
               }
@@ -48,12 +48,12 @@ async function myApp(){
       Authorization: `Bearer ${getLocalStorage}`,
     },
   }).then(res=>{
-    console.log(res)
+    // console.log(res)
     if(res.ok){
       return res.json()
     }
   }).then(resullt=>{
-    console.log(resullt)
+    // console.log(resullt)
     setSubjectDetail(resullt)
   })
 }
@@ -65,7 +65,7 @@ getsubjectDetail()
 getAllSubject()
 
   },[params.id])
-    console.log(params);
+    // console.log(params);
     useEffect(()=>{
       setXtFlagSpinnerShow(false)
     },[])
@@ -76,7 +76,7 @@ getAllSubject()
 
       }
     })
-    console.log(pathname);
+    // console.log(pathname);
   return (
 
 <div className='container'>

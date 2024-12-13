@@ -20,7 +20,6 @@ export default function ProductDetailLeft({detail}) {
       quantity: 1,
       orderItemID:0
     }
-    console.log(obj)
     async function myApp(){
       const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
         method:'POST',
@@ -30,7 +29,6 @@ export default function ProductDetailLeft({detail}) {
         }, 
         body:JSON.stringify(obj)
       }).then(res=>{
-        console.log(res)
         if (res.status==200){
           setBasketFlag(prev=>!prev)
           AlertA()    

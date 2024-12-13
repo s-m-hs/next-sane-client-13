@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,flagMessageNotification} from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,flagMessageNotification,Laptop} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -21,6 +21,7 @@ import { Sidebar } from 'primereact/sidebar';
 
 
 export default function Header() {
+  let { xtFlagLogin,name,userSrc,setUserSrc,setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,setFlagMessageNotification} = useContext(MainContext)
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
   const [mainCategoryB, setMainCategoryB] = useState({});
@@ -53,7 +54,7 @@ export default function Header() {
     setMenuOpen(!isMenuOpen);
   };
 
-  let { xtFlagLogin,name,userSrc, setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,setFlagMessageNotification} = useContext(MainContext)
+
   const rout = useRouter()
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
@@ -72,7 +73,6 @@ export default function Header() {
         },
         // body:JSON.stringify(obj)
       }).then(res=>{
-        console.log(res);
         if(res.status==200){
           return res.json().then(result=>{
             setMessageNotification(result)
@@ -193,10 +193,12 @@ useEffect(()=>{
   }, [])
 
   const exitHandler = () => {
+  
     localStorage.removeItem('loginToken')
     setXtFlagLogin(false)
     setCartCounter(0)
     rout.push('/')
+    setUserSrc('')
     // rout.push('/')
     // console.log('object')
   }
@@ -430,8 +432,9 @@ useEffect(()=>{
                           onClick={() => setXtFlagSpinnerShow(true)}>پنل کاربری </Dropdown.Item>
                         <Dropdown.Item onClick={()=>{
                            exitHandler()
+                          
                             setMessageNotification([])
-                            setFlagMessageNotification(prev=!prev)
+                            setFlagMessageNotification(prev=>!prev)
                         }}>خروج</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
@@ -976,7 +979,8 @@ useEffect(()=>{
                   }
 
 
-                  {/* <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >درباره ما</Link> </li> */}
+<li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
+محاسبه گر سیستم</Link> </li>
                   <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} ><BuildingApartment size={15} /> تماس با ما</Link> </li>
                 </ul>
 
@@ -1216,7 +1220,7 @@ useEffect(()=>{
 
                 <li className={`${styles.bottomHeader_ul_category}`}
                   onClick={() => {
-                    console.log(ulRefA.current.classList.value);
+                    // console.log(ulRefA.current.classList.value);
                     if (ulRefA.current.classList.value === 'Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA') {
                       ulRefA.current.classList.remove('header_hidden_ulRefA')
                     } else {
@@ -1291,9 +1295,21 @@ setXtFlagSpinnerShow(true)
                       >
                         تعمیرات</span></Link>
 </>
+ 
 }
 
-                
+<Link href={'/computerparts'}
+                         onClick={() => {
+                          setMenuOpen(false)
+  setXtFlagSpinnerShow(true)
+                          
+                        }}>
+                      <Laptop size={15} color="#14a5af" />
+
+                      <span 
+
+                      >
+                        محاسبه گر سیستم </span></Link>  
 
                     <Link href={'/contactus'}
                          onClick={() => {
@@ -1312,6 +1328,7 @@ setXtFlagSpinnerShow(true)
 {
   xtFlagLogin &&  <Link href={'/'} onClick={() => {
     exitHandler()
+  
     // setXtFlagSpinnerShow(true)
     setMenuOpen(false)
     setMessageNotification([])
