@@ -639,9 +639,9 @@ useEffect(()=>{
                          <User size={15} />پنل کاربری </Link> </li>
 
                   }
-                  {/* <li> <Link href={'/about'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >
-                  <BuildingApartment size={20} />
-                  درباره ما</Link> </li> */}
+                 <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
+                   محاسیه گر سیستم</Link> </li>
+
     <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
     تماس با ما</Link> </li>
                 </ul>
