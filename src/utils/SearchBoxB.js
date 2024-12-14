@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-export default function SearchBoxB({ array, placeholder, id, onPriceChange,onClear  }) {
+export default function SearchBoxB({ array, placeholder, id, onPriceChange,onClear ,reset }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchTermPrice, setSearchTermPrice] = useState('');
     const [showOptions, setShowOptions] = useState(false);
@@ -17,6 +17,7 @@ export default function SearchBoxB({ array, placeholder, id, onPriceChange,onCle
         if (id === 'manufacturerNameForAdd') {
             setSearchTerm(item.name);
             setSearchTermPrice(item.price);
+            console.log(item.price)
             onPriceChange((Number((item.price).replace(/,/g, '')))*1000 || 0); // گزارش مقدار به والد
         }
     };
@@ -30,7 +31,7 @@ export default function SearchBoxB({ array, placeholder, id, onPriceChange,onCle
     const handleManualPriceChange = (e) => {
         const manualPrice = e.target.value.replace(/[^0-9]/g, ''); // فقط اعداد مجاز
         setSearchTermPrice(manualPrice);
-        onPriceChange(Number(manualPrice) || 0); // گزارش مقدار به والد
+        onPriceChange(Number(manualPrice)*1000 || 0); // گزارش مقدار به والد
     };
 
     const filteredCategoryItems = array?.filter((item) =>
@@ -62,6 +63,11 @@ export default function SearchBoxB({ array, placeholder, id, onPriceChange,onCle
           document.removeEventListener('keydown', handleKeyDown);
         };
       }, [showOptions, activeIndex, filteredCategoryItems]);
+      useEffect(() => {
+      
+        setSearchTerm('');
+        setSearchTermPrice('');
+}, [reset]);
     return (
         <div className="dropdown-containerB">
             <input

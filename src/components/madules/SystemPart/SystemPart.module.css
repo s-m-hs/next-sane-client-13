@@ -9,6 +9,11 @@
 .li_click{
     color: blue;
     cursor: pointer;
+    position: relative;
+}
+.handIcon{
+    position: absolute;
+    
 }
 .li_click svg{
     rotate: 90deg

@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,flagMessageNotification,Laptop} from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,Laptop} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -21,7 +21,7 @@ import { Sidebar } from 'primereact/sidebar';
 
 
 export default function Header() {
-  let { xtFlagLogin,name,userSrc,setUserSrc,setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,setFlagMessageNotification} = useContext(MainContext)
+  let { xtFlagLogin,name,userSrc,setUserSrc,setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,flagMessageNotification,setFlagMessageNotification} = useContext(MainContext)
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
   const [mainCategoryB, setMainCategoryB] = useState({});
@@ -642,7 +642,7 @@ useEffect(()=>{
                          <User size={15} />پنل کاربری </Link> </li>
 
                   }
-                 <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
+                 <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <Laptop size={15} />
                    محاسبه گر سیستم</Link> </li>
 
     <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
@@ -979,7 +979,7 @@ useEffect(()=>{
                   }
 
 
-<li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
+<li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <Laptop size={15} />
 محاسبه گر سیستم</Link> </li>
                   <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} ><BuildingApartment size={15} /> تماس با ما</Link> </li>
                 </ul>

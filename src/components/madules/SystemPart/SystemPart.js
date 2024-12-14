@@ -12,7 +12,8 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function SystemPart() {
     const [lgShow, setLgShow] = useState(false);
-    
+    const[resetSearchbox,setResetSearchbox]=useState(false)
+
     // const [isSaving, setIsSaving] = useState(false);
     const [prices, setPrices] = useState([]); // لیست قیمت‌ها
     const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
@@ -126,7 +127,7 @@ const generatePDF = () => {
     <li>جهت مشاوره و یا تایید نهایی سیستم فایل ذخیره شده را برای همکاران ما تیکت نمایید ...</li>
     <li className= {` ${style.li_click}`}
     onClick={()=>setLgShow(true)}
-    >جهت راهنمایی و توضیحات بیشتر کلیک کنید ...<HandPointing size={32} /></li>
+    >جهت راهنمایی و توضیحات بیشتر کلیک کنید ...<HandPointing size={32} className={style.handIcon}/></li>
 </ul>
             </div>
 
@@ -146,11 +147,13 @@ const generatePDF = () => {
                                         <td>{item.name}</td>
                                         <td>
                                             <SearchBoxB
+
                                                 array={hardWareData}
                                                 placeholder={"..."}
                                                 id="manufacturerNameForAdd"
                                                 onPriceChange={(price) => handlePriceChange(price, index)}
                                                 onClear={() => handleClear(index)}
+                                                reset={resetSearchbox}
                                             />
                                         </td>
                                         <td className={`${style.td_number}`}>
@@ -181,7 +184,13 @@ const generatePDF = () => {
     ذخیره
     <DownloadSimple size={32} />
 </button>
-                            <button className='btn btn-warning'>بازنشانی
+                            <button className='btn btn-warning'
+                            onClick={()=> {setResetSearchbox(!resetSearchbox)
+                                setPrices(HardWareName.map(() => 0))
+                                setPrices([]); // صفر کردن تمام مقادیر قیمت‌ها
+                            
+                            }}
+                            >بازنشانی
                             <ArrowCounterClockwise size={32} />
                             </button>
                         </div>
