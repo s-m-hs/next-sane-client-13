@@ -1,7 +1,11 @@
-.detail{
+.table{
+    margin-top: 50px;
+    /* border: 1px dotted; */
+}
+/* .detail{
     margin-top: 50px;
 
-}
+} */
 .detail li{
     list-style: inside !important;
 }
@@ -40,6 +44,23 @@ margin: 10px;}
     width: 100px;
     margin: 5px;
 }
+
+
+.card{
+    text-align: center;
+    margin: 0 auto;
+    width: 30%;
+    min-height: 80px;
+cursor: pointer;
+color: #fff;
+border-radius: 8px;
+margin-top: 5px;
+}
+.card :hover{
+opacity: 0.8;
+}
+
+
 @media only screen and (max-width:500px){
 .table{
     font-size: 12px;
