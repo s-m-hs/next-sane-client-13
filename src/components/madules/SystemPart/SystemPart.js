@@ -40,11 +40,11 @@ export default function SystemPart() {
   ];
 
   const systemSample=[
-    {id:'1',title:'سیستم خانگی و اداری سطح 1',src:'',color:'#dfb909'},
+    {id:'1',title:'سیستم خانگی و اداری سطح 1',src:'',color:'#56cdff'},
     {id:'2',title:'سیستم خانگی و اداری سطح 2',src:'',color:'#34e619'},
     {id:'3',title:'سیستم خانگی و اداری سطح 3',src:'',color:'#9d66f5'},
-    {id:'4',title:'سیستم گیمینگ و مهندسی سطح 1',src:'',color:'#fffd00'},
-    {id:'5',title:'سیستم گیمینگ و مهندسی سطح 2',src:'',color:'#ffbc00'},
+    {id:'4',title:'سیستم گیمینگ و مهندسی سطح 1',src:'',color:'#ffbc00'},
+    {id:'5',title:'سیستم گیمینگ و مهندسی سطح 2',src:'',color:'#e056d2'},
     {id:'6',title:'سیستم گیمینگ و مهندسی سطح 3',src:'',color:'#ff4d37'},
   ]
   const generatePDF = () => {
