@@ -33,7 +33,6 @@ export default function SearchBoxB({ array, placeholder, id, onPriceChange,onCle
         setSearchTermPrice(manualPrice);
         onPriceChange(Number(manualPrice)*1000 || 0); // گزارش مقدار به والد
     };
-
     const filteredCategoryItems = array?.filter((item) =>
         id === 'manufacturerNameForAdd' ? item.name.toLowerCase().includes(searchTerm.toLowerCase()) : ''
     );

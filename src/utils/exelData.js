@@ -24,11 +24,7 @@ const hardWareData=[
         "name": "H510-MK",
         "price": "4,050"
     },
-    {
-        "id": 6,
-        "name": "GT1030-2G BRK",
-        "price": "CALL"
-    },
+  
     {
         "id": 7,
         "name": "UD850GM GOLD FULL",
@@ -39,11 +35,7 @@ const hardWareData=[
         "name": "SAMSUNG 24C360 Curved",
         "price": "5,350"
     },
-    {
-        "id": 9,
-        "name": "H510-MK",
-        "price": "CALL"
-    },
+   
     {
         "id": 10,
         "name": "شGT1030-2G PH",
@@ -54,26 +46,8 @@ const hardWareData=[
         "name": "870EVO 250G",
         "price": "3,800"
     },
-    {
-        "id": 12,
-        "name": "H510-MR",
-        "price": "CALL"
-    },
-    {
-        "id": 13,
-        "name": "GT1030-2G PH",
-        "price": "CALL"
-    },
-    {
-        "id": 14,
-        "name": "870EVO 500G",
-        "price": "CALL"
-    },
-    {
-        "id": 15,
-        "name": "SPA65 1T",
-        "price": "CALL"
-    },
+
+   
     {
         "id": 16,
         "name": "PF550 WHITE",
@@ -89,21 +63,7 @@ const hardWareData=[
         "name": "H510-ME",
         "price": "4,600"
     },
-    {
-        "id": 19,
-        "name": "GTX1650 DUAL OC 4G",
-        "price": "CALL"
-    },
-    {
-        "id": 20,
-        "name": "870EVO 1T",
-        "price": "CALL"
-    },
-    {
-        "id": 21,
-        "name": "SPA65 2T",
-        "price": "CALL"
-    },
+  
     {
         "id": 22,
         "name": "PN750D GOLD",
@@ -119,16 +79,7 @@ const hardWareData=[
         "name": "H510-MA",
         "price": "5,100"
     },
-    {
-        "id": 25,
-        "name": "شRTX3050 DUAL OC 6G",
-        "price": "CALL"
-    },
-    {
-        "id": 26,
-        "name": "870EVO 2T",
-        "price": "CALL"
-    },
+
     {
         "id": 27,
         "name": "SPA85 1T",
@@ -149,11 +100,7 @@ const hardWareData=[
         "name": "H610-MR",
         "price": "6,100"
     },
-    {
-        "id": 31,
-        "name": "RTX3050 DUAL OC 6G",
-        "price": "CALL"
-    },
+
     {
         "id": 32,
         "name": "PN850M GOLD FULL",
@@ -169,31 +116,19 @@ const hardWareData=[
         "name": "H610-MK",
         "price": "6,500"
     },
-    {
-        "id": 35,
-        "name": "RTX3050 DUAL OC 8G",
-        "price": "CALL"
-    },
+  
     {
         "id": 36,
         "name": "970EVO 250G",
         "price": "3,050"
     },
-    {
-        "id": 37,
-        "name": "SPA85 4T",
-        "price": "CALL"
-    },
+
     {
         "id": 38,
         "name": "H610-MK",
         "price": "6,300"
     },
-    {
-        "id": 39,
-        "name": "شRTX3050 DUAL OC 8G",
-        "price": "CALL"
-    },
+
     {
         "id": 40,
         "name": "970EVO 500G",
@@ -204,16 +139,7 @@ const hardWareData=[
         "name": "DVDASUS BULK",
         "price": "1,180"
     },
-    {
-        "id": 42,
-        "name": "H610-ME",
-        "price": "CALL"
-    },
-    {
-        "id": 43,
-        "name": "RTX3060 DUAL OC 12G",
-        "price": "CALL"
-    },
+
     {
         "id": 44,
         "name": "970EVO 1T",
@@ -234,21 +160,7 @@ const hardWareData=[
         "name": "DVDASUS EX ULITE",
         "price": "2,400"
     },
-    {
-        "id": 48,
-        "name": "H610-MD",
-        "price": "CALL"
-    },
-    {
-        "id": 49,
-        "name": "RTX3060 TI DUAL OC 8G",
-        "price": "CALL"
-    },
-    {
-        "id": 50,
-        "name": "970EVO 2T",
-        "price": "CALL"
-    },
+
     {
         "id": 51,
         "name": "Team Group 16GB 4800 D5",
@@ -349,11 +261,7 @@ const hardWareData=[
         "name": "HP 107W",
         "price": "8,450"
     },
-    {
-        "id": 71,
-        "name": "H610-MA WIFI D5",
-        "price": "CALL"
-    },
+  
     {
         "id": 72,
         "name": "شRTX 4060 TI TUF OC 8G",
@@ -409,16 +317,7 @@ const hardWareData=[
         "name": "HP M15w",
         "price": "10,500"
     },
-    {
-        "id": 83,
-        "name": "PRIME B660-MK",
-        "price": "CALL"
-    },
-    {
-        "id": 84,
-        "name": "RTX4060 TI PROART 16G",
-        "price": "CALL"
-    },
+
     {
         "id": 85,
         "name": "Evo 990 1T",
@@ -439,11 +338,7 @@ const hardWareData=[
         "name": "HP M12a",
         "price": "29,700"
     },
-    {
-        "id": 89,
-        "name": "B660-MA WIFI",
-        "price": "CALL"
-    },
+
     {
         "id": 90,
         "name": "RTX4070 DUAL OC 12G",
@@ -474,11 +369,7 @@ const hardWareData=[
         "name": "شPRIME B660-PLUS",
         "price": "7,500"
     },
-    {
-        "id": 96,
-        "name": "RTX 4070 Super Strix OC 12",
-        "price": "CALL"
-    },
+
     {
         "id": 97,
         "name": "Pro 990 1T",
@@ -494,11 +385,7 @@ const hardWareData=[
         "name": "PRIME B660-PLUS",
         "price": "7,800"
     },
-    {
-        "id": 100,
-        "name": "RTX4070 TI TUF OC 12G",
-        "price": "CALL"
-    },
+
     {
         "id": 101,
         "name": "Pro 990 2T",
@@ -519,16 +406,7 @@ const hardWareData=[
         "name": "HP MFP M28W",
         "price": "22,100"
     },
-    {
-        "id": 105,
-        "name": "B760-MK",
-        "price": "CALL"
-    },
-    {
-        "id": 106,
-        "name": "RTX4070 TI STRIX OC 12G",
-        "price": "CALL"
-    },
+
     {
         "id": 107,
         "name": "NOTUS 95 ARGB",
@@ -544,11 +422,7 @@ const hardWareData=[
         "name": "B760-MA",
         "price": "8,300"
     },
-    {
-        "id": 110,
-        "name": "شRTX4080 TUF OC 16G",
-        "price": "CALL"
-    },
+
     {
         "id": 111,
         "name": "Lexar NS100 128G",
@@ -564,11 +438,7 @@ const hardWareData=[
         "name": "B760 PRIME PLUS D4",
         "price": "8,400"
     },
-    {
-        "id": 114,
-        "name": "RTX4080 Super Tuf OC 16G",
-        "price": "CALL"
-    },
+
     {
         "id": 115,
         "name": "Lexar NS100 256G",
@@ -594,11 +464,7 @@ const hardWareData=[
         "name": "شB760-MA WIFI D5",
         "price": "9,100"
     },
-    {
-        "id": 120,
-        "name": "RTX4080 Super Strix OC 16",
-        "price": "CALL"
-    },
+
     {
         "id": 121,
         "name": "Lexar NS100 512G",
@@ -649,21 +515,13 @@ const hardWareData=[
         "name": "Canon MF3010",
         "price": "13,600"
     },
-    {
-        "id": 131,
-        "name": "B760-TUF PLUS Wifi D5",
-        "price": "CALL"
-    },
+  
     {
         "id": 132,
         "name": "Pristine 16G 2666",
         "price": "2,000"
     },
-    {
-        "id": 133,
-        "name": "B760-F STRIX WIFI D5",
-        "price": "CALL"
-    },
+ 
     {
         "id": 134,
         "name": "G4400 TRAY",
@@ -739,11 +597,7 @@ const hardWareData=[
         "name": "Green 450 ECO",
         "price": "2,100"
     },
-    {
-        "id": 149,
-        "name": "شZ790-P PRIME Wifi D5",
-        "price": "CALL"
-    },
+
     {
         "id": 150,
         "name": "G6500 TRAY",
@@ -784,11 +638,7 @@ const hardWareData=[
         "name": "Crucial 32G 4800 Single D5",
         "price": "4,900"
     },
-    {
-        "id": 158,
-        "name": "Green 550 ECO",
-        "price": "CALL"
-    },
+
     {
         "id": 159,
         "name": "Z790-A PRIME WIFI D5",
@@ -814,11 +664,7 @@ const hardWareData=[
         "name": "Green 600 ECO",
         "price": "3,050"
     },
-    {
-        "id": 164,
-        "name": "Z790 TUF PLUS wifi D4",
-        "price": "CALL"
-    },
+
     {
         "id": 165,
         "name": "i5 11400 TRAY",
@@ -844,11 +690,7 @@ const hardWareData=[
         "name": "KINGMAX 512G",
         "price": "1,850"
     },
-    {
-        "id": 170,
-        "name": "Z790 TUF PLUS wifi D5",
-        "price": "CALL"
-    },
+
     {
         "id": 171,
         "name": "i3 12100 TRAY",
@@ -869,11 +711,7 @@ const hardWareData=[
         "name": "Green 530",
         "price": "3,250"
     },
-    {
-        "id": 175,
-        "name": "Z790-A STRIX WIFI D5",
-        "price": "CALL"
-    },
+   
     {
         "id": 176,
         "name": "i5 12400F TRAY",
@@ -904,11 +742,7 @@ const hardWareData=[
         "name": "RGB SL 32G DUAL 3200",
         "price": "5,500"
     },
-    {
-        "id": 182,
-        "name": "Green 700",
-        "price": "CALL"
-    },
+
     {
         "id": 183,
         "name": "Z790-H STRIX WIFI D5",
@@ -934,11 +768,7 @@ const hardWareData=[
         "name": "Green GED 600 Bronze",
         "price": "4,200"
     },
-    {
-        "id": 188,
-        "name": "Z790-E STRIX WIFI D5",
-        "price": "CALL"
-    },
+ 
     {
         "id": 189,
         "name": "i7 12700k TRAY",
@@ -959,11 +789,7 @@ const hardWareData=[
         "name": "Green GED 800 Bronze",
         "price": "6,500"
     },
-    {
-        "id": 193,
-        "name": "Z790 Maximus Hero D5",
-        "price": "CALL"
-    },
+
     {
         "id": 194,
         "name": "i9 12900k TRAY",
@@ -1069,21 +895,13 @@ const hardWareData=[
         "name": "i7 13700K TRAY",
         "price": "22,000"
     },
-    {
-        "id": 215,
-        "name": "Blue M.2 1TB",
-        "price": "CALL"
-    },
+
     {
         "id": 216,
         "name": "RGB 64G Dual 5200",
         "price": "12,700"
     },
-    {
-        "id": 217,
-        "name": "Green Parsa",
-        "price": "CALL"
-    },
+
     {
         "id": 218,
         "name": "B760M POWER DDR4",
@@ -1119,11 +937,7 @@ const hardWareData=[
         "name": "RGB 32G Dual 5600",
         "price": "7,900"
     },
-    {
-        "id": 225,
-        "name": "GreenARAD",
-        "price": "CALL"
-    },
+
     {
         "id": 226,
         "name": "B760 DS3H AX DDR4",
@@ -1249,16 +1063,8 @@ const hardWareData=[
         "name": "TP-LINK 8961",
         "price": "1,580"
     },
-    {
-        "id": 251,
-        "name": "purple 6t",
-        "price": "CALL"
-    },
-    {
-        "id": 252,
-        "name": "Dominator 64G Dual 6400",
-        "price": "CALL"
-    },
+
+ 
     {
         "id": 253,
         "name": "GREEN G6",
@@ -1319,11 +1125,7 @@ const hardWareData=[
         "name": "Z790 AERO G DDR5",
         "price": "23,000"
     },
-    {
-        "id": 265,
-        "name": "TP-LINK 9970",
-        "price": "CALL"
-    },
+ 
     {
         "id": 266,
         "name": "Western Ultra 1t",
@@ -1344,11 +1146,7 @@ const hardWareData=[
         "name": "Z790 AORUS ELITE AX Ice",
         "price": "22,000"
     },
-    {
-        "id": 270,
-        "name": "TP-LINK M7200",
-        "price": "CALL"
-    },
+ 
     {
         "id": 271,
         "name": "Western Ultra 2t",
@@ -1374,11 +1172,7 @@ const hardWareData=[
         "name": "GTX1660 SUPER OC 6G",
         "price": "19,500"
     },
-    {
-        "id": 276,
-        "name": "TP-LINK MR-6400",
-        "price": "CALL"
-    },
+  
     {
         "id": 277,
         "name": "Western Ulltra 5t",
@@ -1399,16 +1193,7 @@ const hardWareData=[
         "name": "RTX 3060 WF2 OC 12G",
         "price": "21,500"
     },
-    {
-        "id": 281,
-        "name": "TP-LINK MR-6400",
-        "price": "CALL"
-    },
-    {
-        "id": 282,
-        "name": "Western my book 4t",
-        "price": "CALL"
-    },
+
     {
         "id": 283,
         "name": "HYPER 212 SPECTRUM",
@@ -1424,11 +1209,7 @@ const hardWareData=[
         "name": "RTX 3060 GAMING OC 12G",
         "price": "22,500"
     },
-    {
-        "id": 286,
-        "name": "TP-LINK M7350",
-        "price": "CALL"
-    },
+
     {
         "id": 287,
         "name": "Western my book 6t",
@@ -1449,11 +1230,7 @@ const hardWareData=[
         "name": "RTX 4070 SUPER WF3 OC",
         "price": "45,500"
     },
-    {
-        "id": 291,
-        "name": "TP-LINK M7350",
-        "price": "CALL"
-    },
+
     {
         "id": 292,
         "name": "Western my book 8t",
@@ -1494,16 +1271,7 @@ const hardWareData=[
         "name": "RTX 4070 Super Gaming OC",
         "price": "47,000"
     },
-    {
-        "id": 300,
-        "name": "D-LINK 2750",
-        "price": "CALL"
-    },
-    {
-        "id": 301,
-        "name": "HD 650 1TB",
-        "price": "CALL"
-    },
+
     {
         "id": 302,
         "name": "MWE 650 WHITE",
@@ -1519,16 +1287,7 @@ const hardWareData=[
         "name": "RTX 4070TI GAMING 12G",
         "price": "57,000"
     },
-    {
-        "id": 305,
-        "name": "D-LINK VDSL 224",
-        "price": "CALL"
-    },
-    {
-        "id": 306,
-        "name": "HD 650 2TB",
-        "price": "CALL"
-    },
+
     {
         "id": 307,
         "name": "MWE 750 WHITE",
@@ -1549,11 +1308,7 @@ const hardWareData=[
         "name": "D-LINK VDSL 224",
         "price": "1,950"
     },
-    {
-        "id": 311,
-        "name": "HD 680 1TB",
-        "price": "CALL"
-    },
+
     {
         "id": 312,
         "name": "MWE 750 GOLD FULL",

@@ -14,11 +14,13 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./SystemPart.module.css";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Modal from "react-bootstrap/Modal";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
 
 export default function SystemPart() {
   const [lgShow, setLgShow] = useState(false);
   const [resetSearchbox, setResetSearchbox] = useState(false);
   const [imageSrc,setImageSrc]=useState('')
+  const [getExel,setGetExel]=useState([])
 const classRefA=useRef()
   // const [isSaving, setIsSaving] = useState(false);
   const [prices, setPrices] = useState([]); // لیست قیمت‌ها
@@ -53,10 +55,31 @@ const classRefA=useRef()
 const cardClickHandle=(src)=>{
   classRefA.current.classList.add('SystemPart-show')
   setImageSrc(src)
-
 }
-
-
+// const getdataExel=()=>{
+//   const getLocalStorage=localStorage.getItem('loginToken')
+//   async function myApp() {
+//     const res=await fetch(`${apiUrl}/api/CyGuarantee?phoneNumber=09196025114`,{
+//       method:'GET',
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${getLocalStorage}`,
+//         }
+      
+//     }).then(res=>{
+//       if(res.ok){
+//        return res.json()
+//       }
+//     }).then(result=>{
+//       console.log(result)
+//       setGetExel(result)
+//     })
+//   }
+//   myApp()
+// }
+// useEffect(()=>{
+//   getdataExel()
+// },[])
   const generatePDF = () => {
     // setIsSaving(true); // نمایش اسپینر
     setXtFlagSpinnerShow(true); // نمایش اسپینر
@@ -134,7 +157,7 @@ const cardClickHandle=(src)=>{
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, []);
-
+console.log(hardWareData);
   return (
     <div className={`container ${style.systemdetailsample_container}`}>
       {/* {isSaving && (
@@ -154,8 +177,8 @@ const cardClickHandle=(src)=>{
 
         <div className={`col-md-5 ${style.div_r} p-5`}>
           <h1>سیستم های پیشنهادی :</h1>
-          <div className="container ">
-            <div className={`row row-cols-3 mt-3 ${style.div_card} `}  >
+          <div className="container  ">
+            <div className={`row row-cols-3 mt-5 ${style.div_card} `}  >
 {systemSample.map(item=>(
   <div className={`col ${style.card} boxSh`} style={{backgroundColor:`${item.color}`}} 
   onClick={()=>{cardClickHandle(item.src)}}>
@@ -196,6 +219,7 @@ const cardClickHandle=(src)=>{
               </li>
             </ul>
           </div>
+          
           <div>
             <table className={`table table-hover  ${style.table}`}>
               <thead>
