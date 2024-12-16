@@ -987,3 +987,6 @@ left: 10px;
     width: 100px !important;
   }
 
+  .SystemPart-show{
+    display: block !important;
+}

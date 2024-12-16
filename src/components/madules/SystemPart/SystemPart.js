@@ -6,10 +6,11 @@ import {
   DownloadSimple,
   HandPointing,
   ArrowCounterClockwise,
+  XCircle
 } from "@phosphor-icons/react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import style from "./SystemPart.module.css";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Modal from "react-bootstrap/Modal";
@@ -17,7 +18,8 @@ import Modal from "react-bootstrap/Modal";
 export default function SystemPart() {
   const [lgShow, setLgShow] = useState(false);
   const [resetSearchbox, setResetSearchbox] = useState(false);
-
+  const [imageSrc,setImageSrc]=useState('')
+const classRefA=useRef()
   // const [isSaving, setIsSaving] = useState(false);
   const [prices, setPrices] = useState([]); // لیست قیمت‌ها
   const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
@@ -40,13 +42,21 @@ export default function SystemPart() {
   ];
 
   const systemSample=[
-    {id:'1',title:'سیستم خانگی و اداری سطح 1',src:'',color:'#56cdff'},
-    {id:'2',title:'سیستم خانگی و اداری سطح 2',src:'',color:'#34e619'},
-    {id:'3',title:'سیستم خانگی و اداری سطح 3',src:'',color:'#9d66f5'},
-    {id:'4',title:'سیستم گیمینگ و مهندسی سطح 1',src:'',color:'#ffbc00'},
-    {id:'5',title:'سیستم گیمینگ و مهندسی سطح 2',src:'',color:'#e056d2'},
-    {id:'6',title:'سیستم گیمینگ و مهندسی سطح 3',src:'',color:'#ff4d37'},
+    {id:'1',title:'سیستم خانگی و اداری سطح 1',src:"/images/system/Capture1.PNG",color:'#56cdff'},
+    {id:'2',title:'سیستم خانگی و اداری سطح 2',src:'/images/system/Capture2.PNG',color:'#34e619'},
+    {id:'3',title:'سیستم خانگی و اداری سطح 3',src:'/images/system/Capture3.PNG',color:'#9d66f5'},
+    {id:'4',title:'سیستم گیمینگ و مهندسی سطح 1',src:'/images/system/Capture4.PNG',color:'#ffbc00'},
+    {id:'5',title:'سیستم گیمینگ و مهندسی سطح 2',src:'/images/system/Capture5.PNG',color:'#e056d2'},
+    {id:'6',title:'سیستم گیمینگ و مهندسی سطح 3',src:'/images/system/Capture6.PNG',color:'#ff4d37'},
   ]
+
+const cardClickHandle=(src)=>{
+  classRefA.current.classList.add('SystemPart-show')
+  setImageSrc(src)
+
+}
+
+
   const generatePDF = () => {
     // setIsSaving(true); // نمایش اسپینر
     setXtFlagSpinnerShow(true); // نمایش اسپینر
@@ -126,18 +136,29 @@ export default function SystemPart() {
   }, []);
 
   return (
-    <div className="container ">
+    <div className={`container ${style.systemdetailsample_container}`}>
       {/* {isSaving && (
             <div className="spinner-overlay">
                 <SpinnerA size={50} />
             </div>
         )} */}
+        <div className={` ${style.systemdetailsample_row}`}>
+        <div ref={classRefA} className={`col-md-5 ${style.systemdetailsample_div} `}>
+        <XCircle size={32} color="#ad00ff" onClick={()=>classRefA.current.classList.remove('SystemPart-show')}/>
+          <img src={imageSrc} alt="" />
+        </div>
+<div className="col-md-7"></div>
+        </div>
+        
       <div className="row boxSh ">
+
         <div className={`col-md-5 ${style.div_r} p-5`}>
+          <h1>سیستم های پیشنهادی :</h1>
           <div className="container ">
-            <div className={`row row-cols-3 mt-3 ${style.div_card} `} >
+            <div className={`row row-cols-3 mt-3 ${style.div_card} `}  >
 {systemSample.map(item=>(
-  <div className={`col ${style.card} boxSh`} style={{backgroundColor:`${item.color}`}} >
+  <div className={`col ${style.card} boxSh`} style={{backgroundColor:`${item.color}`}} 
+  onClick={()=>{cardClickHandle(item.src)}}>
     <p>{item.title}</p>
   </div>
 ))}

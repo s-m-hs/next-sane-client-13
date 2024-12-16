@@ -60,7 +60,39 @@ margin-top: 5px;
 opacity: 0.6;
 }
 
+.systemdetailsample_container{
+    position: relative;
+}
+.systemdetailsample_div{
+    display: none;
+    height: 100%;
+position: absolute;
+z-index: 1000;
+animation: move 500ms 1 alternate ease-in-out;;
+}
+.systemdetailsample_div svg{
+    position: absolute;
+    z-index: 1500;
+    cursor: pointer;
+}
+.systemdetailsample_div svg:hover{
+    opacity: 0.7;
+}
+.systemdetailsample_div img{
+    width: 100%;
+}
 
+@keyframes move {
+    0% {
+        /* top: -800px; */
+        opacity: 0;
+    }
+
+    100% {
+        /* top: 0px; */
+        opacity: 1;
+    }
+}
 @media only screen and (max-width:500px){
 .table{
     font-size: 12px;
