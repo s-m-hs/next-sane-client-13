@@ -602,6 +602,23 @@ select:-webkit-autofill:focus {
   border-bottom-color: var(--primary-color);
 }
 
+.custom-otp-inputB {
+  width:14%;
+  font-size: 36px;
+  direction: ltr !important;
+  /* border: 0 none; */
+  /* appearance: none;
+  text-align: center;
+  transition: all 0.2s;
+  background: transparent; */
+  /* border-bottom: 2px solid var(--surface-500); */
+}
+
+.custom-otp-inputB:focus {
+  outline: 0 none;
+  border-bottom-color: var(--primary-color);
+}
+
 
 .create_ticket{
   display: none;

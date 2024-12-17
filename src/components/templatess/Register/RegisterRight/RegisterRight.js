@@ -18,13 +18,16 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 export default function RegisterRight() {
 const router = useRouter()
 const [token, setTokens] = useState('09');
+const [tokenB, setTokensB] = useState('');
+const [flagInput,setFlagInput]=useState(false)
 const [err1,setErr1]=useState('')
+const [flagErrorCheckbox,setFlagErrorCheckbox]=useState(false)
 
 const customInput = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-input" />;
+const customInputB = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-inputB" />;
 
 
 let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
-
 
   const {
     register,
@@ -45,59 +48,62 @@ let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useConte
     if(errors.password){
       setErr1(errors.password.message)
 
-    }else(setErr1(''))
+    }else if(errors.checkbox){
+      console.log(errors.checkbox.message);
+      setFlagErrorCheckbox(true)
+      // setErr1(errors.checkbox)
+
+    } else {
+      setErr1('')
+
+    }
   };
+
  const alertA=()=>alertN('center','success','ثبت نام با موفقیت انجام شد',1500).then((res) => {
     setXtFlagLogin(true)
 reset(setValue(''))
 router.push('/') 
 });
-const alertB=()=>alertN('center','error',"با این شماره همراه قبلا  ثبت نام انجام شده است...",2000)
+const alertD=()=>alertN('center','success','کد تایید برای شما ارسال شد',1500).then((res) => {
+  setFlagInput(true)
+reset(setValue(''))
+
+});
+const alertB=()=>alertN('center','error',"مشکلی پیش آمده ،دوباره تلاش کنید...",2000)
 const alertC=()=>alertN('center','error',"  شماره همراه به درستی وارد نشده است ...",1500)
+const alertE=()=>alertN('center','error',"  رمز عبور و تکرار آن یکسان نیست...",1500)
 
       ////////////////////////////
 
 const handleRegistration=(data)=>{
-
      let obj={
     un: token,
   pw:data.password,
     name:data.name
 }
-  if(token.length==11){
-    // axios.post(`${apiUrl}/api/Customer/register`,
-    //   {
-    //     un: token,
-    //     pw:data.password,
-    //       name:data.name
-    //    },
-    //   {
-    //      headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //   }
-    // ).then( res=> {
-    //   // console.log(res.data)
-    //   console.log(res.response)
+  if(token.length==11 && !flagInput){
+   
+if(data.passwordRepeat===data.password){
+  postApiByAlert('/api/Customer/register',obj,alertD,alertB)
+  setFlagErrorCheckbox(false)
 
-    //   if(res){
-    //       localStorage.setItem('loginToken',result.token)
-    //   localStorage.setItem('user',obj.name)
-    //   alertA()
-    //   }
-    
-      
-    // }).catch(err=>console.log(err))
+}else{
+  alertE()
+  setFlagErrorCheckbox(false)
+
+}
 
 
+  }else if(tokenB.length==6 && flagInput){
+    let obj={
+      valadationCode: tokenB,
+      username:token
+    }
+    postApiByAlert('/api/Customer/verifyCode',obj,alertA,alertB)
 
-
-
-
-    postApiByAlert('/api/Customer/register',obj,alertA,alertB)
-
-
-  }else(
+  }
+  
+  else(
     alertC()
   )
   // console.log(data);
@@ -129,7 +135,9 @@ setXtFlagSpinnerShow(false)
           action=""
           onSubmit={handleSubmit(handleRegistration, handleError)}
         >
-       <div className={`${style.div_input_B} centerr`}>
+   {!flagInput ?    
+   <>
+<div className={`${style.div_input_B} centerr`}>
             <User size={40} color="#19a5af" weight="fill" />
           <div >
                <input
@@ -154,7 +162,6 @@ setXtFlagSpinnerShow(false)
             <style scoped>
           
             </style>
-
             <InputOtp value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
         </div>
           </div>
@@ -182,9 +189,34 @@ setXtFlagSpinnerShow(false)
             {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
           </div>
 
+          
+          <div className={`${style.div_input_B} centerr`}>
+            <Key size={40} color="#19a5af" weight="fill" />
+            <div >
+              <input 
+              className={`${style.div_input_div} `}
+              // minLength={6}
+              name="password"
+               type="text"
+                placeholder="تکرار رمزعبور "
+               
+                {...register(`passwordRepeat`, {
+                  required: "رمز عبور را وارد نمایید (حداقل 4 کاراکتر ) ",
+                  minLength : {
+                    value: 4,
+                    message: 'رمز عبور وارد شده نباید کمتر از 4 کاراکتر باشد ' // JS only: <p>error message</p> TS only support string
+                  }
+              })}
+                 />
+                 {err1 && <p className={`${style.err_p}`} >{err1}</p>}
+            </div>
+            {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
+          </div>
+
    <div>
-        <h1>
+        <h1 className={flagErrorCheckbox ? `${style.chekbox}` : ''}>
           <input
+          
           name="checkbox"
            type="checkbox"
            {...register(`checkbox`, registerOptions.checkbox)}
@@ -194,8 +226,28 @@ setXtFlagSpinnerShow(false)
         </h1>
       </div>
 
-    <button type="submit" className={`${style.button} btn btn-info`}
-      >تایید</button>
+
+    
+
+
+   <button type="submit" className={`${style.button} btn btn-info`}
+   >تایید</button>  
+</>
+   :
+   <>
+               <div className={`${style.card_div} card flex justify-content-center`} >
+               <InputOtp value={tokenB} length={6}  onChange={(e) => setTokensB(e.value)} integerOnly  inputTemplate={customInputB}/>
+
+<button type="submit" className={tokenB.length==6 ? `${style.buttonB} btn btn-primary` : `${style.buttonB2} btn btn-primary`}
+>ارسال کد تایید</button>  
+</div>
+
+</>
+   }
+
+
+
+ 
 
         </form>
       </div>
