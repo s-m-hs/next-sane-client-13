@@ -18,7 +18,6 @@ import Button from 'react-bootstrap/Button';
 
 
 
-
 export default function LoginRight() {
 const [rgister,setRegister]=useState('')
 const [token, setTokens] = useState('09');
@@ -27,6 +26,10 @@ const [tokenC, setTokensC] = useState('');
 const [err1,setErr1]=useState('')
 const [show, setShow] = useState(false);
 const [recoveryFlag,setRecoveryFlag]=useState(false)
+const [onlyOkFlag,setOnlyOkFlag]=useState(false)
+const[pass1,setPass1]=useState('')
+const[pass2,setPass2]=useState('')
+
 const classRefA=useRef()
 const classRefB=useRef()
 const customInput = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-input" />;
@@ -65,10 +68,60 @@ router.push('/')
 });
 const alertB=()=>alertN('center','error',"دوباره امتحان کنید...",1500)
 const alertC=()=>alertN('center','error',"  شماره همراه را به درستی وارد نشده است ...",1500)
+const alertD=()=>alertN('center','error'," رمز ورود باید بیشتر از 3 کاراکتر باشد...",1500)
+const alertF=()=>alertN('center','error'," رمز ورود با رمز تکرار یکسان نیست  ...",1500)
+const alertG=()=>alertN('center','success'," رمز ورود با موفقیت تغییر کرد",1500).then((res) => {
+setShow(false)
+  reset(setValue(''))
+
+})
+const alertH=()=>alertN('center','success',"",1500).then((res) => {
+  classRefB.current.classList.remove( `${style.buttonB}`)
+  classRefB.current.classList.add( `${style.buttonB2}`)
+  classRefA.current.classList.remove(`${style.hide}`)
+  
+  })
+  const alertJ=()=>alertN('center','success',"",3000).then((res) => {
+ sendMobToRecovery()
+    
+    })
+const chengePass1=(e)=>{
+setPass1(e.target.value)
+}
+const chengePass2=(e)=>{
+  setPass2(e.target.value)
+  }
+
 
 const sendCodeToRecovery=()=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+
+  if(pass1.length<4 || pass2.length<4){
+    alertD()
+  }else if(pass1 !== pass2){ 
+    alertF()
+  }
+  else if(pass1 === pass2){
+   async function myApp(){
+  const res=await fetch(`${apiUrl}/api/Customer/recoverPassword?phoneNumber=${tokenB}&password=${pass1}`,{
+    method:'PUT',
+    headers:{
+      "Content-Type": "application/json",
+      Authorization:`Bearer ${getLocalStorage}` ,
+    },
+  }).then(res=>{
+    if(res.ok){
+      alertG()
+      setOnlyOkFlag(false)
+      setRecoveryFlag(false)
+    }
+  })
+} 
+myApp()
+  }
 
 }
+
 
 
 const sendMobToRecovery=()=>{
@@ -84,7 +137,8 @@ if(tokenB.length==11){
     }).then(res=>{
       if(res.ok){
         setRecoveryFlag(true)
-        classRefB.current.classList.add('loginRight-show')
+        // classRefB.current.classList.add('loginRight-show')
+        setOnlyOkFlag(true)
 
       }
     }
@@ -246,14 +300,14 @@ useEffect(()=>{
         // closeButton
         >
           <Modal.Title>
-            {!recoveryFlag ?  <h3>شماره همراه خود را وارد کنید...</h3> :
+            {!recoveryFlag && !onlyOkFlag ?  <h3>شماره همراه خود را وارد کنید :</h3> :
              <h3>کد تایید را وارد کنید ...</h3>
 }
             </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          {!recoveryFlag ?    <div className={`${style.card_div} card flex justify-content-center`} >
+          {(!recoveryFlag && !onlyOkFlag)  ?    <div className={`${style.card_div} card flex justify-content-center`} >
             <style scoped>
           
             </style>
@@ -263,13 +317,20 @@ useEffect(()=>{
             <div className={`${style.card_div} card flex justify-content-center`} >
             <InputOtp value={tokenC} length={6}  onChange={(e) => setTokensC(e.value)} integerOnly  inputTemplate={customInputB}/>
 
-<button type="submit" className={tokenC.length==6 ? `${style.buttonB} btn btn-primary mt-3` : `${style.buttonB2} btn btn-primary mt-3`}
-onClick={()=>sendCodeToRecovery()}
->ارسال کد تایید</button>  
+<button ref={classRefB} type="submit" className={tokenC.length==6 ? `${style.buttonB} btn btn-primary mt-3` : `${style.buttonB2} btn btn-primary mt-3`}
+onClick={()=>{
+  alertH()
+  // classRefB.current.classList.remove( `${style.buttonB}`)
+  // classRefB.current.classList.add( `${style.buttonB2}`)
+  // classRefA.current.classList.remove(`${style.hide}`)
+  }}
+>ارسال کد تایید
+{/* <ClockLoader color="#efefef" /> */}
+</button>  
 </div>}
     
     <>
-    <section ref={classRefA} className={`${style.hide}`}>
+    <section ref={classRefA} className={`${style.hide}`} style={{ margin:'20px' ,padding:'5px'}}>
           <div className={`${style.div_inputC} centerr`}>
             <Key size={30} color="#19a5af" weight="fill" />
             <div >
@@ -279,7 +340,8 @@ onClick={()=>sendCodeToRecovery()}
               name="password"
                type="text"
                 placeholder="رمزعبور "
-       
+       value={pass1}
+       onChange={chengePass1}
                  />
                  {/* {err1 && <p className={`${style.err_p}`} >{err1}</p>} */}
             </div>
@@ -291,10 +353,12 @@ onClick={()=>sendCodeToRecovery()}
             <div >
               <input 
               className={`${style.div_input_div} `}
-              // minLength={6}
+              // minLength={4}
               name="password"
                type="text"
                 placeholder="تکرار رمزعبور "
+                value={pass2}
+                onChange={chengePass2}
                
          
                  />
@@ -305,6 +369,10 @@ onClick={()=>sendCodeToRecovery()}
   
             {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
           </div>
+
+          <button className={`${style.buttonB} btn btn-info mt-2`}
+          onClick={sendCodeToRecovery}
+          >تایید</button>
     </section>
 
 
@@ -317,12 +385,14 @@ onClick={()=>sendCodeToRecovery()}
           <Button variant="secondary" onClick={()=>{
             handleClose()
             setRecoveryFlag(false)
-            setTokensB('09')
             setTokensC('')
+            setPass1('')
+            setPass2('')
           } }>
             بستن
           </Button>
-          <Button ref={classRefB} variant="primary" onClick={()=>sendMobToRecovery()} >تایید</Button>
+          {!recoveryFlag && !onlyOkFlag && <Button variant="primary" onClick={()=>alertJ()} >تایید</Button>
+        }
           {/* <Button ref={classRefA} className={`${style.hide}`} variant="primary" onClick={()=>sendMobToRecovery()} >تایید</Button> */}
         </Modal.Footer>
       </Modal>

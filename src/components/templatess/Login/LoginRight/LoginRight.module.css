@@ -62,7 +62,8 @@
     cursor: pointer;
 }
 .div_inputC{
-    width: 100%
+    width: 100%;
+    margin-top: 2px;
 }
 
 .div_inputC div{
@@ -70,7 +71,9 @@
 }
 
 .div_inputC div input{
-    width: 100%
+    width: 100%;
+    outline: none;
+
 }
 .buttonB{
     width: 100%;
