@@ -56,6 +56,40 @@
     border: none;
     direction: ltr;
 }
+.h3{
+    color: rgb(10, 104, 245);
+    margin-top: 10px;
+    cursor: pointer;
+}
+.div_inputC{
+    width: 100%
+}
+
+.div_inputC div{
+    width: 100%
+}
+
+.div_inputC div input{
+    width: 100%
+}
+.buttonB{
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+}
+.buttonB2{
+    opacity: 0.5;
+    pointer-events: none;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+}
+.show{
+    display: inline;
+}
+.hide{
+    display: none !important;
+}
 @media only screen and (max-width:900px){
     .img{
         display: block;
