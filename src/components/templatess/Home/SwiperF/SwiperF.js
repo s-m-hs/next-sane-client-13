@@ -33,6 +33,39 @@ export default function App() {
       >
 {/* 1 */}
 
+<SwiperSlide>
+<div className={`${style.type_div6} `}>
+       <h1 className={`${style.type_h6}`}>
+
+       <div className="App">
+            <TypeIt
+                options={{
+                  strings: [" ارسال رایگان سفارشات در سطح شهر..."],
+                  speed: 20,
+                  loop:true,
+                    waitUntilVisible: true,
+                    deleteSpeed:100
+                }}
+            />
+        </div>
+
+
+                      {/* <Typewriter
+                        options={{
+                          strings: [" فروش انواع لوازم جانبی کامپیوتر و ملزومات آن با تنوع کم نظیر شامل انواع موس ،کیبرد ،اسپیکر،هدست،پاور بانک و ..."],
+deleteSpeed:100,
+                            autoStart: true,
+                          loop: true,
+                        }}
+                      /> */}
+                    </h1>
+                    <img src="../images/cycle2.jpg" alt="" />
+</div>
+
+ 
+        </SwiperSlide>
+
+
      <SwiperSlide>
 <div className={`${style.type_div2}`}>
        <h1 className={`${style.type_h2}`}>

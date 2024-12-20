@@ -19,7 +19,7 @@ import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 
-export default function Contact({ center = [34.62829620983138, 50.878898715923015], zoom = 18, greatPlaceCoords = { lat: 34.62829620983138, lng: 50.878898715923015 } }) {
+export default function Contact({ center = [34.64259043104306, 50.890225000643426], zoom = 18, greatPlaceCoords = { lat: 34.64259043104306, lng: 50.890225000643426 } }) {
 let {setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
 
 // const defaultProps = {
@@ -46,13 +46,16 @@ let {setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
         <div className={`row ${style.row}`} >
             <div className={`col-md-6 centerc boxSh ${style.col_right}`}>
             <div >
-    <img  className={style.img} src="../../../../../images/photo_2024-06-07_23-49-30.jpg" alt="sane-contact" />
+    <img  className={style.img}
+    //  src="../../../../../images/photo_2024-06-07_23-49-30.jpg"
+     src="../../../../../images/4soo.png"
+      alt="sane-contact" />
 </div>
 
 <h5>تماس با ما</h5>
 <h1>اطلاعات تماس:</h1>
 <h3>استان قم</h3>
-<h3>بلوار سمیه نبش کوچه 6</h3>
+<h3>تقاطع 45متری عماریاسر و خیابان آذر ،سرای چهارسو</h3>
 <h3>شماره تماس: 37839322 -37835456- 37835457</h3>
 
 

@@ -87,7 +87,7 @@ export default function SearchBoxB({ array, placeholder, id, onPriceChange,onCle
                 onChange={handleManualPriceChange} // مدیریت تغییر دستی قیمت
             /> */}
             {showOptions && (
-                <div className="dropdown-options">
+                <div className="dropdown-optionsB">
                     {filteredCategoryItems?.length > 0 ? (
                         filteredCategoryItems?.map((item, index) => (
                             <div

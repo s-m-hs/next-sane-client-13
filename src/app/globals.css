@@ -625,70 +625,7 @@ select:-webkit-autofill:focus {
 
 }
 
-@media only screen and (max-width:1350px){
-  .mySwiperF{
-    display: none !important;
-  }
- 
-}
-@media only screen and (max-width:990px){
-  .home-miniSwiper{
-    display: none;
-  }
-  .mySwiperG  {
-    /* position: absolute; */
-    width: 200px  !important;
-    height: 95%;
-    /* left: 0 !important; */
-    opacity: 0.5 !important; 
-  }
-  
-}
-@media only screen and (max-width:900px){
- 
-  /* .container{
-    --bs-gutter-x:none !important
-  } */
-  .mySwiperB >.swiper-wrapper >.swiper-slide{
-    padding: 0px !important;
-  }
-  .swipercomb-title{
-      font-size: 20px !important;
-  }
-}
 
-
-
-
-@media only screen and (max-width:600px){
-.home-swiperB-col{
-  height: 35vh;
-
-}
-
-
-  input[type=number]::-webkit-outer-spin-button, 
-input[type=number]::-webkit-inner-spin-button {
-  display: none !important;
-  padding-right: 0 !important;
-
-}
-}
-
-/* .p-speeddial-opened::after .spannn{
-  content: '';
-  background-color: #030303 !important;
-} */
-
-@media only screen and (max-width:500px){
-  .custom-otp-input {
-    width: 7%;
-    font-size: 22px;
-  }
-
-
-
-}
 
 
 
@@ -977,15 +914,12 @@ left: 10px;
     z-index: 10;
     max-height: 800px;
     overflow-y: auto;
-    font-size: 12px;
-  }
-  
-  .dropdown-optionB {
-    padding: 8px;
+    font-size: 18px;
+      padding: 8px;
     cursor: pointer;
-    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
   }
-  
+
   .dropdown-optionB:hover,
   .dropdown-optionB.active {
     background-color: #f0f0f0;
@@ -998,6 +932,8 @@ left: 10px;
     width: 100%;
     border: none;
     outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+
   }
   .sistemAssembly-input2{
     background-color: var(--gray2);
@@ -1009,4 +945,78 @@ left: 10px;
 }
 .loginRight-show{
   display: none !important;
+}
+
+
+
+
+
+@media only screen and (max-width:1350px){
+  .mySwiperF{
+    display: none !important;
+  }
+ 
+}
+@media only screen and (max-width:990px){
+  .home-miniSwiper{
+    display: none;
+  }
+  .mySwiperG  {
+    /* position: absolute; */
+    width: 200px  !important;
+    height: 95%;
+    /* left: 0 !important; */
+    opacity: 0.5 !important; 
+  }
+  
+}
+@media only screen and (max-width:900px){
+ 
+  /* .container{
+    --bs-gutter-x:none !important
+  } */
+  .mySwiperB >.swiper-wrapper >.swiper-slide{
+    padding: 0px !important;
+  }
+  .swipercomb-title{
+      font-size: 20px !important;
+  }
+}
+
+
+
+
+@media only screen and (max-width:600px){
+.home-swiperB-col{
+  height: 35vh;
+
+}
+
+
+  input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+  display: none !important;
+  padding-right: 0 !important;
+
+}
+}
+
+/* .p-speeddial-opened::after .spannn{
+  content: '';
+  background-color: #030303 !important;
+} */
+
+@media only screen and (max-width:500px){
+  .custom-otp-input {
+    width: 7%;
+    font-size: 22px;
+  }
+  .dropdown-optionsB{
+    font-size: 14px;
+    width: 200px;
+
+  }
+
+
+
 }
