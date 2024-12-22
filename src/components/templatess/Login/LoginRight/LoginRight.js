@@ -71,27 +71,59 @@ const alertC=()=>alertN('center','error',"  شماره همراه را به در
 const alertD=()=>alertN('center','error'," رمز ورود باید بیشتر از 3 کاراکتر باشد...",1500)
 const alertF=()=>alertN('center','error'," رمز ورود با رمز تکرار یکسان نیست  ...",1500)
 const alertG=()=>alertN('center','success'," رمز ورود با موفقیت تغییر کرد",1500).then((res) => {
-setShow(false)
+  setShow(false)
   reset(setValue(''))
 
 })
 const alertH=()=>alertN('center','success',"",1500).then((res) => {
   classRefB.current.classList.remove( `${style.buttonB}`)
   classRefB.current.classList.add( `${style.buttonB2}`)
-  classRefA.current.classList.remove(`${style.hide}`)
+  sendverifyCode()
+  // classRefA.current.classList.remove(`${style.hide}`)
   
   })
   const alertJ=()=>alertN('center','success',"",3000).then((res) => {
  sendMobToRecovery()
     
     })
-const chengePass1=(e)=>{
+
+    const alertK=()=>alertN('center','error'," کد وارد شده نادرست و یا منقضی شده است ...",1500)
+
+    const chengePass1=(e)=>{
 setPass1(e.target.value)
 }
 const chengePass2=(e)=>{
   setPass2(e.target.value)
   }
 
+const sendverifyCode=()=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+
+  let obj={
+    valadationCode: tokenC,
+    username:tokenB
+  }
+  // console.log(obj)
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/Customer/verifyCode`,{
+      method:'POST',
+      headers:{
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${getLocalStorage}` ,
+      },
+      body:JSON.stringify(obj)
+    }).then(res=>{
+      if(res.ok){
+        console.log(res)
+        // return res.json()
+        classRefA.current.classList.remove(`${style.hide}`)
+
+      }else {
+        alertK()      }
+    })
+  }
+  myApp()
+}
 
 const sendCodeToRecovery=()=>{
   const getLocalStorage=localStorage.getItem('loginToken')

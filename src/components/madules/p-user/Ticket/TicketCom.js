@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation';
 
 export default function TicketCom() {
 
-let{cyUserID,mobil,setXtFlagSpinnerShow,setFlagMessageNotification}=useContext(MainContext)
+let{cyUserID,mobile,setXtFlagSpinnerShow,setFlagMessageNotification}=useContext(MainContext)
 const [ticketArray,setTicketArray]=useState([])
 const ticketArrayRevers = ticketArray.slice().reverse()
 
