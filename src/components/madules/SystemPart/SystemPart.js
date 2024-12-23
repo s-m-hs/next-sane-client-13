@@ -159,13 +159,13 @@ const cardClickHandle=(src)=>{
   }, []);
 console.log(hardWareData);
   return (
-    <div className={`container ${style.systemdetailsample_container}`}>
+    <div className={`container `}>
       {/* {isSaving && (
             <div className="spinner-overlay">
                 <SpinnerA size={50} />
             </div>
         )} */}
-        <div className={` ${style.systemdetailsample_row}`}>
+        <div className={`row ${style.systemdetailsample_container}`}>
         <div ref={classRefA} className={`col-md-5 ${style.systemdetailsample_div} `}>
         <XCircle size={32} color="#ad00ff" onClick={()=>classRefA.current.classList.remove('SystemPart-show')}/>
           <img src={imageSrc} alt="" />
