@@ -21,11 +21,35 @@ export default function SystemPart() {
   const [resetSearchbox, setResetSearchbox] = useState(false);
   const [imageSrc,setImageSrc]=useState('')
   const [getExel,setGetExel]=useState([])
+  const [priceArray,setPriceArray]=useState([])
+
 const classRefA=useRef()
   // const [isSaving, setIsSaving] = useState(false);
   const [prices, setPrices] = useState([]); // لیست قیمت‌ها
   const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
   let { setXtFlagSpinnerShow } = useContext(MainContext);
+  const getPriceArray=()=>{
+    const getLocalStorage = localStorage.getItem('loginToken')
+
+    async function myApp(){
+        const res=await fetch(`${apiUrl}/api/CyKeyDatas/10`,{
+            method:'GET',
+            headers: {
+                Authorization: `Bearer ${getLocalStorage}`,
+                "Content-Type": "application/json",
+              },
+        }).then(res=>{
+            console.log(res)
+            return res.json().then(result=>{
+                setPriceArray(JSON.parse(result.tag))
+            })
+        })
+    }
+    myApp()
+}
+useEffect(()=>{
+    getPriceArray()
+},[])
 
   const HardWareName = [
     { id: 1, name: "مادربرد  (MAINBOARD)" },
@@ -235,7 +259,8 @@ console.log(hardWareData);
                     <td>{item.name}</td>
                     <td>
                       <SearchBoxB
-                        array={hardWareData}
+                        // array={hardWareData}
+                        array={priceArray}
                         placeholder={"..."}
                         id="manufacturerNameForAdd"
                         onPriceChange={(price) =>
