@@ -39,7 +39,6 @@ const classRefA=useRef()
                 "Content-Type": "application/json",
               },
         }).then(res=>{
-            console.log(res)
             return res.json().then(result=>{
                 setPriceArray(JSON.parse(result.tag))
             })
@@ -181,7 +180,6 @@ const cardClickHandle=(src)=>{
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, []);
-console.log(hardWareData);
   return (
     <div className={`container `}>
       {/* {isSaving && (

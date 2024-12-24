@@ -42,8 +42,7 @@ export default function SwiperC({ title, categoryCode }) {
   useEffect(() => {
     getProductByCat();
   }, []);
-
-  // console.log(productByCatArray)
+// console.log(productByCatArray?.itemList)
   return (
     <>
       <div className="swipercomb-div">
@@ -93,6 +92,13 @@ export default function SwiperC({ title, categoryCode }) {
                 imgSrc={item.mainImage}
                 title={item.name}
                 price={item.price}
+                supply={item.supply}
+                categoryCode={categoryCode}
+                cyProductCategoryId={item.cyProductCategoryId
+                  
+
+                }
+
               />
             </SwiperSlide>
           ))}

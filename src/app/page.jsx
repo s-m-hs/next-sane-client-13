@@ -20,8 +20,9 @@ import updateBasket from '@/utils/ApiUrl/updateBasket';
 import { usePathname } from 'next/navigation';
 
 // import getLocalStorage from '@/utils/localStorag/localStorage';
-import { use, useContext, useEffect } from 'react';
+import { use, useContext, useEffect, useState } from 'react';
 import SubjecArea from '@/components/madules/SubjecArea/SubjecArea';
+import apiUrl from '@/utils/ApiUrl/apiUrl'
 
 export default function Home() {
   const pathname = usePathname();
@@ -29,7 +30,7 @@ export default function Home() {
   let { xtflagSpinnerShow,setXtFlagSpinnerShow, xtFlagLogin, localUpdateBasket, setLocalUpdateBasket,setCartCounter,setBasketFlag } = useContext(MainContext);
   const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
   // const getLocalStorage=localStorage.getItem('loginToken')
-
+const [key,setKey]=useState('')
 
     const brandLogA=[
       'A4.jpg','rapoo.jpg','razer.jpg','tesco.jpg','proone.jpg','logitech.jpg'
@@ -37,6 +38,33 @@ export default function Home() {
   const brandLogoB=[
     'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
 ]
+
+const keyShow=(id)=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
+      method:'GET',
+      headers: {
+        Authorization: `Bearer ${getLocalStorage}`,
+        "Content-Type": "application/json",
+      },
+
+    }).then(res=>{
+      if(res.ok){
+        return res.json().then(result=>{
+          setKey((result.tag))
+        })
+
+      }
+      
+    })
+  }myApp()
+}
+
+useEffect(()=>{
+  keyShow(11)
+},[])
 useEffect(() => {
   const getLocalStorage=localStorage.getItem('loginToken')
   if(xtFlagLogin){
@@ -87,9 +115,11 @@ useEffect(() => {
     <SubjecArea /> 
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
+    {key === 'ok'  ? 
+     <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
+  :''} 
     <BanerA />
-
+  
  
     </div>
     </div>
