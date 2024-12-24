@@ -17,6 +17,7 @@ const [parentId,setParentId]=useState('')
 
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  });
   const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
+  const AlertC=()=>alertN('center','info'," برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک سمت راست پایین استفاده کنید)...",5000).then((res) => {  });
 const addToBasket=()=>{
   const getLocalStorage =localStorage.getItem('loginToken')
   let obj={
@@ -87,10 +88,10 @@ const addToBasket=()=>{
 
         <span className={styles.title}  > {title} </span>
         {/* <span>368,000</span> */}
-        {supply!=0 ?   <span className={styles.price}  >{(Number(price)/10)?.toLocaleString()}تومان </span>:
+        {supply!=0 ?   <span className={styles.price}  >{(Number(price)/10)?.toLocaleString()}تومان </span>: 
         // parentId == 2 ?
         categoryCode==='hardwairebestseller' ?
-        <span className={styles.price}>استعلام موجودی</span>
+        <span onClick={()=>AlertC()} style={{cursor:'pointer'}} className={styles.price}>استعلام قیمت</span>
 :
         <span className={styles.price}>ناموجود</span>
 }
@@ -98,15 +99,31 @@ const addToBasket=()=>{
         
         <div className={`${styles.icon_div} centerr`}   >
         <ShoppingCart size={24} color="#19a7af" weight="duotone"
-        onClick={()=>{
-          xtFlagLogin ? 
-          addToBasket()
-          // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
-          :
 
-             addToCart(id,'1',setCartCounter)
+onClick={()=>{
+  if(xtFlagLogin ){
+if(supply!=0){
+  addToBasket()
+}else if(supply==0 && categoryCode==='hardwairebestseller' ){
+  AlertC()
+}
+  }else{
+    if(supply!=0){
+      addToCart(id,'1',setCartCounter)
+    }else if(supply==0){
+    AlertC()
+  }
+  }
+}}
+
+        // onClick={()=>{
+        //   xtFlagLogin  ? 
+        //   addToBasket()
+        //   :
+
+        //      addToCart(id,'1',setCartCounter)
           
-        }}
+        // }}
     />
         <Heart size={24} color="#19a7af" weight="duotone" />
   

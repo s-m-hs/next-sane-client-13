@@ -22,7 +22,7 @@ export default function SystemPart() {
   const [imageSrc,setImageSrc]=useState('')
   const [getExel,setGetExel]=useState([])
   const [priceArray,setPriceArray]=useState([])
-
+const [keyHelp,setKeyHelp]=useState('')
 const classRefA=useRef()
   // const [isSaving, setIsSaving] = useState(false);
   const [prices, setPrices] = useState([]); // لیست قیمت‌ها
@@ -176,9 +176,32 @@ const cardClickHandle=(src)=>{
       return baseTotal + baseTotal * 0.06; // اضافه کردن 6 درصد
     }
   };
+const getkeyHelp=(id)=>{
+  const getLocalStorage =localStorage.getItem('loginToken')
+
+  async function myApp(){
+const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
+  method:'GET',
+  headers: {
+    "Content-Type": "application/json",
+    Authorization:`Bearer ${ getLocalStorage }`
+  }, 
+}).then(res=>{
+  if(res.ok){
+    return res.json().then(result=>{
+      console.log(result)
+      setKeyHelp(result.value)
+
+    })
+  }
+})
+  }
+  myApp()
+}
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
+    getkeyHelp(12)
   }, []);
   return (
     <div className={`container `}>
@@ -214,7 +237,17 @@ const cardClickHandle=(src)=>{
 
         <div className="col-md-7 p-5 systemTable">
           <div className={` ${style.detail} `}>
-            <ul>
+          <div className={`${style.col} `}  dangerouslySetInnerHTML={{__html:`${keyHelp}`}}>
+          </div>
+
+          <div
+                className={` ${style.li_click}`}
+                onClick={() => setLgShow(true)}
+              >
+                جهت راهنمایی و توضیحات بیشتر کلیک کنید ...
+                <HandPointing size={32} className={style.handIcon} />
+              </div>
+            {/* <ul>
               <li>
                 قیمت اعلام شده صرفا جهت اطلاع شما مشتری گرامی از قیمت تقریبی
                 تمام شده سیستم میباشد ...
@@ -229,8 +262,8 @@ const cardClickHandle=(src)=>{
                 قبیل مجموعه آفیس ، پلیر ،مرورگر و ... می باشد)...
               </li>
               <li>
-                جهت مشاوره و یا تایید نهایی سیستم فایل ذخیره شده را برای همکاران
-                ما تیکت نمایید ...
+                جهت مشاوره و یا تایید نهایی سیستم فایل ذخیره شده را طبق راهنمایی لینک پایین  
+               تیکت نمایید و یا از ابزارک پایین سمت راست صفحه جهت چت کردن با همکاران ما اقدام بفرمایید  ...
               </li>
               <li
                 className={` ${style.li_click}`}
@@ -239,7 +272,7 @@ const cardClickHandle=(src)=>{
                 جهت راهنمایی و توضیحات بیشتر کلیک کنید ...
                 <HandPointing size={32} className={style.handIcon} />
               </li>
-            </ul>
+            </ul> */}
           </div>
           
           <div>

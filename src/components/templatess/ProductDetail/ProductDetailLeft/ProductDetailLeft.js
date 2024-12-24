@@ -78,28 +78,26 @@ export default function ProductDetailLeft({detail}) {
 }
              
             </div>
-            <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
+
+            {detail.supply !=0 &&    <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
               <button className={`${Styles.addButton} btn btn-info`}  
                       onClick={()=>{
-                        // const getLocalStorage=localStorage.getItem('loginToken')
-                        // let obj=[{
-                        //   cyProductID:detail.id,
-                        //   quantity: 1
-                        // }] 
+                   
+
                         xtFlagLogin ? 
                         addToBasket()
-                        // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA) 
                         :
               
                            addToCart(detail.id,'1',setCartCounter)
                         
                       }}
               >
-        {detail.supply !=0 ? 'افزودن به سبد خرید' : 'افزودن به سبد خرید (جهت استعلام موجودی )'}
+      افزودن به سبد خرید
                 
                 </button>
 
-            </div>
+            </div>}
+         
 
           </div>
         </div>
