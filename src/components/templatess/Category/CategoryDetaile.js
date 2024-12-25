@@ -204,7 +204,6 @@ const res= await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,{
   body: JSON.stringify(obj)
 }).then(res=>{
   return res.json().then(result=>{
-    console.log(result)
     // setParentId(result.root.id)
     if(result.root.rootId==null){
     setParentId(result.root.id)

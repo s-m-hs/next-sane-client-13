@@ -109,7 +109,8 @@ transition: all 0.2s ease-in-out;
         display: none;
     }
     .breadcrumb_row{
-        display: none;
+        margin-top: 50px;
+        /* display: none; */
     }
     .pagination_div{
         margin-bottom: 80px;

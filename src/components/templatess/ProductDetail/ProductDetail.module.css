@@ -55,4 +55,9 @@ width: fit-content;
     .product_right_col{
         display: none !important;
     }
+    .breadcrumb{
+        margin-top: 60px;
+        font-size: 12px;
+        margin-right: 10px !important;
+    }
 }

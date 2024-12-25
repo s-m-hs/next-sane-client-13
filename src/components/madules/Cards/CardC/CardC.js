@@ -43,7 +43,6 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
         }, 
         body:JSON.stringify(obj)
       }).then(res=>{
-        console.log(res)
         if (res.status==200){
           setBasketFlag(prev=>!prev)
           AlertA()      }else if(res.status==400){
