@@ -69,12 +69,21 @@ export default function Footer() {
             </div>
             <div className='col-md-4'></div>
             <div className='col-md-3'>
-              <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='enamad' style={{cursor:'pointer'}} code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'/>
-              {/* <img src="../../../../../../images/brand/enamad.png"     alt="namad" /> */}
+          
 
-              </Link>
+              
+
+
+              <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' alt='' style={{cursor:'pointer'}} code='vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'/></Link>
+
+
+    {/* <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='enamad' style={{cursor:'pointer'}} code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'/>
+
+              </Link> */}
+
+
             </div>
-            {/* <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='' style='cursor:pointer' code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'></a> */}
+        
         </div>
 
         </div>

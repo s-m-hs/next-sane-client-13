@@ -31,7 +31,6 @@ export default function CategoryDetaile({ param }) {
   const [mainCatA, setMainCatA] = useState({});
   const [mainCatB, setMainCatB] = useState({});
   const [codePro,setCodePro]=useState('')
-
 // console.log(mainCategory)
 // console.log(mainCategory?.item.code)
 
@@ -180,7 +179,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatB)
     getCategoryAccesory()
     getCategoryHard()
   },[])
-  
+  console.log(mainCatB)
 ////////////////////////////////sidebar
 
   //////////////////////////////
@@ -200,6 +199,9 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatB)
       timer: 500
     }).then(res=>setFlag(prev=>!prev))
   }, []);
+
+
+
 
   ///////////////////////////
   useEffect(()=>{
@@ -341,6 +343,7 @@ useEffect(()=>{
               
             <CardC 
             // clickSpinner={()=>setFlagSpinnerShow(true)}
+            mainCatB={mainCatB}
               id={item.id}
               imgSrc={item.smallImage
               } title={item.name} price={Number(item.price)/10} supply={item.supply}
