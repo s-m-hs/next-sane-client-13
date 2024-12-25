@@ -31,6 +31,8 @@ export default function CategoryDetaile({ param }) {
   const [mainCatA, setMainCatA] = useState({});
   const [mainCatB, setMainCatB] = useState({});
   const [codePro,setCodePro]=useState('')
+  const [parentId,setParentId]=useState('')
+
 // console.log(mainCategory)
 // console.log(mainCategory?.item.code)
 
@@ -175,11 +177,54 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatA)
 postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatB)
   };
 
+
+
+
   useEffect(()=>{
     getCategoryAccesory()
     getCategoryHard()
+
   },[])
-  console.log(mainCatB)
+const getChild=()=>{
+  
+  const getLocalStorage =localStorage.getItem('loginToken')
+ let  obj={
+    gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    id:param
+    ,
+    str: "string"
+}
+  async function myApp(){
+const res= await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,{
+  method:'POST',
+  headers: {
+    "Content-Type": "application/json",
+    Authorization:`Bearer ${ getLocalStorage }`
+  }, 
+  body: JSON.stringify(obj)
+}).then(res=>{
+  return res.json().then(result=>{
+    console.log(result)
+    // setParentId(result.root.id)
+    if(result.root.rootId==null){
+    setParentId(result.root.id)
+
+    }else{
+      setParentId(result.root.rootId)
+
+    }
+
+  })
+})
+  }
+  myApp()
+}
+useEffect(()=>{ 
+    getChild()
+
+},[])
+
+
 ////////////////////////////////sidebar
 
   //////////////////////////////
@@ -343,7 +388,7 @@ useEffect(()=>{
               
             <CardC 
             // clickSpinner={()=>setFlagSpinnerShow(true)}
-            mainCatB={mainCatB}
+            parentId={parentId}
               id={item.id}
               imgSrc={item.smallImage
               } title={item.name} price={Number(item.price)/10} supply={item.supply}

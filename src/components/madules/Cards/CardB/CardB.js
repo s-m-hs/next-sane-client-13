@@ -7,6 +7,7 @@ import alertN from '@/utils/Alert/AlertA'
 import updateBasket from '@/utils/ApiUrl/updateBasket'
 import addToCart from '@/utils/Functions/addToCart'
 import apiUrl from '@/utils/ApiUrl/apiUrl'
+import alertQ from '@/utils/Alert/AlertQ'
 
 
 
@@ -17,7 +18,7 @@ const [parentId,setParentId]=useState('')
 
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  });
   const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
-  const AlertC=()=>alertN('center','info'," برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک سمت راست پایین استفاده کنید)...",5000).then((res) => {  });
+  const AlertC=()=>alertQ('center','info'," برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو پایین سمت راست استفاده کنید)...",'باشه ...').then((res) => {  });
 const addToBasket=()=>{
   const getLocalStorage =localStorage.getItem('loginToken')
   let obj={

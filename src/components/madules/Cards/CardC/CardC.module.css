@@ -91,6 +91,17 @@
     background-color: var(--them);
     color: var(--white1ffffff);
     }
+    .RequstPrice{
+      text-align: center;
+      width: 80px;
+      background-color: orange;
+      cursor: pointer;
+      top: -36px;
+      right: 0;
+      border-radius: 7px;
+      color: white !important;
+      position: absolute;
+    }
     /* .cardprob-container:hover span{
       color: var(--white1ffffff);
       text-shadow: none

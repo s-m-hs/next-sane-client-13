@@ -65,7 +65,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
           <div className={`row row-cols-6  ${styles.bcatitem}`}>
             {mainCategory.childs.map((item, index) => (
               <CardA
-              // click={console.log('click')}
+              // click={console.log(item)}
               datos='fade-up'
                 key={item.id}
                 imgSrc={item.imageUrl}
@@ -79,7 +79,7 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCategory)
              <div className={`row row-cols-auto  ${styles.bcatitemB}`}>
              {mainCategory.childs.map((item, index) => (
                <CardA
-              //  click={console.log('click')}
+              //  click={console.log(item)}
                datos=''
                  key={item.id}
                  imgSrc={item.imageUrl}

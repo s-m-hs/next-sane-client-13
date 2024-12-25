@@ -8,11 +8,11 @@ import { MainContext } from '@/context/MainContext'
 import alertN from '@/utils/Alert/AlertA'
 import updateBasket from '@/utils/ApiUrl/updateBasket'
 import apiUrl from '@/utils/ApiUrl/apiUrl'
+import alertQ from '@/utils/Alert/AlertQ'
 
 
-export default function CardC({imgSrc,title,price,id,clickSpinner,supply }) { 
+export default function CardC({imgSrc,title,price,id,clickSpinner,supply,parentId }) { 
   let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket}=useContext(MainContext)
-  const [parentId,setParentId]=useState('')
 
 
 
@@ -26,6 +26,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
   } ;
 
   const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
+  const AlertC=()=>alertQ('center','info'," برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو پایین سمت راست استفاده کنید)...",'باشه ...').then((res) => {  });
   const addToBasket=()=>{
     const getLocalStorage =localStorage.getItem('loginToken')
     let obj={
@@ -33,7 +34,6 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
       quantity: 1,
       orderItemID:0
     }
-    console.log(obj)
     async function myApp(){
       const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
         method:'POST',
@@ -57,36 +57,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
   }
 
 
-const getChild=()=>{
-  const getLocalStorage =localStorage.getItem('loginToken')
- let  obj={
-    gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    id: id
-    ,
-    str: "string"
-}
-  async function myApp(){
-const res= await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,{
-  method:'POST',
-  headers: {
-    "Content-Type": "application/json",
-    Authorization:`Bearer ${ getLocalStorage }`
-  }, 
-  body: JSON.stringify(obj)
-}).then(res=>{
-  console.log(res)
-  return res.json().then(result=>{
-    console.log(result)
-    setParentId(result.root.rootId)
-  })
-})
-  }
-  myApp()
-}
-useEffect(()=>{ 
-    getChild()
 
-},[])
 
 // console.log(supply)
   return (
@@ -94,6 +65,10 @@ useEffect(()=>{
      data-aos='fade-up'
       
      className={`${Styles.cardprob_container} centerc `}>
+      {parentId==2 && 
+      <span className={`${Styles.RequstPrice} centerc `}
+      onClick={AlertC}
+      >استعلام قیمت</span>}
 
       <Link  className={`${Styles.cardprob_container_linkA}`} 
       onClick={()=>setXtFlagSpinnerShow(true)}
@@ -107,6 +82,9 @@ useEffect(()=>{
     {/* <span>368,000</span> */}
 {supply!=0  ?  
     <span className={Styles.cardprob_price}>{price?.toLocaleString()}تومان </span>
+:
+parentId==2 ?
+''
 :
 <span className={Styles.cardprob_price}>ناموجود</span>
 
