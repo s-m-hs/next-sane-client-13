@@ -35,7 +35,7 @@ export default function App() {
 
 <SwiperSlide>
 <div className={`${style.type_div6} `}>
-       <h1 className={`${style.type_h6}`}>
+       <h2 className={`${style.type_h6}`}>
 
        <div className="App">
             <TypeIt
@@ -58,7 +58,7 @@ deleteSpeed:100,
                           loop: true,
                         }}
                       /> */}
-                    </h1>
+                    </h2>
                     <img src="../images/cycle2.jpg" alt="" />
 </div>
 
@@ -68,7 +68,7 @@ deleteSpeed:100,
 
      <SwiperSlide>
 <div className={`${style.type_div2}`}>
-       <h1 className={`${style.type_h2}`}>
+       <h2 className={`${style.type_h2}`}>
 
        <div className="App">
             <TypeIt
@@ -91,7 +91,7 @@ deleteSpeed:100,
                           loop: true,
                         }}
                       /> */}
-                    </h1>
+                    </h2>
 </div>
 
  
@@ -102,7 +102,7 @@ deleteSpeed:100,
         <SwiperSlide>
 <div className={`${style.type_div3}`}>
 
-       <h1 className={`${style.type_h3}`}>
+       <h2 className={`${style.type_h3}`}>
 
        <div className="App">
             <TypeIt
@@ -125,7 +125,7 @@ deleteSpeed:100,
                           loop: true,
                         }}
                       /> */}
-                    </h1>
+                    </h2>
 
     
 </div>
@@ -137,7 +137,7 @@ deleteSpeed:100,
 {/* 3 */}
         <SwiperSlide>
 <div className={`${style.type_div}`}>
-       <h1 className={`${style.type_h1}`}>
+       <h2 className={`${style.type_h1}`}>
        <div className="App">
             <TypeIt
                 options={{
@@ -160,7 +160,7 @@ deleteSpeed:100,
                           loop: true,
                         }}
                       /> */}
-                    </h1>
+                    </h2>
 </div>
 
  
@@ -170,7 +170,7 @@ deleteSpeed:100,
 {/* 4 */}
         <SwiperSlide>
 <div className={`${style.type_div5}`}>
-       <h1 className={`${style.type_h5}`}>
+       <h2 className={`${style.type_h5}`}>
 
        <div className="App">
             <TypeIt
@@ -194,7 +194,7 @@ deleteSpeed:100,
                           loop: true,
                         }}
                       /> */}
-                    </h1>
+                    </h2>
 </div>
 
  
@@ -205,7 +205,7 @@ deleteSpeed:100,
 
         <SwiperSlide>
 <div className={`${style.type_div4}`}>
-       <h1 className={`${style.type_h4}`}>
+       <h2 className={`${style.type_h4}`}>
        <div className="App">
             <TypeIt
                 options={{
@@ -226,7 +226,7 @@ deleteSpeed:100,
                           loop: true,
                         }}
                       /> */}
-                    </h1>
+                    </h2>
 </div>
 
  

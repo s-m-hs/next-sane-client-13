@@ -306,6 +306,10 @@ transition: all 0.3s ease-in;
   display: block;
   width: 100%;
 }
+
+.mobile-swiperf {
+  display: none ;
+}
 .swiper-button-prev{
   top: 90% !important;
   bottom: 0 !important;
@@ -953,7 +957,7 @@ left: 10px;
 
 @media only screen and (max-width:1350px){
   .mySwiperF{
-    display: none !important;
+    /* display: none !important; */
   }
  
 }
@@ -991,7 +995,12 @@ left: 10px;
   height: 35vh;
 
 }
-
+.mobile-swiperf {
+  display: block ;
+}
+.mySwiperF h2{
+font-size: 22px !important;
+}
 
   input[type=number]::-webkit-outer-spin-button, 
 input[type=number]::-webkit-inner-spin-button {

@@ -640,6 +640,14 @@ transition:transform 0.1s linear;
 /* .sidebar_mobile{
     display: none ;
 } */
+.mobiNumber_div{
+    padding: 2px;
+    text-align: center;
+}
+.mobiNumber_div :nth-child(2){
+font-size: 10px;
+}
+
 
 @media only screen and (max-width:900px){
     .A{

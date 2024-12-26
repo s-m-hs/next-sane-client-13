@@ -112,6 +112,11 @@ useEffect(() => {
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
+<div  className='mobile-swiperf'>
+   <SwiperF/>
+</div>
+   
+
     <SubjecArea /> 
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />

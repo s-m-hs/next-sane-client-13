@@ -26,7 +26,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
   } ;
 
   const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
-  const AlertC=()=>alertQ('center','info'," برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو پایین سمت راست استفاده کنید)...",'باشه ...').then((res) => {  });
+  const AlertC=()=>alertQ('center','info'," برای استعلام قیمت میتونید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو پایین سمت راست استفاده کنید)...",'باشه ...').then((res) => {  });
   const addToBasket=()=>{
     const getLocalStorage =localStorage.getItem('loginToken')
     let obj={
@@ -64,7 +64,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
      data-aos='fade-up'
       
      className={`${Styles.cardprob_container} centerc `}>
-      {parentId==2 && 
+       { supply==0 &&  parentId==2 && 
       <span className={`${Styles.RequstPrice} centerc `}
       onClick={AlertC}
       >استعلام قیمت</span>}

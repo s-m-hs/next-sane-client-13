@@ -502,8 +502,11 @@ useEffect(()=>{
                 </div> */}
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-
-                  <span>02191005457</span>
+<div className={` ${styles.mobiNumber_div} centerc`}>
+       <span>02191005457</span>
+                  <span>کامپیوترصانع</span>
+</div>
+             
                   <Phone size={24} color="#ededed" weight="duotone" />
                 </div>
 
@@ -806,7 +809,10 @@ useEffect(()=>{
                 </div> */}
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-                  <span>02191005457</span>
+                <div className={` ${styles.mobiNumber_div} centerc`}>
+       <span>02191005457</span>
+                  <span>کامپیوترصانع</span>
+</div>
                   <Phone size={24} color="#ededed" weight="duotone" />      </div>
 
    

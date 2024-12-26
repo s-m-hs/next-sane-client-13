@@ -14,6 +14,7 @@ import GoogleMapReact from 'google-map-react';
 import GoogleMap from 'google-map-react';
 import MyGreatPlace from './MyGreatPlace.js';
 import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle } from "@phosphor-icons/react";
+import Link from 'next/link';
 
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -52,11 +53,13 @@ let {setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
       alt="sane-contact" />
 </div>
 
-<h5>تماس با ما</h5>
+<h5>تماس با کامپیوترصانع</h5>
 <h1>اطلاعات تماس:</h1>
 <h3>استان قم</h3>
 <h3>ابتدای 55متری عمار یاسر ،سرای چهارسو پلاک 34 و 35</h3>
 <h3>شماره تماس: 37839322 -37835456- 37835457</h3>
+<Link href={'https://balad.ir/p/2vF8vyl1goeizX'}>کامپیوترصانع را از اینجا مسیریابی کنید...</Link>
+<hr/>
 
 
 
