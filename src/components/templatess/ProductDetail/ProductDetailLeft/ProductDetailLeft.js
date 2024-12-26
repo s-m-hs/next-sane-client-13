@@ -104,7 +104,8 @@ export default function ProductDetailLeft({detail}) {
 
         <div className={`${Styles.ProductDetailL_divright_swiper} col-12 col-md-6`}>
           <SwiperProduct src={detail.mainImage} srcB={detail.images?.split('*,*')} />
-          <button className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
+
+         {detail.supply !=0 &&       <button className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
              onClick={()=>{
               // const getLocalStorage=localStorage.getItem('loginToken')
               // let obj=[{
@@ -120,8 +121,9 @@ export default function ProductDetailLeft({detail}) {
                  addToCart(detail.id,'1',setCartCounter)
               
             }}
-          >           {detail.supply !=0 ? 'افزودن به سبد خرید' : 'افزودن به سبد خرید ( استعلام موجودی )'}
-</button>
+          >        افزودن به سبد خرید
+</button> }
+    
         </div>
 
 <div className={`${Styles.ProductDetailL_divright_swiper_bottom} col-12`}  >

@@ -7,6 +7,7 @@ import { MainContext } from '@/context/MainContext'
 
 export default function SubjecArea() {
     const[allSubjects,setAllSubjects]=useState([])
+    const allSubjectsSlice=allSubjects.slice(0,3)
  
 const getAllSubject=()=>{
     const getLocalStorage=localStorage.getItem('loginToken')
@@ -37,7 +38,7 @@ useEffect(()=>{
     <div className={`container ${style.container}  `}>
         {/* <h2>مقالات صانع :</h2> */}
         <div className={`row row-cols-auto mt-3  ${style.row} centerr`}>
-            {allSubjects?.length!=0 && allSubjects.map(item=>(
+            {allSubjects?.length!=0 && allSubjectsSlice.map(item=>(
                 <CardSub item={item} 
 />
             ))}

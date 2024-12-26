@@ -14,7 +14,8 @@ export default function SubjectDetail({params}) {
 
   const [subjectDetail,setSubjectDetail]=useState([])
   const[allSubjects,setAllSubjects]=useState([])
-const pathname=usePathname()
+  const allSubjectsSlice=allSubjects.slice(0,3)
+  const pathname=usePathname()
   const getAllSubject=()=>{
       const getLocalStorage=localStorage.getItem('loginToken')
       async function myApp(){
@@ -108,7 +109,7 @@ getAllSubject()
 
     <div className={`col-xxl-4 boxSh p-3 mt-5 centerc ${style.allsubject}`}  >
 
-      {allSubjects?.length!=0 && allSubjects?.map((item=>(
+      {allSubjects?.length!=0 && allSubjectsSlice?.map((item=>(
         <CardSub item={item}/>
       )))}
     </div>
