@@ -26,7 +26,7 @@ export default function CategoryDetaile({ param }) {
   const [flag, setFlag] = useState(false)
   const [page, setPage] = React.useState(1);
   const [paginationArray, setPaginationArray] = useState([]);
-  const pageCount=20
+  const pageCount=100
   const [allCount, setAllCount] = useState([]);
   const [mainCatA, setMainCatA] = useState({});
   const [mainCatB, setMainCatB] = useState({});
