@@ -33,10 +33,22 @@ export default function Home() {
 const [key,setKey]=useState('')
 
     const brandLogA=[
-      'A4.jpg','rapoo.jpg','razer.jpg','tesco.jpg','proone.jpg','logitech.jpg'
+      {id:1,brand:'A4.jpg',url:'https://www.a4tech.com/'},
+      {id:2,brand:'rapoo.jpg',url:'https://www.rapoo-eu.com/'},
+      {id:3,brand:'razer.jpg',url:'https://www.razer.com/'},
+      {id:4,brand:'tesco.jpg',url:'https://tsco.ir/'},
+      {id:5,brand:'earldom.jpg',url:'https://www.earldom.com/'},
+      {id:6,brand:'Logitech-Symbol.png',url:'https://www.logitech.com/'},
+      // 'A4.jpg','rapoo.jpg','razer.jpg','tesco.jpg','proone.jpg','logitech.jpg'
   ]
   const brandLogoB=[
-    'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
+    {id:1,brand:'asus.jpg',url:'https://www.asus.com/'},
+    {id:2,brand:'sp.jpg',url:'https://www.silicon-power.com/web//'},
+    {id:3,brand:'wd.jpg',url:''},
+    {id:4,brand:'samsung.jpg',url:'https://www.samsung.com/us/'},
+    {id:5,brand:'giga.jpg',url:'https://www.gigabyte.com/'},
+    {id:6,brand:'green.png',url:'https://green.ir/'},
+    // 'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
 ]
 
 const keyShow=(id)=>{
@@ -123,7 +135,7 @@ useEffect(() => {
     {key === 'ok'  ? 
      <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
   :''} 
-    <BanerA />
+    <BanerA  />
   
  
     </div>
