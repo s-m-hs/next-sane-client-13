@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css"
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,Laptop} from "@phosphor-icons/react";
+import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,Laptop,UsersThree} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
@@ -15,6 +15,7 @@ import { Alert, Modal, Tooltip } from "react-bootstrap";
 import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 import { Sidebar } from 'primereact/sidebar';
+import alertQ from "@/utils/Alert/AlertQ";
 
 
 
@@ -60,7 +61,7 @@ export default function Header() {
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
   const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 3000);
   /////////////////////////////theming
-  
+  const AlertD = () => alertQ('center', 'info', "لطفا جهت دریافت لیست قیمت روزانه ،بعد از ثبت نام در سایت از قسمت بالا(سمت چپ) قسمت پیامها  یک پیام با عنوان 'دریافت لیست قیمت ' ارسال بفرمایید همکاران ما در کمترین زمان با شما تماس خواهند گرفت ... ", 'باشه...');
   const getAllTicket=()=>{
     const getLocalStorage = localStorage.getItem('loginToken')
   
@@ -338,29 +339,7 @@ useEffect(()=>{
                     onClick={() => { 
                       setVisible(true)
                       searchBox() }} />
-                  {/* {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
-                    <span><XCircle size={24} onClick={() => {
-                      setFlagSearch(false)
-                      setSearchType('')
-                    }} /></span>
-                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={() => {
-                        setFlagSearch(false)
-                        setSearchBoxArr([])
-                        setSearchType('')
-                        setXtFlagSpinnerShow(true)}}
-                      >
-                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                          <span>{item.name}</span>
-                          <img src={item.smallImage} alt="" />
-                        </div>
-                      </Link>
-
-                    )) : ''}
-
-
-
-                  </div>} */}
+            
                   <div  className={`${styles.sidebar_input_div} `} >
                                     <Sidebar 
                  
@@ -647,6 +626,9 @@ useEffect(()=>{
                   }
                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <Laptop size={15} />
                    محاسبه گر سیستم</Link> </li>
+
+                   <li onClick={() => AlertD()}> <UsersThree size={15} />
+                    ورود همکاران(پخش عمده)  </li>
 
     <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
     تماس با ما</Link> </li>

@@ -3,9 +3,15 @@ import React from 'react'
 import style from './Footer.module.css'
 import { MagnifyingGlass,Phone,ShoppingCart,User,EnvelopeSimple} from "@phosphor-icons/react";
 import Link from 'next/link';
+import Script from 'next/script';
 
 
 export default function Footer() {
+  function showZPTrust(){
+    var thewindow = window.open("https://www.zarinpal.com/trustPage/"+window.location.hostname, null, "width=450, height=600, scrollbars=no, resizable=no");
+    }
+
+
   return (
     <div className={`container  ${style.container}`} >
       <hr />
@@ -67,7 +73,14 @@ export default function Footer() {
               <h3> کامپیوترصانع فعالیت خود را از سال 1380 در زمینۀ فروش قطعات کامپیوتر و کالاهای دیجیتال به صورت آنلاین از طریق وبسایت و آفلاین از طریق فروشگاه فیزیکی شروع نموده و نمایندگی رسمی پخش محصولات بسیاری از شرکت‌های ایرانی و خارجی را داشته و تا کنون به تمام شهرهای کوچک و بزرگ ایران ارسال کالا داشته و در این زمینه یکی از پیشتازهای این عرصه می‌باشد.</h3>
               <h5>کلیه حقوق مادی و معنوی سایت برای مجموعه صانع  محفوظ است.</h5>
             </div>
-            <div className='col-md-4'></div>
+            <div className={` col-md-4 centerr mt-3 ${style.zarinpal}`} >
+            <a href="javascript:showZPTrust();" title="دروازه پرداخت معتبر"><img src="https://cdn.zarinpal.com/badges/trustLogo/1.png" border="0" alt="دروازه پرداخت معتبر"/></a>
+<Script
+src="https://www.zarinpal.com/webservice/TrustCode" type="text/javascript"
+/>
+            </div>
+
+
             <div className='col-md-3'>
           
 

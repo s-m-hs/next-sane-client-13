@@ -64,6 +64,9 @@ margin: 10px;
   justify-content: flex-start !important;
 }
 
+/* .zarinpal img{
+  width: 80px;
+} */
 @media only screen and (max-width:900px) {
   .container{
 height: auto;

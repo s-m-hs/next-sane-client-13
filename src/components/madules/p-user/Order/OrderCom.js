@@ -153,7 +153,7 @@ export default function OrderCom() {
                         <td>{item.cyUserID}</td>
                         <td>{item.id}</td>
                         <td><DateFormat dateString={`${item.orderDate}`} /></td>
-                        <td>{`${(item.totalAmount).toLocaleString()}`} تومان</td>
+                        <td>{`${(item.totalAmount/10).toLocaleString()}`} تومان</td>
                         {/* <td>{item.statusText}</td> */}
                         <td><button className='btn btn-primary' onClick={() => {
                           getOrderByOrderID(item.id)
@@ -186,8 +186,8 @@ export default function OrderCom() {
                                         <td><img className={` ${style.image} boxSh`} src={`${item.cyProductImgUrl}`} alt={item.partNumber} /></td>  
                                         <td>{item.partNumber}</td>  
                                         <td>{item.quantity}</td>  
-                                        <td>{item.unitOfferPrice ?  `${(item.unitOfferPrice).toLocaleString()} `: `${item.unitPrice.toLocaleString()} ` }</td>  
-                                        <td>{item.totalPrice} </td>  
+                                        <td>{item.unitOfferPrice ?  `${(item.unitOfferPrice/10).toLocaleString()} `: `${(item.unitPrice/10).toLocaleString()} ` }</td>  
+                                        <td>{(item.totalPrice/10).toLocaleString()} </td>  
                                         </tr>
                                         ))}
                                       

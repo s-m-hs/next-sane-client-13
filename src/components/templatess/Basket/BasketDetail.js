@@ -17,6 +17,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { HandTap, CheckCircle,X } from "@phosphor-icons/react";
+import alertQ from "@/utils/Alert/AlertQ";
 
 export default function BasketDetail() {
   let {
@@ -54,7 +55,7 @@ export default function BasketDetail() {
     );
 
   const AlertC = () =>
-    alertN("center", "success", "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید", 3500).then(
+    alertQ("center", "success", "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید", 'باشه...').then(
       (res) => rout.push("/")
     );
 
@@ -260,7 +261,7 @@ export default function BasketDetail() {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
   // console.log(getBasket);
-  // console.log(toBuy);
+
 
   return (
     <div className={`container ${style.container}`} >
@@ -531,13 +532,18 @@ onClick={paymentHandler}
           <Modal.Header closeButton></Modal.Header>
 
           <Modal.Body style={{ fontSize: "35px" }}>
-            در صورت تمایل آدرس خود را انتخاب کنید :
+
+              <h2> در صورت تمایل آدرس خود را انتخاب کنید :</h2>
             <Form.Select aria-label="Default select example">
               <option>Open this select menu</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
-            </Form.Select>
+            </Form.Select> 
+           
+       
+        
+
             {!mobile && (
               <div className={`${style.mobileAdd_div} centerr`}>
                 <h1>شما موبایل ثبت شده ای ندارید!!!</h1>
