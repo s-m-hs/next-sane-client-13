@@ -22,7 +22,7 @@ export const metadata = {
   title: " فروشگاه اینترنتی صانع",
   description: " Sane Anformatic Collection",
   icons: {
-    icon: "https://sapi.sanecomputer.com/GFiles/24-12-26/newphoto_2024-05-30_19-08-29.jpg",
+    icon: "../images/photo_2024-05-30_19-08-24.jpg",
   },
 };
 
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
             <title>کامپیوترصانع</title>  
             <meta name="description" content="کامپیوترصانع فعالیت خود را از سال 1380 در زمینۀ فروش قطعات کامپیوتر و کالاهای دیجیتال به صورت آنلاین از طریق وبسایت و آفلاین از طریق فروشگاه فیزیکی شروع نموده ..."/>  
             <meta property="og:title" content="فروشگاه صانع" />  
-            <meta property="og:image" content="https://sapi.sanecomputer.com/GFiles/24-12-26/newphoto_2024-05-30_19-08-29.jpg" />  
+            <meta property="og:image" content="../images/photo_2024-05-30_19-08-24.jpg" />  
         <meta name="enamad" content="25577088" />
         <script  
             type="application/ld+json"  
@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
                 "@type": "SaneComputer",  
                 "name": "کامپیوترصانع",  
                 "url": "https://www.sanecomputer.com",  
-                "logo": "https://sapi.sanecomputer.com/GFiles/24-12-26/newphoto_2024-05-30_19-08-29.jpg"  
+                "logo": "../images/photo_2024-05-30_19-08-24.jpg"  
               }),  
             }}  
           /> 
