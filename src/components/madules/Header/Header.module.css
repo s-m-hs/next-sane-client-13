@@ -306,7 +306,7 @@ width: 35%;
     caret-color: #14a5af;
     /* caret-color: transparent; */
     
-    background: linear-gradient(to right, rgba(20, 165, 175, 0.1) 30%, rgba(250, 240, 240, 0.4));
+    background: linear-gradient(to right, rgba(20, 165, 175, 0.3) 20%, rgba(250, 240, 240, 0.4));
 }
 .Header_rightSide__div_search i{
     position: absolute;

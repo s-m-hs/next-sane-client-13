@@ -437,13 +437,13 @@ onClick={paymentHandler}
 
   <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
   <div className={`centerc ${style.cath_div_mobile}`}>
-  <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
+  <span> <input   className={` ${style.cath_input}`} type='radio'  checked/><span className="m-2">پرداخت در محل</span> 
   </span>
-  <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
+  <span> <input   className={`${style.cath_input}`} type='radio'  disabled/> <span className="m-2">پرداخت آنلاین</span> 
   </span>
 </div>
     <button
-      className={`btn btn-outline-warning  ${style.colPrice_mobile_btn1}`}
+      className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
       disabled
     >
       <span>مجموع سبد خرید :</span>
@@ -496,9 +496,9 @@ onClick={paymentHandler}
             </div>
             
             <div className={`centerc ${style.cath_div}`}>
-              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
+              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/><span className="m-2">پرداخت در محل</span> 
               </span>
-              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
+              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/><span className="m-2">پرداخت آنلاین</span> 
               </span>
             </div>
         
