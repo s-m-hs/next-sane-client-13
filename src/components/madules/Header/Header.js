@@ -16,6 +16,7 @@ import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 import { Sidebar } from 'primereact/sidebar';
 import alertQ from "@/utils/Alert/AlertQ";
+import { useSearchParams } from 'next/navigation';
 
 
 
@@ -34,7 +35,10 @@ export default function Header() {
   const [visible, setVisible] = useState(false);
   const [visibleB, setVisibleB] = useState(false);
   const pathname=usePathname()
-
+  const rout = useRouter()
+  const searchParams = useSearchParams();
+  // const authority = searchParams.get('Authority');
+  // const status = searchParams.get('Status');
   // console.log(ulRefA.current);
   // const getLocalStorage = localStorage.getItem('loginToken')
   // const getLocalStorageUser = localStorage.getItem('user')
@@ -56,7 +60,7 @@ export default function Header() {
   };
 
 
-  const rout = useRouter()
+  
   const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
   const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
   const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 3000);
@@ -293,6 +297,18 @@ useEffect(()=>{
       AlertB()
     }
   },[])
+
+  useEffect(()=>{
+    if(pathname.includes('paymentResult')){
+      setXtFlagSpinnerShow(true)
+      const authority = searchParams.get('Authority');
+      const status = searchParams.get('Status'); 
+      console.log(authority)
+      console.log(status)
+      rout.push('/paymentResult')
+   
+    }
+  },[pathname]) 
   return (
     <>
       {xtflagSpinnerShow &&
@@ -482,11 +498,11 @@ useEffect(()=>{
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
 <div className={` ${styles.mobiNumber_div} centerc`}>
-       <span>02191005457</span>
+       <span>02191005457 <Phone size={18} color="#ededed" weight="duotone" /></span>
                   <span>کامپیوترصانع</span>
 </div>
              
-                  <Phone size={24} color="#ededed" weight="duotone" />
+                  {/* <Phone size={24} color="#ededed" weight="duotone" /> */}
                 </div>
 
 
@@ -627,8 +643,8 @@ useEffect(()=>{
                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <Laptop size={15} />
                    محاسبه گر سیستم</Link> </li>
 
-                   <li onClick={() => AlertD()}> <UsersThree size={15} />
-                    ورود همکاران(پخش عمده)  </li>
+                   {/* <li onClick={() => AlertD()}> <UsersThree size={15} />
+                    ورود همکاران(پخش عمده)  </li> */}
 
     <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
     تماس با ما</Link> </li>
@@ -792,10 +808,11 @@ useEffect(()=>{
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                 <div className={` ${styles.mobiNumber_div} centerc`}>
-       <span>02191005457</span>
+       <span>02191005457<Phone size={18} color="#ededed" weight="duotone" /></span>
                   <span>کامپیوترصانع</span>
 </div>
-                  <Phone size={24} color="#ededed" weight="duotone" />      </div>
+                  {/* <Phone size={24} color="#ededed" weight="duotone" />    */}
+                     </div>
 
    
               </div>

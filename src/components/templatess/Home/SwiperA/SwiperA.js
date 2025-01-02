@@ -33,7 +33,7 @@ export default function SwiperA() {
                     <img src="../../images/photo_2024-05-30_19-08-29.jpg" />
                   </SwiperSlide>
                   <SwiperSlide className={styles.swiper_slide} >
-                    <img src="../../images/photo_2024-05-30_19-08-24.jpg" />
+                    <img src="../../images/photo_2024-05-30_19-08-242.jpg" />
                   </SwiperSlide>
                   <SwiperSlide  className={styles.swiper_slide}>
                     <img src="../../images/1005639-خنده-دار-اقامت-ربات-سفید.jpg" />

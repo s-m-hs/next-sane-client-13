@@ -18,7 +18,6 @@ import Form from "react-bootstrap/Form";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { HandTap, CheckCircle,X } from "@phosphor-icons/react";
 import alertQ from "@/utils/Alert/AlertQ";
-
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -48,7 +47,7 @@ export default function BasketDetail() {
 
   const rout = useRouter();
   // const getLocalStorage=localStorage.getItem('loginToken')
-
+// console.log(getBasket[0].cyOrderID) 
   const AlertA = () =>
     alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) =>
       setBasketFlag((prev) => !prev)
@@ -71,6 +70,28 @@ export default function BasketDetail() {
     RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
   };
   ///////////////////////////////
+const directToZarin=()=>{
+  const getLocalStorage = localStorage.getItem("loginToken");
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}`,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getLocalStorage}`
+      },
+    }).then(res=>{
+      if(res.ok){
+        return res.json().then(result=>{
+          console.log(result)
+          rout.push(`${result.url}`)
+        })
+      }
+    })
+  }
+  myApp()
+}
+
+
   const handleRegisterShop = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
@@ -336,68 +357,6 @@ export default function BasketDetail() {
             </table>
           </div>
 
-          {/* <div className={` container ${style.col_8_bottom_div_1} centerc`}>
-
-            <div className="row">
-
-              <div className="col-6">
-
-              <div className={`  ${style.col_8_bottom_div_2} centerr`}>
-
-<button
-  type="button"
-  className={
-    flagUpdate
-      ? `${style.btn} btn btn-outline-info`
-      : `${style.btn_hide}`
-  }
-  onClick={updateBasketHandler}
->
-  به روز رسانی سبد خرید
-</button>
-</div>
-
-<button
-type="button"
-className={
-  flagUpdate
-    ? `${style.btn_hide}`
-    : `${style.btn} btn btn-outline-info`
-}
-onClick={paymentHandler}
->
-تکمیل خرید
-</button>
-              </div>
-           
-
-
-              <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
-              <div className={`centerc ${style.cath_div_mobile}`}>
-              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/>پرداخت در محل
-              </span>
-              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/>پرداخت آنلاین
-              </span>
-            </div>
-                <button
-                  className={`btn btn-outline-warning  ${style.colPrice_mobile_btn1}`}
-                  disabled
-                >
-                  <span>مجموع سبد خرید :</span>
-                  <br />
-                  <span className={`  ${style.colPrice_mobile_span2}`} >{total.toLocaleString()} تومان</span>
-                  <img
-                    src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-                    alt=""
-                    className={style.colPrice_mobile_shopimg}
-                  />
-                </button>
-              </div></div>
-
-            </div>
-
-          
-          </div> */}
         </div>
         <div className={` container  ${style.col_8_bottom_div_1} centerc`}>
 
@@ -436,12 +395,16 @@ onClick={paymentHandler}
 
 
   <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
-  <div className={`centerc ${style.cath_div_mobile}`}>
-  <span> <input   className={` ${style.cath_input}`} type='radio'  checked/><span className="m-2">پرداخت در محل</span> 
+
+  {/* <div className={`centerc ${style.cath_div_mobile}`}>
+
+  <span> <input   className={`${style.cath_input}`} type='radio' checked /> <span className="m-2">پرداخت آنلاین</span> 
   </span>
-  <span> <input   className={`${style.cath_input}`} type='radio'  disabled/> <span className="m-2">پرداخت آنلاین</span> 
+
+  <span> <input   className={` ${style.cath_input}`} type='radio'  /><span className="m-2">پرداخت در محل</span> 
   </span>
-</div>
+  
+</div> */}
     <button
       className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
       disabled
@@ -495,12 +458,16 @@ onClick={paymentHandler}
               </div>
             </div>
             
-            <div className={`centerc ${style.cath_div}`}>
-              <span> <input   className={` ${style.cath_input}`} type='radio'  checked/><span className="m-2">پرداخت در محل</span> 
+            {/* <div className={`centerc ${style.cath_div}`} >
+              
+            <span> <input   className={`${style.cath_input}`} type='radio'  value={1} />
+            <span className="m-2">پرداخت آنلاین</span> 
+            </span>
+
+              <span> <input   className={` ${style.cath_input}`} type='radio'  value={2}/><span className="m-2">پرداخت در محل</span> 
               </span>
-              <span> <input   className={`${style.cath_input}`} type='radio'  disabled/><span className="m-2">پرداخت آنلاین</span> 
-              </span>
-            </div>
+      
+            </div> */}
         
 
             <div className={`centerr ${style.colPrice}`}>
@@ -571,7 +538,8 @@ onClick={paymentHandler}
                   ? `btn btn-info ${style.btn_modal_ok}`
                   : `btn btn-info ${style.btn_modal_ok_disable}`
               }
-              onClick={handleRegisterShop}
+              onClick={directToZarin}
+              // onClick={handleRegisterShop}
             >
               <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید

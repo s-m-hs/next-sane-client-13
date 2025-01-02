@@ -4,11 +4,14 @@ import { MainContext } from "@/context/MainContext";
 import Link from 'next/link';
 import { useContext, useState,useEffect, useRef } from "react";
 import { X,DotsThreeVertical   } from "@phosphor-icons/react";
+import Swal from "sweetalert2";
+import alertN from '@/utils/Alert/AlertA';
 
 // import { CounterContext } from "../../Context/CounterContext";
 // import { MenuContext } from "../../Context/MenuContext";
 // import RemoveApi from "../../jsUtils/ApiCallBack/ApiRemove";
 // import updateBasket from "../../jsUtils/apiPutBasket";
+
 
 const CartItem = (props) => {
   const[quantity,setQuantity]=useState( props.quantity)
@@ -17,6 +20,9 @@ const CartItem = (props) => {
 
 //   let { basketFlag,setGetBasket } = useContext(CounterContext)
 // let{flagLogin}=useContext(MenuContext)
+
+const alertB=()=>alertN('center','error','بیش تر از 5عدد مجاز به سفارش نمی باشید...',1500)
+
 const addClick = () => {
 
   setQuantity(prev=>Number(prev)+1)
@@ -32,17 +38,34 @@ const minesClick = () => {
 };
 
 const changeHandler = (e) => {
-  if(e.target.value>=0){
+  if(e.target.value>=0 && e.target.value<=5){
+    
     setQuantity(e.target.value)
 
+  }else if(e.target.value=0 ||e.target.value>5){
+    alertB()
   }
   props.updateQuantity(props.cyProductID, e.target.value);
 };
-const handleRemove=(e,id)=>{
+const handleRemove=(e)=>{
   xtFlagLogin ?
-  props.remove(id) : props.handleRemove(id)
+  props.remove(props.id) : props.handleRemove(props.id)
 
 }
+const AlertA=(func)=> Swal.fire({
+  title: "آیا از حذف محصول از سبد خرید اطمینان دارید ؟",
+  // text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "بله،حذف بشه...",
+  cancelButtonText:'نه ،حذف نشه...'
+}).then((result) => {
+  if (result.isConfirmed) {
+    func()
+  }
+});
   /////////////////////////////////////////////////
   return (
     <>
@@ -73,6 +96,7 @@ const handleRemove=(e,id)=>{
             type='number'
             class={style.quantity} 
             value={quantity}
+            max={5}
             onChange={(e)=>changeHandler(e)}
             ></input>
 
@@ -138,13 +162,13 @@ const handleRemove=(e,id)=>{
           </Link>
        
           <button className={`btn btn-danger m-1 ${style.btn_product}`}
-          onClick={(e)=>{ handleRemove(e,props.id) }}>
+          onClick={(e)=>{ AlertA(handleRemove)  }}>
            
 حذف
           </button>
 
           <button className={`btn btn-danger m-1 ${style.btn_product_hide}`}
-          onClick={(e)=>{ handleRemove(e,props.id) }}>
+          onClick={(e)=>{ AlertA(handleRemove)}}>
                                <X size={10} color="#fff" />
 
 

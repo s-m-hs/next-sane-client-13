@@ -81,7 +81,7 @@ src="https://www.zarinpal.com/webservice/TrustCode" type="text/javascript"
             </div>
 
 
-            <div className='col-md-3'>
+            <div className='col-md-3 centerr mt-2'>
           
 
               

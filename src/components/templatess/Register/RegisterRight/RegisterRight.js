@@ -173,7 +173,7 @@ setXtFlagSpinnerShow(false)
               className={`${style.div_input_div} `}
               // minLength={6}
               name="password"
-               type="text"
+               type="password"
                 placeholder="رمزعبور "
                
                 {...register(`password`, {
@@ -197,7 +197,7 @@ setXtFlagSpinnerShow(false)
               className={`${style.div_input_div} `}
               // minLength={6}
               name="password"
-               type="text"
+               type="password"
                 placeholder="تکرار رمزعبور "
                
                 {...register(`passwordRepeat`, {
