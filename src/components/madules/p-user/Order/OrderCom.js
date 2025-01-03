@@ -137,10 +137,9 @@ export default function OrderCom() {
                     <tr>
                       <th> شناسه مشتری</th>
                       <th>شناسه سفارش</th>
-                      <th>تاریخ ثبت سفارش</th>
+                      {/* <th>تاریخ ثبت سفارش</th> */}
                       <th>مبلغ نهایی </th>
-                      {/* <th>وضعیت سفارش</th> */}
-                      <th>تغییر وضعیت </th>
+                      <th> جزییات </th>
                     </tr>
 
                   </thead>
@@ -152,7 +151,7 @@ export default function OrderCom() {
                       <tr>
                         <td>{item.cyUserID}</td>
                         <td>{item.id}</td>
-                        <td><DateFormat dateString={`${item.orderDate}`} /></td>
+                        {/* <td><DateFormat dateString={`${item?.orderDate}`} /></td> */}
                         <td>{`${(item.totalAmount/10).toLocaleString()}`} تومان</td>
                         {/* <td>{item.statusText}</td> */}
                         <td><button className='btn btn-primary' onClick={() => {

@@ -94,10 +94,12 @@ border: none;
     font-size: 1cqi;
     ;
 }
-
+.cath_div>span span{
+    font-size: 20px;
+}
 .cath_input{
     color: var(--graydcdee1);
-    font-size: 15px;
+    font-size: 15px ;
 }
 
 .col_8_bottom_div_1{

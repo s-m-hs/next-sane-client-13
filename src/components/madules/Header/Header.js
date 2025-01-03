@@ -23,7 +23,7 @@ import { useSearchParams } from 'next/navigation';
 
 
 export default function Header() {
-  let { xtFlagLogin,name,userSrc,setUserSrc,setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,flagMessageNotification,setFlagMessageNotification} = useContext(MainContext)
+  let { xtFlagLogin,name,userSrc,setUserSrc,setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,flagMessageNotification,setFlagMessageNotification,setAuthority,setZarrinStatus,zarrinStatus} = useContext(MainContext)
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
   const [mainCategoryB, setMainCategoryB] = useState({});
@@ -299,12 +299,15 @@ useEffect(()=>{
   },[])
 
   useEffect(()=>{
-    if(pathname.includes('paymentResult')){
+    if(pathname.includes('paymentResult') && zarrinStatus===''){
       setXtFlagSpinnerShow(true)
-      const authority = searchParams.get('Authority');
-      const status = searchParams.get('Status'); 
-      console.log(authority)
-      console.log(status)
+      setAuthority(searchParams.get('Authority'))
+      setZarrinStatus(searchParams.get('Status'))
+      // const authority = searchParams.get('Authority');
+      // const status = searchParams.get('Status'); 
+      // console.log(authority)
+      // console.log(status)
+
       rout.push('/paymentResult')
    
     }

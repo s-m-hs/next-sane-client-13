@@ -27,6 +27,8 @@ const MainProvider = ({ children }) => {
   const [flagThem, setFlagThem] = useState(false);
   const [flagMessageNotification, setFlagMessageNotification] = useState(false);
   const [messageNotification, setMessageNotification] = useState([]);
+  const[authority,setAuthority]=useState('')
+  const [zarrinStatus,setZarrinStatus]=useState('')
 
   // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -170,6 +172,8 @@ const MainProvider = ({ children }) => {
         setMessageNotification,
         userSrc,
         setUserSrc,
+        authority,setAuthority,
+        zarrinStatus,setZarrinStatus
       }}
     >
       {children}

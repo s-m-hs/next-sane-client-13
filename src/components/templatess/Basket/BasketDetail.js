@@ -16,8 +16,9 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
-import { HandTap, CheckCircle,X } from "@phosphor-icons/react";
+import { HandTap, CheckCircle, X } from "@phosphor-icons/react";
 import alertQ from "@/utils/Alert/AlertQ";
+import Link from "next/link";
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -41,22 +42,24 @@ export default function BasketDetail() {
   const [cartItem, setCartItem] = useState([]);
   const [total, setTotal] = useState(0);
   const [show, setShow] = useState(false);
-
+const [payState,setPayState]=useState(1)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const rout = useRouter();
   // const getLocalStorage=localStorage.getItem('loginToken')
-// console.log(getBasket[0].cyOrderID) 
+  // console.log(getBasket[0].cyOrderID)
   const AlertA = () =>
     alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) =>
       setBasketFlag((prev) => !prev)
     );
-
   const AlertC = () =>
-    alertQ("center", "success", "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید", 'باشه...').then(
-      (res) => rout.push("/")
-    );
+    alertQ(
+      "center",
+      "success",
+      "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید",
+      "باشه..."
+    ).then((res) => rout.push("/"));
 
   const AlertB = () =>
     alertN(
@@ -70,27 +73,29 @@ export default function BasketDetail() {
     RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
   };
   ///////////////////////////////
-const directToZarin=()=>{
-  const getLocalStorage = localStorage.getItem("loginToken");
-  async function myApp(){
-    const res=await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}`,{
-      method:'GET',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getLocalStorage}`
-      },
-    }).then(res=>{
-      if(res.ok){
-        return res.json().then(result=>{
-          console.log(result)
-          rout.push(`${result.url}`)
-        })
-      }
-    })
-  }
-  myApp()
-}
-
+  const directToZarin = () => {
+    const getLocalStorage = localStorage.getItem("loginToken");
+    async function myApp() {
+      const res = await fetch(
+        `${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getLocalStorage}`,
+          },
+        }
+      ).then((res) => {
+        if (res.ok) {
+          return res.json().then((result) => {
+            console.log(result);
+            rout.push(`${result.url}`);
+          });
+        }
+      });
+    }
+    myApp();
+  };
 
   const handleRegisterShop = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
@@ -281,11 +286,9 @@ const directToZarin=()=>{
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
-  // console.log(getBasket);
-
 
   return (
-    <div className={`container ${style.container}`} >
+    <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
         <div className={`col-lg-8 centerc  ${style.col_8} boxSh`}>
           <div className={` ${style.col_8_div_table} `}>
@@ -317,7 +320,7 @@ const directToZarin=()=>{
                       name={item["name"]}
                       smallImage={item["smallImage"]}
                       // totalPrice={item.noOffPrice}
-                      unitPrice={Number(item.price)/10}
+                      unitPrice={Number(item.price) / 10}
                       id={item["id"]}
                       cyProductID={item.id}
                       quantity={
@@ -340,8 +343,8 @@ const directToZarin=()=>{
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
-                        totalPrice={Number(item.totalPrice)/10}
-                        unitPrice={Number(item.unitPrice)/10}
+                        totalPrice={Number(item.totalPrice) / 10}
+                        unitPrice={Number(item.unitPrice) / 10}
                         id={item.id}
                         cyProductID={item.cyProductID}
                         quantity={item.quantity}
@@ -356,47 +359,41 @@ const directToZarin=()=>{
               </tbody>
             </table>
           </div>
-
         </div>
         <div className={` container  ${style.col_8_bottom_div_1} centerc`}>
+          <div className="row">
+            <div className="col-6">
+              <div className={`  ${style.col_8_bottom_div_2} centerr`}>
+                <button
+                  type="button"
+                  className={
+                    flagUpdate
+                      ? `${style.btn} btn btn-outline-info`
+                      : `${style.btn_hide}`
+                  }
+                  onClick={updateBasketHandler}
+                >
+                  به روز رسانی سبد خرید
+                </button>
+              </div>
 
-<div className="row">
+              <button
+                type="button"
+                className={
+                  flagUpdate
+                    ? `${style.btn_hide}`
+                    : `${style.btn} btn btn-outline-info`
+                }
+                onClick={paymentHandler}
+              >
+                تکمیل خرید
+              </button>
+            </div>
 
-  <div className="col-6">
-
-  <div className={`  ${style.col_8_bottom_div_2} centerr`}>
-
-<button
-type="button"
-className={
-flagUpdate
-? `${style.btn} btn btn-outline-info`
-: `${style.btn_hide}`
-}
-onClick={updateBasketHandler}
->
-به روز رسانی سبد خرید
-</button>
-</div>
-
-<button
-type="button"
-className={
-flagUpdate
-? `${style.btn_hide}`
-: `${style.btn} btn btn-outline-info`
-}
-onClick={paymentHandler}
->
-تکمیل خرید
-</button>
-  </div>
-
-
-
-  <div className="col-6">  <div className={` ${style.colPrice_mobile}`}>
-
-  {/* <div className={`centerc ${style.cath_div_mobile}`}>
+            <div className="col-6">
+              {" "}
+              <div className={` ${style.colPrice_mobile}`}>
+                {/* <div className={`centerc ${style.cath_div_mobile}`}>
 
   <span> <input   className={`${style.cath_input}`} type='radio' checked /> <span className="m-2">پرداخت آنلاین</span> 
   </span>
@@ -405,26 +402,25 @@ onClick={paymentHandler}
   </span>
   
 </div> */}
-    <button
-      className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
-      disabled
-    >
-      <span>مجموع سبد خرید :</span>
-      <br />
-      <span className={`  ${style.colPrice_mobile_span2}`} >{(Number(total)/10).toLocaleString()} تومان</span>
-      <img
-        src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-        alt="basket-image"
-        className={style.colPrice_mobile_shopimg}
-      />
-    </button>
-  </div></div>
-
-</div>
-
-
-</div>
-     
+                <button
+                  className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
+                  disabled
+                >
+                  <span>مجموع سبد خرید :</span>
+                  <br />
+                  <span className={`  ${style.colPrice_mobile_span2}`}>
+                    {(Number(total) / 10).toLocaleString()} تومان
+                  </span>
+                  <img
+                    src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
+                    alt="basket-image"
+                    className={style.colPrice_mobile_shopimg}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className={`col-lg-4 centerc ${style.col_4} boxSh`}>
           <div>
@@ -457,7 +453,7 @@ onClick={paymentHandler}
                 </button>
               </div>
             </div>
-            
+
             {/* <div className={`centerc ${style.cath_div}`} >
               
             <span> <input   className={`${style.cath_input}`} type='radio'  value={1} />
@@ -468,7 +464,6 @@ onClick={paymentHandler}
               </span>
       
             </div> */}
-        
 
             <div className={`centerr ${style.colPrice}`}>
               <button
@@ -483,7 +478,7 @@ onClick={paymentHandler}
 
                 <span>مجموع سبد خرید :</span>
                 <br />
-                <span>{(Number(total)/10).toLocaleString()} تومان</span>
+                <span>{(Number(total) / 10).toLocaleString()} تومان</span>
               </button>
             </div>
           </div>
@@ -499,17 +494,59 @@ onClick={paymentHandler}
           <Modal.Header closeButton></Modal.Header>
 
           <Modal.Body style={{ fontSize: "35px" }}>
-
-              <h2> در صورت تمایل آدرس خود را انتخاب کنید :</h2>
-            <Form.Select aria-label="Default select example">
-              <option>Open this select menu</option>
-              <option value="1">One</option>
+            {address?.length != 0 ? (
+              <>
+                <h2> آدرس های ثبت شده :</h2>
+                <Form.Select aria-label="Default select example">
+                  {address?.map((item) => (
+                    <option value={item.id}>
+                      {item.state}-{item.address}-کد پستی :{item.postalCode}
+                    </option>
+                  ))}
+                  {/* <option value="1">One</option>
               <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select> 
-           
-       
-        
+              <option value="3">Three</option> */}
+                </Form.Select>
+              </>
+            ) : (
+              <>
+                <h2>
+                  شما آدرس ثبت شده ای ندارید ،در صورت تمایل آدرس خود را وارد
+                  نمایید:
+                </h2>
+                <Link
+                  href={"./p-user/address"}
+                  onClick={() => setXtFlagSpinnerShow(true)}
+                >
+                  <button className="btn btn-success">ثبت آدرس</button>
+                </Link>
+              </>
+            )}
+
+            <div className={`centerc ${style.cath_div}`}>
+              <span>
+                <input
+                  className={`${style.cath_input}`}
+                  type="radio"
+                  name="payment"
+                  defaultChecked
+                  value={1}
+                  onChange={(e)=>setPayState(e.target.value)}
+                />
+                <span className="m-2">پرداخت آنلاین</span>
+              </span>
+
+              <span>
+                <input
+                  className={` ${style.cath_input}`}
+                  name="payment"
+                  type="radio"
+                  value={2}
+                  onChange={(e)=>setPayState(e.target.value)}
+                />
+                <span className="m-2">پرداخت در محل</span>
+              </span>
+            </div>
 
             {!mobile && (
               <div className={`${style.mobileAdd_div} centerr`}>
@@ -538,7 +575,7 @@ onClick={paymentHandler}
                   ? `btn btn-info ${style.btn_modal_ok}`
                   : `btn btn-info ${style.btn_modal_ok_disable}`
               }
-              onClick={directToZarin}
+              onClick={payState==1 ? directToZarin : handleRegisterShop}
               // onClick={handleRegisterShop}
             >
               <CheckCircle size={20} color="#fff" weight="duotone" />
