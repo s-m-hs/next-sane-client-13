@@ -1,31 +1,43 @@
 'use client'
 
 import { MainContext } from '@/context/MainContext'
-import React, { useContext, useEffect } from 'react'
-import style from './PaymentResultCom.module.css'
 import alertQ from '@/utils/Alert/AlertQ'
 import { useRouter } from 'next/navigation'
+import React, { useContext, useEffect, useState } from 'react'
+import style from './PaymentResultCom.module.css'
 import apiUrl from '@/utils/ApiUrl/apiUrl'
+import alertN from '@/utils/Alert/AlertA'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation';
 
-export default function PaymentResultCom() {
+export default function PaymentResultCom({param}) {
 
-  let {setXtFlagSpinnerShow, authority,zarrinStatus,getBasket}=useContext(MainContext)
+  const searchParams = useSearchParams();
+    
+  const authority = searchParams.get('Authority');
+  const status = searchParams.get('Status');
+  let {setXtFlagSpinnerShow,zarrinStatus,getBasket}=useContext(MainContext)
   const route=useRouter()
+const [verifyDetail,setVerifyDetail]=useState({})
+
 const alertA=()=>alertQ('center','error','تراكنش ناموفق می باشد ...','متوجه شدم ...').then(res=>{
   route.push('/basket')
 })
 const alertB=()=>alertQ('center','error','مشکلی پیش آمده ...','متوجه شدم ...').then(res=>{
   route.push('/basket')
 })
-///////////////////
+const alertC=()=>alertN('center','success','پرداخت با موفقیت انجام شد','1500')
+
+
+
+console.log(param)
 const verifyPayment=()=>{
   const getLocalStorage = localStorage.getItem("loginToken");
 let obj={
-  merchantId: "string",
-  orderId: getBasket[0].cyOrderID,
+  orderId: param,
   authority: authority
 }
-console.log(obj);
+  console.log(obj);
   async function myApp(){
     const res=await fetch(`${apiUrl}/api/ZarinPal/varifyPay`,{
       method:'POST',
@@ -37,7 +49,7 @@ console.log(obj);
     }).then(res=>{
       if(res.ok){
         return res.json().then(result=>{
-          console.log(result);
+          setVerifyDetail(result)
           setXtFlagSpinnerShow(false)
 
         })
@@ -51,30 +63,70 @@ console.log(obj);
 }
 // console.log(getBasket[0].cyOrderID);
   useEffect(()=>{
-      if(zarrinStatus==='OK'){
+
+      if(status==='OK'){
         verifyPayment()
 
-console.log('ok');
-      }else if(zarrinStatus==='NOK'){
+      }else if(status==='NOK'){
         alertA()
       }
-},[zarrinStatus])
+},[status])
 
-console.log(zarrinStatus);
+
+  useEffect(()=>{
+      setXtFlagSpinnerShow(false)
+      setVerifyDetail({})
+
+  },[])
   return (
+
+    
+    
     <div className='container'>
 
-      <div className={`row ${style.row}` } >
+    <div className={`row ${style.row}` } >
 
-        <div className={`col text-center ${style.detail_div} boxSh`}>
+      <div className={`col text-center ${style.detail_div} boxSh`}>
 
 
 
 <div>
-  xzczxc
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"> شرح</th>
+  
+    </tr>
+  </thead>
+  <tbody className={style.tbody}>
+    <tr>
+      <th scope="row">وضعیت خرید</th>
+      <td>موفق</td>
+  
+    </tr>
+    <tr>
+      <th scope="row">کد پیگیری </th>
+      <td>{verifyDetail.ref_id}</td>
+    
+    </tr>
+    <tr>
+      <th scope="row">message</th>
+      <td colspan="2">{verifyDetail.message}</td>
+ 
+    </tr>
+  </tbody>
+</table>
+{/* <ul>
+    <li>{verifyDetail?.code}</li>
+    <li>{verifyDetail?.fee}</li>
+    <li>{verifyDetail?.message}</li>
+</ul> */}
 </div>
-        </div>
+<Link href={'/'}>
+<button className='btn btn-warning m-4'>بازگشت به صفحه اصلی</button>
+</Link>
       </div>
     </div>
-  )
+  </div>  )
 }

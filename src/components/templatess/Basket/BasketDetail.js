@@ -96,6 +96,7 @@ const [payState,setPayState]=useState(1)
     }
     myApp();
   };
+  console.log(getBasket)
 
   const handleRegisterShop = () => {
     const getLocalStorage = localStorage.getItem("loginToken");

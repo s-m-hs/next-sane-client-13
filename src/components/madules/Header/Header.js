@@ -36,16 +36,12 @@ export default function Header() {
   const [visibleB, setVisibleB] = useState(false);
   const pathname=usePathname()
   const rout = useRouter()
-  const searchParams = useSearchParams();
   // const authority = searchParams.get('Authority');
   // const status = searchParams.get('Status');
-  // console.log(ulRefA.current);
-  // const getLocalStorage = localStorage.getItem('loginToken')
-  // const getLocalStorageUser = localStorage.getItem('user')
+
   const [userName, setUserName] = useState('')
   const [flag, setFlag] = useState(false)
 
-  // const { scrollYProgress } = useScroll()
 
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -298,20 +294,13 @@ useEffect(()=>{
     }
   },[])
 
-  useEffect(()=>{
-    if(pathname.includes('paymentResult') && zarrinStatus===''){
-      setXtFlagSpinnerShow(true)
-      setAuthority(searchParams.get('Authority'))
-      setZarrinStatus(searchParams.get('Status'))
-      // const authority = searchParams.get('Authority');
-      // const status = searchParams.get('Status'); 
-      // console.log(authority)
-      // console.log(status)
-
-      rout.push('/paymentResult')
-   
-    }
-  },[pathname]) 
+  // useEffect(()=>{
+  //   if(pathname.includes('paymentResult') && zarrinStatus===''){
+  //     setXtFlagSpinnerShow(true)
+  //     setAuthority(authority)
+  //     setZarrinStatus(status)
+  //   }
+  // },[pathname]) 
   return (
     <>
       {xtflagSpinnerShow &&

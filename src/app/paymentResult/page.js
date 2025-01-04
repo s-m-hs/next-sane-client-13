@@ -4,6 +4,7 @@ import React from 'react'
 
 export default function PaymentResult() {
   return (
-    <PaymentResultCom/>
+    <div>sss</div>
+    // <PaymentResultCom/>
   )
 }
