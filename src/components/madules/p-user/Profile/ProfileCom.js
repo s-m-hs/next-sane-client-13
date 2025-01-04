@@ -34,7 +34,6 @@ let {cyUserID,username,name,family,email,mobile,userSrc,xtFlagLogin,setFlagProfi
   };
   //////////////////////
   const alertA=()=>alertN('center','success'," اطلاعات با موفقیت ثبت شد",1500).then((res) => {
-    // setXtFlagLogin(true)
   reset(setValue(''))
   router.push('/') 
   });

@@ -224,6 +224,8 @@ useEffect(()=>{
           setFlag(true)
           setXtFlagLogin(true)
 
+        }else{
+          localStorage.removeItem('loginToken')
         }
       })
     }
@@ -283,16 +285,16 @@ useEffect(()=>{
       setValue(e.target.value);
     }
   };
-
+console.log(pathname)
 
   useEffect(()=>{
     const getLocalStorage = localStorage.getItem('loginToken')
-
-    if( pathname.startsWith('/p-user') && !getLocalStorage){
+console.log(getLocalStorage)
+    if( pathname.includes('/p-user') && !getLocalStorage){
       rout.push('/')
       AlertB()
     }
-  },[])
+  },[pathname])
 
   // useEffect(()=>{
   //   if(pathname.includes('paymentResult') && zarrinStatus===''){
