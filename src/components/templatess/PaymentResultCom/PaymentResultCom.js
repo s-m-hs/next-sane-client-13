@@ -54,6 +54,7 @@ let obj={
 
         })
       }else{
+        console.log(res)
         alertB()
 
       }
