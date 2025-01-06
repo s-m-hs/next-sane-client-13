@@ -412,19 +412,19 @@ console.log(getLocalStorage)
 
 
                   <>
-                    <Dropdown className={styles.user_button}>
+                    <Dropdown className={styles.user_button}  size="lg">
                       <Dropdown.Toggle variant="info" id="dropdown-basic">
                         <span className={styles.user_span}>{name?.toUpperCase()}</span>      </Dropdown.Toggle>
 
-                      <Dropdown.Menu>
+                      <Dropdown.Menu className={styles.user_p}>
                         <Dropdown.Item href="/p-user/profile"
-                          onClick={() => setXtFlagSpinnerShow(true)}>پنل کاربری </Dropdown.Item>
+                          onClick={() => setXtFlagSpinnerShow(true)}><p>پنل کاربری</p>  </Dropdown.Item>
                         <Dropdown.Item onClick={()=>{
                            exitHandler()
                           
                             setMessageNotification([])
                             setFlagMessageNotification(prev=>!prev)
-                        }}>خروج</Dropdown.Item>
+                        }}><p> خروج</p> </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </>

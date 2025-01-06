@@ -618,6 +618,7 @@ transition:transform 0.1s linear;
     opacity: 0.5;
 
 }
+
 .user_span{
     font-size: 100%;
     color: var(--them);
@@ -629,7 +630,10 @@ transition:transform 0.1s linear;
     background-color: inherit !important;
     border: none!important;
     outline: none!important;
-    font-size: large;
+    font-size: 18px;
+}
+.user_p p{
+    font-size: 18px;
 }
 .spinner_row{
     position: fixed;
