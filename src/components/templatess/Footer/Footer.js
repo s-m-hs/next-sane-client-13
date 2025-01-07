@@ -7,9 +7,9 @@ import Script from 'next/script';
 
 
 export default function Footer() {
-  function showZPTrust(){
-    var thewindow = window.open("https://www.zarinpal.com/trustPage/"+window.location.hostname, null, "width=450, height=600, scrollbars=no, resizable=no");
-    }
+  // function showZPTrust(){
+  //   var thewindow = window.open("https://www.zarinpal.com/trustPage/"+window.location.hostname, null, "width=450, height=600, scrollbars=no, resizable=no");
+  //   }
 
 
   return (
@@ -70,32 +70,28 @@ export default function Footer() {
         <div className={`row centerr ${style.rowbuttom}`}  >
             <div className={` col-md-5 centerc ${style.col}`}   >
               <h1>درباره کامپیوترصانع</h1>
-              <h3> کامپیوترصانع فعالیت خود را از سال 1380 در زمینۀ فروش قطعات کامپیوتر و کالاهای دیجیتال به صورت آنلاین از طریق وبسایت و آفلاین از طریق فروشگاه فیزیکی شروع نموده و نمایندگی رسمی پخش محصولات بسیاری از شرکت‌های ایرانی و خارجی را داشته و تا کنون به تمام شهرهای کوچک و بزرگ ایران ارسال کالا داشته و در این زمینه یکی از پیشتازهای این عرصه می‌باشد.</h3>
+              <h3>فروشگاه کامپیوترصانع با بیش از دو دهه تجربه، به عنوان یکی از پیشروترین مراکز فروش قطعات کامپیوتر و کالاهای دیجیتال  به صورت آنلاین(وب سایت) وبه صورت آفلاین(فروشگاه فیزیکی) در ایران شناخته می‌شود. با ارائه محصولات متنوع از برندهای معتبر داخلی و خارجی، ارسال سریع به سراسر کشور و تضمین کیفیت، همواره در تلاشیم تا تجربه خریدی مطمئن و رضایت‌بخش را برای مشتریان خود فراهم کنیم.</h3>
+
+              {/* <h3> کامپیوترصانع فعالیت خود را از سال 1380 در زمینۀ فروش قطعات کامپیوتر و کالاهای دیجیتال به صورت آنلاین از طریق وبسایت و آفلاین از طریق فروشگاه فیزیکی شروع نموده و نمایندگی رسمی پخش محصولات بسیاری از شرکت‌های ایرانی و خارجی را داشته و تا کنون به تمام شهرهای کوچک و بزرگ ایران ارسال کالا داشته و در این زمینه یکی از پیشتازهای این عرصه می‌باشد.</h3> */}
               <h5>کلیه حقوق مادی و معنوی سایت برای مجموعه صانع  محفوظ است.</h5>
             </div>
-            <div className={` col-md-4 centerr mt-3 ${style.zarinpal}`} >
+            <div className={`col-md-7 centerr mt-3 ${style.zarinpal}`} >
+
             <a href="javascript:showZPTrust();" title="دروازه پرداخت معتبر"><img src="https://cdn.zarinpal.com/badges/trustLogo/1.png" border="0" alt="دروازه پرداخت معتبر"/></a>
 <Script
 src="https://www.zarinpal.com/webservice/TrustCode" type="text/javascript"
 />
+
+
+<Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' alt='' style={{cursor:'pointer'}} code='vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'/></Link>
+
             </div>
 
 
-            <div className='col-md-3 centerr mt-2'>
-          
-
-              
-
-
+            {/* <div className='col-md-3 centerr mt-2'>
+        
               <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' alt='' style={{cursor:'pointer'}} code='vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'/></Link>
-
-
-    {/* <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=82062&Code=3LU8UULvBSVTojk3wrvFrDl2SXigwJgq' alt='enamad' style={{cursor:'pointer'}} code='3LU8UULvBSVTojk3wrvFrDl2SXigwJgq'/>
-
-              </Link> */}
-
-
-            </div>
+            </div> */}
         
         </div>
 

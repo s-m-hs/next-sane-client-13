@@ -30,14 +30,13 @@ const alertC=()=>alertN('center','success','پرداخت با موفقیت ان�
 
 
 
-console.log(param)
 const verifyPayment=()=>{
   const getLocalStorage = localStorage.getItem("loginToken");
 let obj={
   orderId: param,
   authority: authority
 }
-  console.log(obj);
+  // console.log(obj);
   async function myApp(){
     const res=await fetch(`${apiUrl}/api/ZarinPal/varifyPay`,{
       method:'POST',
@@ -54,11 +53,12 @@ let obj={
 
         })
       }else{
-        console.log(res)
+    //  console.log(JSON.parse(res))  
+        
         alertB()
 
       }
-    })
+    }).catch(err=>console.log(err))
   }
   myApp()
 }

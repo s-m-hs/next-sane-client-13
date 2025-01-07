@@ -189,7 +189,6 @@ const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
 }).then(res=>{
   if(res.ok){
     return res.json().then(result=>{
-      console.log(result)
       setKeyHelp(result.value)
 
     })

@@ -194,13 +194,13 @@ useEffect(()=>{
 
 <div className={ `login_label_float ${style.input} centerr`}  >
               <input
-              className={errors?.update?.name ? style.error : ''}
+              className={errors?.update?.family ? style.error : ''}
               minLength={3}
-                name="update.name"
+                name="update.family"
                 type="userName"
                 placeholder=" "
                 // value={name}
-                {...register(`update.name`, {
+                {...register(`update.family`, {
                   required: true,minLength: 3
                 })}
               />
@@ -210,12 +210,12 @@ useEffect(()=>{
 
 <div className={ `login_label_float ${style.input}`}>
               <input
-               className={errors?.update?.family ? style.error : ''}
+               className={errors?.update?.name ? style.error : ''}
               minLength={3}
-                name="update.family"
+                name="update.name"
                 type="userName"
                 placeholder=" "
-                {...register(`update.family`, {
+                {...register(`update.name`, {
                   required: true,minLength: 3
                 })}
               />

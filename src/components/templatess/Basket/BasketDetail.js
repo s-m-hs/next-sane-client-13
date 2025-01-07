@@ -88,7 +88,6 @@ const [payState,setPayState]=useState(1)
       ).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
-            console.log(result);
             rout.push(`${result.url}`);
           });
         }
@@ -96,7 +95,6 @@ const [payState,setPayState]=useState(1)
     }
     myApp();
   };
-  console.log(getBasket)
 
   const handleRegisterShop = () => {
     const getLocalStorage = localStorage.getItem("loginToken");

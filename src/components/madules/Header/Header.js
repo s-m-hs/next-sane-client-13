@@ -1,12 +1,36 @@
-"use client"
+"use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import styles from "./Header.module.css"
+import styles from "./Header.module.css";
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
-import { MagnifyingGlass, Phone, SignIn, BuildingApartment, Barcode, UserCheck, SignOut, Wrench, Fingerprint, ShoppingCart, User, EnvelopeSimple, House, TextIndent, XCircle,SunDim ,UserCircleGear,ChatText,ChatCircleText,Bell,ExclamationMark,Laptop,UsersThree} from "@phosphor-icons/react";
+import {
+  MagnifyingGlass,
+  Phone,
+  SignIn,
+  BuildingApartment,
+  Barcode,
+  UserCheck,
+  SignOut,
+  Wrench,
+  Fingerprint,
+  ShoppingCart,
+  User,
+  EnvelopeSimple,
+  House,
+  TextIndent,
+  XCircle,
+  SunDim,
+  UserCircleGear,
+  ChatText,
+  ChatCircleText,
+  Bell,
+  ExclamationMark,
+  Laptop,
+  UsersThree,
+} from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
-import Dropdown from 'react-bootstrap/Dropdown';
+import Dropdown from "react-bootstrap/Dropdown";
 import { DotLoader, PuffLoader } from "react-spinners";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -14,169 +38,190 @@ import alertN from "@/utils/Alert/AlertA";
 import { Alert, Modal, Tooltip } from "react-bootstrap";
 import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
-import { Sidebar } from 'primereact/sidebar';
+import { Sidebar } from "primereact/sidebar";
 import alertQ from "@/utils/Alert/AlertQ";
-import { useSearchParams } from 'next/navigation';
-
-
-
-
+import { useSearchParams } from "next/navigation";
 
 export default function Header() {
-  let { xtFlagLogin,name,userSrc,setUserSrc,setXtFlagLogin, xtflagSpinnerShow, setXtFlagSpinnerShow, cartCounter, setCartCounter, flagThem, setFlagThem,messageNotification,setMessageNotification,flagMessageNotification,setFlagMessageNotification,setAuthority,setZarrinStatus,zarrinStatus} = useContext(MainContext)
+  let {
+    xtFlagLogin,
+    name,
+    userSrc,
+    setUserSrc,
+    setXtFlagLogin,
+    xtflagSpinnerShow,
+    setXtFlagSpinnerShow,
+    cartCounter,
+    setCartCounter,
+    flagThem,
+    setFlagThem,
+    messageNotification,
+    setMessageNotification,
+    flagMessageNotification,
+    setFlagMessageNotification,
+    setAuthority,
+    setZarrinStatus,
+    zarrinStatus,
+  } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
   const [mainCategoryB, setMainCategoryB] = useState({});
-  const [fixTop, setFixTop] = useState(false)
-  const [flaga, setFlaga] = useState(true)
-  const [flagCateMobile, setFlagCateMobile] = useState(true)
-  const ulRef = useRef()
-  const ulRefA = useRef()
+  const [fixTop, setFixTop] = useState(false);
+  const [flaga, setFlaga] = useState(true);
+  const [flagCateMobile, setFlagCateMobile] = useState(true);
+  const ulRef = useRef();
+  const ulRefA = useRef();
   const [visible, setVisible] = useState(false);
   const [visibleB, setVisibleB] = useState(false);
-  const pathname=usePathname()
-  const rout = useRouter()
+  const pathname = usePathname();
+  const rout = useRouter();
   // const authority = searchParams.get('Authority');
   // const status = searchParams.get('Status');
 
-  const [userName, setUserName] = useState('')
-  const [flag, setFlag] = useState(false)
-
+  const [userName, setUserName] = useState("");
+  const [flag, setFlag] = useState(false);
 
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  const [searchType, setSearchType] = useState('')
-  const [searchTypeB, setSearchTypeB] = useState('')
-  const [searchBoxArr, setSearchBoxArr] = useState([])
-  const [flagSearch, setFlagSearch] = useState(false)
+  const [searchType, setSearchType] = useState("");
+  const [searchTypeB, setSearchTypeB] = useState("");
+  const [searchBoxArr, setSearchBoxArr] = useState([]);
+  const [flagSearch, setFlagSearch] = useState(false);
 
   // Function to toggle the menu
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
 
-
-  
-  const AlertA = () => alertN('center', 'info', "محصولی در سبد خرید شما موجود نیست...", 1500);
-  const AlertB = () => alertN('center', 'info', "شما هنوز ثبت نام نکرده اید !!!...", 1500);
-  const AlertC = () => alertN('center', 'info', 'برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ', 3000);
+  const AlertA = () =>
+    alertN("center", "info", "محصولی در سبد خرید شما موجود نیست...", 1500);
+  const AlertB = () =>
+    alertN("center", "info", "شما هنوز ثبت نام نکرده اید !!!...", 1500);
+  const AlertC = () =>
+    alertN(
+      "center",
+      "info",
+      "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ",
+      3000
+    );
   /////////////////////////////theming
-  const AlertD = () => alertQ('center', 'info', "لطفا جهت دریافت لیست قیمت روزانه ،بعد از ثبت نام در سایت از قسمت بالا(سمت چپ) قسمت پیامها  یک پیام با عنوان 'دریافت لیست قیمت ' ارسال بفرمایید همکاران ما در کمترین زمان با شما تماس خواهند گرفت ... ", 'باشه...');
-  const getAllTicket=()=>{
-    const getLocalStorage = localStorage.getItem('loginToken')
-  
-    async function myApp(){
-      const res=await fetch(`${apiUrl}/api/CyTicket/getUserTickets`,{
-        method:'GET',
+  const AlertD = () =>
+    alertQ(
+      "center",
+      "info",
+      "لطفا جهت دریافت لیست قیمت روزانه ،بعد از ثبت نام در سایت از قسمت بالا(سمت چپ) قسمت پیامها  یک پیام با عنوان 'دریافت لیست قیمت ' ارسال بفرمایید همکاران ما در کمترین زمان با شما تماس خواهند گرفت ... ",
+      "باشه..."
+    );
+  const getAllTicket = () => {
+    const getLocalStorage = localStorage.getItem("loginToken");
+
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyTicket/getUserTickets`, {
+        method: "GET",
         headers: {
           Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
         // body:JSON.stringify(obj)
-      }).then(res=>{
-        if(res.status==200){
-          return res.json().then(result=>{
-            setMessageNotification(result)
-         
-          })
-        }
-      }).catch(err=>console.log(err))
+      })
+        .then((res) => {
+          if (res.status == 200) {
+            return res.json().then((result) => {
+              setMessageNotification(result);
+            });
+          }
+        })
+        .catch((err) => console.log(err));
     }
-    myApp()
-  }
-// useEffect(()=>{
-//   setFlagMessageNotification(prev=>!prev)
-// },[])
-  useEffect(()=>{
-    getAllTicket()
-  },[flagMessageNotification,xtFlagLogin])
+    myApp();
+  };
+  // useEffect(()=>{
+  //   setFlagMessageNotification(prev=>!prev)
+  // },[])
+  useEffect(() => {
+    getAllTicket();
+  }, [flagMessageNotification, xtFlagLogin]);
 
-  const changeTheme=()=>{
-    setFlagThem(prev=>!prev)
-    
+  const changeTheme = () => {
+    setFlagThem((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (flagThem) {
+      document.documentElement.style.setProperty("--white1ffffff", "#393939");
+      document.documentElement.style.setProperty("--white1ffffff2", "#464646");
+      document.documentElement.style.setProperty("--gray3", "#9b9b9b");
+      document.documentElement.style.setProperty("--white2", "#d6d6d6");
+      document.documentElement.style.setProperty("--black0", "#ffffff");
+      document.documentElement.style.setProperty("--black33b4359", "#ffffff");
+      document.documentElement.style.setProperty("--yellow", "##ffebcd");
+    } else {
+      document.documentElement.style.setProperty("--white1ffffff", "#ffffff");
+      document.documentElement.style.setProperty("--white1ffffff2", "#ffffff");
+      document.documentElement.style.setProperty("--gray3", "#555");
+      document.documentElement.style.setProperty("--white2", "#ffffff");
+      document.documentElement.style.setProperty("--black0", "#000000");
+      document.documentElement.style.setProperty("--yellow", "#ffebcd");
     }
+  }, [flagThem]);
 
-   
-    useEffect(()=>{
-  if(flagThem){
-      document.documentElement.style.setProperty('--white1ffffff','#393939')
-    document.documentElement.style.setProperty('--white1ffffff2','#464646')
-    document.documentElement.style.setProperty('--gray3','#9b9b9b')
-    document.documentElement.style.setProperty('--white2','#d6d6d6')
-    document.documentElement.style.setProperty('--black0','#ffffff')
-    document.documentElement.style.setProperty('--black33b4359','#ffffff')
-    document.documentElement.style.setProperty('--yellow','##ffebcd')
-
-
-  }else{
-    document.documentElement.style.setProperty('--white1ffffff','#ffffff')
-    document.documentElement.style.setProperty('--white1ffffff2','#ffffff')
-    document.documentElement.style.setProperty('--gray3','#555')
-    document.documentElement.style.setProperty('--white2','#ffffff')
-    document.documentElement.style.setProperty('--black0','#000000')
-    document.documentElement.style.setProperty('--yellow','#ffebcd')
-  }
-    },[flagThem]) 
-  
   /////////////////////////////////
   const searchChange = (e) => {
-    setSearchType(e.target.value)
-
-  }
+    setSearchType(e.target.value);
+  };
   const searchChangeB = (e) => {
-    setSearchTypeB(e.target.value)
-
-  }
+    setSearchTypeB(e.target.value);
+  };
   const searchBox = () => {
-    const getLocalStorage = localStorage.getItem('loginToken')
-    setFlagSearch(false)
+    const getLocalStorage = localStorage.getItem("loginToken");
+    setFlagSearch(false);
     async function myApp() {
       let obj = {
-        name: searchType  ? searchType : searchTypeB ,
+        name: searchType ? searchType : searchTypeB,
         productCategoryCode: null,
         productCategoryId: null,
         categoryCode: null,
         manufacturerName: null,
         pageNumber: 0,
-        pageSize: 1000
-      }
+        pageSize: 1000,
+      };
       // console.log(obj)
       const res = await fetch(`${apiUrl}/api/CyProducts/SearchProducts`, {
-        method: 'POST',
+        method: "POST",
         headers: {
           Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(obj)
-      }).then(res => {
-        // console.log(res)
-        if (res.status == 200) {
-          return res.json()
-        }
-      }).then(result => {
-        if (result) {
-          setFlagSearch(true)
-          setSearchBoxArr(result)
-        } else {
-          setFlagSearch(false)
-        }
-        //   console.log(result)
+        body: JSON.stringify(obj),
       })
+        .then((res) => {
+          // console.log(res)
+          if (res.status == 200) {
+            return res.json();
+          }
+        })
+        .then((result) => {
+          if (result) {
+            setFlagSearch(true);
+            setSearchBoxArr(result);
+          } else {
+            setFlagSearch(false);
+          }
+          //   console.log(result)
+        });
     }
-    myApp()
-  }
+    myApp();
+  };
 
-useEffect(()=>{
-  if(searchTypeB.length>2){
-    searchBox()
+  useEffect(() => {
+    if (searchTypeB.length > 2) {
+      searchBox();
+    } else if (searchTypeB.length < 3) {
+      setSearchBoxArr([]);
+    }
+  }, [searchTypeB]);
 
-  }else if(searchTypeB.length<3){
-    setSearchBoxArr([])
-  }
-},[searchTypeB])
-
-
-  ////////////////////////////  
+  ////////////////////////////
   useEffect(() => {
     const fixNavbarToTop = () => {
       // const currentScroll = window.pageYOffset;
@@ -186,77 +231,71 @@ useEffect(()=>{
       } else {
         setFixTop(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', fixNavbarToTop)
+    window.addEventListener("scroll", fixNavbarToTop);
 
-    return () => window.removeEventListener('scroll', fixNavbarToTop)
-  }, [])
+    return () => window.removeEventListener("scroll", fixNavbarToTop);
+  }, []);
 
   const exitHandler = () => {
-  
-    localStorage.removeItem('loginToken')
-    setXtFlagLogin(false)
-    setCartCounter(0)
-    rout.push('/')
-    setUserSrc('')
+    localStorage.removeItem("loginToken");
+    setXtFlagLogin(false);
+    setCartCounter(0);
+    rout.push("/");
+    setUserSrc("");
     // rout.push('/')
     // console.log('object')
-  }
+  };
 
   ///////////////////////////////
   const getProfile = () => {
-    const getLocalStorage = localStorage.getItem('loginToken')
-    const getLocalStorageUser = localStorage.getItem('user')
-
+    const getLocalStorage = localStorage.getItem("loginToken");
+    const getLocalStorageUser = localStorage.getItem("user");
 
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {
-        method: 'GET',
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getLocalStorage}`,
-        }
-      }).then(res => {
+        },
+      }).then((res) => {
         // console.log(res);
         if (res.status == 200) {
-          setUserName(getLocalStorageUser)
-          setFlag(true)
-          setXtFlagLogin(true)
-
-        }else{
-          localStorage.removeItem('loginToken')
+          setUserName(getLocalStorageUser);
+          setFlag(true);
+          setXtFlagLogin(true);
+        } else {
+          localStorage.removeItem("loginToken");
         }
-      })
+      });
     }
-    myAppGet()
-  }
+    myAppGet();
+  };
 
   useEffect(() => {
     const chekKey2 = (e) => {
       // console.log(e)
-      if (e.keyCode == 13 && searchType !== '') {
-        searchBox()
-   setVisible(true)
-
-        
-      }  else if(e.keyCode == 13 && searchTypeB !== ''){
-        searchBox()
-        setVisibleB(true)
+      if (e.keyCode == 13 && searchType !== "") {
+        searchBox();
+        setVisible(true);
+      } else if (e.keyCode == 13 && searchTypeB !== "") {
+        searchBox();
+        setVisibleB(true);
       } else if (e.keyCode == 27 && flagSearch) {
-        setFlagSearch(false)
-        setSearchType('')
-        setSearchTypeB('')
+        setFlagSearch(false);
+        setSearchType("");
+        setSearchTypeB("");
       }
-
-    }
-    window.addEventListener('keydown', chekKey2)
-    return () => window.removeEventListener('keydown', chekKey2)
-  })
+    };
+    window.addEventListener("keydown", chekKey2);
+    return () => window.removeEventListener("keydown", chekKey2);
+  });
 
   useEffect(() => {
-    getProfile()
-  }, [userName, xtFlagLogin])
+    getProfile();
+  }, [userName, xtFlagLogin]);
   /////////////////////////////////
   const getCategoryById = (id) => {
     let obj = {
@@ -265,13 +304,18 @@ useEffect(()=>{
       str: "string",
     };
     if (id == 3) {
-      postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategory)
+      postApi(
+        "/api/CyProductCategory/GetItemWChildAndRoot",
+        obj,
+        setMainCategory
+      );
     } else if (id == 2) {
-      postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCategoryB)
-
+      postApi(
+        "/api/CyProductCategory/GetItemWChildAndRoot",
+        obj,
+        setMainCategoryB
+      );
     }
-
-
   };
 
   ////////////////////////////
@@ -285,16 +329,14 @@ useEffect(()=>{
       setValue(e.target.value);
     }
   };
-console.log(pathname)
 
-  useEffect(()=>{
-    const getLocalStorage = localStorage.getItem('loginToken')
-console.log(getLocalStorage)
-    if( pathname.includes('/p-user') && !getLocalStorage){
-      rout.push('/')
-      AlertB()
+  useEffect(() => {
+    const getLocalStorage = localStorage.getItem("loginToken");
+    if (pathname.includes("/p-user") && !getLocalStorage) {
+      rout.push("/");
+      AlertB();
     }
-  },[pathname])
+  }, [pathname]);
 
   // useEffect(()=>{
   //   if(pathname.includes('paymentResult') && zarrinStatus===''){
@@ -302,42 +344,36 @@ console.log(getLocalStorage)
   //     setAuthority(authority)
   //     setZarrinStatus(status)
   //   }
-  // },[pathname]) 
+  // },[pathname])
   return (
     <>
-      {xtflagSpinnerShow &&
-        <div className={`${styles.DotLoader_div}`}><DotLoader
-          className={`${styles.DotLoader}`}
-          color="rgba(25, 165, 175)"
-          size='280px'
-          speedMultiplier={1}
-        />
+      {xtflagSpinnerShow && (
+        <div className={`${styles.DotLoader_div}`}>
+          <DotLoader
+            className={`${styles.DotLoader}`}
+            color="rgba(25, 165, 175)"
+            size="280px"
+            speedMultiplier={1}
+          />
         </div>
-      }
-
-
-
+      )}
 
       <section className={styles.A}>
-
-        {!fixTop ?
-
+        {!fixTop ? (
           <div className={`container ${styles.Header} boxSh`}>
-
-
-
-
-
             <div className={`row ${styles.Header_top} centerr`}>
-
-              <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
+              <div
+                className={`col col-md-8 ${styles.Header_rightSide} centerr`}
+              >
                 <div className={styles.Header_rightSide__div_img}>
                   <div style={{ width: "135px", height: "105px" }}>
                     <SwiperA />
                   </div>
                 </div>
 
-                <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>
+                <div
+                  className={`${styles.Header_rightSide__div_search}  centerc boxSh`}
+                >
                   <input
                     className={styles.Header_rightSide__div_search_input}
                     type="text"
@@ -345,144 +381,202 @@ console.log(getLocalStorage)
                     value={searchType}
                     onChange={searchChange}
                   />
-                  <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
-                    onClick={() => { 
-                      setVisible(true)
-                      searchBox() }} />
-            
-                  <div  className={`${styles.sidebar_input_div} `} >
-                                    <Sidebar 
-                 
-                  visible={visible} onHide={() => setVisible(false)} fullScreen>
-                  {flagSearch &&
-                  
-                  <div className="container"> 
-                  <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>   <input
-                    className={styles.Header_rightSide__div_search_input}
-                    type="text"
-                    placeholder="دنبال چی میگردی...؟"
-                    value={searchType}
-                    onChange={searchChange}
+                  <MagnifyingGlass
+                    size={24}
+                    color="#14a5af"
+                    weight="thin"
+                    className={styles.magnifyingGlass}
+                    onClick={() => {
+                      setVisible(true);
+                      searchBox();
+                    }}
                   />
-                  <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
-                    onClick={() => { 
-                      setVisible(true)
-                      searchBox() }} /></div>
 
+                  <div className={`${styles.sidebar_input_div} `}>
+                    <Sidebar
+                      visible={visible}
+                      onHide={() => setVisible(false)}
+                      fullScreen
+                    >
+                      {flagSearch && (
+                        <div className="container">
+                          <div
+                            className={`${styles.Header_rightSide__div_search}  centerc boxSh`}
+                          >
+                            {" "}
+                            <input
+                              className={
+                                styles.Header_rightSide__div_search_input
+                              }
+                              type="text"
+                              placeholder="دنبال چی میگردی...؟"
+                              value={searchType}
+                              onChange={searchChange}
+                            />
+                            <MagnifyingGlass
+                              size={24}
+                              color="#14a5af"
+                              weight="thin"
+                              className={styles.magnifyingGlass}
+                              onClick={() => {
+                                setVisible(true);
+                                searchBox();
+                              }}
+                            />
+                          </div>
 
-                  <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `} >
-                    {/* <span><XCircle size={24} onClick={() => {
+                          <div
+                            className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}
+                          >
+                            {/* <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
                     }} /></span> */}
-                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={() => {
-                        setFlagSearch(false)
-                        setSearchBoxArr([])
-                        setSearchType('')
-                        setXtFlagSpinnerShow(true)
-                      setVisible(false)
-                      }}
-                      >
-                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                          <span>{item.name}</span>
-                          <img src={item.smallImage} alt={item.name} />
+                            {searchBoxArr.itemList?.length != 0
+                              ? searchBoxArr.itemList?.map((item) => (
+                                  <Link
+                                    href={`/product/${item.id}`}
+                                    onClick={() => {
+                                      setFlagSearch(false);
+                                      setSearchBoxArr([]);
+                                      setSearchType("");
+                                      setXtFlagSpinnerShow(true);
+                                      setVisible(false);
+                                    }}
+                                  >
+                                    <div
+                                      className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+                                    >
+                                      <span>{item.name}</span>
+                                      <img
+                                        src={item.smallImage}
+                                        alt={item.name}
+                                      />
+                                    </div>
+                                  </Link>
+                                ))
+                              : ""}
+                          </div>
                         </div>
-                      </Link>
-
-                    )) : ''}
-
-
-
-                  </div></div>
-              
-                  
-                 }
-</Sidebar>
+                      )}
+                    </Sidebar>
                   </div>
-  
                 </div>
                 {/* </div> */}
-
               </div>
 
               <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
-
-                {xtFlagLogin &&
-
-
+                {xtFlagLogin && (
                   <>
-                    <Dropdown className={styles.user_button}  size="lg">
+                    <Dropdown className={styles.user_button} size="lg">
                       <Dropdown.Toggle variant="info" id="dropdown-basic">
-                        <span className={styles.user_span}>{name?.toUpperCase()}</span>      </Dropdown.Toggle>
+                        <span className={styles.user_span}>
+                          {name?.toUpperCase()}
+                        </span>{" "}
+                      </Dropdown.Toggle>
 
                       <Dropdown.Menu className={styles.user_p}>
-                        <Dropdown.Item href="/p-user/profile"
-                          onClick={() => setXtFlagSpinnerShow(true)}><p>پنل کاربری</p>  </Dropdown.Item>
-                        <Dropdown.Item onClick={()=>{
-                           exitHandler()
-                          
-                            setMessageNotification([])
-                            setFlagMessageNotification(prev=>!prev)
-                        }}><p> خروج</p> </Dropdown.Item>
+                        <Dropdown.Item
+                          href="/p-user/profile"
+                          onClick={() => setXtFlagSpinnerShow(true)}
+                        >
+                          <p>پنل کاربری</p>{" "}
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                          onClick={() => {
+                            exitHandler();
+
+                            setMessageNotification([]);
+                            setFlagMessageNotification((prev) => !prev);
+                          }}
+                        >
+                          <p> خروج</p>{" "}
+                        </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </>
-
-                }
-                <Link href={!xtFlagLogin ? '/login' : '/p-user/profile'}>
+                )}
+                <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
                   <div
                     onClick={() => setXtFlagSpinnerShow(true)}
-                    className={`${styles.Header_leftSide__div} centerr`}  >
-{userSrc ? <img src={userSrc} alt="user-profile"  className={`${styles.Header_user_img}`}/> :
-                    <User size={24} color="#14a5af" />
+                    className={`${styles.Header_leftSide__div} centerr`}
+                  >
+                    {userSrc ? (
+                      <img
+                        src={userSrc}
+                        alt="user-profile"
+                        className={`${styles.Header_user_img}`}
+                      />
+                    ) : (
+                      <User size={24} color="#14a5af" />
+                    )}
 
-}
-
-                    {!xtFlagLogin ?
-                      <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
-                      <span className={`${styles.Header_leftSide__div_span} `} >وارد پنل کاربری خود شوید...</span>}
+                    {!xtFlagLogin ? (
+                      <span className={`${styles.Header_leftSide__div_span} `}>
+                        وارد حساب کاربری خود شوید...
+                      </span>
+                    ) : (
+                      <span className={`${styles.Header_leftSide__div_span} `}>
+                        وارد پنل کاربری خود شوید...
+                      </span>
+                    )}
                   </div>
                 </Link>
 
-
-                <Link href={cartCounter != 0 ? '/basket' : '#'}  >
+                <Link href={cartCounter != 0 ? "/basket" : "#"}>
                   <div
                     onClick={() => {
                       if (cartCounter != 0) {
-                        setXtFlagSpinnerShow(true)
+                        setXtFlagSpinnerShow(true);
                       } else {
-                        AlertA()
+                        AlertA();
                       }
-
-
                     }}
-                    className={`${styles.Header_leftSide__div} centerr`}>
+                    className={`${styles.Header_leftSide__div} centerr`}
+                  >
                     <ShoppingCart size={24} color="#14a5af" />
-                    {cartCounter != 0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}
+                    {cartCounter != 0 && (
+                      <span className={`${styles.shopicon_baget} centerc`}>
+                        {cartCounter}
+                      </span>
+                    )}
                   </div>
                 </Link>
 
-               
-{
-                 xtFlagLogin ?  <Link href={'/p-user/ticket'} >
-                                                      <div className={` ${styles.Header_leftSide__div} centerr`}
-                                                      onClick={()=>setXtFlagSpinnerShow(true)}
-                                                      >
-
-                 <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
-                 {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && <span className={`${styles.shopicon_baget} centerc`} > !</span>}  
-                 {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
-                 </div>
-                                 </Link> :  
-                                    <div className={` ${styles.Header_leftSide__div} centerr`}>
-     <ChatCircleText size={28}  color="#14a5af" weight="duotone" 
-     onClick={()=>{
-      AlertC()
-     }}
-     />
-     </div>
-                                                }
+                {xtFlagLogin ? (
+                  <Link href={"/p-user/ticket"}>
+                    <div
+                      className={` ${styles.Header_leftSide__div} centerr`}
+                      onClick={() => setXtFlagSpinnerShow(true)}
+                    >
+                      <ChatCircleText
+                        size={28}
+                        weight="duotone"
+                        color="#14a5af"
+                      />
+                      {messageNotification?.filter(
+                        (filter) => filter.status == 1
+                      )?.length != 0 && (
+                        <span className={`${styles.shopicon_baget} centerc`}>
+                          {" "}
+                          !
+                        </span>
+                      )}
+                      {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
+                    </div>
+                  </Link>
+                ) : (
+                  <div className={` ${styles.Header_leftSide__div} centerr`}>
+                    <ChatCircleText
+                      size={28}
+                      color="#14a5af"
+                      weight="duotone"
+                      onClick={() => {
+                        AlertC();
+                      }}
+                    />
+                  </div>
+                )}
 
                 {/* <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
@@ -490,47 +584,68 @@ console.log(getLocalStorage)
                 <SunDim size={28} color="#14a5af" weight="duotone" />
                 </div> */}
 
-                <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-<div className={` ${styles.mobiNumber_div} centerc`}>
-       <span>02191005457 <Phone size={18} color="#ededed" weight="duotone" /></span>
-                  <span>کامپیوترصانع</span>
-</div>
-             
+                <div
+                  className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}
+                >
+                  <div className={` ${styles.mobiNumber_div} centerc`}>
+                    <span>
+                      02191005457{" "}
+                      <Phone size={18} color="#ededed" weight="duotone" />
+                    </span>
+                    <span>کامپیوترصانع</span>
+                  </div>
+
                   {/* <Phone size={24} color="#ededed" weight="duotone" /> */}
                 </div>
-
-
-
-
-
               </div>
-
             </div>
 
-            <div className={`row  ${styles.header_bottom} `}  >
-              <div className={`col ${styles.header_bottom__col}`}  >
-
-                <ul className={`${styles.header_bottom__col__ul} centerr`}  >
-                  <li 
+            <div className={`row  ${styles.header_bottom} `}>
+              <div className={`col ${styles.header_bottom__col}`}>
+                <ul className={`${styles.header_bottom__col__ul} centerr`}>
+                  <li
                   // onClick={() => setXtFlagSpinnerShow(true)}
-                  > <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} > <House size={15} /> خانه</Link> </li>
+                  >
+                    {" "}
+                    <Link
+                      href={"/"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      {" "}
+                      <House size={15} /> خانه
+                    </Link>{" "}
+                  </li>
 
-
-                  <li className="nav_link arrow_icon"  >
-                  <TextIndent size={15} />
+                  <li className="nav_link arrow_icon">
+                    <TextIndent size={15} />
                     دسته بندی ها
-                    <ul className={`${styles.header_bottom__col__ul__ul} centerc`}
+                    <ul
+                      className={`${styles.header_bottom__col__ul__ul} centerc`}
                       ref={ulRef}
                     >
                       <li
                         value={1}
                         onMouseEnter={onmousHandle}
-                        className={valeS == 1 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+                        className={
+                          valeS == 1
+                            ? ` ${styles.liiii2_a}`
+                            : `${styles.liiii2}`
+                        }
                       >
                         لوازم جانبی
-                        <div className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}>
+                        <div
+                          className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}
+                        >
                           <div
-                            className={valeS == 1 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}
+                            className={
+                              valeS == 1
+                                ? `row-cols-6 ${styles.ishover}`
+                                : `${styles.nohover}`
+                            }
                           >
                             {mainCategory.childs?.length &&
                               mainCategory.childs.map((item, index) => (
@@ -540,10 +655,12 @@ console.log(getLocalStorage)
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                                 >
-                                  <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                                  <img
+                                    src={item.imageUrl}
+                                    alt={item.name || "Category image"}
+                                  />
                                   {item.name}
                                 </Link>
-
                               ))}
                           </div>
                         </div>
@@ -552,14 +669,24 @@ console.log(getLocalStorage)
                       <li
                         value={2}
                         onMouseEnter={onmousHandle}
-                        className={(valeS == 2 && flaga) ? `${styles.liiii2_a}` : `${styles.liiii2}`}
+                        className={
+                          valeS == 2 && flaga
+                            ? `${styles.liiii2_a}`
+                            : `${styles.liiii2}`
+                        }
                       >
                         سخت افزار
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
+                        <div
+                          className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}
+                        >
                           <div
-                            className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
+                            className={
+                              valeS == 2
+                                ? `row-cols-4 ${styles.ishover}`
+                                : `${styles.nohover}`
+                            }
 
-                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -569,91 +696,153 @@ console.log(getLocalStorage)
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                                 >
-                                  <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                                  <img
+                                    src={item.imageUrl}
+                                    alt={item.name || "Category image"}
+                                  />
                                   {item.name}
                                 </Link>
-
                               ))}
                           </div>
                         </div>
                       </li>
-
-
-            
                     </ul>
-
-
-
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
 
-{xtFlagLogin &&   <li className="nav_link arrow_icon" >
-                  <Wrench size={15} />
+                  {xtFlagLogin && (
+                    <li className="nav_link arrow_icon">
+                      <Wrench size={15} />
+                      خدمات
+                      <ul
+                        className={`${styles.header_bottom__col__ul__ul_service} centerc`}
+                      >
+                        <Link href={"/p-user/warranty"}>
+                          <li
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                            value={11}
+                            onMouseEnter={onmousHandle}
+                            className={
+                              valeS == 11
+                                ? ` ${styles.liiii2_a}`
+                                : `${styles.liiii2}`
+                            }
+                          >
+                            گارانتی
+                          </li>
+                        </Link>
 
-                    خدمات
-                    <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
+                        <Link href={"/p-user/repairs"}>
+                          <li
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                            value={12}
+                            onMouseEnter={onmousHandle}
+                            className={
+                              valeS == 12
+                                ? ` ${styles.liiii2_a}`
+                                : `${styles.liiii2}`
+                            }
+                          >
+                            تعمیرات
+                          </li>
+                        </Link>
+                      </ul>
+                    </li>
+                  )}
 
-
+                  {!xtFlagLogin ? (
+                    <>
+                      <li onClick={() => setXtFlagSpinnerShow(true)}>
+                        {" "}
+                        <Link
+                          href={"/login"}
+                          style={{
+                            listStyle: "none",
+                            textDecoration: "none",
+                            color: "inherit",
+                          }}
+                        >
+                          <SignIn size={15} />
+                          ورود{" "}
+                        </Link>{" "}
+                      </li>
+                      <li onClick={() => setXtFlagSpinnerShow(true)}>
+                        {" "}
+                        <Link
+                          href={"/register"}
+                          style={{
+                            listStyle: "none",
+                            textDecoration: "none",
+                            color: "inherit",
+                          }}
+                        >
+                          <UserCheck size={15} />
+                          عضویت{" "}
+                        </Link>{" "}
+                      </li>
+                    </>
+                  ) : (
+                    <li onClick={() => setXtFlagSpinnerShow(true)}>
+                      {" "}
                       <Link
-                        href={'/p-user/warranty'}>
-                        <li
-                          onClick={() => setXtFlagSpinnerShow(true)}
-                          value={11}
-                          onMouseEnter={onmousHandle}
-                          className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                        >گارانتی</li></Link>
-
-
-
-                      <Link href={'/p-user/repairs'}>
-                        <li
-                          onClick={() => setXtFlagSpinnerShow(true)}
-                          value={12}
-                          onMouseEnter={onmousHandle}
-                          className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                        >تعمیرات</li></Link>
-
-
-                    </ul>
+                        href={"/p-user/profile"}
+                        style={{
+                          listStyle: "none",
+                          textDecoration: "none",
+                          color: "inherit",
+                        }}
+                      >
+                        <User size={15} />
+                        پنل کاربری{" "}
+                      </Link>{" "}
+                    </li>
+                  )}
+                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                    {" "}
+                    <Link
+                      href={"/computerparts"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      {" "}
+                      <Laptop size={15} />
+                      محاسبه گر سیستم
+                    </Link>{" "}
                   </li>
-              }
 
-                
-
-                  {
-                    !xtFlagLogin ? <>
-                      <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >
-                         <SignIn size={15} />ورود </Link> </li>
-                      <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >
-                        <UserCheck size={15} />عضویت </Link> </li>
-                    </> :
-                      <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      >
-                         <User size={15} />پنل کاربری </Link> </li>
-
-                  }
-                 <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <Laptop size={15} />
-                   محاسبه گر سیستم</Link> </li>
-
-                   {/* <li onClick={() => AlertD()}> <UsersThree size={15} />
+                  {/* <li onClick={() => AlertD()}> <UsersThree size={15} />
                     ورود همکاران(پخش عمده)  </li> */}
 
-    <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <BuildingApartment size={15} />
-    تماس با ما</Link> </li>
+                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                    {" "}
+                    <Link
+                      href={"/contactus"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      {" "}
+                      <BuildingApartment size={15} />
+                      تماس با ما
+                    </Link>{" "}
+                  </li>
                 </ul>
               </div>
 
-              <div className={styles.header_bottom__col_logo}  >
-                <Link href={'https://eitaa.com/sane_camputer'}>
+              <div className={styles.header_bottom__col_logo}>
+                <Link href={"https://eitaa.com/sane_camputer"}>
                   <img
                     className={styles.sphere3}
                     src="../../../images/eitaa-icon-colorful.png"
                     alt="eitaa"
                   />
                 </Link>
-                <Link href={'https://instagram.com/sane_computer_'}>
+                <Link href={"https://instagram.com/sane_computer_"}>
                   {" "}
                   <img
                     className={styles.sphere2}
@@ -661,7 +850,7 @@ console.log(getLocalStorage)
                     alt="instagram"
                   />
                 </Link>
-                <Link href={'https://t.me/SANE_IT'}>
+                <Link href={"https://t.me/SANE_IT"}>
                   {" "}
                   <img
                     className={styles.sphere}
@@ -672,20 +861,20 @@ console.log(getLocalStorage)
               </div>
             </div>
           </div>
-
-          :
-
-
+        ) : (
           <div className={`container ${styles.containerfix}`}>
             <div className={`row ${styles.Header_top} centerr`}>
-
-              <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
+              <div
+                className={`col col-md-8 ${styles.Header_rightSide} centerr`}
+              >
                 <div className={styles.Header_rightSide__div_img}>
                   <div style={{ width: "80px", height: "50px" }}>
                     <SwiperA />
                   </div>
                 </div>
-                <div className={`${styles.Header_rightSide__div_search}  centerc`}>
+                <div
+                  className={`${styles.Header_rightSide__div_search}  centerc`}
+                >
                   <input
                     className={styles.Header_rightSide__div_search_input}
                     type="text"
@@ -693,162 +882,229 @@ console.log(getLocalStorage)
                     value={searchType}
                     onChange={searchChange}
                   />
-                  <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
-                    onClick={() => { 
-                      setVisible(true)
-                      searchBox() }} />
-          
-                  <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
-                  {flagSearch &&
-                  
-                  <div className="container"> 
-                  <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `} >
-                    {/* <span><XCircle size={24} onClick={() => {
+                  <MagnifyingGlass
+                    size={24}
+                    color="#14a5af"
+                    weight="thin"
+                    className={styles.magnifyingGlass}
+                    onClick={() => {
+                      setVisible(true);
+                      searchBox();
+                    }}
+                  />
+
+                  <Sidebar
+                    visible={visible}
+                    onHide={() => setVisible(false)}
+                    fullScreen
+                  >
+                    {flagSearch && (
+                      <div className="container">
+                        <div
+                          className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}
+                        >
+                          {/* <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
                     }} /></span> */}
-                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={() => {
-                        setFlagSearch(false)
-                        setSearchBoxArr([])
-                        setSearchType('')
-                        setXtFlagSpinnerShow(true)
-                        setVisible(false)
-                      }}
-                      >
-                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                          <span>{item.name}</span>
-                          <img src={item.smallImage} alt={item.name} />
+                          {searchBoxArr.itemList?.length != 0
+                            ? searchBoxArr.itemList?.map((item) => (
+                                <Link
+                                  href={`/product/${item.id}`}
+                                  onClick={() => {
+                                    setFlagSearch(false);
+                                    setSearchBoxArr([]);
+                                    setSearchType("");
+                                    setXtFlagSpinnerShow(true);
+                                    setVisible(false);
+                                  }}
+                                >
+                                  <div
+                                    className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+                                  >
+                                    <span>{item.name}</span>
+                                    <img
+                                      src={item.smallImage}
+                                      alt={item.name}
+                                    />
+                                  </div>
+                                </Link>
+                              ))
+                            : ""}
                         </div>
-                      </Link>
-
-                    )) : ''}
-
-
-
-                  </div></div>
-              
-                  
-                 }
-</Sidebar>
+                      </div>
+                    )}
+                  </Sidebar>
                 </div>
-
               </div>
 
               <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
+                <div className="centerc"></div>
+                {xtFlagLogin && (
+                  <span className={styles.user_span}>
+                    {name?.toUpperCase()}
+                  </span>
+                )}
 
-                <div className="centerc">
-
-                </div>
-                {xtFlagLogin && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
-
-                <Link href={!xtFlagLogin ? '/login' : '/p-user/profile'}>
+                <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
                   <div
                     onClick={() => setXtFlagSpinnerShow(true)}
-                    className={`${styles.Header_leftSide__div} centerr`}  >
-{userSrc ? <img src={userSrc} alt="user-profile"  className={`${styles.Header_user_img}`}/> :
-                    <User size={24} color="#14a5af" />
-
-}                    {!xtFlagLogin ?
-                      <span className={`${styles.Header_leftSide__div_span} `} >وارد حساب کاربری خود شوید...</span> :
-                      <span className={`${styles.Header_leftSide__div_span} `} >وارد پنل کاربری خود شوید...</span>}
+                    className={`${styles.Header_leftSide__div} centerr`}
+                  >
+                    {userSrc ? (
+                      <img
+                        src={userSrc}
+                        alt="user-profile"
+                        className={`${styles.Header_user_img}`}
+                      />
+                    ) : (
+                      <User size={24} color="#14a5af" />
+                    )}{" "}
+                    {!xtFlagLogin ? (
+                      <span className={`${styles.Header_leftSide__div_span} `}>
+                        وارد حساب کاربری خود شوید...
+                      </span>
+                    ) : (
+                      <span className={`${styles.Header_leftSide__div_span} `}>
+                        وارد پنل کاربری خود شوید...
+                      </span>
+                    )}
                   </div>
                 </Link>
 
-
-                <Link href={cartCounter != 0 ? '/basket' : '#'}  >
+                <Link href={cartCounter != 0 ? "/basket" : "#"}>
                   <div
                     onClick={() => {
                       if (cartCounter != 0) {
-                        setXtFlagSpinnerShow(true)
+                        setXtFlagSpinnerShow(true);
                       } else {
-                        AlertA()
+                        AlertA();
                       }
-
-
                     }}
-                    className={`${styles.Header_leftSide__div} centerr`}>
+                    className={`${styles.Header_leftSide__div} centerr`}
+                  >
                     <ShoppingCart size={24} color="#14a5af" />
-                    {cartCounter != 0 && <span className={`${styles.shopicon_baget} centerc`} >{cartCounter}</span>}
+                    {cartCounter != 0 && (
+                      <span className={`${styles.shopicon_baget} centerc`}>
+                        {cartCounter}
+                      </span>
+                    )}
                   </div>
                 </Link>
 
-
-                {
-                 xtFlagLogin ?  <Link href={'/p-user/ticket'}>
-                                                      <div className={` ${styles.Header_leftSide__div} centerr`}
-                                                       onClick={()=>setXtFlagSpinnerShow(true)}
-                                                      >
-
-                 <ChatCircleText size={28} weight="duotone" color="#14a5af" /> 
-                 {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && <span className={`${styles.shopicon_baget} centerc`} > !</span>}  
-                 {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
-                 </div>
-                                 </Link> :  
-                                    <div className={` ${styles.Header_leftSide__div} centerr`}>
-     <ChatCircleText size={28}  color="#14a5af" weight="duotone" 
-     onClick={()=>{
-      AlertC()
-     }}
-     />
-     </div>
-                                                }
-{/* 
+                {xtFlagLogin ? (
+                  <Link href={"/p-user/ticket"}>
+                    <div
+                      className={` ${styles.Header_leftSide__div} centerr`}
+                      onClick={() => setXtFlagSpinnerShow(true)}
+                    >
+                      <ChatCircleText
+                        size={28}
+                        weight="duotone"
+                        color="#14a5af"
+                      />
+                      {messageNotification?.filter(
+                        (filter) => filter.status == 1
+                      )?.length != 0 && (
+                        <span className={`${styles.shopicon_baget} centerc`}>
+                          {" "}
+                          !
+                        </span>
+                      )}
+                      {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
+                    </div>
+                  </Link>
+                ) : (
+                  <div className={` ${styles.Header_leftSide__div} centerr`}>
+                    <ChatCircleText
+                      size={28}
+                      color="#14a5af"
+                      weight="duotone"
+                      onClick={() => {
+                        AlertC();
+                      }}
+                    />
+                  </div>
+                )}
+                {/* 
                 <div className={` ${styles.Header_leftSide__div} centerr`}
                 onClick={changeTheme}
                 >
                 <SunDim size={24} color="#14a5af" weight="duotone" />
                 </div> */}
 
-                <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-                <div className={` ${styles.mobiNumber_div} centerc`}>
-       <span>02191005457<Phone size={18} color="#ededed" weight="duotone" /></span>
-                  <span>کامپیوترصانع</span>
-</div>
+                <div
+                  className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}
+                >
+                  <div className={` ${styles.mobiNumber_div} centerc`}>
+                    <span>
+                      02191005457
+                      <Phone size={18} color="#ededed" weight="duotone" />
+                    </span>
+                    <span>کامپیوترصانع</span>
+                  </div>
                   {/* <Phone size={24} color="#ededed" weight="duotone" />    */}
-                     </div>
-
-   
+                </div>
               </div>
-
             </div>
 
-            <div className={`row  ${styles.header_bottom_fix} `}  >
-              <div className={`col ${styles.header_bottom__col}`}  >
+            <div className={`row  ${styles.header_bottom_fix} `}>
+              <div className={`col ${styles.header_bottom__col}`}>
+                <ul className={`${styles.header_bottom__col__ul_fix} centerr`}>
+                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                    {" "}
+                    <Link
+                      href={"/"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      <House size={15} /> خانه
+                    </Link>{" "}
+                  </li>
 
-                <ul className={`${styles.header_bottom__col__ul_fix} centerr`}  >
-                  <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >
-                  <House size={15} /> خانه</Link> </li>
-
-
-                  <li className="nav_link arrow_icon"  ><TextIndent size={15} />
-
+                  <li className="nav_link arrow_icon">
+                    <TextIndent size={15} />
                     دسته بندی ها
-                    <ul className={`${styles.header_bottom__col__ul__ul} centerc`}>
+                    <ul
+                      className={`${styles.header_bottom__col__ul__ul} centerc`}
+                    >
                       <li
                         value={1}
                         onMouseEnter={onmousHandle}
-                        className={valeS == 1 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
+                        className={
+                          valeS == 1
+                            ? ` ${styles.liiii2_a}`
+                            : `${styles.liiii2}`
+                        }
                       >
                         لوازم جانبی
-                        <div className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}>
+                        <div
+                          className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}
+                        >
                           <div
-                            className={valeS == 1 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}
+                            className={
+                              valeS == 1
+                                ? `row-cols-6 ${styles.ishover}`
+                                : `${styles.nohover}`
+                            }
                           >
                             {mainCategory.childs?.length &&
                               mainCategory.childs.map((item, index) => (
-
                                 <Link
                                   onClick={() => setXtFlagSpinnerShow(true)}
                                   key={index}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-
                                 >
-                                  <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                                  <img
+                                    src={item.imageUrl}
+                                    alt={item.name || "Category image"}
+                                  />
                                   {item.name}
                                 </Link>
-
 
                                 // <Link key={index}
                                 //   onClick={() => {
@@ -868,14 +1124,24 @@ console.log(getLocalStorage)
                       <li
                         value={2}
                         onMouseEnter={onmousHandle}
-                        className={(valeS == 2 && flaga) ? `${styles.liiii2_a}` : `${styles.liiii2}`}
+                        className={
+                          valeS == 2 && flaga
+                            ? `${styles.liiii2_a}`
+                            : `${styles.liiii2}`
+                        }
                       >
                         سخت افزار
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
+                        <div
+                          className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}
+                        >
                           <div
-                            className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
+                            className={
+                              valeS == 2
+                                ? `row-cols-4 ${styles.ishover}`
+                                : `${styles.nohover}`
+                            }
 
-                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -884,17 +1150,17 @@ console.log(getLocalStorage)
                                   key={index}
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-
                                 >
-                                  <img src={item.imageUrl} alt={item.name || 'Category image'} />
+                                  <img
+                                    src={item.imageUrl}
+                                    alt={item.name || "Category image"}
+                                  />
                                   {item.name}
                                 </Link>
-
                               ))}
                           </div>
                         </div>
                       </li>
-
 
                       {/* <li
                         value={6}
@@ -932,66 +1198,134 @@ console.log(getLocalStorage)
                     </ul>
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
-                  {xtFlagLogin &&   <li className="nav_link arrow_icon" >
-                  <Wrench size={15} />
+                  {xtFlagLogin && (
+                    <li className="nav_link arrow_icon">
+                      <Wrench size={15} />
+                      خدمات
+                      <ul
+                        className={`${styles.header_bottom__col__ul__ul_service} centerc`}
+                      >
+                        <Link href={"/p-user/warranty"}>
+                          <li
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                            value={11}
+                            onMouseEnter={onmousHandle}
+                            className={
+                              valeS == 11
+                                ? ` ${styles.liiii2_a}`
+                                : `${styles.liiii2}`
+                            }
+                          >
+                            گارانتی
+                          </li>
+                        </Link>
 
-                    خدمات
-                    <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
+                        <Link href={"/p-user/repairs"}>
+                          <li
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                            value={12}
+                            onMouseEnter={onmousHandle}
+                            className={
+                              valeS == 12
+                                ? ` ${styles.liiii2_a}`
+                                : `${styles.liiii2}`
+                            }
+                          >
+                            تعمیرات
+                          </li>
+                        </Link>
+                      </ul>
+                    </li>
+                  )}
 
+                  {!xtFlagLogin ? (
+                    <>
+                      <li onClick={() => setXtFlagSpinnerShow(true)}>
+                        {" "}
+                        <Link
+                          href={"/login"}
+                          style={{
+                            listStyle: "none",
+                            textDecoration: "none",
+                            color: "inherit",
+                          }}
+                        >
+                          <SignIn size={15} />
+                          ورود{" "}
+                        </Link>{" "}
+                      </li>
 
+                      <li onClick={() => setXtFlagSpinnerShow(true)}>
+                        {" "}
+                        <Link
+                          href={"/register"}
+                          style={{
+                            listStyle: "none",
+                            textDecoration: "none",
+                            color: "inherit",
+                          }}
+                        >
+                          <UserCheck size={15} />
+                          عضویت{" "}
+                        </Link>{" "}
+                      </li>
+                    </>
+                  ) : (
+                    <li onClick={() => setXtFlagSpinnerShow(true)}>
+                      {" "}
                       <Link
-                        href={'/p-user/warranty'}>
-                        <li
-                          onClick={() => setXtFlagSpinnerShow(true)}
-                          value={11}
-                          onMouseEnter={onmousHandle}
-                          className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                        >گارانتی</li></Link>
+                        href={"/p-user/profile"}
+                        style={{
+                          listStyle: "none",
+                          textDecoration: "none",
+                          color: "inherit",
+                        }}
+                      >
+                        <User size={15} />
+                        پنل کاربری{" "}
+                      </Link>{" "}
+                    </li>
+                  )}
 
-
-
-                      <Link href={'/p-user/repairs'}>
-                        <li
-                          onClick={() => setXtFlagSpinnerShow(true)}
-                          value={12}
-                          onMouseEnter={onmousHandle}
-                          className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                        >تعمیرات</li></Link>
-
-
-                    </ul>
+                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                    {" "}
+                    <Link
+                      href={"/computerparts"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      {" "}
+                      <Laptop size={15} />
+                      محاسبه گر سیستم
+                    </Link>{" "}
                   </li>
-              }     
-
-                  {
-                    !xtFlagLogin ? <>
-                      <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/login'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      ><SignIn size={15} />ورود </Link> </li>
-
-                      <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/register'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      ><UserCheck size={15} />عضویت </Link> </li>
-
-                    </> :
-                      <li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/p-user/profile'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                      ><User size={15} />پنل کاربری </Link> </li>
-
-                  }
-
-
-<li onClick={() => setXtFlagSpinnerShow(true)}> <Link href={'/computerparts'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} >                  <Laptop size={15} />
-محاسبه گر سیستم</Link> </li>
-                  <li> <Link href={'/contactus'} style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }} ><BuildingApartment size={15} /> تماس با ما</Link> </li>
+                  <li>
+                    {" "}
+                    <Link
+                      href={"/contactus"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      <BuildingApartment size={15} /> تماس با ما
+                    </Link>{" "}
+                  </li>
                 </ul>
 
-                <div className={styles.header_bottom__col_logo}  >
-                  <Link href={'https://eitaa.com/sane_camputer'}>
+                <div className={styles.header_bottom__col_logo}>
+                  <Link href={"https://eitaa.com/sane_camputer"}>
                     <img
                       className={styles.sphere3}
                       src="../../../images/eitaa-icon-colorful.png"
                       alt="eitaa"
                     />
                   </Link>
-                  <Link href={'https://instagram.com/sane_computer_'}>
+                  <Link href={"https://instagram.com/sane_computer_"}>
                     {" "}
                     <img
                       className={styles.sphere2}
@@ -999,7 +1333,7 @@ console.log(getLocalStorage)
                       alt="instagram"
                     />
                   </Link>
-                  <Link href={'https://t.me/SANE_IT'}>
+                  <Link href={"https://t.me/SANE_IT"}>
                     {" "}
                     <img
                       className={styles.sphere}
@@ -1008,63 +1342,77 @@ console.log(getLocalStorage)
                     />
                   </Link>
                 </div>
-
               </div>
-
             </div>
           </div>
-        }
+        )}
       </section>
-
-
 
       <section className={styles.B}>
         <div className="container">
+          <div className={`${styles.mobi_header} row `}>
+            <Link href={"/"}>
+              <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
+            </Link>
 
-          <div className={`${styles.mobi_header} row `}  >
+            <div className={styles.header_bottom__col_logo}>
+              {xtFlagLogin && (
+                <Link href={"/p-user/profile"}>
+                  <span className={styles.sphere4}>
+                    {userSrc && (
+                      <img
+                        src={userSrc}
+                        alt="user-profile"
+                        className={`${styles.Header_user_img_mobile}`}
+                      />
+                    )}
+                    <UserCircleGear
+                      size={35}
+                      color="#14a5af"
+                      weight="duotone"
+                    />
+                  </span>
+                  {/* <span className={styles.sphere4} >{name?.toUpperCase()}</span> */}
+                </Link>
+              )}
 
-          <Link href={'/'}>
-<img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
-          </Link>
+              {xtFlagLogin ? (
+                <Link
+                  href={"/p-user/ticket"}
+                  onClick={() => setXtFlagSpinnerShow(true)}
+                >
+                  {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
+                  <ChatCircleText
+                    size={30}
+                    color="#14a5af"
+                    weight="duotone"
+                    className={styles.sphere}
+                  />
+                  {
+                    messageNotification?.filter((filter) => filter.status == 1)
+                      ?.length != 0 && (
+                      <ExclamationMark
+                        size={28}
+                        weight="bold"
+                        className={`${styles.shopicon_bagetB} centerc`}
+                      />
+                    )
+                    //  <span className={`${styles.shopicon_baget} centerc`} > !</span>
+                  }
+                </Link>
+              ) : (
+                <ChatCircleText
+                  size={30}
+                  color="#14a5af"
+                  weight="duotone"
+                  className={styles.sphere}
+                  onClick={() => {
+                    AlertC();
+                  }}
+                />
+              )}
 
-            <div className={styles.header_bottom__col_logo}  >
-
-              {
-                 xtFlagLogin &&       <Link href={'/p-user/profile'}>
-              <span className={styles.sphere4} >
-
-              {userSrc && <img src={userSrc} alt="user-profile"  className={`${styles.Header_user_img_mobile}`}/> 
-                  
-
-}
-                <UserCircleGear size={35} color="#14a5af" weight="duotone" />
-                </span>
-              {/* <span className={styles.sphere4} >{name?.toUpperCase()}</span> */}
-</Link>
-              }
-
-
-{
-                 xtFlagLogin ?  <Link href={'/p-user/ticket'}  onClick={()=>setXtFlagSpinnerShow(true)}>
-                  
-                 {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
-                 <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} />
-                 {messageNotification?.filter(filter=>filter.status==1)?.length!=0 && 
-                 <ExclamationMark size={28} weight="bold"  className={`${styles.shopicon_bagetB} centerc`}/>
-                //  <span className={`${styles.shopicon_baget} centerc`} > !</span>
-                 }  
-                 
-                                 </Link> :  
-     <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} 
-     onClick={()=>{
-      AlertC()
-     }}
-     />
-                                                }
-
-
-            
-{/*      
+              {/*      
                   <Link href={'https://eitaa.com/sane_camputer'}>
                     <img
                       className={styles.sphere3}
@@ -1091,32 +1439,45 @@ console.log(getLocalStorage)
                       alt=""
                     />
                   </Link> */}
-
-                </div>
+            </div>
           </div>
-          
         </div>
       </section>
 
-      <section className={styles.D} >
+      <section className={styles.D}>
         {isMenuOpen && (
           <div className="dropdownMenu">
-            <div className={` container centerr ${styles.mobile_dropdownMenu_li}`}>
+            <div
+              className={` container centerr ${styles.mobile_dropdownMenu_li}`}
+            >
               <div
                 // className='row-cols-6 '
                 className={`row ${styles.ishover}`}
               >
                 <div className="col-2 ">
                   <div>
-                    <button className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                    <button
+                      className={
+                        !flagCateMobile
+                          ? `btn btn-outline-info ${styles.rightside_button_cate_mob}`
+                          : `btn btn-outline-info ${styles.active_button_header}`
+                      }
                       onClick={() => setFlagCateMobile(true)}
-                    >              لوازم جانبی
+                    >
+                      {" "}
+                      لوازم جانبی
                     </button>
 
-                    <button className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                    <button
+                      className={
+                        flagCateMobile
+                          ? `btn btn-outline-info ${styles.rightside_button_cate_mob}`
+                          : `btn btn-outline-info ${styles.active_button_header}`
+                      }
                       onClick={() => setFlagCateMobile(false)}
-
-                    >              سخت افزار
+                    >
+                      {" "}
+                      سخت افزار
                     </button>
                   </div>
                   {/* {mainCategory.childs?.length &&
@@ -1134,44 +1495,38 @@ console.log(getLocalStorage)
                   ))} */}
                 </div>
                 <div className="col-10">
-
-
-                  {flagCateMobile ? mainCategory.childs && (
-                    <div className={`row row-cols-auto ${styles.bcatitem}`}>
-                      {mainCategory.childs.map((item, index) => (
-                        <CardA
-                        click={ toggleMenu}
-                        datos={''}
-                          key={item.id}
-                          imgSrc={item.imageUrl}
-                          category={`category`}
-                          id={item.id}
-                          text={item.name
-                          }
-                        />
-                      ))}
-                    </div>
-                  ) : mainCategoryB.childs && (
-                    <div className={`row row-cols-1 ${styles.bcatitem}`}>
-                      {mainCategoryB.childs.map((item, index) => (
-                        <CardA
-                        click={toggleMenu}
-                        datos={''}
-                          key={item.id}
-                          imgSrc={item.imageUrl}
-                          category={`category`}
-                          id={item.id}
-                          text={item.name
-                          }
-                        />
-                      ))}
-                    </div>
-                  )}
-
-
-
+                  {flagCateMobile
+                    ? mainCategory.childs && (
+                        <div className={`row row-cols-auto ${styles.bcatitem}`}>
+                          {mainCategory.childs.map((item, index) => (
+                            <CardA
+                              click={toggleMenu}
+                              datos={""}
+                              key={item.id}
+                              imgSrc={item.imageUrl}
+                              category={`category`}
+                              id={item.id}
+                              text={item.name}
+                            />
+                          ))}
+                        </div>
+                      )
+                    : mainCategoryB.childs && (
+                        <div className={`row row-cols-1 ${styles.bcatitem}`}>
+                          {mainCategoryB.childs.map((item, index) => (
+                            <CardA
+                              click={toggleMenu}
+                              datos={""}
+                              key={item.id}
+                              imgSrc={item.imageUrl}
+                              category={`category`}
+                              id={item.id}
+                              text={item.name}
+                            />
+                          ))}
+                        </div>
+                      )}
                 </div>
-
               </div>
             </div>
             {/* <div>
@@ -1181,266 +1536,275 @@ console.log(getLocalStorage)
             <button className="btn btn-outline-info">              لوازم جانبی 
             </button>          
 </div> */}
-
-
           </div>
         )}
-
       </section>
 
       <section className={styles.C}>
-        <div className={`container left-0 ${styles.C_Contaner} `} >
-
-          <div className={`${styles.mobi_bottomHeader} row`} >
+        <div className={`container left-0 ${styles.C_Contaner} `}>
+          <div className={`${styles.mobi_bottomHeader} row`}>
             <div className="col">
-
-
-              <ul className={`${styles.bottomHeader_ul} centerr `} >
+              <ul className={`${styles.bottomHeader_ul} centerr `}>
                 <li className={`${styles.hamburger_li}centerr`}>
-                  
-                  
-                  <Link href={'/'}
-                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
-                    onClick={()=>setMenuOpen(false)}
-                    >
-                      <House size={28}  weight="duotone"  color="#14a5af"/>
+                  <Link
+                    href={"/"}
+                    style={{
+                      listStyle: "none",
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <House size={28} weight="duotone" color="#14a5af" />
                   </Link>
                 </li>
 
-                <li className={`${styles.hamburger_li} centerr`} onClick={toggleMenu}>
+                <li
+                  className={`${styles.hamburger_li} centerr`}
+                  onClick={toggleMenu}
+                >
                   {/* Hamburger/Close icon */}
-                  <button className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
+                  <button className={`hamburger ${isMenuOpen ? "open" : ""}`}>
                     <span className="bar"></span>
                     <span className="bar"></span>
                     <span className="bar"></span>
                   </button>
-                  
                 </li>
 
-                <li className={`${styles.bottomHeader_ul_category}`}
+                <li
+                  className={`${styles.bottomHeader_ul_category}`}
                   onClick={() => {
                     // console.log(ulRefA.current.classList.value);
-                    if (ulRefA.current.classList.value === 'Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA') {
-                      ulRefA.current.classList.remove('header_hidden_ulRefA')
+                    if (
+                      ulRefA.current.classList.value ===
+                      "Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA"
+                    ) {
+                      ulRefA.current.classList.remove("header_hidden_ulRefA");
                     } else {
-                      ulRefA.current.classList.add('header_hidden_ulRefA')
-
+                      ulRefA.current.classList.add("header_hidden_ulRefA");
                     }
+                  }}
+                >
+                  <User size={28} weight="duotone" color="#14a5af" />
 
-                  }}>
-                  <User size={28} weight="duotone"  color="#14a5af"/>
-
-                  <div className={`${styles.bottomHeader_ul_category_div}`}
+                  <div
+                    className={`${styles.bottomHeader_ul_category_div}`}
                     ref={ulRefA}
                   >
-
-                    {xtFlagLogin ?
-                      <Link href={'/p-user/profile'}
-                      onClick={() => {
-                        setMenuOpen(false)
-setXtFlagSpinnerShow(true)
-                        
-                      }}>
-                        <User size={15} color="#14a5af"/>
-                        <span 
-
-                        >
-                          پروفایل من</span></Link> :
-
-
-                      <Link href={'/login'}
-                      onClick={() => setXtFlagSpinnerShow(true)}>
-                        <SignIn size={15} color="#14a5af"/>
-                        <span 
-
-                        >
-                          ورود</span></Link>}
-
-{!xtFlagLogin && <Link href={'/register'} 
-      onClick={() => {
-        setMenuOpen(false)
-setXtFlagSpinnerShow(true)
-        
-      }}>
-                      <UserCheck size={15} color="#14a5af"/>
-                      <span 
-
+                    {xtFlagLogin ? (
+                      <Link
+                        href={"/p-user/profile"}
+                        onClick={() => {
+                          setMenuOpen(false);
+                          setXtFlagSpinnerShow(true);
+                        }}
                       >
-                        عضویت</span></Link>}
-                    
-{xtFlagLogin &&   
-<><Link href={'/p-user/warranty'}
+                        <User size={15} color="#14a5af" />
+                        <span>پروفایل من</span>
+                      </Link>
+                    ) : (
+                      <Link
+                        href={"/login"}
+                        onClick={() => setXtFlagSpinnerShow(true)}
+                      >
+                        <SignIn size={15} color="#14a5af" />
+                        <span>ورود</span>
+                      </Link>
+                    )}
+
+                    {!xtFlagLogin && (
+                      <Link
+                        href={"/register"}
+                        onClick={() => {
+                          setMenuOpen(false);
+                          setXtFlagSpinnerShow(true);
+                        }}
+                      >
+                        <UserCheck size={15} color="#14a5af" />
+                        <span>عضویت</span>
+                      </Link>
+                    )}
+
+                    {xtFlagLogin && (
+                      <>
+                        <Link
+                          href={"/p-user/warranty"}
                           onClick={() => {
-                            setMenuOpen(false)
-    setXtFlagSpinnerShow(true)
-                            
-                          }}>
-                      <Barcode size={15} color="#14a5af"/>
-                      <span 
+                            setMenuOpen(false);
+                            setXtFlagSpinnerShow(true);
+                          }}
+                        >
+                          <Barcode size={15} color="#14a5af" />
+                          <span>گارانتی</span>
+                        </Link>
 
-                      >
-                        گارانتی</span></Link>
+                        <Link
+                          href={"/p-user/repairs"}
+                          onClick={() => {
+                            setMenuOpen(false);
+                            setXtFlagSpinnerShow(true);
+                          }}
+                        >
+                          <Wrench size={15} color="#14a5af" />
+                          <span>تعمیرات</span>
+                        </Link>
+                      </>
+                    )}
 
-
-                    <Link href={'/p-user/repairs'}
-                         onClick={() => {
-                          setMenuOpen(false)
-  setXtFlagSpinnerShow(true)
-                          
-                        }}>
-                      <Wrench size={15} color="#14a5af"/>
-                      <span 
-
-                      >
-                        تعمیرات</span></Link>
-</>
- 
-}
-
-<Link href={'/computerparts'}
-                         onClick={() => {
-                          setMenuOpen(false)
-  setXtFlagSpinnerShow(true)
-                          
-                        }}>
+                    <Link
+                      href={"/computerparts"}
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setXtFlagSpinnerShow(true);
+                      }}
+                    >
                       <Laptop size={15} color="#14a5af" />
 
-                      <span 
+                      <span>محاسبه گر سیستم </span>
+                    </Link>
 
+                    <Link
+                      href={"/contactus"}
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setXtFlagSpinnerShow(true);
+                      }}
+                    >
+                      <BuildingApartment size={15} color="#14a5af" />
+
+                      <span>تماس با ما</span>
+                    </Link>
+
+                    {xtFlagLogin && (
+                      <Link
+                        href={"/"}
+                        onClick={() => {
+                          exitHandler();
+
+                          // setXtFlagSpinnerShow(true)
+                          setMenuOpen(false);
+                          setMessageNotification([]);
+                          setFlagMessageNotification((prev = !prev));
+                        }}
                       >
-                        محاسبه گر سیستم </span></Link>  
-
-                    <Link href={'/contactus'}
-                         onClick={() => {
-                          setMenuOpen(false)
-  setXtFlagSpinnerShow(true)
-                          
-                        }}>
-                      <BuildingApartment size={15} color="#14a5af"/>
-
-
-                      <span 
-
-                      >
-                        تماس با ما</span></Link>
-
-{
-  xtFlagLogin &&  <Link href={'/'} onClick={() => {
-    exitHandler()
-  
-    // setXtFlagSpinnerShow(true)
-    setMenuOpen(false)
-    setMessageNotification([])
-    setFlagMessageNotification(prev=!prev)
-
-  }}>
-                      <SignOut size={15} color="#14a5af"/>
-                      <span 
-
-                      >
-                        خروج</span></Link>
-}
-                   
-
+                        <SignOut size={15} color="#14a5af" />
+                        <span>خروج</span>
+                      </Link>
+                    )}
                   </div>
-
                 </li>
 
-
                 <li>
-                <Link 
+                  <Link
+                    onClick={() => {
+                      if (cartCounter != 0) {
+                        setXtFlagSpinnerShow(true);
+                        setMenuOpen(false);
+                      } else {
+                        AlertA();
+                        setMenuOpen(false);
+                      }
+                    }}
+                    className={`${styles.bottomHeader_ul_category_a} centerr`}
+                    href={cartCounter != 0 ? "/basket" : "#"}
+                    style={{
+                      listStyle: "none",
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                  >
+                    <div
+                      className={`${styles.Header_leftSide__div_mobile} centerr`}
+                    >
+                      {cartCounter != 0 && (
+                        <span
+                          className={`${styles.shopicon_baget_mobile} centerc`}
+                        >
+                          {cartCounter}
+                        </span>
+                      )}
+                    </div>
+                    <ShoppingCart size={28} weight="duotone" color="#14a5af" />
+                  </Link>
+                </li>
+
+                <li
                   onClick={() => {
-                    if (cartCounter != 0) {
-                      setXtFlagSpinnerShow(true)
-                      setMenuOpen(false)
-                    } else {
-                      AlertA()
-                      setMenuOpen(false)
-
-                    }
-
-
+                    setMenuOpen(false);
+                    setVisibleB(true);
                   }}
-                className={`${styles.bottomHeader_ul_category_a} centerr`}
-                href={cartCounter != 0 ? '/basket' : '#'} 
-                    style={{ listStyle: 'none', textDecoration: 'none', color: 'inherit' }}
                 >
-                  <div
-                  
-                    className={`${styles.Header_leftSide__div_mobile} centerr`}>
-                    {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`} >{cartCounter}</span>}
-                  </div>
-                  <ShoppingCart size={28}   weight="duotone"  color="#14a5af"/>
+                  <MagnifyingGlass size={28} weight="duotone" color="#14a5af" />
+                </li>
+                <div className={`${styles.sidebar_mobile} `}>
+                  <Sidebar
+                    visible={visibleB}
+                    onHide={() => setVisibleB(false)}
+                    fullScreen
+                  >
+                    <div
+                      className={`${styles.Header_rightSide__div_search}  centerc`}
+                    >
+                      <input
+                        className={styles.Header_rightSide__div_search_input}
+                        type="text"
+                        placeholder="دنبال چی میگردی...؟"
+                        value={searchTypeB}
+                        onChange={searchChangeB}
+                      />
+                      <MagnifyingGlass
+                        size={24}
+                        color="#14a5af"
+                        weight="thin"
+                        className={styles.magnifyingGlass}
+                        onClick={() => {
+                          searchBox();
+                        }}
+                      />
 
-                </Link>
-
-                 </li>
-
-
-
-
-                <li onClick={() =>{
-     setMenuOpen(false)
-setVisibleB(true)
-                } }>
-                  <MagnifyingGlass size={28}   weight="duotone"  color="#14a5af"/>
-                  </li>
-<div className={`${styles.sidebar_mobile} `}>
-     <Sidebar   visible={visibleB} onHide={() => setVisibleB(false)} fullScreen>
-                  <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-
-                  <input
-                    className={styles.Header_rightSide__div_search_input}
-                    type="text"
-                    placeholder="دنبال چی میگردی...؟"
-                    value={searchTypeB}
-                    onChange={searchChangeB}
-                  />
-                  <MagnifyingGlass size={24} color="#14a5af" weight="thin" className={styles.magnifyingGlass}
-                    onClick={() => { searchBox() }} />
-
-                  {flagSearch && <div className={`${styles.Header_rightSide__div_searchbox} `} >
-                    {/* <span><XCircle size={24} onClick={() => {
+                      {flagSearch && (
+                        <div
+                          className={`${styles.Header_rightSide__div_searchbox} `}
+                        >
+                          {/* <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchTypeB('')
                     }} 
                     /></span> */}
-                    {searchBoxArr.itemList?.length != 0 ? searchBoxArr.itemList?.map(item => (
-                      <Link href={`/product/${item.id}`} onClick={() => {
-                        setFlagSearch(false)
-                        setSearchBoxArr([])
-                        setSearchTypeB('')
-                        setXtFlagSpinnerShow(true)
-                        setVisibleB(false)
-                      }
-                      
-                      }
-                      >
-                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `} >
-                          <span>{item.name}</span>
-                          <img src={item.smallImage} alt={item.name} />
+                          {searchBoxArr.itemList?.length != 0
+                            ? searchBoxArr.itemList?.map((item) => (
+                                <Link
+                                  href={`/product/${item.id}`}
+                                  onClick={() => {
+                                    setFlagSearch(false);
+                                    setSearchBoxArr([]);
+                                    setSearchTypeB("");
+                                    setXtFlagSpinnerShow(true);
+                                    setVisibleB(false);
+                                  }}
+                                >
+                                  <div
+                                    className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+                                  >
+                                    <span>{item.name}</span>
+                                    <img
+                                      src={item.smallImage}
+                                      alt={item.name}
+                                    />
+                                  </div>
+                                </Link>
+                              ))
+                            : ""}
                         </div>
-                      </Link>
-
-                    )) : ''}
-
-
-
-                  </div>}
-
-                </div>
+                      )}
+                    </div>
                   </Sidebar>
-</div>
-               
+                </div>
               </ul>
-
-
             </div>
           </div>
         </div>
-
       </section>
     </>
-
   );
 }
