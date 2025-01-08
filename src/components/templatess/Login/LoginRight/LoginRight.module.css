@@ -31,6 +31,10 @@
     margin: none !important;
 }
 
+.help_Button{
+    position: absolute;
+    left:20px;
+}
 .div_hr{
     width: 80%;
     align-items: center;

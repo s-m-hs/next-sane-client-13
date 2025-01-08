@@ -40,7 +40,6 @@ import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 import { Sidebar } from "primereact/sidebar";
 import alertQ from "@/utils/Alert/AlertQ";
-import { useSearchParams } from "next/navigation";
 
 export default function Header() {
   let {
@@ -59,9 +58,7 @@ export default function Header() {
     setMessageNotification,
     flagMessageNotification,
     setFlagMessageNotification,
-    setAuthority,
-    setZarrinStatus,
-    zarrinStatus,
+    setFlagHamkar, flagHamkar
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
@@ -336,6 +333,10 @@ export default function Header() {
       rout.push("/");
       AlertB();
     }
+
+    if (!pathname.includes('/login')) {
+      setFlagHamkar(false)
+    }
   }, [pathname]);
 
   // useEffect(()=>{
@@ -434,27 +435,27 @@ export default function Header() {
                     }} /></span> */}
                             {searchBoxArr.itemList?.length != 0
                               ? searchBoxArr.itemList?.map((item) => (
-                                  <Link
-                                    href={`/product/${item.id}`}
-                                    onClick={() => {
-                                      setFlagSearch(false);
-                                      setSearchBoxArr([]);
-                                      setSearchType("");
-                                      setXtFlagSpinnerShow(true);
-                                      setVisible(false);
-                                    }}
+                                <Link
+                                  href={`/product/${item.id}`}
+                                  onClick={() => {
+                                    setFlagSearch(false);
+                                    setSearchBoxArr([]);
+                                    setSearchType("");
+                                    setXtFlagSpinnerShow(true);
+                                    setVisible(false);
+                                  }}
+                                >
+                                  <div
+                                    className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
                                   >
-                                    <div
-                                      className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                    >
-                                      <span>{item.name}</span>
-                                      <img
-                                        src={item.smallImage}
-                                        alt={item.name}
-                                      />
-                                    </div>
-                                  </Link>
-                                ))
+                                    <span>{item.name}</span>
+                                    <img
+                                      src={item.smallImage}
+                                      alt={item.name}
+                                    />
+                                  </div>
+                                </Link>
+                              ))
                               : ""}
                           </div>
                         </div>
@@ -557,11 +558,11 @@ export default function Header() {
                       {messageNotification?.filter(
                         (filter) => filter.status == 1
                       )?.length != 0 && (
-                        <span className={`${styles.shopicon_baget} centerc`}>
-                          {" "}
-                          !
-                        </span>
-                      )}
+                          <span className={`${styles.shopicon_baget} centerc`}>
+                            {" "}
+                            !
+                          </span>
+                        )}
                       {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
@@ -686,7 +687,7 @@ export default function Header() {
                                 : `${styles.nohover}`
                             }
 
-                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -752,7 +753,10 @@ export default function Header() {
 
                   {!xtFlagLogin ? (
                     <>
-                      <li onClick={() => setXtFlagSpinnerShow(true)}>
+                      <li onClick={() =>{
+setXtFlagSpinnerShow(true)
+setFlagHamkar(false)
+                      } }>
                         {" "}
                         <Link
                           href={"/login"}
@@ -797,6 +801,7 @@ export default function Header() {
                       </Link>{" "}
                     </li>
                   )}
+
                   <li onClick={() => setXtFlagSpinnerShow(true)}>
                     {" "}
                     <Link
@@ -812,9 +817,18 @@ export default function Header() {
                       محاسبه گر سیستم
                     </Link>{" "}
                   </li>
-
-                  {/* <li onClick={() => AlertD()}> <UsersThree size={15} />
-                    ورود همکاران(پخش عمده)  </li> */}
+{/* 
+                  <li onClick={() => setFlagHamkar(true)}>
+                    <Link href={'/login'}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      <UsersThree size={15} />
+                      ورود همکاران(پخش عمده)</Link>
+                  </li> */}
 
                   <li onClick={() => setXtFlagSpinnerShow(true)}>
                     {" "}
@@ -909,27 +923,27 @@ export default function Header() {
                     }} /></span> */}
                           {searchBoxArr.itemList?.length != 0
                             ? searchBoxArr.itemList?.map((item) => (
-                                <Link
-                                  href={`/product/${item.id}`}
-                                  onClick={() => {
-                                    setFlagSearch(false);
-                                    setSearchBoxArr([]);
-                                    setSearchType("");
-                                    setXtFlagSpinnerShow(true);
-                                    setVisible(false);
-                                  }}
+                              <Link
+                                href={`/product/${item.id}`}
+                                onClick={() => {
+                                  setFlagSearch(false);
+                                  setSearchBoxArr([]);
+                                  setSearchType("");
+                                  setXtFlagSpinnerShow(true);
+                                  setVisible(false);
+                                }}
+                              >
+                                <div
+                                  className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
                                 >
-                                  <div
-                                    className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                  >
-                                    <span>{item.name}</span>
-                                    <img
-                                      src={item.smallImage}
-                                      alt={item.name}
-                                    />
-                                  </div>
-                                </Link>
-                              ))
+                                  <span>{item.name}</span>
+                                  <img
+                                    src={item.smallImage}
+                                    alt={item.name}
+                                  />
+                                </div>
+                              </Link>
+                            ))
                             : ""}
                         </div>
                       </div>
@@ -1006,11 +1020,11 @@ export default function Header() {
                       {messageNotification?.filter(
                         (filter) => filter.status == 1
                       )?.length != 0 && (
-                        <span className={`${styles.shopicon_baget} centerc`}>
-                          {" "}
-                          !
-                        </span>
-                      )}
+                          <span className={`${styles.shopicon_baget} centerc`}>
+                            {" "}
+                            !
+                          </span>
+                        )}
                       {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
@@ -1141,7 +1155,7 @@ export default function Header() {
                                 : `${styles.nohover}`
                             }
 
-                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -1240,7 +1254,10 @@ export default function Header() {
 
                   {!xtFlagLogin ? (
                     <>
-                      <li onClick={() => setXtFlagSpinnerShow(true)}>
+                      <li onClick={() => {
+                        setXtFlagSpinnerShow(true)
+                        setFlagHamkar(false)
+                      }}>
                         {" "}
                         <Link
                           href={"/login"}
@@ -1497,35 +1514,35 @@ export default function Header() {
                 <div className="col-10">
                   {flagCateMobile
                     ? mainCategory.childs && (
-                        <div className={`row row-cols-auto ${styles.bcatitem}`}>
-                          {mainCategory.childs.map((item, index) => (
-                            <CardA
-                              click={toggleMenu}
-                              datos={""}
-                              key={item.id}
-                              imgSrc={item.imageUrl}
-                              category={`category`}
-                              id={item.id}
-                              text={item.name}
-                            />
-                          ))}
-                        </div>
-                      )
+                      <div className={`row row-cols-auto ${styles.bcatitem}`}>
+                        {mainCategory.childs.map((item, index) => (
+                          <CardA
+                            click={toggleMenu}
+                            datos={""}
+                            key={item.id}
+                            imgSrc={item.imageUrl}
+                            category={`category`}
+                            id={item.id}
+                            text={item.name}
+                          />
+                        ))}
+                      </div>
+                    )
                     : mainCategoryB.childs && (
-                        <div className={`row row-cols-1 ${styles.bcatitem}`}>
-                          {mainCategoryB.childs.map((item, index) => (
-                            <CardA
-                              click={toggleMenu}
-                              datos={""}
-                              key={item.id}
-                              imgSrc={item.imageUrl}
-                              category={`category`}
-                              id={item.id}
-                              text={item.name}
-                            />
-                          ))}
-                        </div>
-                      )}
+                      <div className={`row row-cols-1 ${styles.bcatitem}`}>
+                        {mainCategoryB.childs.map((item, index) => (
+                          <CardA
+                            click={toggleMenu}
+                            datos={""}
+                            key={item.id}
+                            imgSrc={item.imageUrl}
+                            category={`category`}
+                            id={item.id}
+                            text={item.name}
+                          />
+                        ))}
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
@@ -1605,7 +1622,10 @@ export default function Header() {
                     ) : (
                       <Link
                         href={"/login"}
-                        onClick={() => setXtFlagSpinnerShow(true)}
+                        onClick={() => {
+                          setXtFlagSpinnerShow(true)
+                          setFlagHamkar(false)
+                        }}
                       >
                         <SignIn size={15} color="#14a5af" />
                         <span>ورود</span>
@@ -1773,27 +1793,27 @@ export default function Header() {
                     /></span> */}
                           {searchBoxArr.itemList?.length != 0
                             ? searchBoxArr.itemList?.map((item) => (
-                                <Link
-                                  href={`/product/${item.id}`}
-                                  onClick={() => {
-                                    setFlagSearch(false);
-                                    setSearchBoxArr([]);
-                                    setSearchTypeB("");
-                                    setXtFlagSpinnerShow(true);
-                                    setVisibleB(false);
-                                  }}
+                              <Link
+                                href={`/product/${item.id}`}
+                                onClick={() => {
+                                  setFlagSearch(false);
+                                  setSearchBoxArr([]);
+                                  setSearchTypeB("");
+                                  setXtFlagSpinnerShow(true);
+                                  setVisibleB(false);
+                                }}
+                              >
+                                <div
+                                  className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
                                 >
-                                  <div
-                                    className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                  >
-                                    <span>{item.name}</span>
-                                    <img
-                                      src={item.smallImage}
-                                      alt={item.name}
-                                    />
-                                  </div>
-                                </Link>
-                              ))
+                                  <span>{item.name}</span>
+                                  <img
+                                    src={item.smallImage}
+                                    alt={item.name}
+                                  />
+                                </div>
+                              </Link>
+                            ))
                             : ""}
                         </div>
                       )}

@@ -7,7 +7,7 @@ import CardC from "@/components/madules/Cards/CardC/CardC";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Swal from 'sweetalert2'
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { HouseLine} from "@phosphor-icons/react";
+import { HouseLine } from "@phosphor-icons/react";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
 import Pagination from '@mui/material/Pagination';
@@ -26,68 +26,68 @@ export default function CategoryDetaile({ param }) {
   const [flag, setFlag] = useState(false)
   const [page, setPage] = React.useState(1);
   const [paginationArray, setPaginationArray] = useState([]);
-  const pageCount=100
+  const pageCount = 100
   const [allCount, setAllCount] = useState([]);
   const [mainCatA, setMainCatA] = useState({});
   const [mainCatB, setMainCatB] = useState({});
-  const [codePro,setCodePro]=useState('')
-  const [parentId,setParentId]=useState('')
-
-// console.log(mainCategory)
-// console.log(mainCategory?.item.code)
+  const [codePro, setCodePro] = useState('')
+  const [parentId, setParentId] = useState('')
+  const [hamkarPaymentState, setHamkarPaymentState] = useState('1')
+  // console.log(mainCategory)
+  // console.log(mainCategory?.item.code)
 
 
   // const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-let{setNameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
+  let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar } = useContext(MainContext)
   const styleRef = useRef();
-  const goToTop=()=>{
+  const goToTop = () => {
     window.scrollTo({
-      top:0,
-      behavior:'smooth'
+      top: 0,
+      behavior: 'smooth'
     })
   }
   const handleChange = (event, value) => {
     goToTop()
     setPage(value);
     // let code=mainCategory?.item.code
-    let code=codePro
+    let code = codePro
     let obj = {
       cat: code,
-      pageNumber: value-1,
+      pageNumber: value - 1,
       pageSize: pageCount
-    
-  }
+
+    }
     getproductByCat(obj);
-};
-const changeId = (code) => {
-  // console.log(code)
-  setCodePro(code)
-  setPage(1)
-  let obj = {
-    cat: code,
-    pageNumber:0,
-    pageSize: pageCount
-  }
-  getproductByCat(obj)
-  window.scrollTo({
-    top:300,
-    behavior:'smooth'
-  })
-};
+  };
+  const changeId = (code) => {
+    // console.log(code)
+    setCodePro(code)
+    setPage(1)
+    let obj = {
+      cat: code,
+      pageNumber: 0,
+      pageSize: pageCount
+    }
+    getproductByCat(obj)
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth'
+    })
+  };
 
 
-useEffect(() => {
-  if (productByCat?.length != 0 ) {
-    let x = allCount;
-    let countInPage = pageCount; 
-    let z = Math.ceil(x / countInPage);
-    z
-      ? setPaginationArray(Array.from({ length: z }))
-      : setPaginationArray([]);
-  }
-}, [productByCat]);
-productByCat?.sort((a, b) => b.supply - a.supply); 
-// sorted_products = sorted(productByCat, key=lambda x: x['supply'], reverse=True)
+  useEffect(() => {
+    if (productByCat?.length != 0) {
+      let x = allCount;
+      let countInPage = pageCount;
+      let z = Math.ceil(x / countInPage);
+      z
+        ? setPaginationArray(Array.from({ length: z }))
+        : setPaginationArray([]);
+    }
+  }, [productByCat]);
+  productByCat?.sort((a, b) => b.supply - a.supply);
+  // sorted_products = sorted(productByCat, key=lambda x: x['supply'], reverse=True)
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -116,12 +116,12 @@ productByCat?.sort((a, b) => b.supply - a.supply);
             setMainCatChilds(result.childs);
             setMainCategory(result);
 
-          } else { 
+          } else {
             setMainCatChilds([]);
             setMainCategory(result);
 
           }
-   
+
         });
     }
     myAppGet();
@@ -159,14 +159,14 @@ productByCat?.sort((a, b) => b.supply - a.supply);
 
 
 
-/////////////////////////////////sidebar==>>
+  /////////////////////////////////sidebar==>>
   const getCategoryAccesory = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       id: 3,
       str: "string",
     };
-postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatA)
+    postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCatA)
   };
   const getCategoryHard = () => {
     let obj = {
@@ -174,57 +174,57 @@ postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatA)
       id: 2,
       str: "string",
     };
-postApi('/api/CyProductCategory/GetItemWChildAndRoot',obj,setMainCatB)
+    postApi('/api/CyProductCategory/GetItemWChildAndRoot', obj, setMainCatB)
   };
 
 
 
 
-  useEffect(()=>{
+  useEffect(() => {
     getCategoryAccesory()
     getCategoryHard()
 
-  },[])
-const getChild=()=>{
-  
-  const getLocalStorage =localStorage.getItem('loginToken')
- let  obj={
-    gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    id:param
-    ,
-    str: "string"
-}
-  async function myApp(){
-const res= await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,{
-  method:'POST',
-  headers: {
-    "Content-Type": "application/json",
-    Authorization:`Bearer ${ getLocalStorage }`
-  }, 
-  body: JSON.stringify(obj)
-}).then(res=>{
-  return res.json().then(result=>{
-    // setParentId(result.root.id)
-    if(result.root.rootId==null){
-    setParentId(result.root.id)
+  }, [])
+  const getChild = () => {
 
-    }else{
-      setParentId(result.root.rootId)
-
+    const getLocalStorage = localStorage.getItem('loginToken')
+    let obj = {
+      gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      id: param
+      ,
+      str: "string"
     }
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getLocalStorage}`
+        },
+        body: JSON.stringify(obj)
+      }).then(res => {
+        return res.json().then(result => {
+          // setParentId(result.root.id)
+          if (result.root.rootId == null) {
+            setParentId(result.root.id)
 
-  })
-})
+          } else {
+            setParentId(result.root.rootId)
+
+          }
+
+        })
+      })
+    }
+    myApp()
   }
-  myApp()
-}
-useEffect(()=>{ 
+  useEffect(() => {
     getChild()
 
-},[])
+  }, [])
 
 
-////////////////////////////////sidebar
+  ////////////////////////////////sidebar
 
   //////////////////////////////
 
@@ -236,185 +236,214 @@ useEffect(()=>{
       // iconColor:'purple',
       position: "top-end",
       icon: "success",
-      toast:'true',
-      width:'100px',
+      toast: 'true',
+      width: '100px',
       // title: "Your work has been saved",
       showConfirmButton: false,
       timer: 500
-    }).then(res=>setFlag(prev=>!prev))
+    }).then(res => setFlag(prev => !prev))
   }, []);
 
 
 
 
   ///////////////////////////
-  useEffect(()=>{
-  if(mainCatChilds.length==0 && mainCategory.item?.code){
-  let code=mainCategory.item.code
+  useEffect(() => {
+    if (mainCatChilds.length == 0 && mainCategory.item?.code) {
+      let code = mainCategory.item.code
 
-    let obj = {
-      cat: code,
-      pageNumber: page-1,
-      pageSize: pageCount
-    
-  }
-  getproductByCat(obj)
-  }
-  setNameCategory(mainCategory.item?.name)
-  },[mainCatChilds,page])
+      let obj = {
+        cat: code,
+        pageNumber: page - 1,
+        pageSize: pageCount
+
+      }
+      getproductByCat(obj)
+    }
+    setNameCategory(mainCategory.item?.name)
+  }, [mainCatChilds, page])
 
   useEffect(() => {
-    if(mainCatChilds.length!==0){
+    if (mainCatChilds.length !== 0) {
       let obj = {
-      cat: mainCatChilds[0]?.code,
-     pageNumber: page-1,
-      pageSize: pageCount
-    }
-    
-    getproductByCat(obj)
+        cat: mainCatChilds[0]?.code,
+        pageNumber: page - 1,
+        pageSize: pageCount
+      }
+
+      getproductByCat(obj)
     }
 
     ////for first to setcodePro==>>
-setCodePro(mainCatChilds[0]?.code)
+    setCodePro(mainCatChilds[0]?.code)
   }, [flag])
-useEffect(()=>{
-  setXtFlagSpinnerShow(false)
-},[])
+  useEffect(() => {
+    setXtFlagSpinnerShow(false)
+  }, [])
 
-
+  console.log(productByCat)
   return (
     <div className={`container  centerc ${Styles.category}`} >
-<div className="row mt-5">
-  <div className={`col-2  ${Styles.right_maindiv} centerc`} >
+      <div className="row mt-5">
+        <div className={`col-2  ${Styles.right_maindiv} centerc`} >
 
-<h1>دسته بندی ها:</h1>
+          <h1>دسته بندی ها:</h1>
 
-<Accordion defaultActiveKey={['0']} alwaysOpen>
-      <Accordion.Item eventKey="0">
-        <Accordion.Header className={`${Styles.AccordionCom}`}>لوازم جانبی</Accordion.Header>
-        <Accordion.Body>
-        <div className={`${Styles.right_div} centerc`}>
- {mainCatA?.childs?.length!=0 && mainCatA?.childs?.map(item=>(
-  <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
-  ))}
+          <Accordion defaultActiveKey={['0']} alwaysOpen>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header className={`${Styles.AccordionCom}`}>لوازم جانبی</Accordion.Header>
+              <Accordion.Body>
+                <div className={`${Styles.right_div} centerc`}>
+                  {mainCatA?.childs?.length != 0 && mainCatA?.childs?.map(item => (
+                    <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
+                  ))}
 
-</div>
-        </Accordion.Body>
-      </Accordion.Item>
-      <Accordion.Item eventKey="1">
-        <Accordion.Header className={`${Styles.AccordionCom}`}>سخت افزار</Accordion.Header>
-        <Accordion.Body>
-        <div className={`${Styles.right_div} centerc`}>
- {mainCatB?.childs?.length!=0 && mainCatB?.childs?.map(item=>(
-  <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
-  ))}
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header className={`${Styles.AccordionCom}`}>سخت افزار</Accordion.Header>
+              <Accordion.Body>
+                <div className={`${Styles.right_div} centerc`}>
+                  {mainCatB?.childs?.length != 0 && mainCatB?.childs?.map(item => (
+                    <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
+                  ))}
 
-</div>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+                </div>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
 
 
 
-{/* <div className={`${Styles.right_div} centerc`}>
+          {/* <div className={`${Styles.right_div} centerc`}>
  {mainCatA?.childs?.length!=0 && mainCatA?.childs?.map(item=>(
   <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
   ))}
 
 </div> */}
- 
-
-  </div>
 
 
-  <div className={`col-12 col-md-10 ${Styles.category_col}`}>
-  <div className={`row ${Styles.breadcrumb_row}`} >
-  <div className={`${Styles.breadcrumb} col` } >
-    <Breadcrumb>
-    <Breadcrumb.Item ><Link 
-    // onClick={()=>setXtFlagSpinnerShow(true)}
- href="/"><HouseLine size={24} color="#24b8c9de"/>خانه/</Link></Breadcrumb.Item>
-      <Breadcrumb.Item active href="/">
-        {mainCategory.item?.name}
-      </Breadcrumb.Item>
-    </Breadcrumb>
-  </div>
-
-</div>
-
-{
-   paginationArray.length > 1 &&
-             
-   <div className='pagination-div' >
-   <Pagination count={ paginationArray.length}  page={page}
-    //  ref={classRefB}
-    onChange={handleChange}
-    color="primary"
-     shape="rounded"
-    style={{direction:'ltr'}}
-     />
-   </div>}
+        </div>
 
 
-      <div className={`row row-cols-auto  centerr ${Styles.category_row}`}>
-        {mainCatChilds != null &&
-          mainCatChilds.map((item, index) => (
-            <>
-              <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
-                <CardAButton imgSrc={item.imageUrl} text={item.name} changeIdProp={() => changeId(item.code)} code={item.code} />
-                <span >{item.name} </span>
+        <div className={`col-12 col-md-10 ${Styles.category_col}`}>
+          <div className={`row ${Styles.breadcrumb_row}`} >
+            <div className={`${Styles.breadcrumb} col`} >
+              <Breadcrumb>
+                <Breadcrumb.Item ><Link
+                  // onClick={()=>setXtFlagSpinnerShow(true)}
+                  href="/"><HouseLine size={24} color="#24b8c9de" />خانه/</Link></Breadcrumb.Item>
+                <Breadcrumb.Item active href="/">
+                  {mainCategory.item?.name}
+                </Breadcrumb.Item>
+              </Breadcrumb>
+            </div>
+
+          </div>
+
+          {
+            paginationArray.length > 1 &&
+
+            <div className='pagination-div' >
+              <Pagination count={paginationArray.length} page={page}
+                //  ref={classRefB}
+                onChange={handleChange}
+                color="primary"
+                shape="rounded"
+                style={{ direction: 'ltr' }}
+              />
+            </div>}
+
+
+          <div className={`row row-cols-auto  centerr ${Styles.category_row}`}>
+            {mainCatChilds != null &&
+              mainCatChilds.map((item, index) => (
+                <>
+                  <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
+                    <CardAButton imgSrc={item.imageUrl} text={item.name} changeIdProp={() => changeId(item.code)} code={item.code} />
+                    <span >{item.name} </span>
+                  </div>
+                </>
+              ))}
+          </div>
+
+          {
+            verifyHamkar &&
+            <div className={Styles.select_div}>
+              <select class="form-select" aria-label="Default select example"
+                onChange={(e) => {
+                  setHamkarPaymentState(e.target.value)
+                  console.log(hamkarPaymentState)
+                }}
+              >
+                <option value="1">نقدی</option>
+                <option value="2">یک ماهه </option>
+                <option value="3">دو ماهه</option>
+                <option value="4">سه ماهه</option>
+              </select>
+            </div>
+          }
+
+
+
+          <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>
+
+            {productByCat?.length == 0 ?
+
+              // <SpinnerA size={200} /> 
+              <div className="row">
+                <div className="col-12 centerr">
+                  <SpinnerA size={200} />
+                </div>
               </div>
-            </>
-          ))}
-      </div>
 
-      <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>
-        
-        {productByCat?.length == 0 ?
-        
-        // <SpinnerA size={200} /> 
-        <div className="row">
-        <div className="col-12 centerr">
-          <SpinnerA size={200} />
+              : productByCat?.map((item, index) =>
+                <div key={index}
+                  className={`centerc ${Styles.products_col}`}
+                // onClick={ ()=>setFlagSpinnerShow(true) } 
+                >
+
+                  <CardC
+                    // clickSpinner={()=>setFlagSpinnerShow(true)}
+                    parentId={parentId}
+                    id={item.id}
+                    imgSrc={item.smallImage
+                    } title={item.name}
+                    price={Number(item.price) / 10}
+                    supply={item.supply}
+                    noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
+                      hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
+                      hamkarPaymentState === '3' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(5/100)) :
+                      hamkarPaymentState === '4' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(10/100)) :''
+                   
+                }
+                    verifyHam={verifyHamkar}
+
+                  /></div>
+
+              )}
+            {/* <button onClick={clickHan}></button> */}
+          </div>
+          {
+            paginationArray.length > 1 &&
+
+            <div className={`pagination-div ${Styles.pagination_div}`} >
+              <Pagination count={paginationArray.length} page={page}
+                //  ref={classRefB}
+                onChange={handleChange}
+                color="primary"
+                shape="rounded"
+                style={{ direction: 'ltr' }}
+              />
+            </div>}
+
+
         </div>
       </div>
-        
-        : productByCat?.map((item, index) =>
-          <div key={index}
-            className={`centerc ${Styles.products_col}`}
-            // onClick={ ()=>setFlagSpinnerShow(true) } 
-            >
-              
-            <CardC 
-            // clickSpinner={()=>setFlagSpinnerShow(true)}
-            parentId={parentId}
-              id={item.id}
-              imgSrc={item.smallImage
-              } title={item.name} price={Number(item.price)/10} supply={item.supply}
-            /></div>
-
-        )}
-        {/* <button onClick={clickHan}></button> */}
-      </div>
-      {
-   paginationArray.length > 1 &&
-             
-   <div className={`pagination-div ${Styles.pagination_div}`} >
-   <Pagination count={ paginationArray.length}  page={page}
-    //  ref={classRefB}
-    onChange={handleChange}
-    color="primary"
-     shape="rounded"
-    style={{direction:'ltr'}}
-     />
-   </div>}
 
 
-  </div>
-</div>
 
-
- 
     </div>
   );
 }

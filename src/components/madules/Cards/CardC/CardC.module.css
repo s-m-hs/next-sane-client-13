@@ -43,15 +43,29 @@
     font-size: 1.9rem;
   left: 5px;
   text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
-  
+
+ }
+.underLine{
+  text-decoration: line-through red; 
+}
+  .cardprob_noOffPrice{
+    position: absolute;
+    bottom: 10px;
+    font-size: 1.9rem;
+  right: 5px;
+  text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
   }
 
+  .cardprob_container svg{
+    position: absolute;
+    left: 35px;
+  }
   
   .cardprob__icon_div{
     position: absolute;
-    top: 85%;
+    top: 60%;
     /* font-size: 1.9rem; */
-  right: 5px;
+  right: 40px;
   }
   .cardprob__icon_div svg{
     padding: 5px;

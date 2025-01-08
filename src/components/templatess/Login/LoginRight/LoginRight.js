@@ -5,7 +5,7 @@ import Link from "next/link";
 import { User, Key, EyeSlash,DeviceMobile } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import {sha512} from "js-sha512";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 // import getLocalStorage from "@/utils/localStorag/localStorage";
@@ -38,8 +38,8 @@ const customInputB = ({events, props}) => <input {...events} {...props} type="te
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 const router = useRouter()
-// const getLocalStorage=localStorage.getItem('loginToken')
-let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
+const pathname=usePathname()
+let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow, flagHamkar,setFlagHamkar}=useContext(MainContext)
 
 
   const {
@@ -257,19 +257,7 @@ useEffect(()=>{
           action=""
           onSubmit={handleSubmit(handleRegistration, handleError)}
         >
-          {/* <div className={`${style.div_input_B} centerr`}>
-            <User size={40} color="#19a5af" weight="fill" />
-            <div className="login_label_float">
-              <input
-              minLength={3}
-                name="userName"
-                type="userName"
-                placeholder=" "
-                {...register(`userName`, registerOptions.userName)}
-              />
-              <label>نام کاربری </label>
-            </div>
-          </div> */}
+    
 
 <div className={`${style.div_input_B} centerr`}>
             <DeviceMobile  size={40} color="#19a5af" weight="fill" />
@@ -299,16 +287,26 @@ useEffect(()=>{
             {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
           </div>
 
-   <div>
-        {/* <h1>
-          <input
-          name="checkbox"
-           type="checkbox"
-           {...register(`checkbox`, registerOptions.checkbox)}
+{flagHamkar &&  
+<div className={`${style.div_input_B} centerr`}>
+            <Key size={40} color="#19a5af" weight="fill" />
+            <div className="login_label_float">
+              <input 
+              minLength={4}
+              name="password"
+               type="password"
+                placeholder=" "
+                {...register(`password`, registerOptions.password)}
+                 />
+              <label>رمزعبور همکار</label>
+              <button className={`${style.help_Button} btn btn-warning`}>راهنمایی</button>
+            </div>
+            {/* <EyeSlash className={style.eyeicon} size={24} color="#19a5af" /> */}
+          </div>}
+         
 
-           />
-          من شرایط سرویس و خط‌مشی رازداری را می‌پذیرم .
-        </h1> */}
+   <div>
+  
       </div>
 
     <button type="submit" className={`${style.button} btn btn-info`}

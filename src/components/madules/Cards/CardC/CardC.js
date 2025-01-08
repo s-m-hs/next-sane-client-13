@@ -11,7 +11,7 @@ import apiUrl from '@/utils/ApiUrl/apiUrl'
 import alertQ from '@/utils/Alert/AlertQ'
 
 
-export default function CardC({imgSrc,title,price,id,clickSpinner,supply,parentId }) { 
+export default function CardC({imgSrc,title,price,id,clickSpinner,supply,parentId,noOffPrice,verifyHam }) { 
   let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket}=useContext(MainContext)
 
 
@@ -80,7 +80,18 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 
     {/* <span>368,000</span> */}
 {supply!=0  ?  
-    <span className={Styles.cardprob_price}>{price?.toLocaleString()}تومان </span>
+<>
+    <span className={!verifyHam ? `${Styles.cardprob_price}` : `${Styles.cardprob_price} ${Styles.underLine}` }>
+      {price?.toLocaleString()}تومان </span>
+
+
+      {verifyHam && 
+          <span className={Styles.cardprob_noOffPrice}>{noOffPrice?.toLocaleString()}تومان </span>
+
+      }
+</>
+
+
 :
 parentId==2 ?
 ''
@@ -91,9 +102,9 @@ parentId==2 ?
   }
 
      </Link> 
-    <div className={`${Styles.cardprob__icon_div} centerr`} >
-    {/* <ShoppingCart size={32}
-     color="#24b8c9de"
+     {verifyHam &&    <div className={`${Styles.cardprob__icon_div} centerr`} >
+    <ShoppingCart size={42}
+     color="#bf43f9"
 
       weight="fill"
         onClick={()=>{
@@ -112,13 +123,14 @@ parentId==2 ?
              addToCart(id,'1',setCartCounter)
           
         }}
-    /> */}
+    />
     {/* <Heart size={32}
      color="#d757eb"
     weight="thin" /> */}
 
 
-    </div>
+    </div>}
+ 
 {/* <Link className={Styles.cardprob__link}
 // onClick={clickSpinner}
 onClick={()=>setXtFlagSpinnerShow(true)}

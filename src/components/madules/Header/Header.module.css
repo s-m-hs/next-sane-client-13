@@ -651,6 +651,7 @@ transition:transform 0.1s linear;
 .mobiNumber_div :nth-child(2){
 font-size: 11px;
 font-family: monospace;
+font-weight: 600;
 }
 
 

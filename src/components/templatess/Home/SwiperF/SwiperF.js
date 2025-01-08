@@ -40,7 +40,7 @@ export default function App() {
        <div className="App">
             <TypeIt
                 options={{
-                  strings: [" ارسال رایگان سفارشات در سطح شهر..."],
+                  strings: [" ارسال رایگان سفارشات در سطح شهر(تهران وقم)"],
                   speed: 20,
                   loop:true,
                     waitUntilVisible: true,

@@ -103,7 +103,13 @@ transition: all 0.2s ease-in-out;
     /* background-color:var(--them) !important */
 }
 
+.select_div{
+    width: 200px;
 
+}
+.select_div select{
+    font-size: 18px;
+}
 @media only screen and (max-width:900px){
     .right_maindiv{
         display: none;
