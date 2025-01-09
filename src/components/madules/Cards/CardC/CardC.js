@@ -82,13 +82,16 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 {supply!=0  ?  
 
 <>
-{/* {offerState==1 && } */}
+{offerState==1 && noOffPrice===price && <>
+  <span className={`${Styles.cardprob_price} `}>
+  {price?.toLocaleString()} تومان </span>
+</> }
 
 {offerState!==1 && noOffPrice===price && <>
-  <span className={Styles.cardprob_noOffPrice}>{offPrice?.toLocaleString()}تومان </span>
+  <span className={Styles.cardprob_noOffPrice}>{offPrice?.toLocaleString()} تومان </span>
 
 <span className={`${Styles.cardprob_price} ${Styles.underLine}`}>
-  {price?.toLocaleString()}تومان </span>
+  {price?.toLocaleString()} تومان </span>
 </> }
 
 
@@ -97,7 +100,7 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
   <span className={Styles.cardprob_noOffPrice}>{noOffPrice?.toLocaleString()}تومان </span>
 
 <span className={`${Styles.cardprob_price} ${Styles.underLine}`}>
-  {price?.toLocaleString()}تومان </span>
+  {price?.toLocaleString()} تومان </span>
 </>
 } 
 

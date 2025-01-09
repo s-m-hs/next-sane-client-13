@@ -54,6 +54,8 @@
     font-size: 1.9rem;
   right: 5px;
   text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+  color: rgb(255, 179, 0) !important;
+
   }
 
   .cardprob_container svg{

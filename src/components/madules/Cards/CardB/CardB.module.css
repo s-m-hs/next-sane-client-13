@@ -51,16 +51,33 @@ color: var(--white1ffffff);
     color: var(--black33b4359);
     /* text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff; */
 }
+
+.noOffPrice{ 
+/* position: absolute;
+bottom: 10px; */
+
+font-size: 1.2cqi;
+align-self: flex-start !important;
+color: var(--black33b4359);
+text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+padding-bottom: 20px;
+margin-bottom: 10px;
+
+}
+
 .price{
+  /* position: absolute;
+  bottom: 10px; */
     font-size: 1.2cqi;
     align-self: flex-end !important;
     color: var(--black33b4359);
     text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
-    padding-bottom: 20px;
+    color: rgb(255, 179, 0);
 }
-/* .img{
-  width: 60%;
-} */
+
+.underline{
+  text-decoration: line-through red;
+}
 .container img{
   padding-top: 50px;
     width: 100%;
@@ -119,6 +136,10 @@ border-radius: 8px;
   }
   .price{
     font-size: 15px !important;
+}
+.noOffPrice{
+  font-size: 15px !important;
+
 }
   }
   

@@ -1,17 +1,18 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardB from "../../Cards/CardB/CardB";
 // import 'swiper/css';
 import "swiper/css/pagination";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
+import { MainContext } from "@/context/MainContext";
 // import styles from './SwiperC.module.css'
 
 export default function SwiperC({ title, categoryCode }) {
   const [productByCatArray, setProductByCatArray] = useState([]);
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-
+let{offer}=useContext(MainContext)
   const getProductByCat = () => {
     let obj = {
       cat: categoryCode,
@@ -42,7 +43,6 @@ export default function SwiperC({ title, categoryCode }) {
   useEffect(() => {
     getProductByCat();
   }, []);
-// console.log(productByCatArray?.itemList)
   return (
     <>
       <div className="swipercomb-div">
@@ -54,7 +54,7 @@ export default function SwiperC({ title, categoryCode }) {
           // loop={true}
           slidesPerView={1}
           spaceBetween={30}
-          centeredSlides={true}
+          // centeredSlides={true}
           pagination={{
             clickable: true,
           }}
@@ -77,7 +77,7 @@ export default function SwiperC({ title, categoryCode }) {
               spaceBetween: 40,
             },
             1024: {
-              slidesPerView: 5,
+              slidesPerView: 6,
               spaceBetween: 50,
             },
           }}
@@ -91,14 +91,12 @@ export default function SwiperC({ title, categoryCode }) {
                 id={item.id}
                 imgSrc={item.mainImage}
                 title={item.name}
-                price={item.price}
+                price={Number(item.price)/10}
                 supply={item.supply}
                 categoryCode={categoryCode}
-                cyProductCategoryId={item.cyProductCategoryId
-                  
-
-                }
-
+                cyProductCategoryId={item.cyProductCategoryId}
+                noOffPrice={Number(item.noOffPrice)/10}
+offer={offer}
               />
             </SwiperSlide>
           ))}
