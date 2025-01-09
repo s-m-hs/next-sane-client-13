@@ -38,7 +38,7 @@ export default function CategoryDetaile({ param }) {
 
 
   // const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-  let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar } = useContext(MainContext)
+  let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar ,offer} = useContext(MainContext)
   const styleRef = useRef();
   const goToTop = () => {
     window.scrollTo({
@@ -281,7 +281,7 @@ export default function CategoryDetaile({ param }) {
     setXtFlagSpinnerShow(false)
   }, [])
 
-  console.log(productByCat)
+  // console.log(productByCat)
   return (
     <div className={`container  centerc ${Styles.category}`} >
       <div className="row mt-5">
@@ -410,7 +410,8 @@ export default function CategoryDetaile({ param }) {
                     id={item.id}
                     imgSrc={item.smallImage
                     } title={item.name}
-                    price={Number(item.price) / 10}
+                    price={(Number(item.price) / 10)}
+                    offPrice={(Number(item.price) / 10)*offer}
                     supply={item.supply}
                     noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
                       hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
@@ -419,6 +420,7 @@ export default function CategoryDetaile({ param }) {
                    
                 }
                     verifyHam={verifyHamkar}
+                    offerState={offer}
 
                   /></div>
 

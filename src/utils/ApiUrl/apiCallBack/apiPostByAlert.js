@@ -14,13 +14,13 @@ const postApiByAlert=(url,obj,alert,alertB)=>{
       }
     )
       .then((res) => {
-        // console.log(res)
         if(res.ok && res.status!=400){
      return res.json();
         } else if (res.status==400) {
-          // return res.json()
-          console.log(res.msg)
-            alertB()
+          return res.json().then(result=>{
+alertB(result.response)
+          })
+            
         }
       }).then(result=>{
         if(result){

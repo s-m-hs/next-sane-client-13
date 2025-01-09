@@ -46,6 +46,7 @@ let obj={
       },
       body:JSON.stringify(obj)
     }).then(res=>{
+      console.log(res)
       if(res.ok){
         return res.json().then(result=>{
           setVerifyDetail(result)
@@ -53,12 +54,17 @@ let obj={
 
         })
       }else{
-    //  console.log(JSON.parse(res))  
-        
+        console.log(res)
+        // console.log(JSON.parse(res))
+        // return res.json().then(result=>console.log(result)  )
         alertB()
 
       }
-    }).catch(err=>console.log(err))
+    }).catch(err=>{
+      console.log(err)
+      // console.log(JSON.parse(err))
+      // return err.json().then(result=>console.log(JSON.parse(result)))
+    } )
   }
   myApp()
 }

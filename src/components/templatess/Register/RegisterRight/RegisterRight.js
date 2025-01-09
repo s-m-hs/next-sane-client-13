@@ -69,7 +69,7 @@ const alertD=()=>alertN('center','success','کد تایید برای شما ار
 reset(setValue(''))
 
 });
-const alertB=()=>alertN('center','error',"مشکلی پیش آمده ،دوباره تلاش کنید...",2000)
+const alertB=(meg)=>alertN('center','error',meg,2000)
 const alertC=()=>alertN('center','error',"  شماره همراه به درستی وارد نشده است ...",1500)
 const alertE=()=>alertN('center','error',"  رمز عبور و تکرار آن یکسان نیست...",1500)
 
@@ -81,6 +81,7 @@ const handleRegistration=(data)=>{
   pw:data.password,
     name:data.name
 }
+// console.log(obj)
   if(token.length==11 && !flagInput){
    
 if(data.passwordRepeat===data.password){

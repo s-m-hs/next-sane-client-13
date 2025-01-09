@@ -10,7 +10,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 
 
 export default function ProductDetailLeft({detail}) {
-  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket}=useContext(MainContext)
+  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket,offer}=useContext(MainContext)
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000)
   const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
   const addToBasket=()=>{
@@ -41,8 +41,8 @@ export default function ProductDetailLeft({detail}) {
     }
     myApp()
   }
-// console.log(detail)
-
+console.log(detail)
+console.log(offer)
   return (
     <div className="container " style={{ height: '600px' }}>
       <div className="row mt-1" style={{ height: '600px' }}>
@@ -69,8 +69,24 @@ export default function ProductDetailLeft({detail}) {
             </div>
             <div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
 {detail.supply !=0 ? <>
-  <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
-              {/* <span className={Styles.ProductDetailL_divMiddle_price}  >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span> */}
+
+  { offer==1 && 
+    <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>}
+
+{offer!==1 && detail.noOffPrice===detail.price && 
+  <>
+               <span className={Styles.ProductDetailL_divMiddle_offprice} >{((Number(detail.noOffPrice)/10)*offer)?.toLocaleString()} تومان</span>
+             <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+     
+          </>
+}
+
+{detail.noOffPrice!==detail.price &&  <>
+               <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
+             <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+     
+          </>}
+         
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
 </> :
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: ناموجود  </span>
@@ -148,8 +164,37 @@ export default function ProductDetailLeft({detail}) {
       <div className={`${Styles.ProductDetailL_left_price} centerc mt-5`} >
 
         {detail.supply !=0 ? <>
-          <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
-              {/* <span className={Styles.ProductDetailL_divMiddle_price}  >{detail.noOffPrice?.toLocaleString()} تومان</span> */}
+{/* 
+          {detail.noOffPrice===detail.price ?    <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+          : <>
+               <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
+             <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+     
+          </>
+        
+              } */}
+    {/* sdfsdfsdf */}
+    { offer==1 && 
+    <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>}
+    
+{offer!==1 && detail.noOffPrice===detail.price && 
+  <>
+               <span className={Styles.ProductDetailL_divMiddle_offprice} >{((Number(detail.noOffPrice)/10)*offer)?.toLocaleString()} تومان</span>
+             <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+     
+          </>
+}
+
+{detail.noOffPrice!==detail.price &&  <>
+               <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
+             <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
+     
+          </>}
+
+
+
+
+
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
         </> :
                       <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول:ناموجود</span>

@@ -11,7 +11,7 @@ import apiUrl from '@/utils/ApiUrl/apiUrl'
 import alertQ from '@/utils/Alert/AlertQ'
 
 
-export default function CardC({imgSrc,title,price,id,clickSpinner,supply,parentId,noOffPrice,verifyHam }) { 
+export default function CardC({imgSrc,title,price,id,clickSpinner,supply,parentId,noOffPrice,verifyHam,offerState,offPrice }) { 
   let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket}=useContext(MainContext)
 
 
@@ -80,9 +80,20 @@ else if(supply==0){alertN('center','success'," برای استعلام قیمت 
 
     {/* <span>368,000</span> */}
 {supply!=0  ?  
+
 <>
-    <span className={!verifyHam ? `${Styles.cardprob_price}` : `${Styles.cardprob_price} ${Styles.underLine}` }>
-      {price?.toLocaleString()}تومان </span>
+{offerState!==1 ? <>
+  <span className={Styles.cardprob_noOffPrice}>{offPrice?.toLocaleString()}تومان </span>
+
+<span className={
+!verifyHam  && offerState==1 ? `${Styles.cardprob_price}` :
+offerState!=1 || verifyHam ? 
+`${Styles.cardprob_price} ${Styles.underLine}`:'' }>
+  {price?.toLocaleString()}تومان </span>
+</> :  <span className={Styles.cardprob_price}>{price?.toLocaleString()}تومان </span>
+}
+
+
 
 
       {verifyHam && 

@@ -31,6 +31,7 @@ const MainProvider = ({ children }) => {
   const [zarrinStatus,setZarrinStatus]=useState('')
   const [flagHamkar,setFlagHamkar]=useState(false)
   const[verifyHamkar,setVerifyHamkar]=useState(false)
+  const [offer,setOffer]=useState()
 
   // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -177,7 +178,8 @@ const MainProvider = ({ children }) => {
         authority,setAuthority,
         zarrinStatus,setZarrinStatus,
         flagHamkar,setFlagHamkar,
-        verifyHamkar,setVerifyHamkar
+        verifyHamkar,setVerifyHamkar,
+        offer,setOffer
       }}
     >
       {children}

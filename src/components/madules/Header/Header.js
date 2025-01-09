@@ -58,7 +58,8 @@ export default function Header() {
     setMessageNotification,
     flagMessageNotification,
     setFlagMessageNotification,
-    setFlagHamkar, flagHamkar
+    setFlagHamkar, flagHamkar,
+    setOffer
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
@@ -102,13 +103,27 @@ export default function Header() {
       3000
     );
   /////////////////////////////theming
-  const AlertD = () =>
-    alertQ(
-      "center",
-      "info",
-      "لطفا جهت دریافت لیست قیمت روزانه ،بعد از ثبت نام در سایت از قسمت بالا(سمت چپ) قسمت پیامها  یک پیام با عنوان 'دریافت لیست قیمت ' ارسال بفرمایید همکاران ما در کمترین زمان با شما تماس خواهند گرفت ... ",
-      "باشه..."
-    );
+const getOffer=()=>{
+  const getLocalStorage = localStorage.getItem("loginToken");
+
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CyKeyDatas/13`,{
+      method:'GET',
+      headers: {
+        Authorization: `Bearer ${getLocalStorage}`,
+        "Content-Type": "application/json",
+      },
+    }).then(res=>{
+      if(res.ok){
+        return res.json().then(result=>{
+          console.log(result)
+          setOffer(Number(result.value) )
+        })
+      }
+    })
+  }
+  myApp()
+}
   const getAllTicket = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
 
@@ -319,6 +334,7 @@ export default function Header() {
   useEffect(() => {
     getCategoryById(3);
     getCategoryById(2);
+    getOffer()
   }, []);
 
   const onmousHandle = (e) => {
