@@ -33,6 +33,7 @@ export default function BasketDetail() {
     mobile,
     cyUserID,
     address,
+    offer
   } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
@@ -286,6 +287,7 @@ const [payState,setPayState]=useState(1)
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
 
+  console.log(getBasket)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
@@ -342,7 +344,10 @@ const [payState,setPayState]=useState(1)
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
-                        totalPrice={Number(item.totalPrice) / 10}
+                        totalPrice={(offer==1 && item.noOffPrice===item.price)  ?   Number(item.totalPrice) / 10 :
+                          item.noOffPrice!==item.price  ? 'no' :
+                          offer!==1 && '0.5'
+                        }
                         unitPrice={Number(item.unitPrice) / 10}
                         id={item.id}
                         cyProductID={item.cyProductID}

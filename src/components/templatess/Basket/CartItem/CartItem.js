@@ -16,7 +16,7 @@ import alertN from '@/utils/Alert/AlertA';
 const CartItem = (props) => {
   const[quantity,setQuantity]=useState( props.quantity)
   const getLocalStorage=localStorage.getItem('loginToken')
-  let {  xtFlagLogin,setXtFlagSpinnerShow } = useContext(MainContext);
+  let {  xtFlagLogin,setXtFlagSpinnerShow,offer } = useContext(MainContext);
 
 //   let { basketFlag,setGetBasket } = useContext(CounterContext)
 // let{flagLogin}=useContext(MenuContext)
@@ -134,6 +134,8 @@ const AlertA=(func)=> Swal.fire({
           )
           }
         </td>
+
+        
 <td className={style.td_totalPrice}>
 <span className= "tp-product-details-price new-price">
                 {props.totalPrice}

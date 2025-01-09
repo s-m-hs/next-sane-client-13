@@ -413,12 +413,13 @@ export default function CategoryDetaile({ param }) {
                     price={(Number(item.price) / 10)}
                     offPrice={(Number(item.price) / 10)*offer}
                     supply={item.supply}
-                    noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
-                      hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
-                      hamkarPaymentState === '3' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(5/100)) :
-                      hamkarPaymentState === '4' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(10/100)) :''
+                    noOffPrice={(Number(item.noOffPrice) / 10)}
+                //     noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
+                //       hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
+                //       hamkarPaymentState === '3' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(5/100)) :
+                //       hamkarPaymentState === '4' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(10/100)) :''
                    
-                }
+                // }
                     verifyHam={verifyHamkar}
                     offerState={offer}
 
