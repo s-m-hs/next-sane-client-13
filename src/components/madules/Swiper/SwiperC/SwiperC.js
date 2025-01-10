@@ -58,10 +58,10 @@ let{offer}=useContext(MainContext)
           pagination={{
             clickable: true,
           }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 3000,
+          //   disableOnInteraction: false,
+          // }}
           // navigation={true}
           breakpoints={{
             450: {

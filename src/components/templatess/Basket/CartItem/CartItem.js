@@ -21,7 +21,8 @@ const CartItem = (props) => {
 //   let { basketFlag,setGetBasket } = useContext(CounterContext)
 // let{flagLogin}=useContext(MenuContext)
 
-const alertB=()=>alertN('center','error','بیش تر از 5عدد مجاز به سفارش نمی باشید...',1500)
+// const alertB=()=>alertN('center','error','بیش تر از 5عدد مجاز به سفارش نمی باشید...',1500)
+const alertB=()=>alertN('center','error','بیش تر از یک عدد مجاز به سفارش نمی باشید...',1500)
 
 const addClick = () => {
 
@@ -38,11 +39,11 @@ const minesClick = () => {
 };
 
 const changeHandler = (e) => {
-  if(e.target.value>=0 && e.target.value<=5){
+  if(e.target.value>=0 && e.target.value<=1){
     
     setQuantity(e.target.value)
 
-  }else if(e.target.value=0 ||e.target.value>5){
+  }else if(e.target.value=0 ||e.target.value>1){
     alertB()
   }
   props.updateQuantity(props.cyProductID, e.target.value);
@@ -114,17 +115,17 @@ const AlertA=(func)=> Swal.fire({
               </div>
             ) : (
               <span className="tp-product-details-price new-price">
-                {props.totalPrice}
+                {props.totalPrice?.toLocaleString()} تومان
               </span>
             )
           ) : props.totalprice === null ? (
             <span className="tp-product-details-price new-price">
-              {props.unitPrice}
+              {props.unitPrice?.toLocaleString()} تومان
             </span>
           ) : (
             <div>
               <span className="tp-product-details-price old-price">
-                {props.unitPrice}
+                {props.unitPrice.toLocaleString()} تومان 
               </span>
               {/* <br/>
               <span className="tp-product-details-price new-price">
@@ -135,12 +136,12 @@ const AlertA=(func)=> Swal.fire({
           }
         </td>
 
-        
-<td className={style.td_totalPrice}>
+        {props.totalPrice ? <td className={style.td_totalPrice}>
 <span className= "tp-product-details-price new-price">
-                {props.totalPrice}
+                {props.totalPrice?.toLocaleString()}تومان
               </span>
-</td>
+</td> :"----"}
+
 
         {/* <!-- action --> */}
         <td className="tp-cart-action">

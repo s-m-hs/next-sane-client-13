@@ -50,6 +50,15 @@
     height: 5.5cqi;
 }
 
+.Header_rightSide__div_img >img{   
+     width: 8cqi;
+    position: absolute;
+    top: -18px;
+    z-index: 1000;
+    right: 180px;
+rotate: -18deg;
+}
+
 .Header_leftSide {
     /* position: absolute;
 left: 0; */

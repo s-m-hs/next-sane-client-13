@@ -52,6 +52,7 @@ export default function Header() {
     setXtFlagSpinnerShow,
     cartCounter,
     setCartCounter,
+    setLocalUpdateBasket,
     flagThem,
     setFlagThem,
     messageNotification,
@@ -85,6 +86,7 @@ export default function Header() {
   const [searchTypeB, setSearchTypeB] = useState("");
   const [searchBoxArr, setSearchBoxArr] = useState([]);
   const [flagSearch, setFlagSearch] = useState(false);
+  const[offBanner,setOffBanner]=useState([])
 
   // Function to toggle the menu
   const toggleMenu = () => {
@@ -116,7 +118,6 @@ const getOffer=()=>{
     }).then(res=>{
       if(res.ok){
         return res.json().then(result=>{
-          console.log(result)
           setOffer(Number(result.value) )
         })
       }
@@ -329,12 +330,33 @@ const getOffer=()=>{
       );
     }
   };
+const getBanner=(id)=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+  
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CySubjects/${id}`,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getLocalStorage}`,
+      },
+    }).then(res=>{
+      if(res.ok){
+        return res.json().then(result=>{
+          setOffBanner(result)
 
+        }) 
+      }
+    })
+  }
+  myApp()
+}
   ////////////////////////////
   useEffect(() => {
     getCategoryById(3);
     getCategoryById(2);
     getOffer()
+    getBanner(18)
   }, []);
 
   const onmousHandle = (e) => {
@@ -354,6 +376,24 @@ const getOffer=()=>{
       setFlagHamkar(false)
     }
   }, [pathname]);
+
+  useEffect(()=>{
+
+    return ()=> {
+  
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('cartObj')) {
+          const keyy=JSON.parse(localStorage.getItem(key))
+          const value = localStorage.getItem(key);
+          localStorage.removeItem(key)
+          setLocalUpdateBasket([])
+          setCartCounter(0)
+          // apiCallProdDetails(value, addItem, setIsApiCalled)
+        }
+      }
+    }
+  },[])
 
   // useEffect(()=>{
   //   if(pathname.includes('paymentResult') && zarrinStatus===''){
@@ -383,6 +423,13 @@ const getOffer=()=>{
                 className={`col col-md-8 ${styles.Header_rightSide} centerr`}
               >
                 <div className={styles.Header_rightSide__div_img}>
+                {/* <img src="../images/banner/20offer - Copy.png" alt="" /> */}
+                {offBanner?.orderValue==1 && 
+                                <img src={offBanner.bigImg} alt={offBanner.title} />
+
+                }
+                {/* <img src="../images/banner/vecteezy_mega-sale-20-percent-off-right-side-view-3d-render-object_17193891 (1).png" alt="" /> */}
+
                   <div style={{ width: "135px", height: "105px" }}>
                     <SwiperA />
                   </div>
@@ -1386,7 +1433,13 @@ setFlagHamkar(false)
           <div className={`${styles.mobi_header} row `}>
             <Link href={"/"}>
               <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
+              {offBanner?.orderValue==1 && 
+                                <img src={offBanner.bigImg} alt={offBanner.title} />
+
+                }
+
             </Link>
+
 
             <div className={styles.header_bottom__col_logo}>
               {xtFlagLogin && (

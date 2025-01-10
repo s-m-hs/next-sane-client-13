@@ -129,20 +129,40 @@ const [payState,setPayState]=useState(1)
   const handleGoToProfile = () => {
     rout.push("/p-user/profile");
   };
-
   const removeFromCart = (id) => {
     setCartCounter((prevCounter) => prevCounter - 1);
+  
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      // console.log(id);
-      const toRemoveId = JSON.parse(localStorage.getItem(key));
-      // console.log(toRemoveId);
-      if (key.startsWith("cartObj") && toRemoveId.value == id) {
-        removeItem(id);
-        localStorage.removeItem(key);
+  
+      if (key.startsWith("cartObj")) {
+        const item = localStorage.getItem(key);
+  
+        try {
+          const parsedItem = JSON.parse(item); // بررسی مقدار
+          if (parsedItem.value == id) {
+            removeItem(id);
+            localStorage.removeItem(key);
+          }
+        } catch (error) {
+          console.error(`Invalid JSON for key "${key}":`, item);
+        }
       }
     }
   };
+  // const removeFromCart = (id) => {
+  //   setCartCounter((prevCounter) => prevCounter - 1);
+  //   for (let i = 0; i < localStorage.length; i++) {
+  //     const key = localStorage.key(i);
+  //     // console.log(id);
+  //     const toRemoveId = JSON.parse(localStorage.getItem(key));
+  //     // console.log(toRemoveId);
+  //     if (key.startsWith("cartObj") && toRemoveId.value == id) {
+  //       removeItem(id);
+  //       localStorage.removeItem(key);
+  //     }
+  //   }
+  // };
 
   const paymentHandler = () => {
     if (!xtFlagLogin) {
@@ -287,7 +307,7 @@ const [payState,setPayState]=useState(1)
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
 
-  console.log(getBasket)
+  // console.log(getBasket)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
@@ -345,10 +365,10 @@ const [payState,setPayState]=useState(1)
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
                         totalPrice={(offer==1 && item.noOffPrice===item.price)  ?   Number(item.totalPrice) / 10 :
-                          item.noOffPrice!==item.price  ? 'no' :
-                          offer!==1 && '0.5'
+                          item.noOffPrice!==item.price  ?  Number(item.totalPrice) / 10:
+                          offer!==1 &&  (Number(item.totalPrice) / 10)*offer
                         }
-                        unitPrice={Number(item.unitPrice) / 10}
+                        unitPrice={(Number(item.unitPrice) / 10)*offer}
                         id={item.id}
                         cyProductID={item.cyProductID}
                         quantity={item.quantity}
@@ -393,9 +413,8 @@ const [payState,setPayState]=useState(1)
                 تکمیل خرید
               </button>
             </div>
-
-            <div className="col-6">
-              {" "}
+{ Number(total)!=0 &&   <div className="col-6">
+            
               <div className={` ${style.colPrice_mobile}`}>
                 {/* <div className={`centerc ${style.cath_div_mobile}`}>
 
@@ -413,7 +432,7 @@ const [payState,setPayState]=useState(1)
                   <span>مجموع سبد خرید :</span>
                   <br />
                   <span className={`  ${style.colPrice_mobile_span2}`}>
-                    {(Number(total) / 10).toLocaleString()} تومان
+                    {((Number(total) / 10)*offer).toLocaleString()} تومان
                   </span>
                   <img
                     src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
@@ -422,7 +441,9 @@ const [payState,setPayState]=useState(1)
                   />
                 </button>
               </div>
-            </div>
+            </div>}
+          
+
           </div>
         </div>
 
@@ -468,8 +489,7 @@ const [payState,setPayState]=useState(1)
               </span>
       
             </div> */}
-
-            <div className={`centerr ${style.colPrice}`}>
+{Number(total)!=0 &&   <div className={`centerr ${style.colPrice}`}>
               <button
                 className={`btn btn-outline-warning ${style.btn1}`}
                 disabled
@@ -482,9 +502,12 @@ const [payState,setPayState]=useState(1)
 
                 <span>مجموع سبد خرید :</span>
                 <br />
-                <span>{(Number(total) / 10).toLocaleString()} تومان</span>
+                <span>{((Number(total) / 10)*offer).toLocaleString()} تومان</span>
               </button>
-            </div>
+            </div>}
+          
+
+
           </div>
         </div>
       </div>
