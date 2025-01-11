@@ -308,7 +308,7 @@ const [payState,setPayState]=useState(1)
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
 
-  // console.log(getBasket)
+  // console.log(toBuy)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
@@ -342,7 +342,10 @@ const [payState,setPayState]=useState(1)
                       name={item["name"]}
                       smallImage={item["smallImage"]}
                       // totalPrice={item.noOffPrice}
-                      unitPrice={Number(item.price) / 10}
+                      unitPrice={offer==1 && item.noOffPrice===item.price ?  Number(item.price) / 10  :
+                        item.noOffPrice!==item.price ? Number(item.noOffPrice) / 10 :
+                        offer!=1 && (Number(item.price) / 10)*offer
+                      }
                       id={item["id"]}
                       cyProductID={item.id}
                       quantity={
@@ -575,7 +578,7 @@ const [payState,setPayState]=useState(1)
                   value={2}
                   onChange={(e)=>setPayState(e.target.value)}
                 />
-                <span className="m-2">پرداخت در محل</span>
+                <span className="m-2">پرداخت در محل (تهران و قم)</span>
               </span>
             </div>
 

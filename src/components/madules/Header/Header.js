@@ -945,6 +945,10 @@ setFlagHamkar(false)
                 className={`col col-md-8 ${styles.Header_rightSide} centerr`}
               >
                 <div className={styles.Header_rightSide__div_img}>
+                {offBanner?.orderValue==1 && 
+                                <img className={styles.Header_rightSide__div_imgB} src={offBanner.bigImg} alt={offBanner.title} />
+
+                }
                   <div style={{ width: "80px", height: "50px" }}>
                     <SwiperA />
                   </div>
@@ -1430,13 +1434,18 @@ setFlagHamkar(false)
 
       <section className={styles.B}>
         <div className="container">
-          <div className={`${styles.mobi_header} row `}>
+          <div className={`${styles.mobi_header} row  centerr`}>
             <Link href={"/"}>
-              <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
+              <img  src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
               {offBanner?.orderValue==1 && 
-                                <img src={offBanner.bigImg} alt={offBanner.title} />
+              <>
+                                              <img className={`${styles.mobi_header_img_off} `} src={offBanner.bigImg} alt={offBanner.title} />
+
+              <span className={`${styles.mobi_header_span_off} `} > تخفیف ویژه روز پدر</span>
+              </>
 
                 }
+            
 
             </Link>
 
