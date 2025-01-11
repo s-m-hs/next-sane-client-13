@@ -292,8 +292,9 @@ const [payState,setPayState]=useState(1)
   ///to add total price
   useEffect(() => {
     const data = getBasket.map((item) => ({
-      totalPrice: item.totalPrice,
-      // manufacturer: item.manufacturer
+      
+      totalPrice:item.unitOfferPrice===item.unitPrice ?  item.totalPrice*offer : item.unitOfferPrice
+      
     }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
@@ -364,11 +365,14 @@ const [payState,setPayState]=useState(1)
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
-                        totalPrice={(offer==1 && item.noOffPrice===item.price)  ?   Number(item.totalPrice) / 10 :
-                          item.noOffPrice!==item.price  ?  Number(item.totalPrice) / 10:
+                        totalPrice={(offer==1 && item.unitOfferPrice===item.unitPrice)  ?   Number(item.totalPrice) / 10 :
+                          item.unitOfferPrice!==item.unitPrice  ?  Number(item.unitOfferPrice) / 10:
                           offer!==1 &&  (Number(item.totalPrice) / 10)*offer
                         }
-                        unitPrice={(Number(item.unitPrice) / 10)*offer}
+                        unitPrice={(offer==1 && item.unitOfferPrice===item.unitPrice) ? (Number(item.unitPrice) / 10) :
+                          item.unitOfferPrice!==item.unitPrice  ?   (Number(item.unitOfferPrice) / 10) :
+                          offer!==1 &&  (Number(item.unitPrice) / 10)*offer
+                        }
                         id={item.id}
                         cyProductID={item.cyProductID}
                         quantity={item.quantity}
@@ -432,7 +436,7 @@ const [payState,setPayState]=useState(1)
                   <span>مجموع سبد خرید :</span>
                   <br />
                   <span className={`  ${style.colPrice_mobile_span2}`}>
-                    {((Number(total) / 10)*offer).toLocaleString()} تومان
+                    {((Number(total) / 10)).toLocaleString()} تومان
                   </span>
                   <img
                     src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
@@ -502,7 +506,7 @@ const [payState,setPayState]=useState(1)
 
                 <span>مجموع سبد خرید :</span>
                 <br />
-                <span>{((Number(total) / 10)*offer).toLocaleString()} تومان</span>
+                <span>{((Number(total) / 10)).toLocaleString()} تومان</span>
               </button>
             </div>}
           

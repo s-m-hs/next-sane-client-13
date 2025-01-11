@@ -53,15 +53,15 @@ let{offer}=useContext(MainContext)
         <Swiper
           // loop={true}
           slidesPerView={1}
-          spaceBetween={30}
+          spaceBetween={20}
           // centeredSlides={true}
           pagination={{
             clickable: true,
           }}
-          // autoplay={{
-          //   delay: 3000,
-          //   disableOnInteraction: false,
-          // }}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
           // navigation={true}
           breakpoints={{
             450: {
@@ -77,7 +77,7 @@ let{offer}=useContext(MainContext)
               spaceBetween: 40,
             },
             1024: {
-              slidesPerView: 6,
+              slidesPerView: 5,
               spaceBetween: 50,
             },
           }}

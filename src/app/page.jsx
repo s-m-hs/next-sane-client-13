@@ -31,6 +31,7 @@ export default function Home() {
   const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
   // const getLocalStorage=localStorage.getItem('loginToken')
 const [key,setKey]=useState('')
+const [keyOfferSlider,setKeyOfferSlider]=useState('')
 
     const brandLogA=[
       {id:1,brand:'A4.jpg',url:'https://www.a4tech.com/'},
@@ -51,7 +52,9 @@ const [key,setKey]=useState('')
     // 'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
 ]
 
-const keyShow=(id)=>{
+console.log(keyOfferSlider?.value)
+
+const keyShow=(id,func)=>{
   const getLocalStorage=localStorage.getItem('loginToken')
 
   async function myApp(){
@@ -65,17 +68,19 @@ const keyShow=(id)=>{
     }).then(res=>{
       if(res.ok){
         return res.json().then(result=>{
-          setKey((result.tag))
+          console.log(result)
+          func((result))
         })
 
       }
       
     })
   }myApp()
-}
+} 
 
 useEffect(()=>{
-  keyShow(11)
+  keyShow(11,setKey)
+  keyShow(14,setKeyOfferSlider) 
 },[])
 useEffect(() => {
   const getLocalStorage=localStorage.getItem('loginToken')
@@ -123,6 +128,8 @@ useEffect(() => {
       <SwiperF/>
    
      </div> 
+     {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-best-sellers' title={'پرفروشهای فروش ویژه💰:'} />} 
+
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
@@ -134,7 +141,7 @@ useEffect(() => {
     <SubjecArea /> 
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    {key === 'ok'  ? 
+    {key?.tag === 'ok'  ? 
      <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
   :''} 
     <BanerA  />
