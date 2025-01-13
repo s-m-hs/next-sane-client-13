@@ -225,7 +225,6 @@ const getOffer=()=>{
     }
     myApp();
   };
-
   useEffect(() => {
     if (searchTypeB.length > 2) {
       searchBox();
@@ -233,6 +232,8 @@ const getOffer=()=>{
       setSearchBoxArr([]);
     }
   }, [searchTypeB]);
+
+
 
   ////////////////////////////
   useEffect(() => {
@@ -497,28 +498,31 @@ const getBanner=(id)=>{
                       setSearchType('')
                     }} /></span> */}
                             {searchBoxArr.itemList?.length != 0
-                              ? searchBoxArr.itemList?.map((item) => (
-                                <Link
-                                  href={`/product/${item.id}`}
-                                  onClick={() => {
-                                    setFlagSearch(false);
-                                    setSearchBoxArr([]);
-                                    setSearchType("");
-                                    setXtFlagSpinnerShow(true);
-                                    setVisible(false);
-                                  }}
-                                >
-                                  <div
-                                    className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                  >
-                                    <span>{item.name}</span>
-                                    <img
-                                      src={item.smallImage}
-                                      alt={item.name}
-                                    />
-                                  </div>
-                                </Link>
-                              ))
+                              ? searchBoxArr.itemList?.map((item) => {
+if(item.cyCategoryId){                            
+    return <Link
+      href={`/product/${item.id}`}
+      onClick={() => {
+        setFlagSearch(false);
+        setSearchBoxArr([]);
+        setSearchType("");
+        setXtFlagSpinnerShow(true);
+        setVisible(false);
+      }}
+    >
+      <div
+        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+      >
+        <span>{item.name}</span>
+        <img
+          src={item.smallImage}
+          alt={item.name}
+        />
+      </div>
+    </Link>
+}
+
+                              })
                               : ""}
                           </div>
                         </div>
@@ -989,28 +993,33 @@ setFlagHamkar(false)
                       setSearchType('')
                     }} /></span> */}
                           {searchBoxArr.itemList?.length != 0
-                            ? searchBoxArr.itemList?.map((item) => (
-                              <Link
-                                href={`/product/${item.id}`}
-                                onClick={() => {
-                                  setFlagSearch(false);
-                                  setSearchBoxArr([]);
-                                  setSearchType("");
-                                  setXtFlagSpinnerShow(true);
-                                  setVisible(false);
-                                }}
-                              >
-                                <div
-                                  className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                >
-                                  <span>{item.name}</span>
-                                  <img
-                                    src={item.smallImage}
-                                    alt={item.name}
-                                  />
-                                </div>
-                              </Link>
-                            ))
+                            ? searchBoxArr.itemList?.map((item) =>{
+ if(item.mainImage){
+ 
+ return   <Link
+      href={`/product/${item.id}`}
+      onClick={() => {
+        setFlagSearch(false);
+        setSearchBoxArr([]);
+        setSearchType("");
+        setXtFlagSpinnerShow(true);
+        setVisible(false);
+      }}
+    >
+      <div
+        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+      >
+        <span>{item.name}</span>
+        <img
+          src={item.smallImage}
+          alt={item.name}
+        />
+      </div>
+    </Link>
+ 
+}
+
+                            } )
                             : ""}
                         </div>
                       </div>
@@ -1870,8 +1879,9 @@ setFlagHamkar(false)
                     }} 
                     /></span> */}
                           {searchBoxArr.itemList?.length != 0
-                            ? searchBoxArr.itemList?.map((item) => (
-                              <Link
+                            ? searchBoxArr.itemList?.map((item) =>{
+                              if(item.cyCategoryId){
+                                return   <Link
                                 href={`/product/${item.id}`}
                                 onClick={() => {
                                   setFlagSearch(false);
@@ -1891,7 +1901,8 @@ setFlagHamkar(false)
                                   />
                                 </div>
                               </Link>
-                            ))
+                              } 
+                            } )
                             : ""}
                         </div>
                       )}

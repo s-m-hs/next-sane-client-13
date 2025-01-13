@@ -26,6 +26,7 @@ export default function BasketDetail() {
     localUpdateBasket,
     setLocalUpdateBasket,
     setCartCounter,
+    cartCounter,
     getBasket,
     setGetBasket,
     setBasketFlag,
@@ -43,10 +44,14 @@ export default function BasketDetail() {
   const [cartItem, setCartItem] = useState([]);
   const [total, setTotal] = useState(0);
   const [show, setShow] = useState(false);
+  const [showB, setShowB] = useState(false);
 const [payState,setPayState]=useState(1)
+const [ziroSupply,setZiroSupply]=useState([])
+const [flagZiroSupply,setFlagZiroSupply]=useState(false)
   const handleClose = () => setShow(false);
+  const handleCloseB = () => setShowB(false);
   const handleShow = () => setShow(true);
-
+  const handleShowB = () => setShowB(true);
   const rout = useRouter();
   // const getLocalStorage=localStorage.getItem('loginToken')
   // console.log(getBasket[0].cyOrderID)
@@ -69,6 +74,8 @@ const [payState,setPayState]=useState(1)
       " سبد خرید با موفقیت به روزرسانی شد...",
       500
     ).then((res) => setBasketFlag((prev) => !prev));
+
+
   const removeHan = (id) => {
     const getLocalStorage = localStorage.getItem("loginToken");
     RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
@@ -113,15 +120,17 @@ const [payState,setPayState]=useState(1)
         .then((res) => {
           // console.log(res);
           if (res.status == 200) {
-            return res.json();
-          }
+            return res.json().then(result=>{
+              setGetBasket([]);
+              setCartCounter(0);
+              handleClose();
+              AlertC();
+            })
+          }else {
+return res.json().then(result=>{
+alert(result.response)})          }
         })
-        .then((result) => {
-          setGetBasket([]);
-          setCartCounter(0);
-          handleClose();
-          AlertC();
-        });
+      
     }
     myApp();
   };
@@ -177,10 +186,27 @@ const [payState,setPayState]=useState(1)
           rout.push("/register");
         });
       alertN();
-    } else {
-      handleShow();
+    } 
+
+    
+    else if(ziroSupply?.length!=0) {
+   handleShowB()
+    }else if(ziroSupply?.length==0){
+      handleShow()
     }
   };
+
+useEffect(()=>{
+  setZiroSupply([])
+  getBasket?.forEach(item=>{
+    if(item.supply==0){
+      setFlagZiroSupply(false)
+      setZiroSupply(prev=>[...prev,item.productCode])
+    }    
+  })
+},[getBasket])
+
+
 
   const addItem = (item) => {
     setToBuy((prevToBuy) => {
@@ -307,6 +333,13 @@ const [payState,setPayState]=useState(1)
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
+
+// useEffect(()=>{
+//   if(  basket?.length==0 && cartCounter==0){
+//     rout.push('/')
+//   }
+// },[basket])
+
   console.log(getBasket) 
 console.log(address)
   return (
@@ -614,6 +647,39 @@ console.log(address)
               <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید
             </button>
+          </Modal.Footer>
+        </Modal>
+
+
+   {/* for ziroSuply product  ===> */}
+        <Modal size="lg" show={showB} onHide={handleCloseB}>
+          <Modal.Header closeButton></Modal.Header>
+
+          <Modal.Body style={{ fontSize: "35px" }}>
+    <>
+    <h1>موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد خود حذف بفرمایید : </h1>
+    {/* <table className="table"> */}
+      <ul className={`${style.ul_ziroSupply}`} >
+{ziroSupply?.length!=0 && ziroSupply.map(item=>(
+  <li>{item}</li>
+  // <tr key="">
+  //   <th>{item}</th>
+  //     </tr>
+))}
+      </ul>
+    {/* </table> */}
+    </>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <button
+              className={`btn btn-danger ${style.btn_modal_close}`}
+              onClick={handleCloseB}
+            >
+              <X size={16} color="#fff" weight="duotone" />
+              بستن
+            </button>
+       
           </Modal.Footer>
         </Modal>
       </>

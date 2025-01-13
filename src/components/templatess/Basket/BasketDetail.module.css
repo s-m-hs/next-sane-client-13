@@ -108,6 +108,11 @@ border: none;
 .cath_div_mobile{
     display: none;
 }
+
+.ul_ziroSupply li{
+    list-style:disc;
+}
+
 @media only screen and (max-width:900px){
 
 .container{
