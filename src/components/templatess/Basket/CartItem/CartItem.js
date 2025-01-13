@@ -68,6 +68,7 @@ const AlertA=(func)=> Swal.fire({
   }
 });
   /////////////////////////////////////////////////
+
   return (
     <>
       <tr className= {`${style.tr}`}>

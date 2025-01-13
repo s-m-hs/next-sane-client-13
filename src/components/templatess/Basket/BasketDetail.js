@@ -64,7 +64,7 @@ const [payState,setPayState]=useState(1)
 
   const AlertB = () =>
     alertN(
-      "center",
+      "center", 
       "success",
       " سبد خرید با موفقیت به روزرسانی شد...",
       500
@@ -307,8 +307,8 @@ const [payState,setPayState]=useState(1)
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
-
-  // console.log(toBuy)
+  console.log(getBasket) 
+console.log(address)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
@@ -545,8 +545,7 @@ const [payState,setPayState]=useState(1)
             ) : (
               <>
                 <h2>
-                  شما آدرس ثبت شده ای ندارید ،در صورت تمایل آدرس خود را وارد
-                  نمایید:
+                  شما آدرس ثبت شده ای ندارید لطفا آدرس خود را ثبت بفرمایید...
                 </h2>
                 <Link
                   href={"./p-user/address"}
@@ -582,9 +581,9 @@ const [payState,setPayState]=useState(1)
               </span>
             </div>
 
-            {!mobile && (
+            {/* {address?.length == 0 && (
               <div className={`${style.mobileAdd_div} centerr`}>
-                <h1>شما موبایل ثبت شده ای ندارید!!!</h1>
+                <h1>  شما آدرس ثبت شده ای ندارید ،لطفا ابتدا یک آدرس ثت کنید!!!</h1>
                 <button
                   className={`btn btn-success ${style.btnGoToMobile}`}
                   onClick={handleGoToProfile}
@@ -592,7 +591,7 @@ const [payState,setPayState]=useState(1)
                   <HandTap size={32} weight="thin" /> ثبت شماره موبایل
                 </button>
               </div>
-            )}
+            )} */}
           </Modal.Body>
 
           <Modal.Footer>
@@ -605,7 +604,7 @@ const [payState,setPayState]=useState(1)
             </button>
             <button
               className={
-                mobile
+                address?.length !== 0
                   ? `btn btn-info ${style.btn_modal_ok}`
                   : `btn btn-info ${style.btn_modal_ok_disable}`
               }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 
 import SwiperProduct from "../SwiperProduct/SwiperProduct";
 import Styles from './ProductDetailLeft.module.css'
@@ -12,6 +12,9 @@ import Head from "next/head";
 
 export default function ProductDetailLeft({detail}) {
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket,offer}=useContext(MainContext)
+const [flagSupply,setFlagSupply]=useState(false)
+
+
   const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000)
   const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
   const addToBasket=()=>{
@@ -42,7 +45,18 @@ export default function ProductDetailLeft({detail}) {
     }
     myApp()
   }
-// console.log(detail)
+
+  useEffect(()=>{
+    if(detail?.supply !== 0 && detail.supply){
+      console.log('object')
+      setFlagSupply(true) 
+    } else{
+      console.log('err')
+    }
+  },[detail])
+console.log(detail) 
+console.log(typeof(detail?.supply) )
+console.log(flagSupply)
 // console.log(offer)
 // console.log((detail.price)*offer)
   return (
@@ -108,7 +122,7 @@ export default function ProductDetailLeft({detail}) {
              
             </div>
 
-            {detail.supply !=0 &&    <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
+            {flagSupply &&   <div className={`${Styles.ProductDetailL_left} centerc mt-5`} >
               <button className={`${Styles.addButton} btn btn-info`}  
                       onClick={()=>{
                    
@@ -134,7 +148,7 @@ export default function ProductDetailLeft({detail}) {
         <div className={`${Styles.ProductDetailL_divright_swiper} col-12 col-md-6`}>
           <SwiperProduct src={detail.mainImage} srcB={detail.images?.split('*,*')} />
 
-         {detail.supply !=0 &&       <button className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
+         {flagSupply &&      <button className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
              onClick={()=>{
               // const getLocalStorage=localStorage.getItem('loginToken')
               // let obj=[{
