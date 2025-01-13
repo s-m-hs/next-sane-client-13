@@ -7,6 +7,7 @@ import updateBasket from "@/utils/ApiUrl/updateBasket";
 import addToCart from "@/utils/Functions/addToCart";
 import alertN from "@/utils/Alert/AlertA";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
+import Head from "next/head";
 
 
 export default function ProductDetailLeft({detail}) {
@@ -41,23 +42,24 @@ export default function ProductDetailLeft({detail}) {
     }
     myApp()
   }
-console.log(detail)
-console.log(offer)
+// console.log(detail)
+// console.log(offer)
+// console.log((detail.price)*offer)
   return (
 
     <>
-          {/* <Head>
-        <meta name="product_id" content={product.id} />
-        <meta name="product_name" content={product.name} />
-        <meta property="og:image" content={product.image} />
-        <meta name="product_price" content={product.price} />
-        <meta name="product_old_price" content={product.oldPrice || ''} />
+          <Head>
+        <meta name="product_id" content={detail.id} />
+        <meta name="product_name" content={detail.name} />
+        <meta property="og:image" content={detail.mainImage} />
+        <meta name="product_price" content={detail.noOffPrice!==detail.price ? (detail.noOffPrice):(detail.price)*offer} />
+        <meta name="product_old_price" content={detail.price || ''} />
         <meta
           name="availability"
-          content={product.inStock ? 'instock' : 'outofstock'}
+          content={detail.supply ? 'instock' : 'outofstock'}
         />
-        <meta name="guarantee" content={product.guarantee || ''} />
-      </Head> */}
+        {/* <meta name="guarantee" content={detail.guarantee || ''} /> */}
+      </Head>
        <div className="container " style={{ height: '600px' }}>
       <div className="row mt-1" style={{ height: '600px' }}>
         {detail && 
