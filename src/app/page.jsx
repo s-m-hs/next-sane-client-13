@@ -82,29 +82,29 @@ useEffect(()=>{
   keyShow(11,setKey)
   keyShow(14,setKeyOfferSlider) 
 },[])
-useEffect(() => {
-  const getLocalStorage=localStorage.getItem('loginToken')
-  if(xtFlagLogin){
-      for (let i = 0; i < localStorage.length; i++) {
+// useEffect(() => {
+//   const getLocalStorage=localStorage.getItem('loginToken')
+//   if(xtFlagLogin){
+//       for (let i = 0; i < localStorage.length; i++) {
 
-    const key = localStorage.key(i);
-    if (key.startsWith('cartObj')) {
-      const keyy=JSON.parse(localStorage.getItem(key))
-      const value = localStorage.getItem(key);
-      let obj=[{
-        cyProductID:keyy.value,
-        quantity: keyy.quan
-      }] 
-      updateBasket(getLocalStorage,obj,setBasketFlag,alertA)
-      localStorage.removeItem(key)
-      setLocalUpdateBasket([])
-      setCartCounter(0)
-      // apiCallProdDetails(value, addItem, setIsApiCalled)
-    }
-  }
-  }
+//     const key = localStorage.key(i);
+//     if (key.startsWith('cartObj')) {
+//       const keyy=JSON.parse(localStorage.getItem(key))
+//       const value = localStorage.getItem(key);
+//       let obj=[{
+//         cyProductID:keyy.value,
+//         quantity: keyy.quan
+//       }] 
+//       updateBasket(getLocalStorage,obj,setBasketFlag,alertA)
+//       localStorage.removeItem(key)
+//       setLocalUpdateBasket([])
+//       setCartCounter(0)
+//       // apiCallProdDetails(value, addItem, setIsApiCalled)
+//     }
+//   }
+//   }
 
-},[xtFlagLogin]); 
+// },[xtFlagLogin]); 
 
 
 

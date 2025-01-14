@@ -12,6 +12,7 @@ import alertN from "@/utils/Alert/AlertA";
 import { InputOtp } from 'primereact/inputotp';
 // import axios from "axios";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
+import { InputMask } from "primereact/inputmask";
 
 
 
@@ -159,11 +160,11 @@ setXtFlagSpinnerShow(false)
             <DeviceMobile  size={40} color="#19a5af" weight="fill" />
           
 
-            <div className={`${style.card_div} card flex justify-content-center`} >
-            <style scoped>
+            <div className={`${style.card_div} card flex justify-content-center login_label_float`} >
           
-            </style>
-            <InputOtp value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
+                <InputMask className={`${style.inputmask}`} value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput} mask="9999-9999999" placeholder="091...."/>
+            <label>شماره همراه</label>
+          
         </div>
           </div>
 

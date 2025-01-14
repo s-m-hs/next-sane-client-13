@@ -40,6 +40,7 @@ import CardA from "../Cards/CardA/CardA";
 // import { motion , useScroll,AnimatePresence} from "framer-motion"
 import { Sidebar } from "primereact/sidebar";
 import alertQ from "@/utils/Alert/AlertQ";
+import updateBasket from "@/utils/ApiUrl/updateBasket";
 
 export default function Header() {
   let {
@@ -60,7 +61,8 @@ export default function Header() {
     flagMessageNotification,
     setFlagMessageNotification,
     setFlagHamkar, flagHamkar,
-    setOffer
+    setOffer,
+    setBasketFlag
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
@@ -104,6 +106,8 @@ export default function Header() {
       "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ",
       3000
     );
+    const alertD=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
+
   /////////////////////////////theming
 const getOffer=()=>{
   const getLocalStorage = localStorage.getItem("loginToken");
@@ -378,23 +382,73 @@ const getBanner=(id)=>{
     }
   }, [pathname]);
 
-  useEffect(()=>{
-
-    return ()=> {
+  const addToBasket=(obj)=>{
+    const getLocalStorage =localStorage.getItem('loginToken')
   
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key.startsWith('cartObj')) {
-          const keyy=JSON.parse(localStorage.getItem(key))
-          const value = localStorage.getItem(key);
-          localStorage.removeItem(key)
-          setLocalUpdateBasket([])
-          setCartCounter(0)
-          // apiCallProdDetails(value, addItem, setIsApiCalled)
+    async function myApp(){
+      const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+        method:'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${ getLocalStorage }`
+        }, 
+        body:JSON.stringify(obj)
+      }).then(res=>{
+        console.log(res);
+
+        if (res.status==200){
+          // setBasketFlag(prev=>!prev)
+          // AlertA()    
+          }else if(res.status==400){
+            // AlertB()
+          }
+      }
+    
+    )
+    }
+    myApp()
+  }
+  useEffect(() => {
+    if(xtFlagLogin){
+        for (let i = 0; i < localStorage.length; i++) {
+  
+      const key = localStorage.key(i);
+      if (key.startsWith('cartObj')) {
+        const keyy=JSON.parse(localStorage.getItem(key))
+        let obj={
+          cyProductID:keyy.value,
+          quantity: keyy.quan,
+          orderItemID: 0,
         }
+        console.log(obj);
+        addToBasket(obj)
+        localStorage.removeItem(key)
+        setLocalUpdateBasket([])
+        setCartCounter(0)
       }
     }
-  },[])
+    }
+  
+  },[xtFlagLogin]); 
+
+
+  // useEffect(()=>{
+
+  //   return ()=> {
+  
+  //     for (let i = 0; i < localStorage.length; i++) {
+  //       const key = localStorage.key(i);
+  //       if (key.startsWith('cartObj')) {
+  //         const keyy=JSON.parse(localStorage.getItem(key))
+  //         const value = localStorage.getItem(key);
+  //         localStorage.removeItem(key)
+  //         setLocalUpdateBasket([])
+  //         setCartCounter(0)
+  //         // apiCallProdDetails(value, addItem, setIsApiCalled)
+  //       }
+  //     }
+  //   }
+  // },[])
 
   // useEffect(()=>{
   //   if(pathname.includes('paymentResult') && zarrinStatus===''){
@@ -1141,7 +1195,8 @@ setFlagHamkar(false)
             <div className={`row  ${styles.header_bottom_fix} `}>
               <div className={`col ${styles.header_bottom__col}`}>
                 <ul className={`${styles.header_bottom__col__ul_fix} centerr`}>
-                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                  <li  //onClick={() => setXtFlagSpinnerShow(true)}
+                    >
                     {" "}
                     <Link
                       href={"/"}

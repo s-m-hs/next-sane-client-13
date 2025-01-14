@@ -1,6 +1,9 @@
 .div_main{
     align-items: center;
 }
+.div_main div{
+    margin-bottom: 5px;
+}
 .button{
     font-size: larger;
     width: 80% !important;
@@ -89,11 +92,17 @@ width: 100%;
 border:1px solid rgb(168 168 168 / 55%);
 border-radius: 10px;
 padding: 15px 20px;
-margin: 10px;
+/* margin: 10px; */
 }
 .chekbox{
     border: 1px solid red !important;
     border-radius: 5px;
+}
+
+.inputmask{
+    border-radius: 10px;
+    padding: 15px 20px;
+    
 }
 
 @media only screen and (max-width:900px){

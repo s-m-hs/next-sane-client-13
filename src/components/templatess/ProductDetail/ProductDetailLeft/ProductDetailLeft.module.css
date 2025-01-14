@@ -136,7 +136,7 @@ transform: rotate(-5deg);
         display: flex;
     }
 .ProductDetailL_divright_swiper_bottom{
-display: inline;
+display: block;
 }
     .ProductDetailL_divright_swiper{
         height: 60% !important;
@@ -180,6 +180,9 @@ font-size: 13px;
 .ProductDetailL_divright_swiper_button{
     font-size: 20px !important;
 }
+.row_detail{
+    height: auto !important ;
+}
 }
 
 
@@ -187,6 +190,7 @@ font-size: 13px;
         .ProductDetailL_divright_swiper{
             height: 60% !important;
         }
+     
       }
 
 

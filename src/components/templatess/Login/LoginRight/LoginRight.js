@@ -14,6 +14,7 @@ import alertN from "@/utils/Alert/AlertA";
 import { InputOtp } from 'primereact/inputotp';
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
+import { InputMask } from "primereact/inputmask";
 
 
 
@@ -263,12 +264,15 @@ useEffect(()=>{
             <DeviceMobile  size={40} color="#19a5af" weight="fill" />
           
 
-            <div className={`${style.card_div} card flex justify-content-center`} >
-            <style scoped>
+            <div className={`${style.card_div} card flex justify-content-center login_label_float`} >
+            {/* <style scoped>
           
-            </style>
-
-            <InputOtp value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/>
+            </style> */}
+         
+            <InputMask className={`${style.inputmask}`} value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput} mask="99999999999" placeholder="091...."/>
+            <label>شماره همراه</label>
+        
+            {/* <InputOtp value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput}/> */}
         </div>
           </div>
 

@@ -78,7 +78,9 @@ const [flagZiroSupply,setFlagZiroSupply]=useState(false)
 
   const removeHan = (id) => {
     const getLocalStorage = localStorage.getItem("loginToken");
-    RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
+    RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA)
+    cartCounter>=1 ?   setCartCounter((prevCounter) => prevCounter - 1):''
+  
   };
   ///////////////////////////////
   const directToZarin = () => {
@@ -335,10 +337,10 @@ useEffect(()=>{
   }, [xtflagSpinnerShow]);
 
 // useEffect(()=>{
-//   if(  basket?.length==0 && cartCounter==0){
+//   if(  getBasket?.length==0 ){
 //     rout.push('/')
 //   }
-// },[basket])
+// },[getBasket])
 
   console.log(getBasket) 
 console.log(address)
@@ -440,8 +442,21 @@ console.log(address)
                   به روز رسانی سبد خرید
                 </button>
               </div>
+{xtFlagLogin &&    <button
+                type="button"
+                className={
+                  (flagUpdate||getBasket?.length==0) 
+                    ? `${style.btn_hide}`
+                    : `${style.btn} btn btn-outline-info`
+                }
+                onClick={paymentHandler}
+              >
+                تکمیل خرید
+              </button>}
 
-              <button
+              {
+                !xtFlagLogin && 
+                <button
                 type="button"
                 className={
                   flagUpdate
@@ -452,6 +467,8 @@ console.log(address)
               >
                 تکمیل خرید
               </button>
+              }
+           
             </div>
 { Number(total)!=0 &&   <div className="col-6">
             
@@ -505,7 +522,21 @@ console.log(address)
 
             <div>
               <div className="centerc" style={{ alignItems: "center" }}>
-                <button
+
+                {xtFlagLogin &&   <button
+                  type="button"
+                  className={
+                    (flagUpdate||getBasket?.length==0)
+                      ? `${style.btn_hide}`
+                      : `${style.btn} btn btn-outline-info`
+                  }
+                  onClick={paymentHandler}
+                >
+                  تکمیل خرید
+                </button>}
+
+                {
+                  !xtFlagLogin && <button
                   type="button"
                   className={
                     flagUpdate
@@ -516,6 +547,8 @@ console.log(address)
                 >
                   تکمیل خرید
                 </button>
+                }
+              
               </div>
             </div>
 

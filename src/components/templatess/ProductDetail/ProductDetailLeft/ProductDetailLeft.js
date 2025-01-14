@@ -55,8 +55,6 @@ const [flagSupply,setFlagSupply]=useState(false)
     }
   },[detail])
 console.log(detail) 
-console.log(typeof(detail?.supply) )
-console.log(flagSupply)
 // console.log(offer)
 // console.log((detail.price)*offer)
   return (
@@ -75,7 +73,7 @@ console.log(flagSupply)
         {/* <meta name="guarantee" content={detail.guarantee || ''} /> */}
       </Head>
        <div className="container " style={{ height: '600px' }}>
-      <div className="row mt-1" style={{ height: '600px' }}>
+      <div className={`${Styles.row_detail} row mt-1 centerc`} style={{ height: '600px' }}>
         {detail && 
         <>
           <div className= {`col-6 ${Styles.ProductDetailL_main_divright} centerc mt-5`} >
@@ -100,7 +98,7 @@ console.log(flagSupply)
   { offer==1 && 
     <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>}
 
-{offer!==1 && detail.noOffPrice===detail.price && 
+{offer!==1 && detail.noOffPrice===detail.price && detail?.cyCategoryId &&
   <>
                <span className={Styles.ProductDetailL_divMiddle_offprice} >{((Number(detail.noOffPrice)/10)*offer)?.toLocaleString()} تومان</span>
              <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
@@ -108,7 +106,7 @@ console.log(flagSupply)
           </>
 }
 
-{detail.noOffPrice!==detail.price &&  <>
+{detail.noOffPrice!==detail.price && detail?.cyCategoryId && <>
                <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
              <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
      
@@ -201,10 +199,10 @@ console.log(flagSupply)
         
               } */}
     {/* sdfsdfsdf */}
-    { offer==1 && 
+    { offer==1 && detail?.cyCategoryId &&
     <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>}
     
-{offer!==1 && detail.noOffPrice===detail.price && 
+{offer!==1 && detail.noOffPrice===detail.price && detail?.cyCategoryId &&
   <>
                <span className={Styles.ProductDetailL_divMiddle_offprice} >{((Number(detail.noOffPrice)/10)*offer)?.toLocaleString()} تومان</span>
              <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
@@ -212,7 +210,7 @@ console.log(flagSupply)
           </>
 }
 
-{detail.noOffPrice!==detail.price &&  <>
+{detail.noOffPrice!==detail.price && detail?.cyCategoryId && <>
                <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
              <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
      
