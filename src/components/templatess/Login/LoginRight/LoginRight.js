@@ -15,6 +15,8 @@ import { InputOtp } from 'primereact/inputotp';
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
 import { InputMask } from "primereact/inputmask";
+import alertQ from "@/utils/Alert/AlertQ";
+import alertP from "@/utils/Alert/AlertP";
 
 
 
@@ -26,10 +28,14 @@ const [tokenB, setTokensB] = useState('09');
 const [tokenC, setTokensC] = useState('');
 const [err1,setErr1]=useState('')
 const [show, setShow] = useState(false);
+const [showB, setShowB] = useState(false);
+
 const [recoveryFlag,setRecoveryFlag]=useState(false)
 const [onlyOkFlag,setOnlyOkFlag]=useState(false)
 const[pass1,setPass1]=useState('')
 const[pass2,setPass2]=useState('')
+
+const[localbasket,setLocalBasket]=useState([])
 
 const classRefA=useRef()
 const classRefB=useRef()
@@ -38,9 +44,13 @@ const customInputB = ({events, props}) => <input {...events} {...props} type="te
 
 const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
+
+
+const handleCloseB = () => setShowB(false);
+const handleShowB = () => setShowB(true);
 const router = useRouter()
 const pathname=usePathname()
-let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow, flagHamkar,setFlagHamkar}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow,xtflagSpinnerShow, flagHamkar,setFlagHamkar,setLocalUpdateBasket,setCartCounter}=useContext(MainContext)
 
 
   const {
@@ -61,12 +71,31 @@ let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow
   const handleError = (errors) => {
 
   };
+
+  const getLocalStorageProd=(funcc)=>{
+    for (let i = 0; i < localStorage.length; i++) {
+  
+      const key = localStorage.key(i);
+      if (key.startsWith('cartObj')) {
+        const keyy=JSON.parse(localStorage.getItem(key))
+        let obj={
+          cyProductID:keyy.value,
+          quantity: keyy.quan,
+          orderItemID: 0,
+        }
+        funcc(obj)
+      }
+    }
+  }
   //////////////////////
   const alertA=()=>alertN('center','success'," خوش آمدید",1500).then((res) => {
     setXtFlagLogin(true)
+    setBasketFlag(prev=>!prev)
 reset(setValue(''))
 router.push('/') 
 });
+
+
 const alertB=()=>alertN('center','error',"دوباره امتحان کنید...",1500)
 const alertC=()=>alertN('center','error',"  شماره همراه را به درستی وارد نشده است ...",1500)
 const alertD=()=>alertN('center','error'," رمز ورود باید بیشتر از 3 کاراکتر باشد...",1500)
@@ -76,6 +105,7 @@ const alertG=()=>alertN('center','success'," رمز ورود با موفقیت �
   reset(setValue(''))
 
 })
+
 const alertH=()=>alertN('center','success',"",1500).then((res) => {
   classRefB.current.classList.remove( `${style.buttonB}`)
   classRefB.current.classList.add( `${style.buttonB2}`)
@@ -93,6 +123,7 @@ const alertH=()=>alertN('center','success',"",1500).then((res) => {
     const chengePass1=(e)=>{
 setPass1(e.target.value)
 }
+
 const chengePass2=(e)=>{
   setPass2(e.target.value)
   }
@@ -188,6 +219,7 @@ if(tokenB.length==11){
 
       ////////////////////////////
 const login=(obj)=>{
+  
   async function myAppPost(){
     const getLocalStorage=localStorage.getItem('loginToken')
     const res=await fetch(`${apiUrl}/api/Customer/login`,{
@@ -199,23 +231,70 @@ const login=(obj)=>{
       body:JSON.stringify(obj)
     }).then(res=>{
       if(res.status==200){
-        return res.json()
+        return res.json().then(result=>{
+          if(result){
+            localStorage.setItem('loginToken',result.token)
+            setLocalToken(result.token)
+    if(localbasket?.length==0){
+      alertA()
+    }else{
+      for (let i = 0; i < localStorage.length; i++) {
+      
+        const key = localStorage.key(i);
+        if (key.startsWith('cartObj')) {
+          const keyy=JSON.parse(localStorage.getItem(key))
+          let obj={
+            cyProductID:keyy.value,
+            quantity: keyy.quan,
+            orderItemID: 0,
+          }
+          console.log(obj)
+          addToBasket(obj)
+          localStorage.removeItem(key)
+        }
       }
-    }).then(result=>{
-      if(result){
-        localStorage.setItem('loginToken',result.token)
-        // localStorage.setItem('user',obj.name)
-        setLocalToken(result.token)
-        alertA()
-        setBasketFlag(prev=>!prev)
-      }else{
-        alertB()
+    
+      handleShowB()
+    }
+    
+          }else{
+            alertB()
+          }
+        })
       }
     })
   }
   myAppPost()
 
 }
+//////////////////////////////
+const addToBasket=(obj)=>{
+  const getLocalStorage =localStorage.getItem('loginToken')
+
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+      method:'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:`Bearer ${ getLocalStorage }`
+      }, 
+      body:JSON.stringify(obj)
+    }).then(res=>{
+      console.log(res);
+
+      if (res.status==200){
+        // setBasketFlag(prev=>!prev)
+        // AlertA()    
+        }else if(res.status==400){
+          // AlertB()
+        }
+    }
+  
+  )
+  }
+  myApp()
+}
+///////////////////////////////
 
 const handleRegistration=(data)=>{
   // console.log(data);
@@ -235,6 +314,17 @@ if(token.length==11){
 useEffect(()=>{
   setXtFlagSpinnerShow(false)
 },[xtflagSpinnerShow])
+
+
+// for now if locale has any product or no=>>>
+useEffect(()=>{
+  setLocalBasket([])
+  getLocalStorageProd(function (obj) {
+    setLocalBasket(prev=>[...prev,obj])
+  })
+  },[])  
+
+console.log(localbasket)
 
 
   return (
@@ -430,6 +520,40 @@ onClick={()=>{
           {/* <Button ref={classRefA} className={`${style.hide}`} variant="primary" onClick={()=>sendMobToRecovery()} >تایید</Button> */}
         </Modal.Footer>
       </Modal>
+
+
+      <>
+      <Button variant="primary" onClick={handleShowB}>
+        Launch static backdrop modal
+      </Button>
+
+      <Modal
+        show={showB}
+        onHide={handleCloseB}
+        backdrop="static"
+        keyboard={false}
+      >
+   
+        <Modal.Body>
+سبد خردید شما بروزرسانی شد...
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <Button variant="secondary" onClick={handleCloseB}>
+            Close
+          </Button> */}
+          <Button variant="primary"onClick={()=>{
+              setLocalUpdateBasket([])
+              setCartCounter(0)
+              setXtFlagLogin(true)
+              setBasketFlag(prev=>!prev)
+          reset(setValue(''))
+          router.push('/') 
+          }}>باشه...</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+
+
     </>
 
   

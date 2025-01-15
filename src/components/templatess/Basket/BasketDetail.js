@@ -48,11 +48,13 @@ export default function BasketDetail() {
 const [payState,setPayState]=useState(1)
 const [ziroSupply,setZiroSupply]=useState([])
 const [flagZiroSupply,setFlagZiroSupply]=useState(false)
+const[adressId,setAdressId]=useState('')
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleShow = () => setShow(true);
   const handleShowB = () => setShowB(true);
   const rout = useRouter();
+  // console.log(adressId)
   // const getLocalStorage=localStorage.getItem('loginToken')
   // console.log(getBasket[0].cyOrderID)
   const AlertA = () =>
@@ -110,7 +112,7 @@ const [flagZiroSupply,setFlagZiroSupply]=useState(false)
     const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(
-        `${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}`,
+        `${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}&addressId=${adressId}`,
         {
           method: "PUT",
           headers: {
@@ -120,7 +122,7 @@ const [flagZiroSupply,setFlagZiroSupply]=useState(false)
         }
       )
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           if (res.status == 200) {
             return res.json().then(result=>{
               setGetBasket([]);
@@ -335,15 +337,14 @@ useEffect(()=>{
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
+useEffect(()=>{
+  address.length!=0 ? setAdressId(address[0].id) : ''
 
-// useEffect(()=>{
-//   if(  getBasket?.length==0 ){
-//     rout.push('/')
-//   }
-// },[getBasket])
+},[address])
 
   console.log(getBasket) 
 console.log(address)
+console.log(adressId)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
@@ -597,7 +598,9 @@ console.log(address)
             {address?.length != 0 ? (
               <>
                 <h2> آدرس های ثبت شده :</h2>
-                <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example"
+                onChange={(e)=>setAdressId(e.target.value)}
+                >
                   {address?.map((item) => (
                     <option value={item.id}>
                       {item.state}-{item.address}-کد پستی :{item.postalCode}

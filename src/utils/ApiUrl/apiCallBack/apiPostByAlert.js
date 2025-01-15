@@ -15,18 +15,17 @@ const postApiByAlert=(url,obj,alert,alertB)=>{
     )
       .then((res) => {
         if(res.ok && res.status!=400){
-     return res.json();
+     return res.json().then(result=>{
+  
+          localStorage.setItem('loginToken',result.token)
+      localStorage.setItem('user',obj.name)
+      alert();
+    })
         } else if (res.status==400) {
           return res.json().then(result=>{
 alertB(result.response)
           })
             
-        }
-      }).then(result=>{
-        if(result){
-            localStorage.setItem('loginToken',result.token)
-        localStorage.setItem('user',obj.name)
-        alert();
         }
       }).catch(err=>{
         console.log(err.code)

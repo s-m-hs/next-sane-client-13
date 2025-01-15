@@ -13,7 +13,8 @@ import { InputOtp } from 'primereact/inputotp';
 // import axios from "axios";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { InputMask } from "primereact/inputmask";
-
+import Modal from "react-bootstrap/Modal";
+import Button from 'react-bootstrap/Button';
 
 
 export default function RegisterRight() {
@@ -23,12 +24,16 @@ const [tokenB, setTokensB] = useState('');
 const [flagInput,setFlagInput]=useState(false)
 const [err1,setErr1]=useState('')
 const [flagErrorCheckbox,setFlagErrorCheckbox]=useState(false)
+const[localbasket,setLocalBasket]=useState([])
+const [showB, setShowB] = useState(false);
+const handleShowB = () => setShowB(true);
+const handleCloseB = () => setShowB(false);
 
 const customInput = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-input" />;
 const customInputB = ({events, props}) => <input {...events} {...props} type="text" className="custom-otp-inputB" />;
 
 
-let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow}=useContext(MainContext)
+let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow,setLocalUpdateBasket,setCartCounter,setBasketFlag}=useContext(MainContext)
 
   const {
     register,
@@ -76,6 +81,32 @@ const alertE=()=>alertN('center','error',"  رمز عبور و تکرار آن �
 
       ////////////////////////////
 
+      const addToBasket=(obj)=>{
+        const getLocalStorage =localStorage.getItem('loginToken')
+      
+        async function myApp(){
+          const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+            method:'POST',
+            headers: {
+              "Content-Type": "application/json",
+              Authorization:`Bearer ${ getLocalStorage }`
+            }, 
+            body:JSON.stringify(obj)
+          }).then(res=>{
+            console.log(res);
+            if (res.status==200){
+              // setBasketFlag(prev=>!prev)
+              // AlertA()    
+              }else if(res.status==400){
+                // AlertB()
+              }
+          }
+        
+        )
+        }
+        myApp()
+      }
+
 const handleRegistration=(data)=>{
      let obj={
     un: token,
@@ -101,7 +132,89 @@ if(data.passwordRepeat===data.password){
       valadationCode: tokenB,
       username:token
     }
-    postApiByAlert('/api/Customer/verifyCode',obj,alertA,alertB)
+
+   
+      const getLocalStorage=localStorage.getItem('loginToken')
+
+      async function myAppGet() {
+      const res = await fetch(
+        `${apiUrl}/api/Customer/verifyCode`,
+        {
+          method: "POST",
+          headers: {
+            Authorization:`Bearer ${getLocalStorage}` ,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        }
+      )
+        .then((res) => {
+          if(res.status==200){
+       return res.json().then(result=>{
+            localStorage.setItem('loginToken',result.token)
+        localStorage.setItem('user',obj.name)
+
+        if(localbasket?.length==0){
+          alertA()
+        }else{
+          for (let i = 0; i < localStorage.length; i++) {
+          
+            const key = localStorage.key(i);
+            if (key.startsWith('cartObj')) {
+              const keyy=JSON.parse(localStorage.getItem(key))
+              let objj={
+                cyProductID:keyy.value,
+                quantity: keyy.quan,
+                orderItemID: 0,
+              }
+              console.log(objj)
+              addToBasket(objj)
+              localStorage.removeItem(key)
+            }
+          }
+        
+          handleShowB()
+        }      })
+          } else if (res.status==400) {
+            return res.json().then(result=>{
+  alertB(result.response)
+            })
+              
+          }
+        }).catch(err=>{
+          console.log(err.code)
+          // console.log(err.status.code)
+        } )
+    }
+    myAppGet();
+  
+
+
+// if(localbasket?.length==0){
+//   postApiByAlert('/api/Customer/verifyCode',obj,alertA,alertB)
+
+// }else{
+//   postApiByAlert('/api/Customer/verifyCode',obj,function () {
+//     for (let i = 0; i < localStorage.length; i++) {
+  
+//       const key = localStorage.key(i);
+//       if (key.startsWith('cartObj')) {
+//         const keyy=JSON.parse(localStorage.getItem(key))
+//         let objj={
+//           cyProductID:keyy.value,
+//           quantity: keyy.quan,
+//           orderItemID: 0,
+//         }
+//         console.log(objj)
+//         addToBasket(objj)
+//         localStorage.removeItem(key)
+//       }
+//     }
+  
+//     handleShowB()
+//   },alertB)
+// }
+
 
   }
   
@@ -111,11 +224,35 @@ if(data.passwordRepeat===data.password){
   // console.log(data);
 
 }
+const getLocalStorageProd=(funcc)=>{
+  for (let i = 0; i < localStorage.length; i++) {
+
+    const key = localStorage.key(i);
+    if (key.startsWith('cartObj')) {
+      const keyy=JSON.parse(localStorage.getItem(key))
+      let obj={
+        cyProductID:keyy.value,
+        quantity: keyy.quan,
+        orderItemID: 0,
+      }
+      funcc(obj)
+    }
+  }
+}
 
 useEffect(()=>{
 setXtFlagSpinnerShow(false)
 },[xtflagSpinnerShow])
 
+// for now if locale has any product or no=>>>
+useEffect(()=>{
+  setLocalBasket([])
+  getLocalStorageProd(function (obj) {
+    setLocalBasket(prev=>[...prev,obj])
+  })
+  },[])  
+
+console.log(localbasket)
   return (
     <div className={`${style.div_main} centerc`}>
        <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="image" />
@@ -162,7 +299,7 @@ setXtFlagSpinnerShow(false)
 
             <div className={`${style.card_div} card flex justify-content-center login_label_float`} >
           
-                <InputMask className={`${style.inputmask}`} value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput} mask="9999-9999999" placeholder="091...."/>
+                <InputMask className={`${style.inputmask}`} value={token} integerOnly length={11} onChange={(e) => setTokens(e.value)} inputTemplate={customInput} mask="99999999999" placeholder="شماره همراه"/>
             <label>شماره همراه</label>
           
         </div>
@@ -252,6 +389,33 @@ setXtFlagSpinnerShow(false)
  
 
         </form>
+        <>
+
+
+      <Modal
+        show={showB}
+        onHide={handleCloseB}
+        backdrop="static"
+        keyboard={false}
+      >
+   
+        <Modal.Body>
+سبد خرید شما بروزرسانی شد...
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <Button variant="secondary" onClick={handleCloseB}>
+            Close
+          </Button> */}
+          <Button variant="primary"onClick={()=>{
+              setCartCounter(0)
+              setXtFlagLogin(true)
+              setBasketFlag(prev=>!prev)
+          reset(setValue(''))
+          router.push('/') 
+          }}>باشه...</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
       </div>
 
    

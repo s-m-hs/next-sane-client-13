@@ -130,6 +130,8 @@ const MainProvider = ({ children }) => {
   }, [xtFlagLogin, flagProfile, flagAddress]);
 
   useEffect(() => {
+
+    
     getBaskett();
   }, [basketFlag]);
 
