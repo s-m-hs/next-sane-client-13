@@ -55,7 +55,6 @@ let {xtFlagLogin,setXtFlagLogin,setXtFlagSpinnerShow,xtflagSpinnerShow,setLocalU
       setErr1(errors.password.message)
 
     }else if(errors.checkbox){
-      console.log(errors.checkbox.message);
       setFlagErrorCheckbox(true)
       // setErr1(errors.checkbox)
 
@@ -93,7 +92,6 @@ const alertE=()=>alertN('center','error',"  رمز عبور و تکرار آن �
             }, 
             body:JSON.stringify(obj)
           }).then(res=>{
-            console.log(res);
             if (res.status==200){
               // setBasketFlag(prev=>!prev)
               // AlertA()    
@@ -167,7 +165,6 @@ if(data.passwordRepeat===data.password){
                 quantity: keyy.quan,
                 orderItemID: 0,
               }
-              console.log(objj)
               addToBasket(objj)
               localStorage.removeItem(key)
             }
@@ -252,7 +249,6 @@ useEffect(()=>{
   })
   },[])  
 
-console.log(localbasket)
   return (
     <div className={`${style.div_main} centerc`}>
        <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="image" />

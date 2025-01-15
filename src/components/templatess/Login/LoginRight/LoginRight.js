@@ -146,7 +146,6 @@ const sendverifyCode=()=>{
       body:JSON.stringify(obj)
     }).then(res=>{
       if(res.ok){
-        console.log(res)
         // return res.json()
         classRefA.current.classList.remove(`${style.hide}`)
 
@@ -248,7 +247,6 @@ const login=(obj)=>{
             quantity: keyy.quan,
             orderItemID: 0,
           }
-          console.log(obj)
           addToBasket(obj)
           localStorage.removeItem(key)
         }
@@ -280,7 +278,6 @@ const addToBasket=(obj)=>{
       }, 
       body:JSON.stringify(obj)
     }).then(res=>{
-      console.log(res);
 
       if (res.status==200){
         // setBasketFlag(prev=>!prev)
@@ -324,7 +321,6 @@ useEffect(()=>{
   })
   },[])  
 
-console.log(localbasket)
 
 
   return (

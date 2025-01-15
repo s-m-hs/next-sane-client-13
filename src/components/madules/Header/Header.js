@@ -408,28 +408,28 @@ const getBanner=(id)=>{
     }
     myApp()
   }
-  useEffect(() => {
-    if(xtFlagLogin){
-        for (let i = 0; i < localStorage.length; i++) {
+  // useEffect(() => {
+  //   if(xtFlagLogin){
+  //       for (let i = 0; i < localStorage.length; i++) {
   
-      const key = localStorage.key(i);
-      if (key.startsWith('cartObj')) {
-        const keyy=JSON.parse(localStorage.getItem(key))
-        let obj={
-          cyProductID:keyy.value,
-          quantity: keyy.quan,
-          orderItemID: 0,
-        }
-        console.log(obj);
-        addToBasket(obj)
-        localStorage.removeItem(key)
-        setLocalUpdateBasket([])
-        setCartCounter(0)
-      }
-    }
-    }
+  //     const key = localStorage.key(i);
+  //     if (key.startsWith('cartObj')) {
+  //       const keyy=JSON.parse(localStorage.getItem(key))
+  //       let obj={
+  //         cyProductID:keyy.value,
+  //         quantity: keyy.quan,
+  //         orderItemID: 0,
+  //       }
+  //       console.log(obj);
+  //       addToBasket(obj)
+  //       localStorage.removeItem(key)
+  //       setLocalUpdateBasket([])
+  //       setCartCounter(0)
+  //     }
+  //   }
+  //   }
   
-  },[xtFlagLogin]); 
+  // },[xtFlagLogin]); 
 
 
   // useEffect(()=>{

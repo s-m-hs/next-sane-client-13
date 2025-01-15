@@ -48,13 +48,13 @@ const [flagSupply,setFlagSupply]=useState(false)
 
   useEffect(()=>{
     if(detail?.supply !== 0 && detail.supply){
-      console.log('object')
+      // console.log('object')
       setFlagSupply(true) 
     } else{
       console.log('err')
     }
   },[detail])
-console.log(detail) 
+// console.log(detail) 
 // console.log(offer)
 // console.log((detail.price)*offer)
   return (

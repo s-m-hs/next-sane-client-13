@@ -122,7 +122,6 @@ const[adressId,setAdressId]=useState('')
         }
       )
         .then((res) => {
-          console.log(res);
           if (res.status == 200) {
             return res.json().then(result=>{
               setGetBasket([]);
@@ -342,9 +341,9 @@ useEffect(()=>{
 
 },[address])
 
-  console.log(getBasket) 
-console.log(address)
-console.log(adressId)
+//   console.log(getBasket) 
+// console.log(address)
+// console.log(adressId)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
