@@ -337,13 +337,14 @@ useEffect(()=>{
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
 useEffect(()=>{
-  address.length!=0 ? setAdressId(address[0].id) : ''
-
+  if(address &&  address?.length!=0 ){
+    setAdressId(address[0]?.id)
+  }
 },[address])
 
-//   console.log(getBasket) 
-// console.log(address)
-// console.log(adressId)
+  console.log(getBasket) 
+console.log(address)
+console.log(adressId)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">

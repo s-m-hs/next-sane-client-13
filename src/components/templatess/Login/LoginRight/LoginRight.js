@@ -73,19 +73,19 @@ let {xtFlagLogin,setXtFlagLogin,setLocalToken,setBasketFlag,setXtFlagSpinnerShow
   };
 
   const getLocalStorageProd=(funcc)=>{
-    for (let i = 0; i < localStorage.length; i++) {
+    // for (let i = 0; i < localStorage.length; i++) {
   
-      const key = localStorage.key(i);
-      if (key.startsWith('cartObj')) {
-        const keyy=JSON.parse(localStorage.getItem(key))
-        let obj={
-          cyProductID:keyy.value,
-          quantity: keyy.quan,
-          orderItemID: 0,
-        }
-        funcc(obj)
-      }
-    }
+    //   const key = localStorage.key(i);
+    //   if (key.startsWith('cartObj')) {
+    //     const keyy=JSON.parse(localStorage.getItem(key))
+    //     let obj={
+    //       cyProductID:keyy.value,
+    //       quantity: keyy.quan,
+    //       orderItemID: 0,
+    //     }
+    //     funcc(obj)
+    //   }
+    // }
   }
   //////////////////////
   const alertA=()=>alertN('center','success'," خوش آمدید",1500).then((res) => {
@@ -215,7 +215,12 @@ if(tokenB.length==11){
 
 }
 
+useEffect(()=>{
+  const getLocalStorageProd=JSON.parse(localStorage.getItem('cartObj')) || [];
+  setLocalBasket(getLocalStorageProd)
+},[])
 
+console.log(localbasket) 
       ////////////////////////////
 const login=(obj)=>{
   
@@ -229,7 +234,7 @@ const login=(obj)=>{
       },
       body:JSON.stringify(obj)
     }).then(res=>{
-      if(res.status==200){
+      if(res.ok){
         return res.json().then(result=>{
           if(result){
             localStorage.setItem('loginToken',result.token)
@@ -237,28 +242,38 @@ const login=(obj)=>{
     if(localbasket?.length==0){
       alertA()
     }else{
-      for (let i = 0; i < localStorage.length; i++) {
+      console.log(localbasket)
+localbasket?.forEach(item=>{
+  let obj={
+    cyProductID:item.value,
+    quantity: 1,
+    orderItemID: 0,
+  }
+  addToBasket(obj)
+})
+
+      // for (let i = 0; i < localStorage.length; i++) {
       
-        const key = localStorage.key(i);
-        if (key.startsWith('cartObj')) {
-          const keyy=JSON.parse(localStorage.getItem(key))
-          let obj={
-            cyProductID:keyy.value,
-            quantity: keyy.quan,
-            orderItemID: 0,
-          }
-          addToBasket(obj)
-          localStorage.removeItem(key)
-        }
-      }
+      //   const key = localStorage.key(i);
+      //   if (key.startsWith('cartObj')) {
+      //     const keyy=JSON.parse(localStorage.getItem(key))
+      //     let obj={
+      //       cyProductID:keyy.value,
+      //       quantity: keyy.quan,
+      //       orderItemID: 0,
+      //     }
+      //     addToBasket(obj)
+      //     localStorage.removeItem(key)
+      //   }
+      // }
     
       handleShowB()
     }
     
-          }else{
-            alertB()
           }
         })
+      }else{
+        alertB()
       }
     })
   }
@@ -278,7 +293,7 @@ const addToBasket=(obj)=>{
       }, 
       body:JSON.stringify(obj)
     }).then(res=>{
-
+console.log(res)
       if (res.status==200){
         // setBasketFlag(prev=>!prev)
         // AlertA()    
@@ -314,12 +329,12 @@ useEffect(()=>{
 
 
 // for now if locale has any product or no=>>>
-useEffect(()=>{
-  setLocalBasket([])
-  getLocalStorageProd(function (obj) {
-    setLocalBasket(prev=>[...prev,obj])
-  })
-  },[])  
+// useEffect(()=>{
+//   setLocalBasket([])
+//   getLocalStorageProd(function (obj) {
+//     setLocalBasket(prev=>[...prev,obj])
+//   })
+//   },[])  
 
 
 
@@ -538,8 +553,8 @@ onClick={()=>{
             Close
           </Button> */}
           <Button variant="primary"onClick={()=>{
-              setLocalUpdateBasket([])
-              setCartCounter(0)
+localStorage.removeItem('cartObj')
+setCartCounter(0)
               setXtFlagLogin(true)
               setBasketFlag(prev=>!prev)
           reset(setValue(''))
