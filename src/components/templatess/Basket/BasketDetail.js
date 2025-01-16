@@ -31,8 +31,6 @@ export default function BasketDetail() {
     setGetBasket,
     setBasketFlag,
     xtflagSpinnerShow,
-    mobile,
-    cyUserID,
     address,
     offer
   } = useContext(MainContext);
@@ -45,20 +43,18 @@ export default function BasketDetail() {
   const [total, setTotal] = useState(0);
   const [show, setShow] = useState(false);
   const [showB, setShowB] = useState(false);
-const [payState,setPayState]=useState(1)
-const [ziroSupply,setZiroSupply]=useState([])
-const [flagZiroSupply,setFlagZiroSupply]=useState(false)
-const[adressId,setAdressId]=useState('')
+  const [payState, setPayState] = useState(1)
+  const [ziroSupply, setZiroSupply] = useState([])
+  const [flagZiroSupply, setFlagZiroSupply] = useState(false)
+  const [adressId, setAdressId] = useState('')
   const [localbasket, setLocalBasket] = useState([]);
-
+  const [flagLocal, setFlagLocal] = useState(false)
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleShow = () => setShow(true);
   const handleShowB = () => setShowB(true);
   const rout = useRouter();
-  // console.log(adressId)
-  // const getLocalStorage=localStorage.getItem('loginToken')
-  // console.log(getBasket[0].cyOrderID)
+
   const AlertA = () =>
     alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) =>
       setBasketFlag((prev) => !prev)
@@ -73,7 +69,7 @@ const[adressId,setAdressId]=useState('')
 
   const AlertB = () =>
     alertN(
-      "center", 
+      "center",
       "success",
       " سبد خرید با موفقیت به روزرسانی شد...",
       500
@@ -83,8 +79,8 @@ const[adressId,setAdressId]=useState('')
   const removeHan = (id) => {
     const getLocalStorage = localStorage.getItem("loginToken");
     RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA)
-    cartCounter>=1 ?   setCartCounter((prevCounter) => prevCounter - 1):''
-  
+    cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : ''
+
   };
   ///////////////////////////////
   const directToZarin = () => {
@@ -125,17 +121,19 @@ const[adressId,setAdressId]=useState('')
       )
         .then((res) => {
           if (res.status == 200) {
-            return res.json().then(result=>{
+            return res.json().then(result => {
               setGetBasket([]);
               setCartCounter(0);
               handleClose();
               AlertC();
             })
-          }else {
-return res.json().then(result=>{
-alert(result.response)})          }
+          } else {
+            return res.json().then(result => {
+              alert(result.response)
+            })
+          }
         })
-      
+
     }
     myApp();
   };
@@ -143,40 +141,24 @@ alert(result.response)})          }
   const handleGoToProfile = () => {
     rout.push("/p-user/profile");
   };
+
+  ////////////for remove from ui in mode:localstorage===>
+  const removeItem = (id) => {
+    ///for remove from ui==>
+    let getLocalStorageProd =
+      JSON.parse(localStorage.getItem("cartObj")) || [];
+    setToBuy((prevToBuy) => prevToBuy.filter((item) => item.id !== id));
+
+    ///for remove from oldlocale and set newlocal to local==>
+    getLocalStorageProd = getLocalStorageProd.filter(filter => filter.value !== id)
+    localStorage.setItem('cartObj', JSON.stringify(getLocalStorageProd))
+
+  };
   const removeFromCart = (id) => {
     setCartCounter((prevCounter) => prevCounter - 1);
-  
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-  
-      if (key.startsWith("cartObj")) {
-        const item = localStorage.getItem(key);
-  
-        try {
-          const parsedItem = JSON.parse(item); // بررسی مقدار
-          if (parsedItem.value == id) {
-            removeItem(id);
-            localStorage.removeItem(key);
-          }
-        } catch (error) {
-          console.error(`Invalid JSON for key "${key}":`, item);
-        }
-      }
-    }
+    removeItem(id);
   };
-  // const removeFromCart = (id) => {
-  //   setCartCounter((prevCounter) => prevCounter - 1);
-  //   for (let i = 0; i < localStorage.length; i++) {
-  //     const key = localStorage.key(i);
-  //     // console.log(id);
-  //     const toRemoveId = JSON.parse(localStorage.getItem(key));
-  //     // console.log(toRemoveId);
-  //     if (key.startsWith("cartObj") && toRemoveId.value == id) {
-  //       removeItem(id);
-  //       localStorage.removeItem(key);
-  //     }
-  //   }
-  // };
+  ///////////////////////////////////////////
 
   const paymentHandler = () => {
     if (!xtFlagLogin) {
@@ -191,25 +173,25 @@ alert(result.response)})          }
           rout.push("/register");
         });
       alertN();
-    } 
+    }
 
-    
-    else if(ziroSupply?.length!=0) {
-   handleShowB()
-    }else if(ziroSupply?.length==0){
+
+    else if (ziroSupply?.length != 0) {
+      handleShowB()
+    } else if (ziroSupply?.length == 0) {
       handleShow()
     }
   };
 
-useEffect(()=>{
-  setZiroSupply([])
-  getBasket?.forEach(item=>{
-    if(item.supply==0){
-      setFlagZiroSupply(false)
-      setZiroSupply(prev=>[...prev,item.productCode])
-    }    
-  })
-},[getBasket])
+  useEffect(() => {
+    setZiroSupply([])
+    getBasket?.forEach(item => {
+      if (item.supply == 0) {
+        setFlagZiroSupply(false)
+        setZiroSupply(prev => [...prev, item.productCode])
+      }
+    })
+  }, [getBasket])
 
 
 
@@ -225,10 +207,7 @@ useEffect(()=>{
     });
   };
 
-  const removeItem = (id) => {
-    setToBuy((prevToBuy) => prevToBuy.filter((item) => item.id !== id));
-  };
-console.log(basket)
+
   const updateBasketHandler = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
     if (xtFlagLogin) {
@@ -241,7 +220,7 @@ console.log(basket)
       localUpdateBasket.forEach((item) => {
         uniqueItemsMap.set(item.value.value, item);
       });
-    
+
       // افزودن آیتم‌های جدید
       basket.forEach((item) => {
         let newKey = `cartObj${item.cyProductID}`;
@@ -305,27 +284,29 @@ console.log(basket)
     loadCartItem();
   }, []);
 
+
+
   useEffect(() => {
-    const processedKeys = new Set();
-
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-
-      if (key.startsWith("cartObj") && !processedKeys.has(key)) {
-        processedKeys.add(key);
-        const value = localStorage.getItem(key);
-        const parsedValue = JSON.parse(value);
-        apiCallProdDetails(parsedValue.value, addItem, setIsApiCalled);
-      }
+    const getLocalStorageProd =
+      JSON.parse(localStorage.getItem("cartObj")) || [];
+    setLocalBasket(getLocalStorageProd);
+    setFlagLocal(true)
+    if (localbasket.length != 0) {
+      console.log(localbasket)
+      localbasket?.forEach(item => {
+        apiCallProdDetails(item.value, addItem, setIsApiCalled);
+      })
     }
-  }, [xtFlagLogin]);
+
+  }, [flagLocal]);
+
 
   ///to add total price
   useEffect(() => {
     const data = getBasket.map((item) => ({
-      
-      totalPrice:item.unitOfferPrice===item.unitPrice ?  item.totalPrice*offer : item.unitOfferPrice
-      
+
+      totalPrice: item.unitOfferPrice === item.unitPrice ? item.totalPrice * offer : item.unitOfferPrice
+
     }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
@@ -338,22 +319,18 @@ console.log(basket)
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
-useEffect(()=>{
-  if(address &&  address?.length!=0 ){
-    setAdressId(address[0]?.id)
-  }
-},[address])
+  useEffect(() => {
+    if (address && address?.length != 0) {
+      setAdressId(address[0]?.id)
+    }
+  }, [address])
 
- useEffect(() => {
-    const getLocalStorageProd =
-      JSON.parse(localStorage.getItem("cartObj")) || [];
-    setLocalBasket(getLocalStorageProd);
-  }, []);
 
-  console.log(getBasket) 
-console.log(address)
-console.log(adressId)
-console.log(toBuy) 
+
+  console.log(getBasket)
+  console.log(address)
+  console.log(adressId)
+  console.log(toBuy)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
@@ -387,9 +364,9 @@ console.log(toBuy)
                       name={item["name"]}
                       smallImage={item["smallImage"]}
                       // totalPrice={item.noOffPrice}
-                      unitPrice={offer==1 && item.noOffPrice===item.price ?  Number(item.price) / 10  :
-                        item.noOffPrice!==item.price ? Number(item.noOffPrice) / 10 :
-                        offer!=1 && (Number(item.price) / 10)*offer
+                      unitPrice={offer == 1 && item.noOffPrice === item.price ? Number(item.price) / 10 :
+                        item.noOffPrice !== item.price ? Number(item.noOffPrice) / 10 :
+                          offer != 1 && (Number(item.price) / 10) * offer
                       }
                       id={item["id"]}
                       cyProductID={item.id}
@@ -397,8 +374,8 @@ console.log(toBuy)
                         localUpdateBasket?.length === 0
                           ? 1
                           : localUpdateBasket.filter(
-                              (filter) => filter.value.value === item.id
-                            )[0]?.value.quan || 1
+                            (filter) => filter.value.value === item.id
+                          )[0]?.value.quan || 1
                       }
                       updateQuantity={updateQuantity}
                       handleRemove={removeFromCart}
@@ -413,13 +390,13 @@ console.log(toBuy)
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
-                        totalPrice={(offer==1 && item.unitOfferPrice===item.unitPrice)  ?   Number(item.totalPrice) / 10 :
-                          item.unitOfferPrice!==item.unitPrice  ?  Number(item.unitOfferPrice) / 10:
-                          offer!==1 &&  (Number(item.totalPrice) / 10)*offer
+                        totalPrice={(offer == 1 && item.unitOfferPrice === item.unitPrice) ? Number(item.totalPrice) / 10 :
+                          item.unitOfferPrice !== item.unitPrice ? Number(item.unitOfferPrice) / 10 :
+                            offer !== 1 && (Number(item.totalPrice) / 10) * offer
                         }
-                        unitPrice={(offer==1 && item.unitOfferPrice===item.unitPrice) ? (Number(item.unitPrice) / 10) :
-                          item.unitOfferPrice!==item.unitPrice  ?   (Number(item.unitOfferPrice) / 10) :
-                          offer!==1 &&  (Number(item.unitPrice) / 10)*offer
+                        unitPrice={(offer == 1 && item.unitOfferPrice === item.unitPrice) ? (Number(item.unitPrice) / 10) :
+                          item.unitOfferPrice !== item.unitPrice ? (Number(item.unitOfferPrice) / 10) :
+                            offer !== 1 && (Number(item.unitPrice) / 10) * offer
                         }
                         id={item.id}
                         cyProductID={item.cyProductID}
@@ -427,7 +404,7 @@ console.log(toBuy)
                         updateQuantity={updateQuantity}
                         remove={removeHan}
                         supply={item.supply}
-                        // handleRemove={removeFromCart}
+                      // handleRemove={removeFromCart}
                       />
                     </>
                   ))
@@ -452,10 +429,10 @@ console.log(toBuy)
                   به روز رسانی سبد خرید
                 </button>
               </div>
-{xtFlagLogin &&    <button
+              {xtFlagLogin && <button
                 type="button"
                 className={
-                  (flagUpdate||getBasket?.length==0) 
+                  (flagUpdate || getBasket?.length == 0)
                     ? `${style.btn_hide}`
                     : `${style.btn} btn btn-outline-info`
                 }
@@ -465,23 +442,23 @@ console.log(toBuy)
               </button>}
 
               {
-                !xtFlagLogin && 
+                !xtFlagLogin &&
                 <button
-                type="button"
-                className={
-                  flagUpdate
-                    ? `${style.btn_hide}`
-                    : `${style.btn} btn btn-outline-info`
-                }
-                onClick={paymentHandler}
-              >
-                تکمیل خرید
-              </button>
+                  type="button"
+                  className={
+                    flagUpdate
+                      ? `${style.btn_hide}`
+                      : `${style.btn} btn btn-outline-info`
+                  }
+                  onClick={paymentHandler}
+                >
+                  تکمیل خرید
+                </button>
               }
-           
+
             </div>
-{ Number(total)!=0 &&   <div className="col-6">
-            
+            {Number(total) != 0 && <div className="col-6">
+
               <div className={` ${style.colPrice_mobile}`}>
                 {/* <div className={`centerc ${style.cath_div_mobile}`}>
 
@@ -509,7 +486,7 @@ console.log(toBuy)
                 </button>
               </div>
             </div>}
-          
+
 
           </div>
         </div>
@@ -533,10 +510,10 @@ console.log(toBuy)
             <div>
               <div className="centerc" style={{ alignItems: "center" }}>
 
-                {xtFlagLogin &&   <button
+                {xtFlagLogin && <button
                   type="button"
                   className={
-                    (flagUpdate||getBasket?.length==0)
+                    (flagUpdate || getBasket?.length == 0)
                       ? `${style.btn_hide}`
                       : `${style.btn} btn btn-outline-info`
                   }
@@ -547,18 +524,18 @@ console.log(toBuy)
 
                 {
                   !xtFlagLogin && <button
-                  type="button"
-                  className={
-                    flagUpdate
-                      ? `${style.btn_hide}`
-                      : `${style.btn} btn btn-outline-info`
-                  }
-                  onClick={paymentHandler}
-                >
-                  تکمیل خرید
-                </button>
+                    type="button"
+                    className={
+                      flagUpdate
+                        ? `${style.btn_hide}`
+                        : `${style.btn} btn btn-outline-info`
+                    }
+                    onClick={paymentHandler}
+                  >
+                    تکمیل خرید
+                  </button>
                 }
-              
+
               </div>
             </div>
 
@@ -572,7 +549,7 @@ console.log(toBuy)
               </span>
       
             </div> */}
-{Number(total)!=0 &&   <div className={`centerr ${style.colPrice}`}>
+            {Number(total) != 0 && <div className={`centerr ${style.colPrice}`}>
               <button
                 className={`btn btn-outline-warning ${style.btn1}`}
                 disabled
@@ -588,7 +565,7 @@ console.log(toBuy)
                 <span>{((Number(total) / 10)).toLocaleString()} تومان</span>
               </button>
             </div>}
-          
+
 
 
           </div>
@@ -608,7 +585,7 @@ console.log(toBuy)
               <>
                 <h2> آدرس های ثبت شده :</h2>
                 <Form.Select aria-label="Default select example"
-                onChange={(e)=>setAdressId(e.target.value)}
+                  onChange={(e) => setAdressId(e.target.value)}
                 >
                   {address?.map((item) => (
                     <option value={item.id}>
@@ -642,7 +619,7 @@ console.log(toBuy)
                   name="payment"
                   defaultChecked
                   value={1}
-                  onChange={(e)=>setPayState(e.target.value)}
+                  onChange={(e) => setPayState(e.target.value)}
                 />
                 <span className="m-2">پرداخت آنلاین</span>
               </span>
@@ -653,7 +630,7 @@ console.log(toBuy)
                   name="payment"
                   type="radio"
                   value={2}
-                  onChange={(e)=>setPayState(e.target.value)}
+                  onChange={(e) => setPayState(e.target.value)}
                 />
                 <span className="m-2">پرداخت در محل (تهران و قم)</span>
               </span>
@@ -686,8 +663,8 @@ console.log(toBuy)
                   ? `btn btn-info ${style.btn_modal_ok}`
                   : `btn btn-info ${style.btn_modal_ok_disable}`
               }
-              onClick={payState==1 ? directToZarin : handleRegisterShop}
-              // onClick={handleRegisterShop}
+              onClick={payState == 1 ? directToZarin : handleRegisterShop}
+            // onClick={handleRegisterShop}
             >
               <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید
@@ -696,24 +673,24 @@ console.log(toBuy)
         </Modal>
 
 
-   {/* for ziroSuply product  ===> */}
+        {/* for ziroSuply product  ===> */}
         <Modal size="lg" show={showB} onHide={handleCloseB}>
           <Modal.Header closeButton></Modal.Header>
 
           <Modal.Body style={{ fontSize: "35px" }}>
-    <>
-    <h1>موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد خود حذف بفرمایید : </h1>
-    {/* <table className="table"> */}
-      <ul className={`${style.ul_ziroSupply}`} >
-{ziroSupply?.length!=0 && ziroSupply.map(item=>(
-  <li>{item}</li>
-  // <tr key="">
-  //   <th>{item}</th>
-  //     </tr>
-))}
-      </ul>
-    {/* </table> */}
-    </>
+            <>
+              <h1>موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد خود حذف بفرمایید : </h1>
+              {/* <table className="table"> */}
+              <ul className={`${style.ul_ziroSupply}`} >
+                {ziroSupply?.length != 0 && ziroSupply.map(item => (
+                  <li>{item}</li>
+                  // <tr key="">
+                  //   <th>{item}</th>
+                  //     </tr>
+                ))}
+              </ul>
+              {/* </table> */}
+            </>
           </Modal.Body>
 
           <Modal.Footer>
@@ -724,7 +701,7 @@ console.log(toBuy)
               <X size={16} color="#fff" weight="duotone" />
               بستن
             </button>
-       
+
           </Modal.Footer>
         </Modal>
       </>

@@ -44,35 +44,12 @@ export default function ProductDetail({ param }) {
     }
     myAppPost()
   }
-// const getCategory=(id)=>{
-//   async function myAppGet(){
-//     const res=await fetch(`${apiUrl}/api/CyCategories/${id}`,{
-//       method:'GET',
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     }).then(res=>{
-//       console.log(res)
-//       return res.json()
-//     }).then(result=>{
-//       // console.log(result)
-//       // setNameCategory(result.text)
-//     })
-//   }
-//   myAppGet()
-// }
-// useEffect(()=>{
-//   if(idCategory){
-//     getCategory(idCategory)
-//   }
-// },[idCategory])
 
 
   useEffect(() => {
+    setIdCategory('')
     getProductById(param)
   }, [param])
-  // console.log(productDetail)
-  // console.log(idCategory);
 
   useEffect(()=>{
     setXtFlagSpinnerShow(false)
