@@ -19,4 +19,4 @@ const updateBasket=(header,obj,setFun,alert)=>{
     myAppput()
   
   }
-  export default updateBasket
+  export default updateBasket 

@@ -49,6 +49,8 @@ const [payState,setPayState]=useState(1)
 const [ziroSupply,setZiroSupply]=useState([])
 const [flagZiroSupply,setFlagZiroSupply]=useState(false)
 const[adressId,setAdressId]=useState('')
+  const [localbasket, setLocalBasket] = useState([]);
+
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleShow = () => setShow(true);
@@ -226,7 +228,7 @@ useEffect(()=>{
   const removeItem = (id) => {
     setToBuy((prevToBuy) => prevToBuy.filter((item) => item.id !== id));
   };
-
+console.log(basket)
   const updateBasketHandler = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
     if (xtFlagLogin) {
@@ -239,7 +241,7 @@ useEffect(()=>{
       localUpdateBasket.forEach((item) => {
         uniqueItemsMap.set(item.value.value, item);
       });
-
+    
       // افزودن آیتم‌های جدید
       basket.forEach((item) => {
         let newKey = `cartObj${item.cyProductID}`;
@@ -342,9 +344,16 @@ useEffect(()=>{
   }
 },[address])
 
+ useEffect(() => {
+    const getLocalStorageProd =
+      JSON.parse(localStorage.getItem("cartObj")) || [];
+    setLocalBasket(getLocalStorageProd);
+  }, []);
+
   console.log(getBasket) 
 console.log(address)
 console.log(adressId)
+console.log(toBuy) 
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">
