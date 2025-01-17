@@ -22,6 +22,7 @@ const pathname = usePathname();
   alertKey("question",'برای خروج از پنل کاربری اطمینان دارید؟؟؟').then((result) => {
     if (result.isConfirmed) {
       localStorage.removeItem('loginToken')
+      localStorage.removeItem('cartObj')
       setXtFlagLogin(false)
       setCartCounter(0)
       rout.push('/')

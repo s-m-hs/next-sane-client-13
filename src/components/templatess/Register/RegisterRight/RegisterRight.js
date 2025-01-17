@@ -115,8 +115,6 @@ export default function RegisterRight() {
     myApp();
   };
 
-
-
   const handleRegistration = (data) => {
     let obj = {
       un: token,
@@ -159,12 +157,11 @@ export default function RegisterRight() {
                   alertA();
                 } else {
                   localbasket?.forEach((item) => {
-                    
                     let obj = {
                       cyProductID: item.value,
                       quantity: 1,
                       orderItemID: 0,
-                    }
+                    };
                     addToBasket(obj);
                   });
 
@@ -186,7 +183,6 @@ export default function RegisterRight() {
     } else alertC();
     // console.log(data);
   };
- 
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
@@ -207,8 +203,8 @@ export default function RegisterRight() {
       />
       <div className={`${style.div_hr} centerr`}>
         <hr />
-        <h1>  ثبت نام کنید </h1>
-  
+        <h1> ثبت نام کنید </h1>
+
         <hr />
       </div>
       <h1>
@@ -375,7 +371,7 @@ export default function RegisterRight() {
                 باشه...
               </Button>
             </Modal.Footer>
-          </Modal> 
+          </Modal>
         </>
       </div>
     </div>

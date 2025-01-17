@@ -292,7 +292,6 @@ export default function BasketDetail() {
     setLocalBasket(getLocalStorageProd);
     setFlagLocal(true)
     if (localbasket.length != 0) {
-      console.log(localbasket)
       localbasket?.forEach(item => {
         apiCallProdDetails(item.value, addItem, setIsApiCalled);
       })
@@ -327,10 +326,10 @@ export default function BasketDetail() {
 
 
 
-  console.log(getBasket)
-  console.log(address)
-  console.log(adressId)
-  console.log(toBuy)
+  // console.log(getBasket)
+  // console.log(address)
+  // console.log(adressId)
+  // console.log(toBuy)
   return (
     <div className={`container ${style.container}`}>
       <div className="row mt-5 ">

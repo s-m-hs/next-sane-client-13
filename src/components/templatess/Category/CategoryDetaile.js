@@ -274,11 +274,16 @@ export default function CategoryDetaile({ param }) {
       getproductByCat(obj)
     }
 
+
     ////for first to setcodePro==>>
     setCodePro(mainCatChilds[0]?.code)
   }, [flag])
+
+
   useEffect(() => {
     setXtFlagSpinnerShow(false)
+    // return()=>setNameCategory('')
+
   }, [])
 
   // console.log(productByCat)

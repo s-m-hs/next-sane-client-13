@@ -50,9 +50,7 @@ const [flagSupply,setFlagSupply]=useState(false)
     if(detail?.supply !== 0 && detail.supply){
       // console.log('object')
       setFlagSupply(true) 
-    } else{
-      console.log('err')
-    }
+    } 
   },[detail])
 // console.log(detail) 
 // console.log(offer)

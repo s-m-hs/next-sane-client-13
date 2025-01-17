@@ -133,6 +133,7 @@ export default function LoginRight() {
       " کد وارد شده نادرست و یا منقضی شده است ...",
       1500
     );
+    const alertL = () => alertN("center", "error", "شماره همراه و یا رمز ورود به درستی وارد نشده است...", 1500);
 
   const chengePass1 = (e) => {
     setPass1(e.target.value);
@@ -247,7 +248,6 @@ export default function LoginRight() {
               if (localbasket?.length == 0) {
                 alertA();
               } else {
-                console.log(localbasket);
                 localbasket?.forEach((item) => {
                   let obj = {
                     cyProductID: item.value,
@@ -261,8 +261,11 @@ export default function LoginRight() {
               }
             }
           });
-        } else {
+        } else if(res.status==401) {
+          alertL();
+        }else{
           alertB();
+
         }
       });
     }

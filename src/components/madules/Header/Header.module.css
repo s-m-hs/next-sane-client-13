@@ -54,7 +54,7 @@
      width: 8cqi;
     position: absolute;
     top: -18px;
-    z-index: 1000;
+    z-index: 100;
     right: 180px;
 rotate: -18deg;
 animation: anima 3s normal linear infinite;
@@ -64,7 +64,7 @@ animation: anima 3s normal linear infinite;
     width: 5cqi !important;
     position: absolute !important;
     top: -11px !important;
-    z-index: 1000 !important;
+    z-index: 100 !important;
     right: 180px !important;
 rotate: -18deg !important;
 animation: anima 3s normal linear infinite;

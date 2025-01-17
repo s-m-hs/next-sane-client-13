@@ -10,7 +10,7 @@ import {
 } from "@phosphor-icons/react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { use, useContext, useEffect, useRef, useState } from "react";
 import style from "./SystemPart.module.css";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Modal from "react-bootstrap/Modal";
@@ -27,7 +27,7 @@ const classRefA=useRef()
   // const [isSaving, setIsSaving] = useState(false);
   const [prices, setPrices] = useState([]); // لیست قیمت‌ها
   const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
-  let { setXtFlagSpinnerShow } = useContext(MainContext);
+  let { setXtFlagSpinnerShow ,xtflagSpinnerShow} = useContext(MainContext);
   const getPriceArray=()=>{
     const getLocalStorage = localStorage.getItem('loginToken')
 
@@ -199,9 +199,12 @@ const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
 }
 
   useEffect(() => {
-    setXtFlagSpinnerShow(false);
     getkeyHelp(12)
   }, []);
+  useEffect(()=>{
+    setXtFlagSpinnerShow(false);
+
+  },[xtflagSpinnerShow])
   return (
     <div className={`container `}>
       {/* {isSaving && (

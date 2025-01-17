@@ -52,7 +52,6 @@ const [keyOfferSlider,setKeyOfferSlider]=useState('')
     // 'asus.jpg','sp.jpg','wd.jpg','samsung.jpg','giga.jpg','coolermaaster.jpg'
 ]
 
-console.log(keyOfferSlider?.value)
 
 const keyShow=(id,func)=>{
   const getLocalStorage=localStorage.getItem('loginToken')
@@ -68,7 +67,6 @@ const keyShow=(id,func)=>{
     }).then(res=>{
       if(res.ok){
         return res.json().then(result=>{
-          console.log(result)
           func((result))
         })
 
@@ -82,41 +80,7 @@ useEffect(()=>{
   keyShow(11,setKey)
   keyShow(14,setKeyOfferSlider) 
 },[])
-// useEffect(() => {
-//   const getLocalStorage=localStorage.getItem('loginToken')
-//   if(xtFlagLogin){
-//       for (let i = 0; i < localStorage.length; i++) {
 
-//     const key = localStorage.key(i);
-//     if (key.startsWith('cartObj')) {
-//       const keyy=JSON.parse(localStorage.getItem(key))
-//       const value = localStorage.getItem(key);
-//       let obj=[{
-//         cyProductID:keyy.value,
-//         quantity: keyy.quan
-//       }] 
-//       updateBasket(getLocalStorage,obj,setBasketFlag,alertA)
-//       localStorage.removeItem(key)
-//       setLocalUpdateBasket([])
-//       setCartCounter(0)
-//       // apiCallProdDetails(value, addItem, setIsApiCalled)
-//     }
-//   }
-//   }
-
-// },[xtFlagLogin]); 
-
-
-
-// useEffect(()=>{
-//   setXtFlagSpinnerShow(false)
-// },[])
-
-// useEffect(()=>{
-//   if(  pathname==='/'){
-//     setXtFlagSpinnerShow(false)
-//   }
-// },[xtflagSpinnerShow])
 
   return (
 <div className='container'>

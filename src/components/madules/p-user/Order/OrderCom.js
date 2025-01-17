@@ -21,7 +21,7 @@ export default function OrderCom() {
 
 
 
-  let { setXtFlagSpinnerShow } = useContext(MainContext)
+  let { setXtFlagSpinnerShow,xtflagSpinnerShow } = useContext(MainContext)
 
 
   const stateArraySelect = [
@@ -86,7 +86,7 @@ export default function OrderCom() {
 
   useEffect(() => {
     setXtFlagSpinnerShow(false)
-  }, [])
+  }, [xtflagSpinnerShow])
   return (
 
     <div >
@@ -138,7 +138,7 @@ export default function OrderCom() {
                       <th> شناسه مشتری</th>
                       <th>شناسه سفارش</th>
                       {/* <th>تاریخ ثبت سفارش</th> */}
-                      <th>مبلغ نهایی </th>
+                      {/* <th>مبلغ نهایی </th> */}
                       <th> جزییات </th>
                     </tr>
 
@@ -152,7 +152,7 @@ export default function OrderCom() {
                         <td>{item.cyUserID}</td>
                         <td>{item.id}</td>
                         {/* <td><DateFormat dateString={`${item?.orderDate}`} /></td> */}
-                        <td>{`${(item.totalAmount/10).toLocaleString()}`} تومان</td>
+                        {/* <td>{`${(item.totalAmount/10).toLocaleString()}`} تومان</td> */}
                         {/* <td>{item.statusText}</td> */}
                         <td><button className='btn btn-primary' onClick={() => {
                           getOrderByOrderID(item.id)

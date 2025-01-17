@@ -13,7 +13,7 @@ import alertQ from '@/utils/Alert/AlertQ'
 
 export default function CardB({imgSrc,title,price,id,clickSpinner,supply ,cyProductCategoryId,categoryCode,offer,noOffPrice
 }) {
-  let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket}=useContext(MainContext)
+  let {setCartCounter,xtFlagLogin,setBasketFlag,setXtFlagSpinnerShow,setLocalUpdateBasket,setNameCategory}=useContext(MainContext)
 const [parentId,setParentId]=useState('')
 
   // const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  });
@@ -46,7 +46,9 @@ const [parentId,setParentId]=useState('')
 //   }
 //   myApp()
 // }
-
+useEffect(()=>{
+  return()=>setNameCategory('')
+},[])
 
   return (
     <div className={`${styles.container} centerc`  } >

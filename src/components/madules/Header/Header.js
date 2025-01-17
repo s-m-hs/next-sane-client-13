@@ -258,6 +258,7 @@ const getOffer=()=>{
 
   const exitHandler = () => {
     localStorage.removeItem("loginToken");
+    localStorage.removeItem("cartObj");
     setXtFlagLogin(false);
     setCartCounter(0);
     rout.push("/");
@@ -381,33 +382,35 @@ const getBanner=(id)=>{
       setFlagHamkar(false)
     }
   }, [pathname]);
-
-  const addToBasket=(obj)=>{
-    const getLocalStorage =localStorage.getItem('loginToken')
+useEffect(()=>{
+return()=>localStorage.removeItem('cartObj')
+},[])
+  // const addToBasket=(obj)=>{
+  //   const getLocalStorage =localStorage.getItem('loginToken')
   
-    async function myApp(){
-      const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
-        method:'POST',
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:`Bearer ${ getLocalStorage }`
-        }, 
-        body:JSON.stringify(obj)
-      }).then(res=>{
-        console.log(res);
+  //   async function myApp(){
+  //     const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
+  //       method:'POST',
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization:`Bearer ${ getLocalStorage }`
+  //       }, 
+  //       body:JSON.stringify(obj)
+  //     }).then(res=>{
+  //       console.log(res);
 
-        if (res.status==200){
-          // setBasketFlag(prev=>!prev)
-          // AlertA()    
-          }else if(res.status==400){
-            // AlertB()
-          }
-      }
+  //       if (res.status==200){
+  //         // setBasketFlag(prev=>!prev)
+  //         // AlertA()    
+  //         }else if(res.status==400){
+  //           // AlertB()
+  //         }
+  //     }
     
-    )
-    }
-    myApp()
-  }
+  //   )
+  //   }
+  //   myApp()
+  // }
   // useEffect(() => {
   //   if(xtFlagLogin){
   //       for (let i = 0; i < localStorage.length; i++) {
@@ -607,7 +610,6 @@ if(item.cyCategoryId){
                         <Dropdown.Item
                           onClick={() => {
                             exitHandler();
-
                             setMessageNotification([]);
                             setFlagMessageNotification((prev) => !prev);
                           }}
@@ -1842,8 +1844,6 @@ setFlagHamkar(false)
                         href={"/"}
                         onClick={() => {
                           exitHandler();
-
-                          // setXtFlagSpinnerShow(true)
                           setMenuOpen(false);
                           setMessageNotification([]);
                           setFlagMessageNotification((prev = !prev));
