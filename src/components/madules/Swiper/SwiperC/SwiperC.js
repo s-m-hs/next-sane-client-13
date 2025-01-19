@@ -84,7 +84,7 @@ let{offer}=useContext(MainContext)
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiperB"
         >
-          {productByCatArray?.itemList?.map((item, index) => (
+          {productByCatArray?.itemList?.slice().reverse().map((item, index) => (
             <SwiperSlide key={index}>
               <CardB
                 clickSpinner={() => setFlagSpinnerShow(true)}
