@@ -10,6 +10,34 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Head from "next/head";
 
 
+export  function generateMetadata({ detail }) { 
+  // const { id } = detail.id; // دریافت آیدی از URL 
+  // const product = await fetchProductData(id); // دریافت اطلاعات محصول 
+ 
+  if (!detail) { 
+    return { 
+      title: 'محصول یافت نشد', 
+      description: 'محصولی با این مشخصات وجود ندارد.', 
+    }; 
+  } 
+ 
+  return { 
+    title: ' - فروشگاه ما', 
+    description: 'product.description,' ,
+    // openGraph: { 
+    //   title: ${product.name} - فروشگاه ما, 
+    //   description: product.description, 
+    //   images: [ 
+    //     { 
+    //       url: product.image, 
+    //       alt: product.name, 
+    //     }, 
+    //   ], 
+    // }, 
+  }; 
+} 
+ 
+
 export default function ProductDetailLeft({detail}) {
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket,offer}=useContext(MainContext)
 const [flagSupply,setFlagSupply]=useState(false)
@@ -58,7 +86,7 @@ const [flagSupply,setFlagSupply]=useState(false)
   return (
 
     <>
-          <Head>
+          {/* <Head>
         <meta name="product_id" content={detail.id} />
         <meta name="product_name" content={detail.name} />
         <meta property="og:image" content={detail.mainImage} />
@@ -68,8 +96,7 @@ const [flagSupply,setFlagSupply]=useState(false)
           name="availability"
           content={detail.supply ? 'instock' : 'outofstock'}
         />
-        {/* <meta name="guarantee" content={detail.guarantee || ''} /> */}
-      </Head>
+      </Head> */}
        <div className="container " style={{ height: '600px' }}>
       <div className={`${Styles.row_detail} row mt-1 centerc`} style={{ height: '600px' }}>
         {detail && 
