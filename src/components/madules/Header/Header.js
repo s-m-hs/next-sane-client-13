@@ -62,6 +62,7 @@ export default function Header() {
     setFlagMessageNotification,
     setFlagHamkar, flagHamkar,
     setOffer,
+    offer,
     setBasketFlag
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
@@ -121,7 +122,9 @@ const getOffer=()=>{
       },
     }).then(res=>{
       if(res.ok){
+        console.log(res)
         return res.json().then(result=>{
+          console.log(result)
           setOffer(Number(result.value) )
         })
       }

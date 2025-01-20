@@ -31,6 +31,7 @@ export default function Home() {
   const alertA=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
   // const getLocalStorage=localStorage.getItem('loginToken')
 const [key,setKey]=useState('')
+const [keyB,setKeyB]=useState('')
 const [keyOfferSlider,setKeyOfferSlider]=useState('')
 
     const brandLogA=[
@@ -78,9 +79,9 @@ const keyShow=(id,func)=>{
 
 useEffect(()=>{
   keyShow(11,setKey)
+  // keyShow(15,setKeyB)
   keyShow(14,setKeyOfferSlider) 
 },[])
-
 
   return (
 <div className='container'>
@@ -94,6 +95,9 @@ useEffect(()=>{
      </div> 
      {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-best-sellers' title={'پرفروشهای فروش ویژه💰:'} />} 
 
+     {/* {keyB?.value === '1'  ? 
+     <SwiperC  categoryCode='new' title={'جدیدترین ها:'} />
+  :''}  */}
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
@@ -105,9 +109,9 @@ useEffect(()=>{
     <SubjecArea /> 
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    {key?.tag === 'ok'  ? 
+    {/* {key?.value === '1'  ? 
      <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
-  :''} 
+  :''}  */}
     <BanerA  />
   
  

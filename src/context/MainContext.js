@@ -135,7 +135,7 @@ const MainProvider = ({ children }) => {
     getBaskett();
   }, [basketFlag]);
 
-  // console.log(cyUserID)
+  console.log(offer)
 
   return (
     <MainContext.Provider

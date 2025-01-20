@@ -9,37 +9,10 @@ import alertN from "@/utils/Alert/AlertA";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Head from "next/head";
 
-
-export  function generateMetadata({ detail }) { 
-  // const { id } = detail.id; // دریافت آیدی از URL 
-  // const product = await fetchProductData(id); // دریافت اطلاعات محصول 
- 
-  if (!detail) { 
-    return { 
-      title: 'محصول یافت نشد', 
-      description: 'محصولی با این مشخصات وجود ندارد.', 
-    }; 
-  } 
- 
-  return { 
-    title: ' - فروشگاه ما', 
-    description: 'product.description,' ,
-    // openGraph: { 
-    //   title: ${product.name} - فروشگاه ما, 
-    //   description: product.description, 
-    //   images: [ 
-    //     { 
-    //       url: product.image, 
-    //       alt: product.name, 
-    //     }, 
-    //   ], 
-    // }, 
-  }; 
-} 
  
 
 export default function ProductDetailLeft({detail}) {
-  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket,offer}=useContext(MainContext)
+  let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket,offer,localToken}=useContext(MainContext)
 const [flagSupply,setFlagSupply]=useState(false)
 
 
@@ -80,7 +53,10 @@ const [flagSupply,setFlagSupply]=useState(false)
       setFlagSupply(true) 
     } 
   },[detail])
-// console.log(detail) 
+console.log(detail) 
+console.log(Number(detail.noOffPrice)/10*offer)
+console.log(offer)
+console.log(localToken)
 // console.log(offer)
 // console.log((detail.price)*offer)
   return (

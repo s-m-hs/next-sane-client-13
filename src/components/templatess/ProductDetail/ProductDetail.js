@@ -18,9 +18,9 @@ export default function ProductDetail({ param }) {
   const [productDetail, setProductDetail] = useState([])
   const [productDetailB, setProductDetailB] = useState({})
   const [idCategory,setIdCategory]=useState('')
-  let{nameCategory,setXtFlagSpinnerShow}=useContext(MainContext)
+  let{nameCategory,setXtFlagSpinnerShow,offer}=useContext(MainContext)
 
-  // console.log(param);
+  console.log(offer);
 
   const getProductById = (id) => {
     async function myAppPost() {

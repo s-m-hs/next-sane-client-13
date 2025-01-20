@@ -3,7 +3,7 @@ import React from 'react'
 
 export const metadata = {
   title: " دسته بندی محصولات کامپیوترصانع",
-  description: " Sane Anformatic Collection",
+  description: " دسته بندی محصولات کامپیوتر صانع : شامل دسته بندیهای لوازم جانبی و سخت افزار می باشد",
  
 };
 

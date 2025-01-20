@@ -4,7 +4,7 @@ import LoginTemplate from '@/components/templatess/Login/LoginTemplate'
 
 export const metadata = {
   title: "صفحه ورود کامپیوترصانع",
-  description: " Sane Anformatic Collection",
+  description: " صفحه ورود کامپیوترر صانع ",
   // icons: {
   //   icon: "../../images/photo_2024-05-30_19-08-29.jpg",
   // },

@@ -3,7 +3,7 @@ import style from './page.module.css'
 import RegisterTemplate from '@/components/templatess/Register/RegisterTemplate'
 export const metadata = {
   title: " صفحه ثبت نام کامپیوترصانع",
-  description: " Sane Anformatic Collection",
+  description: " صفحه ثبت نام کامپیوتر صانع",
 };
 
 export default function Register() {
