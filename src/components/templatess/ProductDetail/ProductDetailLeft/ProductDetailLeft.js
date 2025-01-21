@@ -11,7 +11,7 @@ import Head from "next/head";
 
  
 
-export default function ProductDetailLeft({detail}) {
+export default  function ProductDetailLeft({detail }) {
   let {setCartCounter,xtFlagLogin,setBasketFlag,setLocalUpdateBasket,offer,localToken}=useContext(MainContext)
 const [flagSupply,setFlagSupply]=useState(false)
 
@@ -53,21 +53,38 @@ const [flagSupply,setFlagSupply]=useState(false)
       setFlagSupply(true) 
     } 
   },[detail])
-console.log(detail) 
-console.log(Number(detail.noOffPrice)/10*offer)
-console.log(offer)
-console.log(localToken)
+
 // console.log(offer)
 // console.log((detail.price)*offer)
-  return (
 
+  // دریافت داده‌های محصول
+  // const product = await fetch(`${apiUrl}/api/CyProducts/${detail.id}`).then((res) =>
+  //   res.json()
+  // );
+  // const offerFetch = await fetch(`${apiUrl}/api/CyKeyDatas/13`).then((res) =>
+  //   res.json()
+  // );
+  // const offerr = Number(offerFetch.value);
+
+  // const productPrice =
+  //   product.noOffPrice !== product.price
+  //     ? product.noOffPrice
+  //     : product.price * offerr;
+
+  // const productOldPrice = product.price || '';
+
+  // if (!product || !offerFetch) {
+  //   return <div>محصول یافت نشد</div>;
+  // }
+  return (
+ 
     <>
-          {/* <Head>
+      {/* <Head>
         <meta name="product_id" content={detail.id} />
         <meta name="product_name" content={detail.name} />
         <meta property="og:image" content={detail.mainImage} />
-        <meta name="product_price" content={detail.noOffPrice!==detail.price ? (detail.noOffPrice):(detail.price)*offer} />
-        <meta name="product_old_price" content={detail.price || ''} />
+        <meta name="product_price" content={detail.productPrice} />
+        <meta name="product_old_price" content={detail.productOldPrice} />
         <meta
           name="availability"
           content={detail.supply ? 'instock' : 'outofstock'}

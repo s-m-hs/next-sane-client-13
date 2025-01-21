@@ -79,7 +79,7 @@ const keyShow=(id,func)=>{
 
 useEffect(()=>{
   keyShow(11,setKey)
-  // keyShow(15,setKeyB)
+  keyShow(15,setKeyB)
   keyShow(14,setKeyOfferSlider) 
 },[])
 
@@ -95,9 +95,9 @@ useEffect(()=>{
      </div> 
      {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-best-sellers' title={'پرفروشهای فروش ویژه💰:'} />} 
 
-     {/* {keyB?.value === '1'  ? 
+     {keyB?.value === '1'  ? 
      <SwiperC  categoryCode='new' title={'جدیدترین ها:'} />
-  :''}  */}
+  :''} 
     <CategorySectionA title='لوازم جانبی' categoryId={3}/>
   <BrandArea brandArray={brandLogA} fileRoot={'1'}  />
     <SwiperC categoryCode='best-sellers' title={'پرفروش ترین ها :'} />
@@ -109,9 +109,9 @@ useEffect(()=>{
     <SubjecArea /> 
     <CategorySectionA title='سخت افزار' categoryId={2}/>
     <BrandArea brandArray={brandLogoB} fileRoot={'2'} />
-    {/* {key?.value === '1'  ? 
+    {key?.value === '1'  ? 
      <SwiperC  categoryCode='hardwairebestseller' title={'پرفروش ترین های سخت افزار :'} />
-  :''}  */}
+  :''} 
     <BanerA  />
   
  

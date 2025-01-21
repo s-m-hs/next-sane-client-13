@@ -20,7 +20,6 @@ export default function ProductDetail({ param }) {
   const [idCategory,setIdCategory]=useState('')
   let{nameCategory,setXtFlagSpinnerShow,offer}=useContext(MainContext)
 
-  console.log(offer);
 
   const getProductById = (id) => {
     async function myAppPost() {

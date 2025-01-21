@@ -122,9 +122,7 @@ const getOffer=()=>{
       },
     }).then(res=>{
       if(res.ok){
-        console.log(res)
         return res.json().then(result=>{
-          console.log(result)
           setOffer(Number(result.value) )
         })
       }
