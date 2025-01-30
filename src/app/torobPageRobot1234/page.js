@@ -1,4 +1,5 @@
 'use client'
+import apiUrl from '@/utils/ApiUrl/apiUrl'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -12,8 +13,8 @@ export default function page() {
       
 }
     async function myApp(){
-       let getLocalStorage=localStorage.getItem('logintoken')
-        const res=await fetch(`https:sapi.sanecomputer.com/api/CyProducts/getAllProducts`,{
+        const getLocalStorage=localStorage.getItem('loginToken')
+        const res=await fetch(`${apiUrl}/api/CyProducts/getAllProducts`,{
             method:'POST',
             headers: {
                 Authorization: `Bearer ${getLocalStorage}`,
@@ -21,6 +22,7 @@ export default function page() {
               },
               body:JSON.stringify(obj)
         }).then(res=>{
+            console.log(res)
             if(res.ok){
                 return res.json().then(result=>{
                     console.log(result)

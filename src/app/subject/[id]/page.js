@@ -14,17 +14,24 @@ export default function SubjectDetail({params}) {
 
   const [subjectDetail,setSubjectDetail]=useState([])
   const[allSubjects,setAllSubjects]=useState([])
-  const allSubjectsSlice=allSubjects.slice(0,3)
+  // const allSubjectsSlice=allSubjects.slice(0,3)
   const pathname=usePathname()
   const getAllSubject=()=>{
       const getLocalStorage=localStorage.getItem('loginToken')
+      let obj= {
+        cat: "magazine",
+        pageNumber: 0,
+        pageSize: 100
+      }
       async function myApp(){
-          const res=await fetch(`${apiUrl}/api/CySubjects`,{
-              method:'GET',
+          const res=await fetch(`${apiUrl}/api/CySubjects/GetSubjectByCat`,{
+              method:'POST',
               headers: {
                   "Content-Type": "application/json",
                   Authorization: `Bearer ${getLocalStorage}`,
                 },
+                body:JSON.stringify(obj)
+
           }).then(res=>{
               // console.log(res)
               if(res.ok){
@@ -33,7 +40,7 @@ export default function SubjectDetail({params}) {
           }
   
           ).then(result=>{
-              setAllSubjects(result)
+              setAllSubjects(result.itemList)
           })
       }
       myApp() 
@@ -109,7 +116,7 @@ getAllSubject()
 
     <div className={`col-xxl-4 boxSh p-3 mt-5 centerc ${style.allsubject}`}  >
 
-      {allSubjects?.length!=0 && allSubjectsSlice?.map((item=>(
+      {allSubjects?.length!=0 && allSubjects?.map((item=>(
         <CardSub item={item}/>
       )))}
     </div>

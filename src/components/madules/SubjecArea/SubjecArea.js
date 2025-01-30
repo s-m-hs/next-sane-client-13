@@ -11,13 +11,19 @@ export default function SubjecArea() {
  
 const getAllSubject=()=>{
     const getLocalStorage=localStorage.getItem('loginToken')
+   let obj= {
+        cat: "magazine",
+        pageNumber: 0,
+        pageSize: 100
+      }
     async function myApp(){
-        const res=await fetch(`${apiUrl}/api/CySubjects`,{
-            method:'GET',
+        const res=await fetch(`${apiUrl}/api/CySubjects/GetSubjectByCat`,{
+            method:'POST',
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${getLocalStorage}`,
               },
+            body:JSON.stringify(obj)
         }).then(res=>{
             if(res.ok){
              return   res.json()
@@ -25,7 +31,8 @@ const getAllSubject=()=>{
         }
 
         ).then(result=>{
-            setAllSubjects(result)
+            // console.log(result)
+            setAllSubjects(result.itemList            )
         })
     }
     myApp() 
