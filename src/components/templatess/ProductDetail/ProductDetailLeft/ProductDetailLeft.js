@@ -53,7 +53,6 @@ const [flagSupply,setFlagSupply]=useState(false)
       setFlagSupply(true) 
     } 
   },[detail])
-
 // console.log(offer)
 // console.log((detail.price)*offer)
 
@@ -110,8 +109,9 @@ const [flagSupply,setFlagSupply]=useState(false)
 
       
             </div>
+
             <div className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`} >
-{detail.supply !=0 ? <>
+{detail.supply !=0 &&  <>
 
   { offer==1 && 
     <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>}
@@ -131,8 +131,9 @@ const [flagSupply,setFlagSupply]=useState(false)
           </>}
          
               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: موجود</span>
-</> :
-              <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: ناموجود  </span>
+</>
+//  :
+//               <span className={Styles.ProductDetailL_divMiddle_count} >موجودی محصول: ناموجود  </span>
 
 }
              

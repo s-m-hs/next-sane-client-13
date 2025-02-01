@@ -87,7 +87,7 @@ useEffect(()=>{
         categoryCode==='hardwairebestseller' ?
         <span onClick={()=>AlertC()} style={{cursor:'pointer'}} className={styles.price}>استعلام قیمت</span>
 :
-        <span className={styles.price}>ناموجود</span>
+        <span className={styles.price}>استعلام قیمت</span>
 }
 
         
