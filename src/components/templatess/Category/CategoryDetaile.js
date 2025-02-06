@@ -379,7 +379,7 @@ export default function CategoryDetaile({ param }) {
               <select class="form-select" aria-label="Default select example"
                 onChange={(e) => {
                   setHamkarPaymentState(e.target.value)
-                  console.log(hamkarPaymentState)
+                  // console.log(hamkarPaymentState)
                 }}
               >
                 <option value="1">نقدی</option>

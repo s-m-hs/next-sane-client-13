@@ -68,7 +68,7 @@ const AlertA=(func)=> Swal.fire({
   }
 });
   /////////////////////////////////////////////////
-
+  console.log(props)
   return (
     <>
       <tr className= {`${style.tr}`}>

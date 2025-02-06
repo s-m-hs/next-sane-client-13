@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./SwiperB.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,20 +7,67 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
 
 export default function SwiperB() {
-//   const progressCircle = useRef(null);
-//   const progressContent = useRef(null);
-//   const onAutoplayTimeLeft = (s, time, progress) => {
-//     progressCircle.current.style.setProperty("--progress", 1 - progress);
-//     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-//   };
+const [parameterSlider,setParameterSlider]=useState(0)
+const [sliderImg,setSliderImg]=useState('')
+
+const getBanner=(id)=>{
+  const getLocalStorage=localStorage.getItem('loginToken')
+  
+  async function myApp(){
+    const res=await fetch(`${apiUrl}/api/CySubjects/${id}`,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getLocalStorage}`,
+      },
+    }).then(res=>{
+      if(res.ok){
+        return res.json().then(result=>{
+          setSliderImg(result)
+
+        }) 
+      }
+    })
+  }
+  myApp()
+}
+  const sliderParameter=()=>{
+    const getLocalStorage = localStorage.getItem("loginToken");
+  
+    async function myApp(){
+      const res=await fetch(`${apiUrl}/api/CyKeyDatas/18`,{
+        method:'GET',
+        headers: {
+          Authorization: `Bearer ${getLocalStorage}`,
+          "Content-Type": "application/json",
+        },
+      }).then(res=>{
+        if(res.ok){
+          return res.json().then(result=>{
+            setParameterSlider(Number(result.value) )
+          })
+        }
+      })
+    }
+    myApp()
+  }
+
+useEffect(()=>{
+  sliderParameter()
+  getBanner(42)
+},[])
+  
   return (
     <Swiper
       loop={true}
       spaceBetween={30}
       centeredSlides={true}
-      autoplay={{
+      autoplay={ sliderImg?.orderValue===1 ? {
+        disableOnInteraction: false,
+      } : {
         delay: 2000,
         disableOnInteraction: false,
       }}
@@ -33,7 +80,21 @@ export default function SwiperB() {
     //   onAutoplayTimeLeft={onAutoplayTimeLeft}
       className={styles.swiper}
     >
-   
+      {sliderImg?.orderValue==1 &&   <SwiperSlide className={styles.swiper_slide} >
+                                <img className={styles.swiper_img_A} style={{cursor:'pointer'}} src={sliderImg.bigImg} alt={sliderImg.title} onClick={()=>{window.scrollTo({
+      top: 300,
+      behavior: 'smooth'
+    })}}/>
+
+<img className={styles.swiper_img_B} src={sliderImg.smallImg} alt={sliderImg.title} style={{cursor:'pointer'}} onClick={()=>{window.scrollTo({
+      top: 300,
+      behavior: 'smooth'
+    })}}/>
+    
+
+</SwiperSlide>}
+    
+
 {/* 1 */}
       <SwiperSlide className={styles.swiper_slide}>
       
@@ -108,12 +169,7 @@ export default function SwiperB() {
         <img className={styles.swiper_img_B} src="../../images/236790_Apple_watch_9_Ultra_2_AKrales_0356.jpg" alt="Apple_watch" />
 
       </SwiperSlide>
-      {/* <div className="autoplay_progress" slot="container-end">
-        <svg viewBox="0 0 48 48" ref={progressCircle}>
-          <circle cx="24" cy="24" r="20"></circle>
-        </svg>
-        <span ref={progressContent}></span>
-      </div> */}
+    
     </Swiper>
   );
 }

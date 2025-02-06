@@ -326,7 +326,7 @@ export default function BasketDetail() {
 
 
 
-  // console.log(getBasket)
+  console.log(getBasket)
   // console.log(address)
   // console.log(adressId)
   // console.log(toBuy)
@@ -459,15 +459,7 @@ export default function BasketDetail() {
             {Number(total) != 0 && <div className="col-6">
 
               <div className={` ${style.colPrice_mobile}`}>
-                {/* <div className={`centerc ${style.cath_div_mobile}`}>
 
-  <span> <input   className={`${style.cath_input}`} type='radio' checked /> <span className="m-2">پرداخت آنلاین</span> 
-  </span>
-
-  <span> <input   className={` ${style.cath_input}`} type='radio'  /><span className="m-2">پرداخت در محل</span> 
-  </span>
-  
-</div> */}
                 <button
                   className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
                   disabled
@@ -591,9 +583,7 @@ export default function BasketDetail() {
                       {item.state}-{item.address}-کد پستی :{item.postalCode}
                     </option>
                   ))}
-                  {/* <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option> */}
+               
                 </Form.Select>
               </>
             ) : (
@@ -623,7 +613,7 @@ export default function BasketDetail() {
                 <span className="m-2">پرداخت آنلاین</span>
               </span>
 
-              <span>
+              {/* <span>
                 <input
                   className={` ${style.cath_input}`}
                   name="payment"
@@ -632,20 +622,10 @@ export default function BasketDetail() {
                   onChange={(e) => setPayState(e.target.value)}
                 />
                 <span className="m-2">پرداخت در محل (تهران و قم)</span>
-              </span>
+              </span> */}
             </div>
 
-            {/* {address?.length == 0 && (
-              <div className={`${style.mobileAdd_div} centerr`}>
-                <h1>  شما آدرس ثبت شده ای ندارید ،لطفا ابتدا یک آدرس ثت کنید!!!</h1>
-                <button
-                  className={`btn btn-success ${style.btnGoToMobile}`}
-                  onClick={handleGoToProfile}
-                >
-                  <HandTap size={32} weight="thin" /> ثبت شماره موبایل
-                </button>
-              </div>
-            )} */}
+      
           </Modal.Body>
 
           <Modal.Footer>
