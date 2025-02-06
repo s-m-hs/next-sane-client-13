@@ -386,81 +386,18 @@ const getBanner=(id)=>{
 useEffect(()=>{
 return()=>localStorage.removeItem('cartObj')
 },[])
-  // const addToBasket=(obj)=>{
-  //   const getLocalStorage =localStorage.getItem('loginToken')
-  
-  //   async function myApp(){
-  //     const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
-  //       method:'POST',
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization:`Bearer ${ getLocalStorage }`
-  //       }, 
-  //       body:JSON.stringify(obj)
-  //     }).then(res=>{
-  //       console.log(res);
 
-  //       if (res.status==200){
-  //         // setBasketFlag(prev=>!prev)
-  //         // AlertA()    
-  //         }else if(res.status==400){
-  //           // AlertB()
-  //         }
-  //     }
-    
-  //   )
-  //   }
-  //   myApp()
-  // }
-  // useEffect(() => {
-  //   if(xtFlagLogin){
-  //       for (let i = 0; i < localStorage.length; i++) {
-  
-  //     const key = localStorage.key(i);
-  //     if (key.startsWith('cartObj')) {
-  //       const keyy=JSON.parse(localStorage.getItem(key))
-  //       let obj={
-  //         cyProductID:keyy.value,
-  //         quantity: keyy.quan,
-  //         orderItemID: 0,
-  //       }
-  //       console.log(obj);
-  //       addToBasket(obj)
-  //       localStorage.removeItem(key)
-  //       setLocalUpdateBasket([])
-  //       setCartCounter(0)
-  //     }
-  //   }
-  //   }
-  
-  // },[xtFlagLogin]); 
-
-
-  // useEffect(()=>{
-
-  //   return ()=> {
-  
-  //     for (let i = 0; i < localStorage.length; i++) {
-  //       const key = localStorage.key(i);
-  //       if (key.startsWith('cartObj')) {
-  //         const keyy=JSON.parse(localStorage.getItem(key))
-  //         const value = localStorage.getItem(key);
-  //         localStorage.removeItem(key)
-  //         setLocalUpdateBasket([])
-  //         setCartCounter(0)
-  //         // apiCallProdDetails(value, addItem, setIsApiCalled)
-  //       }
-  //     }
-  //   }
-  // },[])
-
-  // useEffect(()=>{
-  //   if(pathname.includes('paymentResult') && zarrinStatus===''){
-  //     setXtFlagSpinnerShow(true)
-  //     setAuthority(authority)
-  //     setZarrinStatus(status)
-  //   }
-  // },[pathname])
+useEffect(() => {
+  const token = localStorage.getItem("logintoken");
+  if (token) {
+    fetch("/api/auth/sync-token", {
+      method: "POST",
+      headers: {
+        "x-login-token": token, // توکن را در هدر می‌فرستیم
+      },
+    });
+  }
+}, []);
   return (
     <>
       {xtflagSpinnerShow && (

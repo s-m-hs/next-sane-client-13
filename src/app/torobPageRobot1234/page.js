@@ -1,49 +1,44 @@
-'use client'
-import apiUrl from '@/utils/ApiUrl/apiUrl'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-
-export default function page() {
-    const [product,setProduct]=useState([])
-    let obj={
-            
+export default async function ProductsPage() {
+    const res = await fetch("https://sapi.sanecomputer.com/api/CyProducts/getAllProducts", { 
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.LOGIN_TOKEN}`, 
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         cat: "string",
         pageNumber: 0,
-        pageSize: 1000000
-      
-}
-    async function myApp(){
-        const getLocalStorage=localStorage.getItem('loginToken')
-        const res=await fetch(`${apiUrl}/api/CyProducts/getAllProducts`,{
-            method:'POST',
-            headers: {
-                Authorization: `Bearer ${getLocalStorage}`,
-                "Content-Type": "application/json",
-              },
-              body:JSON.stringify(obj)
-        }).then(res=>{
-            console.log(res)
-            if(res.ok){
-                return res.json().then(result=>{
-                    console.log(result)
-                    setProduct(result.itemList)
-                })
-            }
-        })
-      }
-     
-useEffect(()=>{
- myApp()
- console.log(product) 
-},[]) 
-  return (
-    <div>
-        {product.length!=0 && product?.map((item)=>(
-            <>
-                        <Link href={`/product/${item.id}`}>{`/product/${item.id}`}</Link><hr/>
-
-            </>
-        ))}
-    </div>
-  )
-}
+        pageSize: 1000000,
+      }),
+      cache: "no-store", // جلوگیری از کش شدن درخواست
+    });
+  
+    if (!res.ok) {
+      return <h1>خطا در دریافت محصولات</h1>;
+    }
+  
+    const data = await res.json();
+    const products = data.itemList || [];
+  
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html lang="fa">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>محصولات</title>
+      </head>
+      <body>
+        <h1>لیست محصولات</h1>
+        <ul>
+          ${products
+            .map((product) => `<li><a href="/product/${product.id}">${product.id}</a></li>`)
+            .join("")}
+        </ul>
+      </body>
+      </html>
+    `;
+  
+    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+  }
+  
