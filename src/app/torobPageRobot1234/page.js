@@ -18,7 +18,9 @@ export default async function ProductsPage() {
     }
   
     const data = await res.json();
-    const products = data.itemList || [];
+    // const products = data.itemList || [];
+    const filteredProducts = data.itemList.filter(product => product.cyProductCategoryId !== null) || [];
+
   
     const htmlContent = `
       <!DOCTYPE html>
@@ -31,7 +33,7 @@ export default async function ProductsPage() {
       <body>
         <h1>لیست محصولات</h1>
         <ul>
-          ${products
+          ${filteredProducts
             .map((product) => `<li><a href="/product/${product.id}">${product.id}</a></li>`)
             .join("")}
         </ul>

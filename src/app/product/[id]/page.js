@@ -80,10 +80,10 @@ export async function generateMetadata({ params }) {
 const product_id= product.id
   const product_price =
     product.noOffPrice !== product.price
-      ? product.noOffPrice
-      : product.price * offer;
+      ? product.noOffPrice/10
+      : (product.price/10) * offer;
 
-  const product_old_price = product.price || '';
+  const product_old_price = product.price/10 || '';
 
   return {
     title: product.name,

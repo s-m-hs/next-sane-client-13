@@ -28,5 +28,6 @@ export async function GET() {
   }
 
   const data = await response.json();
-  return Response.json(data.itemList);
+  const filteredProducts = data.itemList.filter(product => product.cyProductCategoryId !== null);
+  return Response.json(filteredProducts); 
 }
