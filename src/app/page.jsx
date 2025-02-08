@@ -76,13 +76,14 @@ const keyShow=(id,func)=>{
     })
   }myApp()
 } 
+console.log(keyOfferSlider)
 
 useEffect(()=>{
   keyShow(11,setKey)
   keyShow(15,setKeyB)
   keyShow(14,setKeyOfferSlider) 
 },[])
-
+  
   return (
 <div className='container'>
   <div className='row '>
@@ -93,7 +94,7 @@ useEffect(()=>{
       <SwiperF/>
    
      </div> 
-     {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-best-sellers' title={'پرفروشهای فروش ویژه💰:'} />} 
+     {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-Basket' title={`سبد فروش ویژه💰:`} />} 
 
      {keyB?.value === '1'  ? 
      <SwiperC  categoryCode='new' title={'جدیدترین ها:'} />

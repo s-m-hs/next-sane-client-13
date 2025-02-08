@@ -1,0 +1,14 @@
+.products_card {
+
+    width: 95%;
+    margin: 80px auto !important;
+}
+.products_col{
+    box-shadow: 0 0 14px -6px rgba(36, 184, 201, 0.87);
+    min-width: 35rem !important;
+    height: 36rem;
+    margin-bottom: 50px;
+    align-items: center !important;
+    flex-wrap: nowrap;
+   
+}
