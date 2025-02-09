@@ -81,13 +81,13 @@ export default function BasketDetail() {
     RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA)
     cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : ''
 
-  };
+  }; 
   ///////////////////////////////
   const directToZarin = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(
-        `${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}`,
+        `${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`,
         {
           method: "GET",
           headers: {
@@ -326,7 +326,7 @@ export default function BasketDetail() {
 
 
 
-  console.log(getBasket)
+  // console.log(getBasket)
   // console.log(address)
   // console.log(adressId)
   // console.log(toBuy)

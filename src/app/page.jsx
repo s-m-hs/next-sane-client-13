@@ -76,7 +76,7 @@ const keyShow=(id,func)=>{
     })
   }myApp()
 } 
-console.log(keyOfferSlider)
+// console.log(keyOfferSlider)
 
 useEffect(()=>{
   keyShow(11,setKey)
