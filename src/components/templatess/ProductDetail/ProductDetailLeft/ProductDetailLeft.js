@@ -62,41 +62,10 @@ export default function ProductDetailLeft({ detail }) {
       setFlagSupply(true);
     }
   }, [detail]);
-  // console.log(offer)
-  // console.log((detail.price)*offer)
 
-  // دریافت داده‌های محصول
-  // const product = await fetch(`${apiUrl}/api/CyProducts/${detail.id}`).then((res) =>
-  //   res.json()
-  // );
-  // const offerFetch = await fetch(`${apiUrl}/api/CyKeyDatas/13`).then((res) =>
-  //   res.json()
-  // );
-  // const offerr = Number(offerFetch.value);
-
-  // const productPrice =
-  //   product.noOffPrice !== product.price
-  //     ? product.noOffPrice
-  //     : product.price * offerr;
-
-  // const productOldPrice = product.price || '';
-
-  // if (!product || !offerFetch) {
-  //   return <div>محصول یافت نشد</div>;
-  // }
   return (
     <>
-      {/* <Head>
-        <meta name="product_id" content={detail.id} />
-        <meta name="product_name" content={detail.name} />
-        <meta property="og:image" content={detail.mainImage} />
-        <meta name="product_price" content={detail.productPrice} />
-        <meta name="product_old_price" content={detail.productOldPrice} />
-        <meta
-          name="availability"
-          content={detail.supply ? 'instock' : 'outofstock'}
-        />
-      </Head> */}
+
       <div className="container " style={{ height: "600px" }}>
         <div
           className={`${Styles.row_detail} row mt-1 centerc`}
