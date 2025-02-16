@@ -23,6 +23,7 @@ import { usePathname } from 'next/navigation';
 import { use, useContext, useEffect, useState } from 'react';
 import SubjecArea from '@/components/madules/SubjecArea/SubjecArea';
 import apiUrl from '@/utils/ApiUrl/apiUrl'
+import SwiperD from '@/components/templatess/Home/SwiperD/SwiperD'
 
 export default function Home() {
   const pathname = usePathname();
@@ -94,6 +95,8 @@ useEffect(()=>{
       <SwiperF/>
    
      </div> 
+<SwiperD categoryCode='new' title={'فوق العاده ها:'}/>
+
      {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-Basket' title={`سبد فروش ویژه💰:`} />} 
 
      {keyB?.value === '1'  ? 

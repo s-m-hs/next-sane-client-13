@@ -1,0 +1,32 @@
+.right_div{
+    direction: ltr;
+    padding: 20px;
+}
+.container{
+    margin-top: 40px !important;
+    /* background-color: var(--white1ffffff2); */
+    background-color: gold;
+
+    border-radius: 35px;
+
+}
+.swipercomb_div{
+    /* position: relative; */
+    background-color: gold;
+    /* margin: 80px auto; */
+    /* width: 90%; */
+    border-radius: 35px;
+    /* border: 1px solid #ffffff; */
+    /* border: 1px solid #ffffff; */
+    /* box-shadow: 0 0 15px -10px; */
+  
+  }
+  .swipercomb_title{
+    position: absolute;
+    border-radius: 22px;
+    top: -20px;
+    margin-right: 50px;
+    background-color: #fff;
+    /* text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff; */
+    font-size: 1.5cqi;
+  }

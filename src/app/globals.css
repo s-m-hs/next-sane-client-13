@@ -952,8 +952,35 @@ left: 10px;
 
 
 
+.flip-clock {
+  --fcc-flip-duration: 0.5s; /* transition duration when flip card */
+  --fcc-spacing: 2px; /* space between unit times and separators */
+  --fcc-digit-block-width: 1.8cqi; /* width of digit card */
+  --fcc-digit-block-height: 1.8cqi; /* height of digit card, highly recommend in even number */
+  --fcc-digit-block-radius: 5px; /* border radius of digit card */
+  --fcc-digit-block-spacing: 5px; /* space between blocks in each unit of time */
+  --fcc-digit-font-size: 1cqi; /* font size of digit */
+  --fcc-digit-color: white; /* color of digit */
+  --fcc-label-font-size: 10px; /* font size of label */
+  --fcc-label-color: #eb2020; /* color of label */
+  --fcc-background: rgb(230, 22, 22); /* background of digit card */
+  --fcc-divider-color: white; /* color of divider */
+  --fcc-divider-height: 1px; /* height of divider */
+  --fcc-separator-size: 4px; /* size of colon */
+  --fcc-separator-color: red; /* color of colon */
+}
+.flip-clock .fcc__unit_time--day{
+  display: none !important;
 
+}
+.fcc__label--hour ,.fcc__label--minute,.fcc__label--second  {
+  display: none !important;
 
+}
+/* .fcc__label--minute{
+  display: none !important;
+
+} */
 @media only screen and (max-width:1350px){
   .mySwiperF{
     /* display: none !important; */
