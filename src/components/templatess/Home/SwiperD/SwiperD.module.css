@@ -39,3 +39,25 @@
   
     width: 300px;
   }
+  .right_div p{
+    font-size: 22px;
+    font-weight: 600;
+    color: rgb(230, 22, 22);
+  }
+
+  .swiperCustom :hover{
+    
+  }
+
+  /* .swiperCustom>.swiper-wrapper >.swiper-slide {
+    --c: #8A9B0F;
+    --b: 3px;
+    --g: 5px;
+    padding: calc(var(--g) + var(--b));
+    --_g: #0000 25%, #af1442 0 !important;
+    background-color: transparent !important;
+    background: conic-gradient(from 180deg at top var(--b) right var(--b), var(--_g)) var(--_i, 200%) 0 / 200% var(--_i, var(--b)) no-repeat, conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0 var(--_i, 200%) / var(--_i, var(--b)) 200% no-repeat;
+    transition: .3s, background-position .3s .3s;
+} */
+
+  /* .mySwiperB  */

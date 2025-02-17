@@ -53,7 +53,7 @@ export default function SwiperD({ title, categoryCode }) {
       <div className={`container ${style.container} boxSh`}>
         <div className="row centerr">
           <div className={`col-lg-2 ${style.right_div} centerc`}>
-           
+           <p>شگفتانه روز</p>
             <Example />
 
             <ClockLoader color="#fd2121" size={100} speedMultiplier={0.3} />
@@ -75,10 +75,10 @@ export default function SwiperD({ title, categoryCode }) {
               pagination={{
                 clickable: true,
               }}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
+              // autoplay={{
+              //   delay: 3000,
+              //   disableOnInteraction: false,
+              // }}
               // navigation={true}
               breakpoints={{
                 450: {
@@ -99,7 +99,7 @@ export default function SwiperD({ title, categoryCode }) {
                 },
               }}
               modules={[Autoplay, Pagination, Navigation]}
-              className="mySwiperB"
+              className={`${style.swiperCustom} mySwiperB swiperCustom `} 
             >
               {productByCatArray?.itemList
                 ?.slice()

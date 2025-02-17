@@ -235,6 +235,10 @@ transition: all 0.3s ease-in;
   border: none !important;
 }
 
+.swiperCustom >.swiper-wrapper >.swiper-slide {
+  --_g: #0000 25%,red 0 !important;
+
+}
 
 
 
@@ -955,11 +959,11 @@ left: 10px;
 .flip-clock {
   --fcc-flip-duration: 0.5s; /* transition duration when flip card */
   --fcc-spacing: 2px; /* space between unit times and separators */
-  --fcc-digit-block-width: 1.8cqi; /* width of digit card */
-  --fcc-digit-block-height: 1.8cqi; /* height of digit card, highly recommend in even number */
+  --fcc-digit-block-width: 2cqi; /* width of digit card */
+  --fcc-digit-block-height: 2cqi; /* height of digit card, highly recommend in even number */
   --fcc-digit-block-radius: 5px; /* border radius of digit card */
   --fcc-digit-block-spacing: 5px; /* space between blocks in each unit of time */
-  --fcc-digit-font-size: 1cqi; /* font size of digit */
+  --fcc-digit-font-size: 1.3cqi; /* font size of digit */
   --fcc-digit-color: white; /* color of digit */
   --fcc-label-font-size: 10px; /* font size of label */
   --fcc-label-color: #eb2020; /* color of label */
@@ -997,6 +1001,16 @@ left: 10px;
     height: 95%;
     /* left: 0 !important; */
     opacity: 0.5 !important; 
+  }
+
+  .flip-clock {
+   
+    --fcc-digit-block-width: 30px; /* width of digit card */
+    --fcc-digit-block-height: 30px; /* height of digit card, highly recommend in even number */
+    --fcc-digit-block-radius: 5px; /* border radius of digit card */
+    --fcc-digit-block-spacing: 5px; /* space between blocks in each unit of time */
+    --fcc-digit-font-size: 15px; /* font size of digit */
+
   }
   
 }
