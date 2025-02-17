@@ -1,6 +1,7 @@
 .right_div{
     direction: ltr;
     padding: 20px;
+    align-items: center;
 }
 .container{
     margin-top: 40px !important;
@@ -29,4 +30,12 @@
     background-color: #fff;
     /* text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff; */
     font-size: 1.5cqi;
+  }
+
+  .right_div span{
+    position: relative;
+  }
+  .right_div img{
+  
+    width: 300px;
   }

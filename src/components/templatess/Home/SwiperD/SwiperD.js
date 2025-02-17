@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState  } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import 'swiper/css';
 import "swiper/css/pagination";
@@ -9,11 +9,10 @@ import { MainContext } from "@/context/MainContext";
 import CardB from "@/components/madules/Cards/CardB/CardB";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 // import styles from './SwiperC.module.css'
-import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
-import '@leenguyen/react-flip-clock-countdown/dist/index.css';
+import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
+import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 import Example from "./Example";
-
-
+import { ClockLoader } from "react-spinners";
 
 export default function SwiperD({ title, categoryCode }) {
   const [productByCatArray, setProductByCatArray] = useState([]);
@@ -51,14 +50,14 @@ export default function SwiperD({ title, categoryCode }) {
   }, []);
   return (
     <>
-      <div className={`container ${style.container} boxSh`} >
-        <div className="row centerr" >
-            <span>
-                پر تخفیف های امروز :
-            </span>
-          <div className={`col-lg-2 ${style.right_div} centerr`}>
-            <Example/>
-            </div>
+      <div className={`container ${style.container} boxSh`}>
+        <div className="row centerr">
+          <div className={`col-lg-2 ${style.right_div} centerc`}>
+           
+            <Example />
+
+            <ClockLoader color="#fd2121" size={100} speedMultiplier={0.3} />
+          </div>
 
           <div className={` col-lg-10 ${style.swipercomb_div}`}>
             <span
