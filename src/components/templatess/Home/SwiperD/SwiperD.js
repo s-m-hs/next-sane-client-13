@@ -60,12 +60,12 @@ export default function SwiperD({ title, categoryCode }) {
           </div>
 
           <div className={` col-lg-10 ${style.swipercomb_div}`}>
-            <span
+            {/* <span
               className={` ${style.swipercomb_title}`}
               style={{ marginRight: "50px" }}
             >
               {title}
-            </span>
+            </span> */}
 
             <Swiper
               // loop={true}
