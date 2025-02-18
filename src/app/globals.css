@@ -959,8 +959,8 @@ left: 10px;
 .flip-clock {
   --fcc-flip-duration: 0.5s; /* transition duration when flip card */
   --fcc-spacing: 2px; /* space between unit times and separators */
-  --fcc-digit-block-width: 2cqi; /* width of digit card */
-  --fcc-digit-block-height: 2cqi; /* height of digit card, highly recommend in even number */
+  --fcc-digit-block-width: 1.8cqi; /* width of digit card */
+  --fcc-digit-block-height: 1.8cqi; /* height of digit card, highly recommend in even number */
   --fcc-digit-block-radius: 5px; /* border radius of digit card */
   --fcc-digit-block-spacing: 5px; /* space between blocks in each unit of time */
   --fcc-digit-font-size: 1.3cqi; /* font size of digit */

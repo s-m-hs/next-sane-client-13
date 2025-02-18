@@ -95,7 +95,7 @@ useEffect(()=>{
       <SwiperF/>
    
      </div> 
-<SwiperD categoryCode='new' title={'فوق العاده ها:'}/>
+<SwiperD categoryCode='SUPRIZ DAY' title={'فوق العاده ها:'}/>
 
      {keyOfferSlider?.value==='1' && <SwiperC categoryCode='offer-Basket' title={`سبد فروش ویژه💰:`} />} 
 
