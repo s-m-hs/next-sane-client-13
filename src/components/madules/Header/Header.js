@@ -715,7 +715,7 @@ if(item.cyCategoryId){
                                   key={index}
                                   onClick={() => setXtFlagSpinnerShow(true)}
                                   href={`/category/${item.id}`}
-                                  className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                                  className={`${styles.header_bottom__col__ul__ul__ul__link2} centerc`}
                                 >
                                   <img
                                     src={item.imageUrl}
@@ -756,7 +756,7 @@ if(item.cyCategoryId){
                                   key={index}
                                   onClick={() => setXtFlagSpinnerShow(true)}
                                   href={`/category/${item.id}`}
-                                  className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
+                                  className={`${styles.header_bottom__col__ul__ul__ul__link2} centerc`}
                                 >
                                   <img
                                     src={item.imageUrl}

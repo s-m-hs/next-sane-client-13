@@ -223,7 +223,7 @@ width: 35%;
 
 .header_bottom__col__ul__ul {
     width: 25rem;
-    height: 60vh;
+    height: 700px;
     min-height: 50rem;
     padding: unset;
     border-left: 1px dotted rgb(204, 202, 202);
@@ -247,11 +247,10 @@ width: 35%;
     background-color: rgba(255, 255, 255);
     position: absolute;
     /* min-width: 400px; */
-    min-width: 40vw;
+    min-width: 600px;
     min-height: 50rem;
-
     /* width: fit-content; */
-    height: 60vh;
+    height: 700px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     top: 0;
@@ -468,12 +467,14 @@ height: 18px;
 
 .header_bottom__col__ul__ul__ul__link2 {
     
+    font-size: 15px;
     text-align: center;
     z-index: 10;
     color: var(--black33b4359);
     text-decoration: none;
     padding: 3.5rem;
 transition:transform 0.1s linear;
+justify-content: flex-start !important;
 }
 
 .header_bottom__col__ul__ul__ul__link2:hover {
