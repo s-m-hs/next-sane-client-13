@@ -21,6 +21,13 @@ body{
   font-family:vazir,calibri !important;
 
 }
+
+ /* .p-image-preview-container{
+  width: 60% !important;
+} */
+.p-image-preview-container img{
+  width: 70% !important;
+}
 @font-face {
   font-family: 'Yekan';
   font-style: normal;
