@@ -989,6 +989,10 @@ left: 10px;
 
 }
 
+/* .p-image-preview-container{
+  width: 80% !important;
+} */
+
 @media only screen and (max-width:1350px){
   .mySwiperF{
     /* display: none !important; */

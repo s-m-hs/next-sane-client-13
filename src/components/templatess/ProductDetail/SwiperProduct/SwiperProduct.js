@@ -18,7 +18,7 @@ export default function SwiperProduct({src,srcB}) {
   return (
     <>
     {src && <>
-     <div  className={`${Styles.swiper} centerc`}>
+     <div  className={`${Styles.swiper} centerc mb-2`}>
         <Swiper
       style={{
         '--swiper-navigation-color': '#fff',
@@ -32,7 +32,7 @@ export default function SwiperProduct({src,srcB}) {
     >
        <SwiperSlide className={Styles.swiper_slide}>
        <div>
-       <Image src={src} alt="Image" width="250" preview />
+       <Image src={src} alt="Image" width="350" height='350' preview />
 
             {/* <ImageMagnifier 
                 src={src}
@@ -50,8 +50,8 @@ export default function SwiperProduct({src,srcB}) {
   <>
 {<>
 {item &&   <SwiperSlide className={Styles.swiper_slide}>
-  <div>
-  <Image src={item} alt="Image" width="250" preview />
+  <div >
+  <Image src={item} alt="Image" width="350"height='350' preview />
            {/* <ImageMagnifier 
               src={item}
               width={500}

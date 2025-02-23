@@ -39,6 +39,7 @@ const MainProvider = ({ children }) => {
     const getLocalStorage = localStorage.getItem("loginToken");
 
     setGetBasket([]);
+
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/CyOrders/GetBasketForUser`, {
         method: "GET",
@@ -130,8 +131,6 @@ const MainProvider = ({ children }) => {
   }, [xtFlagLogin, flagProfile, flagAddress]);
 
   useEffect(() => {
-
-    
     getBaskett();
   }, [basketFlag]);
 

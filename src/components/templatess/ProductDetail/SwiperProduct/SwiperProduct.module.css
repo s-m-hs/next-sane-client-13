@@ -86,8 +86,9 @@
     position: relative;
   }
   
-.swiper div{
+.img_div{
   width: 400px;
+  height: 350px;
 }
 
 

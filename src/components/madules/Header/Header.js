@@ -90,7 +90,7 @@ export default function Header() {
   const [searchBoxArr, setSearchBoxArr] = useState([]);
   const [flagSearch, setFlagSearch] = useState(false);
   const[offBanner,setOffBanner]=useState([])
-
+const[resetFlagCart,setResetFlagCart]=useState(true)
   // Function to toggle the menu
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -398,6 +398,14 @@ useEffect(() => {
     });
   }
 }, []);
+
+useEffect(()=>{
+  setResetFlagCart(false)
+  setTimeout(() => {
+    setResetFlagCart(true)
+
+  }, 0.1);
+},cartCounter)
   return (
     <>
       {xtflagSpinnerShow && (
@@ -585,25 +593,29 @@ if(item.cyCategoryId){
                   </div>
                 </Link>
 
-                <Link href={cartCounter != 0 ? "/basket" : "#"}>
-                  <div
-                    onClick={() => {
-                      if (cartCounter != 0) {
-                        setXtFlagSpinnerShow(true);
-                      } else {
-                        AlertA();
-                      }
-                    }}
-                    className={`${styles.Header_leftSide__div} centerr`}
-                  >
-                    <ShoppingCart size={24} color="#14a5af" />
-                    {cartCounter != 0 && (
-                      <span className={`${styles.shopicon_baget} centerc`}>
-                        {cartCounter}
-                      </span>
-                    )}
-                  </div>
-                </Link>
+                {resetFlagCart && 
+                             <Link href={cartCounter != 0 ? "/basket" : "#"}>
+                             <div
+                               onClick={() => {
+                                 if (cartCounter != 0) {
+                                   setXtFlagSpinnerShow(true);
+                                 } else {
+                                   AlertA();
+                                 }
+                               }}
+                               className={`${styles.Header_leftSide__div} centerr`}
+                             >
+                               <ShoppingCart size={24} color="#14a5af" />
+                               {cartCounter != 0 && (
+                                 <span className={`${styles.shopicon_baget} centerc`}>
+                                   {cartCounter}
+                                 </span>
+                               )}
+                             </div>
+                           </Link>
+                           }
+
+   
 
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
@@ -1056,6 +1068,7 @@ setFlagHamkar(false)
                   </div>
                 </Link>
 
+                {resetFlagCart && 
                 <Link href={cartCounter != 0 ? "/basket" : "#"}>
                   <div
                     onClick={() => {
@@ -1075,6 +1088,7 @@ setFlagHamkar(false)
                     )}
                   </div>
                 </Link>
+}
 
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
@@ -1795,6 +1809,7 @@ setFlagHamkar(false)
                 </li>
 
                 <li>
+                {resetFlagCart && 
                   <Link
                     onClick={() => {
                       if (cartCounter != 0) {
@@ -1826,6 +1841,7 @@ setFlagHamkar(false)
                     </div>
                     <ShoppingCart size={28} weight="duotone" color="#14a5af" />
                   </Link>
+}
                 </li>
 
                 <li
