@@ -62,7 +62,7 @@ let{offer}=useContext(MainContext)
             delay: 3000,
             disableOnInteraction: false,
           }}
-          // navigation={true}
+          navigation={true}
           breakpoints={{
             450: {
               slidesPerView: 1,

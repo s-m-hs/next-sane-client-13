@@ -1020,6 +1020,13 @@ left: 10px;
     --fcc-digit-font-size: 15px; /* font size of digit */
 
   }
+  .swiper-button-prev{
+ display: none !important;
+  }
+  .swiper-button-next{
+    display: none !important;
+
+  }
   
 }
 @media only screen and (max-width:900px){
