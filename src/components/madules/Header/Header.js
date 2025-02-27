@@ -41,6 +41,7 @@ import CardA from "../Cards/CardA/CardA";
 import { Sidebar } from "primereact/sidebar";
 import alertQ from "@/utils/Alert/AlertQ";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
+// import RotatingGlobe from "@/utils/RotatingGlobe";
 
 export default function Header() {
   let {
@@ -1455,6 +1456,7 @@ setFlagHamkar(false)
           <div className={`${styles.mobi_header} row  centerr`}>
             <Link href={"/"}>
               <img  src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
+              {/* <RotatingGlobe/> */}
               {offBanner?.orderValue==1 && 
               <>
                                               <img className={`${styles.mobi_header_img_off} `} src={offBanner.bigImg} alt={offBanner.title} />

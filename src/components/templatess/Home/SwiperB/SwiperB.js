@@ -33,11 +33,9 @@ export default function SwiperB() {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          console.log(res);
           if (res.ok) {
             return res.json().then((result) => {
               setCatArray(result.itemList);
-              console.log(result);
             });
           }
         })
@@ -95,9 +93,9 @@ export default function SwiperB() {
 
   return (
     <Swiper
-      loop={true}
+      // loop={true}
       spaceBetween={30}
-
+    
       autoplay={ sliderImg?.orderValue===1 ? {
         disableOnInteraction: false,
       } : {
@@ -132,12 +130,12 @@ export default function SwiperB() {
             src={sliderImg.smallImg}
             alt={sliderImg.title}
             style={{ cursor: "pointer" }}
-            onClick={() => {
-              window.scrollTo({
-                top: 300,
-                behavior: "smooth",
-              });
-            }}
+            // onClick={() => {
+            //   window.scrollTo({
+            //     top: 300,
+            //     behavior: "smooth",
+            //   });
+            // }}
           />
         </SwiperSlide>
       )}
