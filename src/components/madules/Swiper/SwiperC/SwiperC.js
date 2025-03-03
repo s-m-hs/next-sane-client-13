@@ -13,6 +13,11 @@ export default function SwiperC({ title, categoryCode }) {
   const [productByCatArray, setProductByCatArray] = useState([]);
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
 let{offer}=useContext(MainContext)
+/////برای مرتب کردن محصولات بر اساس mfrNo 
+const sortedProducts = productByCatArray?.itemList?.sort((a, b) => {
+  return a.mfrNo - b.mfrNo;
+});
+
   const getProductByCat = () => {
     let obj = {
       cat: categoryCode,
@@ -43,6 +48,10 @@ let{offer}=useContext(MainContext)
   useEffect(() => {
     getProductByCat();
   }, []);
+
+
+
+
   return (
     <>
       <div className="swipercomb-div">
@@ -84,7 +93,7 @@ let{offer}=useContext(MainContext)
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiperB"
         >
-          {productByCatArray?.itemList?.slice().reverse().map((item, index) => (
+          {sortedProducts?.slice().reverse().map((item, index) => (
             <SwiperSlide key={index}>
               <CardB
                 clickSpinner={() => setFlagSpinnerShow(true)}
