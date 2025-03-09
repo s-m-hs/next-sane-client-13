@@ -1,8 +1,6 @@
-
-
-import React from 'react';
-import apiUrl from '@/utils/ApiUrl/apiUrl';
-import ProductDetail from '@/components/templatess/ProductDetail/ProductDetail';
+import React from "react";
+import apiUrl from "@/utils/ApiUrl/apiUrl";
+import ProductDetail from "@/components/templatess/ProductDetail/ProductDetail";
 export async function generateMetadata({ params }) {
   const { id } = params;
 
@@ -16,19 +14,19 @@ export async function generateMetadata({ params }) {
 
   if (!product || !offerFetch) {
     return {
-      title: 'محصول یافت نشد',
-      description: 'محصولی با این مشخصات وجود ندارد.',
+      title: "محصول یافت نشد",
+      description: "محصولی با این مشخصات وجود ندارد.",
     };
   }
-  const availability=product.supply ? 'instock' : 'outofstock'
-  const product_name=product.name
-const product_id= product.id
+  const availability = product.supply !== 0 ? "instock" : "outofstock";
+  const product_name = product.name;
+  const product_id = product.id;
   const product_price =
     product.noOffPrice !== product.price
-      ? product.noOffPrice/10
-      : (product.price/10) * offer;
+      ? product.noOffPrice / 10
+      : (product.price / 10) * offer;
 
-  const product_old_price = product.price/10 || '';
+  const product_old_price = product.price / 10 || "";
 
   return {
     title: product.name,
@@ -50,12 +48,10 @@ const product_id= product.id
       product_name,
       product_price,
       product_old_price,
-      availability
+      availability,
     },
   };
 }
 export default async function ProductPage({ params }) {
-  return (
-<ProductDetail param={params.id}/>
-)
+  return <ProductDetail param={params.id} />;
 }
