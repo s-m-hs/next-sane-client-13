@@ -4,12 +4,12 @@ import ProductDetail from "@/components/templatess/ProductDetail/ProductDetail";
 export async function generateMetadata({ params }) {
   const { id } = params;
 
-  const product = await fetch(`${apiUrl}/api/CyProducts/${id}`).then((res) =>
-    res.json()
-  );
-  const offerFetch = await fetch(`${apiUrl}/api/CyKeyDatas/13`).then((res) =>
-    res.json()
-  );
+  const product = await fetch(`${apiUrl}/api/CyProducts/${id}`, {
+    cache: "no-store",
+  }).then((res) => res.json());
+  const offerFetch = await fetch(`${apiUrl}/api/CyKeyDatas/13`, {
+    cache: "no-store",
+  }).then((res) => res.json());
   const offer = Number(offerFetch.value);
 
   if (!product || !offerFetch) {
