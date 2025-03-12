@@ -32,7 +32,7 @@ export default function BasketDetail() {
     setBasketFlag,
     xtflagSpinnerShow,
     address,
-    offer
+    offer,
   } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
@@ -43,12 +43,12 @@ export default function BasketDetail() {
   const [total, setTotal] = useState(0);
   const [show, setShow] = useState(false);
   const [showB, setShowB] = useState(false);
-  const [payState, setPayState] = useState(1)
-  const [ziroSupply, setZiroSupply] = useState([])
-  const [flagZiroSupply, setFlagZiroSupply] = useState(false)
-  const [adressId, setAdressId] = useState('')
+  const [payState, setPayState] = useState(1);
+  const [ziroSupply, setZiroSupply] = useState([]);
+  const [flagZiroSupply, setFlagZiroSupply] = useState(false);
+  const [adressId, setAdressId] = useState("");
   const [localbasket, setLocalBasket] = useState([]);
-  const [flagLocal, setFlagLocal] = useState(false)
+  const [flagLocal, setFlagLocal] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleShow = () => setShow(true);
@@ -75,13 +75,11 @@ export default function BasketDetail() {
       500
     ).then((res) => setBasketFlag((prev) => !prev));
 
-
   const removeHan = (id) => {
     const getLocalStorage = localStorage.getItem("loginToken");
-    RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA)
-    cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : ''
-
-  }; 
+    RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
+    cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : "";
+  };
   ///////////////////////////////
   const directToZarin = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
@@ -118,22 +116,20 @@ export default function BasketDetail() {
             Authorization: `Bearer ${getLocalStorage}`,
           },
         }
-      )
-        .then((res) => {
-          if (res.status == 200) {
-            return res.json().then(result => {
-              setGetBasket([]);
-              setCartCounter(0);
-              handleClose();
-              AlertC();
-            })
-          } else {
-            return res.json().then(result => {
-              alert(result.response)
-            })
-          }
-        })
-
+      ).then((res) => {
+        if (res.status == 200) {
+          return res.json().then((result) => {
+            setGetBasket([]);
+            setCartCounter(0);
+            handleClose();
+            AlertC();
+          });
+        } else {
+          return res.json().then((result) => {
+            alert(result.response);
+          });
+        }
+      });
     }
     myApp();
   };
@@ -145,14 +141,14 @@ export default function BasketDetail() {
   ////////////for remove from ui in mode:localstorage===>
   const removeItem = (id) => {
     ///for remove from ui==>
-    let getLocalStorageProd =
-      JSON.parse(localStorage.getItem("cartObj")) || [];
+    let getLocalStorageProd = JSON.parse(localStorage.getItem("cartObj")) || [];
     setToBuy((prevToBuy) => prevToBuy.filter((item) => item.id !== id));
 
     ///for remove from oldlocale and set newlocal to local==>
-    getLocalStorageProd = getLocalStorageProd.filter(filter => filter.value !== id)
-    localStorage.setItem('cartObj', JSON.stringify(getLocalStorageProd))
-
+    getLocalStorageProd = getLocalStorageProd.filter(
+      (filter) => filter.value !== id
+    );
+    localStorage.setItem("cartObj", JSON.stringify(getLocalStorageProd));
   };
   const removeFromCart = (id) => {
     setCartCounter((prevCounter) => prevCounter - 1);
@@ -173,27 +169,22 @@ export default function BasketDetail() {
           rout.push("/register");
         });
       alertN();
-    }
-
-
-    else if (ziroSupply?.length != 0) {
-      handleShowB()
+    } else if (ziroSupply?.length != 0) {
+      handleShowB();
     } else if (ziroSupply?.length == 0) {
-      handleShow()
+      handleShow();
     }
   };
 
   useEffect(() => {
-    setZiroSupply([])
-    getBasket?.forEach(item => {
+    setZiroSupply([]);
+    getBasket?.forEach((item) => {
       if (item.supply == 0) {
-        setFlagZiroSupply(false)
-        setZiroSupply(prev => [...prev, item.productCode])
+        setFlagZiroSupply(false);
+        setZiroSupply((prev) => [...prev, item.productCode]);
       }
-    })
-  }, [getBasket])
-
-
+    });
+  }, [getBasket]);
 
   const addItem = (item) => {
     setToBuy((prevToBuy) => {
@@ -206,7 +197,6 @@ export default function BasketDetail() {
       return prevToBuy;
     });
   };
-
 
   const updateBasketHandler = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
@@ -284,28 +274,25 @@ export default function BasketDetail() {
     loadCartItem();
   }, []);
 
-
-
   useEffect(() => {
     const getLocalStorageProd =
       JSON.parse(localStorage.getItem("cartObj")) || [];
     setLocalBasket(getLocalStorageProd);
-    setFlagLocal(true)
+    setFlagLocal(true);
     if (localbasket.length != 0) {
-      localbasket?.forEach(item => {
+      localbasket?.forEach((item) => {
         apiCallProdDetails(item.value, addItem, setIsApiCalled);
-      })
+      });
     }
-
   }, [flagLocal]);
-
 
   ///to add total price
   useEffect(() => {
     const data = getBasket.map((item) => ({
-
-      totalPrice: item.unitOfferPrice === item.unitPrice ? item.totalPrice * offer : item.unitOfferPrice
-
+      totalPrice:
+        item.unitOfferPrice === item.unitPrice
+          ? item.totalPrice * offer
+          : item.unitOfferPrice,
     }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
@@ -320,11 +307,9 @@ export default function BasketDetail() {
   }, [xtflagSpinnerShow]);
   useEffect(() => {
     if (address && address?.length != 0) {
-      setAdressId(address[0]?.id)
+      setAdressId(address[0]?.id);
     }
-  }, [address])
-
-
+  }, [address]);
 
   // console.log(getBasket)
   // console.log(address)
@@ -363,9 +348,12 @@ export default function BasketDetail() {
                       name={item["name"]}
                       smallImage={item["smallImage"]}
                       // totalPrice={item.noOffPrice}
-                      unitPrice={offer == 1 && item.noOffPrice === item.price ? Number(item.price) / 10 :
-                        item.noOffPrice !== item.price ? Number(item.noOffPrice) / 10 :
-                          offer != 1 && (Number(item.price) / 10) * offer
+                      unitPrice={
+                        offer == 1 && item.noOffPrice === item.price
+                          ? Number(item.price) / 10
+                          : item.noOffPrice !== item.price
+                          ? Number(item.noOffPrice) / 10
+                          : offer != 1 && (Number(item.price) / 10) * offer
                       }
                       id={item["id"]}
                       cyProductID={item.id}
@@ -373,8 +361,8 @@ export default function BasketDetail() {
                         localUpdateBasket?.length === 0
                           ? 1
                           : localUpdateBasket.filter(
-                            (filter) => filter.value.value === item.id
-                          )[0]?.value.quan || 1
+                              (filter) => filter.value.value === item.id
+                            )[0]?.value.quan || 1
                       }
                       updateQuantity={updateQuantity}
                       handleRemove={removeFromCart}
@@ -389,13 +377,21 @@ export default function BasketDetail() {
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
-                        totalPrice={(offer == 1 && item.unitOfferPrice === item.unitPrice) ? Number(item.totalPrice) / 10 :
-                          item.unitOfferPrice !== item.unitPrice ? Number(item.unitOfferPrice) / 10 :
-                            offer !== 1 && (Number(item.totalPrice) / 10) * offer
+                        totalPrice={
+                          offer == 1 && item.unitOfferPrice === item.unitPrice
+                            ? Number(item.totalPrice) / 10
+                            : item.unitOfferPrice !== item.unitPrice
+                            ? Number(item.unitOfferPrice) / 10
+                            : offer !== 1 &&
+                              (Number(item.totalPrice) / 10) * offer
                         }
-                        unitPrice={(offer == 1 && item.unitOfferPrice === item.unitPrice) ? (Number(item.unitPrice) / 10) :
-                          item.unitOfferPrice !== item.unitPrice ? (Number(item.unitOfferPrice) / 10) :
-                            offer !== 1 && (Number(item.unitPrice) / 10) * offer
+                        unitPrice={
+                          offer == 1 && item.unitOfferPrice === item.unitPrice
+                            ? Number(item.unitPrice) / 10
+                            : item.unitOfferPrice !== item.unitPrice
+                            ? Number(item.unitOfferPrice) / 10
+                            : offer !== 1 &&
+                              (Number(item.unitPrice) / 10) * offer
                         }
                         id={item.id}
                         cyProductID={item.cyProductID}
@@ -403,7 +399,7 @@ export default function BasketDetail() {
                         updateQuantity={updateQuantity}
                         remove={removeHan}
                         supply={item.supply}
-                      // handleRemove={removeFromCart}
+                        // handleRemove={removeFromCart}
                       />
                     </>
                   ))
@@ -412,7 +408,34 @@ export default function BasketDetail() {
             </table>
           </div>
         </div>
-        <div className={` container  ${style.col_8_bottom_div_1} centerc`}>
+        <div className={`container mt-1  ${style.postDetail_container}`}>
+          <div className="row">
+            <div className="col">
+              <div className={`  ${style.postDetail_div}`}>
+                <ul>
+                  <li>
+                    <p>
+                      سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری
+                      تحویل پست میگردد.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و... با
+                      هماهنگی با واحد فروش در شهر تهران و قم فراهم می باشد.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={` container  ${style.col_8_bottom_div_1} centerc mt-3`}>
           <div className="row">
             <div className="col-6">
               <div className={`  ${style.col_8_bottom_div_2} centerr`}>
@@ -428,20 +451,22 @@ export default function BasketDetail() {
                   به روز رسانی سبد خرید
                 </button>
               </div>
-              {xtFlagLogin && <button
-                type="button"
-                className={
-                  (flagUpdate || getBasket?.length == 0)
-                    ? `${style.btn_hide}`
-                    : `${style.btn} btn btn-outline-info`
-                }
-                onClick={paymentHandler}
-              >
-                تکمیل خرید
-              </button>}
 
-              {
-                !xtFlagLogin &&
+              {xtFlagLogin && (
+                <button
+                  type="button"
+                  className={
+                    flagUpdate || getBasket?.length == 0
+                      ? `${style.btn_hide}`
+                      : `${style.btn} btn btn-outline-info`
+                  }
+                  onClick={paymentHandler}
+                >
+                  تکمیل خرید
+                </button>
+              )}
+
+              {!xtFlagLogin && (
                 <button
                   type="button"
                   className={
@@ -453,32 +478,30 @@ export default function BasketDetail() {
                 >
                   تکمیل خرید
                 </button>
-              }
-
+              )}
             </div>
-            {Number(total) != 0 && <div className="col-6">
 
-              <div className={` ${style.colPrice_mobile}`}>
-
-                <button
-                  className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
-                  disabled
-                >
-                  <span>مجموع سبد خرید :</span>
-                  <br />
-                  <span className={`  ${style.colPrice_mobile_span2}`}>
-                    {((Number(total) / 10)).toLocaleString()} تومان
-                  </span>
-                  <img
-                    src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-                    alt="basket-image"
-                    className={style.colPrice_mobile_shopimg}
-                  />
-                </button>
+            {Number(total) != 0 && (
+              <div className="col-6">
+                <div className={` ${style.colPrice_mobile}`}>
+                  <button
+                    className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
+                    disabled
+                  >
+                    <span>مجموع سبد خرید :</span>
+                    <br />
+                    <span className={`  ${style.colPrice_mobile_span2}`}>
+                      {(Number(total) / 10).toLocaleString()} تومان
+                    </span>
+                    <img
+                      src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
+                      alt="basket-image"
+                      className={style.colPrice_mobile_shopimg}
+                    />
+                  </button>
+                </div>
               </div>
-            </div>}
-
-
+            )}
           </div>
         </div>
 
@@ -500,21 +523,22 @@ export default function BasketDetail() {
 
             <div>
               <div className="centerc" style={{ alignItems: "center" }}>
+                {xtFlagLogin && (
+                  <button
+                    type="button"
+                    className={
+                      flagUpdate || getBasket?.length == 0
+                        ? `${style.btn_hide}`
+                        : `${style.btn} btn btn-outline-info`
+                    }
+                    onClick={paymentHandler}
+                  >
+                    تکمیل خرید
+                  </button>
+                )}
 
-                {xtFlagLogin && <button
-                  type="button"
-                  className={
-                    (flagUpdate || getBasket?.length == 0)
-                      ? `${style.btn_hide}`
-                      : `${style.btn} btn btn-outline-info`
-                  }
-                  onClick={paymentHandler}
-                >
-                  تکمیل خرید
-                </button>}
-
-                {
-                  !xtFlagLogin && <button
+                {!xtFlagLogin && (
+                  <button
                     type="button"
                     className={
                       flagUpdate
@@ -525,8 +549,7 @@ export default function BasketDetail() {
                   >
                     تکمیل خرید
                   </button>
-                }
-
+                )}
               </div>
             </div>
 
@@ -540,25 +563,24 @@ export default function BasketDetail() {
               </span>
       
             </div> */}
-            {Number(total) != 0 && <div className={`centerr ${style.colPrice}`}>
-              <button
-                className={`btn btn-outline-warning ${style.btn1}`}
-                disabled
-              >
-                <img
-                  src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-                  alt="basket-image"
-                  className={style.shopimg}
-                />
+            {Number(total) != 0 && (
+              <div className={`centerr ${style.colPrice}`}>
+                <button
+                  className={`btn btn-outline-warning ${style.btn1}`}
+                  disabled
+                >
+                  <img
+                    src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
+                    alt="basket-image"
+                    className={style.shopimg}
+                  />
 
-                <span>مجموع سبد خرید :</span>
-                <br />
-                <span>{((Number(total) / 10)).toLocaleString()} تومان</span>
-              </button>
-            </div>}
-
-
-
+                  <span>مجموع سبد خرید :</span>
+                  <br />
+                  <span>{(Number(total) / 10).toLocaleString()} تومان</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -575,7 +597,8 @@ export default function BasketDetail() {
             {address?.length != 0 ? (
               <>
                 <h2> آدرس های ثبت شده :</h2>
-                <Form.Select aria-label="Default select example"
+                <Form.Select
+                  aria-label="Default select example"
                   onChange={(e) => setAdressId(e.target.value)}
                 >
                   {address?.map((item) => (
@@ -583,7 +606,6 @@ export default function BasketDetail() {
                       {item.state}-{item.address}-کد پستی :{item.postalCode}
                     </option>
                   ))}
-               
                 </Form.Select>
               </>
             ) : (
@@ -613,6 +635,33 @@ export default function BasketDetail() {
                 <span className="m-2">پرداخت آنلاین</span>
               </span>
 
+              <div className={` row ${style.postDetail_row}`}>
+                <div className="col">
+                  <div className={`  ${style.postDetail_div}`}>
+                    <ul>
+                      <li>
+                        <p>
+                          سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت
+                          کاری تحویل پست میگردد.
+                        </p>
+                      </li>
+
+                      <li>
+                        <p>
+                          امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و...
+                          با هماهنگی با واحد فروش در شهر تهران و قم فراهم می
+                          باشد.
+                        </p>
+                      </li>
+
+                      <li>
+                        <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               {/* <span>
                 <input
                   className={` ${style.cath_input}`}
@@ -624,8 +673,6 @@ export default function BasketDetail() {
                 <span className="m-2">پرداخت در محل (تهران و قم)</span>
               </span> */}
             </div>
-
-      
           </Modal.Body>
 
           <Modal.Footer>
@@ -643,7 +690,7 @@ export default function BasketDetail() {
                   : `btn btn-info ${style.btn_modal_ok_disable}`
               }
               onClick={payState == 1 ? directToZarin : handleRegisterShop}
-            // onClick={handleRegisterShop}
+              // onClick={handleRegisterShop}
             >
               <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید
@@ -651,22 +698,25 @@ export default function BasketDetail() {
           </Modal.Footer>
         </Modal>
 
-
         {/* for ziroSuply product  ===> */}
         <Modal size="lg" show={showB} onHide={handleCloseB}>
           <Modal.Header closeButton></Modal.Header>
 
           <Modal.Body style={{ fontSize: "35px" }}>
             <>
-              <h1>موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد خود حذف بفرمایید : </h1>
+              <h1>
+                موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد
+                خود حذف بفرمایید :{" "}
+              </h1>
               {/* <table className="table"> */}
-              <ul className={`${style.ul_ziroSupply}`} >
-                {ziroSupply?.length != 0 && ziroSupply.map(item => (
-                  <li>{item}</li>
-                  // <tr key="">
-                  //   <th>{item}</th>
-                  //     </tr>
-                ))}
+              <ul className={`${style.ul_ziroSupply}`}>
+                {ziroSupply?.length != 0 &&
+                  ziroSupply.map((item) => (
+                    <li>{item}</li>
+                    // <tr key="">
+                    //   <th>{item}</th>
+                    //     </tr>
+                  ))}
               </ul>
               {/* </table> */}
             </>
@@ -680,7 +730,6 @@ export default function BasketDetail() {
               <X size={16} color="#fff" weight="duotone" />
               بستن
             </button>
-
           </Modal.Footer>
         </Modal>
       </>

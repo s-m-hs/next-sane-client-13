@@ -10,6 +10,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 
 export default function SwiperB() {
+  const swiperRef = useRef(null);
   const [parameterSlider, setParameterSlider] = useState(0);
   const [sliderImg, setSliderImg] = useState("");
   const [catArray, setCatArray] = useState([]);
@@ -91,18 +92,33 @@ export default function SwiperB() {
     getSlider("org-slider-img");
   }, []);
 
+  useEffect(() => {
+    const swiperInstance = swiperRef.current?.swiper;
+
+    if (swiperInstance) {
+      swiperInstance.on("slideChange", () => {
+        if (swiperInstance.activeIndex === 0) {
+          swiperInstance.params.autoplay.delay = 8000; // 10 ثانیه برای اسلاید اول
+        } else {
+          swiperInstance.params.autoplay.delay = 4000; // 4 ثانیه برای بقیه
+        }
+        swiperInstance.autoplay.start(); // برای اعمال تغییرات
+      });
+    }
+  }, []);
   return (
     <Swiper
       // loop={true}
+      ref={swiperRef}
       spaceBetween={30}
-    
-      autoplay={ sliderImg?.orderValue===1 ? {
-        disableOnInteraction: false,
-      } : {
-        delay: 4000,
-        disableOnInteraction: false,
-      }}
-
+      autoplay={
+        sliderImg?.orderValue === 1
+          ? { delay: 8000, disableOnInteraction: false }
+          : {
+              delay: 8000,
+              disableOnInteraction: false,
+            }
+      }
       pagination={{
         clickable: true,
       }}
@@ -114,15 +130,15 @@ export default function SwiperB() {
         <SwiperSlide className={styles.swiper_slide}>
           <img
             className={styles.swiper_img_A}
-            style={{ cursor: "pointer" }}
+            // style={{ cursor: "pointer" }}
             src={sliderImg.bigImg}
             alt={sliderImg.title}
-            onClick={() => {
-              window.scrollTo({
-                top: 300,
-                behavior: "smooth",
-              });
-            }}
+            // onClick={() => {
+            //   window.scrollTo({
+            //     top: 300,
+            //     behavior: "smooth",
+            //   });
+            // }}
           />
 
           <img
