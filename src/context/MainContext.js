@@ -27,11 +27,12 @@ const MainProvider = ({ children }) => {
   const [flagThem, setFlagThem] = useState(false);
   const [flagMessageNotification, setFlagMessageNotification] = useState(false);
   const [messageNotification, setMessageNotification] = useState([]);
-  const[authority,setAuthority]=useState('')
-  const [zarrinStatus,setZarrinStatus]=useState('')
-  const [flagHamkar,setFlagHamkar]=useState(false)
-  const[verifyHamkar,setVerifyHamkar]=useState(false)
-  const [offer,setOffer]=useState()
+  const [authority, setAuthority] = useState("");
+  const [zarrinStatus, setZarrinStatus] = useState("");
+  const [flagHamkar, setFlagHamkar] = useState(false);
+  const [verifyHamkar, setVerifyHamkar] = useState(false);
+  const [offer, setOffer] = useState();
+  const [resetFlagCart, setResetFlagCart] = useState(true);
 
   // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -134,7 +135,6 @@ const MainProvider = ({ children }) => {
     getBaskett();
   }, [basketFlag]);
 
-
   return (
     <MainContext.Provider
       value={{
@@ -175,11 +175,18 @@ const MainProvider = ({ children }) => {
         setMessageNotification,
         userSrc,
         setUserSrc,
-        authority,setAuthority,
-        zarrinStatus,setZarrinStatus,
-        flagHamkar,setFlagHamkar,
-        verifyHamkar,setVerifyHamkar,
-        offer,setOffer
+        authority,
+        setAuthority,
+        zarrinStatus,
+        setZarrinStatus,
+        flagHamkar,
+        setFlagHamkar,
+        verifyHamkar,
+        setVerifyHamkar,
+        offer,
+        setOffer,
+        resetFlagCart,
+        setResetFlagCart,
       }}
     >
       {children}

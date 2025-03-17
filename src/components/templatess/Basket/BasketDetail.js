@@ -75,6 +75,14 @@ export default function BasketDetail() {
       500
     ).then((res) => setBasketFlag((prev) => !prev));
 
+  const AlertD = () =>
+    alertQ(
+      "center",
+      "info",
+      "ضمن تبریک سال نو و تشکر از همراهی شما هموطن گرامی به اطلاع میرساند به دلیل محدودیتهای ارسال کالا در ایام تعطیلات ارسال کلیه سفارشات در تاریخ 1404/01/18  انجام میگیرد",
+      "متوجه شدم ..."
+    );
+
   const removeHan = (id) => {
     const getLocalStorage = localStorage.getItem("loginToken");
     RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
@@ -310,7 +318,9 @@ export default function BasketDetail() {
       setAdressId(address[0]?.id);
     }
   }, [address]);
-
+  useEffect(() => {
+    AlertD();
+  }, []);
   // console.log(getBasket)
   // console.log(address)
   // console.log(adressId)
@@ -412,7 +422,40 @@ export default function BasketDetail() {
           <div className="row">
             <div className="col">
               <div className={`  ${style.postDetail_div}`}>
-                <ul>
+                <ul style={{ border: "1px dotted red" }}>
+                  <li>
+                    <h3 style={{ color: "crimson" }}>
+                      ضمن{" "}
+                      <span style={{ color: "green", fontWeight: "bold" }}>
+                        🥗 تبریک سال نو 🥗
+                      </span>{" "}
+                      و تشکر از همراهی شما هموطن گرامی ،به اطلاع میرساند به دلیل
+                      محدودیتهای ارسال کالا 🚚 در ایام{" "}
+                      <span
+                        style={{
+                          color: "green",
+                          fontWeight: "bold",
+                          margin: "3px",
+                        }}
+                      >
+                        ایام تعطیلات
+                      </span>{" "}
+                      ارسال کلیه سفارشات در تاریخ
+                      <span
+                        style={{
+                          color: "green",
+                          fontWeight: "bold",
+                          margin: "3px",
+                        }}
+                      >
+                        1404/01/18
+                      </span>
+                      انجام میگیرد.
+                    </h3>
+                  </li>
+                </ul>
+
+                {/* <ul>
                   <li>
                     <p>
                       سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری
@@ -430,7 +473,7 @@ export default function BasketDetail() {
                   <li>
                     <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
@@ -638,7 +681,39 @@ export default function BasketDetail() {
               <div className={` row ${style.postDetail_row}`}>
                 <div className="col">
                   <div className={`  ${style.postDetail_div}`}>
-                    <ul>
+                    <ul style={{ border: "1px dotted red" }}>
+                      <li>
+                        <h3 style={{ color: "crimson" }}>
+                          ضمن{" "}
+                          <span style={{ color: "green", fontWeight: "bold" }}>
+                            🥗 تبریک سال نو 🥗
+                          </span>{" "}
+                          و تشکر از همراهی شما هموطن گرامی ،به اطلاع میرساند به
+                          دلیل محدودیتهای ارسال کالا 🚚 در{" "}
+                          <span
+                            style={{
+                              color: "green",
+                              fontWeight: "bold",
+                              margin: "3px",
+                            }}
+                          >
+                            ایام تعطیلات
+                          </span>{" "}
+                          ارسال کلیه سفارشات در تاریخ
+                          <span
+                            style={{
+                              color: "green",
+                              fontWeight: "bold",
+                              margin: "3px",
+                            }}
+                          >
+                            1404/01/18
+                          </span>
+                          انجام میگیرد.
+                        </h3>
+                      </li>
+                    </ul>
+                    {/* <ul>
                       <li>
                         <p>
                           سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت
@@ -657,7 +732,7 @@ export default function BasketDetail() {
                       <li>
                         <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
                       </li>
-                    </ul>
+                    </ul> */}
                   </div>
                 </div>
               </div>

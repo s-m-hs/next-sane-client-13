@@ -61,10 +61,13 @@ export default function Header() {
     setMessageNotification,
     flagMessageNotification,
     setFlagMessageNotification,
-    setFlagHamkar, flagHamkar,
+    setFlagHamkar,
+    flagHamkar,
     setOffer,
     offer,
-    setBasketFlag
+    setBasketFlag,
+    resetFlagCart,
+    setResetFlagCart,
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
@@ -90,8 +93,7 @@ export default function Header() {
   const [searchTypeB, setSearchTypeB] = useState("");
   const [searchBoxArr, setSearchBoxArr] = useState([]);
   const [flagSearch, setFlagSearch] = useState(false);
-  const[offBanner,setOffBanner]=useState([])
-const[resetFlagCart,setResetFlagCart]=useState(true)
+  const [offBanner, setOffBanner] = useState([]);
   // Function to toggle the menu
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -108,29 +110,35 @@ const[resetFlagCart,setResetFlagCart]=useState(true)
       "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ",
       3000
     );
-    const alertD=()=>alertN('center','success',"محصولات با موفقیت به سبد خرید شما اضافه شد",500)
+  const alertD = () =>
+    alertN(
+      "center",
+      "success",
+      "محصولات با موفقیت به سبد خرید شما اضافه شد",
+      500
+    );
 
   /////////////////////////////theming
-const getOffer=()=>{
-  const getLocalStorage = localStorage.getItem("loginToken");
+  const getOffer = () => {
+    const getLocalStorage = localStorage.getItem("loginToken");
 
-  async function myApp(){
-    const res=await fetch(`${apiUrl}/api/CyKeyDatas/13`,{
-      method:'GET',
-      headers: {
-        Authorization: `Bearer ${getLocalStorage}`,
-        "Content-Type": "application/json",
-      },
-    }).then(res=>{
-      if(res.ok){
-        return res.json().then(result=>{
-          setOffer(Number(result.value) )
-        })
-      }
-    })
-  }
-  myApp()
-}
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyKeyDatas/13`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getLocalStorage}`,
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.ok) {
+          return res.json().then((result) => {
+            setOffer(Number(result.value));
+          });
+        }
+      });
+    }
+    myApp();
+  };
   const getAllTicket = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
 
@@ -239,8 +247,6 @@ const getOffer=()=>{
     }
   }, [searchTypeB]);
 
-
-
   ////////////////////////////
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -338,33 +344,32 @@ const getOffer=()=>{
       );
     }
   };
-const getBanner=(id)=>{
-  const getLocalStorage=localStorage.getItem('loginToken')
-  
-  async function myApp(){
-    const res=await fetch(`${apiUrl}/api/CySubjects/${id}`,{
-      method:'GET',
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getLocalStorage}`,
-      },
-    }).then(res=>{
-      if(res.ok){
-        return res.json().then(result=>{
-          setOffBanner(result)
+  const getBanner = (id) => {
+    const getLocalStorage = localStorage.getItem("loginToken");
 
-        }) 
-      }
-    })
-  }
-  myApp()
-}
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CySubjects/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getLocalStorage}`,
+        },
+      }).then((res) => {
+        if (res.ok) {
+          return res.json().then((result) => {
+            setOffBanner(result);
+          });
+        }
+      });
+    }
+    myApp();
+  };
   ////////////////////////////
   useEffect(() => {
     getCategoryById(3);
     getCategoryById(2);
-    getOffer()
-    getBanner(18)
+    getOffer();
+    getBanner(18);
   }, []);
 
   const onmousHandle = (e) => {
@@ -380,33 +385,32 @@ const getBanner=(id)=>{
       AlertB();
     }
 
-    if (!pathname.includes('/login')) {
-      setFlagHamkar(false)
+    if (!pathname.includes("/login")) {
+      setFlagHamkar(false);
     }
   }, [pathname]);
-useEffect(()=>{
-return()=>localStorage.removeItem('cartObj')
-},[])
+  useEffect(() => {
+    return () => localStorage.removeItem("cartObj");
+  }, []);
 
-useEffect(() => {
-  const token = localStorage.getItem("logintoken");
-  if (token) {
-    fetch("/api/auth/sync-token", {
-      method: "POST",
-      headers: {
-        "x-login-token": token, // توکن را در هدر می‌فرستیم
-      },
-    });
-  }
-}, []);
+  useEffect(() => {
+    const token = localStorage.getItem("logintoken");
+    if (token) {
+      fetch("/api/auth/sync-token", {
+        method: "POST",
+        headers: {
+          "x-login-token": token, // توکن را در هدر می‌فرستیم
+        },
+      });
+    }
+  }, []);
 
-useEffect(()=>{
-  setResetFlagCart(false)
-  setTimeout(() => {
-    setResetFlagCart(true)
-
-  }, 0.1);
-},cartCounter)
+  useEffect(() => {
+    setResetFlagCart(false);
+    setTimeout(() => {
+      setResetFlagCart(true);
+    }, 0.1);
+  }, cartCounter);
   return (
     <>
       {xtflagSpinnerShow && (
@@ -419,7 +423,18 @@ useEffect(()=>{
           />
         </div>
       )}
-
+      {/* <>
+        <button
+          onClick={() => {
+            setCartCounter(0);
+            setResetFlagCart(false);
+            setTimeout(() => {
+              setResetFlagCart(true);
+            }, 0.1);
+          }}
+        ></button>
+       
+      </> */}
       <section className={styles.A}>
         {!fixTop ? (
           <div className={`container ${styles.Header} boxSh`}>
@@ -428,12 +443,11 @@ useEffect(()=>{
                 className={`col col-md-8 ${styles.Header_rightSide} centerr`}
               >
                 <div className={styles.Header_rightSide__div_img}>
-                {/* <img src="../images/banner/20offer - Copy.png" alt="" /> */}
-                {offBanner?.orderValue==1 && 
-                                <img src={offBanner.bigImg} alt={offBanner.title} />
-
-                }
-                {/* <img src="../images/banner/vecteezy_mega-sale-20-percent-off-right-side-view-3d-render-object_17193891 (1).png" alt="" /> */}
+                  {/* <img src="../images/banner/20offer - Copy.png" alt="" /> */}
+                  {offBanner?.orderValue == 1 && (
+                    <img src={offBanner.bigImg} alt={offBanner.title} />
+                  )}
+                  {/* <img src="../images/banner/vecteezy_mega-sale-20-percent-off-right-side-view-3d-render-object_17193891 (1).png" alt="" /> */}
 
                   <div style={{ width: "135px", height: "105px" }}>
                     <SwiperA />
@@ -503,30 +517,31 @@ useEffect(()=>{
                     }} /></span> */}
                             {searchBoxArr.itemList?.length != 0
                               ? searchBoxArr.itemList?.map((item) => {
-if(item.cyCategoryId){                            
-    return <Link
-      href={`/product/${item.id}`}
-      onClick={() => {
-        setFlagSearch(false);
-        setSearchBoxArr([]);
-        setSearchType("");
-        setXtFlagSpinnerShow(true);
-        setVisible(false);
-      }}
-    >
-      <div
-        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-      >
-        <span>{item.name}</span>
-        <img
-          src={item.smallImage}
-          alt={item.name}
-        />
-      </div>
-    </Link>
-}
-
-                              })
+                                  if (item.cyCategoryId) {
+                                    return (
+                                      <Link
+                                        href={`/product/${item.id}`}
+                                        onClick={() => {
+                                          setFlagSearch(false);
+                                          setSearchBoxArr([]);
+                                          setSearchType("");
+                                          setXtFlagSpinnerShow(true);
+                                          setVisible(false);
+                                        }}
+                                      >
+                                        <div
+                                          className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+                                        >
+                                          <span>{item.name}</span>
+                                          <img
+                                            src={item.smallImage}
+                                            alt={item.name}
+                                          />
+                                        </div>
+                                      </Link>
+                                    );
+                                  }
+                                })
                               : ""}
                           </div>
                         </div>
@@ -594,29 +609,27 @@ if(item.cyCategoryId){
                   </div>
                 </Link>
 
-                {resetFlagCart && 
-                             <Link href={cartCounter != 0 ? "/basket" : "#"}>
-                             <div
-                               onClick={() => {
-                                 if (cartCounter != 0) {
-                                   setXtFlagSpinnerShow(true);
-                                 } else {
-                                   AlertA();
-                                 }
-                               }}
-                               className={`${styles.Header_leftSide__div} centerr`}
-                             >
-                               <ShoppingCart size={24} color="#14a5af" />
-                               {cartCounter != 0 && (
-                                 <span className={`${styles.shopicon_baget} centerc`}>
-                                   {cartCounter}
-                                 </span>
-                               )}
-                             </div>
-                           </Link>
-                           }
-
-   
+                {resetFlagCart && (
+                  <Link href={cartCounter != 0 ? "/basket" : "#"}>
+                    <div
+                      onClick={() => {
+                        if (cartCounter != 0) {
+                          setXtFlagSpinnerShow(true);
+                        } else {
+                          AlertA();
+                        }
+                      }}
+                      className={`${styles.Header_leftSide__div} centerr`}
+                    >
+                      <ShoppingCart size={24} color="#14a5af" />
+                      {cartCounter !== 0 && (
+                        <span className={`${styles.shopicon_baget} centerc`}>
+                          {cartCounter}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                )}
 
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
@@ -632,11 +645,11 @@ if(item.cyCategoryId){
                       {messageNotification?.filter(
                         (filter) => filter.status == 1
                       )?.length != 0 && (
-                          <span className={`${styles.shopicon_baget} centerc`}>
-                            {" "}
-                            !
-                          </span>
-                        )}
+                        <span className={`${styles.shopicon_baget} centerc`}>
+                          {" "}
+                          !
+                        </span>
+                      )}
                       {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
@@ -761,7 +774,7 @@ if(item.cyCategoryId){
                                 : `${styles.nohover}`
                             }
 
-                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -827,10 +840,12 @@ if(item.cyCategoryId){
 
                   {!xtFlagLogin ? (
                     <>
-                      <li onClick={() =>{
-setXtFlagSpinnerShow(true)
-setFlagHamkar(false)
-                      } }>
+                      <li
+                        onClick={() => {
+                          setXtFlagSpinnerShow(true);
+                          setFlagHamkar(false);
+                        }}
+                      >
                         {" "}
                         <Link
                           href={"/login"}
@@ -891,7 +906,7 @@ setFlagHamkar(false)
                       محاسبه گر سیستم
                     </Link>{" "}
                   </li>
-{/* 
+                  {/* 
                   <li onClick={() => setFlagHamkar(true)}>
                     <Link href={'/login'}
                       style={{
@@ -956,10 +971,13 @@ setFlagHamkar(false)
                 className={`col col-md-8 ${styles.Header_rightSide} centerr`}
               >
                 <div className={styles.Header_rightSide__div_img}>
-                {offBanner?.orderValue==1 && 
-                                <img className={styles.Header_rightSide__div_imgB} src={offBanner.bigImg} alt={offBanner.title} />
-
-                }
+                  {offBanner?.orderValue == 1 && (
+                    <img
+                      className={styles.Header_rightSide__div_imgB}
+                      src={offBanner.bigImg}
+                      alt={offBanner.title}
+                    />
+                  )}
                   <div style={{ width: "80px", height: "50px" }}>
                     <SwiperA />
                   </div>
@@ -1000,33 +1018,32 @@ setFlagHamkar(false)
                       setSearchType('')
                     }} /></span> */}
                           {searchBoxArr.itemList?.length != 0
-                            ? searchBoxArr.itemList?.map((item) =>{
- if(item.mainImage){
- 
- return   <Link
-      href={`/product/${item.id}`}
-      onClick={() => {
-        setFlagSearch(false);
-        setSearchBoxArr([]);
-        setSearchType("");
-        setXtFlagSpinnerShow(true);
-        setVisible(false);
-      }}
-    >
-      <div
-        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-      >
-        <span>{item.name}</span>
-        <img
-          src={item.smallImage}
-          alt={item.name}
-        />
-      </div>
-    </Link>
- 
-}
-
-                            } )
+                            ? searchBoxArr.itemList?.map((item) => {
+                                if (item.mainImage) {
+                                  return (
+                                    <Link
+                                      href={`/product/${item.id}`}
+                                      onClick={() => {
+                                        setFlagSearch(false);
+                                        setSearchBoxArr([]);
+                                        setSearchType("");
+                                        setXtFlagSpinnerShow(true);
+                                        setVisible(false);
+                                      }}
+                                    >
+                                      <div
+                                        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+                                      >
+                                        <span>{item.name}</span>
+                                        <img
+                                          src={item.smallImage}
+                                          alt={item.name}
+                                        />
+                                      </div>
+                                    </Link>
+                                  );
+                                }
+                              })
                             : ""}
                         </div>
                       </div>
@@ -1069,27 +1086,27 @@ setFlagHamkar(false)
                   </div>
                 </Link>
 
-                {resetFlagCart && 
-                <Link href={cartCounter != 0 ? "/basket" : "#"}>
-                  <div
-                    onClick={() => {
-                      if (cartCounter != 0) {
-                        setXtFlagSpinnerShow(true);
-                      } else {
-                        AlertA();
-                      }
-                    }}
-                    className={`${styles.Header_leftSide__div} centerr`}
-                  >
-                    <ShoppingCart size={24} color="#14a5af" />
-                    {cartCounter != 0 && (
-                      <span className={`${styles.shopicon_baget} centerc`}>
-                        {cartCounter}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-}
+                {resetFlagCart && (
+                  <Link href={cartCounter != 0 ? "/basket" : "#"}>
+                    <div
+                      onClick={() => {
+                        if (cartCounter != 0) {
+                          setXtFlagSpinnerShow(true);
+                        } else {
+                          AlertA();
+                        }
+                      }}
+                      className={`${styles.Header_leftSide__div} centerr`}
+                    >
+                      <ShoppingCart size={24} color="#14a5af" />
+                      {cartCounter !== 0 && (
+                        <span className={`${styles.shopicon_baget} centerc`}>
+                          {cartCounter}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                )}
 
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
@@ -1105,11 +1122,11 @@ setFlagHamkar(false)
                       {messageNotification?.filter(
                         (filter) => filter.status == 1
                       )?.length != 0 && (
-                          <span className={`${styles.shopicon_baget} centerc`}>
-                            {" "}
-                            !
-                          </span>
-                        )}
+                        <span className={`${styles.shopicon_baget} centerc`}>
+                          {" "}
+                          !
+                        </span>
+                      )}
                       {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
@@ -1150,8 +1167,8 @@ setFlagHamkar(false)
             <div className={`row  ${styles.header_bottom_fix} `}>
               <div className={`col ${styles.header_bottom__col}`}>
                 <ul className={`${styles.header_bottom__col__ul_fix} centerr`}>
-                  <li  //onClick={() => setXtFlagSpinnerShow(true)}
-                    >
+                  <li //onClick={() => setXtFlagSpinnerShow(true)}
+                  >
                     {" "}
                     <Link
                       href={"/"}
@@ -1241,7 +1258,7 @@ setFlagHamkar(false)
                                 : `${styles.nohover}`
                             }
 
-                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -1340,10 +1357,12 @@ setFlagHamkar(false)
 
                   {!xtFlagLogin ? (
                     <>
-                      <li onClick={() => {
-                        setXtFlagSpinnerShow(true)
-                        setFlagHamkar(false)
-                      }}>
+                      <li
+                        onClick={() => {
+                          setXtFlagSpinnerShow(true);
+                          setFlagHamkar(false);
+                        }}
+                      >
                         {" "}
                         <Link
                           href={"/login"}
@@ -1455,20 +1474,23 @@ setFlagHamkar(false)
         <div className="container">
           <div className={`${styles.mobi_header} row  centerr`}>
             <Link href={"/"}>
-              <img  src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
+              <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
               {/* <RotatingGlobe/> */}
-              {offBanner?.orderValue==1 && 
-              <>
-                                              <img className={`${styles.mobi_header_img_off} `} src={offBanner.bigImg} alt={offBanner.title} />
+              {offBanner?.orderValue == 1 && (
+                <>
+                  <img
+                    className={`${styles.mobi_header_img_off} `}
+                    src={offBanner.bigImg}
+                    alt={offBanner.title}
+                  />
 
-              <span className={`${styles.mobi_header_span_off} `} > تخفیف ویژه روز پدر</span>
-              </>
-
-                }
-            
-
+                  <span className={`${styles.mobi_header_span_off} `}>
+                    {" "}
+                    تخفیف ویژه روز پدر
+                  </span>
+                </>
+              )}
             </Link>
-
 
             <div className={styles.header_bottom__col_logo}>
               {xtFlagLogin && (
@@ -1612,35 +1634,35 @@ setFlagHamkar(false)
                 <div className="col-10">
                   {flagCateMobile
                     ? mainCategory.childs && (
-                      <div className={`row row-cols-auto ${styles.bcatitem}`}>
-                        {mainCategory.childs.map((item, index) => (
-                          <CardA
-                            click={toggleMenu}
-                            datos={""}
-                            key={item.id}
-                            imgSrc={item.imageUrl}
-                            category={`category`}
-                            id={item.id}
-                            text={item.name}
-                          />
-                        ))}
-                      </div>
-                    )
+                        <div className={`row row-cols-auto ${styles.bcatitem}`}>
+                          {mainCategory.childs.map((item, index) => (
+                            <CardA
+                              click={toggleMenu}
+                              datos={""}
+                              key={item.id}
+                              imgSrc={item.imageUrl}
+                              category={`category`}
+                              id={item.id}
+                              text={item.name}
+                            />
+                          ))}
+                        </div>
+                      )
                     : mainCategoryB.childs && (
-                      <div className={`row row-cols-1 ${styles.bcatitem}`}>
-                        {mainCategoryB.childs.map((item, index) => (
-                          <CardA
-                            click={toggleMenu}
-                            datos={""}
-                            key={item.id}
-                            imgSrc={item.imageUrl}
-                            category={`category`}
-                            id={item.id}
-                            text={item.name}
-                          />
-                        ))}
-                      </div>
-                    )}
+                        <div className={`row row-cols-1 ${styles.bcatitem}`}>
+                          {mainCategoryB.childs.map((item, index) => (
+                            <CardA
+                              click={toggleMenu}
+                              datos={""}
+                              key={item.id}
+                              imgSrc={item.imageUrl}
+                              category={`category`}
+                              id={item.id}
+                              text={item.name}
+                            />
+                          ))}
+                        </div>
+                      )}
                 </div>
               </div>
             </div>
@@ -1721,8 +1743,8 @@ setFlagHamkar(false)
                       <Link
                         href={"/login"}
                         onClick={() => {
-                          setXtFlagSpinnerShow(true)
-                          setFlagHamkar(false)
+                          setXtFlagSpinnerShow(true);
+                          setFlagHamkar(false);
                         }}
                       >
                         <SignIn size={15} color="#14a5af" />
@@ -1811,39 +1833,43 @@ setFlagHamkar(false)
                 </li>
 
                 <li>
-                {resetFlagCart && 
-                  <Link
-                    onClick={() => {
-                      if (cartCounter != 0) {
-                        setXtFlagSpinnerShow(true);
-                        setMenuOpen(false);
-                      } else {
-                        AlertA();
-                        setMenuOpen(false);
-                      }
-                    }}
-                    className={`${styles.bottomHeader_ul_category_a} centerr`}
-                    href={cartCounter != 0 ? "/basket" : "#"}
-                    style={{
-                      listStyle: "none",
-                      textDecoration: "none",
-                      color: "inherit",
-                    }}
-                  >
-                    <div
-                      className={`${styles.Header_leftSide__div_mobile} centerr`}
+                  {resetFlagCart && (
+                    <Link
+                      onClick={() => {
+                        if (cartCounter != 0) {
+                          setXtFlagSpinnerShow(true);
+                          setMenuOpen(false);
+                        } else {
+                          AlertA();
+                          setMenuOpen(false);
+                        }
+                      }}
+                      className={`${styles.bottomHeader_ul_category_a} centerr`}
+                      href={cartCounter != 0 ? "/basket" : "#"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
                     >
-                      {cartCounter != 0 && (
-                        <span
-                          className={`${styles.shopicon_baget_mobile} centerc`}
-                        >
-                          {cartCounter}
-                        </span>
-                      )}
-                    </div>
-                    <ShoppingCart size={28} weight="duotone" color="#14a5af" />
-                  </Link>
-}
+                      <div
+                        className={`${styles.Header_leftSide__div_mobile} centerr`}
+                      >
+                        {cartCounter != 0 && (
+                          <span
+                            className={`${styles.shopicon_baget_mobile} centerc`}
+                          >
+                            {cartCounter}
+                          </span>
+                        )}
+                      </div>
+                      <ShoppingCart
+                        size={28}
+                        weight="duotone"
+                        color="#14a5af"
+                      />
+                    </Link>
+                  )}
                 </li>
 
                 <li
@@ -1890,30 +1916,32 @@ setFlagHamkar(false)
                     }} 
                     /></span> */}
                           {searchBoxArr.itemList?.length != 0
-                            ? searchBoxArr.itemList?.map((item) =>{
-                              if(item.cyCategoryId){
-                                return   <Link
-                                href={`/product/${item.id}`}
-                                onClick={() => {
-                                  setFlagSearch(false);
-                                  setSearchBoxArr([]);
-                                  setSearchTypeB("");
-                                  setXtFlagSpinnerShow(true);
-                                  setVisibleB(false);
-                                }}
-                              >
-                                <div
-                                  className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                >
-                                  <span>{item.name}</span>
-                                  <img
-                                    src={item.smallImage}
-                                    alt={item.name}
-                                  />
-                                </div>
-                              </Link>
-                              } 
-                            } )
+                            ? searchBoxArr.itemList?.map((item) => {
+                                if (item.cyCategoryId) {
+                                  return (
+                                    <Link
+                                      href={`/product/${item.id}`}
+                                      onClick={() => {
+                                        setFlagSearch(false);
+                                        setSearchBoxArr([]);
+                                        setSearchTypeB("");
+                                        setXtFlagSpinnerShow(true);
+                                        setVisibleB(false);
+                                      }}
+                                    >
+                                      <div
+                                        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
+                                      >
+                                        <span>{item.name}</span>
+                                        <img
+                                          src={item.smallImage}
+                                          alt={item.name}
+                                        />
+                                      </div>
+                                    </Link>
+                                  );
+                                }
+                              })
                             : ""}
                         </div>
                       )}
