@@ -318,9 +318,13 @@ export default function BasketDetail() {
       setAdressId(address[0]?.id);
     }
   }, [address]);
-  useEffect(() => {
-    AlertD();
-  }, []);
+  /////////////////////////////////
+  // هشدار مربوط به تحویل کالا در ایام تعظیلات
+  // useEffect(() => {
+  //   AlertD();
+  // }, []);
+
+  ////////////////////
   // console.log(getBasket)
   // console.log(address)
   // console.log(adressId)
@@ -422,7 +426,8 @@ export default function BasketDetail() {
           <div className="row">
             <div className="col">
               <div className={`  ${style.postDetail_div}`}>
-                <ul style={{ border: "1px dotted red" }}>
+                {/* هشدار مربوط به تحویل کالا در ایام تعظیلات  */}
+                {/* <ul style={{ border: "1px dotted red" }}>
                   <li>
                     <h3 style={{ color: "crimson" }}>
                       ضمن{" "}
@@ -453,9 +458,9 @@ export default function BasketDetail() {
                       انجام میگیرد.
                     </h3>
                   </li>
-                </ul>
+                </ul> */}
 
-                {/* <ul>
+                <ul>
                   <li>
                     <p>
                       سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری
@@ -473,7 +478,7 @@ export default function BasketDetail() {
                   <li>
                     <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
                   </li>
-                </ul> */}
+                </ul>
               </div>
             </div>
           </div>
@@ -681,7 +686,8 @@ export default function BasketDetail() {
               <div className={` row ${style.postDetail_row}`}>
                 <div className="col">
                   <div className={`  ${style.postDetail_div}`}>
-                    <ul style={{ border: "1px dotted red" }}>
+                    {/* هشدار مربوط به تحویل کالا در ایام تعظیلات  */}
+                    {/* <ul style={{ border: "1px dotted red" }}>
                       <li>
                         <h3 style={{ color: "crimson" }}>
                           ضمن{" "}
@@ -712,8 +718,8 @@ export default function BasketDetail() {
                           انجام میگیرد.
                         </h3>
                       </li>
-                    </ul>
-                    {/* <ul>
+                    </ul> */}
+                    <ul>
                       <li>
                         <p>
                           سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت
@@ -732,7 +738,7 @@ export default function BasketDetail() {
                       <li>
                         <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
                       </li>
-                    </ul> */}
+                    </ul>
                   </div>
                 </div>
               </div>
