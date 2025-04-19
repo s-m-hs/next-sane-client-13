@@ -26,6 +26,7 @@ export default function PaymentResultCom({ param }) {
     setCartCounter,
     setGetBasket,
     setResetFlagCart,
+    setPaymentState
   } = useContext(MainContext);
   const route = useRouter();
   const [verifyDetail, setVerifyDetail] = useState({});
@@ -154,10 +155,11 @@ export default function PaymentResultCom({ param }) {
                 <button
                   className="btn btn-warning m-4"
                   onClick={() => {
+                    setPaymentState(true)
                     rout.push("/"); // اول به صفحه اصلی هدایت کن
-                    setTimeout(() => {
-                      window.location.reload(true); // بعد از کمی تأخیر رفرش کن
-                    }, 100);
+                    // setTimeout(() => {
+                    //   window.location.reload(true); // بعد از کمی تأخیر رفرش کن
+                    // }, 100);
                   }}
                 >
                   بازگشت به صفحه اصلی

@@ -33,6 +33,7 @@ const MainProvider = ({ children }) => {
   const [verifyHamkar, setVerifyHamkar] = useState(false);
   const [offer, setOffer] = useState();
   const [resetFlagCart, setResetFlagCart] = useState(true);
+  const [paymentState,setPaymentState]=useState(false)
 
   // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -187,6 +188,7 @@ const MainProvider = ({ children }) => {
         setOffer,
         resetFlagCart,
         setResetFlagCart,
+        paymentState,setPaymentState
       }}
     >
       {children}

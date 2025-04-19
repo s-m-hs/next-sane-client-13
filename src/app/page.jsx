@@ -40,6 +40,7 @@ export default function Home() {
   const pathname = usePathname();
 
   let {
+    paymentState,setPaymentState,
     xtflagSpinnerShow,
     setXtFlagSpinnerShow,
     xtFlagLogin,
@@ -106,6 +107,14 @@ export default function Home() {
     keyShow(15, setKeyB);
     keyShow(14, setKeyOfferSlider);
   }, []);
+  useEffect(() => {
+    if(paymentState){
+         setTimeout(() => {
+      window.location.reload(true); // بعد از کمی تأخیر رفرش کن
+    }, 500); 
+    }
+
+  }, [paymentState])
 
   return (
     <div className="container">
