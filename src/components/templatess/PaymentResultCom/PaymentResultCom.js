@@ -73,32 +73,21 @@ export default function PaymentResultCom({ param }) {
             });
           } else {
             console.log(res);
-            // console.log(JSON.parse(res))
-            // return res.json().then(result=>console.log(result)  )
+
             alertB();
           }
         })
         .catch((err) => {
           console.log(err);
-          // console.log(JSON.parse(err))
-          // return err.json().then(result=>console.log(JSON.parse(result)))
         });
     }
     myApp();
   };
-  // console.log(getBasket[0].cyOrderID);
+
   useEffect(() => {
     if (status === "OK") {
       verifyPayment();
       setShow(true);
-      // window.location.reload(true);
-      // setBasketFlag((prev) => !prev);
-      // setCartCounter(0);
-      // setGetBasket([]);
-      // setResetFlagCart(false);
-      // setTimeout(() => {
-      //   setResetFlagCart(true);
-      // }, 0.1);
     } else if (status === "NOK") {
       alertA();
     }
