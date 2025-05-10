@@ -41,6 +41,8 @@ import CardA from "../Cards/CardA/CardA";
 import { Sidebar } from "primereact/sidebar";
 import alertQ from "@/utils/Alert/AlertQ";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
+import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
+import LogOut from "@/utils/Functions/LogOut";
 // import RotatingGlobe from "@/utils/RotatingGlobe";
 
 export default function Header() {
@@ -64,8 +66,6 @@ export default function Header() {
     setFlagHamkar,
     flagHamkar,
     setOffer,
-    offer,
-    setBasketFlag,
     resetFlagCart,
     setResetFlagCart,
   } = useContext(MainContext);
@@ -120,13 +120,15 @@ export default function Header() {
 
   /////////////////////////////theming
   const getOffer = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyKeyDatas/13`, {
         method: "GET",
+        credentials: "include",
+
         headers: {
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
       }).then((res) => {
@@ -140,13 +142,15 @@ export default function Header() {
     myApp();
   };
   const getAllTicket = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyTicket/getUserTickets`, {
         method: "GET",
+        credentials: "include",
+
         headers: {
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
         // body:JSON.stringify(obj)
@@ -200,7 +204,7 @@ export default function Header() {
     setSearchTypeB(e.target.value);
   };
   const searchBox = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     setFlagSearch(false);
     async function myApp() {
       let obj = {
@@ -215,8 +219,10 @@ export default function Header() {
       // console.log(obj)
       const res = await fetch(`${apiUrl}/api/CyProducts/SearchProducts`, {
         method: "POST",
+        credentials: "include",
+
         headers: {
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(obj),
@@ -265,36 +271,36 @@ export default function Header() {
   }, []);
 
   const exitHandler = () => {
-    localStorage.removeItem("loginToken");
-    localStorage.removeItem("cartObj");
-    setXtFlagLogin(false);
-    setCartCounter(0);
-    rout.push("/");
-    setUserSrc("");
-    // rout.push('/')
-    // console.log('object')
+    LogOut("/api/Customer/logout", function () {
+      localStorage.removeItem("cartObj");
+      setXtFlagLogin(false);
+      setCartCounter(0);
+      rout.push("/");
+      setUserSrc("");
+    });
   };
 
   ///////////////////////////////
   const getProfile = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
-    const getLocalStorageUser = localStorage.getItem("user");
+    // const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorageUser = localStorage.getItem("user");
 
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
       }).then((res) => {
         // console.log(res);
         if (res.status == 200) {
-          setUserName(getLocalStorageUser);
+          // setUserName(getLocalStorageUser);
           setFlag(true);
-          setXtFlagLogin(true);
+          // setXtFlagLogin(true);
         } else {
-          localStorage.removeItem("loginToken");
+          // localStorage.removeItem("loginToken");
         }
       });
     }
@@ -321,8 +327,10 @@ export default function Header() {
   });
 
   useEffect(() => {
-    getProfile();
-  }, [userName, xtFlagLogin]);
+    if (xtFlagLogin) {
+      getProfile();
+    }
+  }, [xtFlagLogin]);
   /////////////////////////////////
   const getCategoryById = (id) => {
     let obj = {
@@ -345,14 +353,16 @@ export default function Header() {
     }
   };
   const getBanner = (id) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CySubjects/${id}`, {
         method: "GET",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
       }).then((res) => {
         if (res.ok) {
@@ -379,8 +389,7 @@ export default function Header() {
   };
 
   useEffect(() => {
-    const getLocalStorage = localStorage.getItem("loginToken");
-    if (pathname.includes("/p-user") && !getLocalStorage) {
+    if (pathname.includes("/p-user") && !xtFlagLogin) {
       rout.push("/");
       AlertB();
     }
@@ -388,22 +397,28 @@ export default function Header() {
     if (!pathname.includes("/login")) {
       setFlagHamkar(false);
     }
-  }, [pathname]);
+    if (pathname.includes("login") && xtFlagLogin) {
+      rout.push("/");
+    }
+    if (pathname.includes("register") && xtFlagLogin) {
+      rout.push("/");
+    }
+  }, [pathname, xtFlagLogin]);
   useEffect(() => {
     return () => localStorage.removeItem("cartObj");
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("logintoken");
-    if (token) {
-      fetch("/api/auth/sync-token", {
-        method: "POST",
-        headers: {
-          "x-login-token": token, // توکن را در هدر می‌فرستیم
-        },
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("logintoken");
+  //   if (token) {
+  //     fetch("/api/auth/sync-token", {
+  //       method: "POST",
+  //       headers: {
+  //         "x-login-token": token, // توکن را در هدر می‌فرستیم
+  //       },
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     setResetFlagCart(false);
@@ -423,18 +438,7 @@ export default function Header() {
           />
         </div>
       )}
-      {/* <>
-        <button
-          onClick={() => {
-            setCartCounter(0);
-            setResetFlagCart(false);
-            setTimeout(() => {
-              setResetFlagCart(true);
-            }, 0.1);
-          }}
-        ></button>
-       
-      </> */}
+
       <section className={styles.A}>
         {!fixTop ? (
           <div className={`container ${styles.Header} boxSh`}>
@@ -563,11 +567,14 @@ export default function Header() {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu className={styles.user_p}>
-                        <Dropdown.Item
-                          href="/p-user/profile"
-                          onClick={() => setXtFlagSpinnerShow(true)}
-                        >
-                          <p>پنل کاربری</p>{" "}
+                        <Dropdown.Item>
+                          <Link
+                            style={{ color: "inherit" }}
+                            href="/p-user/profile"
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                          >
+                            <p>پنل کاربری</p>
+                          </Link>
                         </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => {

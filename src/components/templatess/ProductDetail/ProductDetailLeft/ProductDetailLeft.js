@@ -30,7 +30,7 @@ export default function ProductDetailLeft({ detail }) {
       1000
     ).then((res) => {});
   const addToBasket = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
       cyProductID: detail.id,
       quantity: 1,
@@ -39,9 +39,10 @@ export default function ProductDetailLeft({ detail }) {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyOrders/addToBasket`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       }).then((res) => {

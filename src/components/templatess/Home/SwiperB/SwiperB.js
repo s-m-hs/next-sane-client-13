@@ -18,7 +18,7 @@ export default function SwiperB() {
   const [smallImg, setSmallImg] = useState([]);
 
   const getSlider = (cat) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
       cat: cat,
       pageNumber: 0,
@@ -27,9 +27,11 @@ export default function SwiperB() {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CySubjects/GetSubjectByCat`, {
         method: "POST",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       })
@@ -46,14 +48,16 @@ export default function SwiperB() {
   };
 
   const getBanner = (id) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CySubjects/${id}`, {
         method: "GET",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
       }).then((res) => {
         if (res.ok) {
@@ -66,13 +70,15 @@ export default function SwiperB() {
     myApp();
   };
   const sliderParameter = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyKeyDatas/18`, {
         method: "GET",
+        credentials: "include",
+
         headers: {
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
       }).then((res) => {

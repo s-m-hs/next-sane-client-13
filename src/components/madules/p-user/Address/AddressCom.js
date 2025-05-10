@@ -21,9 +21,8 @@ import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
 import RemoveApi from "@/utils/ApiUrl/apiCallBack/apiRemove";
 export default function AddressCom() {
-  let { address, setFlagAddress,setXtFlagSpinnerShow } = useContext(MainContext);
-
-
+  let { address, setFlagAddress, setXtFlagSpinnerShow } =
+    useContext(MainContext);
 
   const AlertA = () =>
     alertN("right", "success", "آدرس با موفقیت ثبت شد  ...", 1500);
@@ -76,11 +75,11 @@ export default function AddressCom() {
     { id: 28, name: "مرکزی" },
     { id: 29, name: "هرمزگان" },
     { id: 30, name: "همدان" },
-    { id: 31, name: "یزد" }
+    { id: 31, name: "یزد" },
   ];
-  
+
   const handleRegistration = (data) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     let obj = {
       id: 0,
@@ -97,9 +96,11 @@ export default function AddressCom() {
     `,
         {
           method: "POST",
+          credentials: "include",
+
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getLocalStorage}`,
+            // Authorization: `Bearer ${getLocalStorage}`,
           },
           body: JSON.stringify(obj),
         }
@@ -121,15 +122,15 @@ export default function AddressCom() {
   };
 
   const removeHandler = (id) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
-    RemoveApi("api/CyAddress", id, getLocalStorage, AlertB);
+    RemoveApi("api/CyAddress", id, AlertB);
   };
 
-  useEffect(()=>{
-    setXtFlagSpinnerShow(false)
-  },[])
-// console.log(address)
+  useEffect(() => {
+    setXtFlagSpinnerShow(false);
+  }, []);
+  // console.log(address)
   return (
     <div>
       <Tabs
@@ -159,7 +160,9 @@ export default function AddressCom() {
                         //   style={{border:' 1px solid #EAEAEF' , width:'100%', color:'rgb(172 172 173)',outline:'none'}}
                         {...register("state")}
                       >
-                        <option value="" key="">استان خود را انتخاب کنید...</option>
+                        <option value="" key="">
+                          استان خود را انتخاب کنید...
+                        </option>
                         {provinces.map((item, index) => (
                           <option key={index} value={`${item.name}`}>
                             {item.name}

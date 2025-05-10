@@ -76,7 +76,6 @@ export default function RegisterRight() {
       (res) => {
         setXtFlagLogin(true);
         reset(setValue(""));
-        router.push("/");
       }
     );
   const alertD = () =>
@@ -95,13 +94,14 @@ export default function RegisterRight() {
   ////////////////////////////
 
   const addToBasket = (obj) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyOrders/addToBasket`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       }).then((res) => {
@@ -136,13 +136,14 @@ export default function RegisterRight() {
         username: token,
       };
 
-      const getLocalStorage = localStorage.getItem("loginToken");
+      // const getLocalStorage = localStorage.getItem("loginToken");
 
       async function myAppGet() {
         const res = await fetch(`${apiUrl}/api/Customer/verifyCode`, {
           method: "POST",
+          credentials: "include",
           headers: {
-            Authorization: `Bearer ${getLocalStorage}`,
+            // Authorization: `Bearer ${getLocalStorage}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(obj),
@@ -150,9 +151,8 @@ export default function RegisterRight() {
           .then((res) => {
             if (res.status == 200) {
               return res.json().then((result) => {
-                localStorage.setItem("loginToken", result.token);
-                localStorage.setItem("user", obj.name);
-
+                // localStorage.setItem("loginToken", result.token);
+                // localStorage.setItem("user", obj.name);
                 if (localbasket?.length == 0) {
                   alertA();
                 } else {
@@ -365,7 +365,7 @@ export default function RegisterRight() {
                   setXtFlagLogin(true);
                   setBasketFlag((prev) => !prev);
                   reset(setValue(""));
-                  router.push("/");
+                  // router.push("/");
                 }}
               >
                 باشه...

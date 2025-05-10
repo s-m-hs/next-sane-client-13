@@ -33,7 +33,7 @@ const MainProvider = ({ children }) => {
   const [verifyHamkar, setVerifyHamkar] = useState(false);
   const [offer, setOffer] = useState();
   const [resetFlagCart, setResetFlagCart] = useState(true);
-  const [paymentState,setPaymentState]=useState(false)
+  const [paymentState, setPaymentState] = useState(false);
 
   // const getLocalStorage=localStorage.getItem('loginToken')
 
@@ -45,38 +45,36 @@ const MainProvider = ({ children }) => {
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/CyOrders/GetBasketForUser`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localToken ? localToken : getLocalStorage}`,
-          // Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
         },
       })
         .then((res) => {
-          // console.log(res)
-          return res.json();
-        })
-        .then((result) => {
-          // console.log(result)
-          if (result.cyOrderItems) {
-            setGetBasket(result.cyOrderItems);
-            setCartCounter(result.cyOrderItems?.length);
+          if (res.ok) {
+            return res.json().then((result) => {
+              if (result.cyOrderItems) {
+                setGetBasket(result.cyOrderItems);
+                setCartCounter(result.cyOrderItems?.length);
+              }
+            });
           }
-          // console.log(result.cyOrderItems)
         })
+
         .catch((err) => console.log(err));
     }
     myAppGet();
   };
 
   const getProfile = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
-
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {
         method: "GET",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
           // Authorization:`Bearer ${localToken ? localToken : getLocalStorage }`
         },
       })
@@ -103,13 +101,14 @@ const MainProvider = ({ children }) => {
     myApp();
   };
   const getAddress = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyAddress`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localToken ? localToken : getLocalStorage}`,
+          // Authorization: `Bearer ${localToken ? localToken : getLocalStorage}`,
         },
       })
         .then((res) => {
@@ -126,15 +125,55 @@ const MainProvider = ({ children }) => {
     myApp();
   };
 
+  const refreshToken = () => {
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/Customer/refreshToken`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json().then((result) => {
+              setXtFlagLogin(true);
+            });
+          } else {
+            setXtFlagLogin(false);
+          }
+        })
+        .catch((err) => {
+          setXtFlagLogin(false);
+        });
+    }
+    myApp();
+  };
+  const intervalId = () => {
+    setInterval(() => {
+      refreshToken();
+    }, 600000);
+  };
+
+  useEffect(() => {
+    refreshToken();
+    intervalId();
+    clearInterval(intervalId);
+  }, []);
+
   /////////////////////////
   useEffect(() => {
-    getProfile();
-    getAddress();
+    if (xtFlagLogin) {
+      getProfile();
+      getAddress();
+    }
   }, [xtFlagLogin, flagProfile, flagAddress]);
 
   useEffect(() => {
-    getBaskett();
-  }, [basketFlag]);
+    if (xtFlagLogin) {
+      getBaskett();
+    }
+  }, [basketFlag, xtFlagLogin]);
 
   return (
     <MainContext.Provider
@@ -188,7 +227,8 @@ const MainProvider = ({ children }) => {
         setOffer,
         resetFlagCart,
         setResetFlagCart,
-        paymentState,setPaymentState
+        paymentState,
+        setPaymentState,
       }}
     >
       {children}

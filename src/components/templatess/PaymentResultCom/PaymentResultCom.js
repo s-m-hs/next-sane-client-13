@@ -20,14 +20,7 @@ export default function PaymentResultCom({ param }) {
   const handleShow = () => setShow(true);
   const authority = searchParams.get("Authority");
   const status = searchParams.get("Status");
-  let {
-    setXtFlagSpinnerShow,
-    setBasketFlag,
-    setCartCounter,
-    setGetBasket,
-    setResetFlagCart,
-    setPaymentState
-  } = useContext(MainContext);
+  let { setXtFlagSpinnerShow, setPaymentState } = useContext(MainContext);
   const route = useRouter();
   const [verifyDetail, setVerifyDetail] = useState({});
 
@@ -50,7 +43,7 @@ export default function PaymentResultCom({ param }) {
     alertN("center", "success", "پرداخت با موفقیت انجام شد", "1500");
 
   const verifyPayment = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
       orderId: param,
       authority: authority,
@@ -59,9 +52,11 @@ export default function PaymentResultCom({ param }) {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/ZarinPal/varifyPay`, {
         method: "POST",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       })
@@ -144,7 +139,7 @@ export default function PaymentResultCom({ param }) {
                 <button
                   className="btn btn-warning m-4"
                   onClick={() => {
-                    setPaymentState(true)
+                    setPaymentState(true);
                     rout.push("/"); // اول به صفحه اصلی هدایت کن
                     // setTimeout(() => {
                     //   window.location.reload(true); // بعد از کمی تأخیر رفرش کن

@@ -39,16 +39,7 @@ import SwiperD from "@/components/templatess/Home/SwiperD/SwiperD";
 export default function Home() {
   const pathname = usePathname();
 
-  let {
-    paymentState,setPaymentState,
-    xtflagSpinnerShow,
-    setXtFlagSpinnerShow,
-    xtFlagLogin,
-    localUpdateBasket,
-    setLocalUpdateBasket,
-    setCartCounter,
-    setBasketFlag,
-  } = useContext(MainContext);
+  let { paymentState } = useContext(MainContext);
   const alertA = () =>
     alertN(
       "center",
@@ -81,13 +72,14 @@ export default function Home() {
   ];
 
   const keyShow = (id, func) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyKeyDatas/${id}`, {
         method: "GET",
+        credentials: "include",
         headers: {
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
       }).then((res) => {
@@ -108,13 +100,12 @@ export default function Home() {
     keyShow(14, setKeyOfferSlider);
   }, []);
   useEffect(() => {
-    if(paymentState){
-         setTimeout(() => {
-      window.location.reload(true); // بعد از کمی تأخیر رفرش کن
-    }, 500); 
+    if (paymentState) {
+      setTimeout(() => {
+        window.location.reload(true); // بعد از کمی تأخیر رفرش کن
+      }, 500);
     }
-
-  }, [paymentState])
+  }, [paymentState]);
 
   return (
     <div className="container">

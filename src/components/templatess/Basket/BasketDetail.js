@@ -84,21 +84,23 @@ export default function BasketDetail() {
     );
 
   const removeHan = (id) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
-    RemoveApi("api/CyOrders/deleteItem", id, getLocalStorage, AlertA);
+    // const getLocalStorage = localStorage.getItem("loginToken");
+    RemoveApi("api/CyOrders/deleteItem", id, AlertA);
     cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : "";
   };
   ///////////////////////////////
   const directToZarin = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(
         `${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`,
         {
           method: "GET",
+          credentials: "include",
+
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getLocalStorage}`,
+            // Authorization: `Bearer ${getLocalStorage}`,
           },
         }
       ).then((res) => {
@@ -113,15 +115,17 @@ export default function BasketDetail() {
   };
 
   const handleRegisterShop = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(
         `${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}&addressId=${adressId}`,
         {
           method: "PUT",
+          credentials: "include",
+
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getLocalStorage}`,
+            // Authorization: `Bearer ${getLocalStorage}`,
           },
         }
       ).then((res) => {
@@ -207,9 +211,9 @@ export default function BasketDetail() {
   };
 
   const updateBasketHandler = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     if (xtFlagLogin) {
-      updateBasket(getLocalStorage, basket, setBasketFlag, AlertB);
+      updateBasket(basket, setBasketFlag, AlertB);
       setFlagUpdate(false);
     } else {
       let uniqueItemsMap = new Map();
@@ -318,6 +322,12 @@ export default function BasketDetail() {
       setAdressId(address[0]?.id);
     }
   }, [address]);
+
+  useEffect(() => {
+    if (cartCounter == 0) {
+      rout.push("/");
+    }
+  }, [cartCounter]);
   /////////////////////////////////
   // هشدار مربوط به تحویل کالا در ایام تعظیلات
   // useEffect(() => {

@@ -133,7 +133,13 @@ export default function LoginRight() {
       " کد وارد شده نادرست و یا منقضی شده است ...",
       1500
     );
-    const alertL = () => alertN("center", "error", "شماره همراه و یا رمز ورود به درستی وارد نشده است...", 1500);
+  const alertL = () =>
+    alertN(
+      "center",
+      "error",
+      "شماره همراه و یا رمز ورود به درستی وارد نشده است...",
+      1500
+    );
 
   const chengePass1 = (e) => {
     setPass1(e.target.value);
@@ -144,7 +150,7 @@ export default function LoginRight() {
   };
 
   const sendverifyCode = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     let obj = {
       valadationCode: tokenC,
@@ -154,9 +160,11 @@ export default function LoginRight() {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/Customer/verifyCode`, {
         method: "POST",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       }).then((res) => {
@@ -172,7 +180,7 @@ export default function LoginRight() {
   };
 
   const sendCodeToRecovery = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     if (pass1.length < 4 || pass2.length < 4) {
       alertD();
@@ -184,9 +192,11 @@ export default function LoginRight() {
           `${apiUrl}/api/Customer/recoverPassword?phoneNumber=${tokenB}&password=${pass1}`,
           {
             method: "PUT",
+            credentials: "include",
+
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${getLocalStorage}`,
+              // Authorization: `Bearer ${getLocalStorage}`,
             },
           }
         ).then((res) => {
@@ -202,16 +212,18 @@ export default function LoginRight() {
   };
 
   const sendMobToRecovery = () => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
     if (tokenB.length == 11) {
       async function myApp() {
         const res = await fetch(
           `${apiUrl}/api/Customer/sendRecoveryCode?phoneNumber=${tokenB}`,
           {
             method: "POST",
+            credentials: "include",
+
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${getLocalStorage}`,
+              // Authorization: `Bearer ${getLocalStorage}`,
             },
           }
         ).then((res) => {
@@ -231,19 +243,20 @@ export default function LoginRight() {
   ////////////////////////////
   const login = (obj) => {
     async function myAppPost() {
-      const getLocalStorage = localStorage.getItem("loginToken");
+      // const getLocalStorage = localStorage.getItem("loginToken");
       const res = await fetch(`${apiUrl}/api/Customer/login`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       }).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
             if (result) {
-              localStorage.setItem("loginToken", result.token);
+              // localStorage.setItem("loginToken", result.token);
               setLocalToken(result.token);
               if (localbasket?.length == 0) {
                 alertA();
@@ -261,11 +274,10 @@ export default function LoginRight() {
               }
             }
           });
-        } else if(res.status==401) {
+        } else if (res.status == 401) {
           alertL();
-        }else{
+        } else {
           alertB();
-
         }
       });
     }
@@ -273,14 +285,15 @@ export default function LoginRight() {
   };
   //////////////////////////////
   const addToBasket = (obj) => {
-    const getLocalStorage = localStorage.getItem("loginToken");
+    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyOrders/addToBasket`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${getLocalStorage}`,
+          // Authorization: `Bearer ${getLocalStorage}`,
         },
         body: JSON.stringify(obj),
       }).then((res) => {

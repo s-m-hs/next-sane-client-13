@@ -6,7 +6,7 @@ import {
   DownloadSimple,
   HandPointing,
   ArrowCounterClockwise,
-  XCircle
+  XCircle,
 } from "@phosphor-icons/react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -19,36 +19,38 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 export default function SystemPart() {
   const [lgShow, setLgShow] = useState(false);
   const [resetSearchbox, setResetSearchbox] = useState(false);
-  const [imageSrc,setImageSrc]=useState('')
-  const [getExel,setGetExel]=useState([])
-  const [priceArray,setPriceArray]=useState([])
-const [keyHelp,setKeyHelp]=useState('')
-const classRefA=useRef()
+  const [imageSrc, setImageSrc] = useState("");
+  const [getExel, setGetExel] = useState([]);
+  const [priceArray, setPriceArray] = useState([]);
+  const [keyHelp, setKeyHelp] = useState("");
+  const classRefA = useRef();
   // const [isSaving, setIsSaving] = useState(false);
   const [prices, setPrices] = useState([]); // لیست قیمت‌ها
   const [quantities, setQuantities] = useState([]); // لیست تعداد محصولات
-  let { setXtFlagSpinnerShow ,xtflagSpinnerShow} = useContext(MainContext);
-  const getPriceArray=()=>{
-    const getLocalStorage = localStorage.getItem('loginToken')
+  let { setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
+  const getPriceArray = () => {
+    // const getLocalStorage = localStorage.getItem('loginToken')
 
-    async function myApp(){
-        const res=await fetch(`${apiUrl}/api/CyKeyDatas/10`,{
-            method:'GET',
-            headers: {
-                Authorization: `Bearer ${getLocalStorage}`,
-                "Content-Type": "application/json",
-              },
-        }).then(res=>{
-            return res.json().then(result=>{
-                setPriceArray(JSON.parse(result.tag))
-            })
-        })
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyKeyDatas/10`, {
+        method: "GET",
+        credentials: "include",
+
+        headers: {
+          // Authorization: `Bearer ${getLocalStorage}`,
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        return res.json().then((result) => {
+          setPriceArray(JSON.parse(result.tag));
+        });
+      });
     }
-    myApp()
-}
-useEffect(()=>{
-    getPriceArray()
-},[])
+    myApp();
+  };
+  useEffect(() => {
+    getPriceArray();
+  }, []);
 
   const HardWareName = [
     { id: 1, name: "مادربرد  (MAINBOARD)" },
@@ -66,43 +68,73 @@ useEffect(()=>{
     // { id: 13, name: 'OTHER' },
   ];
 
-  const systemSample=[
-    {id:'1',title:'سیستم خانگی و اداری سطح 1',src:"/images/system/Capture1.PNG",color:'#56cdff'},
-    {id:'2',title:'سیستم خانگی و اداری سطح 2',src:'/images/system/Capture2.PNG',color:'#34e619'},
-    {id:'3',title:'سیستم خانگی و اداری سطح 3',src:'/images/system/Capture3.PNG',color:'#9d66f5'},
-    {id:'4',title:'سیستم گیمینگ و مهندسی سطح 1',src:'/images/system/Capture4.PNG',color:'#ffbc00'},
-    {id:'5',title:'سیستم گیمینگ و مهندسی سطح 2',src:'/images/system/Capture5.PNG',color:'#e056d2'},
-    {id:'6',title:'سیستم گیمینگ و مهندسی سطح 3',src:'/images/system/Capture6.PNG',color:'#ff4d37'},
-  ]
+  const systemSample = [
+    {
+      id: "1",
+      title: "سیستم خانگی و اداری سطح 1",
+      src: "/images/system/Capture1.PNG",
+      color: "#56cdff",
+    },
+    {
+      id: "2",
+      title: "سیستم خانگی و اداری سطح 2",
+      src: "/images/system/Capture2.PNG",
+      color: "#34e619",
+    },
+    {
+      id: "3",
+      title: "سیستم خانگی و اداری سطح 3",
+      src: "/images/system/Capture3.PNG",
+      color: "#9d66f5",
+    },
+    {
+      id: "4",
+      title: "سیستم گیمینگ و مهندسی سطح 1",
+      src: "/images/system/Capture4.PNG",
+      color: "#ffbc00",
+    },
+    {
+      id: "5",
+      title: "سیستم گیمینگ و مهندسی سطح 2",
+      src: "/images/system/Capture5.PNG",
+      color: "#e056d2",
+    },
+    {
+      id: "6",
+      title: "سیستم گیمینگ و مهندسی سطح 3",
+      src: "/images/system/Capture6.PNG",
+      color: "#ff4d37",
+    },
+  ];
 
-const cardClickHandle=(src)=>{
-  classRefA.current.classList.add('SystemPart-show')
-  setImageSrc(src)
-}
-// const getdataExel=()=>{
-//   const getLocalStorage=localStorage.getItem('loginToken')
-//   async function myApp() {
-//     const res=await fetch(`${apiUrl}/api/CyGuarantee?phoneNumber=09196025114`,{
-//       method:'GET',
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalStorage}`,
-//         }
-      
-//     }).then(res=>{
-//       if(res.ok){
-//        return res.json()
-//       }
-//     }).then(result=>{
-//       console.log(result)
-//       setGetExel(result)
-//     })
-//   }
-//   myApp()
-// }
-// useEffect(()=>{
-//   getdataExel()
-// },[])
+  const cardClickHandle = (src) => {
+    classRefA.current.classList.add("SystemPart-show");
+    setImageSrc(src);
+  };
+  // const getdataExel=()=>{
+  //   const getLocalStorage=localStorage.getItem('loginToken')
+  //   async function myApp() {
+  //     const res=await fetch(`${apiUrl}/api/CyGuarantee?phoneNumber=09196025114`,{
+  //       method:'GET',
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${getLocalStorage}`,
+  //         }
+
+  //     }).then(res=>{
+  //       if(res.ok){
+  //        return res.json()
+  //       }
+  //     }).then(result=>{
+  //       console.log(result)
+  //       setGetExel(result)
+  //     })
+  //   }
+  //   myApp()
+  // }
+  // useEffect(()=>{
+  //   getdataExel()
+  // },[])
   const generatePDF = () => {
     // setIsSaving(true); // نمایش اسپینر
     setXtFlagSpinnerShow(true); // نمایش اسپینر
@@ -176,35 +208,35 @@ const cardClickHandle=(src)=>{
       return baseTotal + baseTotal * 0.06; // اضافه کردن 6 درصد
     }
   };
-const getkeyHelp=(id)=>{
-  const getLocalStorage =localStorage.getItem('loginToken')
+  const getkeyHelp = (id) => {
+    // const getLocalStorage =localStorage.getItem('loginToken')
 
-  async function myApp(){
-const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
-  method:'GET',
-  headers: {
-    "Content-Type": "application/json",
-    Authorization:`Bearer ${ getLocalStorage }`
-  }, 
-}).then(res=>{
-  if(res.ok){
-    return res.json().then(result=>{
-      setKeyHelp(result.value)
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyKeyDatas/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include",
 
-    })
-  }
-})
-  }
-  myApp()
-}
+          // Authorization:`Bearer ${ getLocalStorage }`
+        },
+      }).then((res) => {
+        if (res.ok) {
+          return res.json().then((result) => {
+            setKeyHelp(result.value);
+          });
+        }
+      });
+    }
+    myApp();
+  };
 
   useEffect(() => {
-    getkeyHelp(12)
+    getkeyHelp(12);
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     setXtFlagSpinnerShow(false);
-
-  },[xtflagSpinnerShow])
+  }, [xtflagSpinnerShow]);
   return (
     <div className={`container `}>
       {/* {isSaving && (
@@ -212,43 +244,57 @@ const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
                 <SpinnerA size={50} />
             </div>
         )} */}
-        <div className={`row ${style.systemdetailsample_container}`}>
-        <div ref={classRefA} className={`col-md-5 ${style.systemdetailsample_div} `}>
-        <XCircle size={32} color="#ad00ff" onClick={()=>classRefA.current.classList.remove('SystemPart-show')}/>
+      <div className={`row ${style.systemdetailsample_container}`}>
+        <div
+          ref={classRefA}
+          className={`col-md-5 ${style.systemdetailsample_div} `}
+        >
+          <XCircle
+            size={32}
+            color="#ad00ff"
+            onClick={() =>
+              classRefA.current.classList.remove("SystemPart-show")
+            }
+          />
           <img src={imageSrc} alt="" />
         </div>
-<div className="col-md-7"></div>
-        </div>
-        
-      <div className="row boxSh ">
+        <div className="col-md-7"></div>
+      </div>
 
+      <div className="row boxSh ">
         <div className={`col-md-5 ${style.div_r} p-5`}>
           <h1>سیستم های پیشنهادی :</h1>
           <div className="container  ">
-            <div className={`row row-cols-3 mt-5 ${style.div_card} `}  >
-{systemSample.map(item=>(
-  <div className={`col ${style.card} boxSh`} style={{backgroundColor:`${item.color}`}} 
-  onClick={()=>{cardClickHandle(item.src)}}>
-    <p>{item.title}</p>
-  </div>
-))}
-              
+            <div className={`row row-cols-3 mt-5 ${style.div_card} `}>
+              {systemSample.map((item) => (
+                <div
+                  className={`col ${style.card} boxSh`}
+                  style={{ backgroundColor: `${item.color}` }}
+                  onClick={() => {
+                    cardClickHandle(item.src);
+                  }}
+                >
+                  <p>{item.title}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="col-md-7 p-5 systemTable">
           <div className={` ${style.detail} `}>
-          <div className={`${style.col} `}  dangerouslySetInnerHTML={{__html:`${keyHelp}`}}>
-          </div>
+            <div
+              className={`${style.col} `}
+              dangerouslySetInnerHTML={{ __html: `${keyHelp}` }}
+            ></div>
 
-          <div
-                className={` ${style.li_click}`}
-                onClick={() => setLgShow(true)}
-              >
-                جهت راهنمایی و توضیحات بیشتر کلیک کنید ...
-                <HandPointing size={32} className={style.handIcon} />
-              </div>
+            <div
+              className={` ${style.li_click}`}
+              onClick={() => setLgShow(true)}
+            >
+              جهت راهنمایی و توضیحات بیشتر کلیک کنید ...
+              <HandPointing size={32} className={style.handIcon} />
+            </div>
             {/* <ul>
               <li>
                 قیمت اعلام شده صرفا جهت اطلاع شما مشتری گرامی از قیمت تقریبی
@@ -276,7 +322,7 @@ const res=await fetch(`${apiUrl}/api/CyKeyDatas/${id}`,{
               </li>
             </ul> */}
           </div>
-          
+
           <div>
             <table className={`table table-hover  ${style.table}`}>
               <thead>
