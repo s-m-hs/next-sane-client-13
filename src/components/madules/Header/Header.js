@@ -68,6 +68,9 @@ export default function Header() {
     setOffer,
     resetFlagCart,
     setResetFlagCart,
+    couponState,
+    coupon,
+    setCouponState,
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
@@ -132,6 +135,7 @@ export default function Header() {
           "Content-Type": "application/json",
         },
       }).then((res) => {
+        console.log(res);
         if (res.ok) {
           return res.json().then((result) => {
             setOffer(Number(result.value));
@@ -378,9 +382,22 @@ export default function Header() {
   useEffect(() => {
     getCategoryById(3);
     getCategoryById(2);
-    getOffer();
     getBanner(18);
   }, []);
+
+  useEffect(() => {
+    if (!couponState) {
+      getOffer();
+    } else if (couponState) {
+      setOffer(coupon[0].discountAmount);
+    }
+  }, [couponState]);
+  useEffect(() => {
+    if (!pathname.includes("basket")) {
+      getOffer();
+      setCouponState(false);
+    }
+  }, [pathname]);
 
   const onmousHandle = (e) => {
     if (e.target.value) {

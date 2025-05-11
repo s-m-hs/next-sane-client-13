@@ -33,6 +33,10 @@ export default function BasketDetail() {
     xtflagSpinnerShow,
     address,
     offer,
+    coupon,
+    setCoupon,
+    couponState,
+    setCouponState,
   } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
@@ -82,6 +86,13 @@ export default function BasketDetail() {
       "ضمن تبریک سال نو و تشکر از همراهی شما هموطن گرامی به اطلاع میرساند به دلیل محدودیتهای ارسال کالا در ایام تعطیلات ارسال کلیه سفارشات در تاریخ 1404/01/18  انجام میگیرد",
       "متوجه شدم ..."
     );
+  const AlertG = () => {
+    if (!couponState) {
+      alertN("center", "success", "کد تخفیف شما با موفقیت اعمال شد ", 1500);
+    } else if (couponState) {
+      alertN("center", "info", "کد تخفیف شما فعال شده است ", 1500);
+    }
+  };
 
   const removeHan = (id) => {
     // const getLocalStorage = localStorage.getItem("loginToken");
@@ -311,8 +322,7 @@ export default function BasketDetail() {
       setTotal(totalPrice);
     };
     calculateTotalPrice();
-    // console.log(total);
-  }, [getBasket]);
+  }, [getBasket, offer]);
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
@@ -582,17 +592,34 @@ export default function BasketDetail() {
             <div>
               <div className="centerc" style={{ alignItems: "center" }}>
                 {xtFlagLogin && (
-                  <button
-                    type="button"
-                    className={
-                      flagUpdate || getBasket?.length == 0
-                        ? `${style.btn_hide}`
-                        : `${style.btn} btn btn-outline-info`
-                    }
-                    onClick={paymentHandler}
-                  >
-                    تکمیل خرید
-                  </button>
+                  <>
+                    <button
+                      className={
+                        !coupon[0]
+                          ? "btn btn-warning disabled"
+                          : "btn btn-warning"
+                      }
+                      onClick={() => {
+                        // setCouponState(!couponState);
+                        setCouponState(true);
+                        AlertG();
+                      }}
+                    >
+                      کدتخفیف : {!coupon[0] ? "" : coupon[0]?.code}
+                    </button>
+
+                    <button
+                      type="button"
+                      className={
+                        flagUpdate || getBasket?.length == 0
+                          ? `${style.btn_hide}`
+                          : `${style.btn} btn btn-outline-info`
+                      }
+                      onClick={paymentHandler}
+                    >
+                      تکمیل خرید
+                    </button>
+                  </>
                 )}
 
                 {!xtFlagLogin && (
