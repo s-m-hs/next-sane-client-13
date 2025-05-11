@@ -19,6 +19,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { HandTap, CheckCircle, X } from "@phosphor-icons/react";
 import alertQ from "@/utils/Alert/AlertQ";
 import Link from "next/link";
+import { GiClick } from "react-icons/gi";
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -45,6 +46,7 @@ export default function BasketDetail() {
   const [basket2, setBasket2] = useState([]);
   const [cartItem, setCartItem] = useState([]);
   const [total, setTotal] = useState(0);
+  const [nonOfftotal, setNonOffTotal] = useState(0);
   const [show, setShow] = useState(false);
   const [showB, setShowB] = useState(false);
   const [payState, setPayState] = useState(1);
@@ -311,15 +313,21 @@ export default function BasketDetail() {
 
   ///to add total price
   useEffect(() => {
-    const data = getBasket.map((item) => ({
+    const data= getBasket.map((item) => ({
       totalPrice:
         item.unitOfferPrice === item.unitPrice
           ? item.totalPrice * offer
           : item.unitOfferPrice,
     }));
+
+    const data2 = getBasket.map((item) => ({
+      totalPrice: item.unitOfferPrice,
+    }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
+      const totalnoneOff=data2.reduce((acc, item) => acc + item.totalPrice, 0);
       setTotal(totalPrice);
+      setNonOffTotal(totalnoneOff)
     };
     calculateTotalPrice();
   }, [getBasket, offer]);
@@ -521,7 +529,23 @@ export default function BasketDetail() {
               </div>
 
               {xtFlagLogin && (
-                <button
+                <>
+                      {coupon[0] &&   <div className={`${style.coupon_div} centerr`} >
+                    <button
+                      className= "btn btn-warning"
+                      
+                      onClick={() => {
+                        // setCouponState(!couponState);
+                        setCouponState(true);
+                        AlertG();
+                      }}
+                    >برای فعالسازی کدتخفیف اینجا کلیک کنید  : {<br/>}
+                    <GiClick style={{fontSize:'25px'}} />{'  '}
+                    <span >کدتخفیف شما : {!coupon[0] ? "" : coupon[0]?.code}
+                    </span>
+                    </button>
+                  </div>}
+                  <button
                   type="button"
                   className={
                     flagUpdate || getBasket?.length == 0
@@ -532,6 +556,8 @@ export default function BasketDetail() {
                 >
                   تکمیل خرید
                 </button>
+                </>
+         
               )}
 
               {!xtFlagLogin && (
@@ -561,6 +587,9 @@ export default function BasketDetail() {
                     <span className={`  ${style.colPrice_mobile_span2}`}>
                       {(Number(total) / 10).toLocaleString()} تومان
                     </span>
+                    <br/>
+                    <span  className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</span>
+                    
                     <img
                       src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
                       alt="basket-image"
@@ -593,20 +622,23 @@ export default function BasketDetail() {
               <div className="centerc" style={{ alignItems: "center" }}>
                 {xtFlagLogin && (
                   <>
+                  {coupon[0] &&   <div className={`${style.coupon_div} centerr`} >
                     <button
-                      className={
-                        !coupon[0]
-                          ? "btn btn-warning disabled"
-                          : "btn btn-warning"
-                      }
+                      className= "btn btn-warning"
+                      
                       onClick={() => {
                         // setCouponState(!couponState);
                         setCouponState(true);
                         AlertG();
                       }}
-                    >
-                      کدتخفیف : {!coupon[0] ? "" : coupon[0]?.code}
+                    >برای فعالسازی کدتخفیف اینجا کلیک کنید  : {<br/>}
+                     <GiClick style={{fontSize:'25px'}}/>{'  '}
+                    <span >کدتخفیف شما : {!coupon[0] ? "" : coupon[0]?.code}
+                    </span>
                     </button>
+                  </div>}
+                
+               
 
                     <button
                       type="button"
@@ -662,7 +694,12 @@ export default function BasketDetail() {
 
                   <span>مجموع سبد خرید :</span>
                   <br />
-                  <span>{(Number(total) / 10).toLocaleString()} تومان</span>
+                   <span
+                  >{(Number(total) / 10).toLocaleString()} تومان</span>
+                  <br/>
+                  <span  className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</span>
+
+             
                 </button>
               </div>
             )}

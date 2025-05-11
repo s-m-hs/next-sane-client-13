@@ -2,7 +2,7 @@
 }
 
 .col_4 {
-  max-height: 500px;
+  /* max-height: 500px; */
   align-items: center;
   background-color: #fff;
   /* background-image: url('../../../../public//images/shop photo/12083346_Wavy_Bus-17_Single-09.png');; */
@@ -119,6 +119,16 @@
   font-size: 12px;
 }
 
+.coupon_div button{
+  font-size: 15px;
+}
+.coupon_div span{
+  font-weight: bold;
+}
+.colPrice_nonoff_span{
+  text-decoration: line-through red;
+}
+
 @media only screen and (max-width: 900px) {
   .container {
     overflow: hidden;
@@ -204,5 +214,8 @@
 @media only screen and (max-width: 450px) {
   .th {
     display: none !important;
+  }
+  .coupon_div button{
+    font-size: 12px;
   }
 }
