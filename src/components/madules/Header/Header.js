@@ -392,10 +392,37 @@ export default function Header() {
       setOffer(coupon[0].discountAmount);
     }
   }, [couponState]);
+  const requestCoupon = (couItemId, state) => {
+    async function myApp() {
+      const res = await fetch(
+        `${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
+        console.log(res);
+      });
+    }
+    myApp();
+  };
+  useEffect(() => {
+    const couponItemId = coupon[0]?.coupons[0]?.id;
+    if (couponItemId) {
+      requestCoupon(couponItemId, 2);
+    }
+  }, [coupon]);
   useEffect(() => {
     if (!pathname.includes("basket")) {
-      getOffer();
-      setCouponState(false);
+      const couponItemId = coupon[0]?.coupons[0]?.id;
+      if (couponState) {
+        getOffer();
+        setCouponState(false);
+        requestCoupon(couponItemId, 2);
+      }
     }
   }, [pathname]);
 

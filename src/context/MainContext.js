@@ -67,7 +67,6 @@ const MainProvider = ({ children }) => {
     }
     myAppGet();
   };
-
   const getProfile = () => {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {

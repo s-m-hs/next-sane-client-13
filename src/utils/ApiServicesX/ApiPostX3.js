@@ -1,11 +1,11 @@
 import apiUrl from "../ApiUrl/apiUrl";
 
-const ApiPostX3 = (url, headerAuth, id, func) => {
+const ApiPostX3 = (url, func) => {
   async function myAppPost() {
-    const res = await fetch(`${apiUrl}${url}${id}`, {
+    const res = await fetch(`${apiUrl}${url}`, {
       method: "POST",
+      credentials: "include",
       headers: {
-        Authorization: headerAuth,
         "Content-Type": "application/json",
       },
     })

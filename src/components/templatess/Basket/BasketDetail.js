@@ -20,6 +20,7 @@ import { HandTap, CheckCircle, X } from "@phosphor-icons/react";
 import alertQ from "@/utils/Alert/AlertQ";
 import Link from "next/link";
 import { GiClick } from "react-icons/gi";
+import { GiCheckMark } from "react-icons/gi";
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -96,6 +97,13 @@ export default function BasketDetail() {
     }
   };
 
+  const AlertE = () =>
+    alertN(
+      "center",
+      "info",
+      "مشکلی در اعمال کد تخفیف به وجود آمده مجددا تلاش بفرمایید",
+      1500
+    );
   const removeHan = (id) => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     RemoveApi("api/CyOrders/deleteItem", id, AlertA);
@@ -125,6 +133,37 @@ export default function BasketDetail() {
       });
     }
     myApp();
+  };
+  const requestCoupon = (couItemId, state) => {
+    async function myApp() {
+      const res = await fetch(
+        `${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
+        console.log(res);
+        if (res.ok) {
+          directToZarin();
+        } else {
+          AlertE();
+        }
+      });
+    }
+    myApp();
+  };
+  const couponIID = coupon?.[0]?.coupons[0]?.id; ///couponItem id to set state to requested
+
+  const payment = () => {
+    if (couponState) {
+      requestCoupon(couponIID, 1);
+    } else {
+      directToZarin();
+    }
   };
 
   const handleRegisterShop = () => {
@@ -313,7 +352,7 @@ export default function BasketDetail() {
 
   ///to add total price
   useEffect(() => {
-    const data= getBasket.map((item) => ({
+    const data = getBasket.map((item) => ({
       totalPrice:
         item.unitOfferPrice === item.unitPrice
           ? item.totalPrice * offer
@@ -325,9 +364,12 @@ export default function BasketDetail() {
     }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
-      const totalnoneOff=data2.reduce((acc, item) => acc + item.totalPrice, 0);
+      const totalnoneOff = data2.reduce(
+        (acc, item) => acc + item.totalPrice,
+        0
+      );
       setTotal(totalPrice);
-      setNonOffTotal(totalnoneOff)
+      setNonOffTotal(totalnoneOff);
     };
     calculateTotalPrice();
   }, [getBasket, offer]);
@@ -530,34 +572,55 @@ export default function BasketDetail() {
 
               {xtFlagLogin && (
                 <>
-                      {coupon[0] &&   <div className={`${style.coupon_div} centerr`} >
-                    <button
-                      className= "btn btn-warning"
-                      
-                      onClick={() => {
-                        // setCouponState(!couponState);
-                        setCouponState(true);
-                        AlertG();
-                      }}
-                    >برای فعالسازی کدتخفیف اینجا کلیک کنید  : {<br/>}
-                    <GiClick style={{fontSize:'25px'}} />{'  '}
-                    <span >کدتخفیف شما : {!coupon[0] ? "" : coupon[0]?.code}
-                    </span>
-                    </button>
-                  </div>}
+                  {coupon[0] && (
+                    <div className={`${style.coupon_div} centerr`}>
+                      <button
+                        className={
+                          !couponState
+                            ? "btn btn-warning"
+                            : "btn btn-primary disabled"
+                        }
+                        onClick={() => {
+                          // setCouponState(!couponState);
+                          setCouponState(true);
+                          AlertG();
+                        }}
+                      >
+                        {!couponState ? (
+                          <>
+                            <span>
+                              {" "}
+                              برای فعالسازی کدتخفیف اینجا کلیک کنید :
+                            </span>
+                            <br />
+                            <GiClick style={{ fontSize: "25px" }} />
+                            {"  "}
+                            <span>کدتخفیف شما : {coupon[0]?.code}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span> کد تخفیف روی سبدخرید شما اعمال شد</span>
+                            <br />
+                            <GiCheckMark style={{ fontSize: "25px" }} />
+                            {"  "}
+                            <span> {coupon[0]?.code}</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
                   <button
-                  type="button"
-                  className={
-                    flagUpdate || getBasket?.length == 0
-                      ? `${style.btn_hide}`
-                      : `${style.btn} btn btn-outline-info`
-                  }
-                  onClick={paymentHandler}
-                >
-                  تکمیل خرید
-                </button>
+                    type="button"
+                    className={
+                      flagUpdate || getBasket?.length == 0
+                        ? `${style.btn_hide}`
+                        : `${style.btn} btn btn-outline-info`
+                    }
+                    onClick={paymentHandler}
+                  >
+                    تکمیل خرید
+                  </button>
                 </>
-         
               )}
 
               {!xtFlagLogin && (
@@ -587,9 +650,11 @@ export default function BasketDetail() {
                     <span className={`  ${style.colPrice_mobile_span2}`}>
                       {(Number(total) / 10).toLocaleString()} تومان
                     </span>
-                    <br/>
-                    <span  className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</span>
-                    
+                    <br />
+                    <span className={`${style.colPrice_nonoff_span}`}>
+                      {(Number(nonOfftotal) / 10).toLocaleString()} تومان
+                    </span>
+
                     <img
                       src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
                       alt="basket-image"
@@ -622,23 +687,43 @@ export default function BasketDetail() {
               <div className="centerc" style={{ alignItems: "center" }}>
                 {xtFlagLogin && (
                   <>
-                  {coupon[0] &&   <div className={`${style.coupon_div} centerr`} >
-                    <button
-                      className= "btn btn-warning"
-                      
-                      onClick={() => {
-                        // setCouponState(!couponState);
-                        setCouponState(true);
-                        AlertG();
-                      }}
-                    >برای فعالسازی کدتخفیف اینجا کلیک کنید  : {<br/>}
-                     <GiClick style={{fontSize:'25px'}}/>{'  '}
-                    <span >کدتخفیف شما : {!coupon[0] ? "" : coupon[0]?.code}
-                    </span>
-                    </button>
-                  </div>}
-                
-               
+                    {coupon[0] && (
+                      <div className={`${style.coupon_div} centerr`}>
+                        <button
+                          className={
+                            !couponState
+                              ? "btn btn-warning"
+                              : "btn btn-primary disabled"
+                          }
+                          onClick={() => {
+                            // setCouponState(!couponState);
+                            setCouponState(true);
+                            AlertG();
+                          }}
+                        >
+                          {!couponState ? (
+                            <>
+                              <span>
+                                {" "}
+                                برای فعالسازی کدتخفیف اینجا کلیک کنید :
+                              </span>
+                              <br />
+                              <GiClick style={{ fontSize: "25px" }} />
+                              {"  "}
+                              <span>کدتخفیف شما : {coupon[0]?.code}</span>
+                            </>
+                          ) : (
+                            <>
+                              <span> کد تخفیف روی سبدخرید شما اعمال شد</span>
+                              <br />
+                              <GiCheckMark style={{ fontSize: "25px" }} />
+                              {"  "}
+                              <span> {coupon[0]?.code}</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    )}
 
                     <button
                       type="button"
@@ -694,12 +779,11 @@ export default function BasketDetail() {
 
                   <span>مجموع سبد خرید :</span>
                   <br />
-                   <span
-                  >{(Number(total) / 10).toLocaleString()} تومان</span>
-                  <br/>
-                  <span  className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</span>
-
-             
+                  <span>{(Number(total) / 10).toLocaleString()} تومان</span>
+                  <br />
+                  <span className={`${style.colPrice_nonoff_span}`}>
+                    {(Number(nonOfftotal) / 10).toLocaleString()} تومان
+                  </span>
                 </button>
               </div>
             )}
@@ -844,8 +928,8 @@ export default function BasketDetail() {
                   ? `btn btn-info ${style.btn_modal_ok}`
                   : `btn btn-info ${style.btn_modal_ok_disable}`
               }
-              onClick={payState == 1 ? directToZarin : handleRegisterShop}
-              // onClick={handleRegisterShop}
+              onClick={payState == 1 ? payment : handleRegisterShop}
+              // onClick={payState == 1 ? directToZarin : handleRegisterShop}
             >
               <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید
