@@ -119,14 +119,23 @@
   font-size: 12px;
 }
 
-.coupon_div button{
+.coupon_div button {
   font-size: 15px;
 }
-.coupon_div span{
+.coupon_div span {
   font-weight: bold;
 }
-.colPrice_nonoff_span{
+.colPrice_nonoff_span {
   text-decoration: line-through red;
+}
+
+.ScaleLoader-louder {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.ScaleLoader-louder > span {
+  width: 150px;
 }
 
 @media only screen and (max-width: 900px) {
@@ -215,7 +224,7 @@
   .th {
     display: none !important;
   }
-  .coupon_div button{
+  .coupon_div button {
     font-size: 12px;
   }
 }

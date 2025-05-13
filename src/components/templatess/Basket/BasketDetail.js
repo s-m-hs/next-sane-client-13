@@ -7,7 +7,7 @@ import CartItem from "./CartItem/CartItem";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { DotLoader } from "react-spinners";
+import { DotLoader, ScaleLoader } from "react-spinners";
 import RemoveApi from "@/utils/ApiUrl/apiCallBack/apiRemove";
 // import getLocalStorage from '@/utils/localStorag/localStorage';
 import alertN from "@/utils/Alert/AlertA";
@@ -21,6 +21,7 @@ import alertQ from "@/utils/Alert/AlertQ";
 import Link from "next/link";
 import { GiClick } from "react-icons/gi";
 import { GiCheckMark } from "react-icons/gi";
+import SpinnerC from "@/utils/SpinnerC/SpinnerC";
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -401,6 +402,11 @@ export default function BasketDetail() {
   // console.log(toBuy)
   return (
     <div className={`container ${style.container}`}>
+      {/* <div className="ScaleLoader-louder">
+        {" "}
+        <ScaleLoader color="#e8c5d6" />
+      </div> */}
+      <SpinnerC />
       <div className="row mt-5 ">
         <div className={`col-lg-8 centerc  ${style.col_8} boxSh`}>
           <div className={` ${style.col_8_div_table} `}>

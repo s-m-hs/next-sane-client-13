@@ -409,13 +409,16 @@ export default function Header() {
     }
     myApp();
   };
+
   useEffect(() => {
+    ///// to check if copuon is availble yet, isRequested state set to false(this is when site relouding:every time site relouding this check  )
     const couponItemId = coupon[0]?.coupons[0]?.id;
     if (couponItemId) {
       requestCoupon(couponItemId, 2);
     }
   }, [coupon]);
   useEffect(() => {
+    ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
     if (!pathname.includes("basket")) {
       const couponItemId = coupon[0]?.coupons[0]?.id;
       if (couponState) {
@@ -425,6 +428,7 @@ export default function Header() {
       }
     }
   }, [pathname]);
+  console.log(coupon);
 
   const onmousHandle = (e) => {
     if (e.target.value) {
