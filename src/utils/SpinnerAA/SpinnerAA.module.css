@@ -1,4 +1,4 @@
-.PuffLoader {
+.DotLoader {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,8 +12,8 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .PuffLoader {
+  .DotLoader {
     position: fixed;
-    left: 15%;
+    left: 0;
   }
 }

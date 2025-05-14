@@ -99,7 +99,7 @@ const CartItem = (props) => {
         </td>
         {/* <!-- price --> */}
 
-        <td className="tp-cart-quantity">
+        <td className={`tp-cart-quantity ${style.quntity_td}`}>
           <div className="tp-product-quantity mt-10 mb-10">
             <input
               type="number"
@@ -137,6 +137,10 @@ const CartItem = (props) => {
               </span> */}
             </div>
           )}
+
+          <span className={`tp-product-details-price ${style.WithoutOffPrice}`}>
+            {props.WithoutOffPrice?.toLocaleString()}
+          </span>
         </td>
 
         {props.totalPrice ? (

@@ -57,6 +57,7 @@ export default function BasketDetail() {
   const [adressId, setAdressId] = useState("");
   const [localbasket, setLocalBasket] = useState([]);
   const [flagLocal, setFlagLocal] = useState(false);
+  const [flagSpinner, setFlagSpinner] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleShow = () => setShow(true);
@@ -160,6 +161,7 @@ export default function BasketDetail() {
   const couponIID = coupon?.[0]?.coupons[0]?.id; ///couponItem id to set state to requested
 
   const payment = () => {
+    setFlagSpinner(true);
     if (couponState) {
       requestCoupon(couponIID, 1);
     } else {
@@ -220,7 +222,6 @@ export default function BasketDetail() {
     removeItem(id);
   };
   ///////////////////////////////////////////
-
   const paymentHandler = () => {
     if (!xtFlagLogin) {
       const alertN = (position, icon, title, timer) =>
@@ -406,7 +407,7 @@ export default function BasketDetail() {
         {" "}
         <ScaleLoader color="#e8c5d6" />
       </div> */}
-      <SpinnerC />
+      {flagSpinner && <SpinnerC />}
       <div className="row mt-5 ">
         <div className={`col-lg-8 centerc  ${style.col_8} boxSh`}>
           <div className={` ${style.col_8_div_table} `}>
@@ -483,6 +484,7 @@ export default function BasketDetail() {
                             : offer !== 1 &&
                               (Number(item.unitPrice) / 10) * offer
                         }
+                        WithoutOffPrice={item.unitPrice / 10} ///send to cartitem product price without off
                         id={item.id}
                         cyProductID={item.cyProductID}
                         quantity={item.quantity}
