@@ -148,7 +148,6 @@ export default function BasketDetail() {
           },
         }
       ).then((res) => {
-        console.log(res);
         if (res.ok) {
           directToZarin();
         } else {
@@ -158,12 +157,12 @@ export default function BasketDetail() {
     }
     myApp();
   };
-  const couponIID = coupon?.[0]?.coupons[0]?.id; ///couponItem id to set state to requested
-
+  
+  const couponI= coupon?.couponAvailable; ///couponItem id to set state to requested
   const payment = () => {
     setFlagSpinner(true);
     if (couponState) {
-      requestCoupon(couponIID, 1);
+      requestCoupon(couponI[0]?.id ,1);
     } else {
       directToZarin();
     }
@@ -580,7 +579,7 @@ export default function BasketDetail() {
 
               {xtFlagLogin && (
                 <>
-                  {coupon[0] && (
+                  {coupon?.couponAvailable && (
                     <div className={`${style.coupon_div} centerr`}>
                       <button
                         className={
@@ -603,7 +602,7 @@ export default function BasketDetail() {
                             <br />
                             <GiClick style={{ fontSize: "25px" }} />
                             {"  "}
-                            <span>کدتخفیف شما : {coupon[0]?.code}</span>
+                            <span>کدتخفیف شما :   {coupon?.code}</span>
                           </>
                         ) : (
                           <>
@@ -611,7 +610,7 @@ export default function BasketDetail() {
                             <br />
                             <GiCheckMark style={{ fontSize: "25px" }} />
                             {"  "}
-                            <span> {coupon[0]?.code}</span>
+                            <span>  {coupon?.code}</span>
                           </>
                         )}
                       </button>
@@ -695,7 +694,7 @@ export default function BasketDetail() {
               <div className="centerc" style={{ alignItems: "center" }}>
                 {xtFlagLogin && (
                   <>
-                    {coupon[0] && (
+                    {coupon?.couponAvailable && (
                       <div className={`${style.coupon_div} centerr`}>
                         <button
                           className={
@@ -718,7 +717,7 @@ export default function BasketDetail() {
                               <br />
                               <GiClick style={{ fontSize: "25px" }} />
                               {"  "}
-                              <span>کدتخفیف شما : {coupon[0]?.code}</span>
+                              <span>کدتخفیف شما :  {coupon?.code}</span>
                             </>
                           ) : (
                             <>
@@ -726,7 +725,7 @@ export default function BasketDetail() {
                               <br />
                               <GiCheckMark style={{ fontSize: "25px" }} />
                               {"  "}
-                              <span> {coupon[0]?.code}</span>
+                              <span>   {coupon?.code}</span>
                             </>
                           )}
                         </button>

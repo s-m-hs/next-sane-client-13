@@ -135,7 +135,6 @@ export default function Header() {
           "Content-Type": "application/json",
         },
       }).then((res) => {
-        console.log(res);
         if (res.ok) {
           return res.json().then((result) => {
             setOffer(Number(result.value));
@@ -385,11 +384,12 @@ export default function Header() {
     getBanner(18);
   }, []);
 
-  useEffect(() => {
-    if (!couponState) {
+  useEffect(() => {     ////to set offer :if couponState is false, get offer from value by admin
+   if (!couponState) {
       getOffer();
     } else if (couponState) {
-      setOffer(coupon[0].discountAmount);
+        const discount = coupon?.discountAmount;
+      setOffer(discount);
     }
   }, [couponState]);
   const requestCoupon = (couItemId, state) => {
@@ -412,23 +412,22 @@ export default function Header() {
 
   useEffect(() => {
     ///// to check if copuon is availble yet, isRequested state set to false(this is when site relouding:every time site relouding this check  )
-    const couponItemId = coupon[0]?.coupons[0]?.id;
+    const couponItemId = coupon?.couponAvailable;
     if (couponItemId) {
-      requestCoupon(couponItemId, 2);
+      requestCoupon(couponItemId[0]?.id, 2);
     }
   }, [coupon]);
   useEffect(() => {
     ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
     if (!pathname.includes("basket")) {
-      const couponItemId = coupon[0]?.coupons[0]?.id;
+const couponItemId = coupon?.couponAvailable;
       if (couponState) {
         getOffer();
         setCouponState(false);
-        requestCoupon(couponItemId, 2);
+        requestCoupon(couponItemId[0]?.id, 2);
       }
     }
   }, [pathname]);
-  console.log(coupon);
 
   const onmousHandle = (e) => {
     if (e.target.value) {

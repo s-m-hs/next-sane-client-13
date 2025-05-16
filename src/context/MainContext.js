@@ -138,10 +138,8 @@ const MainProvider = ({ children }) => {
           },
         }
       ).then((res) => {
-        console.log(res);
         if (res.ok) {
           return res.json().then((result) => {
-            console.log(result);
             setCoupon(result);
           });
         }
@@ -155,7 +153,6 @@ const MainProvider = ({ children }) => {
     }
   }, [cyUserID]);
 
-  console.log(coupon);
 
   const refreshToken = () => {
     async function myApp() {
