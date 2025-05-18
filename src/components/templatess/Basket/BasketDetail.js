@@ -654,13 +654,13 @@ export default function BasketDetail() {
                   >
                     <span>مجموع سبد خرید :</span>
                     <br />
-                    <span className={`  ${style.colPrice_mobile_span2}`}>
+                    <div className={`  ${style.colPrice_mobile_span2}`}>
                       {(Number(total) / 10).toLocaleString()} تومان
-                    </span>
+                    </div>
                     <br />
-                    <span className={`${style.colPrice_nonoff_span}`}>
+                    <div className={`${style.colPrice_nonoff_span}`}>
                       {(Number(nonOfftotal) / 10).toLocaleString()} تومان
-                    </span>
+                    </div>
 
                     <img
                       src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
@@ -786,11 +786,11 @@ export default function BasketDetail() {
 
                   <span>مجموع سبد خرید :</span>
                   <br />
-                  <span>{(Number(total) / 10).toLocaleString()} تومان</span>
+                  <div>{(Number(total) / 10).toLocaleString()} تومان</div>
                   <br />
-                  <span className={`${style.colPrice_nonoff_span}`}>
+                  <div className={`${style.colPrice_nonoff_span}`}>
                     {(Number(nonOfftotal) / 10).toLocaleString()} تومان
-                  </span>
+                  </div>
                 </button>
               </div>
             )}

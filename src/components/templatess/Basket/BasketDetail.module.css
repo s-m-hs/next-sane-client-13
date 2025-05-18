@@ -127,6 +127,7 @@
 }
 .colPrice_nonoff_span {
   text-decoration: line-through red;
+  font-size: 15px;
 }
 
 .ScaleLoader-louder {

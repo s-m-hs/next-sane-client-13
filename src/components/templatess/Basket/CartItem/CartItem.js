@@ -139,7 +139,7 @@ const CartItem = (props) => {
           )}
 
           <span className={`tp-product-details-price ${style.WithoutOffPrice}`}>
-            {props.WithoutOffPrice?.toLocaleString()}
+            {props.WithoutOffPrice?.toLocaleString()} تومان  
           </span>
         </td>
 
