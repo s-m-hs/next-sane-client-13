@@ -133,6 +133,18 @@ input[type="number"] {
   flex-direction: row;
   justify-content: center;
 }
+.centercc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.centerrc {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .boxSh {
   box-shadow: 0 0 15px -10px rgb(0, 0, 0, 0.75);
 }
@@ -226,13 +238,8 @@ input[type="number"] {
   padding: calc(var(--g) + var(--b));
   --_g: #0000 25%, var(--them) 0;
   background-color: transparent !important;
-  background: conic-gradient(
-        from 180deg at top var(--b) right var(--b),
-        var(--_g)
-      )
-      var(--_i, 200%) 0 /200% var(--_i, var(--b)) no-repeat,
-    conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0
-      var(--_i, 200%) / var(--_i, var(--b)) 200% no-repeat;
+  background: conic-gradient(from 180deg at top var(--b) right var(--b), var(--_g)) var(--_i, 200%) 0 /200% var(--_i, var(--b)) no-repeat,
+    conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0 var(--_i, 200%) / var(--_i, var(--b)) 200% no-repeat;
   transition: 0.3s, background-position 0.3s 0.3s;
   /* cursor: pointer; */
 }
@@ -282,10 +289,7 @@ input[type="number"] {
 .p-galleria-thumbnail-container button {
   display: none !important;
 }
-.p-galleria-item-wrapper
-  > .p-galleria-item-container
-  > .p-galleria-content
-  img {
+.p-galleria-item-wrapper > .p-galleria-item-container > .p-galleria-content img {
   height: 325px !important;
 }
 

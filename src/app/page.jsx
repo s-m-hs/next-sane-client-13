@@ -1,18 +1,8 @@
 "use client";
 import dynamic from "next/dynamic";
-const SwiperC = dynamic(
-  () => import("@/components/madules/Swiper/SwiperC/SwiperC"),
-  { ssr: false }
-);
-const CategorySectionA = dynamic(
-  () =>
-    import("@/components/templatess/Home/CategorySectionA/CategorySectionA"),
-  { ssr: false }
-);
-const BrandArea = dynamic(
-  () => import("@/components/madules/BrandArea/BrandArea"),
-  { ssr: false }
-);
+const SwiperC = dynamic(() => import("@/components/madules/Swiper/SwiperC/SwiperC"), { ssr: false });
+const CategorySectionA = dynamic(() => import("@/components/templatess/Home/CategorySectionA/CategorySectionA"), { ssr: false });
+const BrandArea = dynamic(() => import("@/components/madules/BrandArea/BrandArea"), { ssr: false });
 const BanerA = dynamic(() => import("@/components/madules/Baner/BanerA"), {
   ssr: false,
 });
@@ -40,13 +30,7 @@ export default function Home() {
   const pathname = usePathname();
 
   let { paymentState } = useContext(MainContext);
-  const alertA = () =>
-    alertN(
-      "center",
-      "success",
-      "محصولات با موفقیت به سبد خرید شما اضافه شد",
-      500
-    );
+  const alertA = () => alertN("center", "success", "محصولات با موفقیت به سبد خرید شما اضافه شد", 500);
   // const getLocalStorage=localStorage.getItem('loginToken')
   const [key, setKey] = useState("");
   const [keyB, setKeyB] = useState("");
@@ -119,15 +103,9 @@ export default function Home() {
         </div>
         {/* <SwiperD categoryCode='SUPRIZ DAY' title={'فوق العاده ها:'}/> */}
 
-        {keyOfferSlider?.value === "1" && (
-          <SwiperC categoryCode="offer-Basket" title={`سبد فروش ویژه💰:`} />
-        )}
+        {keyOfferSlider?.value === "1" && <SwiperC categoryCode="offer-Basket" title={`سبد فروش ویژه💰:`} />}
 
-        {keyB?.value === "1" ? (
-          <SwiperC categoryCode="new" title={"جدیدترین ها:"} />
-        ) : (
-          ""
-        )}
+        {keyB?.value === "1" ? <SwiperC categoryCode="new" title={"جدیدترین ها:"} /> : ""}
         <CategorySectionA title="لوازم جانبی" categoryId={3} />
         <BrandArea brandArray={brandLogA} fileRoot={"1"} />
         <SwiperC categoryCode="best-sellers" title={"پرفروش ترین ها :"} />
@@ -135,17 +113,10 @@ export default function Home() {
           <SwiperF />
         </div>
 
-        <SubjecArea />
         <CategorySectionA title="سخت افزار" categoryId={2} />
         <BrandArea brandArray={brandLogoB} fileRoot={"2"} />
-        {key?.value === "1" ? (
-          <SwiperC
-            categoryCode="hardwairebestseller"
-            title={"پرفروش ترین های سخت افزار :"}
-          />
-        ) : (
-          ""
-        )}
+        {key?.value === "1" ? <SwiperC categoryCode="hardwairebestseller" title={"پرفروش ترین های سخت افزار :"} /> : ""}
+        <SubjecArea />
         <BanerA />
       </div>
     </div>

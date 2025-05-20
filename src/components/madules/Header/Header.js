@@ -102,24 +102,10 @@ export default function Header() {
     setMenuOpen(!isMenuOpen);
   };
 
-  const AlertA = () =>
-    alertN("center", "info", "محصولی در سبد خرید شما موجود نیست...", 1500);
-  const AlertB = () =>
-    alertN("center", "info", "شما هنوز ثبت نام نکرده اید !!!...", 1500);
-  const AlertC = () =>
-    alertN(
-      "center",
-      "info",
-      "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ",
-      3000
-    );
-  const alertD = () =>
-    alertN(
-      "center",
-      "success",
-      "محصولات با موفقیت به سبد خرید شما اضافه شد",
-      500
-    );
+  const AlertA = () => alertN("center", "info", "محصولی در سبد خرید شما موجود نیست...", 1500);
+  const AlertB = () => alertN("center", "info", "شما هنوز ثبت نام نکرده اید !!!...", 1500);
+  const AlertC = () => alertN("center", "info", "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ", 3000);
+  const alertD = () => alertN("center", "success", "محصولات با موفقیت به سبد خرید شما اضافه شد", 500);
 
   /////////////////////////////theming
   const getOffer = () => {
@@ -342,17 +328,9 @@ export default function Header() {
       str: "string",
     };
     if (id == 3) {
-      postApi(
-        "/api/CyProductCategory/GetItemWChildAndRoot",
-        obj,
-        setMainCategory
-      );
+      postApi("/api/CyProductCategory/GetItemWChildAndRoot", obj, setMainCategory);
     } else if (id == 2) {
-      postApi(
-        "/api/CyProductCategory/GetItemWChildAndRoot",
-        obj,
-        setMainCategoryB
-      );
+      postApi("/api/CyProductCategory/GetItemWChildAndRoot", obj, setMainCategoryB);
     }
   };
   const getBanner = (id) => {
@@ -384,26 +362,24 @@ export default function Header() {
     getBanner(18);
   }, []);
 
-  useEffect(() => {     ////to set offer :if couponState is false, get offer from value by admin
-   if (!couponState) {
+  useEffect(() => {
+    ////to set offer :if couponState is false, get offer from value by admin
+    if (!couponState) {
       getOffer();
     } else if (couponState) {
-        const discount = coupon?.discountAmount;
+      const discount = coupon?.discountAmount;
       setOffer(discount);
     }
   }, [couponState]);
   const requestCoupon = (couItemId, state) => {
     async function myApp() {
-      const res = await fetch(
-        `${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).then((res) => {
+      const res = await fetch(`${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         console.log(res);
       });
     }
@@ -420,7 +396,7 @@ export default function Header() {
   useEffect(() => {
     ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
     if (!pathname.includes("basket")) {
-const couponItemId = coupon?.couponAvailable;
+      const couponItemId = coupon?.couponAvailable;
       if (couponState) {
         getOffer();
         setCouponState(false);
@@ -477,12 +453,7 @@ const couponItemId = coupon?.couponAvailable;
     <>
       {xtflagSpinnerShow && (
         <div className={`${styles.DotLoader_div}`}>
-          <DotLoader
-            className={`${styles.DotLoader}`}
-            color="rgba(25, 165, 175)"
-            size="280px"
-            speedMultiplier={1}
-          />
+          <DotLoader className={`${styles.DotLoader}`} color="rgba(25, 165, 175)" size="280px" speedMultiplier={1} />
         </div>
       )}
 
@@ -490,14 +461,10 @@ const couponItemId = coupon?.couponAvailable;
         {!fixTop ? (
           <div className={`container ${styles.Header} boxSh`}>
             <div className={`row ${styles.Header_top} centerr`}>
-              <div
-                className={`col col-md-8 ${styles.Header_rightSide} centerr`}
-              >
+              <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
                 <div className={styles.Header_rightSide__div_img}>
                   {/* <img src="../images/banner/20offer - Copy.png" alt="" /> */}
-                  {offBanner?.orderValue == 1 && (
-                    <img src={offBanner.bigImg} alt={offBanner.title} />
-                  )}
+                  {offBanner?.orderValue == 1 && <img src={offBanner.bigImg} alt={offBanner.title} />}
                   {/* <img src="../images/banner/vecteezy_mega-sale-20-percent-off-right-side-view-3d-render-object_17193891 (1).png" alt="" /> */}
 
                   <div style={{ width: "135px", height: "105px" }}>
@@ -505,16 +472,8 @@ const couponItemId = coupon?.couponAvailable;
                   </div>
                 </div>
 
-                <div
-                  className={`${styles.Header_rightSide__div_search}  centerc boxSh`}
-                >
-                  <input
-                    className={styles.Header_rightSide__div_search_input}
-                    type="text"
-                    placeholder="دنبال چی میگردی...؟"
-                    value={searchType}
-                    onChange={searchChange}
-                  />
+                <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>
+                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
                   <MagnifyingGlass
                     size={24}
                     color="#14a5af"
@@ -527,26 +486,12 @@ const couponItemId = coupon?.couponAvailable;
                   />
 
                   <div className={`${styles.sidebar_input_div} `}>
-                    <Sidebar
-                      visible={visible}
-                      onHide={() => setVisible(false)}
-                      fullScreen
-                    >
+                    <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
                       {flagSearch && (
                         <div className="container">
-                          <div
-                            className={`${styles.Header_rightSide__div_search}  centerc boxSh`}
-                          >
+                          <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>
                             {" "}
-                            <input
-                              className={
-                                styles.Header_rightSide__div_search_input
-                              }
-                              type="text"
-                              placeholder="دنبال چی میگردی...؟"
-                              value={searchType}
-                              onChange={searchChange}
-                            />
+                            <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
                             <MagnifyingGlass
                               size={24}
                               color="#14a5af"
@@ -559,9 +504,7 @@ const couponItemId = coupon?.couponAvailable;
                             />
                           </div>
 
-                          <div
-                            className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}
-                          >
+                          <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}>
                             {/* <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
@@ -580,14 +523,9 @@ const couponItemId = coupon?.couponAvailable;
                                           setVisible(false);
                                         }}
                                       >
-                                        <div
-                                          className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                        >
+                                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
                                           <span>{item.name}</span>
-                                          <img
-                                            src={item.smallImage}
-                                            alt={item.name}
-                                          />
+                                          <img src={item.smallImage} alt={item.name} />
                                         </div>
                                       </Link>
                                     );
@@ -608,18 +546,12 @@ const couponItemId = coupon?.couponAvailable;
                   <>
                     <Dropdown className={styles.user_button} size="lg">
                       <Dropdown.Toggle variant="info" id="dropdown-basic">
-                        <span className={styles.user_span}>
-                          {name?.toUpperCase()}
-                        </span>{" "}
+                        <span className={styles.user_span}>{name?.toUpperCase()}</span>{" "}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu className={styles.user_p}>
                         <Dropdown.Item>
-                          <Link
-                            style={{ color: "inherit" }}
-                            href="/p-user/profile"
-                            onClick={() => setXtFlagSpinnerShow(true)}
-                          >
+                          <Link style={{ color: "inherit" }} href="/p-user/profile" onClick={() => setXtFlagSpinnerShow(true)}>
                             <p>پنل کاربری</p>
                           </Link>
                         </Dropdown.Item>
@@ -637,28 +569,13 @@ const couponItemId = coupon?.couponAvailable;
                   </>
                 )}
                 <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
-                  <div
-                    onClick={() => setXtFlagSpinnerShow(true)}
-                    className={`${styles.Header_leftSide__div} centerr`}
-                  >
-                    {userSrc ? (
-                      <img
-                        src={userSrc}
-                        alt="user-profile"
-                        className={`${styles.Header_user_img}`}
-                      />
-                    ) : (
-                      <User size={24} color="#14a5af" />
-                    )}
+                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
+                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color="#14a5af" />}
 
                     {!xtFlagLogin ? (
-                      <span className={`${styles.Header_leftSide__div_span} `}>
-                        وارد حساب کاربری خود شوید...
-                      </span>
+                      <span className={`${styles.Header_leftSide__div_span} `}>وارد حساب کاربری خود شوید...</span>
                     ) : (
-                      <span className={`${styles.Header_leftSide__div_span} `}>
-                        وارد پنل کاربری خود شوید...
-                      </span>
+                      <span className={`${styles.Header_leftSide__div_span} `}>وارد پنل کاربری خود شوید...</span>
                     )}
                   </div>
                 </Link>
@@ -676,34 +593,16 @@ const couponItemId = coupon?.couponAvailable;
                       className={`${styles.Header_leftSide__div} centerr`}
                     >
                       <ShoppingCart size={24} color="#14a5af" />
-                      {cartCounter !== 0 && (
-                        <span className={`${styles.shopicon_baget} centerc`}>
-                          {cartCounter}
-                        </span>
-                      )}
+                      {cartCounter !== 0 && <span className={`${styles.shopicon_baget} centerc`}>{cartCounter}</span>}
                     </div>
                   </Link>
                 )}
 
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
-                    <div
-                      className={` ${styles.Header_leftSide__div} centerr`}
-                      onClick={() => setXtFlagSpinnerShow(true)}
-                    >
-                      <ChatCircleText
-                        size={28}
-                        weight="duotone"
-                        color="#14a5af"
-                      />
-                      {messageNotification?.filter(
-                        (filter) => filter.status == 1
-                      )?.length != 0 && (
-                        <span className={`${styles.shopicon_baget} centerc`}>
-                          {" "}
-                          !
-                        </span>
-                      )}
+                    <div className={` ${styles.Header_leftSide__div} centerr`} onClick={() => setXtFlagSpinnerShow(true)}>
+                      <ChatCircleText size={28} weight="duotone" color="#14a5af" />
+                      {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && <span className={`${styles.shopicon_baget} centerc`}> !</span>}
                       {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
@@ -726,13 +625,10 @@ const couponItemId = coupon?.couponAvailable;
                 <SunDim size={28} color="#14a5af" weight="duotone" />
                 </div> */}
 
-                <div
-                  className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}
-                >
+                <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <div className={` ${styles.mobiNumber_div} centerc`}>
                     <span>
-                      02191005457{" "}
-                      <Phone size={18} color="#ededed" weight="duotone" />
+                      02191005457 <Phone size={18} color="#ededed" weight="duotone" />
                     </span>
                     <span>کامپیوترصانع</span>
                   </div>
@@ -765,30 +661,11 @@ const couponItemId = coupon?.couponAvailable;
                   <li className="nav_link arrow_icon">
                     <TextIndent size={15} />
                     دسته بندی ها
-                    <ul
-                      className={`${styles.header_bottom__col__ul__ul} centerc`}
-                      ref={ulRef}
-                    >
-                      <li
-                        value={1}
-                        onMouseEnter={onmousHandle}
-                        className={
-                          valeS == 1
-                            ? ` ${styles.liiii2_a}`
-                            : `${styles.liiii2}`
-                        }
-                      >
+                    <ul className={`${styles.header_bottom__col__ul__ul} centerc`} ref={ulRef}>
+                      <li value={1} onMouseEnter={onmousHandle} className={valeS == 1 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}>
                         لوازم جانبی
-                        <div
-                          className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}
-                        >
-                          <div
-                            className={
-                              valeS == 1
-                                ? `row-cols-6 ${styles.ishover}`
-                                : `${styles.nohover}`
-                            }
-                          >
+                        <div className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}>
+                          <div className={valeS == 1 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}>
                             {mainCategory.childs?.length &&
                               mainCategory.childs.map((item, index) => (
                                 <Link
@@ -797,10 +674,7 @@ const couponItemId = coupon?.couponAvailable;
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2} centerc`}
                                 >
-                                  <img
-                                    src={item.imageUrl}
-                                    alt={item.name || "Category image"}
-                                  />
+                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
                                   {item.name}
                                 </Link>
                               ))}
@@ -808,25 +682,11 @@ const couponItemId = coupon?.couponAvailable;
                         </div>
                       </li>
 
-                      <li
-                        value={2}
-                        onMouseEnter={onmousHandle}
-                        className={
-                          valeS == 2 && flaga
-                            ? `${styles.liiii2_a}`
-                            : `${styles.liiii2}`
-                        }
-                      >
+                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 && flaga ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
                         سخت افزار
-                        <div
-                          className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}
-                        >
+                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
                           <div
-                            className={
-                              valeS == 2
-                                ? `row-cols-4 ${styles.ishover}`
-                                : `${styles.nohover}`
-                            }
+                            className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
 
                             // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
@@ -838,10 +698,7 @@ const couponItemId = coupon?.couponAvailable;
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2} centerc`}
                                 >
-                                  <img
-                                    src={item.imageUrl}
-                                    alt={item.name || "Category image"}
-                                  />
+                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
                                   {item.name}
                                 </Link>
                               ))}
@@ -856,19 +713,13 @@ const couponItemId = coupon?.couponAvailable;
                     <li className="nav_link arrow_icon">
                       <Wrench size={15} />
                       خدمات
-                      <ul
-                        className={`${styles.header_bottom__col__ul__ul_service} centerc`}
-                      >
+                      <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
                         <Link href={"/p-user/warranty"}>
                           <li
                             onClick={() => setXtFlagSpinnerShow(true)}
                             value={11}
                             onMouseEnter={onmousHandle}
-                            className={
-                              valeS == 11
-                                ? ` ${styles.liiii2_a}`
-                                : `${styles.liiii2}`
-                            }
+                            className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
                           >
                             گارانتی
                           </li>
@@ -879,11 +730,7 @@ const couponItemId = coupon?.couponAvailable;
                             onClick={() => setXtFlagSpinnerShow(true)}
                             value={12}
                             onMouseEnter={onmousHandle}
-                            className={
-                              valeS == 12
-                                ? ` ${styles.liiii2_a}`
-                                : `${styles.liiii2}`
-                            }
+                            className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
                           >
                             تعمیرات
                           </li>
@@ -993,27 +840,15 @@ const couponItemId = coupon?.couponAvailable;
 
               <div className={styles.header_bottom__col_logo}>
                 <Link href={"https://eitaa.com/sane_camputer"}>
-                  <img
-                    className={styles.sphere3}
-                    src="../../../images/eitaa-icon-colorful.png"
-                    alt="eitaa"
-                  />
+                  <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
                 </Link>
                 <Link href={"https://instagram.com/sane_computer_"}>
                   {" "}
-                  <img
-                    className={styles.sphere2}
-                    src="../../../images/icons8-instagram-2048.png"
-                    alt="instagram"
-                  />
+                  <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
                 </Link>
                 <Link href={"https://t.me/SANE_IT"}>
                   {" "}
-                  <img
-                    className={styles.sphere}
-                    src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-                    alt="telegram"
-                  />
+                  <img className={styles.sphere} src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png" alt="telegram" />
                 </Link>
               </div>
             </div>
@@ -1021,31 +856,15 @@ const couponItemId = coupon?.couponAvailable;
         ) : (
           <div className={`container ${styles.containerfix}`}>
             <div className={`row ${styles.Header_top} centerr`}>
-              <div
-                className={`col col-md-8 ${styles.Header_rightSide} centerr`}
-              >
+              <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
                 <div className={styles.Header_rightSide__div_img}>
-                  {offBanner?.orderValue == 1 && (
-                    <img
-                      className={styles.Header_rightSide__div_imgB}
-                      src={offBanner.bigImg}
-                      alt={offBanner.title}
-                    />
-                  )}
+                  {offBanner?.orderValue == 1 && <img className={styles.Header_rightSide__div_imgB} src={offBanner.bigImg} alt={offBanner.title} />}
                   <div style={{ width: "80px", height: "50px" }}>
                     <SwiperA />
                   </div>
                 </div>
-                <div
-                  className={`${styles.Header_rightSide__div_search}  centerc`}
-                >
-                  <input
-                    className={styles.Header_rightSide__div_search_input}
-                    type="text"
-                    placeholder="دنبال چی میگردی...؟"
-                    value={searchType}
-                    onChange={searchChange}
-                  />
+                <div className={`${styles.Header_rightSide__div_search}  centerc`}>
+                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
                   <MagnifyingGlass
                     size={24}
                     color="#14a5af"
@@ -1057,16 +876,10 @@ const couponItemId = coupon?.couponAvailable;
                     }}
                   />
 
-                  <Sidebar
-                    visible={visible}
-                    onHide={() => setVisible(false)}
-                    fullScreen
-                  >
+                  <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
                     {flagSearch && (
                       <div className="container">
-                        <div
-                          className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}
-                        >
+                        <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}>
                           {/* <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchType('')
@@ -1085,14 +898,9 @@ const couponItemId = coupon?.couponAvailable;
                                         setVisible(false);
                                       }}
                                     >
-                                      <div
-                                        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                      >
+                                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
                                         <span>{item.name}</span>
-                                        <img
-                                          src={item.smallImage}
-                                          alt={item.name}
-                                        />
+                                        <img src={item.smallImage} alt={item.name} />
                                       </div>
                                     </Link>
                                   );
@@ -1108,34 +916,15 @@ const couponItemId = coupon?.couponAvailable;
 
               <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
                 <div className="centerc"></div>
-                {xtFlagLogin && (
-                  <span className={styles.user_span}>
-                    {name?.toUpperCase()}
-                  </span>
-                )}
+                {xtFlagLogin && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
 
                 <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
-                  <div
-                    onClick={() => setXtFlagSpinnerShow(true)}
-                    className={`${styles.Header_leftSide__div} centerr`}
-                  >
-                    {userSrc ? (
-                      <img
-                        src={userSrc}
-                        alt="user-profile"
-                        className={`${styles.Header_user_img}`}
-                      />
-                    ) : (
-                      <User size={24} color="#14a5af" />
-                    )}{" "}
+                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
+                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color="#14a5af" />}{" "}
                     {!xtFlagLogin ? (
-                      <span className={`${styles.Header_leftSide__div_span} `}>
-                        وارد حساب کاربری خود شوید...
-                      </span>
+                      <span className={`${styles.Header_leftSide__div_span} `}>وارد حساب کاربری خود شوید...</span>
                     ) : (
-                      <span className={`${styles.Header_leftSide__div_span} `}>
-                        وارد پنل کاربری خود شوید...
-                      </span>
+                      <span className={`${styles.Header_leftSide__div_span} `}>وارد پنل کاربری خود شوید...</span>
                     )}
                   </div>
                 </Link>
@@ -1153,34 +942,16 @@ const couponItemId = coupon?.couponAvailable;
                       className={`${styles.Header_leftSide__div} centerr`}
                     >
                       <ShoppingCart size={24} color="#14a5af" />
-                      {cartCounter !== 0 && (
-                        <span className={`${styles.shopicon_baget} centerc`}>
-                          {cartCounter}
-                        </span>
-                      )}
+                      {cartCounter !== 0 && <span className={`${styles.shopicon_baget} centerc`}>{cartCounter}</span>}
                     </div>
                   </Link>
                 )}
 
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
-                    <div
-                      className={` ${styles.Header_leftSide__div} centerr`}
-                      onClick={() => setXtFlagSpinnerShow(true)}
-                    >
-                      <ChatCircleText
-                        size={28}
-                        weight="duotone"
-                        color="#14a5af"
-                      />
-                      {messageNotification?.filter(
-                        (filter) => filter.status == 1
-                      )?.length != 0 && (
-                        <span className={`${styles.shopicon_baget} centerc`}>
-                          {" "}
-                          !
-                        </span>
-                      )}
+                    <div className={` ${styles.Header_leftSide__div} centerr`} onClick={() => setXtFlagSpinnerShow(true)}>
+                      <ChatCircleText size={28} weight="duotone" color="#14a5af" />
+                      {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && <span className={`${styles.shopicon_baget} centerc`}> !</span>}
                       {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
@@ -1203,9 +974,7 @@ const couponItemId = coupon?.couponAvailable;
                 <SunDim size={24} color="#14a5af" weight="duotone" />
                 </div> */}
 
-                <div
-                  className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}
-                >
+                <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <div className={` ${styles.mobiNumber_div} centerc`}>
                     <span>
                       02191005457
@@ -1239,29 +1008,11 @@ const couponItemId = coupon?.couponAvailable;
                   <li className="nav_link arrow_icon">
                     <TextIndent size={15} />
                     دسته بندی ها
-                    <ul
-                      className={`${styles.header_bottom__col__ul__ul} centerc`}
-                    >
-                      <li
-                        value={1}
-                        onMouseEnter={onmousHandle}
-                        className={
-                          valeS == 1
-                            ? ` ${styles.liiii2_a}`
-                            : `${styles.liiii2}`
-                        }
-                      >
+                    <ul className={`${styles.header_bottom__col__ul__ul} centerc`}>
+                      <li value={1} onMouseEnter={onmousHandle} className={valeS == 1 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}>
                         لوازم جانبی
-                        <div
-                          className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}
-                        >
-                          <div
-                            className={
-                              valeS == 1
-                                ? `row-cols-6 ${styles.ishover}`
-                                : `${styles.nohover}`
-                            }
-                          >
+                        <div className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}>
+                          <div className={valeS == 1 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}>
                             {mainCategory.childs?.length &&
                               mainCategory.childs.map((item, index) => (
                                 <Link
@@ -1270,10 +1021,7 @@ const couponItemId = coupon?.couponAvailable;
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                                 >
-                                  <img
-                                    src={item.imageUrl}
-                                    alt={item.name || "Category image"}
-                                  />
+                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
                                   {item.name}
                                 </Link>
 
@@ -1292,25 +1040,11 @@ const couponItemId = coupon?.couponAvailable;
                         </div>
                       </li>
 
-                      <li
-                        value={2}
-                        onMouseEnter={onmousHandle}
-                        className={
-                          valeS == 2 && flaga
-                            ? `${styles.liiii2_a}`
-                            : `${styles.liiii2}`
-                        }
-                      >
+                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 && flaga ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
                         سخت افزار
-                        <div
-                          className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}
-                        >
+                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
                           <div
-                            className={
-                              valeS == 2
-                                ? `row-cols-4 ${styles.ishover}`
-                                : `${styles.nohover}`
-                            }
+                            className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
 
                             // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
@@ -1322,10 +1056,7 @@ const couponItemId = coupon?.couponAvailable;
                                   href={`/category/${item.id}`}
                                   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
                                 >
-                                  <img
-                                    src={item.imageUrl}
-                                    alt={item.name || "Category image"}
-                                  />
+                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
                                   {item.name}
                                 </Link>
                               ))}
@@ -1373,19 +1104,13 @@ const couponItemId = coupon?.couponAvailable;
                     <li className="nav_link arrow_icon">
                       <Wrench size={15} />
                       خدمات
-                      <ul
-                        className={`${styles.header_bottom__col__ul__ul_service} centerc`}
-                      >
+                      <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
                         <Link href={"/p-user/warranty"}>
                           <li
                             onClick={() => setXtFlagSpinnerShow(true)}
                             value={11}
                             onMouseEnter={onmousHandle}
-                            className={
-                              valeS == 11
-                                ? ` ${styles.liiii2_a}`
-                                : `${styles.liiii2}`
-                            }
+                            className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
                           >
                             گارانتی
                           </li>
@@ -1396,11 +1121,7 @@ const couponItemId = coupon?.couponAvailable;
                             onClick={() => setXtFlagSpinnerShow(true)}
                             value={12}
                             onMouseEnter={onmousHandle}
-                            className={
-                              valeS == 12
-                                ? ` ${styles.liiii2_a}`
-                                : `${styles.liiii2}`
-                            }
+                            className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
                           >
                             تعمیرات
                           </li>
@@ -1495,27 +1216,15 @@ const couponItemId = coupon?.couponAvailable;
 
                 <div className={styles.header_bottom__col_logo}>
                   <Link href={"https://eitaa.com/sane_camputer"}>
-                    <img
-                      className={styles.sphere3}
-                      src="../../../images/eitaa-icon-colorful.png"
-                      alt="eitaa"
-                    />
+                    <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
                   </Link>
                   <Link href={"https://instagram.com/sane_computer_"}>
                     {" "}
-                    <img
-                      className={styles.sphere2}
-                      src="../../../images/icons8-instagram-2048.png"
-                      alt="instagram"
-                    />
+                    <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
                   </Link>
                   <Link href={"https://t.me/SANE_IT"}>
                     {" "}
-                    <img
-                      className={styles.sphere}
-                      src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-                      alt="telegram"
-                    />
+                    <img className={styles.sphere} src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png" alt="telegram" />
                   </Link>
                 </div>
               </div>
@@ -1532,16 +1241,9 @@ const couponItemId = coupon?.couponAvailable;
               {/* <RotatingGlobe/> */}
               {offBanner?.orderValue == 1 && (
                 <>
-                  <img
-                    className={`${styles.mobi_header_img_off} `}
-                    src={offBanner.bigImg}
-                    alt={offBanner.title}
-                  />
+                  <img className={`${styles.mobi_header_img_off} `} src={offBanner.bigImg} alt={offBanner.title} />
 
-                  <span className={`${styles.mobi_header_span_off} `}>
-                    {" "}
-                    تخفیف ویژه روز پدر
-                  </span>
+                  <span className={`${styles.mobi_header_span_off} `}> تخفیف ویژه روز پدر</span>
                 </>
               )}
             </Link>
@@ -1550,43 +1252,20 @@ const couponItemId = coupon?.couponAvailable;
               {xtFlagLogin && (
                 <Link href={"/p-user/profile"}>
                   <span className={styles.sphere4}>
-                    {userSrc && (
-                      <img
-                        src={userSrc}
-                        alt="user-profile"
-                        className={`${styles.Header_user_img_mobile}`}
-                      />
-                    )}
-                    <UserCircleGear
-                      size={35}
-                      color="#14a5af"
-                      weight="duotone"
-                    />
+                    {userSrc && <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img_mobile}`} />}
+                    <UserCircleGear size={35} color="#14a5af" weight="duotone" />
                   </span>
                   {/* <span className={styles.sphere4} >{name?.toUpperCase()}</span> */}
                 </Link>
               )}
 
               {xtFlagLogin ? (
-                <Link
-                  href={"/p-user/ticket"}
-                  onClick={() => setXtFlagSpinnerShow(true)}
-                >
+                <Link href={"/p-user/ticket"} onClick={() => setXtFlagSpinnerShow(true)}>
                   {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
-                  <ChatCircleText
-                    size={30}
-                    color="#14a5af"
-                    weight="duotone"
-                    className={styles.sphere}
-                  />
+                  <ChatCircleText size={30} color="#14a5af" weight="duotone" className={styles.sphere} />
                   {
-                    messageNotification?.filter((filter) => filter.status == 1)
-                      ?.length != 0 && (
-                      <ExclamationMark
-                        size={28}
-                        weight="bold"
-                        className={`${styles.shopicon_bagetB} centerc`}
-                      />
+                    messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && (
+                      <ExclamationMark size={28} weight="bold" className={`${styles.shopicon_bagetB} centerc`} />
                     )
                     //  <span className={`${styles.shopicon_baget} centerc`} > !</span>
                   }
@@ -1638,21 +1317,15 @@ const couponItemId = coupon?.couponAvailable;
       <section className={styles.D}>
         {isMenuOpen && (
           <div className="dropdownMenu">
-            <div
-              className={` container centerr ${styles.mobile_dropdownMenu_li}`}
-            >
+            <div className={` container centerr ${styles.mobile_dropdownMenu_li}`}>
               <div
                 // className='row-cols-6 '
                 className={`row ${styles.ishover}`}
               >
-                <div className="col-2 ">
+                {/* <div className="col-2 ">
                   <div>
                     <button
-                      className={
-                        !flagCateMobile
-                          ? `btn btn-outline-info ${styles.rightside_button_cate_mob}`
-                          : `btn btn-outline-info ${styles.active_button_header}`
-                      }
+                      className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(true)}
                     >
                       {" "}
@@ -1660,60 +1333,45 @@ const couponItemId = coupon?.couponAvailable;
                     </button>
 
                     <button
-                      className={
-                        flagCateMobile
-                          ? `btn btn-outline-info ${styles.rightside_button_cate_mob}`
-                          : `btn btn-outline-info ${styles.active_button_header}`
-                      }
+                      className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(false)}
                     >
                       {" "}
                       سخت افزار
                     </button>
                   </div>
-                  {/* {mainCategory.childs?.length &&
-                  mainCategory.childs.map((item, index) => (
-                    <Link
-                    onClick={()=>setXtFlagSpinnerShow(true)}
-                      key={index}
-                      href={`/category/${item.id}`}
-                      className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                
+
+                </div> */}
+                <div className="col-12">
+                  <div>
+                    <button
+                      className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                      onClick={() => setFlagCateMobile(true)}
                     >
-                      <img src={item.imageUrl} alt={item.name || 'Category image'} />
-                      {item.name}
-                    </Link>
-                  ))} */}
-                </div>
-                <div className="col-10">
+                      {" "}
+                      لوازم جانبی
+                    </button>
+
+                    <button
+                      className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                      onClick={() => setFlagCateMobile(false)}
+                    >
+                      {" "}
+                      سخت افزار
+                    </button>
+                  </div>
                   {flagCateMobile
                     ? mainCategory.childs && (
-                        <div className={`row row-cols-auto ${styles.bcatitem}`}>
+                        <div className={`row row-cols-2  ${styles.bcatitem}`}>
                           {mainCategory.childs.map((item, index) => (
-                            <CardA
-                              click={toggleMenu}
-                              datos={""}
-                              key={item.id}
-                              imgSrc={item.imageUrl}
-                              category={`category`}
-                              id={item.id}
-                              text={item.name}
-                            />
+                            <CardA click={toggleMenu} datos={""} key={item.id} imgSrc={item.imageUrl} category={`category`} id={item.id} text={item.name} />
                           ))}
                         </div>
                       )
                     : mainCategoryB.childs && (
-                        <div className={`row row-cols-1 ${styles.bcatitem}`}>
+                        <div className={`row row-cols-2 ${styles.bcatitem}`}>
                           {mainCategoryB.childs.map((item, index) => (
-                            <CardA
-                              click={toggleMenu}
-                              datos={""}
-                              key={item.id}
-                              imgSrc={item.imageUrl}
-                              category={`category`}
-                              id={item.id}
-                              text={item.name}
-                            />
+                            <CardA click={toggleMenu} datos={""} key={item.id} imgSrc={item.imageUrl} category={`category`} id={item.id} text={item.name} />
                           ))}
                         </div>
                       )}
@@ -1744,7 +1402,10 @@ const couponItemId = coupon?.couponAvailable;
                       textDecoration: "none",
                       color: "inherit",
                     }}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      ulRefA.current.classList.remove("header_hidden_ulRefA");
+                    }}
                   >
                     <House size={28} weight="duotone" color="#14a5af" />
                   </Link>
@@ -1752,7 +1413,10 @@ const couponItemId = coupon?.couponAvailable;
 
                 <li
                   className={`${styles.hamburger_li} centerr`}
-                  onClick={toggleMenu}
+                  onClick={() => {
+                    toggleMenu();
+                    ulRefA.current.classList.remove("header_hidden_ulRefA");
+                  }}
                 >
                   {/* Hamburger/Close icon */}
                   <button className={`hamburger ${isMenuOpen ? "open" : ""}`}>
@@ -1766,10 +1430,7 @@ const couponItemId = coupon?.couponAvailable;
                   className={`${styles.bottomHeader_ul_category}`}
                   onClick={() => {
                     // console.log(ulRefA.current.classList.value);
-                    if (
-                      ulRefA.current.classList.value ===
-                      "Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA"
-                    ) {
+                    if (ulRefA.current.classList.value === "Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA") {
                       ulRefA.current.classList.remove("header_hidden_ulRefA");
                     } else {
                       ulRefA.current.classList.add("header_hidden_ulRefA");
@@ -1778,10 +1439,7 @@ const couponItemId = coupon?.couponAvailable;
                 >
                   <User size={28} weight="duotone" color="#14a5af" />
 
-                  <div
-                    className={`${styles.bottomHeader_ul_category_div}`}
-                    ref={ulRefA}
-                  >
+                  <div className={`${styles.bottomHeader_ul_category_div}`} ref={ulRefA}>
                     {xtFlagLogin ? (
                       <Link
                         href={"/p-user/profile"}
@@ -1886,7 +1544,11 @@ const couponItemId = coupon?.couponAvailable;
                   </div>
                 </li>
 
-                <li>
+                <li
+                  onClick={() => {
+                    ulRefA.current.classList.remove("header_hidden_ulRefA");
+                  }}
+                >
                   {resetFlagCart && (
                     <Link
                       onClick={() => {
@@ -1906,22 +1568,10 @@ const couponItemId = coupon?.couponAvailable;
                         color: "inherit",
                       }}
                     >
-                      <div
-                        className={`${styles.Header_leftSide__div_mobile} centerr`}
-                      >
-                        {cartCounter != 0 && (
-                          <span
-                            className={`${styles.shopicon_baget_mobile} centerc`}
-                          >
-                            {cartCounter}
-                          </span>
-                        )}
+                      <div className={`${styles.Header_leftSide__div_mobile} centerr`}>
+                        {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`}>{cartCounter}</span>}
                       </div>
-                      <ShoppingCart
-                        size={28}
-                        weight="duotone"
-                        color="#14a5af"
-                      />
+                      <ShoppingCart size={28} weight="duotone" color="#14a5af" />
                     </Link>
                   )}
                 </li>
@@ -1930,26 +1580,15 @@ const couponItemId = coupon?.couponAvailable;
                   onClick={() => {
                     setMenuOpen(false);
                     setVisibleB(true);
+                    ulRefA.current.classList.remove("header_hidden_ulRefA");
                   }}
                 >
                   <MagnifyingGlass size={28} weight="duotone" color="#14a5af" />
                 </li>
                 <div className={`${styles.sidebar_mobile} `}>
-                  <Sidebar
-                    visible={visibleB}
-                    onHide={() => setVisibleB(false)}
-                    fullScreen
-                  >
-                    <div
-                      className={`${styles.Header_rightSide__div_search}  centerc`}
-                    >
-                      <input
-                        className={styles.Header_rightSide__div_search_input}
-                        type="text"
-                        placeholder="دنبال چی میگردی...؟"
-                        value={searchTypeB}
-                        onChange={searchChangeB}
-                      />
+                  <Sidebar visible={visibleB} onHide={() => setVisibleB(false)} fullScreen>
+                    <div className={`${styles.Header_rightSide__div_search}  centerc`}>
+                      <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchTypeB} onChange={searchChangeB} />
                       <MagnifyingGlass
                         size={24}
                         color="#14a5af"
@@ -1961,9 +1600,7 @@ const couponItemId = coupon?.couponAvailable;
                       />
 
                       {flagSearch && (
-                        <div
-                          className={`${styles.Header_rightSide__div_searchbox} `}
-                        >
+                        <div className={`${styles.Header_rightSide__div_searchbox} `}>
                           {/* <span><XCircle size={24} onClick={() => {
                       setFlagSearch(false)
                       setSearchTypeB('')
@@ -1983,14 +1620,9 @@ const couponItemId = coupon?.couponAvailable;
                                         setVisibleB(false);
                                       }}
                                     >
-                                      <div
-                                        className={`${styles.Header_rightSide__div_searchbox_div} centerr `}
-                                      >
+                                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
                                         <span>{item.name}</span>
-                                        <img
-                                          src={item.smallImage}
-                                          alt={item.name}
-                                        />
+                                        <img src={item.smallImage} alt={item.name} />
                                       </div>
                                     </Link>
                                   );
