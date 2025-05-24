@@ -366,7 +366,7 @@ export default function CategoryDetaile({ param }) {
             </div>
           )}
           <button className="btn btn-warning" style={{ fontSize: "18px" }} onClick={() => setTableShow(!tableShow)}>
-            {!tableShow ? "نمایش نمودار" : "نمایش ستونی"}
+            {!tableShow ? "نمایش نموداری" : "نمایش ستونی"}
             {!tableShow ? <LuTableProperties /> : <FaArrowsAltV />}
           </button>
           <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>

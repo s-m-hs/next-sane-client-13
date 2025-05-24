@@ -319,6 +319,9 @@ export default function Header() {
     if (xtFlagLogin) {
       getProfile();
     }
+    if (localStorage.getItem("cartObj")) {
+      localStorage.removeItem("cartObj");
+    }
   }, [xtFlagLogin]);
   /////////////////////////////////
   const getCategoryById = (id) => {
@@ -568,7 +571,7 @@ export default function Header() {
                     </Dropdown>
                   </>
                 )}
-                <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
+                <Link href={!xtFlagLogin ? "/register" : "/p-user/profile"}>
                   <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
                     {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color="#14a5af" />}
 
@@ -741,7 +744,7 @@ export default function Header() {
 
                   {!xtFlagLogin ? (
                     <>
-                      <li
+                      {/* <li
                         onClick={() => {
                           setXtFlagSpinnerShow(true);
                           setFlagHamkar(false);
@@ -759,7 +762,7 @@ export default function Header() {
                           <SignIn size={15} />
                           ورود{" "}
                         </Link>{" "}
-                      </li>
+                      </li> */}
                       <li onClick={() => setXtFlagSpinnerShow(true)}>
                         {" "}
                         <Link
@@ -771,7 +774,7 @@ export default function Header() {
                           }}
                         >
                           <UserCheck size={15} />
-                          عضویت{" "}
+                          ورود{" "}
                         </Link>{" "}
                       </li>
                     </>
@@ -1132,7 +1135,7 @@ export default function Header() {
 
                   {!xtFlagLogin ? (
                     <>
-                      <li
+                      {/* <li
                         onClick={() => {
                           setXtFlagSpinnerShow(true);
                           setFlagHamkar(false);
@@ -1150,7 +1153,7 @@ export default function Header() {
                           <SignIn size={15} />
                           ورود{" "}
                         </Link>{" "}
-                      </li>
+                      </li> */}
 
                       <li onClick={() => setXtFlagSpinnerShow(true)}>
                         {" "}
@@ -1163,7 +1166,7 @@ export default function Header() {
                           }}
                         >
                           <UserCheck size={15} />
-                          عضویت{" "}
+                          ورود{" "}
                         </Link>{" "}
                       </li>
                     </>
@@ -1440,29 +1443,32 @@ export default function Header() {
                   <User size={28} weight="duotone" color="#14a5af" />
 
                   <div className={`${styles.bottomHeader_ul_category_div}`} ref={ulRefA}>
-                    {xtFlagLogin ? (
-                      <Link
-                        href={"/p-user/profile"}
-                        onClick={() => {
-                          setMenuOpen(false);
-                          setXtFlagSpinnerShow(true);
-                        }}
-                      >
-                        <User size={15} color="#14a5af" />
-                        <span>پروفایل من</span>
-                      </Link>
-                    ) : (
-                      <Link
-                        href={"/login"}
-                        onClick={() => {
-                          setXtFlagSpinnerShow(true);
-                          setFlagHamkar(false);
-                        }}
-                      >
-                        <SignIn size={15} color="#14a5af" />
-                        <span>ورود</span>
-                      </Link>
-                    )}
+                    {
+                      xtFlagLogin && (
+                        <Link
+                          href={"/p-user/profile"}
+                          onClick={() => {
+                            setMenuOpen(false);
+                            setXtFlagSpinnerShow(true);
+                          }}
+                        >
+                          <User size={15} color="#14a5af" />
+                          <span>پروفایل من</span>
+                        </Link>
+                      )
+                      // : (
+                      //   <Link
+                      //     href={"/login"}
+                      //     onClick={() => {
+                      //       setXtFlagSpinnerShow(true);
+                      //       setFlagHamkar(false);
+                      //     }}
+                      //   >
+                      //     <SignIn size={15} color="#14a5af" />
+                      //     <span>ورود</span>
+                      //   </Link>
+                      // )
+                    }
 
                     {!xtFlagLogin && (
                       <Link
@@ -1473,7 +1479,7 @@ export default function Header() {
                         }}
                       >
                         <UserCheck size={15} color="#14a5af" />
-                        <span>عضویت</span>
+                        <span>ورود</span>
                       </Link>
                     )}
 
@@ -1512,7 +1518,7 @@ export default function Header() {
                     >
                       <Laptop size={15} color="#14a5af" />
 
-                      <span>محاسبه گر سیستم </span>
+                      <span style={{ fontSize: "13px" }}>محاسبه گر سیستم </span>
                     </Link>
 
                     <Link

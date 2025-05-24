@@ -64,25 +64,11 @@ export default function BasketDetail() {
   const handleShowB = () => setShowB(true);
   const rout = useRouter();
 
-  const AlertA = () =>
-    alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) =>
-      setBasketFlag((prev) => !prev)
-    );
+  const AlertA = () => alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) => setBasketFlag((prev) => !prev));
   const AlertC = () =>
-    alertQ(
-      "center",
-      "success",
-      "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید",
-      "باشه..."
-    ).then((res) => rout.push("/"));
+    alertQ("center", "success", "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید", "باشه...").then((res) => rout.push("/"));
 
-  const AlertB = () =>
-    alertN(
-      "center",
-      "success",
-      " سبد خرید با موفقیت به روزرسانی شد...",
-      500
-    ).then((res) => setBasketFlag((prev) => !prev));
+  const AlertB = () => alertN("center", "success", " سبد خرید با موفقیت به روزرسانی شد...", 500).then((res) => setBasketFlag((prev) => !prev));
 
   const AlertD = () =>
     alertQ(
@@ -99,13 +85,7 @@ export default function BasketDetail() {
     }
   };
 
-  const AlertE = () =>
-    alertN(
-      "center",
-      "info",
-      "مشکلی در اعمال کد تخفیف به وجود آمده مجددا تلاش بفرمایید",
-      1500
-    );
+  const AlertE = () => alertN("center", "info", "مشکلی در اعمال کد تخفیف به وجود آمده مجددا تلاش بفرمایید", 1500);
   const removeHan = (id) => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     RemoveApi("api/CyOrders/deleteItem", id, AlertA);
@@ -115,18 +95,15 @@ export default function BasketDetail() {
   const directToZarin = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
-      const res = await fetch(
-        `${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`,
-        {
-          method: "GET",
-          credentials: "include",
+      const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`, {
+        method: "GET",
+        credentials: "include",
 
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer ${getLocalStorage}`,
-          },
-        }
-      ).then((res) => {
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${getLocalStorage}`,
+        },
+      }).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
             rout.push(`${result.url}`);
@@ -138,16 +115,13 @@ export default function BasketDetail() {
   };
   const requestCoupon = (couItemId, state) => {
     async function myApp() {
-      const res = await fetch(
-        `${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).then((res) => {
+      const res = await fetch(`${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         if (res.ok) {
           directToZarin();
         } else {
@@ -157,12 +131,12 @@ export default function BasketDetail() {
     }
     myApp();
   };
-  
-  const couponI= coupon?.couponAvailable; ///couponItem id to set state to requested
+
+  const couponI = coupon?.couponAvailable; ///couponItem id to set state to requested
   const payment = () => {
     setFlagSpinner(true);
     if (couponState) {
-      requestCoupon(couponI[0]?.id ,1);
+      requestCoupon(couponI[0]?.id, 1);
     } else {
       directToZarin();
     }
@@ -171,18 +145,15 @@ export default function BasketDetail() {
   const handleRegisterShop = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
-      const res = await fetch(
-        `${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}&addressId=${adressId}`,
-        {
-          method: "PUT",
-          credentials: "include",
+      const res = await fetch(`${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}&addressId=${adressId}`, {
+        method: "PUT",
+        credentials: "include",
 
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer ${getLocalStorage}`,
-          },
-        }
-      ).then((res) => {
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${getLocalStorage}`,
+        },
+      }).then((res) => {
         if (res.status == 200) {
           return res.json().then((result) => {
             setGetBasket([]);
@@ -211,9 +182,7 @@ export default function BasketDetail() {
     setToBuy((prevToBuy) => prevToBuy.filter((item) => item.id !== id));
 
     ///for remove from oldlocale and set newlocal to local==>
-    getLocalStorageProd = getLocalStorageProd.filter(
-      (filter) => filter.value !== id
-    );
+    getLocalStorageProd = getLocalStorageProd.filter((filter) => filter.value !== id);
     localStorage.setItem("cartObj", JSON.stringify(getLocalStorageProd));
   };
   const removeFromCart = (id) => {
@@ -227,7 +196,7 @@ export default function BasketDetail() {
         Swal.fire({
           position: "center",
           icon: "info",
-          title: "لطفا ابتدا ثبت نام کنید(کمتراز 1 دقیقه ...) ",
+          title: "لطفا ابتدا با شماره همراه خود وارد شوید(کمتراز 30 ثانیه 😊) ",
           showConfirmButton: true,
           confirmButtonText: "تایید",
         }).then((res) => {
@@ -253,9 +222,7 @@ export default function BasketDetail() {
 
   const addItem = (item) => {
     setToBuy((prevToBuy) => {
-      const itemExists = prevToBuy.some(
-        (existingItem) => existingItem.id === item.id
-      );
+      const itemExists = prevToBuy.some((existingItem) => existingItem.id === item.id);
       if (!itemExists) {
         return [...prevToBuy, item];
       }
@@ -329,9 +296,7 @@ export default function BasketDetail() {
 
   useEffect(() => {
     const cyProductIDs = basket.map((item) => item.cyProductID);
-    const uniqueArray = cartItem.filter(
-      (item) => !cyProductIDs.includes(item.value.value)
-    );
+    const uniqueArray = cartItem.filter((item) => !cyProductIDs.includes(item.value.value));
     setBasket2(uniqueArray);
   }, [basket]);
 
@@ -340,8 +305,7 @@ export default function BasketDetail() {
   }, []);
 
   useEffect(() => {
-    const getLocalStorageProd =
-      JSON.parse(localStorage.getItem("cartObj")) || [];
+    const getLocalStorageProd = JSON.parse(localStorage.getItem("cartObj")) || [];
     setLocalBasket(getLocalStorageProd);
     setFlagLocal(true);
     if (localbasket.length != 0) {
@@ -354,10 +318,7 @@ export default function BasketDetail() {
   ///to add total price
   useEffect(() => {
     const data = getBasket.map((item) => ({
-      totalPrice:
-        item.unitOfferPrice === item.unitPrice
-          ? item.totalPrice * offer
-          : item.unitOfferPrice,
+      totalPrice: item.unitOfferPrice === item.unitPrice ? item.totalPrice * offer : item.unitOfferPrice,
     }));
 
     const data2 = getBasket.map((item) => ({
@@ -365,10 +326,7 @@ export default function BasketDetail() {
     }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
-      const totalnoneOff = data2.reduce(
-        (acc, item) => acc + item.totalPrice,
-        0
-      );
+      const totalnoneOff = data2.reduce((acc, item) => acc + item.totalPrice, 0);
       setTotal(totalPrice);
       setNonOffTotal(totalnoneOff);
     };
@@ -447,13 +405,7 @@ export default function BasketDetail() {
                       }
                       id={item["id"]}
                       cyProductID={item.id}
-                      quantity={
-                        localUpdateBasket?.length === 0
-                          ? 1
-                          : localUpdateBasket.filter(
-                              (filter) => filter.value.value === item.id
-                            )[0]?.value.quan || 1
-                      }
+                      quantity={localUpdateBasket?.length === 0 ? 1 : localUpdateBasket.filter((filter) => filter.value.value === item.id)[0]?.value.quan || 1}
                       updateQuantity={updateQuantity}
                       handleRemove={removeFromCart}
                     />
@@ -472,16 +424,14 @@ export default function BasketDetail() {
                             ? Number(item.totalPrice) / 10
                             : item.unitOfferPrice !== item.unitPrice
                             ? Number(item.unitOfferPrice) / 10
-                            : offer !== 1 &&
-                              (Number(item.totalPrice) / 10) * offer
+                            : offer !== 1 && (Number(item.totalPrice) / 10) * offer
                         }
                         unitPrice={
                           offer == 1 && item.unitOfferPrice === item.unitPrice
                             ? Number(item.unitPrice) / 10
                             : item.unitOfferPrice !== item.unitPrice
                             ? Number(item.unitOfferPrice) / 10
-                            : offer !== 1 &&
-                              (Number(item.unitPrice) / 10) * offer
+                            : offer !== 1 && (Number(item.unitPrice) / 10) * offer
                         }
                         WithoutOffPrice={item.unitPrice / 10} ///send to cartitem product price without off
                         id={item.id}
@@ -539,17 +489,11 @@ export default function BasketDetail() {
 
                 <ul>
                   <li>
-                    <p>
-                      سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری
-                      تحویل پست میگردد.
-                    </p>
+                    <p>سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری تحویل پست میگردد.</p>
                   </li>
 
                   <li>
-                    <p>
-                      امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و... با
-                      هماهنگی با واحد فروش در شهر تهران و قم فراهم می باشد.
-                    </p>
+                    <p>امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و... با هماهنگی با واحد فروش در شهر تهران و قم فراهم می باشد.</p>
                   </li>
 
                   <li>
@@ -564,15 +508,7 @@ export default function BasketDetail() {
           <div className="row">
             <div className="col-6">
               <div className={`  ${style.col_8_bottom_div_2} centerr`}>
-                <button
-                  type="button"
-                  className={
-                    flagUpdate
-                      ? `${style.btn} btn btn-outline-info`
-                      : `${style.btn_hide}`
-                  }
-                  onClick={updateBasketHandler}
-                >
+                <button type="button" className={flagUpdate ? `${style.btn} btn btn-outline-info` : `${style.btn_hide}`} onClick={updateBasketHandler}>
                   به روز رسانی سبد خرید
                 </button>
               </div>
@@ -582,11 +518,7 @@ export default function BasketDetail() {
                   {coupon?.couponAvailable && (
                     <div className={`${style.coupon_div} centerr`}>
                       <button
-                        className={
-                          !couponState
-                            ? "btn btn-warning"
-                            : "btn btn-primary disabled"
-                        }
+                        className={!couponState ? "btn btn-warning" : "btn btn-primary disabled"}
                         onClick={() => {
                           // setCouponState(!couponState);
                           setCouponState(true);
@@ -595,14 +527,11 @@ export default function BasketDetail() {
                       >
                         {!couponState ? (
                           <>
-                            <span>
-                              {" "}
-                              برای فعالسازی کدتخفیف اینجا کلیک کنید :
-                            </span>
+                            <span> برای فعالسازی کدتخفیف اینجا کلیک کنید :</span>
                             <br />
                             <GiClick style={{ fontSize: "25px" }} />
                             {"  "}
-                            <span>کدتخفیف شما :   {coupon?.code}</span>
+                            <span>کدتخفیف شما : {coupon?.code}</span>
                           </>
                         ) : (
                           <>
@@ -610,36 +539,20 @@ export default function BasketDetail() {
                             <br />
                             <GiCheckMark style={{ fontSize: "25px" }} />
                             {"  "}
-                            <span>  {coupon?.code}</span>
+                            <span> {coupon?.code}</span>
                           </>
                         )}
                       </button>
                     </div>
                   )}
-                  <button
-                    type="button"
-                    className={
-                      flagUpdate || getBasket?.length == 0
-                        ? `${style.btn_hide}`
-                        : `${style.btn} btn btn-outline-info`
-                    }
-                    onClick={paymentHandler}
-                  >
+                  <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                     تکمیل خرید
                   </button>
                 </>
               )}
 
               {!xtFlagLogin && (
-                <button
-                  type="button"
-                  className={
-                    flagUpdate
-                      ? `${style.btn_hide}`
-                      : `${style.btn} btn btn-outline-info`
-                  }
-                  onClick={paymentHandler}
-                >
+                <button type="button" className={flagUpdate ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                   تکمیل خرید
                 </button>
               )}
@@ -648,25 +561,14 @@ export default function BasketDetail() {
             {Number(total) != 0 && (
               <div className="col-6">
                 <div className={` ${style.colPrice_mobile}`}>
-                  <button
-                    className={`btn btn-outline  ${style.colPrice_mobile_btn1}`}
-                    disabled
-                  >
+                  <button className={`btn btn-outline  ${style.colPrice_mobile_btn1}`} disabled>
                     <span>مجموع سبد خرید :</span>
                     <br />
-                    <div className={`  ${style.colPrice_mobile_span2}`}>
-                      {(Number(total) / 10).toLocaleString()} تومان
-                    </div>
+                    <div className={`  ${style.colPrice_mobile_span2}`}>{(Number(total) / 10).toLocaleString()} تومان</div>
                     <br />
-                    <div className={`${style.colPrice_nonoff_span}`}>
-                      {(Number(nonOfftotal) / 10).toLocaleString()} تومان
-                    </div>
+                    <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
 
-                    <img
-                      src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-                      alt="basket-image"
-                      className={style.colPrice_mobile_shopimg}
-                    />
+                    <img src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png" alt="basket-image" className={style.colPrice_mobile_shopimg} />
                   </button>
                 </div>
               </div>
@@ -677,15 +579,7 @@ export default function BasketDetail() {
         <div className={`col-lg-4 centerc ${style.col_4} boxSh`}>
           <div>
             <div className="centerc" style={{ alignItems: "center" }}>
-              <button
-                type="button"
-                className={
-                  flagUpdate
-                    ? `${style.btn} btn btn-outline-info`
-                    : `${style.btn_hide}`
-                }
-                onClick={updateBasketHandler}
-              >
+              <button type="button" className={flagUpdate ? `${style.btn} btn btn-outline-info` : `${style.btn_hide}`} onClick={updateBasketHandler}>
                 به روز رسانی سبد خرید
               </button>
             </div>
@@ -697,11 +591,7 @@ export default function BasketDetail() {
                     {coupon?.couponAvailable && (
                       <div className={`${style.coupon_div} centerr`}>
                         <button
-                          className={
-                            !couponState
-                              ? "btn btn-warning"
-                              : "btn btn-primary disabled"
-                          }
+                          className={!couponState ? "btn btn-warning" : "btn btn-primary disabled"}
                           onClick={() => {
                             // setCouponState(!couponState);
                             setCouponState(true);
@@ -710,14 +600,11 @@ export default function BasketDetail() {
                         >
                           {!couponState ? (
                             <>
-                              <span>
-                                {" "}
-                                برای فعالسازی کدتخفیف اینجا کلیک کنید :
-                              </span>
+                              <span> برای فعالسازی کدتخفیف اینجا کلیک کنید :</span>
                               <br />
                               <GiClick style={{ fontSize: "25px" }} />
                               {"  "}
-                              <span>کدتخفیف شما :  {coupon?.code}</span>
+                              <span>کدتخفیف شما : {coupon?.code}</span>
                             </>
                           ) : (
                             <>
@@ -725,37 +612,21 @@ export default function BasketDetail() {
                               <br />
                               <GiCheckMark style={{ fontSize: "25px" }} />
                               {"  "}
-                              <span>   {coupon?.code}</span>
+                              <span> {coupon?.code}</span>
                             </>
                           )}
                         </button>
                       </div>
                     )}
 
-                    <button
-                      type="button"
-                      className={
-                        flagUpdate || getBasket?.length == 0
-                          ? `${style.btn_hide}`
-                          : `${style.btn} btn btn-outline-info`
-                      }
-                      onClick={paymentHandler}
-                    >
+                    <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                       تکمیل خرید
                     </button>
                   </>
                 )}
 
                 {!xtFlagLogin && (
-                  <button
-                    type="button"
-                    className={
-                      flagUpdate
-                        ? `${style.btn_hide}`
-                        : `${style.btn} btn btn-outline-info`
-                    }
-                    onClick={paymentHandler}
-                  >
+                  <button type="button" className={flagUpdate ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                     تکمیل خرید
                   </button>
                 )}
@@ -774,23 +645,14 @@ export default function BasketDetail() {
             </div> */}
             {Number(total) != 0 && (
               <div className={`centerr ${style.colPrice}`}>
-                <button
-                  className={`btn btn-outline-warning ${style.btn1}`}
-                  disabled
-                >
-                  <img
-                    src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png"
-                    alt="basket-image"
-                    className={style.shopimg}
-                  />
+                <button className={`btn btn-outline-warning ${style.btn1}`} disabled>
+                  <img src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png" alt="basket-image" className={style.shopimg} />
 
                   <span>مجموع سبد خرید :</span>
                   <br />
                   <div>{(Number(total) / 10).toLocaleString()} تومان</div>
                   <br />
-                  <div className={`${style.colPrice_nonoff_span}`}>
-                    {(Number(nonOfftotal) / 10).toLocaleString()} تومان
-                  </div>
+                  <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
                 </button>
               </div>
             )}
@@ -810,10 +672,7 @@ export default function BasketDetail() {
             {address?.length != 0 ? (
               <>
                 <h2> آدرس های ثبت شده :</h2>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setAdressId(e.target.value)}
-                >
+                <Form.Select aria-label="Default select example" onChange={(e) => setAdressId(e.target.value)}>
                   {address?.map((item) => (
                     <option value={item.id}>
                       {item.state}-{item.address}-کد پستی :{item.postalCode}
@@ -823,13 +682,8 @@ export default function BasketDetail() {
               </>
             ) : (
               <>
-                <h2>
-                  شما آدرس ثبت شده ای ندارید لطفا آدرس خود را ثبت بفرمایید...
-                </h2>
-                <Link
-                  href={"./p-user/address"}
-                  onClick={() => setXtFlagSpinnerShow(true)}
-                >
+                <h2>شما آدرس ثبت شده ای ندارید لطفا آدرس خود را ثبت بفرمایید...</h2>
+                <Link href={"./p-user/address"} onClick={() => setXtFlagSpinnerShow(true)}>
                   <button className="btn btn-success">ثبت آدرس</button>
                 </Link>
               </>
@@ -837,14 +691,7 @@ export default function BasketDetail() {
 
             <div className={`centerc ${style.cath_div}`}>
               <span>
-                <input
-                  className={`${style.cath_input}`}
-                  type="radio"
-                  name="payment"
-                  defaultChecked
-                  value={1}
-                  onChange={(e) => setPayState(e.target.value)}
-                />
+                <input className={`${style.cath_input}`} type="radio" name="payment" defaultChecked value={1} onChange={(e) => setPayState(e.target.value)} />
                 <span className="m-2">پرداخت آنلاین</span>
               </span>
 
@@ -886,18 +733,11 @@ export default function BasketDetail() {
                     </ul> */}
                     <ul>
                       <li>
-                        <p>
-                          سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت
-                          کاری تحویل پست میگردد.
-                        </p>
+                        <p>سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری تحویل پست میگردد.</p>
                       </li>
 
                       <li>
-                        <p>
-                          امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و...
-                          با هماهنگی با واحد فروش در شهر تهران و قم فراهم می
-                          باشد.
-                        </p>
+                        <p>امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و... با هماهنگی با واحد فروش در شهر تهران و قم فراهم می باشد.</p>
                       </li>
 
                       <li>
@@ -922,19 +762,12 @@ export default function BasketDetail() {
           </Modal.Body>
 
           <Modal.Footer>
-            <button
-              className={`btn btn-danger ${style.btn_modal_close}`}
-              onClick={handleClose}
-            >
+            <button className={`btn btn-danger ${style.btn_modal_close}`} onClick={handleClose}>
               <X size={16} color="#fff" weight="duotone" />
               بستن
             </button>
             <button
-              className={
-                address?.length !== 0
-                  ? `btn btn-info ${style.btn_modal_ok}`
-                  : `btn btn-info ${style.btn_modal_ok_disable}`
-              }
+              className={address?.length !== 0 ? `btn btn-info ${style.btn_modal_ok}` : `btn btn-info ${style.btn_modal_ok_disable}`}
               onClick={payState == 1 ? payment : handleRegisterShop}
               // onClick={payState == 1 ? directToZarin : handleRegisterShop}
             >
@@ -950,10 +783,7 @@ export default function BasketDetail() {
 
           <Modal.Body style={{ fontSize: "35px" }}>
             <>
-              <h1>
-                موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد
-                خود حذف بفرمایید :{" "}
-              </h1>
+              <h1>موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد خود حذف بفرمایید : </h1>
               {/* <table className="table"> */}
               <ul className={`${style.ul_ziroSupply}`}>
                 {ziroSupply?.length != 0 &&
@@ -969,10 +799,7 @@ export default function BasketDetail() {
           </Modal.Body>
 
           <Modal.Footer>
-            <button
-              className={`btn btn-danger ${style.btn_modal_close}`}
-              onClick={handleCloseB}
-            >
+            <button className={`btn btn-danger ${style.btn_modal_close}`} onClick={handleCloseB}>
               <X size={16} color="#fff" weight="duotone" />
               بستن
             </button>

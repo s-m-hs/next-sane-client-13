@@ -117,6 +117,7 @@
 }
 .postDetail_div p {
   font-size: 12px;
+  font-weight: bold;
 }
 .coupon_div svg {
   animation: fadeEffect 0.5s infinite alternate;
@@ -130,6 +131,8 @@
 .colPrice_nonoff_span {
   text-decoration: line-through red;
   font-size: 15px;
+  position: absolute;
+  top: 70%;
 }
 
 .ScaleLoader-louder {
