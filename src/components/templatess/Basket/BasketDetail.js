@@ -40,6 +40,7 @@ export default function BasketDetail() {
     setCoupon,
     couponState,
     setCouponState,
+    cyUserID
   } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
@@ -358,6 +359,31 @@ export default function BasketDetail() {
   // console.log(address)
   // console.log(adressId)
   // console.log(toBuy)
+  const getActiveCoupon = (userId) => {
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyCoupon/getActiveCouponByUserId?userId=${userId}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.ok) {
+          return res.json().then((result) => {
+            setCoupon(result);
+          });
+        }
+      });
+    }
+    myApp();
+  };
+  useEffect(() => {
+    if (cyUserID) {
+      getActiveCoupon(cyUserID);
+    }
+  }, []);
+
+
   return (
     <div className={`container ${style.container}`}>
       {/* <div className="ScaleLoader-louder">
@@ -545,7 +571,7 @@ export default function BasketDetail() {
                       </button>
                     </div>
                   )}
-                  <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
+                  <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={()=>{paymentHandler}  }>
                     تکمیل خرید
                   </button>
                 </>
