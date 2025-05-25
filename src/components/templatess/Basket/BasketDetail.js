@@ -40,7 +40,7 @@ export default function BasketDetail() {
     setCoupon,
     couponState,
     setCouponState,
-    cyUserID
+    cyUserID,
   } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
@@ -52,6 +52,8 @@ export default function BasketDetail() {
   const [nonOfftotal, setNonOffTotal] = useState(0);
   const [show, setShow] = useState(false);
   const [showB, setShowB] = useState(false);
+  const [showC, setShowC] = useState(false);
+
   const [payState, setPayState] = useState(1);
   const [ziroSupply, setZiroSupply] = useState([]);
   const [flagZiroSupply, setFlagZiroSupply] = useState(false);
@@ -61,8 +63,12 @@ export default function BasketDetail() {
   const [flagSpinner, setFlagSpinner] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
+  const handleCloseC = () => setShowC(false);
+
   const handleShow = () => setShow(true);
   const handleShowB = () => setShowB(true);
+  const handleShowC = () => setShowC(true);
+
   const rout = useRouter();
 
   const AlertA = () => alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) => setBasketFlag((prev) => !prev));
@@ -316,6 +322,12 @@ export default function BasketDetail() {
     }
   }, [flagLocal]);
 
+  useEffect(() => {
+    if (coupon?.couponAvailable) {
+      handleShowC();
+    }
+  }, [coupon]);
+
   ///to add total price
   useEffect(() => {
     const data = getBasket.map((item) => ({
@@ -382,7 +394,6 @@ export default function BasketDetail() {
       getActiveCoupon(cyUserID);
     }
   }, []);
-
 
   return (
     <div className={`container ${style.container}`}>
@@ -571,7 +582,7 @@ export default function BasketDetail() {
                       </button>
                     </div>
                   )}
-                  <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={()=>{paymentHandler}  }>
+                  <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                     تکمیل خرید
                   </button>
                 </>
@@ -831,6 +842,28 @@ export default function BasketDetail() {
             </button>
           </Modal.Footer>
         </Modal>
+
+        <>
+          <Modal show={showC} onHide={handleCloseC} backdrop="static" keyboard={false}>
+            <Modal.Body>
+              <p className="text-center" style={{ fontSize: "18px", fontWeight: "600" }}>
+                {`شما یک کد تخفیف دارید برای استفاده از کد تخفیف خود روی  `}
+                <p style={{ color: "#ffc107", fontSize: "larger", fontWeight: "600" }}>کادر زرد رنگ</p>
+                {`کلیک کنید`}
+              </p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleCloseC();
+                }}
+              >
+                متوجه شدم ...
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       </>
     </div>
   );

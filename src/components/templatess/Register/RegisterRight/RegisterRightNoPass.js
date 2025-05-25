@@ -211,7 +211,7 @@ export default function RegisterRight() {
               <div className={`${style.card_div} card flex justify-content-center`}>
                 <input
                   className={`${style.verifi_input} form-control text-center`}
-                  placeholder="******"
+                  placeholder="کد پیامک شده را وارد کنید..."
                   // onChange={(e) => setTokensB(e.target.value)}
                   onChange={(e) => {
                     const val = e.target.value;
