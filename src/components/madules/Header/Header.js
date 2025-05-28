@@ -383,7 +383,7 @@ export default function Header() {
           "Content-Type": "application/json",
         },
       }).then((res) => {
-        console.log(res);
+        // console.log(res);
       });
     }
     myApp();
@@ -549,7 +549,7 @@ export default function Header() {
                   <>
                     <Dropdown className={styles.user_button} size="lg">
                       <Dropdown.Toggle variant="info" id="dropdown-basic">
-                        <span className={styles.user_span}>{name?.toUpperCase()}</span>{" "}
+                        {name !== "SaneUser" && <span className={styles.user_span}>{name?.toUpperCase()}</span>}{" "}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu className={styles.user_p}>
@@ -919,7 +919,7 @@ export default function Header() {
 
               <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
                 <div className="centerc"></div>
-                {xtFlagLogin && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
+                {xtFlagLogin && name !== "SaneUser" && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
 
                 <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
                   <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>

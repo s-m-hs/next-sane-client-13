@@ -233,6 +233,9 @@
   .btn_modal_close {
     font-size: 13px;
   }
+  .table_basket th {
+    font-size: 10px;
+  }
 }
 
 @media only screen and (max-width: 450px) {

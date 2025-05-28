@@ -100,7 +100,7 @@ export default function RegisterRight() {
     let obj = {
       un: token,
       pw: "sanepassword",
-      name: "کاربر",
+      name: "SaneUser",
     };
     // console.log(obj)
     if (token.length == 11 && !flagInput) {
@@ -211,7 +211,7 @@ export default function RegisterRight() {
               <div className={`${style.card_div} card flex justify-content-center`}>
                 <input
                   className={`${style.verifi_input} form-control text-center`}
-                  placeholder="کد پیامک شده را وارد کنید..."
+                  placeholder=" ...کد پیامک شده را وارد کنید"
                   // onChange={(e) => setTokensB(e.target.value)}
                   onChange={(e) => {
                     const val = e.target.value;

@@ -4,18 +4,7 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import style from "./Prifile.module.css";
 import { useForm } from "react-hook-form";
-import {
-  IdentificationBadge,
-  IdentificationCard,
-  UserCircle,
-  DeviceMobile,
-  EnvelopeSimple,
-  CheckCircle,
-  CheckFat,
-  Asterisk,
-  CloudArrowUp,
-  Image,
-} from "@phosphor-icons/react";
+import { IdentificationBadge, IdentificationCard, UserCircle, DeviceMobile, EnvelopeSimple, CheckCircle, CheckFat, Asterisk, CloudArrowUp, Image } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { MainContext } from "@/context/MainContext";
@@ -26,19 +15,7 @@ export default function ProfileCom() {
   const [imgUrl, setImgUrl] = useState("");
 
   // const getLocalStorage=localStorage.getItem('loginToken')
-  let {
-    cyUserID,
-    username,
-    name,
-    family,
-    email,
-    mobile,
-    userSrc,
-    xtFlagLogin,
-    setFlagProfile,
-    setXtFlagSpinnerShow,
-    xtflagSpinnerShow,
-  } = useContext(MainContext);
+  let { cyUserID, username, name, family, email, mobile, userSrc, xtFlagLogin, setFlagProfile, setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
   const {
     register,
     handleSubmit,
@@ -54,19 +31,11 @@ export default function ProfileCom() {
   };
   //////////////////////
   const alertA = () =>
-    alertN("center", "success", " اطلاعات با موفقیت ثبت شد", 1500).then(
-      (res) => {
-        reset(setValue(""));
-        router.push("/");
-      }
-    );
-  const alertB = () =>
-    alertN(
-      "center",
-      "error",
-      " اطلاعات مورد نیاز را به درستی وارد کنید...",
-      1000
-    ).then((res) => {});
+    alertN("center", "success", " اطلاعات با موفقیت ثبت شد", 1500).then((res) => {
+      reset(setValue(""));
+      router.push("/");
+    });
+  const alertB = () => alertN("center", "error", " اطلاعات مورد نیاز را به درستی وارد کنید...", 1000).then((res) => {});
   const router = useRouter();
   // console.log(errors?.update)
   ////////////////////////
@@ -202,28 +171,17 @@ export default function ProfileCom() {
         // onSelect={ffc}
         // onClick={()=>ffc(id)}
       >
-        <Tab
-          eventKey="home"
-          title=" پروفایل من"
-          style={{ background: "inherit" }}
-        >
+        <Tab eventKey="home" title=" پروفایل من" style={{ background: "inherit" }}>
           <div className={`container ${style.container}`}>
             <div className={`row ${style.row}`}>
               <div className={`col ${style.col} boxSh`}>
-                <form
-                  action=""
-                  onSubmit={handleSubmit(handleRegistration, handleError)}
-                >
+                <form action="" onSubmit={handleSubmit(handleRegistration, handleError)}>
                   <div className={`container ${style.containerB}`}>
                     <div className={`row ${style.rowB}`}>
                       <div className={` col-md-12 col-lg-6 ${style.colB}`}>
-                        <div
-                          className={`login_label_float ${style.input} centerr`}
-                        >
+                        <div className={`login_label_float ${style.input} centerr`}>
                           <input
-                            className={
-                              errors?.update?.family ? style.error : ""
-                            }
+                            className={errors?.update?.family ? style.error : ""}
                             minLength={3}
                             name="update.family"
                             type="userName"
@@ -235,15 +193,9 @@ export default function ProfileCom() {
                             })}
                           />
                           <label>
-                            <Asterisk size={12} color="#14a5af" weight="thin" />{" "}
-                            نام{" "}
+                            <Asterisk size={12} color="#14a5af" weight="thin" /> نام{" "}
                           </label>
-                          <IdentificationBadge
-                            size={38}
-                            color="#14a5af"
-                            weight="duotone"
-                            className={style.icon}
-                          />
+                          <IdentificationBadge size={38} color="#14a5af" weight="duotone" className={style.icon} />
                         </div>
 
                         <div className={`login_label_float ${style.input}`}>
@@ -262,12 +214,7 @@ export default function ProfileCom() {
                             <Asterisk size={12} color="#14a5af" weight="thin" />
                             نام خانوادگی{" "}
                           </label>
-                          <IdentificationCard
-                            size={38}
-                            color="#14a5af"
-                            weight="duotone"
-                            className={style.icon}
-                          />
+                          <IdentificationCard size={38} color="#14a5af" weight="duotone" className={style.icon} />
                         </div>
 
                         {/* <div className={ `login_label_float ${style.input}`}>
@@ -285,9 +232,7 @@ export default function ProfileCom() {
                       <div className={` col-md-12 col-lg-6 ${style.colB}`}>
                         <div className={`login_label_float ${style.input}`}>
                           <input
-                            className={
-                              errors?.update?.mobile ? style.error : ""
-                            }
+                            className={errors?.update?.mobile ? style.error : ""}
                             minLength={3}
                             disabled
                             name="update.mobile"
@@ -299,62 +244,28 @@ export default function ProfileCom() {
                             })}
                           />
                           <label>
-                            <Asterisk size={12} color="#14a5af" weight="thin" />{" "}
-                            موبایل{" "}
+                            <Asterisk size={12} color="#14a5af" weight="thin" /> موبایل{" "}
                           </label>
-                          <DeviceMobile
-                            size={38}
-                            color="#14a5af"
-                            weight="duotone"
-                            className={style.icon}
-                          />
+                          <DeviceMobile size={38} color="#14a5af" weight="duotone" className={style.icon} />
                         </div>
 
                         <div className={`login_label_float ${style.input}`}>
-                          <input
-                            minLength={3}
-                            name="update.email"
-                            type="email"
-                            placeholder=" "
-                            {...register(`update.email`)}
-                          />
+                          <input minLength={3} name="update.email" type="email" placeholder=" " {...register(`update.email`)} />
                           <label>ایمیل </label>
-                          <EnvelopeSimple
-                            size={38}
-                            color="#14a5af"
-                            weight="duotone"
-                            className={style.icon}
-                          />
+                          <EnvelopeSimple size={38} color="#14a5af" weight="duotone" className={style.icon} />
                         </div>
 
                         <div className={`login_label_float ${style.input_img}`}>
                           <div className={` ${style.profile_img_div}`}>
-                            <CloudArrowUp
-                              size={48}
-                              color="#fff"
-                              weight="duotone"
-                            />
-                            <input
-                              type="file"
-                              placeholder="برای پروفایل خود یک عکس انتخاب کن..."
-                              className={` ${style.profile_img_input}`}
-                              onChange={fileChange}
-                            />
+                            <CloudArrowUp size={48} color="#fff" weight="duotone" />
+                            <input type="file" placeholder="برای پروفایل خود یک عکس انتخاب کن..." className={` ${style.profile_img_input}`} onChange={fileChange} />
                             <h3>عکس پروفایل خود را انتخاب کنید...</h3>
-                            <img
-                              className={` ${style.profile_img_image}`}
-                              src={userSrc ? userSrc : `${apiUrl}/${imgUrl}`}
-                              alt="user-profile"
-                            />{" "}
+                            <img className={` ${style.profile_img_image}`} src={userSrc ? userSrc : `${apiUrl}/${imgUrl}`} alt="user-profile" />{" "}
                           </div>
                         </div>
                         <div className={` ${style.url_image_div}`}>
                           {imgUrl ? (
-                            <img
-                              className={` ${style.url_image}`}
-                              src={`${apiUrl}/${imgUrl}`}
-                              alt="profile-Image"
-                            />
+                            <img className={` ${style.url_image}`} src={`${apiUrl}/${imgUrl}`} alt="profile-Image" />
                           ) : (
                             <Image size={48} weight="duotone" color="#14a5af" />
                           )}

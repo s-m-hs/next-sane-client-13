@@ -4,34 +4,19 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import style from "./AddressCom.module.css";
 import { useForm } from "react-hook-form";
-import {
-  IdentificationBadge,
-  City,
-  Mailbox,
-  PhoneCall,
-  DeviceMobile,
-  EnvelopeSimple,
-  CheckCircle,
-  CheckFat,
-  Asterisk,
-} from "@phosphor-icons/react";
+import { IdentificationBadge, City, Mailbox, PhoneCall, DeviceMobile, EnvelopeSimple, CheckCircle, CheckFat, Asterisk, User } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { MainContext } from "@/context/MainContext";
 import alertN from "@/utils/Alert/AlertA";
 import RemoveApi from "@/utils/ApiUrl/apiCallBack/apiRemove";
 export default function AddressCom() {
-  let { address, setFlagAddress, setXtFlagSpinnerShow } =
-    useContext(MainContext);
-
-  const AlertA = () =>
-    alertN("right", "success", "آدرس با موفقیت ثبت شد  ...", 1500);
+  let { address, setFlagAddress, setXtFlagSpinnerShow, name, cyUserID } = useContext(MainContext);
+  const AlertA = () => alertN("right", "success", "آدرس با موفقیت ثبت شد  ...", 1500);
   const AlertB = () =>
-    alertN("right", "success", "آدرس با موفقیت حذف شد  ...", 1500).then(
-      (res) => {
-        setFlagAddress((prev) => !prev);
-      }
-    );
+    alertN("right", "success", "آدرس با موفقیت حذف شد  ...", 1500).then((res) => {
+      setFlagAddress((prev) => !prev);
+    });
 
   const {
     register,
@@ -78,9 +63,26 @@ export default function AddressCom() {
     { id: 31, name: "یزد" },
   ];
 
+  const addNameToProfile = (Usname) => {
+    ///=>  برای گرفتن نام کاربر در صورتی ک پروفایل کاربر فیلد نام برابر باشد با پیشفرض سیستم
+    //  =SaneUser
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/Customer/updateOnlyName?Usid=${cyUserID}&name=${Usname}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).catch((err) => console.log(err));
+    }
+    myApp();
+  };
+
   const handleRegistration = (data) => {
     // const getLocalStorage = localStorage.getItem("loginToken");
-
+    if (name === "SaneUser") {
+      addNameToProfile(data.name);
+    }
     let obj = {
       id: 0,
       address: data.address,
@@ -141,38 +143,81 @@ export default function AddressCom() {
         // onSelect={ffc}
         // onClick={()=>ffc(id)}
       >
-        <Tab
-          eventKey="home"
-          title=" لیست آدرس های من"
-          style={{ background: "inherit" }}
-        >
+        <Tab eventKey="home" title=" لیست آدرس های من" style={{ background: "inherit" }}>
           <div className={`container ${style.container}`}>
             <div className={`row ${style.row}`}>
               <div className={`col ${style.col} boxSh`}>
                 <div className="row">
                   <div className={`col col-lg-6 ${style.col_6} `}>
-                    <form
-                      action=""
-                      onSubmit={handleSubmit(handleRegistration, handleError)}
-                    >
-                      <select
-                        className={`login_label_float ${style.input_state} `}
-                        //   style={{border:' 1px solid #EAEAEF' , width:'100%', color:'rgb(172 172 173)',outline:'none'}}
-                        {...register("state")}
-                      >
-                        <option value="" key="">
-                          استان خود را انتخاب کنید...
-                        </option>
-                        {provinces.map((item, index) => (
-                          <option key={index} value={`${item.name}`}>
-                            {item.name}
-                          </option>
-                        ))}
-                      </select>
+                    <form action="" onSubmit={handleSubmit(handleRegistration, handleError)}>
+                      {name === "SaneUser" && ( ///=>در صورت پیشفرض بودن نام پروفایل  اینپوت گرفتن نام فعال میشود
+                        <div className={`login_label_float ${style.input} centerr`}>
+                          <input
+                            name="name"
+                            type="name"
+                            placeholder=""
+                            // value={name}
+                            {...register(`name`, {
+                              required: "وارد کردن نام کاربری الزامی است...",
+                              minLength: {
+                                value: 3,
+                                message: "نام کاربری باید حداقل ۳ حرف باشد",
+                              },
+                            })}
+                          />
+                          <label>نام کاربری </label>
+                          <User size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                          {errors.name && (
+                            <span
+                              style={{
+                                color: "red",
+                                fontSize: "12px",
+                                position: "absolute",
+                                bottom: "0px",
+                                right: "30px",
+                              }}
+                            >
+                              {errors.name.message}
+                            </span>
+                          )}
+                        </div>
+                      )}
 
-                      <div
-                        className={`login_label_float ${style.input} centerr`}
-                      >
+                      <div className={`login_label_float `} style={{ position: "relative" }}>
+                        <select
+                          className={`login_label_float ${style.input_state} `}
+                          //   style={{border:' 1px solid #EAEAEF' , width:'100%', color:'rgb(172 172 173)',outline:'none'}}
+                          {...register("state", {
+                            required: " وارد کردن استان الزامی است ...",
+                          })}
+                          isInvalid={!!errors.state}
+                        >
+                          <option value="" key="">
+                            استان ...
+                          </option>
+                          {provinces.map((item, index) => (
+                            <option key={index} value={`${item.name}`}>
+                              {item.name}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.state && (
+                          <span
+                            style={{
+                              width: "100%",
+                              color: "red",
+                              fontSize: "12px",
+                              position: "absolute",
+                              bottom: "-10px",
+                              right: "30px",
+                            }}
+                          >
+                            {errors.state.message}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className={`login_label_float ${style.input} centerr`}>
                         <input
                           name="city"
                           type="userName"
@@ -181,17 +226,10 @@ export default function AddressCom() {
                           {...register(`city`)}
                         />
                         <label> شهر </label>
-                        <City
-                          size={38}
-                          color="#14a5af"
-                          weight="duotone"
-                          className={style.icon}
-                        />
+                        <City size={38} color="#14a5af" weight="duotone" className={style.icon} />
                       </div>
 
-                      <div
-                        className={`login_label_float ${style.input} centerr`}
-                      >
+                      <div className={`login_label_float ${style.input} centerr`}>
                         <input
                           name="address"
                           type="userName"
@@ -200,17 +238,10 @@ export default function AddressCom() {
                           {...register(`address`)}
                         />
                         <label> آدرس ... </label>
-                        <City
-                          size={38}
-                          color="#14a5af"
-                          weight="duotone"
-                          className={style.icon}
-                        />
+                        <City size={38} color="#14a5af" weight="duotone" className={style.icon} />
                       </div>
 
-                      <div
-                        className={`login_label_float ${style.input} centerr`}
-                      >
+                      <div className={`login_label_float ${style.input} centerr`}>
                         <input
                           name="postalCode"
                           type="userName"
@@ -219,17 +250,10 @@ export default function AddressCom() {
                           {...register(`postalCode`)}
                         />
                         <label> کد پستی </label>
-                        <Mailbox
-                          size={38}
-                          color="#14a5af"
-                          weight="duotone"
-                          className={style.icon}
-                        />
+                        <Mailbox size={38} color="#14a5af" weight="duotone" className={style.icon} />
                       </div>
 
-                      <div
-                        className={`login_label_float ${style.input} centerr`}
-                      >
+                      <div className={`login_label_float ${style.input} centerr`}>
                         <input
                           name="phone"
                           type="userName"
@@ -238,17 +262,10 @@ export default function AddressCom() {
                           {...register(`phone`)}
                         />
                         <label> شماره ثابت </label>
-                        <PhoneCall
-                          size={38}
-                          color="#14a5af"
-                          weight="duotone"
-                          className={style.icon}
-                        />
+                        <PhoneCall size={38} color="#14a5af" weight="duotone" className={style.icon} />
                       </div>
 
-                      <div
-                        className={`login_label_float ${style.input} centerr`}
-                      >
+                      <div className={`login_label_float ${style.input} centerr`}>
                         <input
                           name="mobile"
                           type="userName"
@@ -257,22 +274,13 @@ export default function AddressCom() {
                           {...register(`mobile`)}
                         />
                         <label> شماره همراه </label>
-                        <DeviceMobile
-                          size={38}
-                          color="#14a5af"
-                          weight="duotone"
-                          className={style.icon}
-                        />
+                        <DeviceMobile size={38} color="#14a5af" weight="duotone" className={style.icon} />
                       </div>
 
                       <div className={`col ${style.col_button}`}>
                         <button className={`btn btn-info ${style.button}`}>
                           تایید
-                          <CheckCircle
-                            size={32}
-                            color="#fff"
-                            weight="duotone"
-                          />
+                          <CheckCircle size={32} color="#fff" weight="duotone" />
                         </button>
                       </div>
                     </form>
@@ -302,10 +310,7 @@ export default function AddressCom() {
                                 {item.phone}-{item.mobile}
                               </td>
                               <td>
-                                <button
-                                  className="btn btn-danger"
-                                  onClick={() => removeHandler(item.id)}
-                                >
+                                <button className="btn btn-danger" onClick={() => removeHandler(item.id)}>
                                   حذف
                                 </button>
                               </td>

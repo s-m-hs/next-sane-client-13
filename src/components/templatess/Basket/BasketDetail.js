@@ -408,7 +408,7 @@ export default function BasketDetail() {
             {/* <button onClick={() => {
               setCartCounter(0)
               localStorage.clear(); setToBuy([]); setBasket([]);setLocalUpdateBasket([]) }}>clear</button> */}
-            <table className="table table-hover">
+            <table className={`table table-hover ${style.table_basket} `}>
               <thead>
                 <tr key="">
                   <th>تصویر کالا</th>

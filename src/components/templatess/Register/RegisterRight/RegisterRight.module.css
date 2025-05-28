@@ -77,10 +77,13 @@
   display: none;
 }
 .card_div {
+  width: 80%;
   border: none;
   direction: ltr;
 }
-
+.card_div input {
+  width: 100%;
+}
 .err_p {
   color: #ff0000;
 }
@@ -102,8 +105,8 @@
   padding: 15px 20px;
 }
 .verifi_input {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 15px;
+  /* font-weight: bold; */
 }
 
 @media only screen and (max-width: 900px) {
