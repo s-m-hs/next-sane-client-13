@@ -19,7 +19,6 @@ export default function ProductDetail({ param }) {
   const [idCategory, setIdCategory] = useState("");
   const [braCram, setBramCram] = useState([]);
   const revercBrad = braCram?.slice().reverse();
-  console.log(revercBrad);
   let { nameCategory, setXtFlagSpinnerShow, offer } = useContext(MainContext);
 
   const getProductById = (id) => {
@@ -56,7 +55,6 @@ export default function ProductDetail({ param }) {
       }).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
-            console.log(result);
             setBramCram(result);
           });
         }
@@ -92,10 +90,7 @@ export default function ProductDetail({ param }) {
                 </Breadcrumb.Item>
 
                 <Breadcrumb.Item>
-                  <Link
-                    onClick={() => setXtFlagSpinnerShow(true)}
-                    href={`/category/${idCategory}`}
-                  >
+                  <Link onClick={() => setXtFlagSpinnerShow(true)} href={`/category/${idCategory}`}>
                     <Dresser size={18} />
                     {revercBrad[0]}
                   </Link>
@@ -134,11 +129,7 @@ export default function ProductDetail({ param }) {
             // onSelect={ffc}
             // onClick={()=>ffc(id)}
           >
-            <Tab
-              eventKey="home"
-              title="مشخصات"
-              style={{ background: "inherit" }}
-            >
+            <Tab eventKey="home" title="مشخصات" style={{ background: "inherit" }}>
               <div className={Styles.table_div}>
                 <table className="table mt-5 table-striped">
                   <tbody>
@@ -154,11 +145,7 @@ export default function ProductDetail({ param }) {
               </div>
             </Tab>
 
-            <Tab
-              eventKey="longer-tab"
-              title="نظرات کاربران"
-              style={{ background: "inherit" }}
-            ></Tab>
+            <Tab eventKey="longer-tab" title="نظرات کاربران" style={{ background: "inherit" }}></Tab>
           </Tabs>
         </div>
       </div>
