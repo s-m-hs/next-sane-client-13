@@ -514,26 +514,26 @@ export default function Header() {
                     }} /></span> */}
                             {searchBoxArr.itemList?.length != 0
                               ? searchBoxArr.itemList?.map((item) => {
-                                  if (item.cyCategoryId) {
-                                    return (
-                                      <Link
-                                        href={`/product/${item.id}`}
-                                        onClick={() => {
-                                          setFlagSearch(false);
-                                          setSearchBoxArr([]);
-                                          setSearchType("");
-                                          setXtFlagSpinnerShow(true);
-                                          setVisible(false);
-                                        }}
-                                      >
-                                        <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
-                                          <span>{item.name}</span>
-                                          <img src={item.smallImage} alt={item.name} />
-                                        </div>
-                                      </Link>
-                                    );
-                                  }
-                                })
+                                if (item.cyCategoryId) {
+                                  return (
+                                    <Link
+                                      href={`/product/${item.id}`}
+                                      onClick={() => {
+                                        setFlagSearch(false);
+                                        setSearchBoxArr([]);
+                                        setSearchType("");
+                                        setXtFlagSpinnerShow(true);
+                                        setVisible(false);
+                                      }}
+                                    >
+                                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
+                                        <span>{item.name}</span>
+                                        <img src={item.smallImage} alt={item.name} />
+                                      </div>
+                                    </Link>
+                                  );
+                                }
+                              })
                               : ""}
                           </div>
                         </div>
@@ -691,7 +691,7 @@ export default function Header() {
                           <div
                             className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
 
-                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -744,25 +744,7 @@ export default function Header() {
 
                   {!xtFlagLogin ? (
                     <>
-                      {/* <li
-                        onClick={() => {
-                          setXtFlagSpinnerShow(true);
-                          setFlagHamkar(false);
-                        }}
-                      >
-                        {" "}
-                        <Link
-                          href={"/login"}
-                          style={{
-                            listStyle: "none",
-                            textDecoration: "none",
-                            color: "inherit",
-                          }}
-                        >
-                          <SignIn size={15} />
-                          ورود{" "}
-                        </Link>{" "}
-                      </li> */}
+
                       <li onClick={() => setXtFlagSpinnerShow(true)}>
                         {" "}
                         <Link
@@ -845,11 +827,11 @@ export default function Header() {
                 <Link href={"https://eitaa.com/sane_camputer"}>
                   <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
                 </Link>
-                <Link href={"https://instagram.com/sane_computer_"}>
+                <Link href={"https://it_sane"}>
                   {" "}
                   <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
                 </Link>
-                <Link href={"https://t.me/SANE_IT"}>
+                <Link href={"https://t.me/sane_camputer"}>
                   {" "}
                   <img className={styles.sphere} src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png" alt="telegram" />
                 </Link>
@@ -889,26 +871,26 @@ export default function Header() {
                     }} /></span> */}
                           {searchBoxArr.itemList?.length != 0
                             ? searchBoxArr.itemList?.map((item) => {
-                                if (item.mainImage) {
-                                  return (
-                                    <Link
-                                      href={`/product/${item.id}`}
-                                      onClick={() => {
-                                        setFlagSearch(false);
-                                        setSearchBoxArr([]);
-                                        setSearchType("");
-                                        setXtFlagSpinnerShow(true);
-                                        setVisible(false);
-                                      }}
-                                    >
-                                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
-                                        <span>{item.name}</span>
-                                        <img src={item.smallImage} alt={item.name} />
-                                      </div>
-                                    </Link>
-                                  );
-                                }
-                              })
+                              if (item.mainImage) {
+                                return (
+                                  <Link
+                                    href={`/product/${item.id}`}
+                                    onClick={() => {
+                                      setFlagSearch(false);
+                                      setSearchBoxArr([]);
+                                      setSearchType("");
+                                      setXtFlagSpinnerShow(true);
+                                      setVisible(false);
+                                    }}
+                                  >
+                                    <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
+                                      <span>{item.name}</span>
+                                      <img src={item.smallImage} alt={item.name} />
+                                    </div>
+                                  </Link>
+                                );
+                              }
+                            })
                             : ""}
                         </div>
                       </div>
@@ -1049,7 +1031,7 @@ export default function Header() {
                           <div
                             className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
 
-                            // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
+                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -1221,11 +1203,11 @@ export default function Header() {
                   <Link href={"https://eitaa.com/sane_camputer"}>
                     <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
                   </Link>
-                  <Link href={"https://instagram.com/sane_computer_"}>
+                  <Link href={"https://it_sane"}>
                     {" "}
                     <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
                   </Link>
-                  <Link href={"https://t.me/SANE_IT"}>
+                  <Link href={"https://t.me/sane_camputer"}>
                     {" "}
                     <img className={styles.sphere} src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png" alt="telegram" />
                   </Link>
@@ -1365,19 +1347,19 @@ export default function Header() {
                   </div>
                   {flagCateMobile
                     ? mainCategory.childs && (
-                        <div className={`row row-cols-2  ${styles.bcatitem}`}>
-                          {mainCategory.childs.map((item, index) => (
-                            <CardA click={toggleMenu} datos={""} key={item.id} imgSrc={item.imageUrl} category={`category`} id={item.id} text={item.name} />
-                          ))}
-                        </div>
-                      )
+                      <div className={`row row-cols-2  ${styles.bcatitem}`}>
+                        {mainCategory.childs.map((item, index) => (
+                          <CardA click={toggleMenu} datos={""} key={item.id} imgSrc={item.imageUrl} category={`category`} id={item.id} text={item.name} />
+                        ))}
+                      </div>
+                    )
                     : mainCategoryB.childs && (
-                        <div className={`row row-cols-2 ${styles.bcatitem}`}>
-                          {mainCategoryB.childs.map((item, index) => (
-                            <CardA click={toggleMenu} datos={""} key={item.id} imgSrc={item.imageUrl} category={`category`} id={item.id} text={item.name} />
-                          ))}
-                        </div>
-                      )}
+                      <div className={`row row-cols-2 ${styles.bcatitem}`}>
+                        {mainCategoryB.childs.map((item, index) => (
+                          <CardA click={toggleMenu} datos={""} key={item.id} imgSrc={item.imageUrl} category={`category`} id={item.id} text={item.name} />
+                        ))}
+                      </div>
+                    )}
                 </div>
               </div>
             </div>
@@ -1614,26 +1596,26 @@ export default function Header() {
                     /></span> */}
                           {searchBoxArr.itemList?.length != 0
                             ? searchBoxArr.itemList?.map((item) => {
-                                if (item.cyCategoryId) {
-                                  return (
-                                    <Link
-                                      href={`/product/${item.id}`}
-                                      onClick={() => {
-                                        setFlagSearch(false);
-                                        setSearchBoxArr([]);
-                                        setSearchTypeB("");
-                                        setXtFlagSpinnerShow(true);
-                                        setVisibleB(false);
-                                      }}
-                                    >
-                                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
-                                        <span>{item.name}</span>
-                                        <img src={item.smallImage} alt={item.name} />
-                                      </div>
-                                    </Link>
-                                  );
-                                }
-                              })
+                              if (item.cyCategoryId) {
+                                return (
+                                  <Link
+                                    href={`/product/${item.id}`}
+                                    onClick={() => {
+                                      setFlagSearch(false);
+                                      setSearchBoxArr([]);
+                                      setSearchTypeB("");
+                                      setXtFlagSpinnerShow(true);
+                                      setVisibleB(false);
+                                    }}
+                                  >
+                                    <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
+                                      <span>{item.name}</span>
+                                      <img src={item.smallImage} alt={item.name} />
+                                    </div>
+                                  </Link>
+                                );
+                              }
+                            })
                             : ""}
                         </div>
                       )}
