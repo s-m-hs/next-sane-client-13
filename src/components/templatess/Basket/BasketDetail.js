@@ -22,6 +22,10 @@ import Link from "next/link";
 import { GiClick } from "react-icons/gi";
 import { GiCheckMark } from "react-icons/gi";
 import SpinnerC from "@/utils/SpinnerC/SpinnerC";
+import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
+import { FiCheckSquare } from "react-icons/fi";
+import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -61,6 +65,11 @@ export default function BasketDetail() {
   const [localbasket, setLocalBasket] = useState([]);
   const [flagLocal, setFlagLocal] = useState(false);
   const [flagSpinner, setFlagSpinner] = useState(false);
+
+  const [postA, setPostA] = useState(0)
+  const [postB, setPostB] = useState(0)
+  const [postState, setPostState] = useState(0)
+
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleCloseC = () => setShowC(false);
@@ -98,7 +107,10 @@ export default function BasketDetail() {
     RemoveApi("api/CyOrders/deleteItem", id, AlertA);
     cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : "";
   };
+
+  const alertF = () => alertN('center', 'warning', 'لطفا نحوه ارسال کالا را انتخاب بفرمایید 😊', 2000)
   ///////////////////////////////
+
   const directToZarin = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
@@ -371,6 +383,30 @@ export default function BasketDetail() {
   // console.log(address)
   // console.log(adressId)
   // console.log(toBuy)
+
+
+  ////post Section
+  const postStateChange = () => {
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CyOrders/postState?orderId=${getBasket[0]?.cyOrderID}&postState=${postState}`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/Json'
+        }
+      }).catch(err => console.log(err))
+    }
+    myApp()
+  }
+
+  useEffect(() => {
+    if (postState != 0) {
+      postStateChange()
+    }
+  }, [postState])
+
+
+  /////////////////coupon Section
   const getActiveCoupon = (userId) => {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyCoupon/getActiveCouponByUserId?userId=${userId}`, {
@@ -393,6 +429,8 @@ export default function BasketDetail() {
     if (cyUserID) {
       getActiveCoupon(cyUserID);
     }
+    ApiGetX2(`/api/CyKeyDatas/1013`, setPostA)
+    ApiGetX2(`/api/CyKeyDatas/1014`, setPostB)
   }, []);
 
   return (
@@ -437,8 +475,8 @@ export default function BasketDetail() {
                         offer == 1 && item.noOffPrice === item.price
                           ? Number(item.price) / 10
                           : item.noOffPrice !== item.price
-                          ? Number(item.noOffPrice) / 10
-                          : offer != 1 && (Number(item.price) / 10) * offer
+                            ? Number(item.noOffPrice) / 10
+                            : offer != 1 && (Number(item.price) / 10) * offer
                       }
                       id={item["id"]}
                       cyProductID={item.id}
@@ -460,15 +498,15 @@ export default function BasketDetail() {
                           offer == 1 && item.unitOfferPrice === item.unitPrice
                             ? Number(item.totalPrice) / 10
                             : item.unitOfferPrice !== item.unitPrice
-                            ? Number(item.unitOfferPrice) / 10
-                            : offer !== 1 && (Number(item.totalPrice) / 10) * offer
+                              ? Number(item.unitOfferPrice) / 10
+                              : offer !== 1 && (Number(item.totalPrice) / 10) * offer
                         }
                         unitPrice={
                           offer == 1 && item.unitOfferPrice === item.unitPrice
                             ? Number(item.unitPrice) / 10
                             : item.unitOfferPrice !== item.unitPrice
-                            ? Number(item.unitOfferPrice) / 10
-                            : offer !== 1 && (Number(item.unitPrice) / 10) * offer
+                              ? Number(item.unitOfferPrice) / 10
+                              : offer !== 1 && (Number(item.unitPrice) / 10) * offer
                         }
                         WithoutOffPrice={item.unitPrice / 10} ///send to cartitem product price without off
                         id={item.id}
@@ -477,68 +515,13 @@ export default function BasketDetail() {
                         updateQuantity={updateQuantity}
                         remove={removeHan}
                         supply={item.supply}
-                        // handleRemove={removeFromCart}
+                      // handleRemove={removeFromCart}
                       />
                     </>
                   ))
                 )}
               </tbody>
             </table>
-          </div>
-        </div>
-        <div className={`container mt-1  ${style.postDetail_container}`}>
-          <div className="row">
-            <div className="col">
-              <div className={`  ${style.postDetail_div}`}>
-                {/* هشدار مربوط به تحویل کالا در ایام تعظیلات  */}
-                {/* <ul style={{ border: "1px dotted red" }}>
-                  <li>
-                    <h3 style={{ color: "crimson" }}>
-                      ضمن{" "}
-                      <span style={{ color: "green", fontWeight: "bold" }}>
-                        🥗 تبریک سال نو 🥗
-                      </span>{" "}
-                      و تشکر از همراهی شما هموطن گرامی ،به اطلاع میرساند به دلیل
-                      محدودیتهای ارسال کالا 🚚 در ایام{" "}
-                      <span
-                        style={{
-                          color: "green",
-                          fontWeight: "bold",
-                          margin: "3px",
-                        }}
-                      >
-                        ایام تعطیلات
-                      </span>{" "}
-                      ارسال کلیه سفارشات در تاریخ
-                      <span
-                        style={{
-                          color: "green",
-                          fontWeight: "bold",
-                          margin: "3px",
-                        }}
-                      >
-                        1404/01/18
-                      </span>
-                      انجام میگیرد.
-                    </h3>
-                  </li>
-                </ul> */}
-
-                <ul>
-                  <li>
-                    <p>سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری تحویل پست میگردد.</p>
-                  </li>
-
-                  <li>
-                    <p>امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و... با هماهنگی با واحد فروش در شهر تهران و قم فراهم می باشد.</p>
-                  </li>
-
-                  <li>
-                    <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
         <div className={` container  ${style.col_8_bottom_div_1} centerc mt-3`}>
@@ -582,6 +565,8 @@ export default function BasketDetail() {
                       </button>
                     </div>
                   )}
+
+
                   <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                     تکمیل خرید
                   </button>
@@ -662,6 +647,7 @@ export default function BasketDetail() {
                   </>
                 )}
 
+
                 {!xtFlagLogin && (
                   <button type="button" className={flagUpdate ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
                     تکمیل خرید
@@ -669,17 +655,6 @@ export default function BasketDetail() {
                 )}
               </div>
             </div>
-
-            {/* <div className={`centerc ${style.cath_div}`} >
-              
-            <span> <input   className={`${style.cath_input}`} type='radio'  value={1} />
-            <span className="m-2">پرداخت آنلاین</span> 
-            </span>
-
-              <span> <input   className={` ${style.cath_input}`} type='radio'  value={2}/><span className="m-2">پرداخت در محل</span> 
-              </span>
-      
-            </div> */}
             {Number(total) != 0 && (
               <div className={`centerr ${style.colPrice}`}>
                 <button className={`btn btn-outline-warning ${style.btn1}`} disabled>
@@ -732,69 +707,30 @@ export default function BasketDetail() {
                 <span className="m-2">پرداخت آنلاین</span>
               </span>
 
-              <div className={` row ${style.postDetail_row}`}>
-                <div className="col">
-                  <div className={`  ${style.postDetail_div}`}>
-                    {/* هشدار مربوط به تحویل کالا در ایام تعظیلات  */}
-                    {/* <ul style={{ border: "1px dotted red" }}>
-                      <li>
-                        <h3 style={{ color: "crimson" }}>
-                          ضمن{" "}
-                          <span style={{ color: "green", fontWeight: "bold" }}>
-                            🥗 تبریک سال نو 🥗
-                          </span>{" "}
-                          و تشکر از همراهی شما هموطن گرامی ،به اطلاع میرساند به
-                          دلیل محدودیتهای ارسال کالا 🚚 در{" "}
-                          <span
-                            style={{
-                              color: "green",
-                              fontWeight: "bold",
-                              margin: "3px",
-                            }}
-                          >
-                            ایام تعطیلات
-                          </span>{" "}
-                          ارسال کلیه سفارشات در تاریخ
-                          <span
-                            style={{
-                              color: "green",
-                              fontWeight: "bold",
-                              margin: "3px",
-                            }}
-                          >
-                            1404/01/18
-                          </span>
-                          انجام میگیرد.
-                        </h3>
-                      </li>
-                    </ul> */}
-                    <ul>
-                      <li>
-                        <p>سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری تحویل پست میگردد.</p>
-                      </li>
 
-                      <li>
-                        <p>امکان دریافت سفارش از طریق حضوری ،پست ،پیک موتوری و... با هماهنگی با واحد فروش در شهر تهران و قم فراهم می باشد.</p>
-                      </li>
 
-                      <li>
-                        <p>هزینه ارسال سفارش به صورت پس کرایه می باشد.</p>
-                      </li>
-                    </ul>
+              <div className={`${style.post} `} >
+
+                <div className="centerr" onClick={() => setPostState(1)}>
+                  {postState == 1 ? <FiCheckSquare color="green" fontSize="18px" /> : <MdOutlineCheckBoxOutlineBlank fontSize="18px" />}
+
+                  <div className={`${style.postEditor}`} dangerouslySetInnerHTML={{ __html: `${postA?.value}` }}>
+                  </div>
+
+                </div>
+
+
+                <div className="centerr" onClick={() => setPostState(2)}>
+                  {postState == 2 ? <FiCheckSquare color="green" fontSize="18px" /> : <MdOutlineCheckBoxOutlineBlank fontSize="18px" />}
+                  <div className={`${style.postEditor}`} dangerouslySetInnerHTML={{ __html: `${postB?.value}` }}>
                   </div>
                 </div>
+
+
               </div>
 
-              {/* <span>
-                <input
-                  className={` ${style.cath_input}`}
-                  name="payment"
-                  type="radio"
-                  value={2}
-                  onChange={(e) => setPayState(e.target.value)}
-                />
-                <span className="m-2">پرداخت در محل (تهران و قم)</span>
-              </span> */}
+              <h3 className={`${style.postnews}`}>سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری تحویل پست میگردد.</h3>
+
             </div>
           </Modal.Body>
 
@@ -805,8 +741,8 @@ export default function BasketDetail() {
             </button>
             <button
               className={address?.length !== 0 ? `btn btn-info ${style.btn_modal_ok}` : `btn btn-info ${style.btn_modal_ok_disable}`}
-              onClick={payState == 1 ? payment : handleRegisterShop}
-              // onClick={payState == 1 ? directToZarin : handleRegisterShop}
+              onClick={postState == 0 ? alertF : payState == 1 ? payment : handleRegisterShop}
+            // onClick={payState == 1 ? directToZarin : handleRegisterShop}
             >
               <CheckCircle size={20} color="#fff" weight="duotone" />
               تایید خرید
@@ -844,6 +780,9 @@ export default function BasketDetail() {
         </Modal>
 
         <>
+
+
+          {/*for copupon show */}
           <Modal show={showC} onHide={handleCloseC} backdrop="static" keyboard={false}>
             <Modal.Body>
               <p className="text-center" style={{ fontSize: "18px", fontWeight: "600" }}>

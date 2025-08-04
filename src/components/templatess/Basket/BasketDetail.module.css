@@ -144,6 +144,21 @@
   width: 150px;
 }
 
+
+.post div{
+width: 100%;
+cursor: pointer;
+}
+
+
+
+.postEditor{
+  font-size: 15px;
+}
+.postnews{
+  font-weight: 600;
+}
+
 @keyframes fadeEffect {
   from {
     opacity: 1;
