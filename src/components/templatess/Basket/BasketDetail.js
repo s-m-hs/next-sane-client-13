@@ -161,6 +161,8 @@ export default function BasketDetail() {
     }
   };
 
+
+
   const handleRegisterShop = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
@@ -321,6 +323,7 @@ export default function BasketDetail() {
 
   useEffect(() => {
     loadCartItem();
+    setFlagSpinner(false)
   }, []);
 
   useEffect(() => {

@@ -1,0 +1,21 @@
+.allsubject{
+   height: fit-content;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+}
+
+.breadcrumb{
+    width: fit-content !important;
+    margin-right: 100px !important;
+}
+.breadcrumb_row{
+/* width: fit-content; */
+}
+.breadcrumb a{
+    color: inherit;
+    margin-left: 10px;
+}
+.breadcrumb a:hover{
+    opacity: 0.7;
+}

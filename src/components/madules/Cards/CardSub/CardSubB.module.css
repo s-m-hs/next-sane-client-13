@@ -1,5 +1,4 @@
 .main_div{
-    position: relative;
     width: 350px !important;
     height: 350px !important;
     border: 1px solid #e5e5e5;
@@ -16,9 +15,7 @@
     color: inherit;
 }
 .main_div img{
-    position: absolute;
-    width: 200px;
-    bottom: 20px;
+    width: 300px;
     
 }
 .main_div h2{

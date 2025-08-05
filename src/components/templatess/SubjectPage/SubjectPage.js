@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function SubjectPage() {
   const [allSubjects, setAllSubjects] = useState([]);
-  // const allSubjectsSlice=allSubjects?.slice(0,3)
+  const allSubjectsSlice = allSubjects.slice().reverse()
 
   const getAllSubject = () => {
     // const getLocalStorage=localStorage.getItem('loginToken')
@@ -35,7 +35,6 @@ export default function SubjectPage() {
           }
         })
         .then((result) => {
-          console.log(result);
           setAllSubjects(result.itemList);
         });
     }
@@ -48,7 +47,7 @@ export default function SubjectPage() {
     <div className="container">
       <div className={`row ${style.row}`}>
         {allSubjects?.length != 0 &&
-          allSubjects?.map((item) => (
+          allSubjectsSlice?.map((item) => (
             <div className="col-12 boxSh m-5 p-5">
               <Link href={`/subject/${item.id}`}>
                 <img src={item.bigImg} alt="" />
