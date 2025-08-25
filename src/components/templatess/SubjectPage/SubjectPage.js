@@ -45,20 +45,21 @@ export default function SubjectPage() {
   }, []);
   return (
     <div className="container">
-      <div className={`row ${style.row}`}>
+      <div className={`row ${style.row} text-center`}>
         {allSubjects?.length != 0 &&
           allSubjectsSlice?.map((item) => (
-            <div className="col-12 boxSh m-5 p-5">
+            <div className={`${style.col_div} col-12  col-lg-3 boxSh m-3 p-5`}>
               <Link href={`/subject/${item.id}`}>
                 <img src={item.bigImg} alt="" />
                 <div className="App">
                   <TypeIt
                     options={{
                       strings: [`${item.describtion}`],
-                      speed: 20,
-                      loop: true,
+                      speed: 50,
+                      // loop: true,
                       waitUntilVisible: true,
-                      deleteSpeed: 40,
+                      deleteSpeed: 20,
+                      cursor: false
                     }}
                   />
                 </div>

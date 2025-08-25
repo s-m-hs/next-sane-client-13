@@ -1,7 +1,18 @@
-.row{
-    margin: 0 auto;
-    width: 80%;
+.row {
+  margin: 0 auto;
+  width: 95%;
+  display: flex;
+  justify-content: center;
 }
-.row img{
-    width: 100%;
+.row img {
+  width: 100%;
+  height: 50%;
+}
+
+.col_div {
+  min-height: 450px;
+}
+.row a {
+  list-style: none !important;
+  color: #000000 !important;
 }

@@ -16,6 +16,7 @@ import { InputMask } from "primereact/inputmask";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { InputNumber } from "primereact/inputnumber";
+import { useRef } from "react";
 export default function RegisterRight() {
   const router = useRouter();
   const [token, setTokens] = useState("09");
@@ -104,22 +105,18 @@ export default function RegisterRight() {
     };
     // console.log(obj)
     if (token.length == 11 && !flagInput) {
-      postApiByAlert("/api/Customer/register2", obj, alertD, alertB);
+      postApiByAlert("/api/Customer/register3", obj, alertD, alertB);
       setFlagErrorCheckbox(false);
     } else if (tokenB.length == 6 && flagInput) {
       let obj = {
         valadationCode: tokenB,
         username: token,
       };
-
-      // const getLocalStorage = localStorage.getItem("loginToken");
-
       async function myAppGet() {
         const res = await fetch(`${apiUrl}/api/Customer/verifyCode2`, {
           method: "POST",
           credentials: "include",
           headers: {
-            // Authorization: `Bearer ${getLocalStorage}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(obj),
@@ -127,8 +124,6 @@ export default function RegisterRight() {
           .then((res) => {
             if (res.status == 200) {
               return res.json().then((result) => {
-                // localStorage.setItem("loginToken", result.token);
-                // localStorage.setItem("user", obj.name);
                 if (localbasket?.length == 0) {
                   alertA();
                 } else {
@@ -160,6 +155,12 @@ export default function RegisterRight() {
     // console.log(data);
   };
 
+
+  useEffect(() => {
+    if (tokenB.length == 6 && flagInput) {
+      handleRegistration()
+    }
+  }, [tokenB])
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
@@ -169,6 +170,46 @@ export default function RegisterRight() {
     const getLocalStorageProd = JSON.parse(localStorage.getItem("cartObj")) || [];
     setLocalBasket(getLocalStorageProd);
   }, []);
+
+  const inputsRef = useRef()
+
+  useEffect(() => {
+    if (flagInput) {
+      inputsRef.current?.focus();
+      startOtpListener();
+    }
+
+    return () => {
+      stopOtpListener();
+    };
+  }, [flagInput]);
+  const otpListenerRef = useRef(null);
+
+  const startOtpListener = () => {
+    if (!navigator.credentials || !("OTPCredential" in window)) return;
+
+    const ac = new AbortController();
+    otpListenerRef.current = ac;
+    navigator.credentials.get({ otp: { transport: ["sms"] } })
+      .then((otpCredential) => {
+        if (otpCredential && otpCredential.code) {
+          const digitsOnly = otpCredential.code.replace(/\D/g, "");
+          setTokensB(digitsOnly);
+        }
+      })
+      .catch((err) => {
+        console.error("OTP Error:", err);
+      });
+  };
+  const stopOtpListener = () => {
+    if (otpListenerRef.current) {
+      otpListenerRef.current.abort();
+      otpListenerRef.current = null;
+    }
+  };
+
+  // console.log(tokenB)
+  // console.log('object')
   return (
     <div className={`${style.div_main} centerc`}>
       <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="image" />
@@ -188,6 +229,8 @@ export default function RegisterRight() {
 
                 <div className={`${style.card_div} card flex justify-content-center login_label_float`}>
                   <InputMask
+
+
                     id="phone"
                     className={`${style.inputmask}`}
                     value={token}
@@ -210,6 +253,7 @@ export default function RegisterRight() {
             <>
               <div className={`${style.card_div} card flex justify-content-center`}>
                 <input
+                  ref={inputsRef}
                   className={`${style.verifi_input} form-control text-center`}
                   placeholder=" ...کد پیامک شده را وارد کنید"
                   // onChange={(e) => setTokensB(e.target.value)}
