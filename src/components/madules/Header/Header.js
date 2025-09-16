@@ -827,7 +827,7 @@ export default function Header() {
                 <Link href={"https://eitaa.com/sane_camputer"}>
                   <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
                 </Link>
-                <Link href={"https://it_sane"}>
+                <Link href={"https://instagram.com/it_sane"}>
                   {" "}
                   <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
                 </Link>
@@ -1203,7 +1203,7 @@ export default function Header() {
                   <Link href={"https://eitaa.com/sane_camputer"}>
                     <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
                   </Link>
-                  <Link href={"https://it_sane"}>
+                  <Link href={"https://instagram.com/it_sane"}>
                     {" "}
                     <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
                   </Link>

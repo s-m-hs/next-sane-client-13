@@ -51,7 +51,7 @@ export default function Footer() {
               </div>
 
               <div>
-                <Link href={'https://it_sane'}>
+                <Link href={'https://instagram.com/it_sane'}>
                   <img
                     className={style.sphere}
                     src="../../../../../../images/icons8-instagram-2048.png"
