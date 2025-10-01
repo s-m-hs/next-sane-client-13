@@ -46,7 +46,7 @@ export default function Footer() {
                     src="../../../../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
                     alt="telgram"
                   />
-                  t.me/SANE_IT
+                  t.me/sane_camputer
                 </Link>
               </div>
 
@@ -57,7 +57,7 @@ export default function Footer() {
                     src="../../../../../../images/icons8-instagram-2048.png"
                     alt="instagram"
                   />
-                  instagram.com/sane_computer
+                  instagram.com/it_sane
                 </Link>
               </div>
 
