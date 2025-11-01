@@ -22,10 +22,10 @@ export default function Footer() {
 
             <div className={`${style.eatadiv} centerr`} >
 
-              <div className={`${style.eatadiv_number} centerr`}>
+              {/* <div className={`${style.eatadiv_number} centerr`}>
                 <Phone className={style.sphere} size={24} color='rgb(20, 165, 175)'
                   weight="duotone" />
-                021-91005457</div>
+                021-91005457</div> */}
 
               <div>
                 <Link href={'https://eitaa.com/sane_camputer'}>

@@ -630,9 +630,9 @@ export default function Header() {
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <div className={` ${styles.mobiNumber_div} centerc`}>
-                    <span>
+                    {/* <span>
                       02191005457 <Phone size={18} color="#ededed" weight="duotone" />
-                    </span>
+                    </span> */}
                     <span>کامپیوترصانع</span>
                   </div>
 
@@ -961,10 +961,10 @@ export default function Header() {
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <div className={` ${styles.mobiNumber_div} centerc`}>
-                    <span>
+                    {/* <span>
                       02191005457
                       <Phone size={18} color="#ededed" weight="duotone" />
-                    </span>
+                    </span> */}
                     <span>کامپیوترصانع</span>
                   </div>
                   {/* <Phone size={24} color="#ededed" weight="duotone" />    */}
