@@ -32,8 +32,7 @@ import {
 import Link from "next/link";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default function Contact({ center = [34.64259043104306, 50.890225000643426], zoom = 18, greatPlaceCoords = { lat: 34.64259043104306, lng: 50.890225000643426 } }) {
+export default function Contact({ center = [34.62873764336864, 50.88024463424296], zoom = 18, greatPlaceCoords = { lat: 34.62873764336864, lng: 50.88024463424296 } }) {
   let { setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
 
   // const defaultProps = {
@@ -70,12 +69,11 @@ export default function Contact({ center = [34.64259043104306, 50.89022500064342
 
             <h5>تماس با کامپیوترصانع</h5>
             <h1>اطلاعات تماس:</h1>
-            {/* <h3>دفتر مرکزی : تهران میدان ولیعصر(عج) شماره تماس : 91005457-021</h3>
 
-            <hr /> */}
-            <h3>قم ابتدای 55 متری عماریاسر روبروی مجتمع تجاری الزهرا(س) سرای بزرگ چارسو پلاک 34 و 35 شماره تماس : 37839322-37835457-37835456 (025)</h3>
+            <h3>قم - بلوار سمیه نبش کوچه 5</h3>            <h3></h3>
+            <h3> شماره تماس : 37839322-37835457-37835456 (025)</h3>
             <h3>شماره همراه : 09381503344</h3>
-            <Link href={"https://balad.ir/p/2vF8vyl1goeizX"}>کامپیوترصانع را از اینجا مسیریابی کنید...</Link>
+            <Link href={"https://nshn.ir/7bsJ6NexQt7g"}>کامپیوترصانع را از اینجا مسیریابی کنید...</Link>
 
             {/* <hr />
             <h3>شعبه دو : مشهد خیابان عدل خمینی بین کوچه 60 و 62 شماره تماس : 09224203488</h3>

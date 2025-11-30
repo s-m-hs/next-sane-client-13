@@ -144,21 +144,38 @@
   width: 150px;
 }
 
-
-.post div{
-width: 100%;
-cursor: pointer;
+.post div {
+  width: 100%;
+  cursor: pointer;
 }
 
-
-
-.postEditor{
+.postEditor {
   font-size: 15px;
 }
-.postnews{
+.postnews {
   font-weight: 600;
 }
 
+.couponDiv {
+  position: relative;
+  height: 80px;
+  border: 1px solid #ffc107;
+  border-radius: 5px;
+  padding: 2px;
+}
+.couponDiv input {
+  outline: none;
+  border: 1px dotted #ffc107;
+}
+
+.couponDiv span {
+  position: absolute;
+  top: -4px;
+  font-size: 18px;
+  color: #ffc107;
+  font-weight: 600;
+  left: 10%;
+}
 @keyframes fadeEffect {
   from {
     opacity: 1;
@@ -251,13 +268,32 @@ cursor: pointer;
   .table_basket th {
     font-size: 10px;
   }
+  .couponDiv input {
+    width: 80%;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px dotted #ffc107;
+    margin: 1px;
+  }
 }
-
+.couponDiv input::placeholder {
+  font-size: 13px !important;
+}
 @media only screen and (max-width: 450px) {
   .th {
     display: none !important;
   }
   .coupon_div button {
     font-size: 12px;
+  }
+
+  .couponDiv {
+    margin-bottom: 2px;
+    height: 60px;
+    border: 1px solid #ffc107;
+    border-radius: 5px;
+    padding: 2px;
   }
 }

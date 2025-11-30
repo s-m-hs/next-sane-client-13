@@ -139,10 +139,10 @@ const CartItem = (props) => {
           )}
 
           <span className={`tp-product-details-price ${style.WithoutOffPrice}`}>
-            {props.WithoutOffPrice?.toLocaleString()} تومان  
+            {props.WithoutOffPrice?.toLocaleString()} تومان
           </span>
         </td>
-
+        {/* 
         {props.totalPrice ? (
           <td className={style.td_totalPrice}>
             <span className="tp-product-details-price new-price">
@@ -151,7 +151,7 @@ const CartItem = (props) => {
           </td>
         ) : (
           "----"
-        )}
+        )} */}
 
         {/* <!-- action --> */}
         <td className="tp-cart-action">

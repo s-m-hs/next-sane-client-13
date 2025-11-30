@@ -25,6 +25,7 @@ import { use, useContext, useEffect, useState } from "react";
 import SubjecArea from "@/components/madules/SubjecArea/SubjecArea";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import SwiperD from "@/components/templatess/Home/SwiperD/SwiperD";
+import Head from "next/head";
 
 export default function Home() {
   const pathname = usePathname();
@@ -92,33 +93,35 @@ export default function Home() {
   }, [paymentState]);
 
   return (
-    <div className="container">
-      <div className="row ">
-        <div className="col-lg-8 home-swiperB-col">
-          <SwiperB />
-        </div>
-        <div className="col-4 home-miniSwiper">
-          <VerticalSlideshow />
-          <SwiperF />
-        </div>
-        {/* <SwiperD categoryCode='SUPRIZ DAY' title={'فوق العاده ها:'}/> */}
+    <>
+      <div className="container">
+        <div className="row ">
+          <div className="col-lg-8 home-swiperB-col">
+            <SwiperB />
+          </div>
+          <div className="col-4 home-miniSwiper">
+            <VerticalSlideshow />
+            <SwiperF />
+          </div>
+          {/* <SwiperD categoryCode='SUPRIZ DAY' title={'فوق العاده ها:'}/> */}
 
-        {keyOfferSlider?.value === "1" && <SwiperC categoryCode="offer-Basket" title={`سبد فروش ویژه💰:`} />}
+          {keyOfferSlider?.value === "1" && <SwiperC categoryCode="offer-Basket" title={`سبد فروش ویژه💰:`} />}
 
-        {keyB?.value === "1" ? <SwiperC categoryCode="new" title={"جدیدترین ها:"} /> : ""}
-        <CategorySectionA title="لوازم جانبی" categoryId={3} />
-        <BrandArea brandArray={brandLogA} fileRoot={"1"} />
-        <SwiperC categoryCode="best-sellers" title={"پرفروش ترین ها :"} />
-        <div className="mobile-swiperf">
-          <SwiperF />
+          {keyB?.value === "1" ? <SwiperC categoryCode="new" title={"جدیدترین ها:"} /> : ""}
+          <CategorySectionA title="لوازم جانبی" categoryId={3} />
+          <BrandArea brandArray={brandLogA} fileRoot={"1"} />
+          <SwiperC categoryCode="best-sellers" title={"پرفروش ترین ها :"} />
+          <div className="mobile-swiperf">
+            <SwiperF />
+          </div>
+
+          <CategorySectionA title="سخت افزار" categoryId={2} />
+          <BrandArea brandArray={brandLogoB} fileRoot={"2"} />
+          {key?.value === "1" ? <SwiperC categoryCode="hardwairebestseller" title={"پرفروش ترین های سخت افزار :"} /> : ""}
+          <SubjecArea />
+          <BanerA />
         </div>
-
-        <CategorySectionA title="سخت افزار" categoryId={2} />
-        <BrandArea brandArray={brandLogoB} fileRoot={"2"} />
-        {key?.value === "1" ? <SwiperC categoryCode="hardwairebestseller" title={"پرفروش ترین های سخت افزار :"} /> : ""}
-        <SubjecArea />
-        <BanerA />
       </div>
-    </div>
+    </>
   );
 }

@@ -43,6 +43,7 @@ import alertQ from "@/utils/Alert/AlertQ";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import LogOut from "@/utils/Functions/LogOut";
+import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
 // import RotatingGlobe from "@/utils/RotatingGlobe";
 
 export default function Header() {
@@ -70,6 +71,7 @@ export default function Header() {
     setResetFlagCart,
     couponState,
     coupon,
+    setCoupon,
     setCouponState,
   } = useContext(MainContext);
   const [valeS, setValue] = useState(1);
@@ -318,6 +320,7 @@ export default function Header() {
   useEffect(() => {
     if (xtFlagLogin) {
       getProfile();
+      requstedCouponSetToFalse()
     }
     if (localStorage.getItem("cartObj")) {
       localStorage.removeItem("cartObj");
@@ -374,28 +377,7 @@ export default function Header() {
       setOffer(discount);
     }
   }, [couponState]);
-  const requestCoupon = (couItemId, state) => {
-    async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        // console.log(res);
-      });
-    }
-    myApp();
-  };
 
-  useEffect(() => {
-    ///// to check if copuon is availble yet, isRequested state set to false(this is when site relouding:every time site relouding this check  )
-    const couponItemId = coupon?.couponAvailable;
-    if (couponItemId) {
-      requestCoupon(couponItemId[0]?.id, 2);
-    }
-  }, [coupon]);
   useEffect(() => {
     ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
     if (!pathname.includes("basket")) {
@@ -403,7 +385,7 @@ export default function Header() {
       if (couponState) {
         getOffer();
         setCouponState(false);
-        requestCoupon(couponItemId[0]?.id, 2);
+        setCoupon(null)
       }
     }
   }, [pathname]);

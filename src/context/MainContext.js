@@ -126,29 +126,6 @@ const MainProvider = ({ children }) => {
     myApp();
   };
 
-  // const getActiveCoupon = (userId) => {
-  //   async function myApp() {
-  //     const res = await fetch(`${apiUrl}/api/CyCoupon/getActiveCouponByUserId?userId=${userId}`, {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }).then((res) => {
-  //       if (res.ok) {
-  //         return res.json().then((result) => {
-  //           setCoupon(result);
-  //         });
-  //       }
-  //     });
-  //   }
-  //   myApp();
-  // };
-  // useEffect(() => {
-  //   if (cyUserID) {
-  //     getActiveCoupon(cyUserID);
-  //   }
-  // }, [cyUserID]);
 
   const refreshToken = () => {
     async function myApp() {
