@@ -102,6 +102,7 @@ export default function BasketDetail() {
 
 
     const AlertE = (msg) => alertN("center", "info", `${msg}`, 1500);
+    const AlertF = () => alertN("center", "info", `در حال حاظر،درگاه پرداخت در حال بروزرسانی میباشد برای نهایی کردن خرید خود لطفا از قسمت تماس با ما ،با واحد فروش تماس حاصل فرمایید . با تشکر `, 6000);
 
     const removeHan = (id) => {
         // const getLocalStorage = localStorage.getItem("loginToken");
@@ -122,8 +123,9 @@ export default function BasketDetail() {
             rout.push("/register");
         });
 
+
+
     const directToZarin = () => {
-        // const getLocalStorage = localStorage.getItem("loginToken");
         async function myApp() {
             const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`, {
                 method: "GET",
@@ -131,7 +133,6 @@ export default function BasketDetail() {
 
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${getLocalStorage}`,
                 },
             }).then((res) => {
                 if (res.ok) {
@@ -151,12 +152,16 @@ export default function BasketDetail() {
         AlertE();
     }
     const payment = () => {
-        setFlagSpinner(true);
-        if (couponStateB) {
-            requestCoupon(coupon?.coupons[0]?.id, 1, funcOk, funcEr);
-        } else {
-            directToZarin();
-        }
+        AlertF()
+
+
+        ////بعد از فعال شدن درگاه پرداخت فعال شود
+        // setFlagSpinner(true);
+        // if (couponStateB) {
+        //     requestCoupon(coupon?.coupons[0]?.id, 1, funcOk, funcEr);
+        // } else {
+        //     directToZarin();
+        // }
     };
 
     const ChangCodeInput = (e) => {

@@ -82,8 +82,10 @@ export default function Footer() {
             src="https://www.zarinpal.com/webservice/TrustCode" type="text/javascript"
           />
 
+          <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=700230&Code=a8FjgWM5i8to9rFSEZ8yLJWRTVVC9Utd'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=700230&Code=a8FjgWM5i8to9rFSEZ8yLJWRTVVC9Utd' alt='' style={{ cursor: 'pointer' }} code='a8FjgWM5i8to9rFSEZ8yLJWRTVVC9Utd' /></Link>
 
-          <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' alt='' style={{ cursor: 'pointer' }} code='vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' /></Link>
+
+          {/* <Link referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=561253&Code=vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' alt='' style={{ cursor: 'pointer' }} code='vbA0Zg0ZLgr7K3DpwQiK5bsBUQ9Ny0CI' /></Link> */}
 
         </div>
 
