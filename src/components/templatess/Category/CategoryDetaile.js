@@ -256,7 +256,7 @@ export default function CategoryDetaile({ param }) {
     // return()=>setNameCategory('')
   }, []);
 
-  // console.log(productByCat)
+  console.log(productByCat)
   return (
     <div className={`container  centerc ${Styles.category}`}>
       <div className="row mt-5">
@@ -369,6 +369,7 @@ export default function CategoryDetaile({ param }) {
             {!tableShow ? "نمایش نموداری" : "نمایش ستونی"}
             {!tableShow ? <LuTableProperties /> : <FaArrowsAltV />}
           </button>
+
           <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>
             {productByCat?.length == 0 ? (
               // <SpinnerA size={200} />
@@ -378,33 +379,37 @@ export default function CategoryDetaile({ param }) {
                 </div>
               </div>
             ) : !tableShow ? (
-              productByCat?.map((item, index) => (
-                <div
-                  key={index}
-                  className={`centerc ${Styles.products_col}`}
-                  // onClick={ ()=>setFlagSpinnerShow(true) }
-                >
-                  <CardC
-                    // clickSpinner={()=>setFlagSpinnerShow(true)}
-                    parentId={parentId}
-                    id={item.id}
-                    imgSrc={item.smallImage}
-                    title={item.name}
-                    price={Number(item.price) / 10}
-                    offPrice={(Number(item.price) / 10) * offer}
-                    supply={item.supply}
-                    noOffPrice={Number(item.noOffPrice) / 10}
-                    //     noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
-                    //       hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
-                    //       hamkarPaymentState === '3' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(5/100)) :
-                    //       hamkarPaymentState === '4' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(10/100)) :''
+              productByCat?.map((item, index) => {
+                return item.isShow &&
+                  (
+                    <div
+                      key={index}
+                      className={`centerc ${Styles.products_col}`}
+                    // onClick={ ()=>setFlagSpinnerShow(true) }
+                    >
+                      <CardC
+                        // clickSpinner={()=>setFlagSpinnerShow(true)}
+                        parentId={parentId}
+                        id={item.id}
+                        imgSrc={item.smallImage}
+                        title={item.name}
+                        price={Number(item.price) / 10}
+                        offPrice={(Number(item.price) / 10) * offer}
+                        supply={item.supply}
+                        noOffPrice={Number(item.noOffPrice) / 10}
+                        isToSale={item.isToSale}
+                        //     noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
+                        //       hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
+                        //       hamkarPaymentState === '3' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(5/100)) :
+                        //       hamkarPaymentState === '4' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(10/100)) :''
 
-                    // }
-                    verifyHam={verifyHamkar}
-                    offerState={offer}
-                  />
-                </div>
-              ))
+                        // }
+                        verifyHam={verifyHamkar}
+                        offerState={offer}
+                      />
+                    </div>
+                  )
+              })
             ) : (
               <table
                 className="table table-striped table-hover
@@ -427,39 +432,48 @@ export default function CategoryDetaile({ param }) {
                       <td>
                         <div className="centercc">
                           {/* <span>368,000</span> */}
-                          {item.supply != 0 ? (
-                            <>
-                              {offer == 1 && item.noOffPrice === item.price && (
-                                <>
-                                  <span className={`${Styles.price} `}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
-                                </>
-                              )}
+                          {(item.supply != 0 && !item.isToSale) ? (<span className={Styles.estlam}>استعلام قیمت</span>) :
+                            (item.supply != 0 && item.isToSale) ?
+                              (
+                                (
+                                  <>
 
-                              {offer !== 1 && item.noOffPrice === item.price && (
-                                <>
-                                  <span className={Styles.noOffPrice}>{`${(Number(item.price) / 10) * offer}`?.toLocaleString()} تومان </span>
 
-                                  <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
-                                </>
-                              )}
+                                    {offer == 1 && item.noOffPrice === item.price && (
+                                      <>
+                                        <span className={`${Styles.price} `}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
+                                      </>
+                                    )}
 
-                              {item.noOffPrice !== item.price && (
-                                <>
-                                  <span className={Styles.noOffPrice}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()}تومان </span>
+                                    {offer !== 1 && item.noOffPrice === item.price && (
+                                      <>
+                                        <span className={Styles.noOffPrice}>{`${(Number(item.price) / 10) * offer}`?.toLocaleString()} تومان </span>
 
-                                  <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
-                                </>
-                              )}
-                            </>
-                          ) : parentId == 2 ? (
+                                        <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
+                                      </>
+                                    )}
+
+                                    {item.noOffPrice !== item.price && (
+                                      <>
+                                        <span className={Styles.noOffPrice}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()}تومان </span>
+
+                                        <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
+                                      </>
+                                    )}
+                                  </>
+                                )
+                              ) : ''
+                          }
+
+                          {(item.supply == 0 && parentId == 2) ? (
                             <span className={Styles.estlam}>استعلام قیمت</span>
-                          ) : (
+                          ) : item.supply == 0 ? (
                             <span
                             // className={Styles.cardprob_price}
                             >
                               ناموجود
                             </span>
-                          )}
+                          ) : ''}
                           {/* <span>{(Number(item.price) / 10) * offer}</span>
                           <span> {Number(item.price) / 10}</span> */}
                         </div>

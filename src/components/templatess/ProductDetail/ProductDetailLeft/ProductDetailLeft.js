@@ -28,7 +28,7 @@ export default function ProductDetailLeft({ detail }) {
       "info",
       " این محصول در سبد خرید شما موجود است ...",
       1000
-    ).then((res) => {});
+    ).then((res) => { });
   const addToBasket = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
@@ -58,7 +58,7 @@ export default function ProductDetailLeft({ detail }) {
   };
 
   useEffect(() => {
-    if (detail?.supply !== 0 && detail.supply) {
+    if (detail?.supply !== 0 && detail.supply && detail.isToSale) {
       // console.log('object')
       setFlagSupply(true);
     }
@@ -97,7 +97,7 @@ export default function ProductDetailLeft({ detail }) {
                   <div
                     className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`}
                   >
-                    {detail.supply != 0 ? (
+                    {(detail.supply != 0 && detail.isToSale) ? (
                       <>
                         {offer == 1 && (
                           <span
@@ -158,11 +158,18 @@ export default function ProductDetailLeft({ detail }) {
                           موجودی محصول: موجود
                         </span> */}
                       </>
-                    ) : (
-                      <span className={Styles.ProductDetailL_divMiddle_count}>
-                        ناموجود
-                      </span>
-                    )}
+                    ) :
+                      (detail.supply != 0 && !detail.isToSale) ?
+                        (
+                          <span className={Styles.ProductDetailL_divMiddle_count2}>
+                            استعلام قیمت
+                          </span>
+                        ) :
+                        (
+                          <span className={Styles.ProductDetailL_divMiddle_count}>
+                            ناموجود
+                          </span>
+                        )}
                   </div>
 
                   {flagSupply && (
@@ -204,7 +211,7 @@ export default function ProductDetailLeft({ detail }) {
                       xtFlagLogin
                         ? addToBasket()
                         : // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA)
-                          addToCart(detail.id, "1", setCartCounter);
+                        addToCart(detail.id, "1", setCartCounter);
                     }}
                   >
                     {" "}
@@ -238,17 +245,9 @@ export default function ProductDetailLeft({ detail }) {
                       <div
                         className={`${Styles.ProductDetailL_left_price} centerc mt-5`}
                       >
-                        {detail.supply != 0 ? (
+                        {(detail.supply != 0 && detail.isToSale) ? (
                           <>
-                            {/* 
-          {detail.noOffPrice===detail.price ?    <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
-          : <>
-               <span className={Styles.ProductDetailL_divMiddle_offprice} >{(Number(detail.noOffPrice)/10)?.toLocaleString()} تومان</span>
-             <span className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`} >{(Number(detail.price)/10)?.toLocaleString()} تومان</span>
-     
-          </>
-        
-              } */}
+
                             {/* sdfsdfsdf */}
                             {offer == 1 && detail?.cyCategoryId && (
                               <span
@@ -317,13 +316,21 @@ export default function ProductDetailLeft({ detail }) {
                               موجودی محصول: موجود
                             </span> */}
                           </>
-                        ) : (
-                          <span
-                            className={Styles.ProductDetailL_divMiddle_count}
-                          >
-                            ناموجود
-                          </span>
-                        )}
+                        )
+                          :
+                          (detail.supply != 0 && !detail.isToSale) ?
+                            (
+                              <span className={Styles.ProductDetailL_divMiddle_count2}>
+                                استعلام قیمت
+                              </span>
+                            )
+                            : (
+                              <span
+                                className={Styles.ProductDetailL_divMiddle_count}
+                              >
+                                ناموجود
+                              </span>
+                            )}
                       </div>
                     </div>
                   </div>

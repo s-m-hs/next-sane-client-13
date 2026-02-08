@@ -102,7 +102,7 @@ export default function BasketDetail() {
 
 
     const AlertE = (msg) => alertN("center", "info", `${msg}`, 1500);
-    const AlertF = () => alertN("center", "info", `در حال حاظر،درگاه پرداخت در حال بروزرسانی میباشد برای نهایی کردن خرید خود لطفا از قسمت تماس با ما ،با واحد فروش تماس حاصل فرمایید . با تشکر `, 6000);
+    const AlertG = () => alertN("center", "info", `در حال حاظر،درگاه پرداخت در حال بروزرسانی میباشد برای نهایی کردن خرید خود لطفا از قسمت تماس با ما ،با واحد فروش تماس حاصل فرمایید . با تشکر `, 6000);
 
     const removeHan = (id) => {
         // const getLocalStorage = localStorage.getItem("loginToken");
@@ -152,16 +152,16 @@ export default function BasketDetail() {
         AlertE();
     }
     const payment = () => {
-        AlertF()
+        // AlertG()
 
 
         ////بعد از فعال شدن درگاه پرداخت فعال شود
-        // setFlagSpinner(true);
-        // if (couponStateB) {
-        //     requestCoupon(coupon?.coupons[0]?.id, 1, funcOk, funcEr);
-        // } else {
-        //     directToZarin();
-        // }
+        setFlagSpinner(true);
+        if (couponStateB) {
+            requestCoupon(coupon?.coupons[0]?.id, 1, funcOk, funcEr);
+        } else {
+            directToZarin();
+        }
     };
 
     const ChangCodeInput = (e) => {

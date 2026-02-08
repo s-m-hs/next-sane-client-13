@@ -22,6 +22,7 @@ export default function CardC({
   verifyHam,
   offerState,
   offPrice,
+  isToSale
 }) {
   let {
     setCartCounter,
@@ -50,14 +51,14 @@ export default function CardC({
       "info",
       " این محصول در سبد خرید شما موجود است ...",
       1000
-    ).then((res) => {});
+    ).then((res) => { });
   const AlertC = () =>
     alertQ(
       "center",
       "info",
       " برای استعلام قیمت میتونید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو- پایین صفحه ) استفاده کنید)...",
       "باشه ..."
-    ).then((res) => {});
+    ).then((res) => { });
   const addToBasket = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
@@ -94,6 +95,11 @@ export default function CardC({
           استعلام قیمت
         </span>
       )}
+      {supply != 0 && !isToSale && (
+        <span className={`${Styles.RequstPrice} centerc `} onClick={AlertC}>
+          استعلام قیمت
+        </span>
+      )}
 
       <Link
         className={`${Styles.cardprob_container_linkA}`}
@@ -105,55 +111,68 @@ export default function CardC({
         <span className={Styles.cardprob_title}> {title} </span>
 
         {/* <span>368,000</span> */}
-        {supply != 0 ? (
-          <>
-            {offerState == 1 && noOffPrice === price && (
-              <>
-                <span className={`${Styles.cardprob_price} `}>
-                  {price?.toLocaleString()} تومان{" "}
-                </span>
-              </>
-            )}
+        {(supply != 0 && isToSale) &&
+          (
+            <>
+              {offerState == 1 && noOffPrice === price && (
+                <>
+                  <span className={`${Styles.cardprob_price} `}>
+                    {price?.toLocaleString()} تومان{" "}
+                  </span>
+                </>
+              )}
 
-            {offerState !== 1 && noOffPrice === price && (
-              <>
-                <span className={Styles.cardprob_noOffPrice}>
-                  {offPrice?.toLocaleString()} تومان{" "}
-                </span>
+              {offerState !== 1 && noOffPrice === price && (
+                <>
+                  <span className={Styles.cardprob_noOffPrice}>
+                    {offPrice?.toLocaleString()} تومان{" "}
+                  </span>
 
-                <span
-                  className={`${Styles.cardprob_price} ${Styles.underLine}`}
-                >
-                  {price?.toLocaleString()} تومان{" "}
-                </span>
-              </>
-            )}
+                  <span
+                    className={`${Styles.cardprob_price} ${Styles.underLine}`}
+                  >
+                    {price?.toLocaleString()} تومان{" "}
+                  </span>
+                </>
+              )}
 
-            {noOffPrice !== price && (
-              <>
+              {noOffPrice !== price && (
+                <>
+                  <span className={Styles.cardprob_noOffPrice}>
+                    {noOffPrice?.toLocaleString()}تومان{" "}
+                  </span>
+
+                  <span
+                    className={`${Styles.cardprob_price} ${Styles.underLine}`}
+                  >
+                    {price?.toLocaleString()} تومان{" "}
+                  </span>
+                </>
+              )}
+
+              {verifyHam && (
                 <span className={Styles.cardprob_noOffPrice}>
                   {noOffPrice?.toLocaleString()}تومان{" "}
                 </span>
+              )}
+            </>
+          )
 
-                <span
-                  className={`${Styles.cardprob_price} ${Styles.underLine}`}
-                >
-                  {price?.toLocaleString()} تومان{" "}
-                </span>
-              </>
-            )}
 
-            {verifyHam && (
-              <span className={Styles.cardprob_noOffPrice}>
-                {noOffPrice?.toLocaleString()}تومان{" "}
-              </span>
-            )}
-          </>
-        ) : parentId == 2 ? (
-          ""
-        ) : (
-          <span className={Styles.cardprob_price}>ناموجود</span>
-        )}
+          //   : parentId == 2 ? (
+          //   ""
+          // ) : (
+          //   <span className={Styles.cardprob_price}>ناموجود</span>
+          //   )
+        }
+
+        {supply == 0 && parentId != 2 ? (
+          <span
+            className={Styles.cardprob_price}
+          >
+            ناموجود
+          </span>
+        ) : ''}
       </Link>
       {verifyHam && (
         <div className={`${Styles.cardprob__icon_div} centerr`}>
@@ -172,7 +191,7 @@ export default function CardC({
               xtFlagLogin
                 ? addToBasket()
                 : // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA)
-                  addToCart(id, "1", setCartCounter);
+                addToCart(id, "1", setCartCounter);
             }}
           />
           {/* <Heart size={32}
