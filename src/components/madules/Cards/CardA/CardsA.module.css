@@ -99,7 +99,7 @@
   z-index: -1;
   background-clip: content-box;
   /* animation: spin 20s linear infinite; چرخش کادر دوار  */
-  border: 2.5px dashed var(--them);
+  border: 2.5px solid var(--them);
 }
 @keyframes spin {
   100% {
