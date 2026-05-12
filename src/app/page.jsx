@@ -77,7 +77,6 @@ export default function Home() {
     }
     myApp();
   };
-  // console.log(keyOfferSlider)
 
   useEffect(() => {
     keyShow(11, setKey);

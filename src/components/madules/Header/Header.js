@@ -207,7 +207,6 @@ export default function Header() {
         pageNumber: 0,
         pageSize: 1000,
       };
-      // console.log(obj)
       const res = await fetch(`${apiUrl}/api/CyProducts/SearchProducts`, {
         method: "POST",
         credentials: "include",
@@ -219,7 +218,6 @@ export default function Header() {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          // console.log(res)
           if (res.status == 200) {
             return res.json();
           }
@@ -231,7 +229,6 @@ export default function Header() {
           } else {
             setFlagSearch(false);
           }
-          //   console.log(result)
         });
     }
     myApp();
@@ -285,7 +282,6 @@ export default function Header() {
           // Authorization: `Bearer ${getLocalStorage}`,
         },
       }).then((res) => {
-        // console.log(res);
         if (res.status == 200) {
           // setUserName(getLocalStorageUser);
           setFlag(true);
@@ -300,7 +296,6 @@ export default function Header() {
 
   useEffect(() => {
     const chekKey2 = (e) => {
-      // console.log(e)
       if (e.keyCode == 13 && searchType !== "") {
         searchBox();
         setVisible(true);
@@ -1396,7 +1391,6 @@ export default function Header() {
                 <li
                   className={`${styles.bottomHeader_ul_category}`}
                   onClick={() => {
-                    // console.log(ulRefA.current.classList.value);
                     if (ulRefA.current.classList.value === "Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA") {
                       ulRefA.current.classList.remove("header_hidden_ulRefA");
                     } else {

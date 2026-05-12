@@ -35,7 +35,6 @@ export default function SubjecArea() {
           }
         })
         .then((result) => {
-          // console.log(result)
           setAllSubjects(result.itemList);
         });
     }

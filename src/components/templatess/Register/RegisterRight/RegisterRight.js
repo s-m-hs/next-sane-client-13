@@ -105,7 +105,6 @@ export default function RegisterRight() {
         },
         body: JSON.stringify(obj),
       }).then((res) => {
-        // console.log(res)
         if (res.status == 200) {
         } else if (res.status == 400) {
           // AlertB()
@@ -121,7 +120,6 @@ export default function RegisterRight() {
       pw: data.password,
       name: data.name,
     };
-    // console.log(obj)
     if (token.length == 11 && !flagInput) {
       if (data.passwordRepeat === data.password) {
         postApiByAlert("/api/Customer/register", obj, alertD, alertB);
@@ -176,12 +174,10 @@ export default function RegisterRight() {
           })
           .catch((err) => {
             console.log(err.code);
-            // console.log(err.status.code)
           });
       }
       myAppGet();
     } else alertC();
-    // console.log(data);
   };
 
   useEffect(() => {

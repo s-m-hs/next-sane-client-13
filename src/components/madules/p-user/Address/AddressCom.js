@@ -28,7 +28,7 @@ export default function AddressCom() {
     defaultValues: {},
   });
 
-  const handleError = (errors) => {};
+  const handleError = (errors) => { };
   const provinces = [
     { id: 1, name: "آذربایجان شرقی" },
     { id: 2, name: "آذربایجان غربی" },
@@ -108,7 +108,6 @@ export default function AddressCom() {
         }
       )
         .then((res) => {
-          // console.log(res);
           if (res.ok) {
             AlertA();
             return res.json();
@@ -132,16 +131,15 @@ export default function AddressCom() {
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, []);
-  // console.log(address)
   return (
     <div>
       <Tabs
         defaultActiveKey="home"
         id="fill-tab-example"
         className="mb-2"
-        // fill
-        // onSelect={ffc}
-        // onClick={()=>ffc(id)}
+      // fill
+      // onSelect={ffc}
+      // onClick={()=>ffc(id)}
       >
         <Tab eventKey="home" title=" لیست آدرس های من" style={{ background: "inherit" }}>
           <div className={`container ${style.container}`}>

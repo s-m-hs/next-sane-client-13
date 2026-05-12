@@ -5,7 +5,7 @@ import SpinnerA from '@/utils/SpinnerA/SpinnerA'
 export default function Loading() {
   return (
     <div className='centerr'>
-        <SpinnerA/>
+        {/* <SpinnerA/> */}
     </div>
 
   

@@ -1,5 +1,6 @@
 .ProductDetailL_divright {
   height: 100%;
+  padding: 10px;
 }
 
 .ProductDetailL_div__title {
@@ -14,6 +15,8 @@
 }
 .ProductDetailL_main_divright {
   background-color: #efefef;
+  height: 90%;
+  border-radius: 5px;
 }
 .ProductDetailL_div__partn {
   font-size: 1cqi;
@@ -32,7 +35,8 @@
 }
 .ProductDetailL_divMiddle_offprice {
   font-size: 1.5cqi;
-  color: var(--them);
+  color:#ffb300;
+  /* color: var(--them); */
   font-weight: 600;
 }
 .ProductDetailL_divMiddle_price {

@@ -12,7 +12,6 @@ const requestCoupon = (couItemId, state, func1, func2) => {
         },
       }
     ).then((res) => {
-      console.log(res);
       if (res.ok) {
         func1();
       } else {

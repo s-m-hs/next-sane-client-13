@@ -126,7 +126,7 @@ export default function SystemPart() {
   //        return res.json()
   //       }
   //     }).then(result=>{
-  //       console.log(result)
+  //      
   //       setGetExel(result)
   //     })
   //   }

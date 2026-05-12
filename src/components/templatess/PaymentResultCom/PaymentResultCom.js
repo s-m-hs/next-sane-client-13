@@ -48,7 +48,6 @@ export default function PaymentResultCom({ param }) {
       orderId: param,
       authority: authority,
     };
-    // console.log(obj);
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/ZarinPal/varifyPay`, {
         method: "POST",
@@ -61,15 +60,12 @@ export default function PaymentResultCom({ param }) {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          console.log(res);
           if (res.ok) {
             return res.json().then((result) => {
               setVerifyDetail(result);
               setXtFlagSpinnerShow(false);
             });
           } else {
-            console.log(res);
-
             alertB();
           }
         })

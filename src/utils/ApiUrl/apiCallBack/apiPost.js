@@ -1,7 +1,7 @@
 import apiUrl from "../apiUrl";
 
-const postApi=(url,obj,setFunc)=>{
-    async function myAppGet() {
+const postApi = (url, obj, setFunc) => {
+  async function myAppGet() {
     const res = await fetch(
       `${apiUrl}${url}`,
       {
@@ -13,12 +13,11 @@ const postApi=(url,obj,setFunc)=>{
       }
     )
       .then((res) => {
-        // console.log(res)
         return res.json();
       })
       .then((result) => {
         setFunc(result);
-      }).catch(err=>console.log(err))
+      }).catch(err => console.log(err))
   }
   myAppGet();
 }

@@ -57,13 +57,11 @@ export default function OrderCom() {
         }
       )
         .then((res) => {
-          // console.log(res)
           if (res.status == 200) {
             return res.json();
           }
         })
         .then((result) => {
-          // console.log(result)
           setorderArrayByDetail(result);
         })
         .catch((err) => console.log(err));
@@ -86,13 +84,11 @@ export default function OrderCom() {
         }
       )
         .then((res) => {
-          // console.log(res)
           if (res.status == 200) {
             return res.json();
           }
         })
         .then((result) => {
-          // console.log(result)
           setAllOrder(result);
         })
         .catch((err) => console.log(err));
@@ -112,9 +108,9 @@ export default function OrderCom() {
         defaultActiveKey="home"
         id="fill-tab-example"
         className="mb-2"
-        // fill
-        // onSelect={ffc}
-        // onClick={()=>ffc(id)}
+      // fill
+      // onSelect={ffc}
+      // onClick={()=>ffc(id)}
       >
         <Tab
           eventKey="home"
@@ -223,11 +219,11 @@ export default function OrderCom() {
                                               <td>
                                                 {item.unitOfferPrice
                                                   ? `${(
-                                                      item.unitOfferPrice / 10
-                                                    ).toLocaleString()} `
+                                                    item.unitOfferPrice / 10
+                                                  ).toLocaleString()} `
                                                   : `${(
-                                                      item.unitPrice / 10
-                                                    ).toLocaleString()} `}
+                                                    item.unitPrice / 10
+                                                  ).toLocaleString()} `}
                                               </td>
                                               <td>
                                                 {(

@@ -30,7 +30,6 @@ export default function ProductDetail({ param }) {
         },
       })
         .then((res) => {
-          // console.log(res)
           return res.json();
         })
         .then((result) => {
@@ -82,7 +81,7 @@ export default function ProductDetail({ param }) {
                 <Breadcrumb.Item>
                   <Link
                     href="/"
-                    // onClick={()=>setXtFlagSpinnerShow(true)}
+                  // onClick={()=>setXtFlagSpinnerShow(true)}
                   >
                     <HouseLine size={18} />
                     خانه{" "}
@@ -119,15 +118,15 @@ export default function ProductDetail({ param }) {
           <ProductDetailLeft detail={productDetailB} />
         </div>
       </div>
-      <div className="row">
+      <div className="row boxSh">
         <div className={`col ${Styles.product_tab_div}`}>
           <Tabs
             defaultActiveKey="home"
             id="fill-tab-example"
             className="mb-2"
-            // fill
-            // onSelect={ffc}
-            // onClick={()=>ffc(id)}
+          // fill
+          // onSelect={ffc}
+          // onClick={()=>ffc(id)}
           >
             <Tab eventKey="home" title="مشخصات" style={{ background: "inherit" }}>
               <div className={Styles.table_div}>

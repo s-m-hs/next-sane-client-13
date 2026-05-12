@@ -80,7 +80,6 @@ const MainProvider = ({ children }) => {
         },
       })
         .then((res) => {
-          // console.log(res)
           if (res.status == 200) {
             return res.json();
           }
@@ -96,7 +95,6 @@ const MainProvider = ({ children }) => {
             setUserSrc(result.userImageUrl);
           }
 
-          // console.log(result)
         });
     }
     myApp();
@@ -113,13 +111,11 @@ const MainProvider = ({ children }) => {
         },
       })
         .then((res) => {
-          // console.log(res);
           if (res.status == 200) {
             return res.json();
           }
         })
         .then((result) => {
-          // console.log(result);
           setAddress(result);
         });
     }

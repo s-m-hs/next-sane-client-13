@@ -78,7 +78,7 @@ export default function LoginRight() {
     checkbox: { required: "code is checkbox" },
   };
 
-  const handleError = (errors) => {};
+  const handleError = (errors) => { };
 
   //////////////////////
   const alertA = () =>
@@ -156,7 +156,6 @@ export default function LoginRight() {
       valadationCode: tokenC,
       username: tokenB,
     };
-    // console.log(obj)
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/Customer/verifyCode`, {
         method: "POST",
@@ -297,7 +296,6 @@ export default function LoginRight() {
         },
         body: JSON.stringify(obj),
       }).then((res) => {
-        // console.log(res);
         if (res.status == 200) {
           // setBasketFlag(prev=>!prev)
           // AlertA()
@@ -311,7 +309,6 @@ export default function LoginRight() {
   ///////////////////////////////
 
   const handleRegistration = (data) => {
-    // console.log(data);
     let obj = {
       un: token,
       pw: sha512(data.password),

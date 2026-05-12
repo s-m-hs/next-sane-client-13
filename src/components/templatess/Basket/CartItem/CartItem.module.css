@@ -11,9 +11,12 @@
   border-bottom: 1px dotted;
   outline: none;
 }
+.td_btn{
+  text-align: center;
+}
 .btn_product {
   font-size: 0.8cqi;
-  width: 100%;
+  width: 40%;
 }
 
 .btn_product_hide {

@@ -29,7 +29,6 @@ const ApiDeleteX2 = (url, func) => {
             },
           })
             .then((res) => {
-              // console.log(res);
             })
             .then((result) => {
               swalWithBootstrapButtons

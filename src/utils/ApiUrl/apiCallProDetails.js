@@ -1,20 +1,19 @@
 import apiUrl from "./apiUrl";
 
 
-const apiCallProdDetails = (prodId,saveRes, isCalled)=>{
-    async function myAppGet(){
-        const res = await fetch(`${apiUrl}/api/CyProducts/${prodId}`,{
-            method:'GET',
+const apiCallProdDetails = (prodId, saveRes, isCalled) => {
+    async function myAppGet() {
+        const res = await fetch(`${apiUrl}/api/CyProducts/${prodId}`, {
+            method: 'GET',
             headers: {
                 accept: "text/plain",
-              },
-        }).then(res=>{
+            },
+        }).then(res => {
             return res.json()
-        }).then(result=>{
-            // console.log(result);
+        }).then(result => {
             saveRes(result)
             isCalled(true)
-        }).catch(err=>console.log(err))
+        }).catch(err => console.log(err))
     }
     myAppGet()
 }
@@ -47,7 +46,7 @@ export default apiCallProdDetails
 //       isCalled(true)
 //     })
 //     .catch((error) => {
-//       console.error(error);
+//
 //     });
 // }
 

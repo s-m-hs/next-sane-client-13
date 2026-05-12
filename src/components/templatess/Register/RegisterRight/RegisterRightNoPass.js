@@ -87,7 +87,6 @@ export default function RegisterRight() {
         },
         body: JSON.stringify(obj),
       }).then((res) => {
-        // console.log(res)
         if (res.status == 200) {
         } else if (res.status == 400) {
           // AlertB()
@@ -103,7 +102,6 @@ export default function RegisterRight() {
       pw: "sanepassword",
       name: "SaneUser",
     };
-    // console.log(obj)
     if (token.length == 11 && !flagInput) {
       postApiByAlert("/api/Customer/register3", obj, alertD, alertB);
       setFlagErrorCheckbox(false);
@@ -147,12 +145,10 @@ export default function RegisterRight() {
           })
           .catch((err) => {
             console.log(err.code);
-            // console.log(err.status.code)
           });
       }
       myAppGet();
     } else alertC();
-    // console.log(data);
   };
 
 
@@ -208,8 +204,7 @@ export default function RegisterRight() {
     }
   };
 
-  // console.log(tokenB)
-  // console.log('object')
+
   return (
     <div className={`${style.div_main} centerc`}>
       <img className={style.img} src="../../../../../images/register/8380015.jpg" alt="image" />

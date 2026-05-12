@@ -59,25 +59,24 @@ export default function ProductDetailLeft({ detail }) {
 
   useEffect(() => {
     if (detail?.supply !== 0 && detail.supply && detail.isToSale) {
-      // console.log('object')
       setFlagSupply(true);
     }
   }, [detail]);
 
   return (
     <>
-      <div className="container " style={{ height: "600px" }}>
+      <div className="container  boxSh" style={{ height: "600px" }}>
         <div
           className={`${Styles.row_detail} row mt-1 centerc`}
-          style={{ height: "600px" }}
+          style={{ height: "600px", padding: "5px" }}
         >
           {detail && (
             <>
               <div
-                className={`col-6 ${Styles.ProductDetailL_main_divright} centerc mt-5`}
+                className={`col-6 ${Styles.ProductDetailL_main_divright} centerc `}
               >
                 <div
-                  className={`${Styles.ProductDetailL_divright} centerc mt-5`}
+                  className={`${Styles.ProductDetailL_divright} centerc `}
                 >
                   <h1 className={Styles.ProductDetailL_div__title}>
                     {detail.name}
@@ -177,7 +176,7 @@ export default function ProductDetailLeft({ detail }) {
                       className={`${Styles.ProductDetailL_left} centerc mt-5`}
                     >
                       <button
-                        className={`${Styles.addButton} btn btn-info`}
+                        className={`${Styles.addButton} btn btn-warning`}
                         onClick={() => {
                           xtFlagLogin
                             ? addToBasket()
@@ -201,7 +200,7 @@ export default function ProductDetailLeft({ detail }) {
 
                 {flagSupply && (
                   <button
-                    className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-info`}
+                    className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-warning`}
                     onClick={() => {
                       // const getLocalStorage=localStorage.getItem('loginToken')
                       // let obj=[{

@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { LuTableProperties } from "react-icons/lu";
 import { FaArrowsAltV } from "react-icons/fa";
 export default function CategoryDetaile({ param }) {
-  const [mainCategory, setMainCategory] = useState({});
+  const [mainCategory, setMainCategory] = useState([]);
   const [mainCatChilds, setMainCatChilds] = useState([]);
   const [productByCat, setProductByCat] = useState([]);
   const [flag, setFlag] = useState(false);
@@ -32,12 +32,10 @@ export default function CategoryDetaile({ param }) {
   const [tableShow, setTableShow] = useState(false);
   const [parentId, setParentId] = useState("");
   const [hamkarPaymentState, setHamkarPaymentState] = useState("1");
+  const [proByCatFlag, setProByCatFlag] = useState(true)
   const rout = useRouter();
 
-  // console.log(mainCategory)
-  // console.log(mainCategory?.item.code)
 
-  // const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
   let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar, offer } = useContext(MainContext);
   const styleRef = useRef();
   const goToTop = () => {
@@ -59,7 +57,6 @@ export default function CategoryDetaile({ param }) {
     getproductByCat(obj);
   };
   const changeId = (code) => {
-    // console.log(code)
     setCodePro(code);
     setPage(1);
     let obj = {
@@ -99,13 +96,10 @@ export default function CategoryDetaile({ param }) {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          // console.log(res);
           return res.json();
         })
         .then((result) => {
-          // console.log(result)
           if (result.childs?.length != 0) {
-            // console.log(result)
             setMainCatChilds(result.childs);
             setMainCategory(result);
           } else {
@@ -127,20 +121,20 @@ export default function CategoryDetaile({ param }) {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          // console.log(res)
-          return res.json();
-        })
-        .then((result) => {
-          // console.log(result)
-          if (result.itemList?.length != 0) {
-            setProductByCat(result.itemList);
-            setAllCount(result.allCount);
-          } else {
-            setProductByCat([]);
-            setAllCount(result.allCount);
+          if (res.ok) {
+            return res.json().then((result) => {
+              if (result.itemList?.length != 0) {
+                setProductByCat(result.itemList);
+                setAllCount(result.allCount);
+                setProByCatFlag(false)
+              } else {
+                setProductByCat([]);
+                setAllCount(result.allCount);
+                setProByCatFlag(false)
+              }
+            });
           }
-        })
-        .catch((err) => console.log(err));
+        }).catch((err) => console.log(err));
     }
     myApppost();
   };
@@ -223,8 +217,9 @@ export default function CategoryDetaile({ param }) {
 
   ///////////////////////////
   useEffect(() => {
-    if (mainCatChilds.length == 0 && mainCategory.item?.code) {
-      let code = mainCategory.item.code;
+    if (mainCatChilds.length == 0 && mainCategory.length != 0) {
+
+      let code = mainCategory.item?.code;
 
       let obj = {
         cat: code,
@@ -234,10 +229,10 @@ export default function CategoryDetaile({ param }) {
       getproductByCat(obj);
     }
     setNameCategory(mainCategory.item?.name);
-  }, [mainCatChilds, page]);
+  }, [page, mainCategory]);
 
   useEffect(() => {
-    if (mainCatChilds.length !== 0) {
+    if (mainCatChilds.length !== 0 && mainCatChilds[0].code && mainCategory.length != 0) {
       let obj = {
         cat: mainCatChilds[0]?.code,
         pageNumber: page - 1,
@@ -249,14 +244,13 @@ export default function CategoryDetaile({ param }) {
 
     ////for first to setcodePro==>>
     setCodePro(mainCatChilds[0]?.code);
-  }, [flag]);
+  }, [flag, mainCategory]);
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
     // return()=>setNameCategory('')
   }, []);
 
-  console.log(productByCat)
   return (
     <div className={`container  centerc ${Styles.category}`}>
       <div className="row mt-5">
@@ -308,7 +302,6 @@ export default function CategoryDetaile({ param }) {
               <Breadcrumb>
                 <Breadcrumb.Item>
                   <Link
-                    // onClick={()=>setXtFlagSpinnerShow(true)}
                     href="/"
                   >
                     <HouseLine size={24} color="#24b8c9de" />
@@ -355,7 +348,6 @@ export default function CategoryDetaile({ param }) {
                 aria-label="Default select example"
                 onChange={(e) => {
                   setHamkarPaymentState(e.target.value);
-                  // console.log(hamkarPaymentState)
                 }}
               >
                 <option value="1">نقدی</option>
@@ -371,8 +363,7 @@ export default function CategoryDetaile({ param }) {
           </button>
 
           <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>
-            {productByCat?.length == 0 ? (
-              // <SpinnerA size={200} />
+            {proByCatFlag ? (
               <div className="row">
                 <div className="col-12 centerr">
                   <SpinnerA size={200} />
@@ -385,10 +376,8 @@ export default function CategoryDetaile({ param }) {
                     <div
                       key={index}
                       className={`centerc ${Styles.products_col}`}
-                    // onClick={ ()=>setFlagSpinnerShow(true) }
                     >
                       <CardC
-                        // clickSpinner={()=>setFlagSpinnerShow(true)}
                         parentId={parentId}
                         id={item.id}
                         imgSrc={item.smallImage}

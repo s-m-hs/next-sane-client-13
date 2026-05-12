@@ -24,7 +24,6 @@ export default function SwiperD({ title, categoryCode }) {
       pageNumber: 0,
       pageSize: 100,
     };
-    // console.log(obj)
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
         method: "POST",
@@ -34,11 +33,9 @@ export default function SwiperD({ title, categoryCode }) {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          // console.log(res)
           return res.json();
         })
         .then((result) => {
-          // console.log(result)
           setProductByCatArray(result);
         })
         .catch((err) => console.log(err));
@@ -53,7 +50,7 @@ export default function SwiperD({ title, categoryCode }) {
       <div className={`container ${style.container} boxSh`}>
         <div className="row centerr">
           <div className={`col-lg-2 ${style.right_div} centerc`}>
-           <p>شگفتانه روز</p>
+            <p>شگفتانه روز</p>
             <Example />
 
             <ClockLoader color="#fd2121" size={100} speedMultiplier={0.3} />
@@ -99,7 +96,7 @@ export default function SwiperD({ title, categoryCode }) {
                 },
               }}
               modules={[Autoplay, Pagination, Navigation]}
-              className={`${style.swiperCustom} mySwiperB swiperCustom `} 
+              className={`${style.swiperCustom} mySwiperB swiperCustom `}
             >
               {productByCatArray?.itemList
                 ?.slice()

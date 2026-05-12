@@ -36,7 +36,6 @@ export default function SubjectShow({ param }) {
                 body: JSON.stringify(obj),
             })
                 .then((res) => {
-                    // console.log(res)
                     if (res.ok) {
                         return res.json();
                     }
@@ -61,13 +60,11 @@ export default function SubjectShow({ param }) {
                 },
             })
                 .then((res) => {
-                    // console.log(res)
                     if (res.ok) {
                         return res.json();
                     }
                 })
                 .then((resullt) => {
-                    // console.log(resullt)
                     setSubjectDetail(resullt);
                 });
         }
@@ -78,7 +75,6 @@ export default function SubjectShow({ param }) {
         getsubjectDetail();
         getAllSubject();
     }, [param]);
-    // console.log(params);
     useEffect(() => {
         setXtFlagSpinnerShow(false);
     }, []);
@@ -88,7 +84,6 @@ export default function SubjectShow({ param }) {
             setXtFlagSpinnerShow(false);
         }
     });
-    // console.log(pathname);
     return (
         <div className="container">
             <div className="row">

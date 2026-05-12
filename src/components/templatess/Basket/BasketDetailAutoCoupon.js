@@ -291,7 +291,6 @@ export default function BasketDetail() {
   };
 
   const updateQuantity = (id, newQuantity) => {
-    // console.log("updateQuantity");
     let basketArray = [];
     basket.forEach((item) => {
       if (item.cyProductID !== id) {
@@ -300,7 +299,6 @@ export default function BasketDetail() {
     });
     basketArray.push({ cyProductID: id, quantity: newQuantity });
     setBasket(basketArray);
-    // console.log(basketArray);
     setFlagUpdate(true);
   };
 
@@ -382,10 +380,7 @@ export default function BasketDetail() {
   // }, []);
 
   ////////////////////
-  // console.log(getBasket)
-  // console.log(address)
-  // console.log(adressId)
-  // console.log(toBuy)
+
 
 
   ////post Section

@@ -11,7 +11,6 @@ const ApiPutX = (url, putId, obj, func) => {
       body: JSON.stringify(obj),
     })
       .then((res) => {
-        console.log(res);
         if (res.ok) {
           func();
         }

@@ -12,11 +12,11 @@ import { MainContext } from "@/context/MainContext";
 export default function SwiperC({ title, categoryCode }) {
   const [productByCatArray, setProductByCatArray] = useState([]);
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-let{offer}=useContext(MainContext)
-/////برای مرتب کردن محصولات بر اساس mfrNo 
-const sortedProducts = productByCatArray?.itemList?.sort((a, b) => {
-  return a.mfrNo - b.mfrNo;
-});
+  let { offer } = useContext(MainContext)
+  /////برای مرتب کردن محصولات بر اساس mfrNo 
+  const sortedProducts = productByCatArray?.itemList?.sort((a, b) => {
+    return a.mfrNo - b.mfrNo;
+  });
 
   const getProductByCat = () => {
     let obj = {
@@ -24,7 +24,6 @@ const sortedProducts = productByCatArray?.itemList?.sort((a, b) => {
       pageNumber: 0,
       pageSize: 100,
     };
-    // console.log(obj)
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
         method: "POST",
@@ -34,11 +33,9 @@ const sortedProducts = productByCatArray?.itemList?.sort((a, b) => {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          // console.log(res)
           return res.json();
         })
         .then((result) => {
-          // console.log(result)
           setProductByCatArray(result);
         })
         .catch((err) => console.log(err));
@@ -100,12 +97,12 @@ const sortedProducts = productByCatArray?.itemList?.sort((a, b) => {
                 id={item.id}
                 imgSrc={item.mainImage}
                 title={item.name}
-                price={Number(item.price)/10}
+                price={Number(item.price) / 10}
                 supply={item.supply}
                 categoryCode={categoryCode}
                 cyProductCategoryId={item.cyProductCategoryId}
-                noOffPrice={Number(item.noOffPrice)/10}
-offer={offer}
+                noOffPrice={Number(item.noOffPrice) / 10}
+                offer={offer}
               />
             </SwiperSlide>
           ))}

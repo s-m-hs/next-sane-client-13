@@ -26,7 +26,6 @@ const postApiByAlert = (url, obj, alert, alertB) => {
       })
       .catch((err) => {
         console.log(err.code);
-        // console.log(err.status.code)
       });
   }
   myAppGet();

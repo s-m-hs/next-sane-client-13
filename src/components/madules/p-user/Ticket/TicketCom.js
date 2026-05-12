@@ -76,7 +76,6 @@ export default function TicketCom() {
     formData.append("Name", "");
     formData.append("Description", "");
     formData.append("IsPrivate", true);
-    // console.log(formData.get('File'));
     async function myAppPostFile() {
       const res = await fetch(`${apiUrl}/api/CyFiles/upload`, {
         method: "POST",
@@ -91,16 +90,12 @@ export default function TicketCom() {
       })
         .then((res) => {
           if (res.status == 200) {
-            // classRefD.current.classList.remove("ticket-hide");
-            // classRefC.current.classList.add('order-show')
             return res.json();
           }
         })
         .then((result) => {
           if (result) {
             setGuIdC(result.id);
-            // classRefD.current.classList.remove("ticket-hide");
-            // classRefC.current.classList.add('order-show')
           }
         })
         .catch((err) => console.log(err));
@@ -144,14 +139,12 @@ export default function TicketCom() {
 
   const sendTicket = (obj) => {
     async function myApp() {
-      // const getLocalStorage = localStorage.getItem('loginToken')
 
       const res = await fetch(`${apiUrl}/api/CyTicket/postOnTicket`, {
         method: "POST",
         credentials: "include",
 
         headers: {
-          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(obj),
@@ -170,8 +163,6 @@ export default function TicketCom() {
   };
 
   const getThicketById = () => {
-    // const getLocalStorage = localStorage.getItem('loginToken')
-
     setGetChats([]);
     async function myApp() {
       const res = await fetch(
@@ -181,7 +172,6 @@ export default function TicketCom() {
           credentials: "include",
 
           headers: {
-            // Authorization: `Bearer ${getLocalStorage}`,
             "Content-Type": "application/json",
           },
         }
@@ -192,7 +182,6 @@ export default function TicketCom() {
           }
         })
         .then((result) => {
-          // console.log(result)
           setGetChats(result);
         })
         .catch((err) => console.log(err));
@@ -200,7 +189,6 @@ export default function TicketCom() {
     myApp();
   };
   const closeChat = () => {
-    // const getLocalStorage = localStorage.getItem('loginToken')
 
     Swal.fire({
       title: " آیا از بستن تیکت اطمینان دارید؟",
@@ -230,13 +218,7 @@ export default function TicketCom() {
             .catch((err) => console.log(err));
         }
         myApp();
-        //     Swal.fire({
-        //   position: "center",
-        //   icon: "success",
-        //   title: " فابل در حال دانلود است",
-        //   showConfirmButton: false,
-        //   timer: 500,
-        // })
+
       }
     });
   };
@@ -250,20 +232,18 @@ export default function TicketCom() {
   } = useForm({
     defaultValues: {},
   });
-  const handleError = (errors) => {};
+  const handleError = (errors) => { };
 
   const stateArraySelect = [
     { id: 1, state: "درانتظار پاسخ" },
     { id: 2, state: " پاسخ داده شده" },
     { id: 3, state: "بسته شده" },
   ];
-  // const[tickettitle,setTickettitle]=useState('')
-  // const[ticketFirstDetaile,setTicketFirstDetaile]=useState('')
+
 
   const classRefA = useRef();
 
   const getAllTicket = () => {
-    // const getLocalStorage = localStorage.getItem('loginToken')
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyTicket/getUserTickets`, {
@@ -290,7 +270,6 @@ export default function TicketCom() {
   };
 
   const handleRegistration = (data) => {
-    // const getLocalStorage = localStorage.getItem('loginToken')
 
     let obj = {
       id: 0,
@@ -323,8 +302,8 @@ export default function TicketCom() {
               description: result.topic
                 ? result.topic
                 : guIdC
-                ? "ارسال فایل"
-                : "",
+                  ? "ارسال فایل"
+                  : "",
               status: 1,
               // sentDate: "2024-11-05T08:26:17.313Z",
               // seenDate: "2024-11-05T08:26:17.313Z",
@@ -335,7 +314,6 @@ export default function TicketCom() {
         }
       });
 
-      // getAllTicket()
     }
     myApp();
   };
@@ -482,10 +460,10 @@ sendTicket(obj)
                             item.status == 1
                               ? "btn btn-info"
                               : item.status == 2
-                              ? "btn btn-warning"
-                              : item.status == 3
-                              ? "btn btn-danger"
-                              : ""
+                                ? "btn btn-warning"
+                                : item.status == 3
+                                  ? "btn btn-danger"
+                                  : ""
                           }
                           onClick={() => {
                             setFile({});
@@ -558,8 +536,8 @@ sendTicket(obj)
                         description: textArea
                           ? textArea
                           : guIdC
-                          ? "ارسال فایل"
-                          : "",
+                            ? "ارسال فایل"
+                            : "",
                         status: 1,
                         sentDate: "2024-11-05T08:26:17.313Z",
                         seenDate: "2024-11-05T08:26:17.313Z",

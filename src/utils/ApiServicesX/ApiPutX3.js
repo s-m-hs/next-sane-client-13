@@ -10,7 +10,6 @@ const ApiPutX3 = (url, headerAuth, id, func) => {
       },
     })
       .then((res) => {
-        // console.log(res)
         if (res.ok) {
           func();
         }

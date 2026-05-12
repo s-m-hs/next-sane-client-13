@@ -30,13 +30,11 @@ export default function WarrantyCom() {
         },
       })
         .then((res) => {
-          // console.log(res)
           if (res.status == 200) {
             return res.json();
           }
         })
         .then((result) => {
-          // console.log(result)
           setWarantyArray(result);
         });
     }
@@ -60,9 +58,9 @@ export default function WarrantyCom() {
         defaultActiveKey="home"
         id="fill-tab-example"
         className="mb-2"
-        // fill
-        // onSelect={ffc}
-        // onClick={()=>ffc(id)}
+      // fill
+      // onSelect={ffc}
+      // onClick={()=>ffc(id)}
       >
         <Tab
           eventKey="home"

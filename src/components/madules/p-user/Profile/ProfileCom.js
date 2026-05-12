@@ -14,7 +14,6 @@ export default function ProfileCom() {
   const [file, setFile] = useState({});
   const [imgUrl, setImgUrl] = useState("");
 
-  // const getLocalStorage=localStorage.getItem('loginToken')
   let { cyUserID, username, name, family, email, mobile, userSrc, xtFlagLogin, setFlagProfile, setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
   const {
     register,
@@ -35,9 +34,8 @@ export default function ProfileCom() {
       reset(setValue(""));
       router.push("/");
     });
-  const alertB = () => alertN("center", "error", " اطلاعات مورد نیاز را به درستی وارد کنید...", 1000).then((res) => {});
+  const alertB = () => alertN("center", "error", " اطلاعات مورد نیاز را به درستی وارد کنید...", 1000).then((res) => { });
   const router = useRouter();
-  // console.log(errors?.update)
   ////////////////////////
   function fileUploadHandler(file, setImgUrlll) {
     // event.preventDefault()
@@ -46,7 +44,6 @@ export default function ProfileCom() {
     formData.append("Name", "");
     formData.append("Description", "");
     formData.append("IsPrivate", false);
-    // console.log(formData.get('File'));
     async function myAppPostFile() {
       const res = await fetch(`${apiUrl}/api/CyFiles/upload`, {
         method: "POST",
@@ -61,11 +58,9 @@ export default function ProfileCom() {
         body: formData,
       })
         .then((res) => {
-          // console.log(res)
           return res.json();
         })
         .then((result) => {
-          // console.log(result)
           setImgUrlll(result.adress);
         })
         .catch((err) => console.log(err));
@@ -82,15 +77,7 @@ export default function ProfileCom() {
     setImgUrl(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (file) {
-  //     fileUploadHandler(file, setImgUrl);
-  //   }
-  // }, [file]);
-
-  // console.log(`${apiUrl}/${imgUrl}`)
   const handleRegistration = (data) => {
-    // console.log(data);
 
     let obj = {
       id: 0,
@@ -105,9 +92,7 @@ export default function ProfileCom() {
       // username:data.update.userName
       username: username,
     };
-    // console.log(obj)
     async function myApp() {
-      // const getLocalStorage=localStorage.getItem('loginToken')
       const res = await fetch(`${apiUrl}/api/Customer/UpdateProfile`, {
         method: "POST",
         credentials: "include",
@@ -119,7 +104,6 @@ export default function ProfileCom() {
         body: JSON.stringify(obj),
       })
         .then((res) => {
-          // console.log(res)
           if (res.status == 200) {
             alertA();
             return res.json();
@@ -127,7 +111,6 @@ export default function ProfileCom() {
         })
         .then((result) => {
           setFlagProfile((prev) => !prev);
-          // console.log(result)
         });
     }
 
@@ -140,10 +123,6 @@ export default function ProfileCom() {
       family: family ? `${family}` : "",
       email: email ? `${email}` : "",
       mobile: mobile ? `${mobile}` : "",
-
-      // website: website ? `${website}` : "",
-      // description: description ? `${description}` : "",
-      // userName: getProfile.username ? `${username}` : "",
     });
   };
 
@@ -160,16 +139,15 @@ export default function ProfileCom() {
     update();
   }, [mobile, xtFlagLogin]);
 
-  // console.log(errors.update.mobile)
   return (
     <div>
       <Tabs
         defaultActiveKey="home"
         id="fill-tab-example"
         className="mb-2"
-        // fill
-        // onSelect={ffc}
-        // onClick={()=>ffc(id)}
+      // fill
+      // onSelect={ffc}
+      // onClick={()=>ffc(id)}
       >
         <Tab eventKey="home" title=" پروفایل من" style={{ background: "inherit" }}>
           <div className={`container ${style.container}`}>
@@ -217,17 +195,7 @@ export default function ProfileCom() {
                           <IdentificationCard size={38} color="#14a5af" weight="duotone" className={style.icon} />
                         </div>
 
-                        {/* <div className={ `login_label_float ${style.input}`}>
-              <input
-            value={username.toUpperCase()}
-            name="update.userName"
 
-            disabled
-              />
-              <label>نام کاربری </label>
-              <UserCircle  size={38} color="#14a5af" weight="duotone"className={style.icon} />
-
-            </div>   */}
                       </div>
                       <div className={` col-md-12 col-lg-6 ${style.colB}`}>
                         <div className={`login_label_float ${style.input}`}>
@@ -285,8 +253,7 @@ export default function ProfileCom() {
             </div>
           </div>
 
-          {/* </Tab>
-    <Tab eventKey="address" title="آدرس" style={{ background: 'inherit' }}> */}
+
         </Tab>
       </Tabs>
     </div>

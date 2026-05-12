@@ -8,12 +8,10 @@ import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 export default function CategorySectionA({ categoryId, title }) {
   const [mainCategory, setMainCategory] = useState({});
   const [flagSpinnerShow, setFlagSpinnerShow] = useState(false);
-  // console.log(mainCategory);
 
   const clickHandler = () => {
     setFlagSpinnerShow(true);
   };
-  // console.log(mainCategory);
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -28,7 +26,6 @@ export default function CategorySectionA({ categoryId, title }) {
     getCategoryById();
   }, []);
 
-  // console.log(mainCategory)
   return (
     <>
       {flagSpinnerShow && <div className={`row ${styles.spinner_row}`}></div>}
@@ -58,7 +55,6 @@ export default function CategorySectionA({ categoryId, title }) {
             <div className={`row row-cols-6  ${styles.bcatitem}`}>
               {mainCategory.childs.map((item, index) => (
                 <CardA
-                  // click={console.log(item)}
                   datos="fade-up"
                   key={item.id}
                   imgSrc={item.imageUrl}
@@ -71,7 +67,6 @@ export default function CategorySectionA({ categoryId, title }) {
             <div className={`row row-cols-auto  ${styles.bcatitemB}`}>
               {mainCategory.childs.map((item, index) => (
                 <CardA
-                  //  click={console.log(item)}
                   datos=""
                   key={item.id}
                   imgSrc={item.imageUrl}

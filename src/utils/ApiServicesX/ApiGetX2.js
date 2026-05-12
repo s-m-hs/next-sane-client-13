@@ -10,7 +10,6 @@ const ApiGetX2 = (url, func) => {
       },
     })
       .then((res) => {
-        // console.log(res);
         if (res.ok) {
           return res.json().then((result) => func(result));
         }

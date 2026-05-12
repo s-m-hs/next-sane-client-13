@@ -22,7 +22,6 @@ const Side = () => {
   const rout = useRouter();
   const pathname = usePathname();
 
-  // console.log(pathname)
   const handleLinkClick = (link) => {
     setActiveLink(link); // Set the active link when clicked
   };

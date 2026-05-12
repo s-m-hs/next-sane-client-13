@@ -68,7 +68,6 @@ const CartItem = (props) => {
       }
     });
   /////////////////////////////////////////////////
-  // console.log(props)
   return (
     <>
       <tr className={`${style.tr}`}>
@@ -154,7 +153,7 @@ const CartItem = (props) => {
         )} */}
 
         {/* <!-- action --> */}
-        <td className="tp-cart-action">
+        <td className={`${style.td_btn}`}>
           <Link
             href={
               xtFlagLogin
@@ -166,7 +165,7 @@ const CartItem = (props) => {
               className={`btn btn-primary m-1 ${style.btn_product}`}
               onClick={() => setXtFlagSpinnerShow(true)}
             >
-              جزییات محصول...
+              جزییات ...
             </button>
 
             <button
