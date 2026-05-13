@@ -22,8 +22,8 @@ export async function generateMetadata({ params }) {
   const availability = product.supply !== 0 ? "instock" : "outofstock";
   const product_name = product.name;
   const product_id = product.id;
-  const product_price = product.noOffPrice !== product.price ? product.noOffPrice / 10 : (product.price / 10) * offer;
-
+  const product_price = product.noOffPrice !== product.price ? product.noOffPrice / 10 : Math.ceil(((product.price / 10) * offer) / 1000) * 1000;
+  // const product_price = product.noOffPrice !== product.price ? product.noOffPrice / 10 : (product.price / 10) * offer;
   const product_old_price = product.price / 10 || "";
 
   return {

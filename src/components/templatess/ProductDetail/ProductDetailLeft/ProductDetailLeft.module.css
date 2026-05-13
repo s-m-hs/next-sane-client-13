@@ -39,6 +39,11 @@
   /* color: var(--them); */
   font-weight: 600;
 }
+.ProductDetailL_divMiddle_offpriceB {
+  font-size: 1.4cqi;
+  color: var(--them);
+  font-weight: 600;
+}
 .ProductDetailL_divMiddle_price {
   font-size: 1cqi;
   position: relative;
@@ -142,6 +147,9 @@
   }
   .ProductDetailL_divMiddle_offprice {
     font-size: 20px;
+  }
+    .ProductDetailL_divMiddle_offpriceB {
+    font-size: 18px;
   }
   .ProductDetailL_divMiddle_price {
     width: fit-content;

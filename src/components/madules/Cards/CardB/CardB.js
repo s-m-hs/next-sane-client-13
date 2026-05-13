@@ -32,7 +32,7 @@ export default function CardB({
       "info",
       " برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو پایین سمت راست استفاده کنید)...",
       "باشه ..."
-    ).then((res) => {});
+    ).then((res) => { });
   // const addToBasket=()=>{
   //   const getLocalStorage =localStorage.getItem('loginToken')
   //   let obj={
@@ -97,7 +97,9 @@ export default function CardB({
           {offer != 1 && noOffPrice === price && (
             <div className="centerc">
               <span className={styles.price}>
-                {(price * offer)?.toLocaleString()}تومان{" "}
+                {/* {(price * offer)?.toLocaleString()}تومان{" "} */}
+                {(Math.ceil((price * offer) / 1000) * 1000).toLocaleString()}تومان{" "}
+
               </span>
               <span className={`${styles.noOffPrice} ${styles.underline}`}>
                 {price?.toLocaleString()}تومان{" "}
@@ -106,17 +108,17 @@ export default function CardB({
           )}
         </>
       ) : // parentId == 2 ?
-      categoryCode === "hardwairebestseller" ? (
-        <span
-          onClick={() => AlertC()}
-          style={{ cursor: "pointer" }}
-          className={styles.price}
-        >
-          استعلام قیمت
-        </span>
-      ) : (
-        <span className={styles.price}>استعلام قیمت</span>
-      )}
+        categoryCode === "hardwairebestseller" ? (
+          <span
+            onClick={() => AlertC()}
+            style={{ cursor: "pointer" }}
+            className={styles.price}
+          >
+            استعلام قیمت
+          </span>
+        ) : (
+          <span className={styles.price}>استعلام قیمت</span>
+        )}
 
       {/* <div className={`${styles.icon_div} centerr`}   >
         <ShoppingCart size={24} color="#19a7af" weight="duotone"

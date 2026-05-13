@@ -117,13 +117,13 @@ export default function ProductDetailLeft({ detail }) {
                                 }
                               >
                                 {(
-                                  (Number(detail.noOffPrice) / 10) *
-                                  offer
+                                  (Math.ceil(((detail.noOffPrice) / 10) *
+                                    offer / 1000)) * 1000
                                 )?.toLocaleString()}{" "}
                                 تومان
                               </span>
                               <span
-                                className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`}
+                                className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline}`}
                               >
                                 {(Number(detail.price) / 10)?.toLocaleString()}{" "}
                                 تومان
@@ -269,13 +269,13 @@ export default function ProductDetailLeft({ detail }) {
                                     }
                                   >
                                     {(
-                                      (Number(detail.noOffPrice) / 10) *
-                                      offer
+                                      (Math.ceil(((detail.noOffPrice) / 10) *
+                                        offer / 1000)) * 1000
                                     )?.toLocaleString()}{" "}
                                     تومان
                                   </span>
                                   <span
-                                    className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`}
+                                    className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline}`}
                                   >
                                     {(
                                       Number(detail.price) / 10
@@ -299,7 +299,7 @@ export default function ProductDetailLeft({ detail }) {
                                     تومان
                                   </span>
                                   <span
-                                    className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`}
+                                    className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline}`}
                                   >
                                     {(
                                       Number(detail.price) / 10

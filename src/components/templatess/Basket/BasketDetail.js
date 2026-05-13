@@ -376,7 +376,7 @@ export default function BasketDetail() {
     ///to add total price
     useEffect(() => {
         const data = getBasket.map((item) => ({
-            totalPrice: item.unitOfferPrice === item.unitPrice ? item.totalPrice * offer : item.unitOfferPrice,
+            totalPrice: item.unitOfferPrice === item.unitPrice ? (Math.ceil(item.totalPrice * offer / 1000) * 1000) : item.unitOfferPrice,
         }));
 
         const data2 = getBasket.map((item) => ({
@@ -483,7 +483,7 @@ export default function BasketDetail() {
                                                     ? Number(item.price) / 10
                                                     : item.noOffPrice !== item.price
                                                         ? Number(item.noOffPrice) / 10
-                                                        : offer != 1 && (Number(item.price) / 10) * offer
+                                                        : offer != 1 && ((Math.ceil(((item.price) / 10) * offer / 1000) * 1000))
                                             }
                                             id={item["id"]}
                                             cyProductID={item.id}
@@ -506,14 +506,14 @@ export default function BasketDetail() {
                                                         ? Number(item.totalPrice) / 10
                                                         : item.unitOfferPrice !== item.unitPrice
                                                             ? Number(item.unitOfferPrice) / 10
-                                                            : offer !== 1 && (Number(item.totalPrice) / 10) * offer
+                                                            : offer !== 1 && (Math.ceil(((item.totalPrice) / 10) * offer / 1000) * 1000)
                                                 }
                                                 unitPrice={
                                                     offer == 1 && item.unitOfferPrice === item.unitPrice
                                                         ? Number(item.unitPrice) / 10
                                                         : item.unitOfferPrice !== item.unitPrice
                                                             ? Number(item.unitOfferPrice) / 10
-                                                            : offer !== 1 && (Number(item.unitPrice) / 10) * offer
+                                                            : offer !== 1 && (Math.ceil(((item.unitPrice) / 10) * offer / 1000) * 1000)
                                                 }
                                                 WithoutOffPrice={item.unitPrice / 10} ///send to cartitem product price without off
                                                 id={item.id}
@@ -573,7 +573,7 @@ export default function BasketDetail() {
                                     <button className={`btn btn-outline  ${style.colPrice_mobile_btn1}`} disabled>
                                         <span>مجموع سبد خرید :</span>
                                         <br />
-                                        <div className={`  ${style.colPrice_mobile_span2}`}>{(Number(total) / 10).toLocaleString()} تومان</div>
+                                        <div className={`  ${style.colPrice_mobile_span2}`}>{(Math.ceil((total) / 10 / 1000) * 1000).toLocaleString()} تومان</div>
                                         <br />
                                         <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
 
@@ -632,7 +632,7 @@ export default function BasketDetail() {
 
                                     <span>مجموع سبد خرید :</span>
                                     <br />
-                                    <div>{(Number(total) / 10).toLocaleString()} تومان</div>
+                                    <div>{(Math.ceil((total) / 10 / 1000) * 1000).toLocaleString()} تومان</div>
                                     <br />
                                     <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
                                 </button>

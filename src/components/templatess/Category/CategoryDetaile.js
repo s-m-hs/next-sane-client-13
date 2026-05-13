@@ -383,7 +383,7 @@ export default function CategoryDetaile({ param }) {
                         imgSrc={item.smallImage}
                         title={item.name}
                         price={Number(item.price) / 10}
-                        offPrice={(Number(item.price) / 10) * offer}
+                        offPrice={(Math.ceil(((item.price) / 10) * offer / 1000)) * 1000}
                         supply={item.supply}
                         noOffPrice={Number(item.noOffPrice) / 10}
                         isToSale={item.isToSale}
@@ -436,7 +436,7 @@ export default function CategoryDetaile({ param }) {
 
                                     {offer !== 1 && item.noOffPrice === item.price && (
                                       <>
-                                        <span className={Styles.noOffPrice}>{`${(Number(item.price) / 10) * offer}`?.toLocaleString()} تومان </span>
+                                        <span className={Styles.noOffPrice}>{`${(Math.ceil(((item.price) / 10) * offer / 1000)) * 1000}`?.toLocaleString()} تومان </span>
 
                                         <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
                                       </>

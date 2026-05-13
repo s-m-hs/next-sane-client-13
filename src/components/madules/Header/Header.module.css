@@ -378,6 +378,7 @@ left: 0; */
   color: #fff;
   height: 15px;
   background-color: rgb(255 0 230);
+  /* background-color: rgb(255 0 230); */
 }
 .shopicon_bagetB {
   align-items: center;
@@ -390,6 +391,7 @@ left: 0; */
   color: #fff;
   height: 18px;
   background-color: rgb(255 0 230);
+  /* background-color: rgb(255 0 230); */
 }
 
 @keyframes moveB {
