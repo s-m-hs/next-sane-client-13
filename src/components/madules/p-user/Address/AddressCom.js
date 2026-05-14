@@ -164,7 +164,7 @@ export default function AddressCom() {
                             })}
                           />
                           <label>نام کاربری </label>
-                          <User size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                          <User size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                           {errors.name && (
                             <span
                               style={{
@@ -224,7 +224,7 @@ export default function AddressCom() {
                           {...register(`city`)}
                         />
                         <label> شهر </label>
-                        <City size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                        <City size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                       </div>
 
                       <div className={`login_label_float ${style.input} centerr`}>
@@ -236,7 +236,7 @@ export default function AddressCom() {
                           {...register(`address`)}
                         />
                         <label> آدرس ... </label>
-                        <City size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                        <City size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                       </div>
 
                       <div className={`login_label_float ${style.input} centerr`}>
@@ -248,7 +248,7 @@ export default function AddressCom() {
                           {...register(`postalCode`)}
                         />
                         <label> کد پستی </label>
-                        <Mailbox size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                        <Mailbox size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                       </div>
 
                       <div className={`login_label_float ${style.input} centerr`}>
@@ -260,7 +260,7 @@ export default function AddressCom() {
                           {...register(`phone`)}
                         />
                         <label> شماره ثابت </label>
-                        <PhoneCall size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                        <PhoneCall size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                       </div>
 
                       <div className={`login_label_float ${style.input} centerr`}>
@@ -272,7 +272,7 @@ export default function AddressCom() {
                           {...register(`mobile`)}
                         />
                         <label> شماره همراه </label>
-                        <DeviceMobile size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                        <DeviceMobile size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                       </div>
 
                       <div className={`col ${style.col_button}`}>

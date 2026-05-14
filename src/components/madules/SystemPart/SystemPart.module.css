@@ -36,7 +36,7 @@ font-family: 'Times New Roman', Times, serif;
 }
 .total_div input{
     outline: none;
-border:1px dotted #14a5af;
+border:1px dotted var(--them);
 border-radius: 3px;
 margin: 10px;}
 

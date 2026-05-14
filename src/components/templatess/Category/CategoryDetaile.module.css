@@ -16,7 +16,8 @@
   margin: 20px;
   font-weight: 600;
   font-size: 0.9cqi;
-  color: var(--black33b4359);
+  color: var(--themB);
+  /* color: var(--black33b4359); */
 }
 .mySwiperD {
   margin-top: 30px;
@@ -35,7 +36,7 @@
   margin: 80px auto !important;
 }
 .products_col {
-  box-shadow: 0 0 14px -6px rgba(36, 184, 201, 0.87);
+  box-shadow: 0 0 14px -6px var(--them);
   min-width: 35rem !important;
   height: 36rem;
   margin-bottom: 50px;
@@ -45,7 +46,7 @@
 .breadcrumb {
   width: fit-content !important;
   margin-right: 100px !important;
-  border-bottom: 1px solid #14a5af;
+  border-bottom: 1px solid var(--them);
 }
 .breadcrumb_row {
   width: fit-content;

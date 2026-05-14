@@ -234,7 +234,7 @@ export default function RegisterRight() {
               </div>
 
               <div className={`${style.div_input_B} centerr`}>
-                <DeviceMobile size={40} color="#19a5af" weight="fill" />
+                <DeviceMobile size={40} color={`var(--themB)`} weight="fill" />
 
                 <div
                   className={`${style.card_div} card flex justify-content-center login_label_float`}
@@ -254,7 +254,7 @@ export default function RegisterRight() {
               </div>
 
               <div className={`${style.div_input_B} centerr`}>
-                <Key size={40} color="#19a5af" weight="fill" />
+                <Key size={40} color={`var(--themB)`} weight="fill" />
                 <div>
                   <input
                     className={`${style.div_input_div} `}
@@ -277,7 +277,7 @@ export default function RegisterRight() {
               </div>
 
               <div className={`${style.div_input_B} centerr`}>
-                <Key size={40} color="#19a5af" weight="fill" />
+                <Key size={40} color={`var(--themB)`} weight="fill" />
                 <div>
                   <input
                     className={`${style.div_input_div} `}

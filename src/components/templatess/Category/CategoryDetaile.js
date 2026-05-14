@@ -304,7 +304,7 @@ export default function CategoryDetaile({ param }) {
                   <Link
                     href="/"
                   >
-                    <HouseLine size={24} color="#24b8c9de" />
+                    <HouseLine size={24} color={`var(--them)`} />
                     خانه/
                   </Link>
                 </Breadcrumb.Item>
@@ -357,7 +357,7 @@ export default function CategoryDetaile({ param }) {
               </select>
             </div>
           )}
-          <button className="btn btn-warning" style={{ fontSize: "18px" }} onClick={() => setTableShow(!tableShow)}>
+          <button className="btn btn-light" style={{ fontSize: "18px", color: `var(--them)` }} onClick={() => setTableShow(!tableShow)}>
             {!tableShow ? "نمایش نموداری" : "نمایش ستونی"}
             {!tableShow ? <LuTableProperties /> : <FaArrowsAltV />}
           </button>

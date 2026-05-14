@@ -35,13 +35,13 @@
 }
 .ProductDetailL_divMiddle_offprice {
   font-size: 1.5cqi;
-  color:#ffb300;
   /* color: var(--them); */
+  color: var(--them);
   font-weight: 600;
 }
 .ProductDetailL_divMiddle_offpriceB {
+  color:var(--black33b4359);
   font-size: 1.4cqi;
-  color: var(--them);
   font-weight: 600;
 }
 .ProductDetailL_divMiddle_price {
@@ -85,8 +85,7 @@
   outline: none;
   height: 50px;
   color: #fff;
-  /* background: linear-gradient(31deg, #14a5af 24%, #ffffff 100%)!important;
-     filter: drop-shadow(1px 7px 9px #14a5af);   */
+
   font-size: 1cqi;
   transition: all 0.2s linear;
 }
@@ -98,8 +97,11 @@
   width: 100%;
   color: #fff;
   display: none;
+  background-color: var(--them);
 }
-
+.addButton{
+  background-color: var(--them);
+}
 /* 
     .bodyd {
         display: flex;

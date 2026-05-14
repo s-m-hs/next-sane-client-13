@@ -11,95 +11,67 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Button } from 'primereact/button';
 import Link from 'next/link';
-import {  List ,X } from "@phosphor-icons/react";
+import { List, X } from "@phosphor-icons/react";
 
 
 
 export default function layout({ children }) {
-  const [flagButton,setFlagButton]=useState(true)
+  const [flagButton, setFlagButton] = useState(true)
 
 
 
-// useEffect(()=>{
-//   window.addEventListener('click',function name() {
-//     setFlagButton(false)
-//   })
-// })
-  
+  // useEffect(()=>{
+  //   window.addEventListener('click',function name() {
+  //     setFlagButton(false)
+  //   })
+  // })
+
 
   return (
-    <div className={ `container ${style.container}`} >
-      <div className={ `row ${style.row}`}  >
-        <div className={ `col-3 ${style.sidebar}`} > <Sidebar />
+    <div className={`container ${style.container}`} >
+      <div className={`row ${style.row}`}  >
+        <div className={`col-3 ${style.sidebar}`} > <Sidebar />
 
-  
+
 
 
         </div>
-        <div className='col-lg-9' style={{marginTop:'50px'}}> 
+        <div className='col-lg-9' style={{ marginTop: '50px' }}>
 
-     <div className={ ` ${style.sidebar_menue}`}>
-  {flagButton &&   <span className={`spannn ${style.span1} centerc`} ><Link href={'/p-user/profile'}  
-      onClick={()=>setFlagButton(false)}
-      >پروفایل</Link> </span>}
-    
-{flagButton &&  <span className={` ${style.span2} centerc`} ><Link href={'/p-user/address'} 
-      onClick={()=>setFlagButton(false)}
-      >آدرس</Link> </span>}
-     
-     {flagButton &&     <span className={` ${style.span3} centerc`} ><Link href={'/p-user/order'}  
-           onClick={()=>setFlagButton(false)}
+          <div className={` ${style.sidebar_menue}`}>
+            {flagButton && <span className={`spannn ${style.span1} centerc`} ><Link href={'/p-user/profile'}
+              onClick={() => setFlagButton(false)}
+            >پروفایل</Link> </span>}
 
-     >سفارشات</Link> </span>}
-   {flagButton &&    <span className={` ${style.span4} centerc`} ><Link href={'/p-user/warranty'}
-         onClick={()=>setFlagButton(false)}
-         >گارانتی</Link> </span>}
-   
+            {flagButton && <span className={` ${style.span2} centerc`} ><Link href={'/p-user/address'}
+              onClick={() => setFlagButton(false)}
+            >آدرس</Link> </span>}
 
-      {flagButton &&  <span className={` ${style.span5} centerc`} ><Link href={'/p-user/repairs'} 
-            onClick={()=>setFlagButton(false)}
+            {flagButton && <span className={` ${style.span3} centerc`} ><Link href={'/p-user/order'}
+              onClick={() => setFlagButton(false)}
+
+            >سفارشات</Link> </span>}
+            {flagButton && <span className={` ${style.span4} centerc`} ><Link href={'/p-user/warranty'}
+              onClick={() => setFlagButton(false)}
+            >گارانتی</Link> </span>}
+
+
+            {flagButton && <span className={` ${style.span5} centerc`} ><Link href={'/p-user/repairs'}
+              onClick={() => setFlagButton(false)}
             >تعمیرات</Link> </span>}
 
-            
-      {flagButton &&  <span className={` ${style.span6} centerc`} ><Link href={'/p-user/ticket'} 
-            onClick={()=>setFlagButton(false)}
+
+            {flagButton && <span className={` ${style.span6} centerc`} ><Link href={'/p-user/ticket'}
+              onClick={() => setFlagButton(false)}
             >پیام ها</Link> </span>}
 
-     <button  onClick={()=>setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
-      {flagButton ? <X size={32} /> :  <List size={32} />}
-    
-     </button>
-     </div >
-    
-                {/* <SpeedDial onClick={()=>setFlagButton(!flagButton)} aria-labelledby="Options" model={items}className={` ${style.speeddial}`}  direction="up" transitionDelay={80} showIcon="pi pi-bars" hideIcon="pi pi-times" buttonClassName="p-button-outlined" /> */}
-        
+            <button onClick={() => setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
+              {flagButton ? <X size={32} /> : <List size={32} />}
 
-        {/* <div className={ `${style.menuebutton}`}>
-      <Button
-      className={ `${style.button}`}
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        دسته بندی 
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
-    </div> */}
-          { children }
+            </button>
+          </div >
+
+          {children}
         </div>
       </div>
     </div>

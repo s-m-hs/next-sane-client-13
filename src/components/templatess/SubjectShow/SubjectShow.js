@@ -95,7 +95,7 @@ export default function SubjectShow({ param }) {
                                     // onClick={()=>setXtFlagSpinnerShow(true)}
                                     href="/"
                                 >
-                                    <HouseLine size={24} color="#24b8c9de" />
+                                    <HouseLine size={24} color={`var(--them)`} />
                                     خانه/
                                 </Link>
 

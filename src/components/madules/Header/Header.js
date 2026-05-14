@@ -26,6 +26,7 @@ import {
   ExclamationMark,
   Laptop,
   UsersThree,
+  ShoppingBag,
 } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
@@ -433,7 +434,9 @@ export default function Header() {
     <>
       {xtflagSpinnerShow && (
         <div className={`${styles.DotLoader_div}`}>
-          <DotLoader className={`${styles.DotLoader}`} color="rgba(25, 165, 175)" size="280px" speedMultiplier={1} />
+          <DotLoader className={`${styles.DotLoader}`}
+            color={`var(--them)`}
+            size="280px" speedMultiplier={1} />
         </div>
       )}
 
@@ -456,7 +459,7 @@ export default function Header() {
                   <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
                   <MagnifyingGlass
                     size={24}
-                    color="#14a5af"
+                    color={`var(--them)`}
                     weight="thin"
                     className={styles.magnifyingGlass}
                     onClick={() => {
@@ -474,7 +477,7 @@ export default function Header() {
                             <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
                             <MagnifyingGlass
                               size={24}
-                              color="#14a5af"
+                              color={`var(--them)`}
                               weight="thin"
                               className={styles.magnifyingGlass}
                               onClick={() => {
@@ -485,10 +488,7 @@ export default function Header() {
                           </div>
 
                           <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}>
-                            {/* <span><XCircle size={24} onClick={() => {
-                      setFlagSearch(false)
-                      setSearchType('')
-                    }} /></span> */}
+
                             {searchBoxArr.itemList?.length != 0
                               ? searchBoxArr.itemList?.map((item) => {
                                 if (item.cyCategoryId) {
@@ -550,7 +550,7 @@ export default function Header() {
                 )}
                 <Link href={!xtFlagLogin ? "/register" : "/p-user/profile"}>
                   <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
-                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color="#14a5af" />}
+                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color={`var(--them)`} />}
 
                     {!xtFlagLogin ? (
                       <span className={`${styles.Header_leftSide__div_span} `}>وارد حساب کاربری خود شوید...</span>
@@ -572,7 +572,7 @@ export default function Header() {
                       }}
                       className={`${styles.Header_leftSide__div} centerr`}
                     >
-                      <ShoppingCart size={24} color="#14a5af" />
+                      <ShoppingCart size={24} color={`var(--them)`} />
                       {cartCounter !== 0 && <span className={`${styles.shopicon_baget} centerc`}>{cartCounter}</span>}
                     </div>
                   </Link>
@@ -581,16 +581,15 @@ export default function Header() {
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
                     <div className={` ${styles.Header_leftSide__div} centerr`} onClick={() => setXtFlagSpinnerShow(true)}>
-                      <ChatCircleText size={28} weight="duotone" color="#14a5af" />
+                      <ChatCircleText size={28} weight="duotone" color={`var(--them)`} />
                       {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && <span className={`${styles.shopicon_baget} centerc`}> !</span>}
-                      {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
                 ) : (
                   <div className={` ${styles.Header_leftSide__div} centerr`}>
                     <ChatCircleText
                       size={28}
-                      color="#14a5af"
+                      color={`var(--them)`}
                       weight="duotone"
                       onClick={() => {
                         AlertC();
@@ -599,21 +598,13 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* <div className={` ${styles.Header_leftSide__div} centerr`}
-                onClick={changeTheme}
-                >
-                <SunDim size={28} color="#14a5af" weight="duotone" />
-                </div> */}
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <div className={` ${styles.mobiNumber_div} centerc`}>
-                    {/* <span>
-                      02191005457 <Phone size={18} color="#ededed" weight="duotone" />
-                    </span> */}
+
                     <span>کامپیوترصانع</span>
                   </div>
 
-                  {/* <Phone size={24} color="#ededed" weight="duotone" /> */}
                 </div>
               </div>
             </div>
@@ -668,7 +659,6 @@ export default function Header() {
                           <div
                             className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
 
-                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
                           >
                             {mainCategoryB.childs?.length &&
                               mainCategoryB.childs.map((item, index) => (
@@ -769,18 +759,7 @@ export default function Header() {
                       محاسبه گر سیستم
                     </Link>{" "}
                   </li>
-                  {/* 
-                  <li onClick={() => setFlagHamkar(true)}>
-                    <Link href={'/login'}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      <UsersThree size={15} />
-                      ورود همکاران(پخش عمده)</Link>
-                  </li> */}
+
 
                   <li onClick={() => setXtFlagSpinnerShow(true)}>
                     {" "}
@@ -829,7 +808,7 @@ export default function Header() {
                   <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
                   <MagnifyingGlass
                     size={24}
-                    color="#14a5af"
+                    color={`var(--them)`}
                     weight="thin"
                     className={styles.magnifyingGlass}
                     onClick={() => {
@@ -882,7 +861,7 @@ export default function Header() {
 
                 <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
                   <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
-                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color="#14a5af" />}{" "}
+                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color={`var(--them)`} />}{" "}
                     {!xtFlagLogin ? (
                       <span className={`${styles.Header_leftSide__div_span} `}>وارد حساب کاربری خود شوید...</span>
                     ) : (
@@ -903,7 +882,7 @@ export default function Header() {
                       }}
                       className={`${styles.Header_leftSide__div} centerr`}
                     >
-                      <ShoppingCart size={24} color="#14a5af" />
+                      <ShoppingCart size={24} color={`var(--them)`} />
                       {cartCounter !== 0 && <span className={`${styles.shopicon_baget} centerc`}>{cartCounter}</span>}
                     </div>
                   </Link>
@@ -912,16 +891,15 @@ export default function Header() {
                 {xtFlagLogin ? (
                   <Link href={"/p-user/ticket"}>
                     <div className={` ${styles.Header_leftSide__div} centerr`} onClick={() => setXtFlagSpinnerShow(true)}>
-                      <ChatCircleText size={28} weight="duotone" color="#14a5af" />
+                      <ChatCircleText size={28} weight="duotone" color={`var(--them)`} />
                       {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && <span className={`${styles.shopicon_baget} centerc`}> !</span>}
-                      {/* <ChatCircleText size={30}  color="#14a5af" weight="duotone" className={styles.sphere} /> */}
                     </div>
                   </Link>
                 ) : (
                   <div className={` ${styles.Header_leftSide__div} centerr`}>
                     <ChatCircleText
                       size={28}
-                      color="#14a5af"
+                      color={`var(--them)`}
                       weight="duotone"
                       onClick={() => {
                         AlertC();
@@ -929,22 +907,12 @@ export default function Header() {
                     />
                   </div>
                 )}
-                {/* 
-                <div className={` ${styles.Header_leftSide__div} centerr`}
-                onClick={changeTheme}
-                >
-                <SunDim size={24} color="#14a5af" weight="duotone" />
-                </div> */}
 
                 <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
                   <div className={` ${styles.mobiNumber_div} centerc`}>
-                    {/* <span>
-                      02191005457
-                      <Phone size={18} color="#ededed" weight="duotone" />
-                    </span> */}
+
                     <span>کامپیوترصانع</span>
                   </div>
-                  {/* <Phone size={24} color="#ededed" weight="duotone" />    */}
                 </div>
               </div>
             </div>
@@ -952,7 +920,7 @@ export default function Header() {
             <div className={`row  ${styles.header_bottom_fix} `}>
               <div className={`col ${styles.header_bottom__col}`}>
                 <ul className={`${styles.header_bottom__col__ul_fix} centerr`}>
-                  <li //onClick={() => setXtFlagSpinnerShow(true)}
+                  <li
                   >
                     {" "}
                     <Link
@@ -1026,39 +994,6 @@ export default function Header() {
                         </div>
                       </li>
 
-                      {/* <li
-                        value={6}
-                        onMouseEnter={onmousHandle}
-                        className={valeS == 6 ? `${styles.liiii2_a}` : `${styles.liiii2}`}
-                      >
-                        لپ تاپ
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}  >
-                          <div
-                            className={valeS == 6 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}
-                          >
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/asus.jpg" alt="" />
-                              ASUS
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/lenovo.jpg" alt="" />
-                              LENOVO
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/hp.jpg" alt="" />
-                              HP
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/acer.jpg" alt="" />
-                              ACER
-                            </Link>
-                            <Link href={'/'} className={styles.header_bottom__col__ul__ul__ul__link2}>
-                              <img src="../../images/microsoft.jpg" alt="" />
-                              MICROSOFT
-                            </Link>
-                          </div>
-                        </div>
-                      </li> */}
                     </ul>
                   </li>
                   {/* <li className="nav_link">فروش اقساط   </li> */}
@@ -1094,25 +1029,7 @@ export default function Header() {
 
                   {!xtFlagLogin ? (
                     <>
-                      {/* <li
-                        onClick={() => {
-                          setXtFlagSpinnerShow(true);
-                          setFlagHamkar(false);
-                        }}
-                      >
-                        {" "}
-                        <Link
-                          href={"/login"}
-                          style={{
-                            listStyle: "none",
-                            textDecoration: "none",
-                            color: "inherit",
-                          }}
-                        >
-                          <SignIn size={15} />
-                          ورود{" "}
-                        </Link>{" "}
-                      </li> */}
+
 
                       <li onClick={() => setXtFlagSpinnerShow(true)}>
                         {" "}
@@ -1215,27 +1132,24 @@ export default function Header() {
                 <Link href={"/p-user/profile"}>
                   <span className={styles.sphere4}>
                     {userSrc && <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img_mobile}`} />}
-                    <UserCircleGear size={35} color="#14a5af" weight="duotone" />
+                    <UserCircleGear size={35} color={`var(--them)`} weight="duotone" />
                   </span>
-                  {/* <span className={styles.sphere4} >{name?.toUpperCase()}</span> */}
                 </Link>
               )}
 
               {xtFlagLogin ? (
                 <Link href={"/p-user/ticket"} onClick={() => setXtFlagSpinnerShow(true)}>
-                  {/* <ChatText size={32} weight="duotone" color="#14a5af" className={styles.sphere}/>  */}
-                  <ChatCircleText size={30} color="#14a5af" weight="duotone" className={styles.sphere} />
+                  <ChatCircleText size={30} color={`var(--them)`} weight="duotone" className={styles.sphere} />
                   {
                     messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && (
                       <ExclamationMark size={28} weight="bold" className={`${styles.shopicon_bagetB} centerc`} />
                     )
-                    //  <span className={`${styles.shopicon_baget} centerc`} > !</span>
                   }
                 </Link>
               ) : (
                 <ChatCircleText
                   size={30}
-                  color="#14a5af"
+                  color={`var(--them)`}
                   weight="duotone"
                   className={styles.sphere}
                   onClick={() => {
@@ -1244,33 +1158,7 @@ export default function Header() {
                 />
               )}
 
-              {/*      
-                  <Link href={'https://eitaa.com/sane_camputer'}>
-                    <img
-                      className={styles.sphere3}
-                      src="/images/eitaa-icon-colorful.png"
-                      alt=""
-                    />
-                  </Link>
 
-                  <Link href={'https://instagram.com/sane_computer_'}>
-                    {" "}
-                    <img
-                      className={styles.sphere2}
-                      src="/images/icons8-instagram-2048.png"
-                      alt=""
-                    />
-                  </Link>
-
-                  <Link href={'https://t.me/SANE_IT'}>
-                  
-                    {" "}
-                    <img
-                      className={styles.sphere}
-                      src="/images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png"
-                      alt=""
-                    />
-                  </Link> */}
             </div>
           </div>
         </div>
@@ -1284,30 +1172,11 @@ export default function Header() {
                 // className='row-cols-6 '
                 className={`row ${styles.ishover}`}
               >
-                {/* <div className="col-2 ">
-                  <div>
-                    <button
-                      className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
-                      onClick={() => setFlagCateMobile(true)}
-                    >
-                      {" "}
-                      لوازم جانبی
-                    </button>
 
-                    <button
-                      className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
-                      onClick={() => setFlagCateMobile(false)}
-                    >
-                      {" "}
-                      سخت افزار
-                    </button>
-                  </div>
-
-                </div> */}
                 <div className="col-12">
                   <div>
                     <button
-                      className={!flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                      className={!flagCateMobile ? `btn btn-secondary ${styles.rightside_button_cate_mob}` : `btn btn-secondary ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(true)}
                     >
                       {" "}
@@ -1315,7 +1184,7 @@ export default function Header() {
                     </button>
 
                     <button
-                      className={flagCateMobile ? `btn btn-outline-info ${styles.rightside_button_cate_mob}` : `btn btn-outline-info ${styles.active_button_header}`}
+                      className={flagCateMobile ? `btn btn-secondary  ${styles.rightside_button_cate_mob}` : `btn btn-secondary ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(false)}
                     >
                       {" "}
@@ -1369,7 +1238,7 @@ export default function Header() {
                       ulRefA.current.classList.remove("header_hidden_ulRefA");
                     }}
                   >
-                    <House size={28} weight="duotone" color="#14a5af" />
+                    <House size={28} weight="duotone" color={`var(--them)`} />
                   </Link>
                 </li>
 
@@ -1398,11 +1267,13 @@ export default function Header() {
                     }
                   }}
                 >
-                  <User size={28} weight="duotone" color="#14a5af" />
+                  <User size={28} weight="duotone" color={`var(--them)`} />
 
                   <div className={`${styles.bottomHeader_ul_category_div}`} ref={ulRefA}>
                     {
-                      xtFlagLogin && (
+                      xtFlagLogin &&
+                      <>
+
                         <Link
                           href={"/p-user/profile"}
                           onClick={() => {
@@ -1410,22 +1281,24 @@ export default function Header() {
                             setXtFlagSpinnerShow(true);
                           }}
                         >
-                          <User size={15} color="#14a5af" />
+                          <User size={15} color={`var(--them)`} />
                           <span>پروفایل من</span>
                         </Link>
-                      )
-                      // : (
-                      //   <Link
-                      //     href={"/login"}
-                      //     onClick={() => {
-                      //       setXtFlagSpinnerShow(true);
-                      //       setFlagHamkar(false);
-                      //     }}
-                      //   >
-                      //     <SignIn size={15} color="#14a5af" />
-                      //     <span>ورود</span>
-                      //   </Link>
-                      // )
+
+                        <Link
+                          href={"/p-user/order"}
+                          onClick={() => {
+                            setMenuOpen(false);
+                            setXtFlagSpinnerShow(true);
+                          }}
+                        >
+                          <ShoppingCart size={15} color={`var(--them)`} />
+                          <span>سفارشات</span>
+                        </Link>
+
+                      </>
+
+
                     }
 
                     {!xtFlagLogin && (
@@ -1436,7 +1309,7 @@ export default function Header() {
                           setXtFlagSpinnerShow(true);
                         }}
                       >
-                        <UserCheck size={15} color="#14a5af" />
+                        <UserCheck size={15} color={`var(--them)`} />
                         <span>ورود</span>
                       </Link>
                     )}
@@ -1450,7 +1323,7 @@ export default function Header() {
                             setXtFlagSpinnerShow(true);
                           }}
                         >
-                          <Barcode size={15} color="#14a5af" />
+                          <Barcode size={15} color={`var(--them)`} />
                           <span>گارانتی</span>
                         </Link>
 
@@ -1461,7 +1334,7 @@ export default function Header() {
                             setXtFlagSpinnerShow(true);
                           }}
                         >
-                          <Wrench size={15} color="#14a5af" />
+                          <Wrench size={15} color={`var(--them)`} />
                           <span>تعمیرات</span>
                         </Link>
                       </>
@@ -1474,7 +1347,7 @@ export default function Header() {
                         setXtFlagSpinnerShow(true);
                       }}
                     >
-                      <Laptop size={15} color="#14a5af" />
+                      <Laptop size={15} color={`var(--them)`} />
 
                       <span style={{ fontSize: "13px" }}>محاسبه گر سیستم </span>
                     </Link>
@@ -1486,7 +1359,7 @@ export default function Header() {
                         setXtFlagSpinnerShow(true);
                       }}
                     >
-                      <BuildingApartment size={15} color="#14a5af" />
+                      <BuildingApartment size={15} color={`var(--them)`} />
 
                       <span>تماس با ما</span>
                     </Link>
@@ -1501,7 +1374,7 @@ export default function Header() {
                           setFlagMessageNotification((prev = !prev));
                         }}
                       >
-                        <SignOut size={15} color="#14a5af" />
+                        <SignOut size={15} color={`var(--them)`} />
                         <span>خروج</span>
                       </Link>
                     )}
@@ -1535,7 +1408,7 @@ export default function Header() {
                       <div className={`${styles.Header_leftSide__div_mobile} centerr`}>
                         {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`}>{cartCounter}</span>}
                       </div>
-                      <ShoppingCart size={28} weight="duotone" color="#14a5af" />
+                      <ShoppingCart size={28} weight="duotone" color={`var(--them)`} />
                     </Link>
                   )}
                 </li>
@@ -1547,7 +1420,7 @@ export default function Header() {
                     ulRefA.current.classList.remove("header_hidden_ulRefA");
                   }}
                 >
-                  <MagnifyingGlass size={28} weight="duotone" color="#14a5af" />
+                  <MagnifyingGlass size={28} weight="duotone" color={`var(--them)`} />
                 </li>
                 <div className={`${styles.sidebar_mobile} `}>
                   <Sidebar visible={visibleB} onHide={() => setVisibleB(false)} fullScreen>
@@ -1555,7 +1428,7 @@ export default function Header() {
                       <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchTypeB} onChange={searchChangeB} />
                       <MagnifyingGlass
                         size={24}
-                        color="#14a5af"
+                        color={`var(--them)`}
                         weight="thin"
                         className={styles.magnifyingGlass}
                         onClick={() => {

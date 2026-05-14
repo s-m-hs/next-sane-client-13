@@ -468,7 +468,7 @@ export default function BasketDetail() {
                                 {!xtFlagLogin && toBuy.length == 0 ? (
                                     <div className={`row ${style.spinner_row}`}>
                                         <div className="col">
-                                            <DotLoader color="rgba(25, 167, 175)" size={250} />
+                                            <DotLoader color={`var(--them)`} size={250} />
                                         </div>
                                     </div>
                                 ) : toBuy.length !== 0 ? (

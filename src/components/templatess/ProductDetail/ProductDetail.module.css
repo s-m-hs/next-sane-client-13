@@ -38,7 +38,7 @@
 .breadcrumb{
     width: fit-content !important;
     margin-right: 100px !important;
-    border-bottom: 1px solid #24b8c9de;
+    border-bottom: 1px solid var(--them);
 }
 .breadcrumb_row{
 width: fit-content;

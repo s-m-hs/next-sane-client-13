@@ -176,7 +176,7 @@ export default function ProductDetailLeft({ detail }) {
                       className={`${Styles.ProductDetailL_left} centerc mt-5`}
                     >
                       <button
-                        className={`${Styles.addButton} btn btn-warning`}
+                        className={`${Styles.addButton} btn btn-light`}
                         onClick={() => {
                           xtFlagLogin
                             ? addToBasket()
@@ -200,13 +200,9 @@ export default function ProductDetailLeft({ detail }) {
 
                 {flagSupply && (
                   <button
-                    className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-warning`}
+                    className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-light`}
+
                     onClick={() => {
-                      // const getLocalStorage=localStorage.getItem('loginToken')
-                      // let obj=[{
-                      //   cyProductID:detail.id,
-                      //   quantity: 1
-                      // }]
                       xtFlagLogin
                         ? addToBasket()
                         : // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA)

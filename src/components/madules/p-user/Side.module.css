@@ -4,7 +4,7 @@
     padding-right: 20px; /* Changed from left to right */
     height: 100vh;
     /* background-image: linear-gradient(30deg, #0048bd, #44a7fd); */
-    background-image: linear-gradient(30deg, #14a5af, #46d7e4);
+    background-image: linear-gradient(30deg, var(--them), var(--them));
 
     border-top-left-radius: 80px; /* Changed to left */
     direction: rtl; /* Add RTL direction */
@@ -34,7 +34,7 @@
     cursor: pointer;
   }
   .sidebar a.active {
-    color: #14a5af; /* Keep the text color white */
+    color:var(--them); /* Keep the text color white */
     background-color: #fff; /* You can set any background color */
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;

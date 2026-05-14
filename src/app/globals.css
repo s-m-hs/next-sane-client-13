@@ -75,8 +75,12 @@ li {
   --black33b4359: #747575;
   --white-50: #030303;
 
-  /* --them: #ffb300; */
-  --them: #14a5af;
+  --them: #960FBF;
+  --themB: #cd41f8;
+  --themC: #eaabfd;
+  /* --them: #14a5af;
+  --themB: #52aab1;
+  --themC: #b8f1f5; */
   --backgroundColor: rgba(246, 241, 209);
   --colorShadeA: rgb(106, 163, 137);
   --colorShadeB: rgb(121, 186, 156);
@@ -198,11 +202,11 @@ input[type="number"] {
 }
 
 .breadcrumb {
-  color: #24b8c9de !important;
+  color: var(--them) !important;
 }
 .breadcrumb {
-  --bs-breadcrumb-item-active-color: #24b8c9de !important;
-  --bs-breadcrumb-divider-color: #24b8c9de !important;
+  --bs-breadcrumb-item-active-color: var(--them) !important;
+  --bs-breadcrumb-divider-color: var(--them) !important;
 }
 
 .mySwiperB {
@@ -505,7 +509,7 @@ select:-webkit-autofill:focus {
 .hamburger .bar {
   width: 60%;
   height: 2px;
-  background-color: #14a5af;
+  background-color: var(--them);
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
 }
@@ -572,6 +576,13 @@ select:-webkit-autofill:focus {
 }
 .pagination-div > nav {
 }
+
+.accordion {--bs-accordion-active-bg:var(--themC) !important
+}
+/* .accordion-button {
+  color: var(--themB);
+} */
+
 /* div{
     animation: move 2000ms 1 alternate ease-in-out;
 } */

@@ -569,7 +569,7 @@ sendTicket(obj)
                       notify();
                     }}
                   >
-                    <ArrowsClockwise color="#14a5af" size={22} />
+                    <ArrowsClockwise color={`var(--them)`} size={22} />
                   </div>
                 )}
 
@@ -633,7 +633,7 @@ sendTicket(obj)
                               <CloudArrowDown
                                 size={32}
                                 weight="duotone"
-                                color="#14a5af"
+                                color={`var(--them)`}
                               />
                             </button>
                           ) : (

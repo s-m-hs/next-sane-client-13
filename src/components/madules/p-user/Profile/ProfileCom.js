@@ -171,9 +171,9 @@ export default function ProfileCom() {
                             })}
                           />
                           <label>
-                            <Asterisk size={12} color="#14a5af" weight="thin" /> نام{" "}
+                            <Asterisk size={12} color={`var(--them)`} weight="thin" /> نام{" "}
                           </label>
-                          <IdentificationBadge size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                          <IdentificationBadge size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                         </div>
 
                         <div className={`login_label_float ${style.input}`}>
@@ -189,10 +189,10 @@ export default function ProfileCom() {
                             })}
                           />
                           <label>
-                            <Asterisk size={12} color="#14a5af" weight="thin" />
+                            <Asterisk size={12} color={`var(--them)`} weight="thin" />
                             نام خانوادگی{" "}
                           </label>
-                          <IdentificationCard size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                          <IdentificationCard size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                         </div>
 
 
@@ -212,15 +212,15 @@ export default function ProfileCom() {
                             })}
                           />
                           <label>
-                            <Asterisk size={12} color="#14a5af" weight="thin" /> موبایل{" "}
+                            <Asterisk size={12} color={`var(--them)`} weight="thin" /> موبایل{" "}
                           </label>
-                          <DeviceMobile size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                          <DeviceMobile size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                         </div>
 
                         <div className={`login_label_float ${style.input}`}>
                           <input minLength={3} name="update.email" type="email" placeholder=" " {...register(`update.email`)} />
                           <label>ایمیل </label>
-                          <EnvelopeSimple size={38} color="#14a5af" weight="duotone" className={style.icon} />
+                          <EnvelopeSimple size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                         </div>
 
                         <div className={`login_label_float ${style.input_img}`}>
@@ -235,7 +235,7 @@ export default function ProfileCom() {
                           {imgUrl ? (
                             <img className={` ${style.url_image}`} src={`${apiUrl}/${imgUrl}`} alt="profile-Image" />
                           ) : (
-                            <Image size={48} weight="duotone" color="#14a5af" />
+                            <Image size={48} weight="duotone" color={`var(--them)`} />
                           )}
                         </div>
                       </div>
@@ -243,7 +243,7 @@ export default function ProfileCom() {
                   </div>
 
                   <div className={`col ${style.col_button}`}>
-                    <button className={`btn btn-info ${style.button}`}>
+                    <button className={`btn btn-light ${style.button}`} style={{ backgroundColor: 'var(--themB)' }}>
                       تایید
                       <CheckCircle size={32} color="#fff" weight="duotone" />
                     </button>

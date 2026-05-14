@@ -5,7 +5,7 @@
     position: fixed;
     color: #fff;
     /* background: #0077B5; */
-    background:#14a5af;
+    background:var(--them);
     padding: 10px;
     border-radius: 50%;
     top: 5px;
