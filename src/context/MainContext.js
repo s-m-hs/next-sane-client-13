@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
+import ApiPostX3 from "@/utils/ApiServicesX/ApiPostX3";
+import ApiPostX1 from "@/utils/ApiServicesX/ApiPostX1";
 // import getLocalStorage from '@/utils/localStorag/localStorage';
 const MainContext = createContext();
 
@@ -36,9 +38,10 @@ const MainProvider = ({ children }) => {
   const [paymentState, setPaymentState] = useState(false);
   const [coupon, setCoupon] = useState([]);
   const [couponState, setCouponState] = useState(false);
-
-  // const getLocalStorage=localStorage.getItem('loginToken')
-
+  const [searchInput, setSearchInput] = useState('')
+  const [searchResult, setSearchResult] = useState([])
+  const [flagSearchInHeader, setFlagSearchInHeader] = useState(false)
+  /////////////////
   const getBaskett = () => {
     const getLocalStorage = localStorage.getItem("loginToken");
 
@@ -67,6 +70,7 @@ const MainProvider = ({ children }) => {
     }
     myAppGet();
   };
+  ////////////////
   const getProfile = () => {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {
@@ -99,6 +103,7 @@ const MainProvider = ({ children }) => {
     }
     myApp();
   };
+  ////////////////
   const getAddress = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
@@ -121,8 +126,29 @@ const MainProvider = ({ children }) => {
     }
     myApp();
   };
+  //////////////
+  // let obj = {
+  //   name: searchInput,
+  //   productCategoryCode: null,
+  //   productCategoryId: null,
+  //   categoryCode: null,
+  //   manufacturerName: null,
+  //   pageNumber: 0,
+  //   pageSize: 1000,
+  // };
+  // const func = (result) => {
+  //   console.log(result)
+  //   setSearchResult(result)
+  // }
+  // const searchBox = () => ApiPostX1(`/api/CyProducts/SearchProducts`, obj, func)
 
+  // useEffect(() => {
+  //   if (searchInput.length >= 3) {
+  //     searchBox()
+  //   }
+  // }, [searchInput])
 
+  //////////////
   const refreshToken = () => {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/Customer/refreshToken`, {
@@ -231,6 +257,9 @@ const MainProvider = ({ children }) => {
         setCoupon,
         couponState,
         setCouponState,
+        searchInput, setSearchInput,
+        flagSearchInHeader, setFlagSearchInHeader,
+        searchResult, setSearchResult
       }}
     >
       {children}

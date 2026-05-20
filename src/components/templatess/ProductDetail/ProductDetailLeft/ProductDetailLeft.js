@@ -111,9 +111,11 @@ export default function ProductDetailLeft({ detail }) {
                           detail.noOffPrice === detail.price &&
                           detail?.cyCategoryId && (
                             <>
+
+
                               <span
                                 className={
-                                  Styles.ProductDetailL_divMiddle_offprice
+                                  `${Styles.ProductDetailL_divMiddle_offprice} `
                                 }
                               >
                                 {(
@@ -122,21 +124,31 @@ export default function ProductDetailLeft({ detail }) {
                                 )?.toLocaleString()}{" "}
                                 تومان
                               </span>
+
                               <span
-                                className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline}`}
+                                className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline} `}
                               >
                                 {(Number(detail.price) / 10)?.toLocaleString()}{" "}
                                 تومان
                               </span>
+
                             </>
                           )}
 
                         {detail.noOffPrice !== detail.price &&
                           detail?.cyCategoryId && (
                             <>
+
+                              <span
+                                className={`${Styles.ProductDetailL_divMiddle_offprice} `}
+                              >
+                                {(Number(detail.price) / 10)?.toLocaleString()}{" "}
+                                تومان
+                              </span>
+
                               <span
                                 className={
-                                  Styles.ProductDetailL_divMiddle_offprice
+                                  `${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`
                                 }
                               >
                                 {(
@@ -144,12 +156,7 @@ export default function ProductDetailLeft({ detail }) {
                                 )?.toLocaleString()}{" "}
                                 تومان
                               </span>
-                              <span
-                                className={`${Styles.ProductDetailL_divMiddle_offprice} ${Styles.underline}`}
-                              >
-                                {(Number(detail.price) / 10)?.toLocaleString()}{" "}
-                                تومان
-                              </span>
+
                             </>
                           )}
                         {/* 
@@ -259,9 +266,12 @@ export default function ProductDetailLeft({ detail }) {
                               detail.noOffPrice === detail.price &&
                               detail?.cyCategoryId && (
                                 <>
+
+
+
                                   <span
                                     className={
-                                      Styles.ProductDetailL_divMiddle_offprice
+                                      `${Styles.ProductDetailL_divMiddle_offprice}`
                                     }
                                   >
                                     {(
@@ -271,7 +281,7 @@ export default function ProductDetailLeft({ detail }) {
                                     تومان
                                   </span>
                                   <span
-                                    className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline}`}
+                                    className={`${Styles.ProductDetailL_divMiddle_offpriceB}  ${Styles.underline}`}
                                   >
                                     {(
                                       Number(detail.price) / 10
@@ -284,21 +294,23 @@ export default function ProductDetailLeft({ detail }) {
                             {detail.noOffPrice !== detail.price &&
                               detail?.cyCategoryId && (
                                 <>
+
+                                  <span
+                                    className={`${Styles.ProductDetailL_divMiddle_offpriceB}`}
+                                  >
+                                    {(
+                                      Number(detail.price) / 10
+                                    )?.toLocaleString()}{" "}
+                                    تومان
+                                  </span>
+
                                   <span
                                     className={
-                                      Styles.ProductDetailL_divMiddle_offprice
+                                      `${Styles.ProductDetailL_divMiddle_offprice}  ${Styles.underline}`
                                     }
                                   >
                                     {(
                                       Number(detail.noOffPrice) / 10
-                                    )?.toLocaleString()}{" "}
-                                    تومان
-                                  </span>
-                                  <span
-                                    className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline}`}
-                                  >
-                                    {(
-                                      Number(detail.price) / 10
                                     )?.toLocaleString()}{" "}
                                     تومان
                                   </span>

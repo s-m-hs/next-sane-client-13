@@ -4,29 +4,20 @@ import styles from "./Header.module.css";
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
 import {
   MagnifyingGlass,
-  Phone,
-  SignIn,
   BuildingApartment,
   Barcode,
   UserCheck,
   SignOut,
   Wrench,
-  Fingerprint,
   ShoppingCart,
   User,
-  EnvelopeSimple,
   House,
   TextIndent,
-  XCircle,
-  SunDim,
   UserCircleGear,
-  ChatText,
   ChatCircleText,
-  Bell,
   ExclamationMark,
   Laptop,
-  UsersThree,
-  ShoppingBag,
+  HandPointing,
 } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
@@ -38,14 +29,10 @@ import { usePathname, useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
 import { Alert, Modal, Tooltip } from "react-bootstrap";
 import CardA from "../Cards/CardA/CardA";
-// import { motion , useScroll,AnimatePresence} from "framer-motion"
 import { Sidebar } from "primereact/sidebar";
-import alertQ from "@/utils/Alert/AlertQ";
-import updateBasket from "@/utils/ApiUrl/updateBasket";
-import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import LogOut from "@/utils/Functions/LogOut";
 import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
-// import RotatingGlobe from "@/utils/RotatingGlobe";
+import { CursorClick } from "@phosphor-icons/react/dist/ssr";
 
 export default function Header() {
   let {
@@ -58,15 +45,12 @@ export default function Header() {
     setXtFlagSpinnerShow,
     cartCounter,
     setCartCounter,
-    setLocalUpdateBasket,
     flagThem,
-    setFlagThem,
     messageNotification,
     setMessageNotification,
     flagMessageNotification,
     setFlagMessageNotification,
     setFlagHamkar,
-    flagHamkar,
     setOffer,
     resetFlagCart,
     setResetFlagCart,
@@ -74,30 +58,20 @@ export default function Header() {
     coupon,
     setCoupon,
     setCouponState,
+    searchInput, setSearchInput, setSearchResult,
+    setFlagSearchInHeader
   } = useContext(MainContext);
+  const ulRef = useRef();
+  const ulRefA = useRef();
+  const pathname = usePathname();
+  const rout = useRouter();
   const [valeS, setValue] = useState(1);
   const [mainCategory, setMainCategory] = useState({});
   const [mainCategoryB, setMainCategoryB] = useState({});
   const [fixTop, setFixTop] = useState(false);
-  const [flaga, setFlaga] = useState(true);
   const [flagCateMobile, setFlagCateMobile] = useState(true);
-  const ulRef = useRef();
-  const ulRefA = useRef();
-  const [visible, setVisible] = useState(false);
-  const [visibleB, setVisibleB] = useState(false);
-  const pathname = usePathname();
-  const rout = useRouter();
-  // const authority = searchParams.get('Authority');
-  // const status = searchParams.get('Status');
-
-  const [userName, setUserName] = useState("");
-  const [flag, setFlag] = useState(false);
-
+  const [show, setShow] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-
-  const [searchType, setSearchType] = useState("");
-  const [searchTypeB, setSearchTypeB] = useState("");
-  const [searchBoxArr, setSearchBoxArr] = useState([]);
   const [flagSearch, setFlagSearch] = useState(false);
   const [offBanner, setOffBanner] = useState([]);
   // Function to toggle the menu
@@ -112,15 +86,12 @@ export default function Header() {
 
   /////////////////////////////theming
   const getOffer = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
-
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyKeyDatas/13`, {
         method: "GET",
         credentials: "include",
 
         headers: {
-          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
       }).then((res) => {
@@ -134,7 +105,6 @@ export default function Header() {
     myApp();
   };
   const getAllTicket = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyTicket/getUserTickets`, {
@@ -142,10 +112,8 @@ export default function Header() {
         credentials: "include",
 
         headers: {
-          // Authorization: `Bearer ${getLocalStorage}`,
           "Content-Type": "application/json",
         },
-        // body:JSON.stringify(obj)
       })
         .then((res) => {
           if (res.status == 200) {
@@ -158,16 +126,10 @@ export default function Header() {
     }
     myApp();
   };
-  // useEffect(()=>{
-  //   setFlagMessageNotification(prev=>!prev)
-  // },[])
+
   useEffect(() => {
     getAllTicket();
   }, [flagMessageNotification, xtFlagLogin]);
-
-  const changeTheme = () => {
-    setFlagThem((prev) => !prev);
-  };
 
   useEffect(() => {
     if (flagThem) {
@@ -190,58 +152,8 @@ export default function Header() {
 
   /////////////////////////////////
   const searchChange = (e) => {
-    setSearchType(e.target.value);
+    setSearchInput(e.target.value);
   };
-  const searchChangeB = (e) => {
-    setSearchTypeB(e.target.value);
-  };
-  const searchBox = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
-    setFlagSearch(false);
-    async function myApp() {
-      let obj = {
-        name: searchType ? searchType : searchTypeB,
-        productCategoryCode: null,
-        productCategoryId: null,
-        categoryCode: null,
-        manufacturerName: null,
-        pageNumber: 0,
-        pageSize: 1000,
-      };
-      const res = await fetch(`${apiUrl}/api/CyProducts/SearchProducts`, {
-        method: "POST",
-        credentials: "include",
-
-        headers: {
-          // Authorization: `Bearer ${getLocalStorage}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      })
-        .then((res) => {
-          if (res.status == 200) {
-            return res.json();
-          }
-        })
-        .then((result) => {
-          if (result) {
-            setFlagSearch(true);
-            setSearchBoxArr(result);
-          } else {
-            setFlagSearch(false);
-          }
-        });
-    }
-    myApp();
-  };
-  useEffect(() => {
-    if (searchTypeB.length > 2) {
-      searchBox();
-    } else if (searchTypeB.length < 3) {
-      setSearchBoxArr([]);
-    }
-  }, [searchTypeB]);
-
   ////////////////////////////
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -271,24 +183,17 @@ export default function Header() {
 
   ///////////////////////////////
   const getProfile = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
-    // const getLocalStorageUser = localStorage.getItem("user");
-
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/Customer/GetProfile`, {
         method: "GET",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${getLocalStorage}`,
         },
       }).then((res) => {
         if (res.status == 200) {
-          // setUserName(getLocalStorageUser);
-          setFlag(true);
-          // setXtFlagLogin(true);
+
         } else {
-          // localStorage.removeItem("loginToken");
         }
       });
     }
@@ -336,7 +241,6 @@ export default function Header() {
     }
   };
   const getBanner = (id) => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
 
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CySubjects/${id}`, {
@@ -345,7 +249,6 @@ export default function Header() {
 
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${getLocalStorage}`,
         },
       }).then((res) => {
         if (res.ok) {
@@ -412,17 +315,6 @@ export default function Header() {
     return () => localStorage.removeItem("cartObj");
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("logintoken");
-  //   if (token) {
-  //     fetch("/api/auth/sync-token", {
-  //       method: "POST",
-  //       headers: {
-  //         "x-login-token": token, // توکن را در هدر می‌فرستیم
-  //       },
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     setResetFlagCart(false);
@@ -456,67 +348,26 @@ export default function Header() {
                 </div>
 
                 <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>
-                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
-                  <MagnifyingGlass
-                    size={24}
-                    color={`var(--them)`}
-                    weight="thin"
-                    className={styles.magnifyingGlass}
-                    onClick={() => {
-                      setVisible(true);
-                      searchBox();
-                    }}
+                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchInput}
+                    onChange={searchChange}
                   />
+                  <button
+                    className={`${styles.magnifyingGlass} btn btn-light`} onClick={() => {
+                      setSearchResult([])
+                      if (searchInput.length == 0) return rout.push('/')
+                      setFlagSearchInHeader(true)
+                      setXtFlagSpinnerShow(true)
+                      rout.push(`/search/${searchInput}`)
+                    }}>
+                    <CursorClick
+                      size={24}
+                      color={`var(--them)`}
+                      weight="thin"
 
-                  <div className={`${styles.sidebar_input_div} `}>
-                    <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
-                      {flagSearch && (
-                        <div className="container">
-                          <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>
-                            {" "}
-                            <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
-                            <MagnifyingGlass
-                              size={24}
-                              color={`var(--them)`}
-                              weight="thin"
-                              className={styles.magnifyingGlass}
-                              onClick={() => {
-                                setVisible(true);
-                                searchBox();
-                              }}
-                            />
-                          </div>
+                    />
+                    جستجو
+                  </button>
 
-                          <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}>
-
-                            {searchBoxArr.itemList?.length != 0
-                              ? searchBoxArr.itemList?.map((item) => {
-                                if (item.cyCategoryId) {
-                                  return (
-                                    <Link
-                                      href={`/product/${item.id}`}
-                                      onClick={() => {
-                                        setFlagSearch(false);
-                                        setSearchBoxArr([]);
-                                        setSearchType("");
-                                        setXtFlagSpinnerShow(true);
-                                        setVisible(false);
-                                      }}
-                                    >
-                                      <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
-                                        <span>{item.name}</span>
-                                        <img src={item.smallImage} alt={item.name} />
-                                      </div>
-                                    </Link>
-                                  );
-                                }
-                              })
-                              : ""}
-                          </div>
-                        </div>
-                      )}
-                    </Sidebar>
-                  </div>
                 </div>
                 {/* </div> */}
               </div>
@@ -653,7 +504,7 @@ export default function Header() {
                         </div>
                       </li>
 
-                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 && flaga ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
+                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
                         سخت افزار
                         <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
                           <div
@@ -805,53 +656,24 @@ export default function Header() {
                   </div>
                 </div>
                 <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchType} onChange={searchChange} />
-                  <MagnifyingGlass
-                    size={24}
-                    color={`var(--them)`}
-                    weight="thin"
-                    className={styles.magnifyingGlass}
-                    onClick={() => {
-                      setVisible(true);
-                      searchBox();
-                    }}
-                  />
+                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchInput} onChange={searchChange} />
+                  <button
+                    className={`${styles.magnifyingGlass} btn btn-light`} onClick={() => {
+                      setSearchResult([])
+                      if (searchInput.length == 0) return rout.push('/')
+                      setFlagSearchInHeader(true)
+                      setXtFlagSpinnerShow(true)
+                      rout.push(`/search/${searchInput}`)
+                    }}>
+                    <CursorClick
+                      size={24}
+                      color={`var(--them)`}
+                      weight="thin"
 
-                  <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
-                    {flagSearch && (
-                      <div className="container">
-                        <div className={`row row-cols-3 ${styles.Header_rightSide__div_searchbox} `}>
-                          {/* <span><XCircle size={24} onClick={() => {
-                      setFlagSearch(false)
-                      setSearchType('')
-                    }} /></span> */}
-                          {searchBoxArr.itemList?.length != 0
-                            ? searchBoxArr.itemList?.map((item) => {
-                              if (item.mainImage) {
-                                return (
-                                  <Link
-                                    href={`/product/${item.id}`}
-                                    onClick={() => {
-                                      setFlagSearch(false);
-                                      setSearchBoxArr([]);
-                                      setSearchType("");
-                                      setXtFlagSpinnerShow(true);
-                                      setVisible(false);
-                                    }}
-                                  >
-                                    <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
-                                      <span>{item.name}</span>
-                                      <img src={item.smallImage} alt={item.name} />
-                                    </div>
-                                  </Link>
-                                );
-                              }
-                            })
-                            : ""}
-                        </div>
-                      </div>
-                    )}
-                  </Sidebar>
+                    />
+                    جستجو
+                  </button>
+
                 </div>
               </div>
 
@@ -955,22 +777,12 @@ export default function Header() {
                                   {item.name}
                                 </Link>
 
-                                // <Link key={index}
-                                //   onClick={() => {
-                                //     ulRef.current.add.className('ul_hidden')
-                                //   }}
-                                //   href={`/category/${item.id}`}
-                                //   className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                                // >
-                                //   <img src={item.imageUrl} alt="" />
-                                //   {item.text}
-                                // </Link>
                               ))}
                           </div>
                         </div>
                       </li>
 
-                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 && flaga ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
+                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
                         سخت افزار
                         <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
                           <div
@@ -1209,13 +1021,7 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            {/* <div>
-            <button className="btn btn-outline-info">              لوازم جانبی 
-            </button>
-         
-            <button className="btn btn-outline-info">              لوازم جانبی 
-            </button>          
-</div> */}
+
           </div>
         )}
       </section>
@@ -1415,61 +1221,33 @@ export default function Header() {
 
                 <li
                   onClick={() => {
-                    setMenuOpen(false);
-                    setVisibleB(true);
-                    ulRefA.current.classList.remove("header_hidden_ulRefA");
+                    setShow(true)
                   }}
                 >
                   <MagnifyingGlass size={28} weight="duotone" color={`var(--them)`} />
                 </li>
                 <div className={`${styles.sidebar_mobile} `}>
-                  <Sidebar visible={visibleB} onHide={() => setVisibleB(false)} fullScreen>
+                  <Modal show={show} onHide={() => setShow(false)} fullScreen>
+                    <Modal.Header closeButton className={`${styles.modal_header}`}>
+                    </Modal.Header>
                     <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-                      <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchTypeB} onChange={searchChangeB} />
-                      <MagnifyingGlass
-                        size={24}
-                        color={`var(--them)`}
-                        weight="thin"
-                        className={styles.magnifyingGlass}
+                      <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchInput} onChange={searchChange} />
+                      <button className={`btn btn-light ${styles.magnifyingGlassB}`}
                         onClick={() => {
-                          searchBox();
+                          setSearchResult([])
+                          if (searchInput.length == 0) return rout.push('/')
+                          setFlagSearchInHeader(true)
+                          setXtFlagSpinnerShow(true)
+                          setShow(false)
+                          rout.push(`/search/${searchInput}`)
                         }}
-                      />
+                      >
 
-                      {flagSearch && (
-                        <div className={`${styles.Header_rightSide__div_searchbox} `}>
-                          {/* <span><XCircle size={24} onClick={() => {
-                      setFlagSearch(false)
-                      setSearchTypeB('')
-                    }} 
-                    /></span> */}
-                          {searchBoxArr.itemList?.length != 0
-                            ? searchBoxArr.itemList?.map((item) => {
-                              if (item.cyCategoryId) {
-                                return (
-                                  <Link
-                                    href={`/product/${item.id}`}
-                                    onClick={() => {
-                                      setFlagSearch(false);
-                                      setSearchBoxArr([]);
-                                      setSearchTypeB("");
-                                      setXtFlagSpinnerShow(true);
-                                      setVisibleB(false);
-                                    }}
-                                  >
-                                    <div className={`${styles.Header_rightSide__div_searchbox_div} centerr `}>
-                                      <span>{item.name}</span>
-                                      <img src={item.smallImage} alt={item.name} />
-                                    </div>
-                                  </Link>
-                                );
-                              }
-                            })
-                            : ""}
-                        </div>
-                      )}
+                        جستجو
+                        <HandPointing style={{ fontSize: "18px" }} />
+                      </button>
                     </div>
-                  </Sidebar>
+                  </Modal>
                 </div>
               </ul>
             </div>

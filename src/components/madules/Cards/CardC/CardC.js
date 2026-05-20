@@ -124,29 +124,34 @@ export default function CardC({
 
               {offerState !== 1 && noOffPrice === price && (
                 <>
-                  <span className={Styles.cardprob_noOffPrice}>
-                    {offPrice?.toLocaleString()} تومان{" "}
-                  </span>
-
                   <span
-                    className={`${Styles.cardprob_price} ${Styles.underLine}`}
+                    className={`${Styles.cardprob_price}`}
                   >
                     {price?.toLocaleString()} تومان{" "}
                   </span>
+
+                  <span className={`${Styles.cardprob_noOffPrice}  ${Styles.underLine}`}>
+                    {offPrice?.toLocaleString()} تومان{" "}
+                  </span>
+
+
                 </>
               )}
 
               {noOffPrice !== price && (
                 <>
-                  <span className={Styles.cardprob_noOffPrice}>
-                    {noOffPrice?.toLocaleString()}تومان{" "}
-                  </span>
+
 
                   <span
-                    className={`${Styles.cardprob_price} ${Styles.underLine}`}
+                    className={`${Styles.cardprob_price} `}
                   >
                     {price?.toLocaleString()} تومان{" "}
                   </span>
+
+                  <span className={`${Styles.cardprob_noOffPrice} ${Styles.underLine}`}>
+                    {noOffPrice?.toLocaleString()}تومان{" "}
+                  </span>
+
                 </>
               )}
 

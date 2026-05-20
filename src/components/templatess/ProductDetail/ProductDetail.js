@@ -7,9 +7,10 @@ import ProducyDetailRight from "./ProducyDetailRight/ProducyDetailRight";
 import ProductDetailLeft from "./ProductDetailLeft/ProductDetailLeft";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { HouseLine, Dresser } from "@phosphor-icons/react";
+import { HouseLine, Dresser, Car } from "@phosphor-icons/react";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
+import { MdLocalPostOffice } from "react-icons/md";
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
 
@@ -118,6 +119,15 @@ export default function ProductDetail({ param }) {
           <ProductDetailLeft detail={productDetailB} />
         </div>
       </div>
+
+      {/* <div className="row centerr">
+
+        <div className="boxSh centerrc">
+          <Car />adasd
+        </div>
+
+      </div> */}
+
       <div className="row boxSh">
         <div className={`col ${Styles.product_tab_div}`}>
           <Tabs
