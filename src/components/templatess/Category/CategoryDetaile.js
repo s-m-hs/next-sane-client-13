@@ -437,16 +437,16 @@ export default function CategoryDetaile({ param }) {
                                     {offer !== 1 && item.noOffPrice === item.price && (
                                       <>
                                         <span className={Styles.noOffPrice}>{`${(Math.ceil(((item.price) / 10) * offer / 1000)) * 1000}`?.toLocaleString()} تومان </span>
-
                                         <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
+
                                       </>
                                     )}
 
                                     {item.noOffPrice !== item.price && (
                                       <>
-                                        <span className={Styles.noOffPrice}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()}تومان </span>
+                                        <span className={`${Styles.noOffPrice}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
+                                        <span className={`${Styles.price}  ${Styles.underLine}`}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()}تومان </span>
 
-                                        <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
                                       </>
                                     )}
                                   </>
