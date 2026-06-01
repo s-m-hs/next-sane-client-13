@@ -16,6 +16,8 @@ const MainProvider = ({ children }) => {
   const [localUpdateBasket, setLocalUpdateBasket] = useState([]);
   const [basketFlag, setBasketFlag] = useState(false);
   const [getBasket, setGetBasket] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0)
+  const [noOffTotalAmount, setNoOffTotalAmount] = useState(0)
   const [localToken, setLocalToken] = useState("");
   const [cyUserID, setCyUserID] = useState("");
   const [username, setUsername] = useState("");
@@ -61,6 +63,8 @@ const MainProvider = ({ children }) => {
               if (result.cyOrderItems) {
                 setGetBasket(result.cyOrderItems);
                 setCartCounter(result.cyOrderItems?.length);
+                setTotalAmount(result.totalAmount)
+                setNoOffTotalAmount(result.noOffTotalAmount)
               }
             });
           }
@@ -259,7 +263,9 @@ const MainProvider = ({ children }) => {
         setCouponState,
         searchInput, setSearchInput,
         flagSearchInHeader, setFlagSearchInHeader,
-        searchResult, setSearchResult
+        searchResult, setSearchResult,
+        totalAmount, setTotalAmount,
+        noOffTotalAmount, setNoOffTotalAmount
       }}
     >
       {children}

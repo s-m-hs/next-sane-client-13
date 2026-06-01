@@ -6,6 +6,8 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { X, DotsThreeVertical } from "@phosphor-icons/react";
 import Swal from "sweetalert2";
 import alertN from "@/utils/Alert/AlertA";
+import { TiDeleteOutline } from "react-icons/ti";
+import { IoMdClose } from "react-icons/io";
 
 // import { CounterContext } from "../../Context/CounterContext";
 // import { MenuContext } from "../../Context/MenuContext";
@@ -111,31 +113,30 @@ const CartItem = (props) => {
         </td>
 
         <td className="tp-cart-price">
-          {props.unitPrice === null ? (
-            props.totalPrice === null ? (
-              <div className="tp-product-badge" style={{ position: "static" }}>
-                <span className="product-hot">نا موجود</span>
-              </div>
-            ) : (
+          {props.unitPrice === null ?
+            (
+              props.totalPrice === null ? (
+                <div className="tp-product-badge" style={{ position: "static" }}>
+                  <span className="product-hot">نا موجود</span>
+                </div>
+              ) : (
+                <span className="tp-product-details-price new-price">
+                  {props.totalPrice?.toLocaleString()} تومان
+                </span>
+              )
+            ) : props.totalprice === null ? (
               <span className="tp-product-details-price new-price">
-                {props.totalPrice?.toLocaleString()} تومان
+                {props.unitPrice?.toLocaleString()} تومان
               </span>
             )
-          ) : props.totalprice === null ? (
-            <span className="tp-product-details-price new-price">
-              {props.unitPrice?.toLocaleString()} تومان
-            </span>
-          ) : (
-            <div>
-              <span className="tp-product-details-price old-price">
-                {props.unitPrice.toLocaleString()} تومان
-              </span>
-              {/* <br/>
-              <span className="tp-product-details-price new-price">
-                {props.offerPrice}
-              </span> */}
-            </div>
-          )}
+              : (
+                <div>
+                  <span className="tp-product-details-price old-price">
+                    {props.unitPrice.toLocaleString()} تومان
+                  </span>
+
+                </div>
+              )}
 
           <span className={`tp-product-details-price ${style.WithoutOffPrice}`}>
             {props.WithoutOffPrice?.toLocaleString()} تومان
@@ -165,7 +166,7 @@ const CartItem = (props) => {
               className={`btn btn-primary m-1 ${style.btn_product}`}
               onClick={() => setXtFlagSpinnerShow(true)}
             >
-              جزییات ...
+              ...
             </button>
 
             <button
@@ -182,7 +183,7 @@ const CartItem = (props) => {
               AlertA(handleRemove);
             }}
           >
-            حذف
+            <IoMdClose style={{ fontSize: "20px" }} />
           </button>
 
           <button

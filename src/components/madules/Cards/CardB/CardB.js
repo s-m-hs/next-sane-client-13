@@ -22,10 +22,8 @@ export default function CardB({
   noOffPrice,
 }) {
   let { setXtFlagSpinnerShow, setNameCategory } = useContext(MainContext);
-  const [parentId, setParentId] = useState("");
 
-  // const AlertA=()=>alertN('center','success'," به سبد خرید اضافه شد...",1000).then((res) => {  });
-  // const AlertB=()=>alertN('center','info'," این محصول در سبد خرید شما موجود است ...",1000).then((res) => {  });
+
   const AlertC = () =>
     alertQ(
       "center",
@@ -33,33 +31,7 @@ export default function CardB({
       " برای استعلام قیمت میتوانید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو پایین سمت راست استفاده کنید)...",
       "باشه ..."
     ).then((res) => { });
-  // const addToBasket=()=>{
-  //   const getLocalStorage =localStorage.getItem('loginToken')
-  //   let obj={
-  //     cyProductID: id,
-  //     quantity: 1,
-  //     orderItemID:0
-  //   }
-  //   async function myApp(){
-  //     const res=await fetch(`${apiUrl}/api/CyOrders/addToBasket`,{
-  //       method:'POST',
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization:`Bearer ${ getLocalStorage }`
-  //       },
-  //       body:JSON.stringify(obj)
-  //     }).then(res=>{
-  //       if (res.status==200){
-  //         setBasketFlag(prev=>!prev)
-  //         AlertA()      }else if(res.status==400){
-  //           AlertB()
-  //         }
-  //     }
 
-  //   )
-  //   }
-  //   myApp()
-  // }
   useEffect(() => {
     return () => setNameCategory("");
   }, []);
@@ -75,37 +47,26 @@ export default function CardB({
       {/* <span>368,000</span> */}
       {supply != 0 ? (
         <>
-          {offer == 1 && noOffPrice === price && (
+
+
+          {(offer == 1 && noOffPrice === price) ?
+
             <span className={styles.price}>
               {price?.toLocaleString()}تومان{" "}
             </span>
-          )}
+            :
 
-          {noOffPrice !== price && (
-            <>
-              <div className="centerc">
-                <span className={styles.price}>
-                  {noOffPrice?.toLocaleString()}تومان{" "}
-                </span>
-                <span className={`${styles.noOffPrice} ${styles.underline}`}>
-                  {price?.toLocaleString()}تومان{" "}
-                </span>
-              </div>
-            </>
-          )}
-
-          {offer != 1 && noOffPrice === price && (
             <div className="centerc">
               <span className={styles.price}>
-                {/* {(price * offer)?.toLocaleString()}تومان{" "} */}
-                {(Math.ceil((price * offer) / 1000) * 1000).toLocaleString()}تومان{" "}
+                {(price).toLocaleString()}تومان{" "}
 
               </span>
               <span className={`${styles.noOffPrice} ${styles.underline}`}>
-                {price?.toLocaleString()}تومان{" "}
+                {noOffPrice?.toLocaleString()}تومان{" "}
               </span>
             </div>
-          )}
+
+          }
         </>
       ) : // parentId == 2 ?
         categoryCode === "hardwairebestseller" ? (

@@ -382,10 +382,10 @@ export default function CategoryDetaile({ param }) {
                         id={item.id}
                         imgSrc={item.smallImage}
                         title={item.name}
-                        price={Number(item.price) / 10}
+                        price={Number(item.resultPrice) / 10}
+                        noOffPrice={Number(item.noOffPrice) / 10}
                         offPrice={(Math.ceil(((item.price) / 10) * offer / 1000)) * 1000}
                         supply={item.supply}
-                        noOffPrice={Number(item.noOffPrice) / 10}
                         isToSale={item.isToSale}
                         //     noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
                         //       hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
@@ -428,27 +428,26 @@ export default function CategoryDetaile({ param }) {
                                   <>
 
 
-                                    {offer == 1 && item.noOffPrice === item.price && (
+                                    {offer == 1 && item.noOffPrice === item.price ?
                                       <>
                                         <span className={`${Styles.price} `}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
                                       </>
-                                    )}
 
-                                    {offer !== 1 && item.noOffPrice === item.price && (
+
+                                      :
                                       <>
-                                        <span className={Styles.noOffPrice}>{`${(Math.ceil(((item.price) / 10) * offer / 1000)) * 1000}`?.toLocaleString()} تومان </span>
-                                        <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
+                                        <span className={Styles.noOffPrice}>{`${Number(item.resultPrice) / 10}`?.toLocaleString()} تومان </span>
+                                        <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()} تومان </span>
 
                                       </>
-                                    )}
-
-                                    {item.noOffPrice !== item.price && (
+                                    }
+                                    {/* {item.noOffPrice !== item.price && (
                                       <>
                                         <span className={`${Styles.noOffPrice}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
                                         <span className={`${Styles.price}  ${Styles.underLine}`}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()}تومان </span>
 
                                       </>
-                                    )}
+                                    )} */}
                                   </>
                                 )
                               ) : ''

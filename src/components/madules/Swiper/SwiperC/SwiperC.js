@@ -97,11 +97,11 @@ export default function SwiperC({ title, categoryCode }) {
                 id={item.id}
                 imgSrc={item.mainImage}
                 title={item.name}
-                price={Number(item.price) / 10}
+                price={Number(item.resultPrice) / 10}
+                noOffPrice={Number(item.noOffPrice) / 10}
                 supply={item.supply}
                 categoryCode={categoryCode}
                 cyProductCategoryId={item.cyProductCategoryId}
-                noOffPrice={Number(item.noOffPrice) / 10}
                 offer={offer}
               />
             </SwiperSlide>

@@ -40,6 +40,8 @@ export default function BasketDetail() {
         getBasket,
         setGetBasket,
         setBasketFlag,
+        totalAmount,
+        noOffTotalAmount,
         xtflagSpinnerShow,
         address,
         offer,
@@ -440,6 +442,8 @@ export default function BasketDetail() {
         ApiGetX2(`/api/CyKeyDatas/1014`, setPostB)
     }, []);
 
+    console.log(getBasket)
+
     return (
         <div className={`container ${style.container}`}>
             {/* <div className="ScaleLoader-louder">
@@ -479,17 +483,18 @@ export default function BasketDetail() {
                                             smallImage={item["smallImage"]}
                                             // totalPrice={item.noOffPrice}
                                             unitPrice={
-                                                offer == 1 && item.noOffPrice === item.price
-                                                    ? Number(item.price) / 10
+                                                item.noOffPrice === item.price
+                                                    ? Number(item.resultPrice) / 10
                                                     : item.noOffPrice !== item.price
-                                                        ? Number(item.noOffPrice) / 10
-                                                        : offer != 1 && ((Math.ceil(((item.price) / 10) * offer / 1000) * 1000))
+                                                        ? Number(item.price) / 10
+                                                        : ""
                                             }
                                             id={item["id"]}
                                             cyProductID={item.id}
                                             quantity={localUpdateBasket?.length === 0 ? 1 : localUpdateBasket.filter((filter) => filter.value.value === item.id)[0]?.value.quan || 1}
                                             updateQuantity={updateQuantity}
                                             handleRemove={removeFromCart}
+                                            WithoutOffPrice={item.noOffPrice / 10}
                                         />
                                     ))
                                 ) : (
@@ -508,12 +513,7 @@ export default function BasketDetail() {
                                                             ? Number(item.unitOfferPrice) / 10
                                                             : offer !== 1 && (Math.ceil(((item.totalPrice) / 10) * offer / 1000) * 1000)
                                                 }
-                                                unitPrice={
-                                                    offer == 1 && item.unitOfferPrice === item.unitPrice
-                                                        ? Number(item.unitPrice) / 10
-                                                        : item.unitOfferPrice !== item.unitPrice
-                                                            ? Number(item.unitOfferPrice) / 10
-                                                            : offer !== 1 && (Math.ceil(((item.unitPrice) / 10) * offer / 1000) * 1000)
+                                                unitPrice={Number(item.resultPrice) / 10
                                                 }
                                                 WithoutOffPrice={item.unitPrice / 10} ///send to cartitem product price without off
                                                 id={item.id}
@@ -573,9 +573,9 @@ export default function BasketDetail() {
                                     <button className={`btn btn-outline  ${style.colPrice_mobile_btn1}`} disabled>
                                         <span>مجموع سبد خرید :</span>
                                         <br />
-                                        <div className={`  ${style.colPrice_mobile_span2}`}>{(Math.ceil((total) / 10 / 1000) * 1000).toLocaleString()} تومان</div>
+                                        <div className={`  ${style.colPrice_mobile_span2}`}>{(Number(totalAmount) / 10).toLocaleString()} تومان</div>
                                         <br />
-                                        <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
+                                        <div className={`${style.colPrice_nonoff_span}`}>{(Number(noOffTotalAmount) / 10).toLocaleString()} تومان</div>
 
                                         <img src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png" alt="basket-image" className={style.colPrice_mobile_shopimg} />
                                     </button>
@@ -632,9 +632,9 @@ export default function BasketDetail() {
 
                                     <span>مجموع سبد خرید :</span>
                                     <br />
-                                    <div>{(Math.ceil((total) / 10 / 1000) * 1000).toLocaleString()} تومان</div>
+                                    <div>{(Number(totalAmount) / 10).toLocaleString()} تومان</div>
                                     <br />
-                                    <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
+                                    <div className={`${style.colPrice_nonoff_span}`}>{(Number(noOffTotalAmount) / 10).toLocaleString()} تومان</div>
                                 </button>
                             </div>
                         )}

@@ -122,26 +122,28 @@ export default function CardC({
                 </>
               )}
 
-              {offerState !== 1 && noOffPrice === price && (
-                <>
-
-                  <span className={`${Styles.cardprob_price} `}>
-                    {offPrice?.toLocaleString()} تومان{" "}
-                  </span>
-
-                  <span
-                    className={`${Styles.cardprob_noOffPrice}  ${Styles.underLine}`}
-                  >
-                    {price?.toLocaleString()} تومان{" "}
-                  </span>
 
 
 
 
-                </>
-              )}
+              <>
 
-              {noOffPrice !== price && (
+                <span className={`${Styles.cardprob_price} `}>
+                  {price?.toLocaleString()} تومان{" "}
+                </span>
+
+                <span
+                  className={`${Styles.cardprob_noOffPrice}  ${Styles.underLine}`}
+                >
+                  {noOffPrice?.toLocaleString()} تومان{" "}
+                </span>
+
+
+
+
+              </>
+
+              {/* {noOffPrice !== price && (
                 <>
 
 
@@ -156,7 +158,7 @@ export default function CardC({
                   </span>
 
                 </>
-              )}
+              )} */}
 
               {verifyHam && (
                 <span className={Styles.cardprob_noOffPrice}>
