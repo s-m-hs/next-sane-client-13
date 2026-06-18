@@ -28,6 +28,7 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import alertAA from "@/utils/Alert/AlertAA";
 import requestCoupon from "@/utils/Functions/requestCoupon";
 import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
+import CountdownLoader from "@/utils/CountdownLoader";
 
 export default function BasketDetail() {
     let {
@@ -129,20 +130,22 @@ export default function BasketDetail() {
 
     const directToZarin = () => {
         async function myApp() {
-            const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`, {
-                method: "GET",
-                credentials: "include",
+            const res = await fetch(`${apiUrl}/api/ZarinPal/PayZibal?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`
+                // const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`
+                , {
+                    method: "GET",
+                    credentials: "include",
 
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }).then((res) => {
-                if (res.ok) {
-                    return res.json().then((result) => {
-                        rout.push(`${result.url}`);
-                    });
-                }
-            });
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }).then((res) => {
+                    if (res.ok) {
+                        return res.json().then((result) => {
+                            rout.push(`${result.url}`);
+                        });
+                    }
+                });
         }
         myApp();
     };
@@ -442,7 +445,6 @@ export default function BasketDetail() {
         ApiGetX2(`/api/CyKeyDatas/1014`, setPostB)
     }, []);
 
-    console.log(getBasket)
 
     return (
         <div className={`container ${style.container}`}>
@@ -450,7 +452,7 @@ export default function BasketDetail() {
         {" "}
         <ScaleLoader color="#e8c5d6" />
       </div> */}
-            {flagSpinner && <SpinnerC />}
+            {flagSpinner && <SpinnerC title="در حال انتقال به درگاه پرداخت" />}
             <div className="row mt-5 ">
                 <div className={`col-lg-8 centerc  ${style.col_8} boxSh`}>
                     <div className={` ${style.col_8_div_table} `}>
@@ -688,7 +690,6 @@ export default function BasketDetail() {
                                     </div>
 
                                 </div>
-
 
                                 <div className="centerr" onClick={() => setPostState(2)}>
                                     {postState == 2 ? <FiCheckSquare color="green" fontSize="18px" /> : <MdOutlineCheckBoxOutlineBlank fontSize="18px" />}

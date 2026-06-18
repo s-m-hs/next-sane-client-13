@@ -10,18 +10,23 @@ import alertN from "@/utils/Alert/AlertA";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Modal from "react-bootstrap/Modal";
+import SpinnerC from "@/utils/SpinnerC/SpinnerC";
 
 export default function PaymentResultCom({ param }) {
   const rout = useRouter();
   const searchParams = useSearchParams();
   const [show, setShow] = useState(false);
-
+  const [flagSpinner, setFlagSpinner] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const trackId = searchParams.get("trackId");
+  const success = searchParams.get("success");
+
   const authority = searchParams.get("Authority");
   const status = searchParams.get("Status");
   let { setXtFlagSpinnerShow, setPaymentState } = useContext(MainContext);
   const route = useRouter();
+  const [verifyDetailB, setVerifyDetailB] = useState({});
   const [verifyDetail, setVerifyDetail] = useState({});
 
   const alertA = () =>
@@ -36,6 +41,7 @@ export default function PaymentResultCom({ param }) {
   const alertB = () =>
     alertQ("center", "error", "مشکلی پیش آمده ...", "متوجه شدم ...").then(
       (res) => {
+        setFlagSpinner(false);
         route.push("/basket");
       }
     );
@@ -46,24 +52,33 @@ export default function PaymentResultCom({ param }) {
     // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
       orderId: param,
-      authority: authority,
+      trackId: trackId,
     };
-    async function myApp() {
-      const res = await fetch(`${apiUrl}/api/ZarinPal/varifyPay`, {
-        method: "POST",
-        credentials: "include",
 
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${getLocalStorage}`,
-        },
-        body: JSON.stringify(obj),
-      })
+    //     let obj = {
+    //   orderId: param,
+    //   authority: authority,
+    // };
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/ZarinPal/verifyPayZibal`,
+        // const res = await fetch(`${apiUrl}/api/ZarinPal/varifyPay`,
+        {
+          method: "POST",
+          credentials: "include",
+
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${getLocalStorage}`,
+          },
+          body: JSON.stringify(obj),
+        })
         .then((res) => {
           if (res.ok) {
             return res.json().then((result) => {
-              setVerifyDetail(result);
+              setVerifyDetailB(result)
+              // setVerifyDetail(result);
               setXtFlagSpinnerShow(false);
+              setFlagSpinner(false);
             });
           } else {
             alertB();
@@ -76,22 +91,34 @@ export default function PaymentResultCom({ param }) {
     myApp();
   };
 
+
   useEffect(() => {
-    if (status === "OK") {
+    console.log(success)
+    console.log(verifyDetailB)
+    if (success == 1) {
       verifyPayment();
       setShow(true);
-    } else if (status === "NOK") {
+    } else if (status != 1) {
       alertA();
     }
-  }, [status]);
+  }, [success]);
+
+  // useEffect(() => {
+  //   if (status === "OK") {
+  //     verifyPayment();
+  //     setShow(true);
+  //   } else if (status === "NOK") {
+  //     alertA();
+  //   }
+  // }, [status]);
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
-    setVerifyDetail({});
-    // window.location.reload(true);
+    // setVerifyDetail({});
   }, []);
   return (
     <div className="container">
+      {flagSpinner && <SpinnerC title="در حال ثبت سفارش" />}
       <>
         <Modal
           show={show}
@@ -102,7 +129,34 @@ export default function PaymentResultCom({ param }) {
           <Modal.Body>
             <div className={`row ${style.row}`}>
               <div className={`col text-center ${style.detail_div} boxSh`}>
+
                 <div>
+                  <table class="table mt-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"> شرح</th>
+                      </tr>
+                    </thead>
+                    <tbody className={style.tbody}>
+                      <tr>
+                        <th scope="row">وضعیت خرید</th>
+                        <td>موفق</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">کد پیگیری </th>
+                        <td>{verifyDetailB.RefNumber}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">message</th>
+                        <td colspan="2">{verifyDetailB.message}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+                {/* <div>
                   <table class="table mt-4">
                     <thead>
                       <tr>
@@ -125,26 +179,17 @@ export default function PaymentResultCom({ param }) {
                       </tr>
                     </tbody>
                   </table>
-                  {/* <ul>
-    <li>{verifyDetail?.code}</li>
-    <li>{verifyDetail?.fee}</li>
-    <li>{verifyDetail?.message}</li>
-</ul> */}
-                </div>
-                {/* <Link href={"/"} > */}
+                </div> */}
                 <button
                   className="btn btn-warning m-4"
                   onClick={() => {
                     setPaymentState(true);
                     rout.push("/"); // اول به صفحه اصلی هدایت کن
-                    // setTimeout(() => {
-                    //   window.location.reload(true); // بعد از کمی تأخیر رفرش کن
-                    // }, 100);
+
                   }}
                 >
                   بازگشت به صفحه اصلی
                 </button>
-                {/* </Link> */}
               </div>
             </div>
           </Modal.Body>
