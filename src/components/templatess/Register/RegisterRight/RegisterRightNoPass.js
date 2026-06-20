@@ -240,7 +240,7 @@ export default function RegisterRight() {
                 </div>
               </div>
 
-              <button type="submit" className={`${style.button} btn btn-info`}>
+              <button type="submit" className={`${style.button} btn btn-light`}>
                 تایید
               </button>
             </>

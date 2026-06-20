@@ -9,8 +9,9 @@
   width: 80% !important;
   height: 40px !important;
   margin-top: 50px;
-  background-color: rgb(25, 165, 175);
+  background-color: var(--them);
   color: #fff;
+  border-radius: 5px;
 }
 .buttonB {
   font-size: larger;

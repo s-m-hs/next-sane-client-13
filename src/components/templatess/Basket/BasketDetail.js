@@ -4,7 +4,6 @@ import { MainContext } from "@/context/MainContext";
 import apiCallProdDetails from "@/utils/ApiUrl/apiCallProDetails";
 import React, { useContext, useEffect, useState } from "react";
 import CartItem from "./CartItem/CartItem";
-import { ToastContainer, Zoom, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { DotLoader, ScaleLoader } from "react-spinners";
@@ -12,15 +11,12 @@ import RemoveApi from "@/utils/ApiUrl/apiCallBack/apiRemove";
 // import getLocalStorage from '@/utils/localStorag/localStorage';
 import alertN from "@/utils/Alert/AlertA";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import { HandTap, CheckCircle, X } from "@phosphor-icons/react";
 import alertQ from "@/utils/Alert/AlertQ";
 import Link from "next/link";
-import { GiClick } from "react-icons/gi";
-import { GiCheckMark } from "react-icons/gi";
 import SpinnerC from "@/utils/SpinnerC/SpinnerC";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { FiCheckSquare } from "react-icons/fi";
@@ -28,7 +24,6 @@ import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import alertAA from "@/utils/Alert/AlertAA";
 import requestCoupon from "@/utils/Functions/requestCoupon";
 import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
-import CountdownLoader from "@/utils/CountdownLoader";
 
 export default function BasketDetail() {
     let {
@@ -131,7 +126,7 @@ export default function BasketDetail() {
     const directToZarin = () => {
         async function myApp() {
             const res = await fetch(`${apiUrl}/api/ZarinPal/PayZibal?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`
-                // const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`
+                // const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`  ///==> Zarinpal
                 , {
                     method: "GET",
                     credentials: "include",
@@ -183,7 +178,6 @@ export default function BasketDetail() {
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${getLocalStorage}`,
                 },
             }).then(res => {
 
@@ -292,7 +286,6 @@ export default function BasketDetail() {
     };
 
     const updateBasketHandler = () => {
-        // const getLocalStorage = localStorage.getItem("loginToken");
         if (xtFlagLogin) {
             updateBasket(basket, setBasketFlag, AlertB);
             setFlagUpdate(false);

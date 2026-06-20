@@ -49,26 +49,24 @@ export default function PaymentResultCom({ param }) {
     alertN("center", "success", "پرداخت با موفقیت انجام شد", "1500");
 
   const verifyPayment = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
       orderId: param,
       trackId: trackId,
     };
 
-    //     let obj = {
+    //     let obj = {   ///// ==> Zarinpal
     //   orderId: param,
     //   authority: authority,
     // };
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/ZarinPal/verifyPayZibal`,
-        // const res = await fetch(`${apiUrl}/api/ZarinPal/varifyPay`,
+        // const res = await fetch(`${apiUrl}/api/ZarinPal/varifyPay`, ///// ==> Zarinpal
         {
           method: "POST",
           credentials: "include",
 
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${getLocalStorage}`,
           },
           body: JSON.stringify(obj),
         })
@@ -76,7 +74,7 @@ export default function PaymentResultCom({ param }) {
           if (res.ok) {
             return res.json().then((result) => {
               setVerifyDetailB(result)
-              // setVerifyDetail(result);
+              // setVerifyDetail(result); ///// ==> Zarinpal
               setXtFlagSpinnerShow(false);
               setFlagSpinner(false);
             });
@@ -93,8 +91,6 @@ export default function PaymentResultCom({ param }) {
 
 
   useEffect(() => {
-    console.log(success)
-    console.log(verifyDetailB)
     if (success == 1) {
       verifyPayment();
       setShow(true);
@@ -103,7 +99,7 @@ export default function PaymentResultCom({ param }) {
     }
   }, [success]);
 
-  // useEffect(() => {
+  // useEffect(() => {  ///// ==> Zarinpal
   //   if (status === "OK") {
   //     verifyPayment();
   //     setShow(true);
@@ -114,7 +110,7 @@ export default function PaymentResultCom({ param }) {
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
-    // setVerifyDetail({});
+    setVerifyDetail({});
   }, []);
   return (
     <div className="container">
@@ -145,7 +141,7 @@ export default function PaymentResultCom({ param }) {
                       </tr>
                       <tr>
                         <th scope="row">کد پیگیری </th>
-                        <td>{verifyDetailB.RefNumber}</td>
+                        <td>{verifyDetailB.refNumber}</td>
                       </tr>
                       <tr>
                         <th scope="row">message</th>
@@ -155,7 +151,7 @@ export default function PaymentResultCom({ param }) {
                   </table>
                 </div>
 
-
+                {/* ==> Zarinpal */}
                 {/* <div>
                   <table class="table mt-4">
                     <thead>
