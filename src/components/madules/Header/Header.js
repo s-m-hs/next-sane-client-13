@@ -595,7 +595,7 @@ export default function Header() {
                     </li>
                   )}
 
-                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                  {/* <li onClick={() => setXtFlagSpinnerShow(true)}>
                     {" "}
                     <Link
                       href={"/computerparts"}
@@ -609,7 +609,26 @@ export default function Header() {
                       <Laptop size={15} />
                       محاسبه گر سیستم
                     </Link>{" "}
+                  </li> */}
+
+                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                    {" "}
+                    <Link
+                      href={"/computers"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      {" "}
+                      <Laptop size={15} />
+                      سیستم های اسمبل شده
+                    </Link>{" "}
                   </li>
+
+
+
 
 
                   <li onClick={() => setXtFlagSpinnerShow(true)}>
@@ -875,7 +894,7 @@ export default function Header() {
                     </li>
                   )}
 
-                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                  {/* <li onClick={() => setXtFlagSpinnerShow(true)}>
                     {" "}
                     <Link
                       href={"/computerparts"}
@@ -889,7 +908,25 @@ export default function Header() {
                       <Laptop size={15} />
                       محاسبه گر سیستم
                     </Link>{" "}
+                  </li> */}
+
+                  <li onClick={() => setXtFlagSpinnerShow(true)}>
+                    {" "}
+                    <Link
+                      href={"/computers"}
+                      style={{
+                        listStyle: "none",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      {" "}
+                      <Laptop size={15} />
+                      سیستم های اسمبل شده
+                    </Link>{" "}
                   </li>
+
+
                   <li>
                     {" "}
                     <Link
@@ -1048,6 +1085,7 @@ export default function Header() {
                   </Link>
                 </li>
 
+
                 <li
                   className={`${styles.hamburger_li} centerr`}
                   onClick={() => {
@@ -1062,6 +1100,10 @@ export default function Header() {
                     <span className="bar"></span>
                   </button>
                 </li>
+
+
+
+
 
                 <li
                   className={`${styles.bottomHeader_ul_category}`}
@@ -1145,7 +1187,7 @@ export default function Header() {
                         </Link>
                       </>
                     )}
-
+                    {/* 
                     <Link
                       href={"/computerparts"}
                       onClick={() => {
@@ -1156,7 +1198,9 @@ export default function Header() {
                       <Laptop size={15} color={`var(--them)`} />
 
                       <span style={{ fontSize: "13px" }}>محاسبه گر سیستم </span>
-                    </Link>
+                    </Link> */}
+
+
 
                     <Link
                       href={"/contactus"}
@@ -1218,6 +1262,29 @@ export default function Header() {
                     </Link>
                   )}
                 </li>
+
+
+
+
+                <li className={`${styles.hamburger_li}centerr`}>
+                  <Link
+                    href={"/computers"}
+                    style={{
+                      listStyle: "none",
+                      textDecoration: "none",
+                      color: "inherit",
+                    }}
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setXtFlagSpinnerShow(true);
+                      ulRefA.current.classList.remove("header_hidden_ulRefA");
+                    }}
+                  >
+                    <Laptop size={28} weight="duotone" color={`var(--them)`} />
+                    {/* <House size={28} weight="duotone" color={`var(--them)`} /> */}
+                  </Link>
+                </li>
+
 
                 <li
                   onClick={() => {
