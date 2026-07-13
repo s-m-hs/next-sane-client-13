@@ -95,6 +95,23 @@
   opacity: 0.8;
   /* background: linear-gradient(31deg, #ffffff  24%, #14a5af 100%)!important; */
 }
+.ProductDetailL_divright_swiper{
+  position: relative;
+}
+  .favorite{
+  position: absolute;
+  left:20px;
+  top: 0;
+  cursor: pointer;
+  z-index: 1000;
+}
+.share{
+    position: absolute;
+  left:20px;
+  top: 30px;
+  cursor: pointer;
+  z-index: 1000;
+}
 .ProductDetailL_divright_swiper_button {
   width: 100%;
   color: #fff;
@@ -148,7 +165,9 @@
   .ProductDetailL_divright_swiper {
     height: 60% !important;
     width: 100% !important;
+    position: relative;
   }
+
   .ProductDetailL_divMiddle_offprice {
     font-size: 20px;
   }

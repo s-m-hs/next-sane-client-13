@@ -2,6 +2,7 @@
 
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { CategoryIcon } from "./Icons";
+import { SystemLevel } from "@/utils/DataStore";
 
 export default function CategoryFilter({ categories, activeSlug, onSelect, counts, systems }) {
   const items = [
@@ -28,12 +29,11 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
               }}
               className={`sane-chip ${activeSlug === c.slug ? "active" : ""}`}
             >
-              {c.title}
-              {c.slug !== "all" && (
-                <span className="ms-1" style={{ opacity: 0.8 }}>
-                  ({counts[c.slug] || 0})
-                </span>
-              )}
+              {c.title}*
+              {counts &&
+                counts?.filter(filt => filt.level == (SystemLevel.filter(filter => (
+                  filter.title == c.slug
+                ))[0]?.level))[0]?.count}
             </button>
           ))}
         </div>
@@ -68,7 +68,12 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
                     <span className="flex-grow-1" style={{ fontSize: "0.9rem" }}>
                       {c.title}
                     </span>
-                    <span className="small">{c.slug === "all" ? counts.all : counts[c.slug] || 0}</span>
+                    <span className="small">
+                      {counts &&
+                        counts?.filter(filt => filt.level == (SystemLevel.filter(filter => (
+                          filter.title == c.slug
+                        ))[0]?.level))[0]?.count}
+                    </span>
                   </button>
                 </li>
               );

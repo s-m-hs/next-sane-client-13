@@ -53,6 +53,7 @@ export default function TicketCom() {
       async function myApp() {
         const res = fetch(`${apiUrl}/api/CyFiles/download/${gui}`, {
           method: "GET",
+          credentials: "include",
           headers: {
             // Authorization: headerAuth,
             "Content-Type": "application/json",

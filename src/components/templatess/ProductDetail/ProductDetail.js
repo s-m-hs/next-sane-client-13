@@ -26,6 +26,7 @@ export default function ProductDetail({ param }) {
     async function myAppPost() {
       const res = await fetch(`${apiUrl}/api/CyProducts/${id}`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,6 +50,7 @@ export default function ProductDetail({ param }) {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyProducts/breadcrumbs/${param}`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

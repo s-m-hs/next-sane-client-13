@@ -4,6 +4,7 @@ const ApiGetX2 = (url, func) => {
   async function myAppGet() {
     const res = await fetch(`${apiUrl}${url}`, {
       method: "GET",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         // Authorization: headerAuth,

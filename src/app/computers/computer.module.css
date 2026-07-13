@@ -10,6 +10,16 @@
     .listhardware_p{
     font-size: 15px !important;
   }
+.header{
+    margin-top: 80px;
+}
 
+}
+
+@media only screen and (max-width: 900px) {
+
+.header{
+    margin-top: 50px;
+}
 
 }

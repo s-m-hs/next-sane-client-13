@@ -90,6 +90,7 @@ export default function CategoryDetaile({ param }) {
     async function myAppGet() {
       const res = await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -115,6 +116,7 @@ export default function CategoryDetaile({ param }) {
     async function myApppost() {
       const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByProductCat`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -395,6 +397,8 @@ export default function CategoryDetaile({ param }) {
                         // }
                         verifyHam={verifyHamkar}
                         offerState={offer}
+                        isFavor={item.isFavorite}
+                        isShowHeart={true}
                       />
                     </div>
                   )

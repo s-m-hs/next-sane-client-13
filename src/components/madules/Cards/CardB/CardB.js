@@ -8,6 +8,8 @@ import updateBasket from "@/utils/ApiUrl/updateBasket";
 import addToCart from "@/utils/Functions/addToCart";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import alertQ from "@/utils/Alert/AlertQ";
+import Favorite from "../../Favorite/Favorite";
+import ShareButton from "../../ShareButton/ShareButton";
 
 export default function CardB({
   imgSrc,
@@ -20,6 +22,7 @@ export default function CardB({
   categoryCode,
   offer,
   noOffPrice,
+  isFavor
 }) {
   let { setXtFlagSpinnerShow, setNameCategory } = useContext(MainContext);
 
@@ -35,9 +38,17 @@ export default function CardB({
   useEffect(() => {
     return () => setNameCategory("");
   }, []);
-
   return (
     <div className={`${styles.container} centerc`}>
+      <div className={`${styles.favorite}`}>
+        <Favorite id={id} isFavorite={isFavor} />
+
+      </div>
+
+      <div className={`${styles.share}`}>
+        <ShareButton productId={id} />
+      </div>
+
       <Link href={`/product/${id}`} onClick={() => setXtFlagSpinnerShow(true)}>
         {" "}
         <img className={`${styles.img}`} src={imgSrc} alt={`${title}`} />

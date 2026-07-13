@@ -6,6 +6,7 @@ const postApi = (url, obj, setFunc) => {
       `${apiUrl}${url}`,
       {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

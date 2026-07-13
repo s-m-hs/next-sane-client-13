@@ -8,6 +8,8 @@ import addToCart from "@/utils/Functions/addToCart";
 import alertN from "@/utils/Alert/AlertA";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Head from "next/head";
+import Favorite from "@/components/madules/Favorite/Favorite";
+import ShareButton from "@/components/madules/ShareButton/ShareButton";
 
 export default function ProductDetailLeft({ detail }) {
   let {
@@ -62,7 +64,7 @@ export default function ProductDetailLeft({ detail }) {
       setFlagSupply(true);
     }
   }, [detail]);
-
+  console.log(detail)
   return (
     <>
       <div className="container  boxSh" style={{ height: "600px" }}>
@@ -138,8 +140,9 @@ export default function ProductDetailLeft({ detail }) {
                           </span>
                         ) :
                         (
+                          ///ناموجود ===> استعلام قیمت
                           <span className={Styles.ProductDetailL_divMiddle_count}>
-                            ناموجود
+                            استعلام قیمت
                           </span>
                         )}
                   </div>
@@ -166,6 +169,16 @@ export default function ProductDetailLeft({ detail }) {
               <div
                 className={`${Styles.ProductDetailL_divright_swiper} col-12 col-md-6`}
               >
+
+                <div className={`${Styles.favorite}`}>
+                  <Favorite id={detail.id} isFavorite={detail.isFavorite} />
+
+                </div>
+
+                <div className={`${Styles.share}`}>
+                  <ShareButton productId={detail.id} />
+                </div>
+
                 <SwiperProduct
                   src={detail.mainImage}
                   srcB={detail.images?.split("*,*")}
@@ -258,11 +271,12 @@ export default function ProductDetailLeft({ detail }) {
                               </span>
                             )
                             : (
+
+                              ///ناموجود ===> استعلام قیمت
                               <span
                                 className={Styles.ProductDetailL_divMiddle_count}
                               >
-                                ناموجود
-                              </span>
+                                استعلام قیمت                              </span>
                             )}
                       </div>
                     </div>

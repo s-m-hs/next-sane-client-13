@@ -27,6 +27,7 @@ export default function SwiperC({ title, categoryCode }) {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -46,7 +47,7 @@ export default function SwiperC({ title, categoryCode }) {
     getProductByCat();
   }, []);
 
-
+  console.log(sortedProducts)
 
 
   return (
@@ -103,6 +104,7 @@ export default function SwiperC({ title, categoryCode }) {
                 categoryCode={categoryCode}
                 cyProductCategoryId={item.cyProductCategoryId}
                 offer={offer}
+                isFavor={item.isFavorite}
               />
             </SwiperSlide>
           ))}

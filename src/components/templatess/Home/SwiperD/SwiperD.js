@@ -27,6 +27,7 @@ export default function SwiperD({ title, categoryCode }) {
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByCat`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

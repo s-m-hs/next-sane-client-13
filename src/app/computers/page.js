@@ -13,18 +13,21 @@ export default function ComputersPage() {
   let { setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
   const [activeSlug, setActiveSlug] = useState("all");
   const [allSystem, setAllSystem] = useState([])
+  const [counts, setCounts] = useState(0)
 
   const getAllSystem = () => {
     ApiGetX2(`/api/SysPC2`, setAllSystem)
   }
-
-  const counts = useMemo(() => {
-    const c = { all: products.length };
-    categories.forEach((cat) => {
-      c[cat.slug] = products.filter((p) => p.category === cat.slug).length;
-    });
-    return c;
-  }, []);
+  const getLevelLength = () => {
+    ApiGetX2(`/api/SysPC2/level-count`, setCounts)
+  }
+  // const counts = useMemo(() => {
+  //   const c = { all: products.length };
+  //   categories.forEach((cat) => {
+  //     c[cat.slug] = products.filter((p) => p.category === cat.slug).length;
+  //   });
+  //   return c;
+  // }, []);
 
   const visibleProducts = useMemo(() => {
     if (activeSlug === "all") return products;
@@ -33,15 +36,18 @@ export default function ComputersPage() {
 
   const activeCategory = categories.find((c) => c.slug === activeSlug);
 
+
+
   useEffect(() => {
     getAllSystem()
+    getLevelLength()
   }, [])
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
   return (
     <main className="container py-4 py-lg-5">
-      <header className="mb-4">
+      <header className={`${Style.header} mb-4`} >
         <p className="small sane-text-sub mb-1">خانه / کامپیوترصانع</p>
         <h1 className="fw-bold sane-text-ink" style={{ fontSize: "1.75rem" }}>
           کامپیوترهای آماده

@@ -9,6 +9,8 @@ import alertN from "@/utils/Alert/AlertA";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import alertQ from "@/utils/Alert/AlertQ";
+import Favorite from "../../Favorite/Favorite";
+import ShareButton from "../../ShareButton/ShareButton";
 
 export default function CardC({
   imgSrc,
@@ -22,7 +24,8 @@ export default function CardC({
   verifyHam,
   offerState,
   offPrice,
-  isToSale
+  isToSale, isFavor,
+  isShowHeart
 }) {
   let {
     setCartCounter,
@@ -101,11 +104,21 @@ export default function CardC({
         </span>
       )}
 
+      {isShowHeart ? <div className={`${Styles.favorite}`}>
+        <Favorite id={id} isFavorite={isFavor} />
+
+      </div> : ""}
+
+      <div className={`${Styles.share}`}>
+        <ShareButton productId={id} />
+      </div>
+
       <Link
         className={`${Styles.cardprob_container_linkA}`}
         onClick={() => setXtFlagSpinnerShow(true)}
         href={`/product/${id}`}
       >
+
         <img src={imgSrc} alt={`${title}`} />
 
         <span className={Styles.cardprob_title}> {title} </span>

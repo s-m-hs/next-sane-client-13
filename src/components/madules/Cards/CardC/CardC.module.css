@@ -16,7 +16,18 @@
     height: 100%;
     
   }
-
+.favorite{
+  position: absolute !important;
+  left: 0px !important;
+  top: 0 !important;
+  cursor: pointer !important;
+} 
+.share{
+    position: absolute !important;
+  left: 0px !important;
+  top: 30px !important;
+  cursor: pointer !important;
+}
   .cardprob_container img{
     /* position: absolute;
     top: 5px; */
@@ -60,7 +71,7 @@
 
   .cardprob_container svg{
     position: absolute;
-    left: 35px;
+    /* left: 35px; */
   }
   
   .cardprob__icon_div{

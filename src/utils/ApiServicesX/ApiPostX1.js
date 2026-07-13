@@ -4,6 +4,7 @@ const ApiPostX1 = (url, obj, func) => {
     async function myApp() {
         const res = await fetch(`${apiUrl}${url}`, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

@@ -13,6 +13,7 @@ import ProductCard from "@/components/templatess/AsemblySystem/ProductCard";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { useContext, useEffect, useState } from "react";
 import { MainContext } from "@/context/MainContext";
+import { SystemLevel } from "@/utils/DataStore";
 
 // export function generateMetadata({ params }) {
 
@@ -81,21 +82,20 @@ export default function ProductDetailPage({ params }) {
     },
   ];
 
-
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, [xtflagSpinnerShow]);
   return (
 
     <main className="container py-4 py-lg-5">
-      <nav className="small sane-text-sub mb-4 d-flex align-items-center gap-2 flex-wrap">
+      <nav className={`${Style.header} small sane-text-sub mb-4 d-flex align-items-center gap-2 flex-wrap`}>
         <Link href="/computers" className="sane-text-sub text-decoration-none">
           کامپیوترهای آماده
         </Link>
         <ChevronIcon size={14} />
-        <Link href={`/computers?cat=${category?.slug}`} className="sane-text-sub text-decoration-none">
-          {category?.title}
-        </Link>
+        <span href={`/computers?cat=${category?.slug}`} className="sane-text-sub text-decoration-none">
+          {SystemLevel.filter(item => item.level == product.level)[0]?.name}
+        </span>
         <ChevronIcon size={14} />
         <span className="sane-text-ink fw-medium text-truncate">{product.name}</span>
       </nav>
@@ -105,7 +105,7 @@ export default function ProductDetailPage({ params }) {
         <div className="col-12 col-lg-7">
           <div className="ratio ratio-4x3 rounded-4 overflow-hidden sane-gradient-soft-White position-relative border" >
             <img src={product.cySubject
-              ?.smallImg
+              ?.bigImg
             } alt={product.name} fill sizes="(max-width: 1024px) 100vw, 55vw" style={{ objectFit: "contain" }} priority />
             {/* {!product.available && (
               <span className="badge rounded-pill sane-badge-danger position-absolute top-0 end-0 m-3">ناموجود</span>

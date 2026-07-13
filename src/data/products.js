@@ -29,7 +29,7 @@ export const categories = [
   {
     slug: "Design",
     title: "طراحی -تولید محتوا",
-    description: "کامپیوتر و مانیتور یکپارچه، شیک و جمع‌وجور",
+    description: "مناسب جهت تولید محتوا ،ویرایش ،تدوین و ...",
     icon: "Design",
   },
 ];

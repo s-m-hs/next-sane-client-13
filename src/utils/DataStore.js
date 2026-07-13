@@ -1,9 +1,9 @@
 export const SystemLevel = [
-    { title: "Home", level: 1 },
-    { title: "Official", level: 2 },
-    { title: "Programming", level: 3 },
-    { title: "Design", level: 4 },
-    { title: "Gaming", level: 5 },
+    { title: "Home", level: 1, name: "خانگی" },
+    { title: "Official", level: 2, name: "اداری" },
+    { title: "Programming", level: 3, name: "برنامه نویسی" },
+    { title: "Design", level: 4, name: "تولید محتوا" },
+    { title: "Gaming", level: 5, name: "گیمینگ" },
 ]
 
 export const ParentHardWare = [

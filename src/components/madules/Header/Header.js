@@ -18,6 +18,7 @@ import {
   ExclamationMark,
   Laptop,
   HandPointing,
+  Heart
 } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
@@ -411,6 +412,13 @@ export default function Header() {
                   </div>
                 </Link>
 
+                <Link href={'/favorite'}>
+                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
+                    <Heart size={24} color={`var(--them)`} />
+
+                  </div>
+                </Link>
+
                 {resetFlagCart && (
                   <Link href={cartCounter != 0 ? "/basket" : "#"}>
                     <div
@@ -708,6 +716,13 @@ export default function Header() {
                     ) : (
                       <span className={`${styles.Header_leftSide__div_span} `}>وارد پنل کاربری خود شوید...</span>
                     )}
+                  </div>
+                </Link>
+
+                <Link href={'/favorite'}>
+                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
+                    <Heart size={24} color={`var(--them)`} />
+
                   </div>
                 </Link>
 
@@ -1165,6 +1180,16 @@ export default function Header() {
                     {xtFlagLogin && (
                       <>
                         <Link
+                          href={"/favorite"}
+                          onClick={() => {
+                            setMenuOpen(false);
+                            setXtFlagSpinnerShow(true);
+                          }}
+                        >
+                          <Heart size={15} color={`var(--them)`} />
+                          <span>علاقه مندی ها</span>
+                        </Link>
+                        {/* <Link
                           href={"/p-user/warranty"}
                           onClick={() => {
                             setMenuOpen(false);
@@ -1184,7 +1209,7 @@ export default function Header() {
                         >
                           <Wrench size={15} color={`var(--them)`} />
                           <span>تعمیرات</span>
-                        </Link>
+                        </Link> */}
                       </>
                     )}
                     {/* 

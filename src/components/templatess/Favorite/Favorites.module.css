@@ -1,0 +1,29 @@
+
+.category_row {
+  padding-top: 22px;
+  width: 100%;
+}
+
+.products_col {
+  box-shadow: 0 0 14px -6px var(--them);
+  min-width: 35rem !important;
+  height: 36rem;
+  margin-bottom: 50px;
+  align-items: center !important;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.span{
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  margin: 1px;
+}
+
+@media only screen and (max-width: 780px) {
+  .category_row {
+    margin-top: 50px;
+  }
+}

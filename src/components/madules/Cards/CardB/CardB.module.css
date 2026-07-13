@@ -12,6 +12,20 @@ margin: 15px;
 .container a{
   width: 80%;
 }
+.favorite{
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.share{
+    position: absolute;
+  left: 0;
+  top: 30px;
+  cursor: pointer;
+}
 .icon_div{
     width: 100%;
     justify-content: flex-start !important;
