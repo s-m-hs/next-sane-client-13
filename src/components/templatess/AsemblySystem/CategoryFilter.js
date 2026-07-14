@@ -28,6 +28,7 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
                 onSelect(c.slug)
               }}
               className={`sane-chip ${activeSlug === c.slug ? "active" : ""}`}
+              style={{ fontSize: "12px" }}
             >
               {c.title}*
               {counts &&
@@ -42,7 +43,7 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
       {/* دسکتاپ: ستون کناری */}
       <aside className="d-none d-lg-block flex-shrink-0" style={{ width: "280px" }}>
         <div className="sane-card p-3" style={{ position: "sticky", top: "1.5rem" }}>
-          <h2 className="px-2 pt-1 pb-2 fw-bold sane-text-sub" style={{ fontSize: "0.85rem" }}>
+          <h2 className="px-2 pt-1 pb-2 fw-bold sane-text-sub" style={{ fontSize: "16px" }}>
             دسته‌بندی کامپیوترها
           </h2>
           <ul className="list-unstyled d-flex flex-column gap-1 mb-0">
@@ -65,7 +66,7 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
                         <CategoryIcon name={c.icon} size={18} />
                       )}
                     </span>
-                    <span className="flex-grow-1" style={{ fontSize: "0.9rem" }}>
+                    <span className="flex-grow-1" style={{ fontSize: "15px" }}>
                       {c.title}
                     </span>
                     <span className="small">

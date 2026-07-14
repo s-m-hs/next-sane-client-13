@@ -3,34 +3,35 @@
 
 export const categories = [
   {
-    slug: "Gaming",
-    title: "کامپیوتر گیمینگ",
-    description: "سیستم‌های آماده برای اجرای روان جدیدترین بازی‌ها",
-    icon: "Gaming",
-  },
-  {
-    slug: "Official",
-    title: "کامپیوتر اداری",
-    description: "مناسب کارهای روزمره، اداری و آموزشی",
-    icon: "Official",
-  },
-  {
-    slug: "Programming",
-    title: "مهندسی و برنامه نویسی",
-    description: "برای ترید، مدل‌سازی سه‌بعدی و رندر سنگین",
-    icon: "Programming",
-  },
-  {
     slug: "Home",
     title: "خانگی-آموزشی",
     description: "کم‌حجم، بی‌صدا و مناسب فضای محدود",
     icon: "Home",
   },
   {
+    slug: "Official",
+    title: " اداری - حسابداری",
+    description: "مناسب کارهای روزمره، اداری و آموزشی",
+    icon: "Official",
+  },
+  {
+    slug: "Programming",
+    title: "مهندسی - برنامه نویسی",
+    description: "برای ترید، مدل‌سازی سه‌بعدی و رندر سنگین",
+    icon: "Programming",
+  },
+
+  {
     slug: "Design",
     title: "طراحی -تولید محتوا",
     description: "مناسب جهت تولید محتوا ،ویرایش ،تدوین و ...",
     icon: "Design",
+  },
+  {
+    slug: "Gaming",
+    title: " گیمینگ - رندرینگ",
+    description: "سیستم‌های آماده برای اجرای روان جدیدترین بازی‌ها",
+    icon: "Gaming",
   },
 ];
 

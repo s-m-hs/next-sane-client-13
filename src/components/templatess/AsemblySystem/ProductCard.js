@@ -26,7 +26,6 @@ export default function ProductCard({ product }) {
       ))[0]?.name
     },
   ];
-  console.log(product)
   return (
     <div className="sane-card sane-card-hover h-100 d-flex flex-column overflow-hidden">
       <Link href={`/computers/${product.id}`} style={{ height: "100%" }}>

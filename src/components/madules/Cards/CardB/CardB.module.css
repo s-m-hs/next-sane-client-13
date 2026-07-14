@@ -15,14 +15,14 @@ margin: 15px;
 .favorite{
   
   position: absolute;
-  left: 0;
+  left:2px;
   top: 0;
   cursor: pointer;
 }
 
 .share{
     position: absolute;
-  left: 0;
+  left: 1px;
   top: 30px;
   cursor: pointer;
 }
