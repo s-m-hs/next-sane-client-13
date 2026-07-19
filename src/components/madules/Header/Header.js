@@ -708,7 +708,7 @@ export default function Header() {
                 <div className="centerc"></div>
                 {xtFlagLogin && name !== "SaneUser" && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
 
-                <Link href={!xtFlagLogin ? "/login" : "/p-user/profile"}>
+                <Link href={!xtFlagLogin ? "/register" : "/p-user/profile"}>
                   <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
                     {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color={`var(--them)`} />}{" "}
                     {!xtFlagLogin ? (
