@@ -907,7 +907,7 @@ select:-webkit-autofill:focus {
   z-index: 10;
   max-height: 800px;
   overflow-y: auto;
-  font-size: 18px;
+  font-size: 15px;
   padding: 8px;
   cursor: pointer;
   font-family: Arial, Helvetica, sans-serif;
@@ -926,6 +926,8 @@ select:-webkit-autofill:focus {
   border: none;
   outline: none;
   font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px dotted;
+  font-size: 15px;
 }
 .sistemAssembly-input2 {
   background-color: var(--gray2);

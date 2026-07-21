@@ -19,3 +19,13 @@ export const ParentHardWare = [
     { title: "dvd_r", enum: 10 },
     { title: "monitor", enum: 11 },
 ]
+export const ParentHardWareSearch = [
+    { title: "main", enum: 1, id: 1078 },
+    { title: "cpu", enum: 2, id: 62 },
+    { title: "ram", enum: 3, id: 1080 },
+    { title: "vga", enum: 4, id: 1085 },
+    { title: "ssd", enum: 5, id: 45 },
+    { title: "power", enum: 8, id: 48 },
+    { title: "case", enum: 9, id: 1066 },
+
+]

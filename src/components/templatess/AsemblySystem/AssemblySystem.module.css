@@ -4,3 +4,11 @@
 /* .hardwarList_tr{
     cursor: pointer;
 } */
+ .searchli{
+    position: relative;
+ }
+
+ .searchli > button{
+    position: absolute;
+    left: -10px;
+ }

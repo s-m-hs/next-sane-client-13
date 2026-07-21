@@ -8,12 +8,15 @@ import ProductCard from "@/components/templatess/AsemblySystem/ProductCard";
 import AssembleAnimation from "@/components//templatess/AsemblySystem/AssembleAnimation";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { MainContext } from "@/context/MainContext";
+import SearchHardware from "@/components/templatess/AsemblySystem/SearchHardware";
+import { ParentHardWare } from "@/utils/DataStore";
 
 export default function ComputersPage() {
   let { setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
   const [activeSlug, setActiveSlug] = useState("all");
   const [allSystem, setAllSystem] = useState([])
   const [counts, setCounts] = useState(0)
+
 
   const getAllSystem = () => {
     ApiGetX2(`/api/SysPC2`, setAllSystem)
@@ -85,7 +88,15 @@ export default function ComputersPage() {
       </div>
 
       <div className="d-flex flex-column flex-lg-row gap-4">
-        <CategoryFilter categories={categories} activeSlug={activeSlug} onSelect={setActiveSlug} counts={counts} systems={setAllSystem} />
+        <div className="centerc" style={{ justifyContent: "flex-start" }}>
+
+          <CategoryFilter categories={categories} activeSlug={activeSlug} onSelect={setActiveSlug} counts={counts} systems={setAllSystem} />
+
+          <SearchHardware
+            items={ParentHardWare}
+          />
+        </div>
+
 
         <section className="flex-grow-1">
           <div className="d-flex align-items-center justify-content-between mb-3">
@@ -96,11 +107,12 @@ export default function ComputersPage() {
             <div className="sane-card p-5 text-center sane-text-sub">محصولی در این دسته موجود نیست.</div>
           ) : (
             <div className="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-3">
-              {allSystem.map((item) => (
-                <div className="col" key={item.id}>
-                  <ProductCard product={item} />
-                </div>
-              ))}
+              {
+                allSystem.map((item) => (
+                  <div className="col" key={item.id}>
+                    <ProductCard product={item} />
+                  </div>
+                ))}
             </div>
           )}
         </section>
