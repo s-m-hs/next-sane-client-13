@@ -104,7 +104,7 @@ export default function Home() {
           </div>
           {/* <SwiperD categoryCode='SUPRIZ DAY' title={'فوق العاده ها:'}/> */}
 
-          {keyOfferSlider?.value === "1" && <SwiperC categoryCode="offer-Basket" title={`سبد فروش ویژه💰:`} />}
+          {keyOfferSlider?.value === "1" && <SwiperC categoryCode="offer-Basket" title={`${keyOfferSlider?.key}`}  />}
 
           {keyB?.value === "1" ? <SwiperC categoryCode="new" title={"جدیدترین ها:"} /> : ""}
           <CategorySectionA title="لوازم جانبی" categoryId={3} />
