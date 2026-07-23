@@ -10,6 +10,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import alertQ from "@/utils/Alert/AlertQ";
 import Favorite from "../../Favorite/Favorite";
 import ShareButton from "../../ShareButton/ShareButton";
+import { product } from "@/utils/DataStore";
 
 export default function CardB({
   imgSrc,
@@ -46,7 +47,7 @@ export default function CardB({
       </div>
 
       <div className={`${styles.share}`}>
-        <ShareButton productId={id} />
+        <ShareButton productId={id} type={product} />
       </div>
 
       <Link href={`/product/${id}`} onClick={() => setXtFlagSpinnerShow(true)}>

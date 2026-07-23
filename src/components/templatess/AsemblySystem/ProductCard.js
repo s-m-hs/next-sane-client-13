@@ -2,6 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { SpecIcon, StarIcon, ChevronIcon } from "./Icons";
 import { formatPrice } from "@/data/products";
+import Styles from './AssemblySystem.module.css'
+import ShareButton from "@/components/madules/ShareButton/ShareButton";
+import { system } from "@/utils/DataStore";
 
 export default function ProductCard({ product }) {
   const specRows = [
@@ -28,7 +31,11 @@ export default function ProductCard({ product }) {
   ];
   return (
     <div className="sane-card sane-card-hover h-100 d-flex flex-column overflow-hidden">
-      <Link href={`/computers/${product.id}`} style={{ height: "100%" }}>
+      <div className={`${Styles.share}`}>
+        <ShareButton productId={product.id} type={system} />
+      </div>
+      <Link href={`/computers/${product.id}`} style={{ height: "100%", position: "relative" }}>
+
         <img src={product?.cySubject?.smallImg} alt={product.name} fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" style={{ objectFit: "cover" }} />
 

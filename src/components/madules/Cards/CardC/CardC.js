@@ -11,6 +11,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import alertQ from "@/utils/Alert/AlertQ";
 import Favorite from "../../Favorite/Favorite";
 import ShareButton from "../../ShareButton/ShareButton";
+import { product } from "@/utils/DataStore";
 
 export default function CardC({
   imgSrc,
@@ -110,7 +111,7 @@ export default function CardC({
       </div> : ""}
 
       <div className={`${Styles.share}`}>
-        <ShareButton productId={id} />
+        <ShareButton productId={id} type={product} />
       </div>
 
       <Link

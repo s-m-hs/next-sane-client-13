@@ -1,11 +1,15 @@
 "use client";
 
+import { product, system } from "@/utils/DataStore";
 import { CiShare2 } from "react-icons/ci";
 
-export default function ShareButton({ productId, productName }) {
+export default function ShareButton({ productId, productName, type }) {
 
     const handleShare = async () => {
-        const url = `https://sanecomputer.com/product/${productId}`;
+        const url = type == product ? `https://sanecomputer.com/product/${productId}` :
+            type == system ?
+                `https://sanecomputer.com/computers/${productId}` : ''
+            ;
 
         if (navigator.share) {
             try {

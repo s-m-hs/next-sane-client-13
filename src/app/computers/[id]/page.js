@@ -13,7 +13,8 @@ import ProductCard from "@/components/templatess/AsemblySystem/ProductCard";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { useContext, useEffect, useState } from "react";
 import { MainContext } from "@/context/MainContext";
-import { SystemLevel } from "@/utils/DataStore";
+import { system, SystemLevel } from "@/utils/DataStore";
+import ShareButton from "@/components/madules/ShareButton/ShareButton";
 
 // export function generateMetadata({ params }) {
 
@@ -104,6 +105,9 @@ export default function ProductDetailPage({ params }) {
         {/* گالری تصاویر */}
         <div className="col-12 col-lg-7">
           <div className="ratio ratio-4x3 rounded-4 overflow-hidden sane-gradient-soft-White position-relative border" >
+            <div className={`${Style.share}`}>
+              <ShareButton productId={product.id} type={system} />
+            </div>
             <img src={product.cySubject
               ?.bigImg
             } alt={product.name} fill sizes="(max-width: 1024px) 100vw, 55vw" style={{ objectFit: "contain" }} priority />

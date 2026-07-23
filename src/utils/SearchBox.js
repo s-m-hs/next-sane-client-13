@@ -11,16 +11,55 @@ export default function SearchBox(props) {
         setSearchTerm(e.target.value);
         setShowOptions(true);
         setActiveIndex(-1); // Reset active index when search term changes
-    };
+        // اگر کاربر مقدار SearchBox را کامل پاک کرد
+        if (e.target.value.trim() === '') {
+            props.setHWList(prev =>
+                prev.filter(
+                    item => item.parentHardWare !== props.parentEnum
+                )
+            );
 
+            // شناسه محصول انتخاب شده هم پاک شود
+            setProductId(0);
+        }
+    };
     const handleOptionClick = (item) => {
         setShowOptions(false);
         setActiveIndex(-1);
+
         if (props.id === 'product') {
+            // نام محصول انتخاب شده در SearchBox باقی بماند
             setSearchTerm(item.name);
-            setProductId(item.id)
+
+            // ذخیره ID محصول
+            setProductId(item.id);
+
+            if (props.parentId) {
+                props.setHWList(prev => {
+                    // حذف آیتم قبلی مربوط به همین نوع سخت‌افزار
+                    // و اضافه کردن آیتم جدید
+                    return [
+                        ...prev.filter(
+                            x => x.parentHardWare !== props.parentEnum
+                        ),
+                        {
+                            parentHardWare: props.parentEnum,
+                            cyProductId: item.id,
+                            name: item.name
+                        }
+                    ];
+                });
+            }
         }
     };
+    // const handleOptionClick = (item) => {
+    //     setShowOptions(false);
+    //     setActiveIndex(-1);
+    //     if (props.id === 'product') {
+    //         setSearchTerm(item.name);
+    //         setProductId(item.id)
+    //     }
+    // };
     const handleBlur = () => {
         if (!searchTerm) {
             // props.onClear(); // گزارش خالی بودن مشخصات به والد
@@ -77,7 +116,7 @@ export default function SearchBox(props) {
                 onFocus={() => setShowOptions(true)}
                 onBlur={handleBlur}
             />
-            <button
+            {/* <button
                 className="btn btn-info m-1"
                 onClick={() => {
                     if (!props.parentId) {
@@ -106,7 +145,7 @@ export default function SearchBox(props) {
                 }}
             >
                 <Plus size={15} />
-            </button>
+            </button> */}
             {/* <input
             className='sistemAssembly-input2'
                 type="text"

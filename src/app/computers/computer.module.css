@@ -5,7 +5,14 @@
 .box_text{
     color: #fff !important;
 }
-
+ .share{
+    /* position: absolute;
+  left:20px;
+  top: 30px; */
+  cursor: pointer;
+  z-index: 1000;
+  padding: 2px;
+}
 @media only screen and (max-width: 500px) {
     .listhardware_p{
     font-size: 15px !important;

@@ -10,6 +10,7 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Head from "next/head";
 import Favorite from "@/components/madules/Favorite/Favorite";
 import ShareButton from "@/components/madules/ShareButton/ShareButton";
+import { product } from "@/utils/DataStore";
 
 export default function ProductDetailLeft({ detail }) {
   let {
@@ -64,7 +65,6 @@ export default function ProductDetailLeft({ detail }) {
       setFlagSupply(true);
     }
   }, [detail]);
-  console.log(detail)
   return (
     <>
       <div className="container  boxSh" style={{ height: "600px" }}>
@@ -176,7 +176,7 @@ export default function ProductDetailLeft({ detail }) {
                 </div>
 
                 <div className={`${Styles.share}`}>
-                  <ShareButton productId={detail.id} />
+                  <ShareButton productId={detail.id} type={product} />
                 </div>
 
                 <SwiperProduct

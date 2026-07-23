@@ -141,7 +141,7 @@ export default function SearchHardware(props) {
                                             className={`${Styles.searchli}`}
                                             style={{ listStyle: 'initial' }}
                                         >
-                                            <button className='btn btn-light'
+                                            {/* <button className='btn btn-light'
                                                 onClick={() => {
                                                     setHWList(prev => {
                                                         const deleted = prev.filter(filter => (
@@ -154,7 +154,7 @@ export default function SearchHardware(props) {
                                                 }}
                                             >
                                                 <CloseButton />
-                                            </button>
+                                            </button> */}
                                             {item.name}
                                         </li>
                                     ))}
@@ -211,7 +211,7 @@ export default function SearchHardware(props) {
                                 className={`${Styles.searchli}`}
                                 style={{ listStyle: 'initial' }}
                             >
-                                <button className='btn btn-light'
+                                {/* <button className='btn btn-light'
                                     onClick={() => {
                                         setHWList(prev => {
                                             const deleted = prev.filter(filter => (
@@ -224,7 +224,7 @@ export default function SearchHardware(props) {
                                     }}
                                 >
                                     <CloseButton />
-                                </button>
+                                </button> */}
                                 {item.name}
                             </li>
                         ))}
