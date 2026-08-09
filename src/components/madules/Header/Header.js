@@ -81,7 +81,7 @@ export default function Header() {
   };
 
   const AlertA = () => alertN("center", "info", "محصولی در سبد خرید شما موجود نیست...", 1500);
-  const AlertB = () => alertN("center", "info", "شما هنوز ثبت نام نکرده اید !!!...", 1500);
+  const AlertB = () => alertN("center", "info", "برای دسترسی به پنل کاربری ابتدا با شماره همراه خود لاگین کنید !!!...", 1500);
   const AlertC = () => alertN("center", "info", "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ", 3000);
   const alertD = () => alertN("center", "success", "محصولات با موفقیت به سبد خرید شما اضافه شد", 500);
 
@@ -295,13 +295,11 @@ export default function Header() {
       setValue(e.target.value);
     }
   };
-
   useEffect(() => {
     if (pathname.includes("/p-user") && !xtFlagLogin) {
       rout.push("/");
       AlertB();
     }
-
     if (!pathname.includes("/login")) {
       setFlagHamkar(false);
     }
@@ -1156,7 +1154,7 @@ export default function Header() {
                           }}
                         >
                           <ShoppingCart size={15} color={`var(--them)`} />
-                          <span>سفارشات</span>
+                          <span>پیگری سفارش</span>
                         </Link>
 
                       </>

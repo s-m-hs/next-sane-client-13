@@ -22,6 +22,7 @@ import DateFormat from "@/utils/DateFormat";
 import { Sidebar } from "primereact/sidebar";
 
 export default function OrderCom() {
+  const router = useRouter();
   const [allOrder, setAllOrder] = useState([]);
   const reverceAllOrder = allOrder?.slice().reverse();
   const [OrderId, setOrderId] = useState(1);
@@ -39,7 +40,12 @@ export default function OrderCom() {
     { id: 6, state: "لغو شده" },
     { id: 7, state: " همه سفارشات" },
   ];
-
+  const handleOrder = (id) => {
+    getOrderByOrderID(id);
+    setOrderId(id);
+    setXtFlagSpinnerShow(true);
+    router.push(`/p-user/order/${id}`);
+  };
   const getOrderByOrderID = (id) => {
     setorderArrayByDetail([]);
     // const getLocalStorage = localStorage.getItem('loginToken')
@@ -104,154 +110,121 @@ export default function OrderCom() {
   }, [xtflagSpinnerShow]);
   return (
     <div>
-      <Tabs
-        defaultActiveKey="home"
-        id="fill-tab-example"
-        className="mb-2"
-      // fill
-      // onSelect={ffc}
-      // onClick={()=>ffc(id)}
-      >
-        <Tab
-          eventKey="home"
-          title="  لیست سفارشات"
-          style={{ background: "inherit" }}
-        >
-          <div className={`container ${style.container}`}>
-            <div className={`row ${style.row}`}>
-              <div className={`col ${style.col} boxSh`}>
-                {/* <div>    
-  <label className="order--state-selectlabel">دسته بندی :</label>
-          <select
-            className="order-state"
-            onChange={(e) => {
-              if (e.target.value) {
-                setStateId(e.target.value);
-             
-              } else {
-                setStateId(e.target.value);
-                // setStateArray([]);
-                // setOrdeDetail([]);
-                // setOrderID("");
-              }
-            }}
-          >
-            {stateArraySelect.map((item) => (
-              <>
-                <option key={item.id} value={item.id}>
-               
-                  {item.state}
-                </option>
-              </>
-            ))}
-          </select>
-        </div> */}
 
-                <div
-                  className={`table table-responsive table-hover table-striped ${style.order_allorder} `}
-                >
-                  <thead>
-                    <tr>
-                      <th> شناسه مشتری</th>
-                      <th>شناسه سفارش</th>
-                      {/* <th>تاریخ ثبت سفارش</th> */}
-                      {/* <th>مبلغ نهایی </th> */}
-                      <th> جزییات </th>
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                    {allOrder?.length != 0 &&
-                      reverceAllOrder?.map((item) => (
-                        <tr>
-                          <td>{item.cyUserID}</td>
-                          <td>{item.id}</td>
-                          {/* <td><DateFormat dateString={`${item?.orderDate}`} /></td> */}
-                          {/* <td>{`${(item.totalAmount/10).toLocaleString()}`} تومان</td> */}
-                          {/* <td>{item.statusText}</td> */}
-                          <td>
-                            <button
-                              className="btn btn-primary"
-                              onClick={() => {
-                                getOrderByOrderID(item.id);
-                                setOrderId(item.id);
-                                setVisible(true);
-                              }}
-                            >
-                              جزيیات سفارش
-                            </button>
-                            <Sidebar
-                              visible={visible}
-                              onHide={() => setVisible(false)}
-                              fullScreen
-                            >
-                              <div className="container">
-                                <div className="row">
-                                  <div className="col">
-                                    {orderArrayByDetail?.length != 0 && (
-                                      <div
-                                        className={`table table-striped table-hover ${style.basket_table}`}
-                                      >
-                                        <thead>
-                                          <tr>
-                                            <th>تصویر کالا</th>
-                                            <th>عنوان کالا</th>
-                                            <th>تعداد</th>
-                                            <th>قیمت واحد(تومان)</th>
-                                            <th className={`${style.th}`}>
-                                              قیمت کل(تومان)
-                                            </th>{" "}
-                                          </tr>
-                                        </thead>
+      <div className={`container ${style.container}`}>
+        <div className={`row ${style.row}`}>
+          <div className={`col ${style.col} `}>
 
-                                        <tbody>
-                                          {orderArrayByDetail?.map((item) => (
-                                            <tr>
-                                              <td>
-                                                <img
-                                                  className={` ${style.image} boxSh`}
-                                                  src={`${item.cyProductImgUrl}`}
-                                                  alt={item.partNumber}
-                                                />
-                                              </td>
-                                              <td>{item.partNumber}</td>
-                                              <td>{item.quantity}</td>
-                                              <td>
-                                                {item.unitOfferPrice
-                                                  ? `${(
-                                                    item.unitOfferPrice / 10
-                                                  ).toLocaleString()} `
-                                                  : `${(
-                                                    item.unitPrice / 10
-                                                  ).toLocaleString()} `}
-                                              </td>
-                                              <td>
-                                                {(
-                                                  item.totalPrice / 10
-                                                ).toLocaleString()}{" "}
-                                              </td>
-                                            </tr>
-                                          ))}
-                                        </tbody>
-                                      </div>
-                                    )}
+
+            <div className="sane-shipment-banner "
+              style={{ fontSize: "18px", textAlign: '-webkit-center' }}
+            // className={`table table-responsive table-hover table-striped ${style.order_allorder} `}
+            >
+              <table className="table table-bordered">
+                <thead className="order-table-user">
+                  <tr>
+                    <th> شناسه مشتری</th>
+                    <th> کد پیگیری سفارش</th>
+                    {/* <th>تاریخ ثبت سفارش</th> */}
+                    {/* <th>مبلغ نهایی </th> */}
+                    <th> جزییات </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {allOrder?.length != 0 &&
+                    reverceAllOrder?.map((item) => (
+                      <tr>
+                        <td>{item.cyUserID}</td>
+                        <td>{item.id}</td>
+                        {/* <td><DateFormat dateString={`${item?.orderDate}`} /></td> */}
+                        {/* <td>{`${(item.totalAmount/10).toLocaleString()}`} تومان</td> */}
+                        {/* <td>{item.statusText}</td> */}
+                        <td>
+                          <button
+                            className="btn btn-light p-3"
+                            style={{ backgroundColor: "var(--themA)", color: "#fff", border: "none" }}
+                            onClick={() => {
+                              handleOrder(item.id)
+                              // setVisible(true);
+                            }}
+                          >
+                            جزيیات سفارش
+                          </button>
+                          {/* <Sidebar
+                          visible={visible}
+                          onHide={() => setVisible(false)}
+                          fullScreen
+                        >
+                          <div className="container">
+                            <div className="row">
+                              <div className="col">
+                                {orderArrayByDetail?.length != 0 && (
+                                  <div
+                                    className={`table table-striped table-hover ${style.basket_table}`}
+                                  >
+                                    <thead>
+                                      <tr>
+                                        <th>تصویر کالا</th>
+                                        <th>عنوان کالا</th>
+                                        <th>تعداد</th>
+                                        <th>قیمت واحد(تومان)</th>
+                                        <th className={`${style.th}`}>
+                                          قیمت کل(تومان)
+                                        </th>{" "}
+                                      </tr>
+                                    </thead>
+
+                                    <tbody>
+                                      {orderArrayByDetail?.map((item) => (
+                                        <tr>
+                                          <td>
+                                            <img
+                                              className={` ${style.image} boxSh`}
+                                              src={`${item.cyProductImgUrl}`}
+                                              alt={item.partNumber}
+                                            />
+                                          </td>
+                                          <td>{item.partNumber}</td>
+                                          <td>{item.quantity}</td>
+                                          <td>
+                                            {item.unitOfferPrice
+                                              ? `${(
+                                                item.unitOfferPrice / 10
+                                              ).toLocaleString()} `
+                                              : `${(
+                                                item.unitPrice / 10
+                                              ).toLocaleString()} `}
+                                          </td>
+                                          <td>
+                                            {(
+                                              item.totalPrice / 10
+                                            ).toLocaleString()}{" "}
+                                          </td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
                                   </div>
-                                </div>
+                                )}
                               </div>
-                            </Sidebar>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </div>
-              </div>
+                            </div>
+                          </div>
+                        </Sidebar> */}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* </Tab>
+      {/* </Tab>
 <Tab eventKey="address" title="آدرس" style={{ background: 'inherit' }}> */}
-        </Tab>
-      </Tabs>
+
     </div>
   );
 }

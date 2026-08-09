@@ -4,7 +4,7 @@ import { SpeedDial } from 'primereact/speeddial';
 import { useRouter } from 'next/navigation';
 import { Toast } from 'primereact/toast';
 import Sidebar from '@/components/madules/p-user/Sidebar'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import style from './puser.module.css'
 // import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -12,19 +12,26 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from 'primereact/button';
 import Link from 'next/link';
 import { List, X } from "@phosphor-icons/react";
+import alertN from '@/utils/Alert/AlertA';
+import { MainContext } from '@/context/MainContext';
 
 
 
 export default function layout({ children }) {
-  const [flagButton, setFlagButton] = useState(true)
+  let { xtFlagLogin } = useContext(MainContext)
+  const rout = useRouter();
+  const [flagButton, setFlagButton] = useState(false)
+  const AlertB = () => alertN("center", "info", "برای دسترسی به پنل کاربری ابتدا با شماره همراه خود لاگین کنید !!!...", 1500);
 
 
 
-  // useEffect(()=>{
-  //   window.addEventListener('click',function name() {
-  //     setFlagButton(false)
-  //   })
-  // })
+  // useEffect(() => {
+  //   if (!xtFlagLogin) {
+  //     rout.push("/");
+  //     console.log(xtFlagLogin)
+  //     // AlertB();
+  //   }
+  // }, [])
 
 
   return (
@@ -65,7 +72,9 @@ export default function layout({ children }) {
               onClick={() => setFlagButton(false)}
             >پیام ها</Link> </span>}
 
-            <button onClick={() => setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
+            <button
+              style={{ backgroundColor: "var(--themA)", color: "#fff", outline: "none", border: "none" }}
+              onClick={() => setFlagButton(!flagButton)} className={`  btn btn-outline-info ${style.speeddial}`}>
               {flagButton ? <X size={32} /> : <List size={32} />}
 
             </button>

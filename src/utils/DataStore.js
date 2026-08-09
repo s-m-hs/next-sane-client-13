@@ -33,3 +33,8 @@ export const ParentHardWareSearch = [
 
 export const product = 1
 export const system = 2
+
+export const sendState = [
+    { title: "پست", enum: 1 },
+    { title: "تحویل حضوری / ارسال با پیک", enum: 2 },
+]

@@ -970,6 +970,47 @@ select:-webkit-autofill:focus {
 /* .p-image-preview-container{
   width: 80% !important;
 } */
+.select-box{
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid rgb(168 168 168 / 55%);
+    outline: none;
+    font-size: 15px;
+}
+.input-box{
+    background-color: var(--white);
+  color: var(--black0);
+  border-radius: 8px;
+  width: 100%;
+  border: 1px solid rgba(168, 168, 168, 0.550000011920929);
+  outline: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-appearance: none;
+}
+
+
+.LoadingA {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.3); /* اختیاری – بک‌دراپ */
+  z-index: 10000000;
+}
+.LoadingA div {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 
 @media only screen and (max-width: 1350px) {
   .mySwiperF {
@@ -1380,3 +1421,201 @@ button:focus-visible {
     opacity: 1 !important;
   }
 }
+/* ===== جدول اطلاعات سفارش (نام خریدار / محصول / پرداخت / مقصد) ===== */
+.sane-order-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--sane-line);
+}
+.sane-order-table th {
+  background: var(--sane-violet-deep);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.sane-order-table td {
+  padding: 0.9rem 1rem;
+  text-align: center;
+  color: var(--sane-ink);
+  background: #fff;
+  border-top: 1px solid var(--sane-line);
+  font-size: 15px;
+}
+
+/* ===== چیپ کد قابل کپی ===== */
+.sane-code-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--sane-bg);
+  border: 1px solid var(--sane-line);
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.85rem;
+}
+.sane-code-copy-btn {
+  border: none;
+  background: #fff;
+  color: var(--sane-violet);
+  border-radius: 0.5rem;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sane-line);
+  transition: background-color 0.2s ease;
+}
+.sane-code-copy-btn:hover {
+  background: #f3e8ff;
+}
+
+/* ===== نوار پیگیری سفارش — دسکتاپ (افقی) ===== */
+.sane-stepper {
+  position: relative;
+  padding: 0 6px;
+}
+.sane-stepper-track {
+  position: absolute;
+  top: 23px;
+  right: 6px;
+  left: 6px;
+  height: 3px;
+  background: var(--sane-line);
+  border-radius: 3px;
+  z-index: 0;
+}
+.sane-stepper-progress {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--sane-violet) 0%, var(--sane-pink) 100%);
+  transition: width 0.4s ease;
+}
+.sane-stepper-steps {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+}
+.sane-stepper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  text-align: center;
+  padding: 0 0.25rem;
+}
+.sane-stepper-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid var(--sane-line);
+  color: var(--sane-sub);
+  flex-shrink: 0;
+}
+.sane-stepper-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sane-sub);
+  max-width: 100px;
+}
+.sane-stepper-step.done .sane-stepper-icon {
+  background: linear-gradient(135deg, var(--sane-violet) 0%, var(--sane-pink) 100%);
+  border-color: transparent;
+  color: #fff;
+}
+.sane-stepper-step.done .sane-stepper-label {
+  color: var(--sane-ink);
+}
+.sane-stepper-step.current .sane-stepper-icon {
+  background: #fff;
+  border: 2px dashed var(--sane-violet);
+  color: var(--sane-violet);
+  box-shadow: 0 0 0 5px rgba(109, 40, 217, 0.12);
+  animation: sane-stepper-pulse 1.8s ease-in-out infinite;
+}
+.sane-stepper-step.current .sane-stepper-label {
+  color: var(--sane-violet-deep);
+  font-weight: 800;
+}
+@keyframes sane-stepper-pulse {
+  0%, 100% { box-shadow: 0 0 0 5px rgba(109, 40, 217, 0.12); }
+  50% { box-shadow: 0 0 0 9px rgba(109, 40, 217, 0.05); }
+}
+
+/* ===== نوار پیگیری سفارش — موبایل (تایم‌لاین عمودی) ===== */
+.sane-stepper-vertical {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding-right: 4px;
+}
+.sane-stepper-vertical::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  right: 26px;
+  width: 3px;
+  background: var(--sane-line);
+  z-index: 0;
+}
+.sane-stepper-vstep {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.sane-stepper-vstep .sane-stepper-icon {
+  width: 46px;
+  height: 46px;
+}
+.sane-stepper-vstep .sane-stepper-label {
+  max-width: none;
+}
+.sane-stepper-vstep.done .sane-stepper-icon {
+  background: linear-gradient(135deg, var(--sane-violet) 0%, var(--sane-pink) 100%);
+  border-color: transparent;
+  color: #fff;
+}
+.sane-stepper-vstep.done .sane-stepper-label {
+  color: var(--sane-ink);
+}
+.sane-stepper-vstep.current .sane-stepper-icon {
+  background: #fff;
+  border: 2px dashed var(--sane-violet);
+  color: var(--sane-violet);
+  box-shadow: 0 0 0 5px rgba(109, 40, 217, 0.12);
+}
+.sane-stepper-vstep.current .sane-stepper-label {
+  color: var(--sane-violet-deep);
+  font-weight: 800;
+}
+
+/* ===== نوار اعلان ارسال مرسوله ===== */
+.sane-shipment-banner {
+  background: linear-gradient(90deg, var(--sane-violet-deep) 0%, var(--sane-violet) 100%);
+  color: #fff;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 2;
+}
+
+

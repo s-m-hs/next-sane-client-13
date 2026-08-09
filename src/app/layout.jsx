@@ -61,10 +61,12 @@ export default function RootLayout({ children }) {
           <Header />
           <AOSInit />
           <ErrorBoundary fallback={<Error />}>
-            {/* <CrispChat /> */}
             {children}
 
-            <Script
+            
+
+            {/* گفتینو */}
+            {/* <Script
               id="goftino-widget"
               strategy="afterInteractive"
               dangerouslySetInnerHTML={{
@@ -83,7 +85,7 @@ export default function RootLayout({ children }) {
             }();
           `,
               }}
-            />
+            /> */}
           </ErrorBoundary>
           <ScrollToTopt />
           <Footer />

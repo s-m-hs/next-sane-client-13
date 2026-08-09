@@ -129,24 +129,23 @@ export default function PaymentResultCom({ param }) {
                 <div>
                   <table class="table mt-4">
                     <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col"> شرح</th>
-                      </tr>
                     </thead>
                     <tbody className={style.tbody}>
                       <tr>
                         <th scope="row">وضعیت خرید</th>
                         <td>موفق</td>
                       </tr>
+
                       <tr>
-                        <th scope="row">کد پیگیری </th>
+                        <th scope="row">کدپیگیری سفارش</th>
+                        <td colspan="2">{verifyDetailB.orderId}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">کد پیگیری پرداخت </th>
                         <td>{verifyDetailB.refNumber}</td>
                       </tr>
-                      <tr>
-                        <th scope="row">message</th>
-                        <td colspan="2">{verifyDetailB.message}</td>
-                      </tr>
+
                     </tbody>
                   </table>
                 </div>

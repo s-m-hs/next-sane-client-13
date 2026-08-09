@@ -16,8 +16,9 @@
     .order_allorder td{
         font-size: 18px;
     }
-    .order_allorder th{
-        margin-left: 35px !important;
+    .container th{
+       font-size: 15px;
+       margin: 5px !important;
     }
     .image{
         width: 100px;
