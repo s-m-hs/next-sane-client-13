@@ -1,8 +1,8 @@
 // در پروژه واقعی این داده از API سفارشات فروشگاه خوانده می‌شود.
 
 export const orderSteps = [
-  { key: "review", label: "بررسی سفارش", icon: "review" },
-  { key: "received", label: "دریافت سفارش", icon: "received" },
+  { key: "review", label: "دریافت سفارش", icon: "received" },
+  { key: "received", label: "تایید سفارش", icon: "review" },
   { key: "packing", label: "در حال بسته‌بندی", icon: "packing" },
   { key: "shipped", label: "بسته شما ارسال شد", icon: "shipped" },
   { key: "delivered", label: "تحویل داده شد", icon: "delivered" },

@@ -66,7 +66,7 @@ export default function OrderById({ params }) {
                         {/* <h1 className="fw-bold sane-text-ink mb-1" style={{ fontSize: "1.25rem" }}>
                             سفارش {orderDetails?.id}
                         </h1> */}
-                        <p className="small sane-text-sub mb-0" style={{ fontWeight: 600 }} >تاریخ ثبت سفارش: {
+                        <p className="small  mb-0" style={{ fontWeight: 600, color: "var(--themA)" }} >تاریخ ثبت سفارش: {
                             <DateFormat dateString={orderDetails?.orderDate} />
                         }</p>
 
@@ -116,21 +116,23 @@ export default function OrderById({ params }) {
                 </div>
 
                 {/* مراحل پیگیری سفارش */}
-                <div className="sane-card p-3 p-lg-4">
-                    <h2 className="fw-bold sane-text-ink mb-4" style={{ fontSize: "1rem" }}>
+                <div className="sane-card p-3 p-lg-4" >
+                    <h2 className="fw-bold  mb-4" style={{ color: "var(--themA)", fontSize: "15px", borderBottom: "1px solid", width: "150px", margin: "0 auto" }}>
                         وضعیت پیگیری سفارش
                     </h2>
-                    <OrderStepper steps={orderSteps} currentIndex={orderDetails?.status} />
+                    <OrderStepper steps={orderSteps} currentIndex={orderDetails?.stepper} />
 
-                    {orderDetails?.postCode &&
-                        <div className="sane-shipment-banner mt-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
+                    {(orderDetails?.postCode && orderDetails?.postCode != "0") &&
+                        <div className="sane-shipment-banner mt-4 d-flex align-items-center justify-content-center flex-wrap gap-3">
                             <span>
-                                سفارش شماره <strong dir="ltr" style={{ display: "inline-block" }}>{orderDetails?.id}</strong> با کد مرسوله{" "}
-                                <strong dir="ltr" style={{ display: "inline-block" }}>{orderDetails?.postCode}</strong> توسط شرکت پست در
-                                تاریخ {order.shippedDate} {currentStepLabel === "تحویل داده شد" ? "تحویل داده شد" : "ارسال گردید"}.
+                                سفارش شماره <strong dir="ltr" style={{ display: "inline-block", fontSize: "14px" }}>{orderDetails?.id}</strong> با کد مرسوله{" "}
+                                <strong dir="ltr" style={{ display: "inline-block" }}>{orderDetails?.postCode}</strong>  در
+                                تاریخ <strong dir="ltr" >{<DateFormat dateString={orderDetails?.sendDate} />}</strong>  تحویل شرکت پست گردید.
                             </span>
                             <a
-                                href={order.postTrackingUrl}
+                                style={{ color: 'var(--themA)' }}
+
+                                href="https://tracking.post.ir/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-light fw-bold flex-shrink-0"
@@ -139,7 +141,7 @@ export default function OrderById({ params }) {
                             </a>
                         </div>}
 
-                    {orderDetails?.statusText &&
+                    {(orderDetails?.statusText && orderDetails?.statusText != "0") &&
                         <div className="sane-shipment-banner mt-4 d-flex align-items-center justify-content-between flex-wrap gap-3">توضیحات سفارش :
                             {orderDetails?.statusText}
                         </div >

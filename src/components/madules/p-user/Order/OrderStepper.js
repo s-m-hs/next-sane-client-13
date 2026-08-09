@@ -33,9 +33,9 @@ export default function OrderStepper({ steps, currentIndex }) {
                     return (
                         <div key={step.key} className={`sane-stepper-vstep ${state}`}>
                             <span className="sane-stepper-icon">
-                                <StepIcon name={step.icon} size={18} />
+                                <StepIcon name={step.icon} size={20} />
                             </span>
-                            <span className="sane-stepper-label">{step.label}</span>
+                            <span className="sane-stepper-label" style={{ fontSize: "14px" }}>{step.label}</span>
                         </div>
                     );
                 })}

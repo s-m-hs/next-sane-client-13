@@ -31,15 +31,6 @@ export default function OrderCom() {
 
   let { setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
 
-  const stateArraySelect = [
-    { id: 1, state: "ارسال جهت استعلام گیری  " },
-    { id: 2, state: "درانتظار تایید مشتری" },
-    { id: 3, state: "تایید مشتری" },
-    { id: 4, state: "در حال تامین" },
-    { id: 5, state: "تحویل داده شده" },
-    { id: 6, state: "لغو شده" },
-    { id: 7, state: " همه سفارشات" },
-  ];
   const handleOrder = (id) => {
     getOrderByOrderID(id);
     setOrderId(id);
@@ -78,7 +69,7 @@ export default function OrderCom() {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
       const res = await fetch(
-        `${apiUrl}/api/CyOrders/GetOrdersByStatus?Status=1`,
+        `${apiUrl}/api/CyOrders/GetOrdersByStatus?Status=2`,
         {
           method: "POST",
           credentials: "include",
