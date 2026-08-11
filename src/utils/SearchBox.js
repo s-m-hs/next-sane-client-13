@@ -154,7 +154,8 @@ export default function SearchBox(props) {
                 onChange={handleManualPriceChange} // مدیریت تغییر دستی قیمت
             /> */}
             {showOptions && (
-                <div className="dropdown-optionsB">
+                <div className="dropdown-optionsB"
+                    style={{ overflow: "scroll", height: "600px", backgroundColor: "#fff" }}>
 
                     <span onClick={() => {
                         setShowOptions(false)

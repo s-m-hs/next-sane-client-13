@@ -89,13 +89,21 @@ export default function SearchHardware(props) {
 
     return (
         <>
-            <div className="d-lg-none mb-4" style={{ overflowX: "auto" }}>
+            <div className="d-lg-none mb-4" style={{
+                overflowX: "auto",
+                position: "fixed",
+                top: '130px',
+                zIndex: 10000,
+                backgroundColor: '#ffff',
+                // height: '50px',
+                width: '100%'
+            }}>
                 <div className="d-flex gap-2">
                     <button className='btn btn-light' onClick={() => setShow(true)}><h3 style={{ color: '#6d28d9' }}>جستجو
                         <HandPointing style={{ fontSize: "18px", transform: 'rotate(70deg)' }} />
 
                     </h3></button>
-                    <Modal show={show} onHide={handleClose} Click={handleShow}>
+                    <Modal show={show} onHide={handleClose} Click={handleShow} style={{ zIndex: 10000 }}>
                         <Modal.Header closeButton>
                         </Modal.Header>
                         <Modal.Body>
@@ -169,7 +177,7 @@ export default function SearchHardware(props) {
             </div>
             <aside className="d-none d-lg-block flex-shrink-0 " style={{ width: "280px" }}>
 
-                <div className="sane-card p-3 centerc" style={{ position: "sticky", top: "1.5rem" }}>
+                <div className="sane-card p-3 centerc" style={{ top: "1.5rem" }}>
                     <h3>فیلتر  : </h3>
                     <ul>
                         {ParentHardWareSearch.map(item => (
@@ -234,7 +242,7 @@ export default function SearchHardware(props) {
                         searchSystems()
                     }}>جستجو کن</button>
                 </div>
-            </aside>
+            </aside >
         </>
 
     )

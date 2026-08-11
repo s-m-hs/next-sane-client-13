@@ -10,6 +10,7 @@ import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { MainContext } from "@/context/MainContext";
 import SearchHardware from "@/components/templatess/AsemblySystem/SearchHardware";
 import { ParentHardWare } from "@/utils/DataStore";
+import SubjecArea from "@/components/madules/SubjecArea/SubjecArea";
 
 export default function ComputersPage() {
   let { setXtFlagSpinnerShow, xtflagSpinnerShow } = useContext(MainContext);
@@ -89,12 +90,12 @@ export default function ComputersPage() {
 
       <div className="d-flex flex-column flex-lg-row gap-4">
         <div className="centerc" style={{ justifyContent: "flex-start" }}>
-
-          <CategoryFilter categories={categories} activeSlug={activeSlug} onSelect={setActiveSlug} counts={counts} systems={setAllSystem} />
-
           <SearchHardware
             items={ParentHardWare}
           />
+          <CategoryFilter categories={categories} activeSlug={activeSlug} onSelect={setActiveSlug} counts={counts} systems={setAllSystem} />
+
+
         </div>
 
 
@@ -113,10 +114,14 @@ export default function ComputersPage() {
                     <ProductCard product={item} />
                   </div>
                 ))}
+              <div style={{ width: '100%', marginTop: "50px" }}><SubjecArea page="system" /></div>
+
             </div>
           )}
         </section>
-      </div>
-    </main>
+
+
+
+      </div>    </main>
   );
 }

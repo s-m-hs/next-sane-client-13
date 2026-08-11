@@ -13,12 +13,31 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
   const getSystemBylevel = (level) => {
     ApiGetX2(`/api/SysPC2/SysPcLevel?level=${level}`, systems)
   }
-
+  const goToTop = () => {
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth'
+    })
+  }
   return (
     <>
       {/* موبایل: چیپ‌های افقی قابل اسکرول */}
-      <div className="d-lg-none mb-4" style={{ overflowX: "auto" }}>
-        <div className="d-flex gap-2" style={{ width: "max-content" }}>
+      <div className="d-lg-none " style={{
+        overflowX: "auto",
+        position: "fixed",
+        top: '50px',
+        zIndex: 10000,
+        backgroundColor: '#ffff',
+        height: '90px',
+        width: '100%'
+      }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: "wrap",
+            justifyContent: "space-evenly"
+          }}
+        >
           {items.map((c) => (
             <button
               key={c.slug}
@@ -26,6 +45,7 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
               onClick={() => {
                 getSystemBylevel(c.slug)
                 onSelect(c.slug)
+                goToTop()
               }}
               className={`sane-chip ${activeSlug === c.slug ? "active" : ""}`}
               style={{ fontSize: "12px" }}
@@ -41,8 +61,8 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
       </div>
 
       {/* دسکتاپ: ستون کناری */}
-      <aside className="d-none d-lg-block flex-shrink-0" style={{ width: "280px" }}>
-        <div className="sane-card p-3" style={{ position: "sticky", top: "1.5rem" }}>
+      <aside className="d-none d-lg-block flex-shrink-0" style={{ width: "280px", height: '100%', }}>
+        <div className="sane-card p-3" style={{ position: "sticky", top: "12.5rem" }}>
           <h2 className="px-2 pt-1 pb-2 fw-bold sane-text-sub" style={{ fontSize: "16px" }}>
             دسته‌بندی کامپیوترها
           </h2>
@@ -56,6 +76,8 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
                     onClick={() => {
                       getSystemBylevel(c.slug)
                       onSelect(c.slug)
+                      goToTop()
+
                     }}
                     className={`sane-category-item ${active ? "active" : ""}`}
                   >
@@ -81,6 +103,9 @@ export default function CategoryFilter({ categories, activeSlug, onSelect, count
             })}
           </ul>
         </div>
+
+
+
       </aside>
     </>
   );

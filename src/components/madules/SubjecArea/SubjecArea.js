@@ -6,11 +6,17 @@ import CardSub from "../Cards/CardSub/CardSub";
 import { MainContext } from "@/context/MainContext";
 import { useRouter } from "next/navigation";
 
-export default function SubjecArea() {
+export default function SubjecArea(param) {
   const route = useRouter()
 
   const [allSubjects, setAllSubjects] = useState([]);
-  const allSubjectsSlice = allSubjects.slice().reverse().slice(0, 3);
+  const allSubjectsSlice =
+    param.page == "system" ?
+      allSubjects.filter(filter => filter.tag == "system").slice().reverse().slice(0, 3) :
+      allSubjects.slice().reverse().slice(0, 3)
+    ;
+
+
   const getAllSubject = () => {
     // const getLocalStorage=localStorage.getItem('loginToken')
     let obj = {
