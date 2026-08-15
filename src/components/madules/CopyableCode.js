@@ -20,7 +20,7 @@ export default function CopyableCode({ label, value }) {
         <div className="sane-code-chip">
             <div className="text-truncate">
                 <div className="small sane-text-sub">{label}</div>
-                <div className="fw-bold small text-truncate" dir="ltr">
+                <div className="fw-bold  text-truncate" dir="ltr">
                     {value}
                 </div>
             </div>

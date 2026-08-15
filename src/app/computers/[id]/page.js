@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import { MainContext } from "@/context/MainContext";
 import { system, SystemLevel } from "@/utils/DataStore";
 import ShareButton from "@/components/madules/ShareButton/ShareButton";
+import CopyableCode from "@/components/madules/CopyableCode";
 
 // export function generateMetadata({ params }) {
 
@@ -130,19 +131,26 @@ export default function ProductDetailPage({ params }) {
 
         {/* اطلاعات خرید */}
         <div className="col-12 col-lg-5">
-          <h1 className="fw-bold sane-text-ink" style={{ fontSize: "1.4rem", lineHeight: 2 }}>
-            {product.name}
-          </h1>
 
+          <div className={` ${Style.Header_leftSide__number_div} centerr`}>
+            <div className={` ${Style.mobiNumber_div} centerc`}>
+
+              <h1 className="fw-bold "
+                style={{ fontSize: "2rem", lineHeight: 2, color: "#fff" }}>
+                {product.name}
+              </h1>
+            </div>
+
+          </div>
           <div className="d-flex align-items-center gap-3 mb-3 flex-wrap">
-            <div className="d-flex align-items-center gap-1" style={{ color: "#f59e0b" }}>
+            {/* <div className="d-flex align-items-center gap-1" style={{ color: "#f59e0b" }}>
               <StarIcon size={16} />
               <StarIcon size={16} />
               <StarIcon size={16} />
               <StarIcon size={16} />
               <StarIcon size={16} />
               <span className="fw-bold sane-text-ink small">{product.rating}</span>
-            </div>
+            </div> */}
             {/* <span className="small sane-text-sub">({product.reviews} نظر ثبت‌شده)</span>
             <span className={`badge rounded-pill ${product.available ? "sane-badge-success" : "sane-badge-danger"}`}>
               {product.available ? "موجود در انبار" : "ناموجود"}
@@ -177,9 +185,9 @@ export default function ProductDetailPage({ params }) {
                   {formatPrice(product.price)} <span className="small fw-normal sane-text-sub">تومان</span>
                 </div>
               </div> */}
-              <div className="d-flex align-items-center gap-1 small" style={{ color: "var(--sane-success)", width: "stretch" }}>
-                <CheckBadgeIcon size={16} />
-                گارانتی و مشاوره رایگان
+              <div className="d-flex align-items-center gap-1 " style={{ color: "var(--sane-success)", width: "stretch" }}>
+                <CheckBadgeIcon size={18} />
+                گارانتی و ضمانت  قطعات
               </div>
             </div>
 
@@ -187,8 +195,14 @@ export default function ProductDetailPage({ params }) {
               {/* <button type="button" disabled={!product.available} className="sane-btn-gradient btn flex-fill py-2">
                 {product.available ? "افزودن به سبد خرید" : "اطلاع از موجود شدن"}
               </button> */}
-              <button type="button" className="sane-btn-outline-violet btn flex-fill py-2">
-                مشاوره تلفنی رایگان
+              <button type="button"
+                className="sane-btn-outline-violet btn flex-fill py-2"
+                style={{ fontSize: "15px" }}
+              >
+                مشاوره رایگان  📞
+                {/* مشاوره تلفنی رایگان  📞  7_02537835456 ---- 09045443711 */}
+                <CopyableCode value={'09045443711'} />
+                <CopyableCode value={"02537835456"} />
               </button>
             </div>
           </div>
