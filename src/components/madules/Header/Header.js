@@ -1,39 +1,40 @@
 "use client";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
-import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
 import {
   MagnifyingGlass,
   BuildingApartment,
-  Barcode,
   UserCheck,
   SignOut,
   Wrench,
   ShoppingCart,
   User,
   House,
-  TextIndent,
   UserCircleGear,
   ChatCircleText,
   ExclamationMark,
   Laptop,
   HandPointing,
-  Heart
+  Heart,
+  Headset,
+  Truck,
+  List,
+  CaretDown,
+  InstagramLogo,
+  TelegramLogo,
 } from "@phosphor-icons/react";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
 import { MainContext } from "@/context/MainContext";
-import Dropdown from "react-bootstrap/Dropdown";
-import { DotLoader, PuffLoader } from "react-spinners";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import alertN from "@/utils/Alert/AlertA";
-import { Alert, Modal, Tooltip } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { DotLoader } from "react-spinners";
 import CardA from "../Cards/CardA/CardA";
-import { Sidebar } from "primereact/sidebar";
 import LogOut from "@/utils/Functions/LogOut";
 import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
-import { CursorClick } from "@phosphor-icons/react/dist/ssr";
+import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
 
 export default function Header() {
   let {
@@ -59,10 +60,11 @@ export default function Header() {
     coupon,
     setCoupon,
     setCouponState,
-    searchInput, setSearchInput, setSearchResult,
-    setFlagSearchInHeader
+    searchInput,
+    setSearchInput,
+    setSearchResult,
+    setFlagSearchInHeader,
   } = useContext(MainContext);
-  const ulRef = useRef();
   const ulRefA = useRef();
   const pathname = usePathname();
   const rout = useRouter();
@@ -81,9 +83,15 @@ export default function Header() {
   };
 
   const AlertA = () => alertN("center", "info", "محصولی در سبد خرید شما موجود نیست...", 1500);
-  const AlertB = () => alertN("center", "info", "برای دسترسی به پنل کاربری ابتدا با شماره همراه خود لاگین کنید !!!...", 1500);
-  const AlertC = () => alertN("center", "info", "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ", 3000);
-  const alertD = () => alertN("center", "success", "محصولات با موفقیت به سبد خرید شما اضافه شد", 500);
+  const AlertB = () =>
+    alertN("center", "info", "برای دسترسی به پنل کاربری ابتدا با شماره همراه خود لاگین کنید !!!...", 1500);
+  const AlertC = () =>
+    alertN(
+      "center",
+      "info",
+      "برای تبادل پیام وارتباط با قسمتهای مختلف فروشگاه لطفا با حساب کاربری خود وارد شوید ",
+      3000
+    );
 
   /////////////////////////////theming
   const getOffer = () => {
@@ -91,7 +99,6 @@ export default function Header() {
       const res = await fetch(`${apiUrl}/api/CyKeyDatas/13`, {
         method: "GET",
         credentials: "include",
-
         headers: {
           "Content-Type": "application/json",
         },
@@ -106,12 +113,10 @@ export default function Header() {
     myApp();
   };
   const getAllTicket = () => {
-
     async function myApp() {
       const res = await fetch(`${apiUrl}/api/CyTicket/getUserTickets`, {
         method: "GET",
         credentials: "include",
-
         headers: {
           "Content-Type": "application/json",
         },
@@ -140,7 +145,7 @@ export default function Header() {
       document.documentElement.style.setProperty("--white2", "#d6d6d6");
       document.documentElement.style.setProperty("--black0", "#ffffff");
       document.documentElement.style.setProperty("--black33b4359", "#ffffff");
-      document.documentElement.style.setProperty("--yellow", "##ffebcd");
+      document.documentElement.style.setProperty("--yellow", "#ffebcd");
     } else {
       document.documentElement.style.setProperty("--white1ffffff", "#ffffff");
       document.documentElement.style.setProperty("--white1ffffff2", "#ffffff");
@@ -155,20 +160,26 @@ export default function Header() {
   const searchChange = (e) => {
     setSearchInput(e.target.value);
   };
+
+  const submitSearch = () => {
+    setSearchResult([]);
+    if (searchInput.length == 0) return rout.push("/");
+    setFlagSearchInHeader(true);
+    setXtFlagSpinnerShow(true);
+    rout.push(`/search/${searchInput}`);
+  };
+
   ////////////////////////////
   useEffect(() => {
     const fixNavbarToTop = () => {
-      // const currentScroll = window.pageYOffset;
       const currentScroll = window.scrollY;
-      if (currentScroll > 105) {
+      if (currentScroll > 120) {
         setFixTop(true);
       } else {
         setFixTop(false);
       }
     };
-
     window.addEventListener("scroll", fixNavbarToTop);
-
     return () => window.removeEventListener("scroll", fixNavbarToTop);
   }, []);
 
@@ -191,28 +202,18 @@ export default function Header() {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((res) => {
-        if (res.status == 200) {
-
-        } else {
-        }
       });
+      return res;
     }
     myAppGet();
   };
 
   useEffect(() => {
     const chekKey2 = (e) => {
-      if (e.keyCode == 13 && searchType !== "") {
-        searchBox();
-        setVisible(true);
-      } else if (e.keyCode == 13 && searchTypeB !== "") {
-        searchBox();
-        setVisibleB(true);
-      } else if (e.keyCode == 27 && flagSearch) {
-        setFlagSearch(false);
-        setSearchType("");
-        setSearchTypeB("");
+      if (e.keyCode == 13 && searchInput && searchInput.length > 0 && !pathname.includes("/search")) {
+        submitSearch();
+      } else if (e.keyCode == 27 && show) {
+        setShow(false);
       }
     };
     window.addEventListener("keydown", chekKey2);
@@ -222,7 +223,7 @@ export default function Header() {
   useEffect(() => {
     if (xtFlagLogin) {
       getProfile();
-      requstedCouponSetToFalse()
+      requstedCouponSetToFalse();
     }
     if (localStorage.getItem("cartObj")) {
       localStorage.removeItem("cartObj");
@@ -241,31 +242,10 @@ export default function Header() {
       postApi("/api/CyProductCategory/GetItemWChildAndRoot", obj, setMainCategoryB);
     }
   };
-  const getBanner = (id) => {
-
-    async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CySubjects/${id}`, {
-        method: "GET",
-        credentials: "include",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.ok) {
-          return res.json().then((result) => {
-            setOffBanner(result);
-          });
-        }
-      });
-    }
-    myApp();
-  };
   ////////////////////////////
   useEffect(() => {
     getCategoryById(3);
     getCategoryById(2);
-    getBanner(18);
   }, []);
 
   useEffect(() => {
@@ -281,20 +261,14 @@ export default function Header() {
   useEffect(() => {
     ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
     if (!pathname.includes("basket")) {
-      const couponItemId = coupon?.couponAvailable;
       if (couponState) {
         getOffer();
         setCouponState(false);
-        setCoupon(null)
+        setCoupon(null);
       }
     }
   }, [pathname]);
 
-  const onmousHandle = (e) => {
-    if (e.target.value) {
-      setValue(e.target.value);
-    }
-  };
   useEffect(() => {
     if (pathname.includes("/p-user") && !xtFlagLogin) {
       rout.push("/");
@@ -310,10 +284,10 @@ export default function Header() {
       rout.push("/");
     }
   }, [pathname, xtFlagLogin]);
+
   useEffect(() => {
     return () => localStorage.removeItem("cartObj");
   }, []);
-
 
   useEffect(() => {
     setResetFlagCart(false);
@@ -321,664 +295,260 @@ export default function Header() {
       setResetFlagCart(true);
     }, 0.1);
   }, cartCounter);
+
   return (
     <>
       {xtflagSpinnerShow && (
         <div className={`${styles.DotLoader_div}`}>
-          <DotLoader className={`${styles.DotLoader}`}
-            color={`var(--them)`}
-            size="280px" speedMultiplier={1} />
+          <DotLoader color={`var(--sd-primary)`} size="280px" speedMultiplier={1} />
         </div>
       )}
 
-      <section className={styles.A}>
-        {!fixTop ? (
-          <div className={`container ${styles.Header} boxSh`}>
-            <div className={`row ${styles.Header_top} centerr`}>
-              <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
-                <div className={styles.Header_rightSide__div_img}>
-                  {/* <img src="../images/banner/20offer - Copy.png" alt="" /> */}
-                  {offBanner?.orderValue == 1 && <img src={offBanner.bigImg} alt={offBanner.title} />}
-                  {/* <img src="../images/banner/vecteezy_mega-sale-20-percent-off-right-side-view-3d-render-object_17193891 (1).png" alt="" /> */}
+      {/* ================= DESKTOP HEADER ================= */}
+      <section className={`${styles.A} ${fixTop ? styles.A_fixed : ""}`}>
+        {/* announcement strip */}
+        <div className={styles.topbar}>
+          <div className={`container ${styles.topbar_inner}`}>
+            <div className={styles.topbar_right}>
+              <span className={styles.topbar_item}>
+                <Truck size={16} weight="duotone" /> ارسال سریع به سراسر کشور
+              </span>
+              <span className={styles.topbar_sep}></span>
+              <span className={styles.topbar_item}>
+                <Headset size={16} weight="duotone" /> پشتیبانی: 37835456-025
+              </span>
+            </div>
+            <div className={styles.topbar_left}>
+              <Link href={"https://eitaa.com/sane_camputer"} title="ایتا" className={styles.topbar_social}>
+                <img src="/images/eitaa-icon-colorful.png" alt="eitaa" />
+              </Link>
+              <Link href={"https://t.me/sane_camputer"} title="تلگرام" className={styles.topbar_social}>
+                <TelegramLogo size={15} weight="duotone" />
+              </Link>
+              <Link href={"https://instagram.com/it_sane"} title="اینستاگرام" className={styles.topbar_social}>
+                <InstagramLogo size={15} weight="duotone" />
+              </Link>
+            </div>
+          </div>
+        </div>
 
-                  <div style={{ width: "135px", height: "105px" }}>
-                    <SwiperA />
-                  </div>
-                </div>
-
-                <div className={`${styles.Header_rightSide__div_search}  centerc boxSh`}>
-                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchInput}
-                    onChange={searchChange}
-                  />
-                  <button
-                    className={`${styles.magnifyingGlass} btn btn-light`} onClick={() => {
-                      setSearchResult([])
-                      if (searchInput.length == 0) return rout.push('/')
-                      setFlagSearchInHeader(true)
-                      setXtFlagSpinnerShow(true)
-                      rout.push(`/search/${searchInput}`)
-                    }}>
-                    <CursorClick
-                      size={24}
-                      color={`var(--them)`}
-                      weight="thin"
-
-                    />
-                    جستجو
-                  </button>
-
-                </div>
-                {/* </div> */}
+        {/* main bar */}
+        <div className={styles.mainbar}>
+          <div className={`container ${styles.mainbar_inner}`}>
+            {/* logo */}
+            <Link href={"/"} className={styles.brand}>
+              <div style={{ width: "135px", height: "105px" }}>
+                <SwiperA />
               </div>
+              {/* <img className={styles.brand_logo} src="/images/photo_2024-05-30_19-08-29.jpg" alt="کامپیوترصانع" /> */}
+              <span className={styles.brand_text}>
+                <span className={styles.brand_name}>کامپیوترصانع</span>
+                <span className={styles.brand_tagline}>فروشگاه تخصصی کامپیوتر و دیجیتال</span>
+              </span>
+            </Link>
 
-              <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
+            {/* search */}
+            <div className={styles.search}>
+              <MagnifyingGlass size={22} weight="duotone" className={styles.search_icon} />
+              <input
+                className={styles.search_input}
+                type="text"
+                placeholder="جستجو در محصولات..."
+                value={searchInput}
+                onChange={searchChange}
+              />
+              <button className={styles.search_btn} onClick={submitSearch}>
+                جستجو
+              </button>
+            </div>
+
+            {/* actions */}
+            <div className={styles.actions}>
+              {/* account */}
+              <div className={styles.account}>
+                <Link
+                  href={!xtFlagLogin ? "/register" : "/p-user/profile"}
+                  className={styles.icon_btn}
+                  title={!xtFlagLogin ? "ورود / ثبت‌نام" : "پنل کاربری"}
+                  onClick={() => setXtFlagSpinnerShow(true)}
+                >
+                  {userSrc ? (
+                    <img src={userSrc} alt="user-profile" className={styles.icon_btn_img} />
+                  ) : !xtFlagLogin ? (
+                    <User size={22} weight="duotone" />
+                  ) : (
+                    <UserCircleGear size={22} weight="duotone" />
+                  )}
+                </Link>
+                {xtFlagLogin && name !== "SaneUser" && (
+                  <span className={styles.account_name}>{name?.toUpperCase()}</span>
+                )}
                 {xtFlagLogin && (
-                  <>
-                    <Dropdown className={styles.user_button} size="lg">
-                      <Dropdown.Toggle variant="info" id="dropdown-basic">
-                        {name !== "SaneUser" && <span className={styles.user_span}>{name?.toUpperCase()}</span>}{" "}
-                      </Dropdown.Toggle>
+                  <div className={styles.account_menu}>
+                    <Link href="/p-user/profile" onClick={() => setXtFlagSpinnerShow(true)}>
+                      <UserCircleGear size={16} weight="duotone" /> پنل کاربری
+                    </Link>
+                    <Link href="/p-user/order" onClick={() => setXtFlagSpinnerShow(true)}>
+                      <Truck size={16} weight="duotone" /> پیگیری سفارش
+                    </Link>
+                    <button
+                      onClick={() => {
+                        exitHandler();
+                        setMessageNotification([]);
+                        setFlagMessageNotification((prev) => !prev);
+                      }}
+                    >
+                      <SignOut size={16} weight="duotone" /> خروج
+                    </button>
+                  </div>
+                )}
+              </div>
 
-                      <Dropdown.Menu className={styles.user_p}>
-                        <Dropdown.Item>
-                          <Link style={{ color: "inherit" }} href="/p-user/profile" onClick={() => setXtFlagSpinnerShow(true)}>
-                            <p>پنل کاربری</p>
+              {/* favorites */}
+              <Link href={"/favorite"} className={styles.icon_btn} title="علاقه‌مندی‌ها" onClick={() => setXtFlagSpinnerShow(true)}>
+                <Heart size={22} weight="duotone" />
+              </Link>
+
+              {/* chat */}
+              {xtFlagLogin ? (
+                <Link href={"/p-user/ticket"} className={styles.icon_btn} title="پیام‌ها" onClick={() => setXtFlagSpinnerShow(true)}>
+                  <ChatCircleText size={22} weight="duotone" />
+                  {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && (
+                    <span className={`${styles.badge} ${styles.badge_chat}`}>!</span>
+                  )}
+                </Link>
+              ) : (
+                <div className={styles.icon_btn} title="پیام‌ها" onClick={AlertC}>
+                  <ChatCircleText size={22} weight="duotone" />
+                </div>
+              )}
+
+              {/* cart */}
+              {resetFlagCart && (
+                <Link href={cartCounter != 0 ? "/basket" : "#"} className={styles.icon_btn} title="سبد خرید">
+                  <ShoppingCart size={22} weight="duotone" />
+                  {cartCounter !== 0 && <span className={`${styles.badge} ${styles.badge_cart}`}>{cartCounter}</span>}
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* navbar */}
+        <div className={styles.navbar}>
+          <div className={`container ${styles.navbar_inner}`}>
+            <ul className={styles.navlist}>
+              <li>
+                <Link href={"/"} className={styles.navlink}>
+                  <House size={16} weight="duotone" /> خانه
+                </Link>
+              </li>
+
+              <li className={styles.has_mega}>
+                <span className={styles.navlink}>
+                  <List size={16} weight="duotone" /> دسته‌بندی‌ها <CaretDown size={12} weight="bold" />
+                </span>
+                <div className={styles.mega}>
+                  <div className={`container ${styles.mega_inner}`}>
+                    <div className={styles.mega_tabs}>
+                      <button
+                        onMouseEnter={() => setValue(1)}
+                        className={valeS == 1 ? styles.mega_tab_active : styles.mega_tab}
+                      >
+                        لوازم جانبی
+                      </button>
+                      <button
+                        onMouseEnter={() => setValue(2)}
+                        className={valeS == 2 ? styles.mega_tab_active : styles.mega_tab}
+                      >
+                        سخت افزار
+                      </button>
+                    </div>
+                    <div className={valeS == 1 ? `${styles.mega_grid} ${styles.mega_show}` : styles.mega_hidden}>
+                      {valeS == 1 &&
+                        mainCategory.childs?.map((item, index) => (
+                          <Link
+                            key={index}
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                            href={`/category/${item.id}`}
+                            className={styles.mega_item}
+                          >
+                            <img src={item.imageUrl} alt={item.name || "Category image"} />
+                            <span>{item.name}</span>
                           </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item
-                          onClick={() => {
-                            exitHandler();
-                            setMessageNotification([]);
-                            setFlagMessageNotification((prev) => !prev);
-                          }}
-                        >
-                          <p> خروج</p>{" "}
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </>
-                )}
-                <Link href={!xtFlagLogin ? "/register" : "/p-user/profile"}>
-                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
-                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color={`var(--them)`} />}
-
-                    {!xtFlagLogin ? (
-                      <span className={`${styles.Header_leftSide__div_span} `}>وارد حساب کاربری خود شوید...</span>
-                    ) : (
-                      <span className={`${styles.Header_leftSide__div_span} `}>وارد پنل کاربری خود شوید...</span>
-                    )}
-                  </div>
-                </Link>
-
-                <Link href={'/favorite'}>
-                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
-                    <Heart size={24} color={`var(--them)`} />
-
-                  </div>
-                </Link>
-
-                {resetFlagCart && (
-                  <Link href={cartCounter != 0 ? "/basket" : "#"}>
-                    <div
-                      onClick={() => {
-                        if (cartCounter != 0) {
-                          setXtFlagSpinnerShow(true);
-                        } else {
-                          AlertA();
-                        }
-                      }}
-                      className={`${styles.Header_leftSide__div} centerr`}
-                    >
-                      <ShoppingCart size={24} color={`var(--them)`} />
-                      {cartCounter !== 0 && <span className={`${styles.shopicon_baget} centerc`}>{cartCounter}</span>}
+                        ))}
                     </div>
-                  </Link>
-                )}
-
-                {xtFlagLogin ? (
-                  <Link href={"/p-user/ticket"}>
-                    <div className={` ${styles.Header_leftSide__div} centerr`} onClick={() => setXtFlagSpinnerShow(true)}>
-                      <ChatCircleText size={28} weight="duotone" color={`var(--them)`} />
-                      {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && <span className={`${styles.shopicon_baget} centerc`}> !</span>}
+                    <div className={valeS == 2 ? `${styles.mega_grid} ${styles.mega_show}` : styles.mega_hidden}>
+                      {valeS == 2 &&
+                        mainCategoryB.childs?.map((item, index) => (
+                          <Link
+                            key={index}
+                            onClick={() => setXtFlagSpinnerShow(true)}
+                            href={`/category/${item.id}`}
+                            className={styles.mega_item}
+                          >
+                            <img src={item.imageUrl} alt={item.name || "Category image"} />
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
                     </div>
-                  </Link>
-                ) : (
-                  <div className={` ${styles.Header_leftSide__div} centerr`}>
-                    <ChatCircleText
-                      size={28}
-                      color={`var(--them)`}
-                      weight="duotone"
-                      onClick={() => {
-                        AlertC();
-                      }}
-                    />
                   </div>
-                )}
-
-
-                <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-                  <div className={` ${styles.mobiNumber_div} centerc`}>
-
-                    <span>کامپیوترصانع</span>
-                  </div>
-
                 </div>
-              </div>
-            </div>
+              </li>
 
-            <div className={`row  ${styles.header_bottom} `}>
-              <div className={`col ${styles.header_bottom__col}`}>
-                <ul className={`${styles.header_bottom__col__ul} centerr`}>
-                  <li
-                  // onClick={() => setXtFlagSpinnerShow(true)}
-                  >
-                    {" "}
-                    <Link
-                      href={"/"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      {" "}
-                      <House size={15} /> خانه
-                    </Link>{" "}
-                  </li>
-
-                  <li className="nav_link arrow_icon">
-                    <TextIndent size={15} />
-                    دسته بندی ها
-                    <ul className={`${styles.header_bottom__col__ul__ul} centerc`} ref={ulRef}>
-                      <li value={1} onMouseEnter={onmousHandle} className={valeS == 1 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}>
-                        لوازم جانبی
-                        <div className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}>
-                          <div className={valeS == 1 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}>
-                            {mainCategory.childs?.length &&
-                              mainCategory.childs.map((item, index) => (
-                                <Link
-                                  key={index}
-                                  onClick={() => setXtFlagSpinnerShow(true)}
-                                  href={`/category/${item.id}`}
-                                  className={`${styles.header_bottom__col__ul__ul__ul__link2} centerc`}
-                                >
-                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
-                                  {item.name}
-                                </Link>
-                              ))}
-                          </div>
-                        </div>
-                      </li>
-
-                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
-                        سخت افزار
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
-                          <div
-                            className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
-
-                          >
-                            {mainCategoryB.childs?.length &&
-                              mainCategoryB.childs.map((item, index) => (
-                                <Link
-                                  key={index}
-                                  onClick={() => setXtFlagSpinnerShow(true)}
-                                  href={`/category/${item.id}`}
-                                  className={`${styles.header_bottom__col__ul__ul__ul__link2} centerc`}
-                                >
-                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
-                                  {item.name}
-                                </Link>
-                              ))}
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  {/* <li className="nav_link">فروش اقساط   </li> */}
-
-                  {xtFlagLogin && (
-                    <li className="nav_link arrow_icon">
-                      <Wrench size={15} />
-                      خدمات
-                      <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
-                        <Link href={"/p-user/warranty"}>
-                          <li
-                            onClick={() => setXtFlagSpinnerShow(true)}
-                            value={11}
-                            onMouseEnter={onmousHandle}
-                            className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                          >
-                            گارانتی
-                          </li>
-                        </Link>
-
-                        <Link href={"/p-user/repairs"}>
-                          <li
-                            onClick={() => setXtFlagSpinnerShow(true)}
-                            value={12}
-                            onMouseEnter={onmousHandle}
-                            className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                          >
-                            تعمیرات
-                          </li>
-                        </Link>
-                      </ul>
-                    </li>
-                  )}
-
-                  {!xtFlagLogin ? (
-                    <>
-
-                      <li onClick={() => setXtFlagSpinnerShow(true)}>
-                        {" "}
-                        <Link
-                          href={"/register"}
-                          style={{
-                            listStyle: "none",
-                            textDecoration: "none",
-                            color: "inherit",
-                          }}
-                        >
-                          <UserCheck size={15} />
-                          ورود{" "}
-                        </Link>{" "}
-                      </li>
-                    </>
-                  ) : (
-                    <li onClick={() => setXtFlagSpinnerShow(true)}>
-                      {" "}
-                      <Link
-                        href={"/p-user/profile"}
-                        style={{
-                          listStyle: "none",
-                          textDecoration: "none",
-                          color: "inherit",
-                        }}
-                      >
-                        <User size={15} />
-                        پنل کاربری{" "}
-                      </Link>{" "}
-                    </li>
-                  )}
-
-                  {/* <li onClick={() => setXtFlagSpinnerShow(true)}>
-                    {" "}
-                    <Link
-                      href={"/computerparts"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      {" "}
-                      <Laptop size={15} />
-                      محاسبه گر سیستم
-                    </Link>{" "}
-                  </li> */}
-
-                  <li onClick={() => setXtFlagSpinnerShow(true)}>
-                    {" "}
-                    <Link
-                      href={"/computers"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      {" "}
-                      <Laptop size={15} />
-                      سیستم های اسمبل شده
-                    </Link>{" "}
-                  </li>
-
-
-
-
-
-                  <li onClick={() => setXtFlagSpinnerShow(true)}>
-                    {" "}
-                    <Link
-                      href={"/contactus"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      {" "}
-                      <BuildingApartment size={15} />
-                      تماس با ما
-                    </Link>{" "}
-                  </li>
-                </ul>
-              </div>
-
-              <div className={styles.header_bottom__col_logo}>
-                <Link href={"https://eitaa.com/sane_camputer"}>
-                  <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
+              <li>
+                <Link href={"/computers"} className={styles.navlink} onClick={() => setXtFlagSpinnerShow(true)}>
+                  <Laptop size={16} weight="duotone" /> سیستم‌های اسمبل‌شده
                 </Link>
-                <Link href={"https://instagram.com/it_sane"}>
-                  {" "}
-                  <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
+              </li>
+
+              {xtFlagLogin && (
+                <li className={styles.has_dropdown}>
+                  <span className={styles.navlink}>
+                    <Wrench size={16} weight="duotone" /> خدمات <CaretDown size={12} weight="bold" />
+                  </span>
+                  <div className={styles.dropdown}>
+                    <Link href={"/p-user/warranty"} onClick={() => setXtFlagSpinnerShow(true)}>
+                      گارانتی
+                    </Link>
+                    <Link href={"/p-user/repairs"} onClick={() => setXtFlagSpinnerShow(true)}>
+                      تعمیرات
+                    </Link>
+                  </div>
+                </li>
+              )}
+
+              {!xtFlagLogin ? (
+                <li>
+                  <Link href={"/register"} className={styles.navlink} onClick={() => setXtFlagSpinnerShow(true)}>
+                    <UserCheck size={16} weight="duotone" /> ورود
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link href={"/p-user/profile"} className={styles.navlink} onClick={() => setXtFlagSpinnerShow(true)}>
+                    <User size={16} weight="duotone" /> پنل کاربری
+                  </Link>
+                </li>
+              )}
+
+              <li>
+                <Link href={"/contactus"} className={styles.navlink} onClick={() => setXtFlagSpinnerShow(true)}>
+                  <BuildingApartment size={16} weight="duotone" /> تماس با ما
                 </Link>
-                <Link href={"https://t.me/sane_camputer"}>
-                  {" "}
-                  <img className={styles.sphere} src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png" alt="telegram" />
-                </Link>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
-        ) : (
-          <div className={`container ${styles.containerfix}`}>
-            <div className={`row ${styles.Header_top} centerr`}>
-              <div className={`col col-md-8 ${styles.Header_rightSide} centerr`}>
-                <div className={styles.Header_rightSide__div_img}>
-                  {offBanner?.orderValue == 1 && <img className={styles.Header_rightSide__div_imgB} src={offBanner.bigImg} alt={offBanner.title} />}
-                  <div style={{ width: "80px", height: "50px" }}>
-                    <SwiperA />
-                  </div>
-                </div>
-                <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-                  <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchInput} onChange={searchChange} />
-                  <button
-                    className={`${styles.magnifyingGlass} btn btn-light`} onClick={() => {
-                      setSearchResult([])
-                      if (searchInput.length == 0) return rout.push('/')
-                      setFlagSearchInHeader(true)
-                      setXtFlagSpinnerShow(true)
-                      rout.push(`/search/${searchInput}`)
-                    }}>
-                    <CursorClick
-                      size={24}
-                      color={`var(--them)`}
-                      weight="thin"
-
-                    />
-                    جستجو
-                  </button>
-
-                </div>
-              </div>
-
-              <div className={`col col-md-4 ${styles.Header_leftSide} centerr`}>
-                <div className="centerc"></div>
-                {xtFlagLogin && name !== "SaneUser" && <span className={styles.user_span}>{name?.toUpperCase()}</span>}
-
-                <Link href={!xtFlagLogin ? "/register" : "/p-user/profile"}>
-                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
-                    {userSrc ? <img src={userSrc} alt="user-profile" className={`${styles.Header_user_img}`} /> : <User size={24} color={`var(--them)`} />}{" "}
-                    {!xtFlagLogin ? (
-                      <span className={`${styles.Header_leftSide__div_span} `}>وارد حساب کاربری خود شوید...</span>
-                    ) : (
-                      <span className={`${styles.Header_leftSide__div_span} `}>وارد پنل کاربری خود شوید...</span>
-                    )}
-                  </div>
-                </Link>
-
-                <Link href={'/favorite'}>
-                  <div onClick={() => setXtFlagSpinnerShow(true)} className={`${styles.Header_leftSide__div} centerr`}>
-                    <Heart size={24} color={`var(--them)`} />
-
-                  </div>
-                </Link>
-
-                {resetFlagCart && (
-                  <Link href={cartCounter != 0 ? "/basket" : "#"}>
-                    <div
-                      onClick={() => {
-                        if (cartCounter != 0) {
-                          setXtFlagSpinnerShow(true);
-                        } else {
-                          AlertA();
-                        }
-                      }}
-                      className={`${styles.Header_leftSide__div} centerr`}
-                    >
-                      <ShoppingCart size={24} color={`var(--them)`} />
-                      {cartCounter !== 0 && <span className={`${styles.shopicon_baget} centerc`}>{cartCounter}</span>}
-                    </div>
-                  </Link>
-                )}
-
-                {xtFlagLogin ? (
-                  <Link href={"/p-user/ticket"}>
-                    <div className={` ${styles.Header_leftSide__div} centerr`} onClick={() => setXtFlagSpinnerShow(true)}>
-                      <ChatCircleText size={28} weight="duotone" color={`var(--them)`} />
-                      {messageNotification?.filter((filter) => filter.status == 1)?.length != 0 && <span className={`${styles.shopicon_baget} centerc`}> !</span>}
-                    </div>
-                  </Link>
-                ) : (
-                  <div className={` ${styles.Header_leftSide__div} centerr`}>
-                    <ChatCircleText
-                      size={28}
-                      color={`var(--them)`}
-                      weight="duotone"
-                      onClick={() => {
-                        AlertC();
-                      }}
-                    />
-                  </div>
-                )}
-
-                <div className={`col-lg-4 ${styles.Header_leftSide__number_div} centerr`}>
-                  <div className={` ${styles.mobiNumber_div} centerc`}>
-
-                    <span>کامپیوترصانع</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={`row  ${styles.header_bottom_fix} `}>
-              <div className={`col ${styles.header_bottom__col}`}>
-                <ul className={`${styles.header_bottom__col__ul_fix} centerr`}>
-                  <li
-                  >
-                    {" "}
-                    <Link
-                      href={"/"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      <House size={15} /> خانه
-                    </Link>{" "}
-                  </li>
-
-                  <li className="nav_link arrow_icon">
-                    <TextIndent size={15} />
-                    دسته بندی ها
-                    <ul className={`${styles.header_bottom__col__ul__ul} centerc`}>
-                      <li value={1} onMouseEnter={onmousHandle} className={valeS == 1 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}>
-                        لوازم جانبی
-                        <div className={` container centerr ${styles.header_bottom__col__ul__ul__ul}`}>
-                          <div className={valeS == 1 ? `row-cols-6 ${styles.ishover}` : `${styles.nohover}`}>
-                            {mainCategory.childs?.length &&
-                              mainCategory.childs.map((item, index) => (
-                                <Link
-                                  onClick={() => setXtFlagSpinnerShow(true)}
-                                  key={index}
-                                  href={`/category/${item.id}`}
-                                  className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                                >
-                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
-                                  {item.name}
-                                </Link>
-
-                              ))}
-                          </div>
-                        </div>
-                      </li>
-
-                      <li value={2} onMouseEnter={onmousHandle} className={valeS == 2 ? `${styles.liiii2_a}` : `${styles.liiii2}`}>
-                        سخت افزار
-                        <div className={`container  centerr ${styles.header_bottom__col__ul__ul__ul}`}>
-                          <div
-                            className={valeS == 2 ? `row-cols-4 ${styles.ishover}` : `${styles.nohover}`}
-
-                          // className={valeS == 2 ? "row-cols-4 ishover" : " nohover"}
-                          >
-                            {mainCategoryB.childs?.length &&
-                              mainCategoryB.childs.map((item, index) => (
-                                <Link
-                                  onClick={() => setXtFlagSpinnerShow(true)}
-                                  key={index}
-                                  href={`/category/${item.id}`}
-                                  className={`${styles.header_bottom__col__ul__ul__ul__link2}`}
-                                >
-                                  <img src={item.imageUrl} alt={item.name || "Category image"} />
-                                  {item.name}
-                                </Link>
-                              ))}
-                          </div>
-                        </div>
-                      </li>
-
-                    </ul>
-                  </li>
-                  {/* <li className="nav_link">فروش اقساط   </li> */}
-                  {xtFlagLogin && (
-                    <li className="nav_link arrow_icon">
-                      <Wrench size={15} />
-                      خدمات
-                      <ul className={`${styles.header_bottom__col__ul__ul_service} centerc`}>
-                        <Link href={"/p-user/warranty"}>
-                          <li
-                            onClick={() => setXtFlagSpinnerShow(true)}
-                            value={11}
-                            onMouseEnter={onmousHandle}
-                            className={valeS == 11 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                          >
-                            گارانتی
-                          </li>
-                        </Link>
-
-                        <Link href={"/p-user/repairs"}>
-                          <li
-                            onClick={() => setXtFlagSpinnerShow(true)}
-                            value={12}
-                            onMouseEnter={onmousHandle}
-                            className={valeS == 12 ? ` ${styles.liiii2_a}` : `${styles.liiii2}`}
-                          >
-                            تعمیرات
-                          </li>
-                        </Link>
-                      </ul>
-                    </li>
-                  )}
-
-                  {!xtFlagLogin ? (
-                    <>
-
-
-                      <li onClick={() => setXtFlagSpinnerShow(true)}>
-                        {" "}
-                        <Link
-                          href={"/register"}
-                          style={{
-                            listStyle: "none",
-                            textDecoration: "none",
-                            color: "inherit",
-                          }}
-                        >
-                          <UserCheck size={15} />
-                          ورود{" "}
-                        </Link>{" "}
-                      </li>
-                    </>
-                  ) : (
-                    <li onClick={() => setXtFlagSpinnerShow(true)}>
-                      {" "}
-                      <Link
-                        href={"/p-user/profile"}
-                        style={{
-                          listStyle: "none",
-                          textDecoration: "none",
-                          color: "inherit",
-                        }}
-                      >
-                        <User size={15} />
-                        پنل کاربری{" "}
-                      </Link>{" "}
-                    </li>
-                  )}
-
-                  {/* <li onClick={() => setXtFlagSpinnerShow(true)}>
-                    {" "}
-                    <Link
-                      href={"/computerparts"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      {" "}
-                      <Laptop size={15} />
-                      محاسبه گر سیستم
-                    </Link>{" "}
-                  </li> */}
-
-                  <li onClick={() => setXtFlagSpinnerShow(true)}>
-                    {" "}
-                    <Link
-                      href={"/computers"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      {" "}
-                      <Laptop size={15} />
-                      سیستم های اسمبل شده
-                    </Link>{" "}
-                  </li>
-
-
-                  <li>
-                    {" "}
-                    <Link
-                      href={"/contactus"}
-                      style={{
-                        listStyle: "none",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      <BuildingApartment size={15} /> تماس با ما
-                    </Link>{" "}
-                  </li>
-                </ul>
-
-                <div className={styles.header_bottom__col_logo}>
-                  <Link href={"https://eitaa.com/sane_camputer"}>
-                    <img className={styles.sphere3} src="../../../images/eitaa-icon-colorful.png" alt="eitaa" />
-                  </Link>
-                  <Link href={"https://instagram.com/it_sane"}>
-                    {" "}
-                    <img className={styles.sphere2} src="../../../images/icons8-instagram-2048.png" alt="instagram" />
-                  </Link>
-                  <Link href={"https://t.me/sane_camputer"}>
-                    {" "}
-                    <img className={styles.sphere} src="../../../images/Jowhareh_galleries_5_poster_13cf28d3-554d-426a-a1b6-79463537f52c.png" alt="telegram" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
       </section>
 
-      <section className={styles.B}>
+      {/* ================= MOBILE HEADER ================= */}
+      <section className={styles.B} >
         <div className="container">
           <div className={`${styles.mobi_header} row  centerr`}>
             <Link href={"/"}>
-              <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" />
+              <img src="/images/Sane_Logo_Purple.jpg" alt="logo" />
+              {/* <img src="/images/photo_2024-05-30_19-08-29.jpg" alt="logo" /> */}
               {/* <RotatingGlobe/> */}
               {offBanner?.orderValue == 1 && (
                 <>
@@ -1019,37 +589,29 @@ export default function Header() {
                   }}
                 />
               )}
-
-
             </div>
           </div>
         </div>
       </section>
 
+      {/* mobile dropdown menu */}
       <section className={styles.D}>
         {isMenuOpen && (
           <div className="dropdownMenu">
             <div className={` container centerr ${styles.mobile_dropdownMenu_li}`}>
-              <div
-                // className='row-cols-6 '
-                className={`row ${styles.ishover}`}
-              >
-
+              <div className={`row ${styles.ishover}`}>
                 <div className="col-12">
                   <div>
                     <button
                       className={!flagCateMobile ? `btn btn-secondary ${styles.rightside_button_cate_mob}` : `btn btn-secondary ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(true)}
                     >
-                      {" "}
                       لوازم جانبی
                     </button>
-
                     <button
                       className={flagCateMobile ? `btn btn-secondary  ${styles.rightside_button_cate_mob}` : `btn btn-secondary ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(false)}
                     >
-                      {" "}
                       سخت افزار
                     </button>
                   </div>
@@ -1071,17 +633,17 @@ export default function Header() {
                 </div>
               </div>
             </div>
-
           </div>
         )}
       </section>
 
+      {/* mobile bottom bar */}
       <section className={styles.C}>
         <div className={`container left-0 ${styles.C_Contaner} `}>
           <div className={`${styles.mobi_bottomHeader} row`}>
             <div className="col">
               <ul className={`${styles.bottomHeader_ul} centerr `}>
-                <li className={`${styles.hamburger_li}centerr`}>
+                <li className={styles.hamburger_li}>
                   <Link
                     href={"/"}
                     style={{
@@ -1094,10 +656,9 @@ export default function Header() {
                       ulRefA.current.classList.remove("header_hidden_ulRefA");
                     }}
                   >
-                    <House size={28} weight="duotone" color={`var(--them)`} />
+                    <House size={28} weight="duotone" color={`var(--sd-primary)`} />
                   </Link>
                 </li>
-
 
                 <li
                   className={`${styles.hamburger_li} centerr`}
@@ -1106,7 +667,6 @@ export default function Header() {
                     ulRefA.current.classList.remove("header_hidden_ulRefA");
                   }}
                 >
-                  {/* Hamburger/Close icon */}
                   <button className={`hamburger ${isMenuOpen ? "open" : ""}`}>
                     <span className="bar"></span>
                     <span className="bar"></span>
@@ -1114,27 +674,21 @@ export default function Header() {
                   </button>
                 </li>
 
-
-
-
-
                 <li
                   className={`${styles.bottomHeader_ul_category}`}
                   onClick={() => {
-                    if (ulRefA.current.classList.value === "Header_bottomHeader_ul_category_div__flSYL header_hidden_ulRefA") {
+                    if (ulRefA.current.classList.value.includes("header_hidden_ulRefA")) {
                       ulRefA.current.classList.remove("header_hidden_ulRefA");
                     } else {
                       ulRefA.current.classList.add("header_hidden_ulRefA");
                     }
                   }}
                 >
-                  <User size={28} weight="duotone" color={`var(--them)`} />
+                  <User size={28} weight="duotone" color={`var(--sd-primary)`} />
 
                   <div className={`${styles.bottomHeader_ul_category_div}`} ref={ulRefA}>
-                    {
-                      xtFlagLogin &&
+                    {xtFlagLogin && (
                       <>
-
                         <Link
                           href={"/p-user/profile"}
                           onClick={() => {
@@ -1142,7 +696,7 @@ export default function Header() {
                             setXtFlagSpinnerShow(true);
                           }}
                         >
-                          <User size={15} color={`var(--them)`} />
+                          <User size={15} color={`var(--sd-primary)`} />
                           <span>پروفایل من</span>
                         </Link>
 
@@ -1153,14 +707,11 @@ export default function Header() {
                             setXtFlagSpinnerShow(true);
                           }}
                         >
-                          <ShoppingCart size={15} color={`var(--them)`} />
+                          <ShoppingCart size={15} color={`var(--sd-primary)`} />
                           <span>پیگری سفارش</span>
                         </Link>
-
                       </>
-
-
-                    }
+                    )}
 
                     {!xtFlagLogin && (
                       <Link
@@ -1170,60 +721,23 @@ export default function Header() {
                           setXtFlagSpinnerShow(true);
                         }}
                       >
-                        <UserCheck size={15} color={`var(--them)`} />
+                        <UserCheck size={15} color={`var(--sd-primary)`} />
                         <span>ورود</span>
                       </Link>
                     )}
 
                     {xtFlagLogin && (
-                      <>
-                        <Link
-                          href={"/favorite"}
-                          onClick={() => {
-                            setMenuOpen(false);
-                            setXtFlagSpinnerShow(true);
-                          }}
-                        >
-                          <Heart size={15} color={`var(--them)`} />
-                          <span>علاقه مندی ها</span>
-                        </Link>
-                        {/* <Link
-                          href={"/p-user/warranty"}
-                          onClick={() => {
-                            setMenuOpen(false);
-                            setXtFlagSpinnerShow(true);
-                          }}
-                        >
-                          <Barcode size={15} color={`var(--them)`} />
-                          <span>گارانتی</span>
-                        </Link>
-
-                        <Link
-                          href={"/p-user/repairs"}
-                          onClick={() => {
-                            setMenuOpen(false);
-                            setXtFlagSpinnerShow(true);
-                          }}
-                        >
-                          <Wrench size={15} color={`var(--them)`} />
-                          <span>تعمیرات</span>
-                        </Link> */}
-                      </>
+                      <Link
+                        href={"/favorite"}
+                        onClick={() => {
+                          setMenuOpen(false);
+                          setXtFlagSpinnerShow(true);
+                        }}
+                      >
+                        <Heart size={15} color={`var(--sd-primary)`} />
+                        <span>علاقه مندی ها</span>
+                      </Link>
                     )}
-                    {/* 
-                    <Link
-                      href={"/computerparts"}
-                      onClick={() => {
-                        setMenuOpen(false);
-                        setXtFlagSpinnerShow(true);
-                      }}
-                    >
-                      <Laptop size={15} color={`var(--them)`} />
-
-                      <span style={{ fontSize: "13px" }}>محاسبه گر سیستم </span>
-                    </Link> */}
-
-
 
                     <Link
                       href={"/contactus"}
@@ -1232,8 +746,7 @@ export default function Header() {
                         setXtFlagSpinnerShow(true);
                       }}
                     >
-                      <BuildingApartment size={15} color={`var(--them)`} />
-
+                      <BuildingApartment size={15} color={`var(--sd-primary)`} />
                       <span>تماس با ما</span>
                     </Link>
 
@@ -1247,7 +760,7 @@ export default function Header() {
                           setFlagMessageNotification((prev = !prev));
                         }}
                       >
-                        <SignOut size={15} color={`var(--them)`} />
+                        <SignOut size={15} color={`var(--sd-primary)`} />
                         <span>خروج</span>
                       </Link>
                     )}
@@ -1281,15 +794,12 @@ export default function Header() {
                       <div className={`${styles.Header_leftSide__div_mobile} centerr`}>
                         {cartCounter != 0 && <span className={`${styles.shopicon_baget_mobile} centerc`}>{cartCounter}</span>}
                       </div>
-                      <ShoppingCart size={28} weight="duotone" color={`var(--them)`} />
+                      <ShoppingCart size={28} weight="duotone" color={`var(--sd-primary)`} />
                     </Link>
                   )}
                 </li>
 
-
-
-
-                <li className={`${styles.hamburger_li}centerr`}>
+                <li className={styles.hamburger_li}>
                   <Link
                     href={"/computers"}
                     style={{
@@ -1303,36 +813,39 @@ export default function Header() {
                       ulRefA.current.classList.remove("header_hidden_ulRefA");
                     }}
                   >
-                    <Laptop size={28} weight="duotone" color={`var(--them)`} />
-                    {/* <House size={28} weight="duotone" color={`var(--them)`} /> */}
+                    <Laptop size={28} weight="duotone" color={`var(--sd-primary)`} />
                   </Link>
                 </li>
 
-
                 <li
                   onClick={() => {
-                    setShow(true)
+                    setShow(true);
                   }}
                 >
-                  <MagnifyingGlass size={28} weight="duotone" color={`var(--them)`} />
+                  <MagnifyingGlass size={28} weight="duotone" color={`var(--sd-primary)`} />
                 </li>
                 <div className={`${styles.sidebar_mobile} `}>
                   <Modal show={show} onHide={() => setShow(false)} fullScreen>
-                    <Modal.Header closeButton className={`${styles.modal_header}`}>
-                    </Modal.Header>
+                    <Modal.Header closeButton className={`${styles.modal_header}`}></Modal.Header>
                     <div className={`${styles.Header_rightSide__div_search}  centerc`}>
-                      <input className={styles.Header_rightSide__div_search_input} type="text" placeholder="دنبال چی میگردی...؟" value={searchInput} onChange={searchChange} />
-                      <button className={`btn btn-light ${styles.magnifyingGlassB}`}
+                      <input
+                        className={styles.Header_rightSide__div_search_input}
+                        type="text"
+                        placeholder="دنبال چی میگردی...؟"
+                        value={searchInput}
+                        onChange={searchChange}
+                      />
+                      <button
+                        className={`btn btn-light ${styles.magnifyingGlassB}`}
                         onClick={() => {
-                          setSearchResult([])
-                          if (searchInput.length == 0) return rout.push('/')
-                          setFlagSearchInHeader(true)
-                          setXtFlagSpinnerShow(true)
-                          setShow(false)
-                          rout.push(`/search/${searchInput}`)
+                          setSearchResult([]);
+                          if (searchInput.length == 0) return rout.push("/");
+                          setFlagSearchInHeader(true);
+                          setXtFlagSpinnerShow(true);
+                          setShow(false);
+                          rout.push(`/search/${searchInput}`);
                         }}
                       >
-
                         جستجو
                         <HandPointing style={{ fontSize: "18px" }} />
                       </button>

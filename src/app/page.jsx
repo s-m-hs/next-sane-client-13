@@ -6,6 +6,7 @@ const BrandArea = dynamic(() => import("@/components/madules/BrandArea/BrandArea
 const BanerA = dynamic(() => import("@/components/madules/Baner/BanerA"), {
   ssr: false,
 });
+const FeatureStrip = dynamic(() => import("@/components/madules/FeatureStrip/FeatureStrip"), { ssr: false });
 
 // import BanerA from '@/components/madules/Baner/BanerA';
 // import BrandArea from '@/components/madules/BrandArea/BrandArea';
@@ -103,6 +104,8 @@ export default function Home() {
             <SwiperF />
           </div>
           {/* <SwiperD categoryCode='SUPRIZ DAY' title={'فوق العاده ها:'}/> */}
+
+          <FeatureStrip />
 
           {keyOfferSlider?.value === "1" && <SwiperC categoryCode="offer-Basket" title={`${keyOfferSlider?.key}`}  />}
 

@@ -51,9 +51,9 @@ export default function SubjecArea(param) {
   }, []);
 
   return (
-    <div className={`container ${style.container}  `}>
+    <div className={`container ${style.container}  boxSh p-2`}>
       {/* <h2>مقالات صانع :</h2> */}
-      <button className="btn btn-warning" onClick={() => route.push('/subject')}>همه مقالات</button>
+      <button className="themed_btn " onClick={() => route.push('/subject')}>همه مقالات</button>
       <div className={`row row-cols-auto mt-3  ${style.row} centerr`}>
         {allSubjects?.length != 0 &&
           allSubjectsSlice.map((item) => <CardSub item={item} />)}

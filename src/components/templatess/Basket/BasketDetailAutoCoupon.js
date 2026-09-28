@@ -4,29 +4,37 @@ import { MainContext } from "@/context/MainContext";
 import apiCallProdDetails from "@/utils/ApiUrl/apiCallProDetails";
 import React, { useContext, useEffect, useState } from "react";
 import CartItem from "./CartItem/CartItem";
-import { ToastContainer, Zoom, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { DotLoader, ScaleLoader } from "react-spinners";
 import RemoveApi from "@/utils/ApiUrl/apiCallBack/apiRemove";
-// import getLocalStorage from '@/utils/localStorag/localStorage';
 import alertN from "@/utils/Alert/AlertA";
 import updateBasket from "@/utils/ApiUrl/updateBasket";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
-import { HandTap, CheckCircle, X } from "@phosphor-icons/react";
+import {
+  HandTap,
+  CheckCircle,
+  X,
+  ShoppingCart,
+  ArrowLeft,
+  Ticket,
+  Trash,
+  CreditCard,
+  Package,
+  Gift,
+} from "@phosphor-icons/react";
 import alertQ from "@/utils/Alert/AlertQ";
 import Link from "next/link";
-import { GiClick } from "react-icons/gi";
-import { GiCheckMark } from "react-icons/gi";
+import { GiClick, GiCheckMark } from "react-icons/gi";
 import SpinnerC from "@/utils/SpinnerC/SpinnerC";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { FiCheckSquare } from "react-icons/fi";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function BasketDetail() {
+export default function BasketDetailAutoCoupon() {
   let {
     setXtFlagSpinnerShow,
     xtFlagLogin,
@@ -57,7 +65,6 @@ export default function BasketDetail() {
   const [show, setShow] = useState(false);
   const [showB, setShowB] = useState(false);
   const [showC, setShowC] = useState(false);
-
   const [payState, setPayState] = useState(1);
   const [ziroSupply, setZiroSupply] = useState([]);
   const [flagZiroSupply, setFlagZiroSupply] = useState(false);
@@ -65,34 +72,37 @@ export default function BasketDetail() {
   const [localbasket, setLocalBasket] = useState([]);
   const [flagLocal, setFlagLocal] = useState(false);
   const [flagSpinner, setFlagSpinner] = useState(false);
-
-  const [postA, setPostA] = useState(0)
-  const [postB, setPostB] = useState(0)
-  const [postState, setPostState] = useState(0)
+  const [postA, setPostA] = useState(0);
+  const [postB, setPostB] = useState(0);
+  const [postState, setPostState] = useState(0);
+  const [dataReady, setDataReady] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleCloseC = () => setShowC(false);
-
   const handleShow = () => setShow(true);
   const handleShowB = () => setShowB(true);
   const handleShowC = () => setShowC(true);
 
   const rout = useRouter();
 
-  const AlertA = () => alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) => setBasketFlag((prev) => !prev));
+  const AlertA = () =>
+    alertN("center", "info", "حذف با موفقیت انجام شد...", 1000).then((res) =>
+      setBasketFlag((prev) => !prev)
+    );
   const AlertC = () =>
-    alertQ("center", "success", "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید", "باشه...").then((res) => rout.push("/"));
-
-  const AlertB = () => alertN("center", "success", " سبد خرید با موفقیت به روزرسانی شد...", 500).then((res) => setBasketFlag((prev) => !prev));
-
-  const AlertD = () =>
     alertQ(
       "center",
-      "info",
-      "ضمن تبریک سال نو و تشکر از همراهی شما هموطن گرامی به اطلاع میرساند به دلیل محدودیتهای ارسال کالا در ایام تعطیلات ارسال کلیه سفارشات در تاریخ 1404/01/18  انجام میگیرد",
-      "متوجه شدم ..."
+      "success",
+      "خرید شما با موفقیت انجام شد میتوانید سفارش خود را از پنل کاربری بخش سفارشات پیگیری نمایید",
+      "باشه..."
+    ).then((res) => rout.push("/"));
+
+  const AlertB = () =>
+    alertN("center", "success", " سبد خرید با موفقیت به روزرسانی شد...", 500).then(
+      (res) => setBasketFlag((prev) => !prev)
     );
+
   const AlertG = () => {
     if (!couponState) {
       alertN("center", "success", "کد تخفیف شما با موفقیت اعمال شد ", 1500);
@@ -101,28 +111,35 @@ export default function BasketDetail() {
     }
   };
 
-  const AlertE = () => alertN("center", "info", "مشکلی در اعمال کد تخفیف به وجود آمده مجددا تلاش بفرمایید", 1500);
+  const AlertE = () =>
+    alertN(
+      "center",
+      "info",
+      "مشکلی در اعمال کد تخفیف به وجود آمده مجددا تلاش بفرمایید",
+      1500
+    );
   const removeHan = (id) => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
     RemoveApi("api/CyOrders/deleteItem", id, AlertA);
-    cartCounter >= 1 ? setCartCounter((prevCounter) => prevCounter - 1) : "";
+    cartCounter >= 1
+      ? setCartCounter((prevCounter) => prevCounter - 1)
+      : "";
   };
 
-  const alertF = () => alertN('center', 'warning', 'لطفا نحوه ارسال کالا را انتخاب بفرمایید 😊', 2000)
-  ///////////////////////////////
+  const alertF = () =>
+    alertN("center", "warning", "لطفا نحوه ارسال کالا را انتخاب بفرمایید 😊", 2000);
 
   const directToZarin = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
-      const res = await fetch(`${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`, {
-        method: "GET",
-        credentials: "include",
-
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${getLocalStorage}`,
-        },
-      }).then((res) => {
+      const res = await fetch(
+        `${apiUrl}/api/ZarinPal/pay?orderId=${getBasket[0].cyOrderID}&addressId=${address[0].id}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
             rout.push(`${result.url}`);
@@ -132,15 +149,19 @@ export default function BasketDetail() {
     }
     myApp();
   };
-  const requestCoupon = (couItemId, state) => {
+
+  const requestCouponFn = (couItemId, state) => {
     async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
+      const res = await fetch(
+        `${apiUrl}/api/CyCoupon/requestCoupon?CoupItemId=${couItemId}&state=${state}`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
         if (res.ok) {
           directToZarin();
         } else {
@@ -151,30 +172,28 @@ export default function BasketDetail() {
     myApp();
   };
 
-  const couponI = coupon?.couponAvailable; ///couponItem id to set state to requested
+  const couponI = coupon?.couponAvailable;
   const payment = () => {
     setFlagSpinner(true);
     if (couponState) {
-      requestCoupon(couponI[0]?.id, 1);
+      requestCouponFn(couponI[0]?.id, 1);
     } else {
       directToZarin();
     }
   };
 
-
-
   const handleRegisterShop = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}&addressId=${adressId}`, {
-        method: "PUT",
-        credentials: "include",
-
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${getLocalStorage}`,
-        },
-      }).then((res) => {
+      const res = await fetch(
+        `${apiUrl}/api/CyOrders/sendToPending?id=${getBasket[0].cyOrderID}&addressId=${adressId}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
         if (res.status == 200) {
           return res.json().then((result) => {
             setGetBasket([]);
@@ -198,13 +217,19 @@ export default function BasketDetail() {
 
   ////////////for remove from ui in mode:localstorage===>
   const removeItem = (id) => {
-    ///for remove from ui==>
-    let getLocalStorageProd = JSON.parse(localStorage.getItem("cartObj")) || [];
-    setToBuy((prevToBuy) => prevToBuy.filter((item) => item.id !== id));
+    let getLocalStorageProd =
+      JSON.parse(localStorage.getItem("cartObj")) || [];
+    setToBuy((prevToBuy) =>
+      prevToBuy.filter((item) => item.id !== id)
+    );
 
-    ///for remove from oldlocale and set newlocal to local==>
-    getLocalStorageProd = getLocalStorageProd.filter((filter) => filter.value !== id);
-    localStorage.setItem("cartObj", JSON.stringify(getLocalStorageProd));
+    getLocalStorageProd = getLocalStorageProd.filter(
+      (filter) => filter.value !== id
+    );
+    localStorage.setItem(
+      "cartObj",
+      JSON.stringify(getLocalStorageProd)
+    );
   };
   const removeFromCart = (id) => {
     setCartCounter((prevCounter) => prevCounter - 1);
@@ -213,17 +238,16 @@ export default function BasketDetail() {
   ///////////////////////////////////////////
   const paymentHandler = () => {
     if (!xtFlagLogin) {
-      const alertN = (position, icon, title, timer) =>
-        Swal.fire({
-          position: "center",
-          icon: "info",
-          title: "لطفا ابتدا با شماره همراه خود وارد شوید(کمتراز 30 ثانیه 😊) ",
-          showConfirmButton: true,
-          confirmButtonText: "تایید",
-        }).then((res) => {
-          rout.push("/register");
-        });
-      alertN();
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title:
+          "لطفا ابتدا با شماره همراه خود وارد شوید(کمتراز 30 ثانیه 😊) ",
+        showConfirmButton: true,
+        confirmButtonText: "تایید",
+      }).then((res) => {
+        rout.push("/register");
+      });
     } else if (ziroSupply?.length != 0) {
       handleShowB();
     } else if (ziroSupply?.length == 0) {
@@ -243,7 +267,9 @@ export default function BasketDetail() {
 
   const addItem = (item) => {
     setToBuy((prevToBuy) => {
-      const itemExists = prevToBuy.some((existingItem) => existingItem.id === item.id);
+      const itemExists = prevToBuy.some(
+        (existingItem) => existingItem.id === item.id
+      );
       if (!itemExists) {
         return [...prevToBuy, item];
       }
@@ -252,19 +278,16 @@ export default function BasketDetail() {
   };
 
   const updateBasketHandler = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
     if (xtFlagLogin) {
       updateBasket(basket, setBasketFlag, AlertB);
       setFlagUpdate(false);
     } else {
       let uniqueItemsMap = new Map();
 
-      // افزودن آیتم‌های قبلی
       localUpdateBasket.forEach((item) => {
         uniqueItemsMap.set(item.value.value, item);
       });
 
-      // افزودن آیتم‌های جدید
       basket.forEach((item) => {
         let newKey = `cartObj${item.cyProductID}`;
         let newValue = {
@@ -286,7 +309,6 @@ export default function BasketDetail() {
       });
 
       setFlagUpdate(false);
-      // notify();
     }
   };
 
@@ -315,17 +337,22 @@ export default function BasketDetail() {
 
   useEffect(() => {
     const cyProductIDs = basket.map((item) => item.cyProductID);
-    const uniqueArray = cartItem.filter((item) => !cyProductIDs.includes(item.value.value));
+    const uniqueArray = cartItem.filter(
+      (item) => !cyProductIDs.includes(item.value.value)
+    );
     setBasket2(uniqueArray);
   }, [basket]);
 
   useEffect(() => {
     loadCartItem();
-    setFlagSpinner(false)
+    setFlagSpinner(false);
+    const timer = setTimeout(() => setDataReady(true), 300);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    const getLocalStorageProd = JSON.parse(localStorage.getItem("cartObj")) || [];
+    const getLocalStorageProd =
+      JSON.parse(localStorage.getItem("cartObj")) || [];
     setLocalBasket(getLocalStorageProd);
     setFlagLocal(true);
     if (localbasket.length != 0) {
@@ -344,7 +371,10 @@ export default function BasketDetail() {
   ///to add total price
   useEffect(() => {
     const data = getBasket.map((item) => ({
-      totalPrice: item.unitOfferPrice === item.unitPrice ? Math.ceil(item.totalPrice * offer / 1000) * 1000 : item.unitOfferPrice,
+      totalPrice:
+        item.unitOfferPrice === item.unitPrice
+          ? Math.ceil((item.totalPrice * offer) / 1000) * 1000
+          : item.unitOfferPrice,
     }));
 
     const data2 = getBasket.map((item) => ({
@@ -352,7 +382,10 @@ export default function BasketDetail() {
     }));
     const calculateTotalPrice = () => {
       const totalPrice = data.reduce((acc, item) => acc + item.totalPrice, 0);
-      const totalnoneOff = data2.reduce((acc, item) => acc + item.totalPrice, 0);
+      const totalnoneOff = data2.reduce(
+        (acc, item) => acc + item.totalPrice,
+        0
+      );
       setTotal(totalPrice);
       setNonOffTotal(totalnoneOff);
     };
@@ -369,51 +402,47 @@ export default function BasketDetail() {
   }, [address]);
 
   useEffect(() => {
-    if (cartCounter == 0) {
-      rout.push("/");
+    if (xtFlagLogin && getBasket && getBasket.length > 0) {
+      setDataReady(true);
     }
-  }, [cartCounter]);
-  /////////////////////////////////
-  // هشدار مربوط به تحویل کالا در ایام تعظیلات
-  // useEffect(() => {
-  //   AlertD();
-  // }, []);
-
-  ////////////////////
-
-
+  }, [getBasket, xtFlagLogin]);
 
   ////post Section
   const postStateChange = () => {
     async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CyOrders/postState?orderId=${getBasket[0]?.cyOrderID}&postState=${postState}`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/Json'
+      const res = await fetch(
+        `${apiUrl}/api/CyOrders/postState?orderId=${getBasket[0]?.cyOrderID}&postState=${postState}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/Json",
+          },
         }
-      }).catch(err => console.log(err))
+      ).catch((err) => console.log(err));
     }
-    myApp()
-  }
+    myApp();
+  };
 
   useEffect(() => {
     if (postState != 0) {
-      postStateChange()
+      postStateChange();
     }
-  }, [postState])
-
+  }, [postState]);
 
   /////////////////coupon Section
   const getActiveCoupon = (userId) => {
     async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CyCoupon/getActiveCouponByUserId?userId=${userId}`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
+      const res = await fetch(
+        `${apiUrl}/api/CyCoupon/getActiveCouponByUserId?userId=${userId}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
             setCoupon(result);
@@ -423,385 +452,583 @@ export default function BasketDetail() {
     }
     myApp();
   };
+
   useEffect(() => {
     if (cyUserID) {
       getActiveCoupon(cyUserID);
     }
-    ApiGetX2(`/api/CyKeyDatas/1013`, setPostA)
-    ApiGetX2(`/api/CyKeyDatas/1014`, setPostB)
+    ApiGetX2(`/api/CyKeyDatas/1013`, setPostA);
+    ApiGetX2(`/api/CyKeyDatas/1014`, setPostB);
   }, []);
 
+  // محاسبات
+  const itemCount = xtFlagLogin
+    ? getBasket?.length || 0
+    : toBuy?.length || 0;
+  const displayTotal = Number(total || 0);
+  const displayOldTotal = Number(nonOfftotal || 0);
+  const hasDiscount = displayOldTotal > displayTotal;
+
+  const clearCart = () => {
+    Swal.fire({
+      title: "خالی کردن سبد خرید؟",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "بله،خالی کن",
+      cancelButtonText: "لغو",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCartCounter(0);
+        localStorage.clear();
+        setToBuy([]);
+        setBasket([]);
+        setLocalUpdateBasket([]);
+        rout.push("/");
+      }
+    });
+  };
+
   return (
-    <div className={`container ${style.container}`}>
-      {/* <div className="ScaleLoader-louder">
-        {" "}
-        <ScaleLoader color="#e8c5d6" />
-      </div> */}
-      {flagSpinner && <SpinnerC />}
-      <div className="row mt-5 ">
-        <div className={`col-lg-8 centerc  ${style.col_8} boxSh`}>
-          <div className={` ${style.col_8_div_table} `}>
-            {/* <button onClick={() => {
-              setCartCounter(0)
-              localStorage.clear(); setToBuy([]); setBasket([]);setLocalUpdateBasket([]) }}>clear</button> */}
-            <table className={`table table-hover ${style.table_basket} `}>
-              <thead>
-                <tr key="">
-                  <th>تصویر کالا</th>
-                  <th>عنوان کالا</th>
-                  <th>تعداد</th>
-                  <th>قیمت</th>
-                  {/* <th className={`${style.th}`}>قیمت کل</th> */}
-                  <th>جزییات</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!xtFlagLogin && toBuy.length == 0 ? (
-                  <div className={`row ${style.spinner_row}`}>
-                    <div className="col">
-                      <DotLoader color={`var(--them)`} size={250} />
-                    </div>
-                  </div>
-                ) : toBuy.length !== 0 ? (
-                  toBuy.map((item) => (
-                    <CartItem
+    <>
+      {flagSpinner && (
+        <div className={style.spinnerOverlay}>
+          <SpinnerC />
+        </div>
+      )}
+
+      <div className={`container ${style.page}`}>
+        {/* ===== HEADER ===== */}
+        <div className={style.header}>
+          <div className={style.headerTitle}>
+            <h1>
+              <ShoppingCart
+                size={28}
+                weight="fill"
+                style={{ color: "var(--sd-primary)", marginLeft: "0.6rem" }}
+              />
+              سبد خرید من
+            </h1>
+            {itemCount > 0 && (
+              <span className={style.headerBadge}>{itemCount}</span>
+            )}
+          </div>
+
+          {itemCount > 0 && (
+            <div className={style.headerActions}>
+              <button className={style.clearBtn} onClick={clearCart}>
+                <Trash size={16} weight="duotone" />
+                خالی کردن سبد
+              </button>
+              <Link href="/" className={style.continueLink}>
+                <ArrowLeft size={16} weight="bold" />
+                ادامه خرید
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* ===== لودینگ اولیه ===== */}
+        {!xtFlagLogin && toBuy.length === 0 && !dataReady && (
+          <div className={style.spinnerWrap}>
+            <DotLoader color={"var(--sd-primary)"} size={120} />
+          </div>
+        )}
+
+        {/* ===== سبد خالی ===== */}
+        {dataReady && itemCount === 0 && (
+          <div className={style.emptyState}>
+            <ShoppingCart size={72} weight="thin" color="var(--sd-border)" />
+            <h2>سبد خرید شما خالی است!</h2>
+            <p>محصولی را به سبد خرید خود اضافه کنید</p>
+            <div className={style.emptyCta}>
+              <Link href="/">
+                <button className={style.checkoutBtn} style={{ width: "auto", padding: "1rem 3rem" }}>
+                  <ArrowLeft size={20} weight="bold" />
+                  بازگشت به فروشگاه
+                </button>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* ===== MAIN GRID ===== */}
+        {itemCount > 0 && (
+          <div className={style.grid}>
+            {/* ===== ستون سمت چپ: محصولات ===== */}
+            <div className={style.cartColumn}>
+              {!xtFlagLogin && toBuy.length !== 0
+                ? toBuy.map((item, idx) => (
+                    <motion.div
                       key={item.id}
-                      name={item["name"]}
-                      smallImage={item["smallImage"]}
-                      // totalPrice={item.noOffPrice}
-                      unitPrice={
-                        offer == 1 && item.noOffPrice === item.price
-                          ? Number(item.price) / 10
-                          : item.noOffPrice !== item.price
-                            ? Number(item.noOffPrice) / 10
-                            : offer != 1 && (Math.ceil((item.price) / 10) * offer / 1000) * 1000
-                      }
-                      id={item["id"]}
-                      cyProductID={item.id}
-                      quantity={localUpdateBasket?.length === 0 ? 1 : localUpdateBasket.filter((filter) => filter.value.value === item.id)[0]?.value.quan || 1}
-                      updateQuantity={updateQuantity}
-                      handleRemove={removeFromCart}
-                    />
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: idx * 0.05,
+                        duration: 0.4,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      <CartItem
+                        name={item["name"]}
+                        smallImage={item["smallImage"]}
+                        unitPrice={
+                          offer == 1 && item.noOffPrice === item.price
+                            ? Number(item.price) / 10
+                            : item.noOffPrice !== item.price
+                              ? Number(item.noOffPrice) / 10
+                              : offer != 1 &&
+                                Math.ceil(
+                                  (item.price / 10) * offer / 1000
+                                ) *
+                                  1000
+                        }
+                        id={item["id"]}
+                        cyProductID={item.id}
+                        quantity={
+                          localUpdateBasket?.length === 0
+                            ? 1
+                            : localUpdateBasket.filter(
+                                (filter) =>
+                                  filter.value.value === item.id
+                              )[0]?.value.quan || 1
+                        }
+                        updateQuantity={updateQuantity}
+                        handleRemove={removeFromCart}
+                      />
+                    </motion.div>
                   ))
-                ) : (
-                  getBasket != null &&
-                  // flagB &&
-                  getBasket.map((item) => (
-                    <>
+                : getBasket != null &&
+                  getBasket.map((item, idx) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: idx * 0.05,
+                        duration: 0.4,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
                       <CartItem
                         products={getBasket}
                         name={item.partNumber}
                         smallImage={item.cyProductImgUrl}
                         totalPrice={
-                          offer == 1 && item.unitOfferPrice === item.unitPrice
+                          offer == 1 &&
+                          item.unitOfferPrice === item.unitPrice
                             ? Number(item.totalPrice) / 10
                             : item.unitOfferPrice !== item.unitPrice
                               ? Number(item.unitOfferPrice) / 10
-                              : offer !== 1 && (Math.ceil((item.totalPrice) / 10) * offer / 1000) * 1000
+                              : offer !== 1 &&
+                                Math.ceil(
+                                  ((item.totalPrice) / 10) *
+                                    offer /
+                                    1000
+                                ) *
+                                  1000
                         }
                         unitPrice={
-                          offer == 1 && item.unitOfferPrice === item.unitPrice
+                          offer == 1 &&
+                          item.unitOfferPrice === item.unitPrice
                             ? Number(item.unitPrice) / 10
                             : item.unitOfferPrice !== item.unitPrice
                               ? Number(item.unitOfferPrice) / 10
-                              : offer !== 1 && (Math.ceil((item.unitPrice) / 10) * offer / 1000) * 1000
+                              : offer !== 1 &&
+                                Math.ceil(
+                                  ((item.unitPrice) / 10) *
+                                    offer /
+                                    1000
+                                ) *
+                                  1000
                         }
-                        WithoutOffPrice={item.unitPrice / 10} ///send to cartitem product price without off
+                        WithoutOffPrice={item.unitPrice / 10}
                         id={item.id}
                         cyProductID={item.cyProductID}
                         quantity={item.quantity}
                         updateQuantity={updateQuantity}
                         remove={removeHan}
                         supply={item.supply}
-                      // handleRemove={removeFromCart}
                       />
-                    </>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className={` container  ${style.col_8_bottom_div_1} centerc mt-3`}>
-          <div className="row">
-            <div className="col-6">
-              <div className={`  ${style.col_8_bottom_div_2} centerr`}>
-                <button type="button" className={flagUpdate ? `${style.btn} btn btn-outline-info` : `${style.btn_hide}`} onClick={updateBasketHandler}>
-                  به روز رسانی سبد خرید
-                </button>
-              </div>
+                    </motion.div>
+                  ))}
 
-              {xtFlagLogin && (
-                <>
-                  {coupon?.couponAvailable && (
-                    <div className={`${style.coupon_div} centerr`}>
-                      <button
-                        className={!couponState ? "btn btn-warning" : "btn btn-primary disabled"}
-                        onClick={() => {
-                          // setCouponState(!couponState);
-                          setCouponState(true);
-                          AlertG();
-                        }}
-                      >
-                        {!couponState ? (
-                          <>
-                            <span> برای فعالسازی کدتخفیف اینجا کلیک کنید :</span>
-                            <br />
-                            <GiClick style={{ fontSize: "25px" }} />
-                            {"  "}
-                            <span>کدتخفیف شما : {coupon?.code}</span>
-                          </>
-                        ) : (
-                          <>
-                            <span> کد تخفیف روی سبدخرید شما اعمال شد</span>
-                            <br />
-                            <GiCheckMark style={{ fontSize: "25px" }} />
-                            {"  "}
-                            <span> {coupon?.code}</span>
-                          </>
-                        )}
-                      </button>
+              <AnimatePresence>
+                {flagUpdate && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <button
+                      className={style.updateBtn}
+                      onClick={updateBasketHandler}
+                    >
+                      به‌روزرسانی سبد خرید
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* ===== ستون سمت راست: خلاصه سفارش ===== */}
+            <div className={style.summaryColumn}>
+              <div className={style.summaryCard}>
+                <h2 className={style.summaryTitle}>خلاصه سفارش</h2>
+
+                <div className={style.summaryRow}>
+                  <span className={style.summaryLabel}>تعداد کالا</span>
+                  <span className={style.summaryValue}>
+                    {itemCount.toLocaleString()} عدد
+                  </span>
+                </div>
+
+                <div className={style.summaryRow}>
+                  <span className={style.summaryLabel}>مبلغ کل</span>
+                  <span className={style.summaryValue}>
+                    {(displayOldTotal / 10).toLocaleString()} تومان
+                  </span>
+                </div>
+
+                {hasDiscount && (
+                  <div className={style.couponDiscountRow}>
+                    <span>تخفیف</span>
+                    <span>
+                      -{(displayOldTotal - displayTotal) / 10 > 0
+                        ? ((displayOldTotal - displayTotal) / 10).toLocaleString()
+                        : "0"}{" "}
+                      تومان
+                    </span>
+                  </div>
+                )}
+
+                <div className={style.summaryRowTotal}>
+                  <span className={style.summaryLabel}>مبلغ قابل پرداخت</span>
+                  <span className={`${style.summaryValue} ${style.totalValue}`}>
+                    {(displayTotal / 10).toLocaleString()} تومان
+                  </span>
+                </div>
+
+                {hasDiscount && (
+                  <div style={{ marginTop: "0.4rem" }}>
+                    <span className={style.oldTotalValue}>
+                      {(displayOldTotal / 10).toLocaleString()} تومان
+                    </span>
+                  </div>
+                )}
+
+                {/* ===== کد تخفیف خودکار ===== */}
+                {xtFlagLogin && coupon?.couponAvailable && (
+                  <div className={style.couponBanner}>
+                    <div>
+                      <span className={style.couponBannerText}>
+                        <Gift size={18} weight="fill" style={{ marginLeft: "0.4rem" }} />
+                        کد تخفیف شما:
+                      </span>
+                      <div className={style.couponBannerCode}>
+                        {coupon?.code}
+                      </div>
                     </div>
+                    <button
+                      className={style.couponBannerBtn}
+                      disabled={couponState}
+                      onClick={() => {
+                        setCouponState(true);
+                        AlertG();
+                      }}
+                    >
+                      {!couponState ? (
+                        <>
+                          <GiClick style={{ fontSize: "16px" }} />
+                          {"  "}
+                          فعالسازی
+                        </>
+                      ) : (
+                        "✅ فعال شد"
+                      )}
+                    </button>
+                  </div>
+                )}
+
+                {/* ===== دکمه‌ها ===== */}
+                <div className={style.actionsSection}>
+                  {flagUpdate && (
+                    <button
+                      className={style.updateBtn}
+                      onClick={updateBasketHandler}
+                    >
+                      به‌روزرسانی سبد خرید
+                    </button>
                   )}
 
-
-                  <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
-                    تکمیل خرید
-                  </button>
-                </>
-              )}
-
-              {!xtFlagLogin && (
-                <button type="button" className={flagUpdate ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
-                  تکمیل خرید
-                </button>
-              )}
-            </div>
-
-            {Number(total) != 0 && (
-              <div className="col-6">
-                <div className={` ${style.colPrice_mobile}`}>
-                  <button className={`btn btn-outline  ${style.colPrice_mobile_btn1}`} disabled>
-                    <span>مجموع سبد خرید :</span>
-                    <br />
-                    <div className={`  ${style.colPrice_mobile_span2}`}>{(Number(total) / 10).toLocaleString()} تومان</div>
-                    <br />
-                    <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
-
-                    <img src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png" alt="basket-image" className={style.colPrice_mobile_shopimg} />
+                  <button
+                    className={style.checkoutBtn}
+                    onClick={paymentHandler}
+                    disabled={flagUpdate || getBasket?.length == 0}
+                  >
+                    <CreditCard size={22} weight="fill" />
+                    {xtFlagLogin ? "تکمیل خرید" : "ورود و ثبت سفارش"}
                   </button>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-
-        <div className={`col-lg-4 centerc ${style.col_4} boxSh`}>
-          <div>
-            <div className="centerc" style={{ alignItems: "center" }}>
-              <button type="button" className={flagUpdate ? `${style.btn} btn btn-outline-info` : `${style.btn_hide}`} onClick={updateBasketHandler}>
-                به روز رسانی سبد خرید
-              </button>
             </div>
-
-            <div>
-              <div className="centerc" style={{ alignItems: "center" }}>
-                {xtFlagLogin && (
-                  <>
-                    {coupon?.couponAvailable && (
-                      <div className={`${style.coupon_div} centerr`}>
-                        <button
-                          className={!couponState ? "btn btn-warning" : "btn btn-primary disabled"}
-                          onClick={() => {
-                            // setCouponState(!couponState);
-                            setCouponState(true);
-                            AlertG();
-                          }}
-                        >
-                          {!couponState ? (
-                            <>
-                              <span> برای فعالسازی کدتخفیف اینجا کلیک کنید :</span>
-                              <br />
-                              <GiClick style={{ fontSize: "25px" }} />
-                              {"  "}
-                              <span>کدتخفیف شما : {coupon?.code}</span>
-                            </>
-                          ) : (
-                            <>
-                              <span> کد تخفیف روی سبدخرید شما اعمال شد</span>
-                              <br />
-                              <GiCheckMark style={{ fontSize: "25px" }} />
-                              {"  "}
-                              <span> {coupon?.code}</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    )}
-
-                    <button type="button" className={flagUpdate || getBasket?.length == 0 ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
-                      تکمیل خرید
-                    </button>
-                  </>
-                )}
-
-
-                {!xtFlagLogin && (
-                  <button type="button" className={flagUpdate ? `${style.btn_hide}` : `${style.btn} btn btn-outline-info`} onClick={paymentHandler}>
-                    تکمیل خرید
-                  </button>
-                )}
-              </div>
-            </div>
-            {Number(total) != 0 && (
-              <div className={`centerr ${style.colPrice}`}>
-                <button className={`btn btn-outline-warning ${style.btn1}`} disabled>
-                  <img src="./images/shop photo/12083346_Wavy_Bus-17_Single-09.png" alt="basket-image" className={style.shopimg} />
-
-                  <span>مجموع سبد خرید :</span>
-                  <br />
-                  <div>{(Number(total) / 10).toLocaleString()} تومان</div>
-                  <br />
-                  <div className={`${style.colPrice_nonoff_span}`}>{(Number(nonOfftotal) / 10).toLocaleString()} تومان</div>
-                </button>
-              </div>
-            )}
           </div>
-        </div>
+        )}
       </div>
 
-      <>
-        {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-
-        <Modal size="lg" show={show} onHide={handleClose}>
-          <Modal.Header closeButton></Modal.Header>
-
-          <Modal.Body style={{ fontSize: "35px" }}>
-            {address?.length != 0 ? (
-              <>
-                <h2> آدرس های ثبت شده :</h2>
-                <Form.Select aria-label="Default select example" onChange={(e) => setAdressId(e.target.value)}>
-                  {address?.map((item) => (
-                    <option value={item.id}>
-                      {item.state}-{item.address}-کد پستی :{item.postalCode}
-                    </option>
-                  ))}
-                </Form.Select>
-              </>
-            ) : (
-              <>
-                <h2>شما آدرس ثبت شده ای ندارید لطفا آدرس خود را ثبت بفرمایید...</h2>
-                <Link href={"./p-user/address"} onClick={() => setXtFlagSpinnerShow(true)}>
-                  <button className="btn btn-success">ثبت آدرس</button>
-                </Link>
-              </>
-            )}
-
-            <div className={`centerc ${style.cath_div}`}>
-              <span>
-                <input className={`${style.cath_input}`} type="radio" name="payment" defaultChecked value={1} onChange={(e) => setPayState(e.target.value)} />
-                <span className="m-2">پرداخت آنلاین</span>
+      {/* ===== موبایل بار ===== */}
+      {itemCount > 0 && (
+        <div className={style.mobileBar}>
+          <div className={style.mobileBarTotal}>
+            <span className={style.mobileBarTotalLabel}>مبلغ قابل پرداخت</span>
+            <span className={style.mobileBarTotalPrice}>
+              {(displayTotal / 10).toLocaleString()} تومان
+            </span>
+            {hasDiscount && (
+              <span className={style.mobileBarOldPrice}>
+                {(displayOldTotal / 10).toLocaleString()} تومان
               </span>
+            )}
+          </div>
+          <button
+            className={style.mobileBarBtn}
+            onClick={paymentHandler}
+            disabled={flagUpdate}
+          >
+            <Package size={18} weight="fill" style={{ marginLeft: "0.4rem" }} />
+            {xtFlagLogin ? "تکمیل خرید" : "ورود و ثبت سفارش"}
+          </button>
+        </div>
+      )}
 
+      {/* ==============================
+          MODAL: پرداخت
+          ============================== */}
+      <Modal
+        size="lg"
+        show={show}
+        onHide={handleClose}
+        dialogClassName={style.modalContent}
+        centered
+      >
+        <Modal.Header closeButton className={style.modalHeader}>
+          <h4 style={{ fontWeight: 800 }}>نهایی‌سازی سفارش</h4>
+        </Modal.Header>
 
-
-              <div className={`${style.post} `} >
-
-                <div className="centerr" onClick={() => setPostState(1)}>
-                  {postState == 1 ? <FiCheckSquare color="green" fontSize="18px" /> : <MdOutlineCheckBoxOutlineBlank fontSize="18px" />}
-
-                  <div className={`${style.postEditor}`} dangerouslySetInnerHTML={{ __html: `${postA?.value}` }}>
-                  </div>
-
-                </div>
-
-
-                <div className="centerr" onClick={() => setPostState(2)}>
-                  {postState == 2 ? <FiCheckSquare color="green" fontSize="18px" /> : <MdOutlineCheckBoxOutlineBlank fontSize="18px" />}
-                  <div className={`${style.postEditor}`} dangerouslySetInnerHTML={{ __html: `${postB?.value}` }}>
-                  </div>
-                </div>
-
-
-              </div>
-
-              <h3 className={`${style.postnews}`}>سفارش پس از تایید نهایی واحد فروش حداکثر طی 48 ساعت کاری تحویل پست میگردد.</h3>
-
-            </div>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <button className={`btn btn-danger ${style.btn_modal_close}`} onClick={handleClose}>
-              <X size={16} color="#fff" weight="duotone" />
-              بستن
-            </button>
-            <button
-              className={address?.length !== 0 ? `btn btn-info ${style.btn_modal_ok}` : `btn btn-info ${style.btn_modal_ok_disable}`}
-              onClick={postState == 0 ? alertF : payState == 1 ? payment : handleRegisterShop}
-            // onClick={payState == 1 ? directToZarin : handleRegisterShop}
-            >
-              <CheckCircle size={20} color="#fff" weight="duotone" />
-              تایید خرید
-            </button>
-          </Modal.Footer>
-        </Modal>
-
-        {/* for ziroSuply product  ===> */}
-        <Modal size="lg" show={showB} onHide={handleCloseB}>
-          <Modal.Header closeButton></Modal.Header>
-
-          <Modal.Body style={{ fontSize: "35px" }}>
+        <Modal.Body className={style.modalBody}>
+          {address?.length != 0 ? (
             <>
-              <h1>موجودی محصولات زیر به اتمام رسیده است ،لطفا این موارد را از سبد خود حذف بفرمایید : </h1>
-              {/* <table className="table"> */}
-              <ul className={`${style.ul_ziroSupply}`}>
-                {ziroSupply?.length != 0 &&
-                  ziroSupply.map((item) => (
-                    <li>{item}</li>
-                    // <tr key="">
-                    //   <th>{item}</th>
-                    //     </tr>
-                  ))}
-              </ul>
-              {/* </table> */}
-            </>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <button className={`btn btn-danger ${style.btn_modal_close}`} onClick={handleCloseB}>
-              <X size={16} color="#fff" weight="duotone" />
-              بستن
-            </button>
-          </Modal.Footer>
-        </Modal>
-
-        <>
-
-
-          {/*for copupon show */}
-          <Modal show={showC} onHide={handleCloseC} backdrop="static" keyboard={false}>
-            <Modal.Body>
-              <p className="text-center" style={{ fontSize: "18px", fontWeight: "600" }}>
-                {`شما یک کد تخفیف دارید برای استفاده از کد تخفیف خود روی  `}
-                <p style={{ color: "#ffc107", fontSize: "larger", fontWeight: "600" }}>کادر زرد رنگ</p>
-                {`کلیک کنید`}
-              </p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  handleCloseC();
-                }}
+              <h5 style={{ fontWeight: 700, marginBottom: "1rem" }}>
+                آدرس تحویل سفارش
+              </h5>
+              <Form.Select
+                className={style.addressSelect}
+                onChange={(e) => setAdressId(e.target.value)}
               >
-                متوجه شدم ...
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      </>
-    </div>
+                {address?.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.state} - {item.address} - کد پستی: {item.postalCode}
+                  </option>
+                ))}
+              </Form.Select>
+            </>
+          ) : (
+            <div style={{ textAlign: "center", padding: "2rem 0" }}>
+              <h5 style={{ fontWeight: 700, marginBottom: "1.2rem" }}>
+                شما آدرس ثبت شده‌ای ندارید
+              </h5>
+              <Link
+                href={"./p-user/address"}
+                onClick={() => setXtFlagSpinnerShow(true)}
+              >
+                <button
+                  className={style.checkoutBtn}
+                  style={{
+                    width: "auto",
+                    padding: "0.8rem 2.4rem",
+                    fontSize: "1.4rem",
+                  }}
+                >
+                  ثبت آدرس جدید
+                </button>
+              </Link>
+            </div>
+          )}
+
+          <div className={style.paymentSection}>
+            <h5 style={{ fontWeight: 700, marginBottom: "1rem" }}>
+              روش پرداخت
+            </h5>
+            <label className={style.paymentOption}>
+              <input
+                type="radio"
+                name="payment"
+                defaultChecked
+                value={1}
+                onChange={(e) => setPayState(e.target.value)}
+              />
+              <CreditCard
+                size={20}
+                weight="fill"
+                style={{ color: "var(--sd-primary)" }}
+              />
+              <span style={{ fontWeight: 600 }}>پرداخت آنلاین (درگاه بانکی)</span>
+            </label>
+
+            <h5
+              style={{
+                fontWeight: 700,
+                marginTop: "1.6rem",
+                marginBottom: "1rem",
+              }}
+            >
+              روش ارسال
+            </h5>
+
+            <div
+              className={`${style.postOption} ${
+                postState == 1 ? style.postOptionActive : ""
+              }`}
+              onClick={() => setPostState(1)}
+            >
+              {postState == 1 ? (
+                <FiCheckSquare color="var(--sd-primary)" fontSize="20px" />
+              ) : (
+                <MdOutlineCheckBoxOutlineBlank fontSize="20px" />
+              )}
+              <div
+                className={style.postEditor}
+                dangerouslySetInnerHTML={{ __html: `${postA?.value}` }}
+              />
+            </div>
+
+            <div
+              className={`${style.postOption} ${
+                postState == 2 ? style.postOptionActive : ""
+              }`}
+              onClick={() => setPostState(2)}
+            >
+              {postState == 2 ? (
+                <FiCheckSquare color="var(--sd-primary)" fontSize="20px" />
+              ) : (
+                <MdOutlineCheckBoxOutlineBlank fontSize="20px" />
+              )}
+              <div
+                className={style.postEditor}
+                dangerouslySetInnerHTML={{ __html: `${postB?.value}` }}
+              />
+            </div>
+
+            <p className={style.postNote}>
+              سفارش پس از تایید نهایی واحد فروش حداکثر طی ۴۸ ساعت کاری تحویل پست
+              میگردد.
+            </p>
+          </div>
+        </Modal.Body>
+
+        <Modal.Footer className={style.modalFooter}>
+          <button className={style.modalBtnClose} onClick={handleClose}>
+            <X size={16} weight="duotone" />
+            بستن
+          </button>
+          <button
+            className={`${style.modalBtnConfirm} ${
+              address?.length === 0 ? style.modalBtnConfirmDisabled : ""
+            }`}
+            onClick={
+              postState == 0 ? alertF : payState == 1 ? payment : handleRegisterShop
+            }
+          >
+            <CheckCircle size={18} weight="fill" />
+            تایید و پرداخت
+          </button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* ==============================
+          MODAL: اخطار موجودی صفر
+          ============================== */}
+      <Modal
+        size="lg"
+        show={showB}
+        onHide={handleCloseB}
+        dialogClassName={style.modalContent}
+        centered
+      >
+        <Modal.Header closeButton className={style.modalHeader}>
+          <h4 style={{ fontWeight: 800, color: "var(--sd-danger)" }}>
+            ❌ موجودی برخی محصولات به اتمام رسیده
+          </h4>
+        </Modal.Header>
+
+        <Modal.Body className={style.modalBody}>
+          <p style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
+            لطفا موارد زیر را از سبد خرید خود حذف کنید:
+          </p>
+          <ul className={style.ziroList}>
+            {ziroSupply?.length != 0 &&
+              ziroSupply.map((item, idx) => <li key={idx}>{item}</li>)}
+          </ul>
+        </Modal.Body>
+
+        <Modal.Footer className={style.modalFooter}>
+          <button className={style.modalBtnClose} onClick={handleCloseB}>
+            <X size={16} weight="duotone" />
+            بستن
+          </button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* ==============================
+          MODAL: اعلان کد تخفیف
+          ============================== */}
+      <Modal
+        show={showC}
+        onHide={handleCloseC}
+        backdrop="static"
+        keyboard={false}
+        dialogClassName={style.modalContent}
+        centered
+        size="sm"
+      >
+        <Modal.Body style={{ textAlign: "center", padding: "2.4rem" }}>
+          <Gift size={48} weight="fill" style={{ color: "var(--sd-primary)", marginBottom: "1rem" }} />
+          <p
+            style={{
+              fontSize: "1.6rem",
+              fontWeight: 600,
+              lineHeight: 2,
+            }}
+          >
+            شما یک کد تخفیف دارید!
+            <br />
+            برای استفاده از کد تخفیف خود روی{" "}
+            <strong style={{ color: "#f59e0b" }}>باکس زرد رنگ</strong> کلیک
+            کنید.
+          </p>
+        </Modal.Body>
+        <Modal.Footer
+          style={{
+            border: "none",
+            justifyContent: "center",
+            padding: "0 2rem 2rem",
+          }}
+        >
+          <button
+            className={style.checkoutBtn}
+            style={{
+              width: "auto",
+              padding: "0.8rem 3rem",
+              fontSize: "1.4rem",
+            }}
+            onClick={handleCloseC}
+          >
+            متوجه شدم ...
+          </button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }

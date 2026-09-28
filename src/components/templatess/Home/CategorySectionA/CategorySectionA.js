@@ -4,6 +4,7 @@ import CardA from "@/components/madules/Cards/CardA/CardA";
 import styles from "./CategorySectionA.module.css";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
+import Link from "next/link";
 
 export default function CategorySectionA({ categoryId, title }) {
   const [mainCategory, setMainCategory] = useState({});
@@ -32,8 +33,17 @@ export default function CategorySectionA({ categoryId, title }) {
       <div className="container">
         <div className={`row mt-1 ${styles.title_row}`}>
           <div className="col" style={{ marginRight: "50px", marginTop: "30px" }}>
-            <h1 className={styles.title}>{`دسته بندی ${title}:`}</h1>
+            <h1 className={styles.title}>
+              <span className={styles.title_bar}></span>
+              {`دسته بندی ${title}`}
+            </h1>
           </div>
+          {/* <div className={`col-auto ${styles.more_col}`}>
+            <Link href={`/category/${categoryId}`} className={styles.more_link}>
+              مشاهده همه
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            </Link>
+          </div> */}
         </div>
         {/* <div className="row">
               <div className="col-12 centerr">

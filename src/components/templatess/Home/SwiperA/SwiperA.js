@@ -30,7 +30,8 @@ export default function SwiperA() {
         className={styles.swiper}
       >
         <SwiperSlide className={styles.swiper_slide}>
-          <img src="../../images/logoFactor3.png" />
+          {/* <img src="../../images/logoFactor3.png" /> */}
+          <img src="/images/Sane_Logo_2_Purple.jpg" />
         </SwiperSlide>
 
         <SwiperSlide className={styles.swiper_slide}>
@@ -38,7 +39,8 @@ export default function SwiperA() {
         </SwiperSlide>
 
         <SwiperSlide className={styles.swiper_slide} >
-          <img src="../../images/logobytext.jpg" />
+          {/* <img src="../../images/logobytext.jpg" /> */}
+          <img src="../../images/Sane_Logo_Purple.jpg" />
         </SwiperSlide>
 
 

@@ -1,19 +1,29 @@
+import React from "react";
+import styles from "./BrandArea.module.css";
 
-import React from 'react'
-import Styles from './BrandArea.module.css'
-import CardBrand from '../Cards/CardBrand/CardBrand'
-export default function BrandArea({brandArray,fileRoot}) {
-
+export default function BrandArea({ brandArray, fileRoot }) {
+  const list = [...brandArray, ...brandArray];
   return (
-    <div className={`container ${Styles.container }`}  >
-        <div className='row '>
-           
-                {brandArray.map((item,index)=>
-             <CardBrand key={index} src={item.brand} fileRoot={fileRoot} url={item.url}  aos={'fade-right'}/>  
-                )}
-
-            
+    <div className={`container ${styles.container} sd-fade-up`}>
+      <div className={styles.marquee}>
+        <div className={styles.track}>
+          {list.map((item, index) => (
+            <a
+              key={index}
+              href={item.url || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.card}
+            >
+              <img
+                src={`../../../../../images/brand/${fileRoot}/${item.brand}`}
+                alt={`${item.brand}`}
+                loading="lazy"
+              />
+            </a>
+          ))}
         </div>
+      </div>
     </div>
-  )
+  );
 }

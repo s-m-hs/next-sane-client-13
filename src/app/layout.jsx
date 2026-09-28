@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/madules/Header/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import "./globals.css";
+import "./design.css";
 import AOSInit from "@/utils/Aos/aos";
 import Footer from "@/components/templatess/Footer/Footer";
 import ScrollToTopt from "@/utils/ScrollToTop/ScrollToTop";

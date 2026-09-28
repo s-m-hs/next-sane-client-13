@@ -69,10 +69,7 @@ export default function SearchComp({ param }) {
 
                                             {item.supply != 0 &&
 
-                                                <span className={styles.price}>{
-                                                    item.noOffPrice != item.price ?
-                                                        (item.price / 10).toLocaleString() :
-                                                        (Math.ceil(offer * item.price / 10000) * 1000).toLocaleString()} تومان</span>}
+                                                <span className={styles.price}>{(item.resultPrice / 10).toLocaleString()} تومان</span>}
 
                                         </div>
 
