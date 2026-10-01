@@ -38,3 +38,9 @@ export const sendState = [
     { title: "پست", enum: 1 },
     { title: "تحویل حضوری / ارسال با پیک", enum: 2 },
 ]
+
+
+export const NOOffer = 0
+export const PercentOffer = 1
+export const RialOffer = 2
+

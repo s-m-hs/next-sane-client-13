@@ -1,88 +1,186 @@
-.container{
-    margin-top : 50px ;
-    width: 100%;
-    height: 500px;
-    background-color: var(--white1ffffff);
-    position: relative;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+/* فوتر مدرن — دارک‌اسلیت با درخشش بنفش */
+.footer {
+  margin-top: 6rem;
+  width: 100%;
+  position: relative;
+  border-radius: 3rem 3rem 0 0;
+  background:
+    radial-gradient(700px 300px at 85% 0%, rgba(124, 58, 237, 0.25), transparent 65%),
+    radial-gradient(600px 260px at 8% 100%, rgba(6, 182, 212, 0.14), transparent 60%),
+    linear-gradient(160deg, #1e1b4b 0%, #0f172a 60%, #111827 100%);
+  color: #e2e8f0;
+  overflow: hidden;
 }
-.container>div{
-    width: 80%;
-    margin: 0 auto;
- 
-    border-bottom: 1px solid #f0f0ff;
-}
-.logo{
-    width: 10%;
-    height: 10%;
-}
-.sphere {
-    padding: 4px;
-    width: 30px !important;
-    height: 30px;
-    background-color:green;
-    background: radial-gradient(circle at 30% 50%, #ffffff 10%, #d0d0d0 70%);
-    border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    /* position: absolute;
-    left:5%; */
-  }
-  .eatadiv{
-    justify-content: flex-start !important;
 
-  }
-  .eatadiv div{
-margin: 10px;
-  }
-  .eatadiv div a{
-    color: var(--black33b4359);
-  }
-.rowtop{
-  height: 30%;
+.inner {
+  padding: 5rem 0 2rem;
 }
-  .rowbuttom{
-    height: 70%;
-  }
-.col{
-  height: 80%;
-  justify-content: space-evenly;
+
+.rowtop {
+  gap: 2rem 0;
 }
-.col h1 {
-  color: var(--black33b4359);
+
+.logo {
+  width: 90px;
+  height: auto;
+  border-radius: 1.6rem;
+  box-shadow: 0 10px 30px -8px rgba(124, 58, 237, 0.55);
 }
-.col h5 {
-  color: var(--black33b4359);
+
+.tagline {
+  margin-top: 1.4rem;
+  font-size: 1.4rem;
+  color: #a5b4fc;
+  font-weight: 600;
 }
-.col h3{
+
+.socials {
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.35s ease;
+}
+
+.social img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.social:hover {
+  transform: translateY(-5px);
+  background: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 12px 26px -8px rgba(124, 58, 237, 0.65);
+}
+
+.divider {
+  height: 1px;
+  margin: 3.5rem 0;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.35), transparent);
+}
+
+.about h2,
+.links h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.about h2::before,
+.links h2::before {
+  content: "";
+  width: 0.6rem;
+  height: 2.2rem;
+  border-radius: 99px;
+  background: linear-gradient(180deg, #a78bfa, #06b6d4);
+}
+
+.about p {
   text-align: justify;
-  color: var(--black33b4359);
+  font-size: 1.45rem;
+  line-height: 2.2;
+  color: #94a3b8;
 }
 
-.eatadiv_number{
-  color: var(--black33b4359);
-  justify-content: flex-start !important;
+.links ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem 2rem;
+  padding: 0;
+  margin: 0;
 }
 
-/* .zarinpal img{
-  width: 80px;
-} */
-@media only screen and (max-width:900px) {
-  .container{
-height: auto;
-padding-bottom: 80px;
-
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 1rem;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, color 0.3s ease;
 }
-  .empty_col{
-    display: none;
+
+.links a:hover {
+  transform: translateX(-6px);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.linkIcon {
+  display: inline-flex;
+  color: #a78bfa;
+}
+
+.badges {
+  margin-top: 3.5rem;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.badgeCard {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.4rem;
+  min-width: 120px;
+  min-height: 100px;
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.badgeCard img {
+  max-width: 96px;
+  max-height: 80px;
+  cursor: pointer;
+}
+
+.badgeCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px -12px rgba(124, 58, 237, 0.5);
+}
+
+.bottom {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  font-size: 1.35rem;
+  color: #64748b;
+}
+
+@media only screen and (max-width: 900px) {
+  .inner {
+    padding: 3.5rem 10px 1.5rem;
   }
-  .eatadiv{
-    flex-direction: column ;
+  .footer {
+    border-radius: 2rem 2rem 0 0;
   }
-  .logo{
-    display: none;
+  .about,
+  .links {
+    margin-bottom: 2.5rem;
   }
-  .Footer_rowbuttom{
-   height: auto;
+  .links ul {
+    grid-template-columns: 1fr;
   }
 }

@@ -12,6 +12,7 @@ import alertQ from "@/utils/Alert/AlertQ";
 import Favorite from "../../Favorite/Favorite";
 import ShareButton from "../../ShareButton/ShareButton";
 import { product } from "@/utils/DataStore";
+import PriceBox from "../../PriceBox/PriceBox";
 
 export default function CardC({
   imgSrc,
@@ -25,8 +26,10 @@ export default function CardC({
   verifyHam,
   offerState,
   offPrice,
-  isToSale, isFavor,
-  isShowHeart
+  isToSale,
+  isFavor,
+  isShowHeart,
+
 }) {
   let {
     setCartCounter,
@@ -34,7 +37,14 @@ export default function CardC({
     setBasketFlag,
     setXtFlagSpinnerShow,
     setLocalUpdateBasket,
+    offer
   } = useContext(MainContext);
+
+  // محاسبه درصد تخفیف
+  const hasDiscount = noOffPrice !== null && price !== null && Number(noOffPrice) > Number(price) && supply !== 0 && isToSale;
+  const discountPercent = hasDiscount
+    ? Math.round((1 - Number(price) / Number(noOffPrice)) * 100)
+    : 0;
 
   const AlertA = () => {
     if (supply != 0) {
@@ -50,12 +60,9 @@ export default function CardC({
   };
 
   const AlertB = () =>
-    alertN(
-      "center",
-      "info",
-      " این محصول در سبد خرید شما موجود است ...",
-      1000
-    ).then((res) => { });
+    alertN("center", "info", " این محصول در سبد خرید شما موجود است ...", 1000).then(
+      (res) => { }
+    );
   const AlertC = () =>
     alertQ(
       "center",
@@ -64,7 +71,6 @@ export default function CardC({
       "باشه ..."
     ).then((res) => { });
   const addToBasket = () => {
-    // const getLocalStorage = localStorage.getItem("loginToken");
     let obj = {
       cyProductID: id,
       quantity: 1,
@@ -76,7 +82,6 @@ export default function CardC({
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          // Authorization:`Bearer ${ getLocalStorage }`
         },
         body: JSON.stringify(obj),
       }).then((res) => {
@@ -91,144 +96,82 @@ export default function CardC({
     myApp();
   };
 
-  // console.log(supply)
   return (
-    <div data-aos="fade-up" className={`${Styles.cardprob_container} centerc `}>
-      {supply == 0 && parentId == 2 && (
-        <span className={`${Styles.RequstPrice} centerc `} onClick={AlertC}>
-          استعلام قیمت
-        </span>
-      )}
-      {supply != 0 && !isToSale && (
-        <span className={`${Styles.RequstPrice} centerc `} onClick={AlertC}>
+    <div data-aos="fade-up" className={`${Styles.cardprob_container} centerc`}>
+      {/* برچسب استعلام قیمت */}
+      {((supply == 0 && parentId == 2) || (supply != 0 && !isToSale)) && (
+        <span className={`${Styles.RequstPrice} centerc`} onClick={AlertC}>
           استعلام قیمت
         </span>
       )}
 
-      {isShowHeart ? <div className={`${Styles.favorite}`}>
-        <Favorite id={id} isFavorite={isFavor} />
+      {/* برچسب درصد تخفیف */}
+      {discountPercent > 0 && (
+        <span className={Styles.discountBadge}>%{discountPercent} تخفیف</span>
+      )}
 
-      </div> : ""}
+      {/* Favorite */}
+      {isShowHeart && (
+        <div className={Styles.favorite}>
+          <Favorite id={id} isFavorite={isFavor} />
+        </div>
+      )}
 
-      <div className={`${Styles.share}`}>
+      {/* Share */}
+      <div className={Styles.share}>
         <ShareButton productId={id} type={product} />
       </div>
 
+      {/* لینک محصول */}
       <Link
         className={`${Styles.cardprob_container_linkA}`}
         onClick={() => setXtFlagSpinnerShow(true)}
         href={`/product/${id}`}
       >
-
-        <img src={imgSrc} alt={`${title}`} />
+        <div className={Styles.imageWrap}>
+          <img src={imgSrc} alt={`${title}`} />
+        </div>
 
         <span className={Styles.cardprob_title}> {title} </span>
 
-        {/* <span>368,000</span> */}
-        {(supply != 0 && isToSale) &&
-          (
-            <>
-              {offerState == 1 && noOffPrice === price && (
-                <>
-                  <span className={`${Styles.cardprob_price} `}>
-                    {price?.toLocaleString()} تومان{" "}
-                  </span>
-                </>
-              )}
+        {/* قیمت‌ها */}
+        {supply != 0 && isToSale && <PriceBox offer={offer} price={price} noOffPrice={noOffPrice} />}
 
-
-
-
-
-              <>
-
-                <span className={`${Styles.cardprob_price} `}>
-                  {price?.toLocaleString()} تومان{" "}
-                </span>
-
-                <span
-                  className={`${Styles.cardprob_noOffPrice}  ${Styles.underLine}`}
-                >
-                  {noOffPrice?.toLocaleString()} تومان{" "}
-                </span>
-
-
-
-
-              </>
-
-              {/* {noOffPrice !== price && (
-                <>
-
-
-                  <span
-                    className={`${Styles.cardprob_price} `}
-                  >
-                    {price?.toLocaleString()} تومان{" "}
-                  </span>
-
-                  <span className={`${Styles.cardprob_noOffPrice} ${Styles.underLine}`}>
-                    {noOffPrice?.toLocaleString()}تومان{" "}
-                  </span>
-
-                </>
-              )} */}
-
-              {verifyHam && (
-                <span className={Styles.cardprob_noOffPrice}>
-                  {noOffPrice?.toLocaleString()}تومان{" "}
-                </span>
-              )}
-            </>
-          )
-
-
-          //   : parentId == 2 ? (
-          //   ""
-          // ) : (
-          //   <span className={Styles.cardprob_price}>ناموجود</span>
-          //   )
-        }
+        {/* {supply != 0 && isToSale && (
+          <div className={Styles.priceRow}>
+            <span className={Styles.cardprob_price}>
+              {price?.toLocaleString()} <small className={Styles.toman}>تومان</small>
+            </span>
+            {hasDiscount && (
+              <span className={`${Styles.cardprob_noOffPrice}`}>
+                {noOffPrice?.toLocaleString()} تومان
+              </span>
+            )}
+          </div>
+        )} */}
 
         {supply == 0 && parentId != 2 ? (
-          <span
-            className={Styles.cardprob_price}
-          >
-            ناموجود
-          </span>
-        ) : ''}
+          <span className={Styles.cardprob_price}>ناموجود</span>
+        ) : (
+          ""
+        )}
       </Link>
+
+      {/* دکمه سبد خرید */}
       {verifyHam && (
         <div className={`${Styles.cardprob__icon_div} centerr`}>
           <ShoppingCart
-            size={42}
+            size={32}
             color="#bf43f9"
             weight="fill"
             onClick={() => {
-              // const getLocalStorage=localStorage.getItem('loginToken')
-
-              // let obj=[{
-              //   cyProductID: id,
-              //   quantity: 1,
-              //   orderItemID: 0,
-              // }]
               xtFlagLogin
                 ? addToBasket()
-                : // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA)
-                addToCart(id, "1", setCartCounter);
+                : addToCart(id, "1", setCartCounter);
             }}
           />
-          {/* <Heart size={32}
-     color="#d757eb"
-    weight="thin" /> */}
         </div>
       )}
-
-      {/* <Link className={Styles.cardprob__link}
-// onClick={clickSpinner}
-onClick={()=>setXtFlagSpinnerShow(true)}
-  href={`/product/${id}`} >جزییات بیشتر...</Link> */}
-      <div></div>
     </div>
   );
 }

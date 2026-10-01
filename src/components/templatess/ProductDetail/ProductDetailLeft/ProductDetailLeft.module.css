@@ -40,9 +40,9 @@
   font-weight: 600;
 }
 .ProductDetailL_divMiddle_offpriceB {
-  color: var(--them);
+  /* color: var(--them); */
   font-size: 1.4cqi;
-  font-weight: 600;
+  /* font-weight: 600; */
 }
 .ProductDetailL_divMiddle_price {
   font-size: 1cqi;

@@ -10,7 +10,8 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Head from "next/head";
 import Favorite from "@/components/madules/Favorite/Favorite";
 import ShareButton from "@/components/madules/ShareButton/ShareButton";
-import { product } from "@/utils/DataStore";
+import { NOOffer, product } from "@/utils/DataStore";
+import PriceBox from "@/components/madules/PriceBox/PriceBox";
 
 export default function ProductDetailLeft({ detail }) {
   let {
@@ -103,7 +104,8 @@ export default function ProductDetailLeft({ detail }) {
 
                       /////حالت screen > 900
                       <>
-                        {offer == 1 ?
+
+                        {offer.offerType == NOOffer ?
                           <span
                             className={Styles.ProductDetailL_divMiddle_offprice}
                           >
@@ -230,7 +232,7 @@ export default function ProductDetailLeft({ detail }) {
                           <>
 
                             {/* /////حالت screen < 900 */}
-                            {offer == 1 && detail?.cyCategoryId ?
+                            {offer.offerType == NOOffer ?
                               <span
                                 className={
                                   Styles.ProductDetailL_divMiddle_offprice

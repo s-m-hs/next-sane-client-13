@@ -1,0 +1,33 @@
+.noOffPrice{ 
+/* position: absolute;
+bottom: 10px; */
+
+font-size: 15px;
+/* align-self: flex-end !important; */
+color: var(--black33b4359);
+text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+padding-bottom: 20px;
+margin-bottom: 10px;
+
+}
+
+.price{
+  /* position: absolute;
+  bottom: 10px; */
+    font-size: 18px;
+    justify-content: center;
+    /* align-self: flex-end !important; */
+    color: var(--black33b4359);
+    text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
+    /* color: rgb(255, 179, 0); */
+    color: var(--them);
+}
+.priceDiv{
+  height: 60px;
+  position: absolute;
+  bottom: 10px;
+  justify-self: flex-end !important;
+}
+.underline{
+  text-decoration: line-through red;
+}

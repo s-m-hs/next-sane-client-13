@@ -57,6 +57,8 @@ export default function OrderById({ params }) {
     useEffect(() => {
         getOrderByOrderID()
     }, [])
+    console.log(orderDetails)
+
     return (
         <div className="d-flex flex-column flex-lg-row gap-4 mt-1">
             {loading && <LoadingA isShow={true} />}             <section className="flex-grow-1 d-flex flex-column gap-4">

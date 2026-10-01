@@ -6,17 +6,22 @@ import CardAButton from "@/components/madules/Cards/CardAButton/CardAButton";
 import CardC from "@/components/madules/Cards/CardC/CardC";
 import SpinnerA from "@/utils/SpinnerA/SpinnerA";
 import Swal from "sweetalert2";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { HouseLine } from "@phosphor-icons/react";
+import Accordion from "react-bootstrap/Accordion";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
 import Pagination from "@mui/material/Pagination";
 import postApi from "@/utils/ApiUrl/apiCallBack/apiPost";
-import { style } from "@mui/system";
-import Accordion from "react-bootstrap/Accordion";
-import { useRouter } from "next/navigation";
-import { LuTableProperties } from "react-icons/lu";
-import { FaArrowsAltV } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  HouseLine,
+  Layout,
+  Rows,
+  ShoppingBag,
+  SlidersHorizontal,
+  CaretLeft,
+} from "@phosphor-icons/react";
+
 export default function CategoryDetaile({ param }) {
   const [mainCategory, setMainCategory] = useState([]);
   const [mainCatChilds, setMainCatChilds] = useState([]);
@@ -32,22 +37,20 @@ export default function CategoryDetaile({ param }) {
   const [tableShow, setTableShow] = useState(false);
   const [parentId, setParentId] = useState("");
   const [hamkarPaymentState, setHamkarPaymentState] = useState("1");
-  const [proByCatFlag, setProByCatFlag] = useState(true)
+  const [proByCatFlag, setProByCatFlag] = useState(true);
   const rout = useRouter();
 
-
-  let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar, offer } = useContext(MainContext);
+  let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar, offer } =
+    useContext(MainContext);
   const styleRef = useRef();
+
   const goToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   const handleChange = (event, value) => {
     goToTop();
     setPage(value);
-    // let code=mainCategory?.item.code
     let code = codePro;
     let obj = {
       cat: code,
@@ -56,6 +59,7 @@ export default function CategoryDetaile({ param }) {
     };
     getproductByCat(obj);
   };
+
   const changeId = (code) => {
     setCodePro(code);
     setPage(1);
@@ -65,10 +69,7 @@ export default function CategoryDetaile({ param }) {
       pageSize: pageCount,
     };
     getproductByCat(obj);
-    window.scrollTo({
-      top: 300,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 300, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -79,8 +80,9 @@ export default function CategoryDetaile({ param }) {
       z ? setPaginationArray(Array.from({ length: z })) : setPaginationArray([]);
     }
   }, [productByCat]);
+
   productByCat?.sort((a, b) => b.supply - a.supply);
-  // sorted_products = sorted(productByCat, key=lambda x: x['supply'], reverse=True)
+
   const getCategoryById = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -88,17 +90,16 @@ export default function CategoryDetaile({ param }) {
       str: "string",
     };
     async function myAppGet() {
-      const res = await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      })
-        .then((res) => {
-          return res.json();
-        })
+      const res = await fetch(
+        `${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(obj),
+        }
+      )
+        .then((res) => res.json())
         .then((result) => {
           if (result.childs?.length != 0) {
             setMainCatChilds(result.childs);
@@ -111,37 +112,38 @@ export default function CategoryDetaile({ param }) {
     }
     myAppGet();
   };
-  ////////////////////////////
+
   const getproductByCat = (obj) => {
     async function myApppost() {
-      const res = await fetch(`${apiUrl}/api/CyProducts/GetProductByProductCat`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      })
+      const res = await fetch(
+        `${apiUrl}/api/CyProducts/GetProductByProductCat`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(obj),
+        }
+      )
         .then((res) => {
           if (res.ok) {
             return res.json().then((result) => {
               if (result.itemList?.length != 0) {
                 setProductByCat(result.itemList);
                 setAllCount(result.allCount);
-                setProByCatFlag(false)
+                setProByCatFlag(false);
               } else {
                 setProductByCat([]);
                 setAllCount(result.allCount);
-                setProByCatFlag(false)
+                setProByCatFlag(false);
               }
             });
           }
-        }).catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
     }
     myApppost();
   };
 
-  /////////////////////////////////sidebar==>>
   const getCategoryAccesory = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -163,66 +165,56 @@ export default function CategoryDetaile({ param }) {
     getCategoryAccesory();
     getCategoryHard();
   }, []);
+
   const getChild = () => {
-    // const getLocalStorage = localStorage.getItem('loginToken')
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       id: param,
       str: "string",
     };
     async function myApp() {
-      const res = await fetch(`${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`, {
-        method: "POST",
-        credentials: "include",
-
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${getLocalStorage}`
-        },
-        body: JSON.stringify(obj),
-      }).then((res) => {
-        return res.json().then((result) => {
-          // setParentId(result.root.id)
+      const res = await fetch(
+        `${apiUrl}/api/CyProductCategory/GetItemWChildAndRoot`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(obj),
+        }
+      ).then((res) =>
+        res.json().then((result) => {
           if (result.root.rootId == null) {
             setParentId(result.root.id);
           } else {
             setParentId(result.root.rootId);
           }
-        });
-      });
+        })
+      );
     }
     myApp();
   };
+
   useEffect(() => {
     getChild();
   }, []);
-
-  ////////////////////////////////sidebar
-
-  //////////////////////////////
 
   useEffect(() => {
     if (param !== null) {
       getCategoryById();
     }
     Swal.fire({
-      // iconColor:'purple',
       position: "top-end",
       icon: "success",
       toast: "true",
       width: "100px",
-      // title: "Your work has been saved",
       showConfirmButton: false,
       timer: 500,
     }).then((res) => setFlag((prev) => !prev));
   }, []);
 
-  ///////////////////////////
   useEffect(() => {
     if (mainCatChilds.length == 0 && mainCategory.length != 0) {
-
       let code = mainCategory.item?.code;
-
       let obj = {
         cat: code,
         pageNumber: page - 1,
@@ -234,150 +226,208 @@ export default function CategoryDetaile({ param }) {
   }, [page, mainCategory]);
 
   useEffect(() => {
-    if (mainCatChilds.length !== 0 && mainCatChilds[0].code && mainCategory.length != 0) {
+    if (
+      mainCatChilds.length !== 0 &&
+      mainCatChilds[0].code &&
+      mainCategory.length != 0
+    ) {
       let obj = {
         cat: mainCatChilds[0]?.code,
         pageNumber: page - 1,
         pageSize: pageCount,
       };
-
       getproductByCat(obj);
     }
-
-    ////for first to setcodePro==>>
     setCodePro(mainCatChilds[0]?.code);
   }, [flag, mainCategory]);
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
-    // return()=>setNameCategory('')
   }, []);
 
+  // محاسبات
+  const totalProducts = allCount || productByCat?.length || 0;
+  const categoryName = mainCategory.item?.name || "";
+  const hasChildCategories = mainCatChilds?.length > 0;
+
   return (
-    <div className={`container  centerc ${Styles.category}`}>
-      <div className="row mt-5">
-        <div className={`col-2  ${Styles.right_maindiv} centerc`}>
-          <h1>دسته بندی ها:</h1>
+    <div className={`container ${Styles.page}`}>
+      {/* ===== HERO HEADER ===== */}
+      <div className={Styles.hero}>
+        <div className={Styles.heroContent}>
+          <nav className={Styles.heroBreadcrumb}>
+            <Link href="/">
+              <HouseLine size={16} weight="fill" />
+              خانه
+            </Link>
+            <span className={Styles.heroBreadcrumbSeparator}>/</span>
+            <span style={{ color: "#fff", fontWeight: 600 }}>
+              {categoryName || "دسته‌بندی"}
+            </span>
+          </nav>
+          <h1 className={Styles.heroTitle}>
+            <ShoppingBag
+              size={32}
+              weight="fill"
+              style={{ marginLeft: "0.8rem", opacity: 0.8 }}
+            />
+            {categoryName || "محصولات"}
+          </h1>
+          {totalProducts > 0 && (
+            <div className={Styles.heroCount}>
+              {totalProducts.toLocaleString()} محصول
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ===== MAIN GRID ===== */}
+      <div className={Styles.grid}>
+        {/* ===== SIDEBAR ===== */}
+        <aside className={Styles.sidebar}>
+          <h3 className={Styles.sidebarTitle}>
+            <SlidersHorizontal size={18} weight="duotone" />
+            دسته‌بندی‌ها
+          </h3>
 
           <Accordion defaultActiveKey={["0"]} alwaysOpen>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header className={`${Styles.AccordionCom}`}>لوازم جانبی</Accordion.Header>
-              <Accordion.Body>
-                <div className={`${Styles.right_div} centerc`}>
+            <Accordion.Item eventKey="0" className={Styles.accItem}>
+              <Accordion.Header className={Styles.accHeader}>
+                لوازم جانبی
+              </Accordion.Header>
+              <Accordion.Body className={Styles.accBody}>
+                <div className={Styles.sidebarLinks}>
                   {mainCatA?.childs?.length != 0 &&
                     mainCatA?.childs?.map((item) => (
-                      <Link href={`/category/${item.id}`}>
-                        {" "}
-                        <span>{item.name}</span>
+                      <Link
+                        key={item.id}
+                        href={`/category/${item.id}`}
+                        className={`${Styles.sidebarLink} ${String(item.id) === param
+                          ? Styles.sidebarLinkActive
+                          : ""
+                          }`}
+                      >
+                        <span className={Styles.sidebarLinkDot} />
+                        {item.name}
                       </Link>
                     ))}
                 </div>
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Header className={`${Styles.AccordionCom}`}>سخت افزار</Accordion.Header>
-              <Accordion.Body>
-                <div className={`${Styles.right_div} centerc`}>
+            <Accordion.Item eventKey="1" className={Styles.accItem}>
+              <Accordion.Header className={Styles.accHeader}>
+                سخت افزار
+              </Accordion.Header>
+              <Accordion.Body className={Styles.accBody}>
+                <div className={Styles.sidebarLinks}>
                   {mainCatB?.childs?.length != 0 &&
                     mainCatB?.childs?.map((item) => (
-                      <Link href={`/category/${item.id}`}>
-                        {" "}
-                        <span>{item.name}</span>
+                      <Link
+                        key={item.id}
+                        href={`/category/${item.id}`}
+                        className={`${Styles.sidebarLink} ${String(item.id) === param
+                          ? Styles.sidebarLinkActive
+                          : ""
+                          }`}
+                      >
+                        <span className={Styles.sidebarLinkDot} />
+                        {item.name}
                       </Link>
                     ))}
                 </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
+        </aside>
 
-          {/* <div className={`${Styles.right_div} centerc`}>
- {mainCatA?.childs?.length!=0 && mainCatA?.childs?.map(item=>(
-  <Link href={`/category/${item.id}`}>  <span>{item.name}</span></Link>
-  ))}
-
-</div> */}
-        </div>
-
-        <div className={`col-12 col-md-10 ${Styles.category_col}`}>
-          <div className={`row ${Styles.breadcrumb_row}`}>
-            <div className={`${Styles.breadcrumb} col`}>
-              <Breadcrumb>
-                <Breadcrumb.Item>
-                  <Link
-                    href="/"
-                  >
-                    <HouseLine size={24} color={`var(--them)`} />
-                    خانه/
-                  </Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active href="/">
-                  {mainCategory.item?.name}
-                </Breadcrumb.Item>
-              </Breadcrumb>
-            </div>
-          </div>
-
-          {paginationArray.length > 1 && (
-            <div className="pagination-div">
-              <Pagination
-                count={paginationArray.length}
-                page={page}
-                //  ref={classRefB}
-                onChange={handleChange}
-                color="primary"
-                shape="rounded"
-                style={{ direction: "ltr" }}
-              />
-            </div>
-          )}
-
-          <div className={`row row-cols-auto  centerr ${Styles.category_row}`}>
-            {mainCatChilds != null &&
-              mainCatChilds.map((item, index) => (
-                <>
-                  <div key={item.id} className={`centerc ${Styles.category__cart_div}`}>
-                    <CardAButton imgSrc={item.imageUrl} text={item.name} changeIdProp={() => changeId(item.code)} code={item.code} />
-                    <span>{item.name} </span>
-                  </div>
-                </>
+        {/* ===== CONTENT ===== */}
+        <div className={Styles.content}>
+          {/* ===== چیپ‌های زیردسته ===== */}
+          {hasChildCategories && (
+            <div className={Styles.chipRow}>
+              {mainCatChilds.map((item, index) => (
+                <button
+                  key={item.id}
+                  className={`${Styles.chip} ${codePro === item.code ? Styles.chipActive : ""
+                    }`}
+                  onClick={() => changeId(item.code)}
+                >
+                  {item.imageUrl && (
+                    <img
+                      src={item.imageUrl}
+                      alt=""
+                      className={Styles.chipImg}
+                    />
+                  )}
+                  {item.name}
+                </button>
               ))}
-          </div>
-
-          {verifyHamkar && (
-            <div className={Styles.select_div}>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                onChange={(e) => {
-                  setHamkarPaymentState(e.target.value);
-                }}
-              >
-                <option value="1">نقدی</option>
-                <option value="2">یک ماهه </option>
-                <option value="3">دو ماهه</option>
-                <option value="4">سه ماهه</option>
-              </select>
             </div>
           )}
-          <button className="btn btn-light" style={{ fontSize: "18px", color: `var(--them)` }} onClick={() => setTableShow(!tableShow)}>
-            {!tableShow ? "نمایش نموداری" : "نمایش ستونی"}
-            {!tableShow ? <LuTableProperties /> : <FaArrowsAltV />}
-          </button>
 
-          <div className={`row row-cols-4 centerr pt-4 ${Styles.products_card} boxSh `}>
-            {proByCatFlag ? (
-              <div className="row">
-                <div className="col-12 centerr">
-                  <SpinnerA size={200} />
-                </div>
-              </div>
-            ) : !tableShow ? (
-              productByCat?.map((item, index) => {
-                return item.isShow &&
-                  (
-                    <div
-                      key={index}
-                      className={`centerc ${Styles.products_col}`}
+          {/* ===== انتخاب همکاری + نمای جدولی ===== */}
+          <div className={Styles.controls}>
+            <div className={Styles.controlsLeft}>
+              {verifyHamkar && (
+                <select
+                  className={Styles.paymentSelect}
+                  value={hamkarPaymentState}
+                  onChange={(e) => setHamkarPaymentState(e.target.value)}
+                >
+                  <option value="1">نقدی</option>
+                  <option value="2">یک ماهه</option>
+                  <option value="3">دو ماهه</option>
+                  <option value="4">سه ماهه</option>
+                </select>
+              )}
+              <button
+                className={`${Styles.toggleBtn} ${tableShow ? Styles.toggleBtnActive : ""
+                  }`}
+                onClick={() => setTableShow(!tableShow)}
+              >
+                {tableShow ? (
+                  <>
+                    <Layout size={16} weight="duotone" /> نمایش Grid
+                  </>
+                ) : (
+                  <>
+                    <Rows size={16} weight="duotone" /> نمایش جدول
+                  </>
+                )}
+              </button>
+            </div>
+
+            <span className={Styles.controlLabel}>
+              {totalProducts > 0 && `${totalProducts.toLocaleString()} محصول`}
+            </span>
+          </div>
+
+          {/* ===== محصولات ===== */}
+          {proByCatFlag ? (
+            <div className={Styles.skeletonGrid}>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className={Styles.skeletonCard} />
+              ))}
+            </div>
+          ) : !tableShow ? (
+            /* ------ نمای کارتی ------ */
+            <div className={Styles.productGrid}>
+              <AnimatePresence mode="popLayout">
+                {productByCat
+                  ?.filter((item) => item.isShow)
+                  .map((item, index) => (
+                    <motion.div
+                      key={item.id}
+                      layout
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{
+                        delay: index * 0.03,
+                        duration: 0.35,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className={Styles.productCardWrapper}
                     >
                       <CardC
                         parentId={parentId}
@@ -386,108 +436,136 @@ export default function CategoryDetaile({ param }) {
                         title={item.name}
                         price={Number(item.resultPrice) / 10}
                         noOffPrice={Number(item.noOffPrice) / 10}
-                        offPrice={(Math.ceil(((item.price) / 10) * offer / 1000)) * 1000}
+                        offPrice={
+                          Math.ceil((item.price / 10) * offer / 1000) * 1000
+                        }
                         supply={item.supply}
                         isToSale={item.isToSale}
-                        //     noOffPrice={hamkarPaymentState === '1' ? Number(item.noOffPrice / 10)-(Number(item.noOffPrice / 10)*(5/100)) :
-                        //       hamkarPaymentState === '2' ? Number(item.noOffPrice / 10) :
-                        //       hamkarPaymentState === '3' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(5/100)) :
-                        //       hamkarPaymentState === '4' ? Number(item.noOffPrice / 10)+ (Number(item.noOffPrice / 10)*(10/100)) :''
-
-                        // }
                         verifyHam={verifyHamkar}
                         offerState={offer}
                         isFavor={item.isFavorite}
                         isShowHeart={true}
                       />
-                    </div>
-                  )
-              })
-            ) : (
-              <table
-                className="table table-striped table-hover
-                "
-              >
+                    </motion.div>
+                  ))}
+              </AnimatePresence>
+            </div>
+          ) : (
+            /* ------ نمای جدولی ------ */
+            <div className={Styles.tableWrap}>
+              <table className={Styles.table}>
+                <thead>
+                  <tr>
+                    <th>تصویر</th>
+                    <th>نام محصول</th>
+                    <th>قیمت</th>
+                    <th>وضعیت</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  {productByCat?.map((item) => (
-                    <tr
-                      className={`${Styles.tr} `}
-                      key=""
-                      onClick={() => {
-                        setXtFlagSpinnerShow(true);
-                        rout.push("/product/" + item.id);
-                      }}
-                    >
-                      <td>
-                        <img src={item.smallImage} alt="" />{" "}
-                      </td>
-                      <td>{item.name}</td>
-                      <td>
-                        <div className="centercc">
-                          {/* <span>368,000</span> */}
-                          {(item.supply != 0 && !item.isToSale) ? (<span className={Styles.estlam}>استعلام قیمت</span>) :
-                            (item.supply != 0 && item.isToSale) ?
-                              (
-                                (
-                                  <>
-
-
-                                    {offer == 1 && item.noOffPrice === item.price ?
-                                      <>
-                                        <span className={`${Styles.price} `}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
-                                      </>
-
-
-                                      :
-                                      <>
-                                        <span className={Styles.noOffPrice}>{`${Number(item.resultPrice) / 10}`?.toLocaleString()} تومان </span>
-                                        <span className={`${Styles.price} ${Styles.underLine}`}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()} تومان </span>
-
-                                      </>
-                                    }
-                                    {/* {item.noOffPrice !== item.price && (
-                                      <>
-                                        <span className={`${Styles.noOffPrice}`}>{`${Number(item.price) / 10}`?.toLocaleString()} تومان </span>
-                                        <span className={`${Styles.price}  ${Styles.underLine}`}>{`${Number(item.noOffPrice) / 10}`?.toLocaleString()}تومان </span>
-
-                                      </>
-                                    )} */}
-                                  </>
-                                )
-                              ) : ''
-                          }
-
-                          {(item.supply == 0 && parentId == 2) ? (
-                            <span className={Styles.estlam}>استعلام قیمت</span>
+                  {productByCat
+                    ?.filter((item) => item.isShow)
+                    .map((item) => (
+                      <tr
+                        key={item.id}
+                        onClick={() => {
+                          setXtFlagSpinnerShow(true);
+                          rout.push("/product/" + item.id);
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <td>
+                          <img
+                            src={item.smallImage}
+                            alt=""
+                            className={Styles.tableImg}
+                          />
+                        </td>
+                        <td className={Styles.tableTitle}>{item.name}</td>
+                        <td>
+                          {item.supply != 0 && !item.isToSale ? (
+                            <span className={Styles.tableEstlam}>
+                              استعلام قیمت
+                            </span>
+                          ) : item.supply != 0 && item.isToSale ? (
+                            <div className={Styles.tablePriceWrap}>
+                              {Number(item.noOffPrice) > Number(item.resultPrice) && (
+                                <span className={Styles.tableDiscountBadge}>
+                                  %{Math.round((1 - Number(item.resultPrice) / Number(item.noOffPrice)) * 100)}- تخفیف
+                                </span>
+                              )}
+                              <div className={Styles.tablePriceCol}>
+                                <span className={Styles.tablePrice}>
+                                  {Number(item.resultPrice / 10).toLocaleString()}{" "}
+                                  <small>تومان</small>
+                                </span>
+                                {(offer != 1 || Number(item.noOffPrice) > Number(item.resultPrice)) && (
+                                  <span className={Styles.tableOldPrice}>
+                                    {Number(item.noOffPrice / 10).toLocaleString()}{" "}
+                                    تومان
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          ) : item.supply == 0 && parentId == 2 ? (
+                            <span className={Styles.tableEstlam}>
+                              استعلام قیمت
+                            </span>
                           ) : item.supply == 0 ? (
-                            <span
-                            // className={Styles.cardprob_price}
-                            >
+                            <span className={Styles.tableOutOfStock}>
                               ناموجود
                             </span>
-                          ) : ''}
-                          {/* <span>{(Number(item.price) / 10) * offer}</span>
-                          <span> {Number(item.price) / 10}</span> */}
-                        </div>
-                      </td>
-                      <td></td>
-                    </tr>
-                  ))}
+                          ) : null}
+                        </td>
+                        <td>
+                          {item.supply > 0 ? (
+                            <span
+                              className="sane-badge-success"
+                              style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "0.3rem",
+                                padding: "0.2rem 0.8rem",
+                                borderRadius: "99px",
+                                fontSize: "1.1rem",
+                                fontWeight: 700,
+                              }}
+                            >
+                              ● موجود
+                            </span>
+                          ) : (
+                            <span
+                              className="sane-badge-danger"
+                              style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "0.3rem",
+                                padding: "0.2rem 0.8rem",
+                                borderRadius: "99px",
+                                fontSize: "1.1rem",
+                                fontWeight: 700,
+                              }}
+                            >
+                              ● ناموجود
+                            </span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
-            )}
-            {/* <button onClick={clickHan}></button> */}
-          </div>
+            </div>
+          )}
+
+          {/* ===== صفحه‌بندی ===== */}
           {paginationArray.length > 1 && (
-            <div className={`pagination-div ${Styles.pagination_div}`}>
+            <div className={Styles.paginationWrap}>
               <Pagination
                 count={paginationArray.length}
                 page={page}
-                //  ref={classRefB}
                 onChange={handleChange}
                 color="primary"
                 shape="rounded"
-                style={{ direction: "ltr" }}
               />
             </div>
           )}

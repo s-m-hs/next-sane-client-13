@@ -1,0 +1,255 @@
+/* ============================================================
+   DESIGN LAYER — صانع مدرن (light, modern, GPU-friendly)
+   توکن‌ها، ابزارها و انیمیشن‌های سراسری قالب جدید
+   ============================================================ */
+:root {
+  /* پالت جدید — بنفش/نیلی/فیروزه‌ای روی زمینه روشن */
+  --sd-primary: #7c3aed;
+  --sd-primary-dark: #6d28d9;
+  --sd-primary-light: #a78bfa;
+  --sd-primary-soft: #f5f3ff;
+  --sd-accent: #06b6d4;
+  --sd-gradient: linear-gradient(135deg, #7c3aed 0%, #6366f1 55%, #06b6d4 130%);
+  --sd-gradient-soft: linear-gradient(135deg, #f5f3ff 0%, #eef2ff 60%, #ecfeff 100%);
+  --sd-bg: #f8fafc;
+  --sd-surface: #ffffff;
+  --sd-text: #1e293b;
+  --sd-text-soft: #64748b;
+  --sd-border: #e2e8f0;
+  --sd-success: #10b981;
+  --sd-danger: #ef4444;
+  --sd-radius: 1.6rem;
+  --sd-radius-sm: 1rem;
+  --sd-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 4px rgba(15, 23, 42, 0.05);
+  --sd-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.06);
+  --sd-shadow-lg: 0 16px 40px -12px rgba(15, 23, 42, 0.18), 0 4px 12px -4px rgba(15, 23, 42, 0.08);
+  --sd-shadow-primary: 0 8px 24px -8px rgba(124, 58, 237, 0.45);
+  --sd-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sd-speed: 0.35s;
+
+  /* هم‌راستا کردن تم قدیمی با پالت جدید */
+  --them: #7c3aed;
+  --themA: #6d28d9;
+  --themB: #8b5cf6;
+  --themC: #ede9fe;
+  --white2fafaff: #f8fafc;
+  --graydcdee1: #e2e8f0;
+  --gray1f2f6fc: #f1f5f9;
+  --black1464646: #475569;
+  --black22e2e2e: #1e293b;
+  --black33b4359: #64748b;
+}
+
+/* ---------- زمینه و پس‌زمینه صفحه ---------- */
+body {
+  background:
+    radial-gradient(1200px 500px at 85% -10%, rgba(124, 58, 237, 0.07), transparent 60%),
+    radial-gradient(900px 420px at 10% 0%, rgba(6, 182, 212, 0.06), transparent 55%),
+    var(--sd-bg) !important;
+  color: var(--sd-text);
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--sd-primary), var(--sd-primary-light));
+  border-radius: 99px;
+  border: 2px solid #f1f5f9;
+}
+
+/* ---------- تیتر سکشن‌ها ---------- */
+.sd-section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--sd-text);
+  margin-bottom: 1.6rem;
+}
+.sd-section-title::before {
+  content: "";
+  width: 0.7rem;
+  height: 2.4rem;
+  border-radius: 99px;
+  background: var(--sd-gradient);
+  flex: none;
+}
+
+/* ---------- دکمه‌ها ---------- */
+.sd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.1rem 2.4rem;
+  border: none;
+  border-radius: 99px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--sd-gradient);
+  background-size: 160% 160%;
+  background-position: 0% 50%;
+  box-shadow: var(--sd-shadow-primary);
+  cursor: pointer;
+  transition: background-position var(--sd-speed) var(--sd-ease),
+    transform var(--sd-speed) var(--sd-ease), box-shadow var(--sd-speed) var(--sd-ease);
+  will-change: transform;
+}
+.sd-btn:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(124, 58, 237, 0.55);
+}
+.sd-btn:active { transform: translateY(0) scale(0.98); }
+
+.sd-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2.2rem;
+  border-radius: 99px;
+  border: 2px solid var(--sd-primary);
+  color: var(--sd-primary);
+  background: transparent;
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all var(--sd-speed) var(--sd-ease);
+}
+.sd-btn-outline:hover {
+  background: var(--sd-primary-soft);
+  transform: translateY(-2px);
+}
+
+/* ---------- کارت عمومی ---------- */
+.sd-card {
+  background: var(--sd-surface);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius);
+  box-shadow: var(--sd-shadow-sm);
+  transition: transform var(--sd-speed) var(--sd-ease),
+    box-shadow var(--sd-speed) var(--sd-ease), border-color var(--sd-speed) var(--sd-ease);
+  will-change: transform;
+}
+.sd-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sd-shadow-lg);
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+/* ---------- بج‌ها ---------- */
+.sd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 99px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.sd-badge-off {
+  color: #fff;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  box-shadow: 0 4px 12px -4px rgba(239, 68, 68, 0.6);
+}
+.sd-badge-new {
+  color: #fff;
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+}
+
+/* ---------- انیمیشن‌های ورود (CSS، GPU) ---------- */
+@keyframes sd-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sd-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sd-pop {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes sd-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes sd-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@keyframes sd-pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.35); }
+  70% { box-shadow: 0 0 0 14px rgba(124, 58, 237, 0); }
+}
+
+.sd-fade-up { animation: sd-fade-up 0.6s var(--sd-ease) both; }
+.sd-fade-in { animation: sd-fade-in 0.6s ease both; }
+.sd-pop { animation: sd-pop 0.5s var(--sd-ease) both; }
+.sd-float { animation: sd-float 3.5s ease-in-out infinite; }
+.sd-delay-1 { animation-delay: 0.08s; }
+.sd-delay-2 { animation-delay: 0.16s; }
+.sd-delay-3 { animation-delay: 0.24s; }
+.sd-delay-4 { animation-delay: 0.32s; }
+
+/* اسکلتون شیمر برای حالت لودینگ */
+.sd-skeleton {
+  background: linear-gradient(90deg, #eef2f7 25%, #f8fafc 50%, #eef2f7 75%);
+  background-size: 200% 100%;
+  animation: sd-shimmer 1.4s linear infinite;
+  border-radius: var(--sd-radius-sm);
+}
+
+/* زوم تصویر با هاور */
+.sd-zoom { overflow: hidden; }
+.sd-zoom > img {
+  transition: transform 0.6s var(--sd-ease);
+  will-change: transform;
+}
+.sd-zoom:hover > img { transform: scale(1.07); }
+
+/* متن گرادیانی */
+.sd-grad-text {
+  display: inline-block;
+  background: var(--sd-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---------- تیتر اسلایدرهای محصول (سوایپر C) ---------- */
+.swipercomb-div {
+  position: relative;
+  margin-top: 40px !important;
+  background-color: var(--sd-surface);
+  border-radius: var(--sd-radius);
+  border: 1px solid var(--sd-border);
+  box-shadow: var(--sd-shadow-sm);
+  padding-top: 2.4rem;
+}
+.swipercomb-title {
+  position: absolute;
+  border-radius: 99px;
+  top: -18px;
+  margin-right: 50px;
+  background: var(--sd-gradient);
+  color: #fff;
+  font-weight: 800;
+  padding: 0.7rem 2.2rem;
+  box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.45);
+  font-size: 1.8rem;
+}
+
+/* ---------- کاهش حرکت برای دسترس‌پذیری/کارایی ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+  }
+}

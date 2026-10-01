@@ -64,10 +64,10 @@ export default function SwiperC({ title, categoryCode }) {
           pagination={{
             clickable: true,
           }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 3000,
+          //   disableOnInteraction: false,
+          // }}
           navigation={true}
           breakpoints={{
             450: {

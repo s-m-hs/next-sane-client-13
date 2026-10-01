@@ -131,26 +131,7 @@ const MainProvider = ({ children }) => {
     myApp();
   };
   //////////////
-  // let obj = {
-  //   name: searchInput,
-  //   productCategoryCode: null,
-  //   productCategoryId: null,
-  //   categoryCode: null,
-  //   manufacturerName: null,
-  //   pageNumber: 0,
-  //   pageSize: 1000,
-  // };
-  // const func = (result) => {
-  //   console.log(result)
-  //   setSearchResult(result)
-  // }
-  // const searchBox = () => ApiPostX1(`/api/CyProducts/SearchProducts`, obj, func)
 
-  // useEffect(() => {
-  //   if (searchInput.length >= 3) {
-  //     searchBox()
-  //   }
-  // }, [searchInput])
 
   //////////////
   const refreshToken = () => {

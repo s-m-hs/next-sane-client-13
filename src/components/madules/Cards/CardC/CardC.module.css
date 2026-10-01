@@ -1,260 +1,229 @@
-.cardprob_container{
-    align-items: center;
-    border-radius: 12px;
-    background-color: var( --white1ffffff);
-    width: 85%;
-    height: 100%;
-    position: relative;
-    /* box-shadow: 0 0 15px -10px rgb(0,0,0,0.75); */
-  }
-  .cardprob_container_linkA{
-    text-align: center;
-    position: absolute;
-    top: 5px;
-    width: 100%;
-    /* animation: zoom1 4s linear infinite; */
-    height: 100%;
-    
-  }
-.favorite{
-  position: absolute !important;
-  left: 0px !important;
-  top: 0 !important;
-  cursor: pointer !important;
-} 
-.share{
-    position: absolute !important;
-  left: 0px !important;
-  top: 30px !important;
-  cursor: pointer !important;
+.cardprob_container {
+  align-items: center;
+  border-radius: 12px;
+  background-color: var(--white1ffffff);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
-  .cardprob_container img{
-    /* position: absolute;
-    top: 5px; */
-    width: 60%;
-    animation: zoom1 4s linear infinite;
-  border-radius: 25%;
-    
-  }
-  
-  .cardprob_container span{
-    color: var(--black33b4359);
-  }
-  .cardprob_title{
-    position: absolute;
-    bottom: 50px;
-    font-size: 1.7rem;
-    right: 5px;
-    font-family: vazirEn;
-  
-  }
-  .cardprob_price{
-    position: absolute;
-    bottom: 10px;
-    font-size: 1.9rem;
-  left: 5px;
-  text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
-  color: rgb(255, 179, 0) !important;
-
- }
-.underLine{
-  text-decoration: line-through red; 
-}
-  .cardprob_noOffPrice{
-    position: absolute;
-    bottom: 10px;
-    font-size: 1.9rem;
-  right: 5px;
-  text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
-
-  }
-
-  .cardprob_container svg{
-    position: absolute;
-    /* left: 35px; */
-  }
-  
-  .cardprob__icon_div{
-    position: absolute;
-    top: 60%;
-    /* font-size: 1.9rem; */
-  right: 40px;
-  }
-  .cardprob__icon_div svg{
-    padding: 5px;
-    cursor: pointer;
-  }
-  .cardprob__icon_div svg:hover {
-   opacity: 0.7;
-  }
-  
-  .cardprob__link{
-  position: absolute;
-  bottom: 0;
-  text-decoration: none;
-  list-style: none;
-  color: var(--them);
+.cardprob_container_linkA {
   text-align: center;
-  font-size: 1.9rem;
-  
-      border: 1px solid var(--them);
-      border-bottom-left-radius: 14px;
-      border-bottom-right-radius: 14px;
-      margin-top: 10px;
-      width: 100%;
-      transition: all 0.3s linear;
-      height: 8%;
-  }
-  .cardprob_container:hover .cardprob__link{
-    background-color: var(--them);
-    color: var(--white1ffffff);
-  }
-  .cardprob_container:hover img{
-    /* transform: scale(.9); */
-    animation: zoom .4s linear 1;
-  
-  }
-  .cardprob__link:hover{
-    background-color: var(--them);
-    color: var(--white1ffffff);
-    }
-    .RequstPrice{
-      text-align: center;
-      width: 80px;
-      background-color: orange;
-      cursor: pointer;
-      top: -36px;
-      right: 0;
-      border-radius: 7px;
-      color: white !important;
-      position: absolute;
-    }
-    /* .cardprob-container:hover span{
-      color: var(--white1ffffff);
-      text-shadow: none
-    } */
-    /* .cardprob-container:hover i{
-      color: var(--white1ffffff) !important;
-    } */
-  
-    /* .cardprob_container{
-      --c: #8A9B0F;
-      --b: 3px;    
-      --g: 5px;    
-      
-      padding: calc(var(--g) + var(--b));
-      --_g: #0000 25%,var(--them) 0;
-      background-color: #fff !important;
-      background: 
-        conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
-         var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
-        conic-gradient(            at bottom var(--b) left  var(--b),var(--_g))
-         0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
-      transition: .3s, background-position .3s .3s;
-    }
-    .cardprob_container:hover {
-      --_i: 100%;
-      transition: .3s, background-size .3s .3s;
-    }
-   
-   */
-  
-   @keyframes rgb-light {
-    0% {
-      color: rgb(130, 239, 239); /* قرمز */
-    }
-    8% {
-      color: rgb(70, 237, 237); /* سبز */
-    }
-    15% {
-      color: rgb(37, 234, 234);; /* آبی */
-    }
-    23% {
-      color: rgb(0, 241, 241);; /* بازگشت به قرمز */
-    }
-    31% {
-      color: rgb(85, 192, 228);; /* بازگشت به قرمز */
-    } 
-     39% {
-      color: rgb(158, 99, 230);; /* بازگشت به قرمز */
-    }  
-    48% {
-      color: rgb(111, 66, 188);; /* بازگشت به قرمز */
-    } 
-     58% {
-      color: rgb(125, 22, 234);; /* بازگشت به قرمز */
-    }  
-    65% {
-      color: #ddb7eb;; /* بازگشت به قرمز */
-    } 
-     75% {
-      color: #d757eb;; /* بازگشت به قرمز */
-    } 
-     83% {
-      color: rgb(152, 27, 187);; /* بازگشت به قرمز */
-    }
-      90% {
-      color: rgb(217, 0, 241);; /* بازگشت به قرمز */
-    }
-    100% {
-      color: rgb(152, 27, 187);; /* بازگشت به قرمز */
-    }
-  }
-  
-  .rgb_icon {
-    animation: rgb-light 6s infinite ease-in-out; /* 2 ثانیه زمان انیمیشن و تکرار بی‌نهایت */
-  }
-  
-  
-  @keyframes rainbow {
-    0% {
-      color: rgb(255, 0, 0); /* قرمز */
-    }
-    16% {
-      color: rgb(255, 127, 0); /* نارنجی */
-    }
-    32% {
-      color: rgb(255, 255, 0); /* زرد */
-    }
-    48% {
-      color: rgb(0, 255, 0); /* سبز */
-    }
-    64% {
-      color: rgb(0, 0, 255); /* آبی */
-    }
-    80% {
-      color: rgb(75, 0, 130); /* نیلی */
-    }
-    100% {
-      color: rgb(148, 0, 211); /* بنفش */
-    }
-  }
-  
-  .rainbow_icon {
-    animation: rainbow 6s infinite ease-in-out; /* 5 ثانیه برای یک چرخه */
-  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.8rem;
+  text-decoration: none;
+}
+.favorite {
+  position: absolute !important;
+  left: 4px !important;
+  top: 4px !important;
+  cursor: pointer !important;
+  z-index: 2;
+}
+.share {
+  position: absolute !important;
+  left: 4px !important;
+  top: 34px !important;
+  cursor: pointer !important;
+  z-index: 2;
+}
+.imageWrap {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 0;
+  padding: 0.4rem 0;
+}
+.cardprob_container img {
+  width: 65%;
+  max-height: 100%;
+  object-fit: contain;
+  animation: zoom1 4s linear infinite;
+  border-radius: 25%;
+  transition: transform 0.4s var(--sd-ease);
+}
+.cardprob_container:hover img {
+  animation: zoom 0.4s linear 1;
+}
 
+/* .cardprob_container span {
+  color: var(--black33b4359);
+} */
+.cardprob_title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--sd-text, #1e293b);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3.6rem;
+  line-height: 1.8rem;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  flex-shrink: 0;
+  position: absolute;
+  bottom: 70px;
+}
 
+/* ===== ردیف قیمت‌ها (flex به جای absolute) ===== */
+.priceRow {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-top: 0.4rem;
+  padding: 0 4px 2px;
+}
 
-  
-    @keyframes zoom { 
-      0%{
-        transform: scale(0.5);
-      }
-      100% { 
-        transform: scale(1);
-      }
-    }
-    @keyframes zoom1 { 
-      0%{
-        transform: rotate(-1deg);
-      }
-      50%{
-        transform: rotate(1deg);
-      }
-   
-      100% { 
-          transform: rotate(-1deg);
-      }
-    }
-    
+.cardprob_price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--sd-primary, #7c3aed);
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.toman {
+  /* font-size: 1rem;
+  font-weight: 600;
+  color: var(--sd-text-soft, #64748b); */
+}
+
+.cardprob_noOffPrice {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--sd-text-soft, #64748b);
+  text-decoration: line-through;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+/* ===== برچسب تخفیف ===== */
+.discountBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.2rem 0.8rem;
+  border-radius: 99px;
+  box-shadow: 0 2px 8px -4px rgba(239, 68, 68, 0.5);
+  pointer-events: none;
+  direction: ltr;
+}
+
+/* ===== برچسب استعلام قیمت ===== */
+.RequstPrice {
+  text-align: center;
+  width: 80px;
+  background-color: orange;
+  cursor: pointer;
+  top: -36px;
+  right: 0;
+  border-radius: 7px;
+  color: white !important;
+  position: absolute;
+  z-index: 2;
+}
+
+/* ===== دکمه سبد خرید ===== */
+.cardprob__icon_div {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 0.8rem;
+  z-index: 2;
+}
+.cardprob__icon_div svg {
+  padding: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.cardprob__icon_div svg:hover {
+  opacity: 0.7;
+}
+
+/* ===== انیمیشن‌ها ===== */
+@keyframes zoom {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes zoom1 {
+  0% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(-1deg);
+  }
+}
+
+/* ===== ریسپانسیو ===== */
+@media only screen and (max-width: 900px) {
+  .cardprob_title {
+    font-size: 1.5rem;
+    min-height: 3rem;
+  }
+  /* .cardprob_price {
+    font-size: 1.3rem;
+  }
+  .cardprob_noOffPrice {
+    font-size: 1rem;
+  } */
+  .discountBadge {
+    font-size: 1rem;
+    padding: 0.15rem 0.6rem;
+  }
+  .cardprob__icon_div svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .cardprob_title {
+    font-size: 1.5rem;
+    min-height: 2.6rem;
+    -webkit-line-clamp: 2;
+  }
+  /* .cardprob_price {
+    font-size: 1.2rem;
+  }
+  .cardprob_noOffPrice {
+    font-size: 0.9rem;
+  } */
+  .discountBadge {
+    font-size: 0.9rem;
+    padding: 0.1rem 0.5rem;
+  }
+  .cardprob__icon_div svg {
+    width: 24px;
+    height: 24px;
+  }
+}

@@ -1,4 +1,69 @@
-.container{
-    margin-top: 20px;
-    overflow: hidden;
+/* نوار برندها — marquee بی‌نهایت با CSS خالص */
+.container {
+  margin-top: 2.4rem;
+}
+.marquee {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--sd-radius);
+  background: var(--sd-surface);
+  border: 1px solid var(--sd-border);
+  box-shadow: var(--sd-shadow-sm);
+  padding: 1.6rem 0;
+  -webkit-mask-image: linear-gradient(
+    to left,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(to left, transparent, #000 8%, #000 92%, transparent);
+}
+.track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: brand-scroll 28s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+.card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1.6rem;
+  padding: 1rem 1.6rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--sd-border);
+  background: #fff;
+  transition: transform 0.3s var(--sd-ease), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: var(--sd-shadow);
+}
+.card img {
+  height: 42px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: filter 0.35s ease, opacity 0.35s ease;
+}
+.card:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+@keyframes brand-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* RTL: بردها به سمت راست حرکت می‌کنند */
+    transform: translateX(50%);
+  }
 }

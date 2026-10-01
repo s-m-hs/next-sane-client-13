@@ -10,7 +10,8 @@ import apiUrl from "@/utils/ApiUrl/apiUrl";
 import alertQ from "@/utils/Alert/AlertQ";
 import Favorite from "../../Favorite/Favorite";
 import ShareButton from "../../ShareButton/ShareButton";
-import { product } from "@/utils/DataStore";
+import { NOOffer, product } from "@/utils/DataStore";
+import PriceBox from "../../PriceBox/PriceBox";
 
 export default function CardB({
   imgSrc,
@@ -40,7 +41,7 @@ export default function CardB({
     return () => setNameCategory("");
   }, []);
   return (
-    <div className={`${styles.container} centerc`}>
+    <div className={`${styles.container} `}>
       <div className={`${styles.favorite}`}>
         <Favorite id={id} isFavorite={isFavor} />
 
@@ -60,15 +61,18 @@ export default function CardB({
       {supply != 0 ? (
         <>
 
+          <PriceBox offer={offer} price={price} noOffPrice={noOffPrice} />
 
-          {(offer == 1 && noOffPrice === price) ?
+          {/* {offer.offerType == NOOffer ?
+            <div className={`${styles.priceDiv} centerc`}>
+              <span className={styles.price}>
+                {price?.toLocaleString()}تومان{" "}
+              </span>
+            </div>
 
-            <span className={styles.price}>
-              {price?.toLocaleString()}تومان{" "}
-            </span>
             :
 
-            <div className="centerc">
+            <div className={`${styles.priceDiv} centerc`}>
               <span className={styles.price}>
                 {(price).toLocaleString()}تومان{" "}
 
@@ -78,19 +82,23 @@ export default function CardB({
               </span>
             </div>
 
-          }
+          } */}
         </>
       ) : // parentId == 2 ?
         categoryCode === "hardwairebestseller" ? (
-          <span
-            onClick={() => AlertC()}
-            style={{ cursor: "pointer" }}
-            className={styles.price}
-          >
-            استعلام قیمت
-          </span>
+          <div className={`${styles.priceDiv} centerc`}>
+            <span
+              onClick={() => AlertC()}
+              style={{ cursor: "pointer" }}
+              className={styles.price}
+            >
+              استعلام قیمت
+            </span>
+          </div>
+
         ) : (
-          <span className={styles.price}>استعلام قیمت</span>
+          <div className={`${styles.priceDiv} centerc`}> <span className={styles.price}>استعلام قیمت</span></div>
+
         )}
 
       {/* <div className={`${styles.icon_div} centerr`}   >

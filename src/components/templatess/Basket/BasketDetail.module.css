@@ -1,299 +1,736 @@
-.col_8 {
+/* ============================================================
+   BasketDetail — صفحه سبد خرید (مدرن، دو-ستونه، ریسپانسیو)
+   ============================================================ */
+
+.page {
+  padding: 2rem 0 8rem;
+  min-height: 60vh;
 }
 
-.col_4 {
-  /* max-height: 500px; */
+/* ---------- هدر صفحه ---------- */
+.header {
+  display: flex;
   align-items: center;
-  background-color: #fff;
-  /* background-image: url('../../../../public//images/shop photo/12083346_Wavy_Bus-17_Single-09.png');; */
-}
-.col_4 button {
-  margin: 50px;
-}
-
-.btn {
-  width: 100% !important;
-  height: 40px;
-  transition: all 0.3s linear;
-  font-size: 20px;
-}
-.btn1 {
-  font-weight: 600 !important;
-  color: #9d00ff !important;
-  width: 100%;
-  /* height: 100px; */
-  font-size: 35px;
-  position: relative;
-  border: none;
-}
-.shopimg {
-  position: absolute;
-  width: 80px;
-  left: -50px;
-  bottom: 0;
-  z-index: -1;
-  opacity: 0;
-}
-.colPrice {
-  align-items: center;
-  width: 100%;
-}
-.colPrice button {
-  font-size: 2cqi;
-}
-.btn_hide {
-  width: 80% !important;
-  height: 35px;
-  transition: all 0.3s linear;
-  border: none;
-  opacity: 0.8;
-  pointer-events: none;
-}
-.spinner_row {
-  position: fixed;
-  top: 40vh;
-  right: 50vw;
-  z-index: 100;
-}
-.spinner_row > div {
-  background-color: inherit;
-}
-.btn_modal_ok {
-  width: 30%;
-  color: #fff;
-  font-size: 1.2cqi;
-}
-.btn_modal_ok_disable {
-  width: 30%;
-  color: #fff;
-  font-size: 1.2cqi;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.btn_modal_close {
-  width: 10%;
-  font-size: 1.2cqi;
-  width: 20%;
-}
-
-.mobileAdd_div {
   justify-content: space-between;
-}
-.mobileAdd_div h1 {
-  font-size: 35px;
-}
-.btnGoToMobile {
-  width: 30%;
-  font-size: 1cqi;
-}
-.cath_div > span span {
-  font-size: 20px;
-}
-.cath_input {
-  color: var(--graydcdee1);
-  font-size: 15px;
+  margin-bottom: 2.4rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.col_8_bottom_div_1 {
-  display: none;
-  justify-content: flex-start !important;
-}
-.cath_div_mobile {
-  display: none;
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
 }
 
-.ul_ziroSupply li {
-  list-style: disc;
-}
-.postDetail_container {
-  display: none;
-}
-.postDetail_div ul {
-  padding-left: 1rem;
-}
-.postDetail_div li {
-  list-style-type: disc !important;
-}
-.postDetail_div p {
-  font-size: 12px;
-  font-weight: bold;
-}
-.coupon_div svg {
-  animation: fadeEffect 0.5s infinite alternate;
-}
-.coupon_div button {
-  font-size: 15px;
-}
-.coupon_div span {
-  font-weight: bold;
-}
-.colPrice_nonoff_span {
-  text-decoration: line-through red;
-  font-size: 15px;
-  position: absolute;
-  top: 70%;
+.headerTitle h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--sd-text, #1e293b);
+  margin: 0;
 }
 
-.ScaleLoader-louder {
-  text-align: center;
-  width: 100%;
-  margin: 0 auto;
-}
-.ScaleLoader-louder > span {
-  width: 150px;
+.headerBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0.8rem;
+  background: var(--sd-gradient, linear-gradient(135deg, #7c3aed, #6366f1, #06b6d4));
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 99px;
+  box-shadow: 0 4px 12px -4px rgba(124, 58, 237, 0.4);
 }
 
-.post div {
-  width: 100%;
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clearBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--sd-border, #e2e8f0);
+  background: var(--sd-surface, #fff);
+  color: var(--sd-text-soft, #64748b);
+  border-radius: 99px;
+  font-size: 1.3rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.25s var(--sd-ease);
+}
+.clearBtn:hover {
+  border-color: var(--sd-danger, #ef4444);
+  color: var(--sd-danger, #ef4444);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.continueLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--sd-border, #e2e8f0);
+  background: var(--sd-surface, #fff);
+  color: var(--sd-text, #1e293b);
+  border-radius: 99px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s var(--sd-ease);
+}
+.continueLink:hover {
+  border-color: var(--sd-primary, #7c3aed);
+  color: var(--sd-primary, #7c3aed);
+  background: var(--sd-primary-soft, #f5f3ff);
+}
+
+/* ---------- گرید اصلی ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2.4rem;
+  align-items: start;
+}
+
+/* ---------- ستون محصولات ---------- */
+.cartColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* لیبل دسته‌بندی محصولات (اختیاری) */
+.sectionLabel {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--sd-text-soft, #64748b);
+  padding: 0 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+/* حالت خالی */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  text-align: center;
+  background: var(--sd-surface, #fff);
+  border: 1px solid var(--sd-border, #e2e8f0);
+  border-radius: var(--sd-radius, 1.6rem);
+  box-shadow: var(--sd-shadow-sm);
+}
+
+.emptyState img {
+  width: 200px;
+  opacity: 0.6;
+  margin-bottom: 1.6rem;
+}
+
+.emptyState h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--sd-text, #1e293b);
+  margin-bottom: 0.6rem;
+}
+
+.emptyState p {
+  color: var(--sd-text-soft, #64748b);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.emptyCta {
+  margin-top: 2rem;
+}
+
+/* اسپینر لودینگ */
+.spinnerWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 0;
+}
+
+/* ---------- سایدبار خلاصه سفارش ---------- */
+.summaryColumn {
+  position: sticky;
+  top: 110px;
+}
+
+.summaryCard {
+  background: var(--sd-surface, #fff);
+  border: 1px solid var(--sd-border, #e2e8f0);
+  border-radius: var(--sd-radius, 1.6rem);
+  box-shadow: var(--sd-shadow, 0 4px 12px -2px rgba(15,23,42,0.08));
+  padding: 2rem;
+}
+
+.summaryTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--sd-text, #1e293b);
+  margin: 0 0 1.6rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--sd-border, #e2e8f0);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  font-size: 1.4rem;
+  color: var(--sd-text-soft, #64748b);
+}
+
+.summaryRowTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0 0;
+  margin-top: 0.8rem;
+  border-top: 2px solid var(--sd-border, #e2e8f0);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--sd-text, #1e293b);
+}
+
+.summaryLabel {
+  font-weight: 600;
+}
+
+.summaryValue {
+  font-weight: 700;
+  direction: ltr;
+}
+
+.totalValue {
+  color: var(--sd-primary, #7c3aed);
+  font-size: 2rem;
+}
+
+.oldTotalValue {
+  font-size: 1.3rem;
+  color: var(--sd-text-soft, #64748b);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.summaryDivider {
+  height: 1px;
+  background: var(--sd-border, #e2e8f0);
+  margin: 1rem 0;
+}
+
+/* ---------- کد تخفیف ---------- */
+.couponSection {
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--sd-border, #e2e8f0);
+}
+
+.couponLabel {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--sd-text, #1e293b);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.couponInputGroup {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.couponInput {
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--sd-border, #e2e8f0);
+  border-radius: 99px;
+  font-size: 1.3rem;
+  outline: none;
+  background: var(--sd-bg, #f8fafc);
+  color: var(--sd-text, #1e293b);
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+.couponInput:focus {
+  border-color: var(--sd-primary, #7c3aed);
+  background: var(--sd-surface, #fff);
+}
+.couponInput::placeholder {
+  color: var(--sd-text-soft, #64748b);
+  font-size: 1.2rem;
+}
+
+.couponBtn {
+  padding: 0.8rem 1.8rem;
+  border: none;
+  border-radius: 99px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.couponBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.couponBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.couponBtnSuccess {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.couponSuccess {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 99px;
+  margin-top: 0.8rem;
+}
+
+.couponDiscountRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #059669;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 0.4rem 0;
+}
+
+/* ---------- دکمه‌های اقدام ---------- */
+.actionsSection {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkoutBtn {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  border: none;
+  border-radius: 99px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--sd-gradient, linear-gradient(135deg, #7c3aed, #6366f1, #06b6d4));
+  background-size: 160% 160%;
+  background-position: 0% 50%;
+  box-shadow: var(--sd-shadow-primary, 0 8px 24px -8px rgba(124, 58, 237, 0.45));
+  cursor: pointer;
+  transition: background-position 0.35s var(--sd-ease),
+    transform 0.35s var(--sd-ease), box-shadow 0.35s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.checkoutBtn:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(124, 58, 237, 0.55);
+}
+.checkoutBtn:active {
+  transform: translateY(0) scale(0.98);
+}
+.checkoutBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.updateBtn {
+  width: 100%;
+  padding: 1rem 2rem;
+  border: 2px solid var(--sd-primary, #7c3aed);
+  border-radius: 99px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--sd-primary, #7c3aed);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s var(--sd-ease);
+  font-family: inherit;
+}
+.updateBtn:hover {
+  background: var(--sd-primary-soft, #f5f3ff);
+  transform: translateY(-1px);
+}
+.updateBtnHidden {
+  display: none;
+}
+
+/* ---------- کد تخفیف خودکار (کامپوننت AutoCoupon) ---------- */
+.couponBanner {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1px dashed #f59e0b;
+  border-radius: 1.2rem;
+  padding: 1.2rem 1.6rem;
+  margin-top: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.couponBannerText {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.couponBannerCode {
+  direction: ltr;
+  font-weight: 800;
+  color: #f59e0b;
+  font-size: 1.5rem;
+}
+
+.couponBannerBtn {
+  padding: 0.6rem 1.6rem;
+  border: none;
+  border-radius: 99px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+}
+.couponBannerBtn:hover {
+  opacity: 0.9;
+}
+.couponBannerBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- منو بار موبایل (ثابت پایین) ---------- */
+.mobileBar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--sd-surface, #fff);
+  border-top: 1px solid var(--sd-border, #e2e8f0);
+  box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+  padding: 1.2rem 1.6rem;
+  z-index: 100;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mobileBarTotal {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileBarTotalLabel {
+  font-size: 1.2rem;
+  color: var(--sd-text-soft, #64748b);
+  font-weight: 600;
+}
+
+.mobileBarTotalPrice {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--sd-primary, #7c3aed);
+}
+
+.mobileBarOldPrice {
+  font-size: 1.2rem;
+  color: var(--sd-text-soft, #64748b);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.mobileBarBtn {
+  flex: 1;
+  max-width: 200px;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 99px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--sd-gradient, linear-gradient(135deg, #7c3aed, #6366f1, #06b6d4));
+  background-size: 160% 160%;
+  box-shadow: var(--sd-shadow-primary);
+  cursor: pointer;
+  transition: all 0.3s var(--sd-ease);
+  font-family: inherit;
+  white-space: nowrap;
+}
+.mobileBarBtn:hover {
+  background-position: 100% 50%;
+  transform: translateY(-1px);
+}
+.mobileBarBtn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- مودال‌ها ---------- */
+.modalContent :global(.modal-content) {
+  border-radius: 1.6rem;
+  border: none;
+  box-shadow: var(--sd-shadow-lg, 0 16px 40px -12px rgba(15,23,42,0.18));
+}
+.modalHeader {
+  border: none !important;
+  padding: 1.6rem 2rem 0 !important;
+}
+.modalBody {
+  padding: 1.6rem 2rem !important;
+  font-size: 1.5rem;
+}
+.modalFooter {
+  border: none !important;
+  padding: 0 2rem 1.6rem !important;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.addressSelect {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--sd-border, #e2e8f0);
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  outline: none;
+  background: var(--sd-bg, #f8fafc);
+  margin: 1rem 0;
+  font-family: inherit;
+}
+
+.paymentSection {
+  margin-top: 1.6rem;
+  padding: 1.6rem;
+  background: var(--sd-bg, #f8fafc);
+  border-radius: 1.2rem;
+}
+
+.paymentOption {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  background: var(--sd-surface, #fff);
+  border: 1px solid var(--sd-border, #e2e8f0);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.6rem;
+}
+.paymentOption:hover {
+  border-color: var(--sd-primary, #7c3aed);
+  background: var(--sd-primary-soft, #f5f3ff);
+}
+.paymentOption input[type="radio"] {
+  accent-color: var(--sd-primary, #7c3aed);
+  width: 18px;
+  height: 18px;
+}
+
+.postOption {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  background: var(--sd-surface, #fff);
+  border: 1px solid var(--sd-border, #e2e8f0);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.6rem;
+}
+.postOption:hover {
+  border-color: var(--sd-accent, #06b6d4);
+}
+.postOptionActive {
+  border-color: var(--sd-accent, #06b6d4);
+  background: rgba(6, 182, 212, 0.05);
 }
 
 .postEditor {
-  font-size: 15px;
+  font-size: 1.3rem;
+  color: var(--sd-text, #1e293b);
 }
-.postnews {
+
+.postNote {
+  font-size: 1.2rem;
+  color: var(--sd-text-soft, #64748b);
+  margin-top: 1.2rem;
+  line-height: 1.8;
   font-weight: 600;
 }
 
-.couponDiv {
-  position: relative;
-  height: 80px;
-  border: 1px solid #ffc107;
-  border-radius: 5px;
-  padding: 2px;
+/* دکمه‌های مودال */
+.modalBtnClose {
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--sd-border, #e2e8f0);
+  background: var(--sd-surface, #fff);
+  color: var(--sd-text, #1e293b);
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
-.couponDiv input {
-  outline: none;
-  border: 1px dotted #ffc107;
+.modalBtnClose:hover {
+  background: var(--sd-bg, #f8fafc);
 }
 
-.couponDiv span {
-  position: absolute;
-  top: -4px;
-  font-size: 18px;
-  color: #ffc107;
-  font-weight: 600;
-  left: 10%;
+.modalBtnConfirm {
+  padding: 0.8rem 2.4rem;
+  border: none;
+  background: var(--sd-gradient);
+  color: #fff;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
-@keyframes fadeEffect {
-  from {
-    opacity: 1;
+.modalBtnConfirm:hover {
+  opacity: 0.9;
+}
+.modalBtnConfirmDisabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.ziroList {
+  padding: 0;
+  margin: 1rem 0;
+}
+.ziroList li {
+  list-style: disc;
+  margin-right: 1.6rem;
+  padding: 0.4rem 0;
+  font-weight: 600;
+  color: var(--sd-danger, #ef4444);
+}
+
+/* ---------- اسپینر تمام‌صفحه ---------- */
+.spinnerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =================== ریسپانسیو =================== */
+@media only screen and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 300px;
+    gap: 1.6rem;
   }
-  to {
-    opacity: 0.5;
+    .mobileBar {
+    display: none;
   }
 }
 
 @media only screen and (max-width: 900px) {
-  .container {
-    overflow: hidden;
+  .page {
+    padding: 1.6rem 0 10rem;
   }
-  .postDetail_container {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .summaryColumn {
+    position: static;
+  }
+  .summaryCard {
+    border-radius: 1.2rem;
+  }
+  /* فوتر موبایل */
+  /* .mobileBar {
     display: flex;
-  }
-  .postDetail_row {
-    display: none;
-  }
-  .col_4 {
-    display: none !important;
-  }
-  .col_8 {
-    overflow: auto !important;
-    margin-right: 0 !important;
-  }
-  .col_8_bottom_div_1 {
-    display: flex !important;
-    /* position: fixed; */
-    bottom: 120px;
-    width: 95%;
-    height: 250px;
-  }
-  .col_8_div_table {
-    overflow: visible;
-    margin-top: 60px;
-    min-height: 50vh;
-    height: 50vh;
-  }
-
-  .col_8_bottom_div_2 {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .colPrice_mobile {
-    width: 100% !important;
-    height: 100%;
-  }
-  .colPrice_mobile_btn1 {
-    font-weight: 600 !important;
-    color: #9d00ff !important;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  .colPrice_mobile_btn1 img {
-    position: absolute;
-    left: 0;
-    top: -10px;
-    width: 40px;
-  }
-  .colPrice_mobile_btn1 span {
-    margin-top: 10px;
-    font-size: 3.5cqi;
-  }
-  .colPrice_mobile_span2 {
-    position: absolute;
-    top: 50%;
-    font-size: 5cqi !important;
-  }
-  .btn {
-    margin-bottom: 30px !important;
-    font-size: 15px;
-  }
-  .btn_hide {
-    margin-bottom: 30px !important;
-    font-size: 12px;
-  }
-  .cath_div_mobile {
-    display: flex;
-  }
-  .btn_modal_ok {
-    font-size: 13px;
-  }
-  .btn_modal_close {
-    font-size: 13px;
-  }
-  .table_basket th {
-    font-size: 10px;
-  }
-  .couponDiv input {
-    width: 80%;
-    outline: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px dotted #ffc107;
-    margin: 1px;
+  } */
+  .headerTitle h1 {
+    font-size: 2rem;
   }
 }
-.couponDiv input::placeholder {
-  font-size: 13px !important;
-}
-@media only screen and (max-width: 450px) {
-  .th {
-    display: none !important;
-  }
-  .coupon_div button {
-    font-size: 12px;
-  }
 
-  .couponDiv {
-    margin-bottom: 2px;
-    height: 60px;
-    border: 1px solid #ffc107;
-    border-radius: 5px;
-    padding: 2px;
+@media only screen and (max-width: 480px) {
+  .page {
+    padding: 1rem 0 9rem;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .headerTitle h1 {
+    font-size: 1.8rem;
+  }
+  .summaryCard {
+    padding: 1.4rem;
+  }
+  .checkoutBtn {
+    font-size: 1.4rem;
+    padding: 1rem 1.6rem;
+  }
+  /* .mobileBar {
+    padding: 1rem 1.2rem;
+  } */
+  .mobileBarTotalPrice {
+    font-size: 1.5rem;
+  }
+  .mobileBarBtn {
+    max-width: 160px;
+    font-size: 1.3rem;
+    padding: 0.8rem 1.4rem;
+  }
+  .couponInputGroup {
+    flex-direction: column;
+  }
+  .couponBtn {
+    width: 100%;
   }
 }

@@ -8,6 +8,12 @@ html {
   box-sizing: inherit;
 }
 
+html,
+body {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
 body {
   line-height: 1.6;
   font-size: 1.6rem;
@@ -217,7 +223,8 @@ input[type="number"] {
   border-radius: 0px;
   /* width: 70% !important; */
   padding-bottom: 30px;
-  height: 95% !important;
+  min-height: 450px;
+  /* max-height: 500px!important; */
   /* background-color: var(--them) !important; */
 }
 .mySwiperB .swiper-slide {
@@ -1349,6 +1356,28 @@ html {
   transform-box: fill-box;
   transform-origin: center;
 }
+
+
+.themed_btn {
+  flex: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 99px;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--sd-gradient);
+  background-size: 160% 160%;
+  box-shadow: 0 6px 16px -6px rgba(124, 58, 237, 0.55);
+  transition: background-position 0.35s var(--sd-ease), transform 0.3s var(--sd-ease);
+}
+.themed_btn:hover {
+  background-position: 100% 50%;
+  transform: translateY(-1px);
+}
+
+
 
 @keyframes assemble-mobo {
   0%, 8% { transform: translateX(-170px); opacity: 0; }

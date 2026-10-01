@@ -1,7 +1,10 @@
 .container{
     background-color: var(--white1ffffff);
     border-radius: 15px !important;
-    height: 100%;
+    height: 400px;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     border:1px solid #e5e5e5;
     position: relative;
@@ -60,8 +63,9 @@ color: var(--white1ffffff);
 
 
 .title{
+  position: absolute;
+  top:270px;
   font-family: vazirEn;
-    align-self: flex-start !important;
     color: var(--black33b4359);
     /* text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff; */
 }
@@ -71,7 +75,7 @@ color: var(--white1ffffff);
 bottom: 10px; */
 
 font-size: 1.2cqi;
-align-self: flex-start !important;
+/* align-self: flex-end !important; */
 color: var(--black33b4359);
 text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
 padding-bottom: 20px;
@@ -83,17 +87,23 @@ margin-bottom: 15px;
   /* position: absolute;
   bottom: 10px; */
     font-size: 1.2cqi;
-    align-self: flex-end !important;
+    justify-content: center;
+    /* align-self: flex-end !important; */
     color: var(--black33b4359);
     text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
     color: rgb(255, 179, 0);
 }
-
+.priceDiv{
+  height: 100px;
+  position: absolute;
+  bottom: 10px;
+  justify-self: flex-end !important;
+}
 .underline{
   text-decoration: line-through red;
 }
 .container img{
-  padding-top: 50px;
+  padding-top: 10px;
     width: 100%;
     animation: zoom1 4s linear infinite;
     text-shadow: 0 13.36px 8.896px #c4b59d, 0 -2px 1px #fff;
