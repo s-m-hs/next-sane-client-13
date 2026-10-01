@@ -35,7 +35,10 @@ import CardA from "../Cards/CardA/CardA";
 import LogOut from "@/utils/Functions/LogOut";
 import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
 import SwiperA from "@/components/templatess/Home/SwiperA/SwiperA";
+<<<<<<< HEAD
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
+=======
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
 
 export default function Header() {
   let {
@@ -364,6 +367,7 @@ export default function Header() {
                 <span className={styles.brand_tagline}>فروشگاه تخصصی کامپیوتر و دیجیتال</span>
               </span>
             </Link>
+<<<<<<< HEAD
 
             {/* search */}
             <div className={styles.search}>
@@ -402,6 +406,45 @@ export default function Header() {
                   )}
                 </Link>
 
+=======
+
+            {/* search */}
+            <div className={styles.search}>
+              <MagnifyingGlass size={22} weight="duotone" className={styles.search_icon} />
+              <input
+                className={styles.search_input}
+                type="text"
+                placeholder="جستجو در محصولات..."
+                value={searchInput}
+                onChange={searchChange}
+              />
+              <button className={styles.search_btn} onClick={submitSearch}>
+                جستجو
+              </button>
+            </div>
+
+            {/* actions */}
+            <div className={styles.actions}>
+              {/* account */}
+              <div className={styles.account}>
+                <Link
+                  href={!xtFlagLogin ? "/register" : "/p-user/profile"}
+                  className={styles.icon_btn}
+                  title={!xtFlagLogin ? "ورود / ثبت‌نام" : "پنل کاربری"}
+                  onClick={() => setXtFlagSpinnerShow(true)}
+                >
+                  {userSrc ? (
+                    <img src={userSrc} alt="user-profile" className={styles.icon_btn_img} />
+                  ) : !xtFlagLogin ? (
+                    <User size={22} weight="duotone" />
+                  ) : (
+                    <UserCircleGear size={22} weight="duotone" />
+                  )}
+                </Link>
+                {xtFlagLogin && name !== "SaneUser" && (
+                  <span className={styles.account_name}>{name?.toUpperCase()}</span>
+                )}
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
                 {xtFlagLogin && (
                   <div className={styles.account_menu}>
                     <Link href="/p-user/profile" onClick={() => setXtFlagSpinnerShow(true)}>

@@ -6,7 +6,10 @@ import { useContext, useState, useEffect, useRef } from "react";
 import { Trash, DotsThreeVertical, Minus, Plus } from "@phosphor-icons/react";
 import Swal from "sweetalert2";
 import { motion, AnimatePresence } from "framer-motion";
+<<<<<<< HEAD
 import { NOOffer } from "@/utils/DataStore";
+=======
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
 
 const CartItem = (props) => {
   const [quantity, setQuantity] = useState(props.quantity);
@@ -84,6 +87,7 @@ const CartItem = (props) => {
         <div className={style.imageWrap}>
           <img src={props.smallImage} alt={props.name} loading="lazy" />
         </div>
+<<<<<<< HEAD
 
         {/* اطلاعات محصول */}
         <div className={style.info}>
@@ -129,6 +133,32 @@ const CartItem = (props) => {
 
             {/* {
               (props.totalPrice !== null && props.totalPrice !== undefined) ? (
+=======
+
+        {/* اطلاعات محصول */}
+        <div className={style.info}>
+          {/* نام محصول */}
+          <div className={style.name}>
+            <a
+              href={xtFlagLogin ? `product/${props.cyProductID}` : `product/${props.id}`}
+              onClick={() => setXtFlagSpinnerShow(true)}
+            >
+              {props.name}
+            </a>
+          </div>
+
+          {/* وضعیت موجودی */}
+          {props.supply === 0 && (
+            <span className={style.soldOut}>
+              <span>●</span> نا موجود
+            </span>
+          )}
+
+          {/* قیمت‌ها */}
+          <div className={style.priceRow}>
+            {/* قیمت نهایی (با تخفیف) */}
+            {(props.totalPrice !== null && props.totalPrice !== undefined) ? (
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
               <span className={style.currentPrice}>
                 {Number(props.totalPrice).toLocaleString()} <small>تومان</small>
               </span>
@@ -136,6 +166,7 @@ const CartItem = (props) => {
               <span className={style.currentPrice}>
                 {Number(props.unitPrice).toLocaleString()} <small>تومان</small>
               </span>
+<<<<<<< HEAD
             ) : null} */}
 
             {/* قیمت بدون تخفیف (خط خورده) */}
@@ -147,6 +178,19 @@ const CartItem = (props) => {
 
             {/* برچسب درصد تخفیف */}
             {discountPercent > 0 && props.offer.offerType != NOOffer && (
+=======
+            ) : null}
+
+            {/* قیمت بدون تخفیف (خط خورده) */}
+            {hasDiscount && (
+              <span className={style.oldPrice}>
+                {Number(props.WithoutOffPrice).toLocaleString()} تومان
+              </span>
+            )}
+
+            {/* برچسب درصد تخفیف */}
+            {discountPercent > 0 && (
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
               <span className={style.offBadge}>
                 {discountPercent}% تخفیف
               </span>

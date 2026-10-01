@@ -39,7 +39,11 @@
   width: 100%;
   flex: 1;
   display: flex;
+<<<<<<< HEAD
   align-items: flex-start;
+=======
+  align-items: center;
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   justify-content: center;
   min-height: 0;
   padding: 0.4rem 0;
@@ -73,8 +77,11 @@
   text-align: center;
   margin-top: auto;
   flex-shrink: 0;
+<<<<<<< HEAD
   position: absolute;
   bottom: 70px;
+=======
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
 }
 
 /* ===== ردیف قیمت‌ها (flex به جای absolute) ===== */
@@ -187,15 +194,26 @@
 /* ===== ریسپانسیو ===== */
 @media only screen and (max-width: 900px) {
   .cardprob_title {
+<<<<<<< HEAD
     font-size: 1.5rem;
     min-height: 3rem;
   }
   /* .cardprob_price {
+=======
+    font-size: 1.1rem;
+    min-height: 3rem;
+  }
+  .cardprob_price {
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
     font-size: 1.3rem;
   }
   .cardprob_noOffPrice {
     font-size: 1rem;
+<<<<<<< HEAD
   } */
+=======
+  }
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   .discountBadge {
     font-size: 1rem;
     padding: 0.15rem 0.6rem;
@@ -208,16 +226,28 @@
 
 @media only screen and (max-width: 480px) {
   .cardprob_title {
+<<<<<<< HEAD
     font-size: 1.5rem;
     min-height: 2.6rem;
     -webkit-line-clamp: 2;
   }
   /* .cardprob_price {
+=======
+    font-size: 1rem;
+    min-height: 2.6rem;
+    -webkit-line-clamp: 2;
+  }
+  .cardprob_price {
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
     font-size: 1.2rem;
   }
   .cardprob_noOffPrice {
     font-size: 0.9rem;
+<<<<<<< HEAD
   } */
+=======
+  }
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   .discountBadge {
     font-size: 0.9rem;
     padding: 0.1rem 0.5rem;

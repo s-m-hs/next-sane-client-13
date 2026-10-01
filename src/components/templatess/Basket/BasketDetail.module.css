@@ -670,9 +670,12 @@
   .grid {
     grid-template-columns: 1fr 300px;
     gap: 1.6rem;
+<<<<<<< HEAD
   }
     .mobileBar {
     display: none;
+=======
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   }
 }
 
@@ -690,12 +693,22 @@
     border-radius: 1.2rem;
   }
   /* فوتر موبایل */
+<<<<<<< HEAD
   /* .mobileBar {
+=======
+  .mobileBar {
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
     display: flex;
   } */
   .headerTitle h1 {
     font-size: 2rem;
   }
+<<<<<<< HEAD
+=======
+  .headerTitle h1 {
+    font-size: 2rem;
+  }
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
 }
 
 @media only screen and (max-width: 480px) {
@@ -716,9 +729,15 @@
     font-size: 1.4rem;
     padding: 1rem 1.6rem;
   }
+<<<<<<< HEAD
   /* .mobileBar {
     padding: 1rem 1.2rem;
   } */
+=======
+  .mobileBar {
+    padding: 1rem 1.2rem;
+  }
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   .mobileBarTotalPrice {
     font-size: 1.5rem;
   }

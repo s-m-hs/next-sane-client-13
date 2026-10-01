@@ -264,10 +264,15 @@
 }
 .account_menu {
   position: absolute;
+<<<<<<< HEAD
   /* top: calc(100% + 10px); */
   /* right: 0; */
   top: -65;
   right: calc(100% - 288px);
+=======
+  top: calc(100% + 10px);
+  right: 0;
+>>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   min-width: 190px;
   background: #fff;
   border: 1px solid var(--sd-border);
