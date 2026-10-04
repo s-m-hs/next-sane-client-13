@@ -71,6 +71,7 @@ const CartItem = (props) => {
     ? Math.round((1 - Number(props.unitPrice) / Number(props.WithoutOffPrice)) * 100)
     : 0;
 
+  console.log(props.offer)
   return (
     <motion.div
       layout
@@ -146,7 +147,7 @@ const CartItem = (props) => {
             )} */}
 
             {/* برچسب درصد تخفیف */}
-            {discountPercent > 0 && props.offer.offerType != NOOffer && (
+            {discountPercent > 0 && (props.offer.offerType != NOOffer || props.WithoutOffPrice != props.unitPrice) && (
               <span className={style.offBadge}>
                 {discountPercent}% تخفیف
               </span>

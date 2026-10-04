@@ -81,7 +81,7 @@ export default function BasketDetail() {
   const [codeInput, setCodeInput] = useState(null);
   const [couponStateB, setCouponStateB] = useState(false);
   const [dataReady, setDataReady] = useState(false);
-
+  const [orderId, setOrderId] = useState('')
   const handleClose = () => setShow(false);
   const handleCloseB = () => setShowB(false);
   const handleCloseC = () => setShowC(false);
@@ -186,7 +186,7 @@ export default function BasketDetail() {
   const useCoupon = (coupCode) => {
     async function myApp() {
       const res = await fetch(
-        `${apiUrl}/api/CyCoupon/useCouponByCustomer?CouponCode=${coupCode}`,
+        `${apiUrl}/api/CyCoupon/useCouponByCustomer?CouponCode=${coupCode}&orderId=${orderId}`,
         {
           method: "GET",
           credentials: "include",
@@ -197,7 +197,7 @@ export default function BasketDetail() {
       ).then((res) => {
         if (res.ok) {
           return res.json().then((result) => {
-            setCouponB(result);
+            setCouponB(result.discountAmount);
             setCoupon(result);
             setCouponStateB(true);
             setCouponState(true);
@@ -465,8 +465,14 @@ export default function BasketDetail() {
   useEffect(() => {
     ApiGetX2(`/api/CyKeyDatas/1013`, setPostA);
     ApiGetX2(`/api/CyKeyDatas/1014`, setPostB);
+
   }, []);
 
+  useEffect(() => {
+    if (getBasket?.length != 0) {
+      setOrderId(getBasket[0].cyOrderID)
+    }
+  }, [getBasket])
   // محاسبه تعداد آیتم‌ها و تخفیف
   const itemCount = xtFlagLogin
     ? getBasket?.length || 0
@@ -495,6 +501,7 @@ export default function BasketDetail() {
     });
   };
   console.log(getBasket)
+  console.log(couponB)
   return (
     <>
       {flagSpinner && (
@@ -673,7 +680,11 @@ export default function BasketDetail() {
                     <span>تخفیف</span>
                     <span>
                       -
-                      {(
+                      {couponB ? (
+                        ((Number(noOffTotalAmount) -
+                          Number(totalAmount)) + couponB) /
+                        10
+                      ).toLocaleString() : (
                         (Number(noOffTotalAmount) -
                           Number(totalAmount)) /
                         10
@@ -686,7 +697,7 @@ export default function BasketDetail() {
                 <div className={style.summaryRowTotal}>
                   <span className={style.summaryLabel}>مبلغ قابل پرداخت</span>
                   <span className={`${style.summaryValue} ${style.totalValue}`}>
-                    {couponB ? (couponB / 10).toLocaleString() : (
+                    {couponB ? (Number(totalAmount - couponB || total - couponB) / 10).toLocaleString() : (
                       Number(totalAmount || total) / 10
                     ).toLocaleString()}{" "}
                     تومان
@@ -773,7 +784,8 @@ export default function BasketDetail() {
           <div className={style.mobileBarTotal}>
             <span className={style.mobileBarTotalLabel}>مبلغ قابل پرداخت</span>
             <span className={style.mobileBarTotalPrice}>
-              {(Number(totalAmount || total) / 10).toLocaleString()} تومان
+              {couponB && (Number(totalAmount - couponB || total - couponB) / 10).toLocaleString()}
+              {/* {(Number(totalAmount || total) / 10).toLocaleString()} تومان */}
             </span>
             {hasDiscount && (
               <span className={style.mobileBarOldPrice}>

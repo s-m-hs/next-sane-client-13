@@ -265,15 +265,15 @@ export default function Header() {
     getCategoryById(2);
   }, []);
 
-  useEffect(() => {
-    ////to set offer :if couponState is false, get offer from value by admin
-    if (!couponState) {
-      getOffer();
-    } else if (couponState) {
-      const discount = coupon?.discountAmount;
-      setOffer(discount);
-    }
-  }, [couponState]);
+  // useEffect(() => {
+  //   ////to set offer :if couponState is false, get offer from value by admin
+  //   if (!couponState) {
+  //     getOffer();
+  //   } else if (couponState) {
+  //     const discount = coupon?.discountAmount;
+  //     setOffer(discount);
+  //   }
+  // }, [couponState]);
 
   useEffect(() => {
     ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
@@ -284,6 +284,7 @@ export default function Header() {
         setCoupon(null);
       }
     }
+    getOffer();
   }, [pathname]);
 
   useEffect(() => {
