@@ -105,7 +105,7 @@ export default function ProductDetailLeft({ detail }) {
                       /////حالت screen > 900
                       <>
 
-                        {offer.offerType == NOOffer ?
+                        {(offer.offerType == NOOffer && (detail.noOffPrice == detail.price)) ?
                           <span
                             className={Styles.ProductDetailL_divMiddle_offprice}
                           >
@@ -232,7 +232,7 @@ export default function ProductDetailLeft({ detail }) {
                           <>
 
                             {/* /////حالت screen < 900 */}
-                            {offer.offerType == NOOffer ?
+                            {(offer.offerType == NOOffer && (detail.noOffPrice == detail.price)) ?
                               <span
                                 className={
                                   Styles.ProductDetailL_divMiddle_offprice

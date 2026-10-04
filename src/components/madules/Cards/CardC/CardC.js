@@ -29,10 +29,6 @@ export default function CardC({
   isToSale,
   isFavor,
   isShowHeart,
-<<<<<<< HEAD
-
-=======
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
 }) {
   let {
     setCartCounter,
@@ -64,11 +60,7 @@ export default function CardC({
 
   const AlertB = () =>
     alertN("center", "info", " این محصول در سبد خرید شما موجود است ...", 1000).then(
-<<<<<<< HEAD
       (res) => { }
-=======
-      (res) => {}
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
     );
   const AlertC = () =>
     alertQ(
@@ -76,7 +68,7 @@ export default function CardC({
       "info",
       " برای استعلام قیمت میتونید با همکاران ما ارتباط داشته باشید،همکاران ما در کم ترین زمان پاسخ شما را خواهند داد (از ابزارک گفتگو- پایین صفحه ) استفاده کنید)...",
       "باشه ..."
-    ).then((res) => {});
+    ).then((res) => { });
   const addToBasket = () => {
     let obj = {
       cyProductID: id,
@@ -142,13 +134,9 @@ export default function CardC({
         <span className={Styles.cardprob_title}> {title} </span>
 
         {/* قیمت‌ها */}
-<<<<<<< HEAD
         {supply != 0 && isToSale && <PriceBox offer={offer} price={price} noOffPrice={noOffPrice} />}
 
         {/* {supply != 0 && isToSale && (
-=======
-        {supply != 0 && isToSale && (
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
           <div className={Styles.priceRow}>
             <span className={Styles.cardprob_price}>
               {price?.toLocaleString()} <small className={Styles.toman}>تومان</small>
@@ -159,11 +147,7 @@ export default function CardC({
               </span>
             )}
           </div>
-<<<<<<< HEAD
         )} */}
-=======
-        )}
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
 
         {supply == 0 && parentId != 2 ? (
           <span className={Styles.cardprob_price}>ناموجود</span>

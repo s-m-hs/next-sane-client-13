@@ -121,6 +121,7 @@ export default function PaymentResultCom({ param }) {
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
+          centered
         >
           <Modal.Body>
             <div className={`row ${style.row}`}>

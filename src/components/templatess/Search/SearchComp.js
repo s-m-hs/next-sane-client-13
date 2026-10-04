@@ -7,6 +7,7 @@ import Link from 'next/link';
 import ApiPostX1 from '@/utils/ApiServicesX/ApiPostX1';
 import { useRouter } from 'next/navigation';
 import TypeIt from 'typeit-react';
+import { NOOffer } from '@/utils/DataStore';
 
 export default function SearchComp({ param }) {
     let { offer, searchInput, setSearchInput, searchResult, setSearchResult, flagSearchInHeader, setFlagSearchInHeader, setXtFlagSpinnerShow } = useContext(MainContext)
@@ -63,13 +64,27 @@ export default function SearchComp({ param }) {
                                         <div className='centerc'>
                                             <span>{item.name}</span>
                                             <span className={item.supply != 0 ? styles.supply : styles.noSupply}>{(item.supply != 0 && item.isToSale) ?
-                                                'موجود' :
+                                                '' :
                                                 (item.supply != 0 && !item.isToSale) ?
                                                     " موجود-استعلام قیمت" : "استعلام قیمت"}</span>
 
-                                            {item.supply != 0 &&
+                                            {(item.supply != 0 && item.isToSale) &&
+                                                (offer.offerType == NOOffer && (item.noOffPrice == item.price)) &&
 
                                                 <span className={styles.price}>{(item.resultPrice / 10).toLocaleString()} تومان</span>}
+
+
+                                            {(item.supply != 0 && item.isToSale) &&
+                                                (offer.offerType != NOOffer || (item.noOffPrice != item.price)) &&
+                                                <>
+                                                    <span className={styles.price}>{(item.resultPrice / 10).toLocaleString()} تومان</span>
+
+                                                    <span className={styles.underline}>{(item.noOffPrice / 10).toLocaleString()} تومان</span>
+                                                </>
+
+
+
+                                            }
 
                                         </div>
 

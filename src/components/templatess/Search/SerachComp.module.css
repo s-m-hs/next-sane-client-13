@@ -46,9 +46,14 @@ padding: 5px;
 color: #ee0e0e !important;
 }
   .price{
-    color: var(--gold) !important;
+    color: var(--them) !important;
     font-size: 25px !important;
   }
+
+  .underline {
+    color: black !important;
+  text-decoration: line-through red;
+}
   @media only screen and (max-width: 900px) {
   
   /* .div_searchbox {

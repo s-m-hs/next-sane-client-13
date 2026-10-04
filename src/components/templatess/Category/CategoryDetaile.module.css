@@ -300,11 +300,7 @@
 /* ---------- گرید محصولات ---------- */
 .productGrid {
   display: grid;
-<<<<<<< HEAD
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-=======
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
   gap: 1.6rem;
 }
 .productGridTable {
@@ -394,13 +390,13 @@
 .tablePrice {
   font-weight: 700;
   color: var(--sd-primary, #7c3aed);
-  direction: ltr;
+  /* direction: ltr; */
   font-size: 1.5rem;
 }
 .tablePrice small {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--sd-text-soft, #64748b);
+  /* color: var(--sd-text-soft, #64748b); */
 }
 .tableOldPrice {
   font-size: 1.1rem;
@@ -493,11 +489,7 @@
     gap: 1.6rem;
   }
   .productGrid {
-<<<<<<< HEAD
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-=======
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
     gap: 1.2rem;
   }
 }
@@ -518,11 +510,7 @@
     gap: 1.6rem;
   }
   .productGrid {
-<<<<<<< HEAD
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-=======
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
->>>>>>> af509f966d954cab4300ac56dd67049e12b81e4e
     gap: 1rem;
   }
   .paymentSelect {

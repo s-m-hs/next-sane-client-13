@@ -21,6 +21,7 @@ import {
   SlidersHorizontal,
   CaretLeft,
 } from "@phosphor-icons/react";
+import { NOOffer } from "@/utils/DataStore";
 
 export default function CategoryDetaile({ param }) {
   const [mainCategory, setMainCategory] = useState([]);
@@ -488,25 +489,48 @@ export default function CategoryDetaile({ param }) {
                               استعلام قیمت
                             </span>
                           ) : item.supply != 0 && item.isToSale ? (
-                            <div className={Styles.tablePriceWrap}>
-                              {Number(item.noOffPrice) > Number(item.resultPrice) && (
-                                <span className={Styles.tableDiscountBadge}>
-                                  %{Math.round((1 - Number(item.resultPrice) / Number(item.noOffPrice)) * 100)}- تخفیف
-                                </span>
-                              )}
-                              <div className={Styles.tablePriceCol}>
+
+                            <>
+                              {(offer.offerType == NOOffer && (item.noOffPrice == item.price)) ?
                                 <span className={Styles.tablePrice}>
                                   {Number(item.resultPrice / 10).toLocaleString()}{" "}
                                   <small>تومان</small>
                                 </span>
-                                {(offer != 1 || Number(item.noOffPrice) > Number(item.resultPrice)) && (
+
+                                : <div className={Styles.tablePriceCol}>
+                                  <span className={Styles.tablePrice}>
+                                    {Number(item.resultPrice / 10).toLocaleString()}{" "}
+                                    <small>تومان</small>
+                                  </span>
+
                                   <span className={Styles.tableOldPrice}>
                                     {Number(item.noOffPrice / 10).toLocaleString()}{" "}
                                     تومان
                                   </span>
+                                </div>}
+
+                              {/* <div className={Styles.tablePriceWrap}>
+                                {Number(item.noOffPrice) > Number(item.resultPrice) && (
+                                  <span className={Styles.tableDiscountBadge}>
+                                    %{Math.round((1 - Number(item.resultPrice) / Number(item.noOffPrice)) * 100)}- تخفیف
+                                  </span>
                                 )}
-                              </div>
-                            </div>
+                                <div className={Styles.tablePriceCol}>
+                                  <span className={Styles.tablePrice}>
+                                    {Number(item.resultPrice / 10).toLocaleString()}{" "}
+                                    <small>تومان</small>
+                                  </span>
+                                  {(offer != 1 || Number(item.noOffPrice) > Number(item.resultPrice)) && (
+                                    <span className={Styles.tableOldPrice}>
+                                      {Number(item.noOffPrice / 10).toLocaleString()}{" "}
+                                      تومان
+                                    </span>
+                                  )}
+                                </div>
+                              </div> */}
+                            </>
+
+
                           ) : item.supply == 0 && parentId == 2 ? (
                             <span className={Styles.tableEstlam}>
                               استعلام قیمت
@@ -517,6 +541,9 @@ export default function CategoryDetaile({ param }) {
                             </span>
                           ) : null}
                         </td>
+
+
+
                         <td>
                           {item.supply > 0 ? (
                             <span
