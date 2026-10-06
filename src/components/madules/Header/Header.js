@@ -277,15 +277,16 @@ export default function Header() {
 
   useEffect(() => {
     ///// to check if couponState is false, isRequested state set to false and coupon not set untile user want(this is when user onclick coupon button on basketdetail-page)
-    if (!pathname.includes("basket")) {
-      if (couponState) {
-        getOffer();
-        setCouponState(false);
-        setCoupon(null);
-      }
-    }
+    // if (!pathname.includes("basket")) {
+    //   if (couponState) {
+    //     getOffer();
+    //     setCouponState(false);
+    //     setCoupon(null);
+    //   }
+    // }
     getOffer();
   }, [pathname]);
+
 
   useEffect(() => {
     if (pathname.includes("/p-user") && !xtFlagLogin) {

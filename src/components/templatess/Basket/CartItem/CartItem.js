@@ -71,7 +71,6 @@ const CartItem = (props) => {
     ? Math.round((1 - Number(props.unitPrice) / Number(props.WithoutOffPrice)) * 100)
     : 0;
 
-  console.log(props.offer)
   return (
     <motion.div
       layout

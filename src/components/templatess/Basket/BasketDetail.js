@@ -78,6 +78,7 @@ export default function BasketDetail() {
   const [postB, setPostB] = useState(0);
   const [postState, setPostState] = useState(0);
   const [couponB, setCouponB] = useState(null);
+  const [couponId, setCouponId] = useState('')
   const [codeInput, setCodeInput] = useState(null);
   const [couponStateB, setCouponStateB] = useState(false);
   const [dataReady, setDataReady] = useState(false);
@@ -118,6 +119,11 @@ export default function BasketDetail() {
     );
 
   const removeHan = (id) => {
+    // با حذف محصول، کد تخفیف ریست می‌شود تا کاربر دوباره وارد کنه
+    setCouponB(null);
+    setCouponStateB(false);
+    setCouponState(false);
+    setCodeInput(null);
     RemoveApi("api/CyOrders/deleteItem", id, AlertA);
     cartCounter >= 1
       ? setCartCounter((prevCounter) => prevCounter - 1)
@@ -170,7 +176,7 @@ export default function BasketDetail() {
   const payment = () => {
     setFlagSpinner(true);
     if (couponStateB) {
-      requestCoupon(coupon?.coupons[0]?.id, 1, funcOk, funcEr);
+      requestCoupon(couponId, 1, funcOk, funcEr);
     } else {
       directToZarin();
     }
@@ -198,6 +204,7 @@ export default function BasketDetail() {
         if (res.ok) {
           return res.json().then((result) => {
             setCouponB(result.discountAmount);
+            setCouponId(result.coupons[0].id)
             setCoupon(result);
             setCouponStateB(true);
             setCouponState(true);
@@ -221,6 +228,7 @@ export default function BasketDetail() {
     }
     myApp();
   };
+
 
   const handleRegisterShop = () => {
     async function myApp() {
@@ -272,6 +280,11 @@ export default function BasketDetail() {
     );
   };
   const removeFromCart = (id) => {
+    // با حذف محصول، کد تخفیف ریست می‌شود
+    setCouponB(null);
+    setCouponStateB(false);
+    setCouponState(false);
+    setCodeInput(null);
     setCartCounter((prevCounter) => prevCounter - 1);
     removeItem(id);
   };
@@ -439,6 +452,7 @@ export default function BasketDetail() {
     }
   }, [getBasket, xtFlagLogin]);
 
+
   ////post Section
   const postStateChange = () => {
     async function myApp() {
@@ -500,8 +514,7 @@ export default function BasketDetail() {
       }
     });
   };
-  console.log(getBasket)
-  console.log(couponB)
+
   return (
     <>
       {flagSpinner && (
