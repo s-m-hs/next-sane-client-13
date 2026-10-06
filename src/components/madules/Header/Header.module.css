@@ -806,27 +806,28 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 1.4rem;
+  padding: 0.6rem 1.8rem;
+  border: none;
   border-radius: 99px;
   font-size: 1.1rem;
   font-weight: 700;
   margin-left: 4px;
-  color: var(--sd-primary, #7c3aed);
-  background: var(--sd-primary-soft, #f5f3ff);
-  border: 1px solid var(--sd-primary, #7c3aed);
+  color: #fff;
+  background: var(--sd-gradient, linear-gradient(135deg, #7c3aed 0%, #6366f1 55%, #06b6d4 130%));
+  background-size: 160% 160%;
+  background-position: 0% 50%;
+  box-shadow: 0 4px 12px -4px rgba(124, 58, 237, 0.35);
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.35s var(--sd-ease, cubic-bezier(0.22,1,0.36,1)),
-              color 0.35s var(--sd-ease),
-              border-color 0.35s var(--sd-ease);
   margin-right: 0.6rem;
+  transition: background-position 0.4s var(--sd-ease, cubic-bezier(0.22,1,0.36,1)),
+              box-shadow 0.4s var(--sd-ease);
   animation: sd-fade-up 0.5s var(--sd-ease) both;
 }
 .mobileAuthBtn:hover {
-  background: var(--sd-gradient, linear-gradient(135deg, #7c3aed, #6366f1, #06b6d4));
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4px 12px -4px rgba(124, 58, 237, 0.35);
+  background-position: 100% 50%;
+  box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.55);
+  transform: translateY(-1px);
 }
 
 @keyframes sd-fade-up {
