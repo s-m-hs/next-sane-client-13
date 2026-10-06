@@ -117,7 +117,12 @@ export default function BasketDetail() {
       `در حال حاظر،درگاه پرداخت در حال بروزرسانی میباشد برای نهایی کردن خرید خود لطفا از قسمت تماس با ما ،با واحد فروش تماس حاصل فرمایید . با تشکر `,
       6000
     );
-
+  const goToTop = () => {
+    window.scrollTo({
+      top: 600,
+      behavior: 'smooth'
+    })
+  }
   const removeHan = (id) => {
     // با حذف محصول، کد تخفیف ریست می‌شود تا کاربر دوباره وارد کنه
     setCouponB(null);
@@ -479,6 +484,7 @@ export default function BasketDetail() {
   useEffect(() => {
     ApiGetX2(`/api/CyKeyDatas/1013`, setPostA);
     ApiGetX2(`/api/CyKeyDatas/1014`, setPostB);
+    goToTop();
 
   }, []);
 

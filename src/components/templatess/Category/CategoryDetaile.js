@@ -22,6 +22,7 @@ import {
   CaretLeft,
 } from "@phosphor-icons/react";
 import { NOOffer } from "@/utils/DataStore";
+import LoadingA from "@/utils/Loading/LoadingA";
 
 export default function CategoryDetaile({ param }) {
   const [mainCategory, setMainCategory] = useState([]);
@@ -39,6 +40,7 @@ export default function CategoryDetaile({ param }) {
   const [parentId, setParentId] = useState("");
   const [hamkarPaymentState, setHamkarPaymentState] = useState("1");
   const [proByCatFlag, setProByCatFlag] = useState(true);
+  const [isLoading, setIsLoading] = useState(false)
   const rout = useRouter();
 
   let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar, offer } =
@@ -132,10 +134,12 @@ export default function CategoryDetaile({ param }) {
                 setProductByCat(result.itemList);
                 setAllCount(result.allCount);
                 setProByCatFlag(false);
+                setIsLoading(false)
               } else {
                 setProductByCat([]);
                 setAllCount(result.allCount);
                 setProByCatFlag(false);
+                setIsLoading(false)
               }
             });
           }
@@ -253,6 +257,9 @@ export default function CategoryDetaile({ param }) {
 
   return (
     <div className={`container ${Styles.page}`}>
+
+      {isLoading && <LoadingA isShow={true} />}
+
       {/* ===== HERO HEADER ===== */}
       <div className={Styles.hero}>
         <div className={Styles.heroContent}>
@@ -351,7 +358,10 @@ export default function CategoryDetaile({ param }) {
                   key={item.id}
                   className={`${Styles.chip} ${codePro === item.code ? Styles.chipActive : ""
                     }`}
-                  onClick={() => changeId(item.code)}
+                  onClick={() => {
+                    setIsLoading(true)
+                    changeId(item.code)
+                  }}
                 >
                   {item.imageUrl && (
                     <img
