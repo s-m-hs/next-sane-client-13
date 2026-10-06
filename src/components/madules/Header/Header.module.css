@@ -800,3 +800,36 @@
     display: block;
   }
 }
+
+/* ---------- دکمه ورود / پیگیری سفارش (موبایل) ---------- */
+.mobileAuthBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.4rem;
+  border-radius: 99px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-left: 4px;
+  color: var(--sd-primary, #7c3aed);
+  background: var(--sd-primary-soft, #f5f3ff);
+  border: 1px solid var(--sd-primary, #7c3aed);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.35s var(--sd-ease, cubic-bezier(0.22,1,0.36,1)),
+              color 0.35s var(--sd-ease),
+              border-color 0.35s var(--sd-ease);
+  margin-right: 0.6rem;
+  animation: sd-fade-up 0.5s var(--sd-ease) both;
+}
+.mobileAuthBtn:hover {
+  background: var(--sd-gradient, linear-gradient(135deg, #7c3aed, #6366f1, #06b6d4));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px -4px rgba(124, 58, 237, 0.35);
+}
+
+@keyframes sd-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

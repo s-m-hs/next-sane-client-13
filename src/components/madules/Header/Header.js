@@ -580,6 +580,11 @@ export default function Header() {
             </Link>
 
             <div className={styles.header_bottom__col_logo}>
+              {/* دکمه موبایل: ورود / پیگیری سفارش */}
+              <Link href={xtFlagLogin ? "/p-user/order" : "/register"} className={styles.mobileAuthBtn}>
+                {xtFlagLogin ? "پیگیری سفارش" : "ورود"}
+              </Link>
+
               {xtFlagLogin && (
                 <Link href={"/p-user/profile"}>
                   <span className={styles.sphere4}>
@@ -609,6 +614,8 @@ export default function Header() {
                   }}
                 />
               )}
+
+
             </div>
           </div>
         </div>

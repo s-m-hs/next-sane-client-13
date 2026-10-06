@@ -223,7 +223,7 @@ export default function ProfileCom() {
                           <EnvelopeSimple size={38} color={`var(--them)`} weight="duotone" className={style.icon} />
                         </div>
 
-                        <div className={`login_label_float ${style.input_img}`}>
+                        {/* <div className={`login_label_float ${style.input_img}`}>
                           <div className={` ${style.profile_img_div}`}>
                             <CloudArrowUp size={48} color="#fff" weight="duotone" />
                             <input type="file" placeholder="برای پروفایل خود یک عکس انتخاب کن..." className={` ${style.profile_img_input}`} onChange={fileChange} />
@@ -237,7 +237,7 @@ export default function ProfileCom() {
                           ) : (
                             <Image size={48} weight="duotone" color={`var(--them)`} />
                           )}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
