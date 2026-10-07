@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
+import Link from "next/link";
 
 export default function SwiperB() {
   const swiperRef = useRef(null);
@@ -171,16 +172,37 @@ export default function SwiperB() {
       {catArray.length != 0 &&
         catArray.map((item) => (
           <SwiperSlide className={styles.swiper_slide}>
-            <img
-              className={styles.swiper_img_A}
-              src={`${item.bigImg}`}
-              alt={`${item.cyCategoryId}`}
-            />
-            <img
-              className={styles.swiper_img_B}
-              src={`${item.smallImg}`}
-              alt={`${item.cyCategoryId}`}
-            />
+            {item.urL_Title ?
+
+              <>
+                <Link href={item.urL_Title} >     <img
+                  className={styles.swiper_img_A}
+                  src={`${item.bigImg}`}
+                  alt={`${item.cyCategoryId}`}
+                /></Link>
+                <Link href={item.urL_Title}>            <img
+                  className={styles.swiper_img_B}
+                  src={`${item.smallImg}`}
+                  alt={`${item.cyCategoryId}`}
+                /></Link>
+              </>
+
+
+              :
+              <>            <img
+                className={styles.swiper_img_A}
+                src={`${item.bigImg}`}
+                alt={`${item.cyCategoryId}`}
+              />
+                <img
+                  className={styles.swiper_img_B}
+                  src={`${item.smallImg}`}
+                  alt={`${item.cyCategoryId}`}
+                /></>
+
+            }
+
+
           </SwiperSlide>
         ))}
 
