@@ -627,8 +627,8 @@ export default function Header() {
           <div className="dropdownMenu">
             <div className={` container centerr ${styles.mobile_dropdownMenu_li}`}>
               <div className={`row ${styles.ishover}`}>
-                <div className="col-12">
-                  <div>
+                <div className="col-12 mt-5 pt-3">
+                  <div className={`${styles.active_button_header_div} centerrc`}>
                     <button
                       className={!flagCateMobile ? `btn btn-secondary ${styles.rightside_button_cate_mob}` : `btn btn-secondary ${styles.active_button_header}`}
                       onClick={() => setFlagCateMobile(true)}

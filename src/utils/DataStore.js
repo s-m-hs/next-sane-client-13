@@ -44,3 +44,16 @@ export const NOOffer = 0
 export const PercentOffer = 1
 export const RialOffer = 2
 
+export const laptopItems = [
+    { id: "brand" },
+    { id: "cpu" },
+    { id: "ram" },
+    { id: "onboardGrafic" },
+    { id: "grafic" },
+    { id: "ssd" },
+    { id: "hdd" },
+    { id: "size" },
+    { id: "weight" },
+    { id: "color" },
+
+]

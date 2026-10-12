@@ -50,7 +50,48 @@ width: fit-content;
 .breadcrumb a:hover{
     opacity: 0.7;
 }
+.subject_div{
+    border: 1px dotted;
+}
+.subject_div p{
+text-align: justify;}
 
+.subject_div h2{
+margin-top: 40px;
+margin-bottom: 15px;
+color: blueviolet;
+font-weight: 600;
+}
+.subject_div h3{
+color: rgb(172, 8, 8);
+font-weight: 600;
+}
+.subject_div th{
+    color: rgb(45, 38, 46);
+}
+.subject_div td{
+    color: rgb(77, 64, 80);
+}
+
+.subject_div table{
+       width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    border-collapse: collapse;
+
+}
+.subject_div table> :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+    background-color: transparent;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #dee2e6;
+}
+.subject_div table > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 @media only screen and (max-width: 900px)  {
     .product_right_col{
         display: none !important;

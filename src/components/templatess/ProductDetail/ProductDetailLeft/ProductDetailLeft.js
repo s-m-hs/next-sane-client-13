@@ -68,7 +68,7 @@ export default function ProductDetailLeft({ detail }) {
   }, [detail]);
   return (
     <>
-      <div className="container  boxSh" style={{ height: "600px" }}>
+      <div className="container  boxSh" style={{ maxHeight: "600px" }}>
         <div
           className={`${Styles.row_detail} row mt-1 centerc`}
           style={{ height: "600px", padding: "5px" }}

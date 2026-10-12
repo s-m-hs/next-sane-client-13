@@ -41,8 +41,8 @@ export default function CategoryDetaile({ param }) {
   const [hamkarPaymentState, setHamkarPaymentState] = useState("1");
   const [proByCatFlag, setProByCatFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false)
+  const [CategoryTitle, setCategoryTitle] = useState(null)
   const rout = useRouter();
-
   let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar, offer } =
     useContext(MainContext);
   const styleRef = useRef();
@@ -220,6 +220,7 @@ export default function CategoryDetaile({ param }) {
   useEffect(() => {
     if (mainCatChilds.length == 0 && mainCategory.length != 0) {
       let code = mainCategory.item?.code;
+      setCategoryTitle(mainCategory.item?.code)
       let obj = {
         cat: code,
         pageNumber: page - 1,
@@ -241,6 +242,7 @@ export default function CategoryDetaile({ param }) {
         pageNumber: page - 1,
         pageSize: pageCount,
       };
+      setCategoryTitle(mainCatChilds[0]?.code)
       getproductByCat(obj);
     }
     setCodePro(mainCatChilds[0]?.code);

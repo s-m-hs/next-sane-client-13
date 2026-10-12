@@ -139,8 +139,8 @@
   width: 80px;
   background-color: orange;
   cursor: pointer;
-  top: -36px;
-  right: 0;
+  top: 10px;
+  right: 5px;
   border-radius: 7px;
   color: white !important;
   position: absolute;

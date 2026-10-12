@@ -11,6 +11,8 @@ import { HouseLine, Dresser, Car } from "@phosphor-icons/react";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
 import { MdLocalPostOffice } from "react-icons/md";
+import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
+import { laptopItems } from "@/utils/DataStore";
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
 
@@ -19,9 +21,12 @@ export default function ProductDetail({ param }) {
   const [productDetailB, setProductDetailB] = useState({});
   const [idCategory, setIdCategory] = useState("");
   const [braCram, setBramCram] = useState([]);
+  const [laptopReview, setLaptopReview] = useState(null)
+  const [subjectId, setSubjectId] = useState(null)
+  const [laptopSubject, setLaptopSubject] = useState(null)
   const revercBrad = braCram?.slice().reverse();
   let { nameCategory, setXtFlagSpinnerShow, offer } = useContext(MainContext);
-
+  console.log(laptopReview)
   const getProductById = (id) => {
     async function myAppPost() {
       const res = await fetch(`${apiUrl}/api/CyProducts/${id}`, {
@@ -39,6 +44,8 @@ export default function ProductDetail({ param }) {
             setProductDetail(result.spec);
             setIdCategory(result.cyProductCategoryId);
             setProductDetailB(result);
+            setLaptopReview(result?.cyLaptop)
+            setSubjectId(result?.cyLaptop?.cySubjectId)
           }
         })
         .catch((err) => console.log(err));
@@ -64,7 +71,36 @@ export default function ProductDetail({ param }) {
     }
     myApp();
   };
+  console.log(laptopSubject, subjectId)
+  const getsubjectDetail = () => {
+    // const getLocalStorage = localStorage.getItem("loginToken");
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/CySubjects/${subjectId}`, {
+        method: "GET",
+        credentials: "include",
 
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${getLocalStorage}`,
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((resullt) => {
+          setLaptopSubject(resullt);
+        });
+    }
+    myApp();
+  };
+  useEffect(() => {
+    if (subjectId) {
+      getsubjectDetail()
+      // ApiGetX2(`CySubjects/${subjectId}`, setLaptopSubject)
+    }
+  }, [subjectId])
   useEffect(() => {
     setIdCategory("");
     getProductById(param);
@@ -74,6 +110,8 @@ export default function ProductDetail({ param }) {
   useEffect(() => {
     setXtFlagSpinnerShow(false);
   }, []);
+
+  console.log(productDetail, productDetailB)
   return (
     <div className={`container ${Styles.product_container}`}>
       <div className={`row ${Styles.breadcrumb_row}`}>
@@ -115,7 +153,7 @@ export default function ProductDetail({ param }) {
 
       <div className={`row ${Styles.product_row}`}>
         <div className={`col-md-3  ${Styles.product_right_col}`}>
-          <ProducyDetailRight spec={productDetail} />
+          <ProducyDetailRight spec={productDetail} laptopReview={laptopReview} />
         </div>
         <div className="col-md-9 product-left-col">
           <ProductDetailLeft detail={productDetailB} />
@@ -144,15 +182,38 @@ export default function ProductDetail({ param }) {
               <div className={Styles.table_div}>
                 <table className="table mt-5 table-striped">
                   <tbody>
-                    {productDetail?.length != 0 &&
+                    {(laptopReview == null && productDetail?.length != 0) ?
                       productDetail?.map((item) => (
                         <tr key={item.id}>
                           <th>{item.name}</th>
                           <td>{item.value}</td>
                         </tr>
-                      ))}
+                      )) :
+                      laptopReview != null ?
+                        laptopItems.map((item) => (
+                          <tr key={item.id}>
+                            <td
+                              style={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <div style={{ fontWeight: "bolder", marginLeft: "10px" }}>
+                                {(item.id).toLocaleUpperCase()} :
+                              </div>
+
+                              <div>{laptopReview[item.id]}</div>
+                            </td>
+                          </tr>
+                        ))
+                        : ""
+                    }
                   </tbody>
                 </table>
+
+                <div className={Styles.subject_div} dangerouslySetInnerHTML={{ __html: laptopSubject?.body }} />
+
               </div>
             </Tab>
 

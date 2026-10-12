@@ -603,18 +603,27 @@
 .mobile_dropdownMenu_li {
   padding: 16px 8px;
 }
+
+.active_button_header_div{
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 100;
+}
+
 .rightside_button_cate_mob,
 .active_button_header {
+  font-size: 15px;
   margin: 4px;
-  border-radius: 99px !important;
-  font-weight: 700;
+  border-radius: 6px !important;
+  /* font-weight: 700; */
 }
 .active_button_header {
   background: var(--sd-gradient) !important;
   border: none !important;
 }
 .bcatitem {
-  margin-top: 12px;
+  margin-top: 30px;
 }
 .ishover {
   width: 100%;
