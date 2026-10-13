@@ -20,9 +20,180 @@ import {
   ShoppingBag,
   SlidersHorizontal,
   CaretLeft,
+  X,
+  Funnel,
 } from "@phosphor-icons/react";
-import { NOOffer } from "@/utils/DataStore";
+import { NOOffer, PercentOffer, RialOffer } from "@/utils/DataStore";
 import LoadingA from "@/utils/Loading/LoadingA";
+
+/* ============================================================
+   فیلتر لپ‌تاپ — فقط وقتی CategoryTitle برابر «laptop» باشد
+   ============================================================ */
+
+const LAPTOP_USAGE_OPTIONS = [
+  { key: "content", label: "تولید محتوا", prop: "IsContentCreation" },
+  { key: "design", label: "طراحی", prop: "IsDesign" },
+  { key: "gaming", label: "گیمینگ", prop: "IsGaming" },
+  { key: "programming", label: "برنامه‌نویسی", prop: "IsProgramming" },
+  { key: "student", label: "دانشجویی", prop: "IsStudent" },
+  { key: "office", label: "اداری", prop: "IsOffice" },
+  { key: "home", label: "خانه", prop: "IsHome" },
+];
+
+const LAPTOP_BRANDS = [
+  "ASUS",
+  "HP",
+  "LENOVO",
+  "MICROSOFT",
+  "DELL",
+  "SONY",
+  "ACER",
+];
+
+const LAPTOP_CPUS = [
+  "Core i3",
+  "Core i5",
+  "Core i7",
+  "Core i9",
+  "Core Ultra 5",
+  "Core Ultra 7",
+  "Core Ultra 9",
+  "Intel Processor",
+  "Pentium",
+  "Celeron",
+  "Ryzen 3",
+  "Ryzen 5",
+  "Ryzen 7",
+  "Ryzen 9",
+  "Ryzen AI",
+];
+
+const LAPTOP_RAMS = [
+  "4GB",
+  "6GB",
+  "8GB",
+  "12Gb",
+  "16GB",
+  "20Gb",
+  "32GB",
+  "48GB",
+  "64GB",
+  "128GB",
+];
+
+const LAPTOP_SSDS = [
+  "64G",
+  "120G",
+  "128G",
+  "240G",
+  "256G",
+  "480G",
+  "500G",
+  "512G",
+  "960G",
+  "1T",
+  "2T",
+  "4T",
+];
+
+const LAPTOP_SIZES = [
+  "11.6 اینچ",
+  "12 اینچ",
+  "12.5 اینچ",
+  "13.3 اینچ",
+  "13.4 اینچ",
+  "13.5 اینچ",
+  "14 اینچ",
+  "14.5 اینچ",
+  "15 اینچ",
+  "15.6 اینچ",
+  "16 اینچ",
+  "16.1 اینچ",
+  "17 اینچ",
+  "17.3 اینچ",
+  "18اینچ",
+];
+
+const EMPTY_LAPTOP_FILTER = {
+  usage: "",
+  brand: "",
+  cpu: "",
+  ram: "",
+  ssd: "",
+  size: "",
+  grafic: false,
+  hdd: false,
+};
+
+const hasActiveLaptopFilter = (f) =>
+  Boolean(
+    f.usage ||
+      f.brand ||
+      f.cpu ||
+      f.ram ||
+      f.ssd ||
+      f.size ||
+      f.grafic ||
+      f.hdd
+  );
+
+// معادل سمت کلاینت از ProductPriceService.CalculateResultPrice
+function calcResultPrice(price, noOffPrice, offer) {
+  if (price == null) return null;
+  if (price !== noOffPrice) return price;
+  if (!offer) return price;
+  if (offer.offerType === NOOffer) return price;
+  if (offer.offerType === PercentOffer && offer.percentOffer) {
+    return Math.ceil((price * offer.percentOffer) / 10000) * 10000;
+  }
+  if (offer.offerType === RialOffer) {
+    if (price < 2500000) return price;
+    if (price < 10000000) return price - 500000;
+    if (price < 20000000) return price - 1000000;
+    if (price <= 30000000) return price - 1500000;
+    return price - 2000000;
+  }
+  return price;
+}
+
+// تبدیل CyProduct خروجی فیلتر به شکل ProductDTO استفاده‌شده در صفحه
+const mapFilterProduct = (item, offer) => {
+  const price = item?.price ?? null;
+  const noOffPrice = item?.noOffPrice ?? null;
+  return {
+    id: item?.id,
+    name: item?.name || "",
+    smallImage: item?.smallImage || item?.mainImage || "",
+    price,
+    noOffPrice,
+    resultPrice: calcResultPrice(price, noOffPrice, offer),
+    supply: item?.supply ?? 0,
+    isToSale: item?.isToSale ?? false,
+    isShow: true,
+    isFavorite: item?.isFavorite ?? false,
+  };
+};
+
+// ساخت بدنه DTO برای /api/CyLaptop/filter
+const buildLaptopFilterDto = (f) => {
+  const usage = LAPTOP_USAGE_OPTIONS.find((u) => u.key === f.usage);
+  return {
+    Brand: f.brand || null,
+    CPU: f.cpu || null,
+    RAM: f.ram || null,
+    Grafic: f.grafic ? "1" : null,
+    SSD: f.ssd || null,
+    HDD: f.hdd ? "1" : null,
+    Size: f.size || null,
+    IsHome: usage?.prop === "IsHome" ? true : null,
+    IsOffice: usage?.prop === "IsOffice" ? true : null,
+    IsStudent: usage?.prop === "IsStudent" ? true : null,
+    IsProgramming: usage?.prop === "IsProgramming" ? true : null,
+    IsGaming: usage?.prop === "IsGaming" ? true : null,
+    IsDesign: usage?.prop === "IsDesign" ? true : null,
+    IsContentCreation: usage?.prop === "IsContentCreation" ? true : null,
+  };
+};
 
 export default function CategoryDetaile({ param }) {
   const [mainCategory, setMainCategory] = useState([]);
@@ -42,6 +213,11 @@ export default function CategoryDetaile({ param }) {
   const [proByCatFlag, setProByCatFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false)
   const [CategoryTitle, setCategoryTitle] = useState(null)
+  // فیلتر لپ‌تاپ
+  const [laptopFilter, setLaptopFilter] = useState(EMPTY_LAPTOP_FILTER);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filterActive, setFilterActive] = useState(false);
+  const filterReqRef = useRef(0);
   const rout = useRouter();
   let { setNameCategory, setXtFlagSpinnerShow, verifyHamkar, offer } =
     useContext(MainContext);
@@ -149,6 +325,79 @@ export default function CategoryDetaile({ param }) {
     myApppost();
   };
 
+  /* ---------- فیلتر لپ‌تاپ ---------- */
+  const restoreCategoryProducts = () => {
+    setIsLoading(true);
+    const code = CategoryTitle;
+    if (code) {
+      let obj = { cat: code, pageNumber: page - 1, pageSize: pageCount };
+      getproductByCat(obj);
+    } else {
+      setIsLoading(false);
+    }
+  };
+
+  const applyLaptopFilter = (next) => {
+    setLaptopFilter(next);
+
+    // اگر هیچ فیلتری فعال نباشد، لیست عادی دسته‌بندی برگردانده می‌شود
+    if (!hasActiveLaptopFilter(next)) {
+      setFilteredProducts([]);
+      setFilterActive(false);
+      restoreCategoryProducts();
+      return;
+    }
+
+    const reqId = ++filterReqRef.current;
+    setIsLoading(true);
+    fetch(`${apiUrl}/api/CyLaptop/filter`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(buildLaptopFilterDto(next)),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (reqId !== filterReqRef.current) return;
+        setIsLoading(false);
+        if (result?.success) {
+          const items = (result.items || []).map((item) =>
+            mapFilterProduct(item, offer)
+          );
+          setFilteredProducts(items);
+          setFilterActive(true);
+          setProByCatFlag(false);
+          setAllCount(result.count ?? items.length);
+          setPaginationArray([]);
+        }
+      })
+      .catch((err) => {
+        if (reqId !== filterReqRef.current) return;
+        setIsLoading(false);
+        console.log(err);
+      });
+  };
+
+  const resetLaptopFilter = () => {
+    filterReqRef.current++;
+    applyLaptopFilter({ ...EMPTY_LAPTOP_FILTER });
+  };
+
+  const onUsageClick = (key) => {
+    applyLaptopFilter({
+      ...laptopFilter,
+      usage: laptopFilter.usage === key ? "" : key,
+    });
+  };
+
+  const onSelectChange = (field, value) => {
+    applyLaptopFilter({ ...laptopFilter, [field]: value });
+  };
+
+  const onCheckChange = (field, checked) => {
+    applyLaptopFilter({ ...laptopFilter, [field]: checked });
+  };
+
   const getCategoryAccesory = () => {
     let obj = {
       gid: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -253,7 +502,11 @@ export default function CategoryDetaile({ param }) {
   }, []);
 
   // محاسبات
-  const totalProducts = allCount || productByCat?.length || 0;
+  const isLaptopCat = CategoryTitle?.toLowerCase() === "laptop";
+  const displayProducts = filterActive
+    ? [...filteredProducts].sort((a, b) => b.supply - a.supply)
+    : productByCat;
+  const totalProducts = allCount || displayProducts?.length || 0;
   const categoryName = mainCategory.item?.name || "";
   const hasChildCategories = mainCatChilds?.length > 0;
 
@@ -352,6 +605,151 @@ export default function CategoryDetaile({ param }) {
 
         {/* ===== CONTENT ===== */}
         <div className={Styles.content}>
+          {/* ===== فیلتر لپ‌تاپ ===== */}
+          {isLaptopCat && (
+            <div className={Styles.filterPanel}>
+              <div className={Styles.filterHeader}>
+                <span className={Styles.filterTitle}>
+                  <SlidersHorizontal size={18} weight="duotone" />
+                  فیلتر لپ‌تاپ
+                </span>
+                {filterActive && (
+                  <button
+                    className={Styles.filterClear}
+                    onClick={resetLaptopFilter}
+                  >
+                    <X size={16} weight="bold" />
+                    پاک کردن فیلترها
+                  </button>
+                )}
+              </div>
+
+              {/* ردیف اول — کاربرد (فقط یکی قابل انتخاب) */}
+              <div className={Styles.filterRow}>
+                <span className={Styles.filterRowLabel}>کاربرد</span>
+                <div className={Styles.usageChips}>
+                  {LAPTOP_USAGE_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.key}
+                      className={`${Styles.usageChip} ${
+                        laptopFilter.usage === opt.key
+                          ? Styles.usageChipActive
+                          : ""
+                      }`}
+                      onClick={() => onUsageClick(opt.key)}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ردیف دوم — مشخصات */}
+              <div className={Styles.filterRow}>
+                <span className={Styles.filterRowLabel}>مشخصات</span>
+                <div className={Styles.filterFields}>
+                  <label className={Styles.filterField}>
+                    <span className={Styles.fieldLabel}>برند</span>
+                    <select
+                      className={Styles.fieldSelect}
+                      value={laptopFilter.brand}
+                      onChange={(e) => onSelectChange("brand", e.target.value)}
+                    >
+                      <option value="">همه</option>
+                      {LAPTOP_BRANDS.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className={Styles.filterField}>
+                    <span className={Styles.fieldLabel}>پردازنده (CPU)</span>
+                    <select
+                      className={Styles.fieldSelect}
+                      value={laptopFilter.cpu}
+                      onChange={(e) => onSelectChange("cpu", e.target.value)}
+                    >
+                      <option value="">همه</option>
+                      {LAPTOP_CPUS.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className={Styles.filterField}>
+                    <span className={Styles.fieldLabel}>رم (RAM)</span>
+                    <select
+                      className={Styles.fieldSelect}
+                      value={laptopFilter.ram}
+                      onChange={(e) => onSelectChange("ram", e.target.value)}
+                    >
+                      <option value="">همه</option>
+                      {LAPTOP_RAMS.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className={Styles.filterCheck}>
+                    <input
+                      type="checkbox"
+                      checked={laptopFilter.grafic}
+                      onChange={(e) => onCheckChange("grafic", e.target.checked)}
+                    />
+                    <span>کارت گرافیک مجزا</span>
+                  </label>
+
+                  <label className={Styles.filterField}>
+                    <span className={Styles.fieldLabel}>حافظه SSD</span>
+                    <select
+                      className={Styles.fieldSelect}
+                      value={laptopFilter.ssd}
+                      onChange={(e) => onSelectChange("ssd", e.target.value)}
+                    >
+                      <option value="">همه</option>
+                      {LAPTOP_SSDS.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className={Styles.filterCheck}>
+                    <input
+                      type="checkbox"
+                      checked={laptopFilter.hdd}
+                      onChange={(e) => onCheckChange("hdd", e.target.checked)}
+                    />
+                    <span>هارد HDD</span>
+                  </label>
+
+                  <label className={Styles.filterField}>
+                    <span className={Styles.fieldLabel}>اندازه صفحه</span>
+                    <select
+                      className={Styles.fieldSelect}
+                      value={laptopFilter.size}
+                      onChange={(e) => onSelectChange("size", e.target.value)}
+                    >
+                      <option value="">همه</option>
+                      {LAPTOP_SIZES.map((v) => (
+                        <option key={v} value={v}>
+                          {v}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* ===== چیپ‌های زیردسته ===== */}
           {hasChildCategories && (
             <div className={Styles.chipRow}>
@@ -422,12 +820,24 @@ export default function CategoryDetaile({ param }) {
                 <div key={i} className={Styles.skeletonCard} />
               ))}
             </div>
+          ) : filterActive && filteredProducts.length === 0 ? (
+            /* ------ نتیجه‌ای برای فیلتر پیدا نشد ------ */
+            <div className={Styles.filterEmpty}>
+              <Funnel size={44} weight="duotone" />
+              <p>محصولی با این مشخصات پیدا نشد</p>
+              <button
+                className={Styles.filterEmptyReset}
+                onClick={resetLaptopFilter}
+              >
+                پاک کردن فیلترها
+              </button>
+            </div>
           ) : !tableShow ? (
             /* ------ نمای کارتی ------ */
             <div className={Styles.productGrid}>
               <AnimatePresence mode="popLayout">
-                {productByCat
-                  ?.filter((item) => item.isShow)
+                {displayProducts
+                  ?.filter((item) => (filterActive ? true : item.isShow))
                   .map((item, index) => (
                     <motion.div
                       key={item.id}
@@ -476,8 +886,8 @@ export default function CategoryDetaile({ param }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {productByCat
-                    ?.filter((item) => item.isShow)
+                  {displayProducts
+                    ?.filter((item) => (filterActive ? true : item.isShow))
                     .map((item) => (
                       <tr
                         key={item.id}
@@ -597,7 +1007,7 @@ export default function CategoryDetaile({ param }) {
           )}
 
           {/* ===== صفحه‌بندی ===== */}
-          {paginationArray.length > 1 && (
+          {!filterActive && paginationArray.length > 1 && (
             <div className={Styles.paginationWrap}>
               <Pagination
                 count={paginationArray.length}
