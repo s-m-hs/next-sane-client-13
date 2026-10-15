@@ -1,123 +1,95 @@
-.swiper{
+/* ============================================================
+   SwiperProduct — گالری تصاویر (بازطراحی مدرن)
+   ============================================================ */
+
+.swiper {
   height: 100%;
+  width: 100%;
   justify-content: space-evenly !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.mySwiperE{
-    width: 100%;
-    height: 10%;
-    margin-top: 25px;
-  }
-  
-  .mySwiperE .swiper_slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    width: 20% !important;
-  
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .mySwiperE .swiper_slide img {
-    /* display: block; */
-    border: 1px solid var(--graydcdee1);
-    border-radius: 8px;
-    width:90%;
-    height: 90%;
-    object-fit: contain;
-    
-  }
-  
-  /* body {
-    background: #000;
-    color: #000;
-  }
-   */
-   /* .mySwiperE{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  } */
-  
-  /* .mySwiperE  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-  }
-   */
+/* ---------- تصویر اصلی ---------- */
+.mySwiperE2 {
+  height: auto;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+}
+.mySwiperE2 .swiper_slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mySwiperE2 .swiper_slide div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.mySwiperE2 .swiper_slide img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(15, 23, 42, 0.08));
+}
 
-  
-  .mySwiperE2 {
-    height: 60%;
-    width: 100%;
-    box-sizing: border-box;
+/* ---------- تصاویر بندانگشتی ---------- */
+.mySwiperE {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin-top: 1rem;
+  padding-bottom: 0.2rem;
+}
+.mySwiperE .swiper_slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+}
+.mySwiperE .swiper_slide:hover {
+  opacity: 1;
+}
+.mySwiperE .swiper_slide img {
+  border: 2px solid var(--sd-border, #eef0f6);
+  border-radius: 0.8rem;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+.mySwiperE :global(.swiper-slide-thumb-active) img {
+  border-color: var(--them, #960fbf);
+  box-shadow: 0 0 0 2px rgba(150, 15, 191, 0.15);
+}
+.mySwiperE :global(.swiper-slide-thumb-active) {
+  opacity: 1;
+}
 
-  }
-  
-  /* .mySwiperE2 {
-    height: 10%;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-   */
-  .mySwiperE2  .swiper_slide {
-    width: 45%;
-    height: 100%;
-    /* opacity: 0.4; */
-  }
-  .mySwiperE2  .swiper_slide div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* width: 65%; */
-  }
-  .mySwiperE2 .swiper_slide_thumb_active {
-    opacity: 1;
-  }
-  
-  .mySwiperE2 .swiper_slide img {
-    /* display: block; */
-    width: 90%;
-    object-fit: contain;
-    position: relative;
-  }
-  
-.img_div{
+.img_div {
   width: 400px;
   height: 350px;
 }
 
-
-  @media only screen and (max-width: 900px) {
-    .mySwiperE2 .swiper_slide img {
-      width: 50% !important;
-      height: 50% !important;
-    }
+/* =================== ریسپانسیو =================== */
+@media only screen and (max-width: 900px) {
+  .mySwiperE2 .swiper_slide img {
+    max-height: 300px;
   }
-  @media only screen and (max-width: 500px) {
-    .mySwiperE2 .swiper_slide img {
-      width: 60% !important;
-      height: 60% !important;
-    }
-    .mySwiperE{
-      height: 20% !important;
-    }
+}
+@media only screen and (max-width: 500px) {
+  .mySwiperE2 .swiper_slide img {
+    max-height: 240px;
   }
-  /* @media only screen and (max-width: 760px) {
-    .mySwiperE2 .swiper_slide img {
-      width: 60% !important;
-      height: 60% !important;
-    }
-  } */
-
-  /* @media only screen and (max-width: 760px) {
-
-    .mySwiperE2 .swiper_slide img {
-      width: 50% !important;
-      height: 50% !important;
-    }
-  } */
+}

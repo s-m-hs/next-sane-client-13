@@ -20,11 +20,19 @@
   gap: 2rem 0;
 }
 
+.div_logo{
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    /* padding: 33px; */
+    width: 160px;
+    border-radius: 5px;
+}
+
 .logo {
-  width: 90px;
+  width: 100px;
   height: auto;
-  border-radius: 1.6rem;
-  box-shadow: 0 10px 30px -8px rgba(124, 58, 237, 0.55);
+  border-radius: 0.5rem;
 }
 
 .tagline {

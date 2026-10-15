@@ -1,231 +1,275 @@
-.ProductDetailL_divright {
+/* ============================================================
+   ProductDetailLeft — گالری + اطلاعات محصول (بازطراحی مدرن)
+   ============================================================ */
+
+.card {
+  background: var(--sd-surface, #fff);
+  border-radius: var(--sd-radius, 1.4rem);
+  padding: 1.2rem;
   height: 100%;
-  padding: 10px;
+  direction: rtl;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 1.6rem;
+  align-items: start;
+  height: 100%;
 }
 
-.ProductDetailL_div__title {
-  font-size: 1.5cqi;
-  font-weight: 500;
-  color: var(--black33b4359);
-  font-family: vazirEn;
-}
-.ProductDetailL_div__description {
-  font-size: 1cqi;
-  color: var(--black33b4359);
-}
-.ProductDetailL_main_divright {
-  background-color: #efefef;
-  height: 90%;
-  border-radius: 5px;
-}
-.ProductDetailL_div__partn {
-  font-size: 1cqi;
-  color: var(--black33b4359);
-}
-.ProductDetailL_detail span {
-  font-size: 0.8cqi;
-  color: var(--black33b4359);
-}
-
-.ProductDetailL_divMiddle {
-  height: 100%;
-  line-height: 30px;
+/* ---------- گالری ---------- */
+.galleryCol {
+  position: relative;
+  background: var(--sd-bg, #f8fafc);
+  border: 1px solid var(--sd-border, #eef0f6);
+  border-radius: 1.2rem;
+  padding: 0.8rem;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
 }
-.ProductDetailL_divMiddle_offprice {
-  font-size: 1.5cqi;
-  /* color: var(--them); */
-  color: var(--them);
+.floatButtons {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.floatBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.floatBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(150, 15, 191, 0.2);
+}
+
+/* ---------- اطلاعات ---------- */
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0.4rem 0.2rem;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+.availBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.9rem;
+  border-radius: 99px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.availBadgeIn {
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+}
+.availBadgeOut {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+.manufacturerBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.9rem;
+  border-radius: 99px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: rgba(150, 15, 191, 0.1);
+  color: var(--them, #960fbf);
+}
+.codeBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.9rem;
+  border-radius: 99px;
+  font-size: 1.05rem;
   font-weight: 600;
+  background: var(--sd-bg, #f8fafc);
+  color: var(--sd-text-soft, #64748b);
+  border: 1px solid var(--sd-border, #eef0f6);
 }
-.ProductDetailL_divMiddle_offpriceB {
-  /* color: var(--them); */
-  font-size: 1.4cqi;
-  /* font-weight: 600; */
+.title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--sd-text, #1e293b);
+  margin: 0;
+  line-height: 1.5;
+  font-family: inherit;
 }
-.ProductDetailL_divMiddle_price {
-  font-size: 1cqi;
-  position: relative;
-    color:var(--black33b4359);
+.description {
+  font-size: 1.2rem;
+  color: var(--sd-text-soft, #64748b);
+  line-height: 1.7;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 0.7rem;
+  background: var(--sd-bg, #f8fafc);
+  border: 1px solid var(--sd-border, #eef0f6);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--sd-text, #1e293b);
+}
+.divider {
+  height: 1px;
+  background: var(--sd-border, #eef0f6);
+  margin: 0.2rem 0 0.4rem;
+}
 
-  /* text-decoration: line-through solid #ff0000; */
+/* ---------- قیمت ---------- */
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
-
+.priceMain {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--them, #960fbf);
+}
+.priceOld {
+  font-size: 1.3rem;
+  color: var(--sd-text-soft, #64748b);
+  font-weight: 500;
+}
 .underline {
-  text-decoration: line-through red;
+  text-decoration: line-through;
+  text-decoration-color: #ef4444;
+  text-decoration-thickness: 2px;
 }
-.ProductDetailL_divMiddle_count {
-  font-size: 1cqi;
-  color: red;
-  /* color: var(--them); */
+.inquiry {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d97706;
 }
-.ProductDetailL_divMiddle_count2 {
-  font-size: 1cqi;
-  color: rgb(255, 166, 0);
-  /* color: var(--them); */
-}
-.ProductDetailL_divMiddle_price::before {
-  content: "";
-  position: absolute;
-  text-decoration: line-through solid #ff0000;
-  top: 15px;
-  right: 0;
-  left: 0;
-  display: block;
-  width: 70%;
-  height: 3%;
-  background-color: #ff0000;
-  transform: rotate(-5deg);
-}
-.ProductDetailL_left {
-  height: 100%;
+
+/* ---------- دکمه افزودن به سبد ---------- */
+.addButton {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-}
-.ProductDetailL_left button {
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding: 0.85rem 2rem;
   border: none;
-  outline: none;
-  height: 50px;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, #960fbf, #cd41f8);
   color: #fff;
-
-  font-size: 1cqi;
-  transition: all 0.2s linear;
-}
-.ProductDetailL_left button:hover {
-  opacity: 0.8;
-  /* background: linear-gradient(31deg, #ffffff  24%, #14a5af 100%)!important; */
-}
-.ProductDetailL_divright_swiper{
-  position: relative;
-}
-  .favorite{
-  position: absolute;
-  left:20px;
-  top: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
-  z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 6px 16px -6px rgba(150, 15, 191, 0.55);
+  width: fit-content;
 }
-.share{
-    position: absolute;
-  left:20px;
-  top: 30px;
-  cursor: pointer;
-  z-index: 1000;
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(150, 15, 191, 0.6);
+  opacity: 0.95;
 }
-.ProductDetailL_divright_swiper_button {
-  width: 100%;
-  color: #fff;
-  display: none;
-  background-color: var(--them);
+.addButton:active {
+  transform: translateY(0);
 }
-.addButton{
-  background-color: var(--them);
-}
-/* 
-    .bodyd {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-      } */
 
-.sphere span {
-  top: 40%;
-  right: 40%;
-  position: absolute;
-}
-.sphere img {
-  width: 30px;
-  height: 30px;
-}
-.ProductDetailL_divright_swiper_bottom {
-  display: none;
-}
-.ProductDetailL_left_price {
-  display: none;
+/* =================== ریسپانسیو =================== */
+@media only screen and (max-width: 1200px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
 }
 @media only screen and (max-width: 900px) {
-  .ProductDetailL_main_divright {
-    display: none !important;
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
-  .ProductDetailL_divright_swiper_button {
-    display: inline !important;
+  .galleryCol {
+    min-height: 260px;
   }
-  .ProductDetailL_left {
-    display: none !important;
+  .infoCol {
+    padding: 0.2rem 0.4rem;
   }
-  .ProductDetailL_left_price {
-    display: flex;
+  .title {
+    font-size: 1.45rem;
   }
-  .ProductDetailL_divright_swiper_bottom {
-    display: block;
+  .priceMain {
+    font-size: 1.7rem;
   }
-  .ProductDetailL_divright_swiper {
-    height: 60% !important;
-    width: 100% !important;
-    position: relative;
+  .addButton {
+    width: 100%;
   }
-
-  .ProductDetailL_divMiddle_offprice {
-    font-size: 20px;
+}
+@media only screen and (max-width: 480px) {
+  .card {
+    padding: 0.8rem;
   }
-    .ProductDetailL_divMiddle_offpriceB {
-    font-size: 18px;
+  .galleryCol {
+    min-height: 220px;
+    padding: 0.4rem;
   }
-  .ProductDetailL_divMiddle_price {
-    width: fit-content;
+  .title {
+    font-size: 1.3rem;
+  }
+  .description {
+    font-size: 1.1rem;
+  }
+  .chip {
+    font-size: 1rem;
+  }
+  .priceMain {
     font-size: 1.5rem;
-    /* text-decoration: line-through solid #ff0000; */
   }
-  .ProductDetailL_divMiddle_price::before {
-    content: "";
-    position: absolute;
-    text-decoration: line-through solid #ff0000;
-    top: 10px;
-    right: 0;
-    left: 0;
-    display: block;
-    width: 70%;
-    height: 3%;
-    background-color: #ff0000;
-    transform: rotate(-5deg);
-  }
-  .ProductDetailL_divMiddle_count {
-    font-size: 15px;
-  }
-  .ProductDetailL_divMiddle_count2 {
-font-size: 15px;
-  /* color: var(--them); */
-}
-  .ProductDetailL_div__title {
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .ProductDetailL_div__description {
-    font-size: 10px;
-  }
-  .ProductDetailL_detail span {
-    font-size: 13px;
-  }
-
-  .ProductDetailL_divright_swiper_button {
-    font-size: 20px !important;
-  }
-  .row_detail {
-    height: auto !important ;
+  .galleryCol{
+    width: 400px;
   }
 }
 
-@media only screen and (max-width: 765px) {
-  .ProductDetailL_divright_swiper {
-    height: 60% !important;
+@media only screen and (max-width: 425px) {
+  .galleryCol{
+    width: 360px;
+  }
+}
+@media only screen and (max-width: 400px) {
+    .galleryCol{
+    width: 340px;
   }
 }
 
-@media only screen and (max-width: 575px) {
-  .ProductDetailL_divright_swiper {
-    height: 50% !important;
+@media only screen and (max-width: 380px) {
+    .galleryCol{
+    width: 320px;
+  }
+}
+@media only screen and (max-width: 360px) {
+    .galleryCol{
+    width: 320px;
   }
 }

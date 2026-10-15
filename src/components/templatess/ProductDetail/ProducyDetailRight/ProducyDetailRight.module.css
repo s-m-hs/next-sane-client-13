@@ -1,15 +1,50 @@
-.table{
-    line-height: 50px;
+/* ============================================================
+   ProducyDetailRight — ستون مشخصات فنی (بازطراحی مدرن)
+   ============================================================ */
+
+.card {
+  background: var(--sd-surface, #fff);
+  border-radius: var(--sd-radius, 1.2rem);
+  direction: rtl;
 }
-
-.table> th{
-    padding: 5px;
-    font-size: 0.9cqi;
-    color: var(--black1464646)!important ;
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--sd-text, #1e293b);
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 2px solid var(--them, #960fbf);
 }
-
-.table>  td{
-    font-size: 0.8cqi;
-    color: var(--black33b4359)!important;
-
+.header svg {
+  color: var(--them, #960fbf);
+}
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px dashed var(--sd-border, #eef0f6);
+  font-size: 1.1rem;
+}
+.row:last-child {
+  border-bottom: none;
+}
+.label {
+  font-weight: 700;
+  color: var(--sd-text-soft, #64748b);
+  flex-shrink: 0;
+}
+.value {
+  font-weight: 500;
+  color: var(--sd-text, #1e293b);
+  text-align: left;
+  overflow-wrap: anywhere;
 }

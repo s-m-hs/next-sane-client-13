@@ -23,7 +23,10 @@ export default function Footer() {
         {/* top: logo + socials */}
         <div className={`row align-items-center ${style.rowtop} sd-fade-up`}>
           <div className="col-md-7 centercc">
-            <img className={style.logo} src="../../../../../../images/Sane_Logo_2_Purple.jpg" alt="logo" />
+            <div className={style.div_logo}>
+              <img className={style.logo} src="../../../../../../images/Sane_Logo_2_Purple.jpg" alt="logo" />
+
+            </div>
             <p className={style.tagline}>
               فروشگاه تخصصی قطعات کامپیوتر و کالاهای دیجیتال — از سال ۱۳۸۰
             </p>

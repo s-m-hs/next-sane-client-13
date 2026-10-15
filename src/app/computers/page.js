@@ -101,7 +101,7 @@ export default function ComputersPage() {
 
         <section className="flex-grow-1">
           <div className="d-flex align-items-center justify-content-between mb-3">
-            <span className="small sane-text-sub">{visibleProducts.length} محصول یافت شد</span>
+            <span className="small sane-text-sub">{allSystem?.length} محصول یافت شد</span>
           </div>
 
           {allSystem.length === 0 ? (

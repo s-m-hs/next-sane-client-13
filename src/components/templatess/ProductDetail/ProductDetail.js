@@ -7,11 +7,17 @@ import ProducyDetailRight from "./ProducyDetailRight/ProducyDetailRight";
 import ProductDetailLeft from "./ProductDetailLeft/ProductDetailLeft";
 import apiUrl from "@/utils/ApiUrl/apiUrl";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { HouseLine, Dresser, Car } from "@phosphor-icons/react";
+import {
+  HouseLine,
+  Dresser,
+  Truck,
+  ShieldCheck,
+  CreditCard,
+  ArrowCounterClockwise,
+  ChatCircleDots,
+} from "@phosphor-icons/react";
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
-import { MdLocalPostOffice } from "react-icons/md";
-import ApiGetX2 from "@/utils/ApiServicesX/ApiGetX2";
 import { laptopItems } from "@/utils/DataStore";
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
@@ -113,84 +119,105 @@ export default function ProductDetail({ param }) {
 
   console.log(productDetail, productDetailB)
   return (
-    <div className={`container ${Styles.product_container}`}>
-      <div className={`row ${Styles.breadcrumb_row}`}>
-        <div className={`${Styles.breadcrumb} col`}>
-          {revercBrad.length != 0 && (
-            <>
-              <Breadcrumb>
-                <Breadcrumb.Item>
-                  <Link
-                    href="/"
-                  // onClick={()=>setXtFlagSpinnerShow(true)}
-                  >
-                    <HouseLine size={18} />
-                    خانه{" "}
-                  </Link>
-                </Breadcrumb.Item>
+    <div className={`container ${Styles.page}`}>
+      {/* ===== نوار مسیر ===== */}
+      <div className={Styles.breadcrumbWrap}>
+        {revercBrad.length != 0 && (
+          <Breadcrumb className={Styles.breadcrumb}>
+            <Breadcrumb.Item>
+              <Link href="/">
+                <HouseLine size={16} weight="fill" />
+                خانه
+              </Link>
+            </Breadcrumb.Item>
 
-                <Breadcrumb.Item>
-                  <Link onClick={() => setXtFlagSpinnerShow(true)} href={`/category/${idCategory}`}>
-                    <Dresser size={18} />
-                    {revercBrad[0]}
-                  </Link>
-                </Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link
+                onClick={() => setXtFlagSpinnerShow(true)}
+                href={`/category/${idCategory}`}
+              >
+                <Dresser size={16} weight="fill" />
+                {revercBrad[0]}
+              </Link>
+            </Breadcrumb.Item>
 
-                <Breadcrumb.Item active href="/">
-                  {revercBrad[1]}
-                </Breadcrumb.Item>
+            <Breadcrumb.Item active href="/">
+              {revercBrad[1]}
+            </Breadcrumb.Item>
 
-                {revercBrad[2] && (
-                  <Breadcrumb.Item active href="/">
-                    {revercBrad[2]}
-                  </Breadcrumb.Item>
-                )}
-              </Breadcrumb>
-            </>
-          )}
+            {revercBrad[2] && (
+              <Breadcrumb.Item active href="/">
+                {revercBrad[2]}
+              </Breadcrumb.Item>
+            )}
+          </Breadcrumb>
+        )}
+      </div>
+
+      {/* ===== کارت اصلی محصول ===== */}
+      <div className={Styles.detailCard}>
+        <div className="row g-0">
+          <div className={`col-lg-9 ${Styles.mainCol}`}>
+            <ProductDetailLeft detail={productDetailB} />
+          </div>
+          <div className={`col-lg-3 ${Styles.specCol}`}>
+            <ProducyDetailRight
+              spec={productDetail}
+              laptopReview={laptopReview}
+            />
+          </div>
         </div>
       </div>
 
-      <div className={`row ${Styles.product_row}`}>
-        <div className={`col-md-3  ${Styles.product_right_col}`}>
-          <ProducyDetailRight spec={productDetail} laptopReview={laptopReview} />
+      {/* ===== مزیت‌های خرید ===== */}
+      <div className={Styles.trustRow}>
+        <div className={Styles.trustItem}>
+          <Truck size={22} weight="duotone" className={Styles.trustIcon} />
+          <span className={Styles.trustText}>ارسال سریع به سراسر کشور</span>
         </div>
-        <div className="col-md-9 product-left-col">
-          <ProductDetailLeft detail={productDetailB} />
+        <div className={Styles.trustItem}>
+          <ShieldCheck size={22} weight="duotone" className={Styles.trustIcon} />
+          <span className={Styles.trustText}>ضمانت اصالت کالا</span>
+        </div>
+        <div className={Styles.trustItem}>
+          <CreditCard size={22} weight="duotone" className={Styles.trustIcon} />
+          <span className={Styles.trustText}>پرداخت امن آنلاین</span>
+        </div>
+        <div className={Styles.trustItem}>
+          <ArrowCounterClockwise
+            size={22}
+            weight="duotone"
+            className={Styles.trustIcon}
+          />
+          <span className={Styles.trustText}>بازگشت تا ۷ روز</span>
         </div>
       </div>
 
-      {/* <div className="row centerr">
-
-        <div className="boxSh centerrc">
-          <Car />adasd
-        </div>
-
-      </div> */}
-
-      <div className="row boxSh">
-        <div className={`col ${Styles.product_tab_div}`}>
-          <Tabs
-            defaultActiveKey="home"
-            id="fill-tab-example"
-            className="mb-2"
-          // fill
-          // onSelect={ffc}
-          // onClick={()=>ffc(id)}
+      {/* ===== تب‌های توضیحات ===== */}
+      <div className={Styles.tabsCard}>
+        <Tabs
+          defaultActiveKey="home"
+          id="fill-tab-example"
+          className={Styles.tabs}
+        >
+          <Tab
+            eventKey="home"
+            title="مشخصات"
+            style={{ background: "inherit" }}
           >
-            <Tab eventKey="home" title="مشخصات" style={{ background: "inherit" }}>
-              <div className={Styles.table_div}>
-                <table className="table mt-5 table-striped">
+            <div className={Styles.tableWrap}>
+              <div className={Styles.specTable}>
+                <table className="table table-striped">
                   <tbody>
-                    {(laptopReview == null && productDetail?.length != 0) ?
-                      productDetail?.map((item) => (
-                        <tr key={item.id}>
-                          <th>{item.name}</th>
-                          <td>{item.value}</td>
-                        </tr>
-                      )) :
-                      laptopReview != null ?
-                        laptopItems.map((item) => (
+                    {laptopReview == null && productDetail?.length != 0
+                      ? productDetail?.map((item) => (
+                          <tr key={item.id}>
+                            <th>{item.name}</th>
+                            <td>{item.value}</td>
+                          </tr>
+                        ))
+                      : laptopReview != null
+                      ? laptopItems.map((item) => (
                           <tr key={item.id}>
                             <td
                               style={{
@@ -199,27 +226,44 @@ export default function ProductDetail({ param }) {
                                 justifyContent: "space-between",
                               }}
                             >
-                              <div style={{ fontWeight: "bolder", marginLeft: "10px" }}>
-                                {(item.id).toLocaleUpperCase()} :
+                              <div
+                                style={{
+                                  fontWeight: "bolder",
+                                  marginLeft: "10px",
+                                }}
+                              >
+                                {item.id.toLocaleUpperCase()} :
                               </div>
 
                               <div>{laptopReview[item.id]}</div>
                             </td>
                           </tr>
                         ))
-                        : ""
-                    }
+                      : ""}
                   </tbody>
                 </table>
-
-                <div className={Styles.subject_div} dangerouslySetInnerHTML={{ __html: laptopSubject?.body }} />
-
               </div>
-            </Tab>
 
-            <Tab eventKey="longer-tab" title="نظرات کاربران" style={{ background: "inherit" }}></Tab>
-          </Tabs>
-        </div>
+              {laptopSubject?.body && (
+                <div
+                  className={Styles.subjectDiv}
+                  dangerouslySetInnerHTML={{ __html: laptopSubject.body }}
+                />
+              )}
+            </div>
+          </Tab>
+
+          <Tab
+            eventKey="longer-tab"
+            title="نظرات کاربران"
+            style={{ background: "inherit" }}
+          >
+            <div className={Styles.commentsEmpty}>
+              <ChatCircleDots size={44} weight="duotone" />
+              <p>هنوز نظری برای این محصول ثبت نشده است.</p>
+            </div>
+          </Tab>
+        </Tabs>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import Favorite from "@/components/madules/Favorite/Favorite";
 import ShareButton from "@/components/madules/ShareButton/ShareButton";
 import { NOOffer, product } from "@/utils/DataStore";
 import PriceBox from "@/components/madules/PriceBox/PriceBox";
+import { ShoppingCart, CheckCircle } from "@phosphor-icons/react";
 
 export default function ProductDetailLeft({ detail }) {
   let {
@@ -66,229 +67,119 @@ export default function ProductDetailLeft({ detail }) {
       setFlagSupply(true);
     }
   }, [detail]);
+
+  /* ---------- تنها نمایشی (بدون منطق) ---------- */
+  const inStock = detail?.supply > 0;
+
   return (
-    <>
-      <div className="container  boxSh" style={{ maxHeight: "600px" }}>
-        <div
-          className={`${Styles.row_detail} row mt-1 centerc`}
-          style={{ height: "600px", padding: "5px" }}
-        >
-          {detail && (
-            <>
-              <div
-                className={`col-6 ${Styles.ProductDetailL_main_divright} centerc `}
+    <div className={Styles.card}>
+      {detail && (
+        <div className={Styles.grid}>
+          {/* ===== گالری تصاویر ===== */}
+          <div className={Styles.galleryCol}>
+            <div className={Styles.floatButtons}>
+              <span className={Styles.floatBtn}>
+                <Favorite id={detail.id} isFavorite={detail.isFavorite} />
+              </span>
+              <span className={Styles.floatBtn}>
+                <ShareButton productId={detail.id} type={product} />
+              </span>
+            </div>
+
+            <SwiperProduct
+              src={detail.mainImage}
+              srcB={detail.images?.split("*,*")}
+            />
+          </div>
+
+          {/* ===== اطلاعات محصول ===== */}
+          <div className={Styles.infoCol}>
+            <div className={Styles.badges}>
+              <span
+                className={`${Styles.availBadge} ${
+                  inStock ? Styles.availBadgeIn : Styles.availBadgeOut
+                }`}
               >
-                <div
-                  className={`${Styles.ProductDetailL_divright} centerc `}
-                >
-                  <h1 className={Styles.ProductDetailL_div__title}>
-                    {detail.name}
-                  </h1>
-                  <span className={Styles.ProductDetailL_div__description}>
-                    {detail.description}
+                <CheckCircle size={14} weight="fill" />
+                {inStock ? "موجود" : "ناموجود"}
+              </span>
+
+              {detail.manufacturer && (
+                <span className={Styles.manufacturerBadge}>
+                  {detail.manufacturer}
+                </span>
+              )}
+
+              {detail.productCode && (
+                <span className={Styles.codeBadge}>
+                  کد کالا: {detail.productCode}
+                </span>
+              )}
+            </div>
+
+            <h1 className={Styles.title}>{detail.name}</h1>
+            {detail.description && (
+              <span className={Styles.description}>{detail.description}</span>
+            )}
+
+            {detail.spec?.slice(0, 3).length > 0 && (
+              <div className={Styles.chips}>
+                {detail.spec?.slice(0, 3).map((item, index) => (
+                  <span key={index} className={Styles.chip}>
+                    {item.name} : {item.value}
                   </span>
-                  {/* <span className={Styles.ProductDetailL_div__partn}  >پارت نامبر: 90MP03F0-BMUA00</span> */}
-                  <div
-                    className={`${Styles.ProductDetailL_detail} centerc mt-5`}
-                  >
-                    {detail.spec?.slice(0, 3).map((item) => (
-                      <span> {`${item.name} : ${item.value}`}</span>
-                    ))}
-                  </div>
+                ))}
+              </div>
+            )}
 
-                  <div
-                    className={`${Styles.ProductDetailL_divMiddle} centerc mt-5`}
-                  >
-                    {(detail.supply != 0 && detail.isToSale) ? (
+            <div className={Styles.divider} />
 
-
-                      /////حالت screen > 900
-                      <>
-
-                        {(offer.offerType == NOOffer && (detail.noOffPrice == detail.price)) ?
-                          <span
-                            className={Styles.ProductDetailL_divMiddle_offprice}
-                          >
-                            {(Number(detail.price) / 10)?.toLocaleString()}{" "}
-                            تومان
-                          </span>
-                          :
-                          <>
-                            <span
-                              className={
-                                `${Styles.ProductDetailL_divMiddle_offprice} `
-                              }
-                            >
-                              {(Number(detail.resultPrice) / 10)?.toLocaleString()}{" "}
-                              تومان
-                            </span>
-
-                            <span
-                              className={`${Styles.ProductDetailL_divMiddle_offpriceB} ${Styles.underline} `}
-                            >
-                              {(Number(detail.noOffPrice) / 10)?.toLocaleString()}{" "}
-                              تومان
-                            </span>
-
-                          </>
-                        }
-
-                      </>
-                    ) :
-                      (detail.supply != 0 && !detail.isToSale) ?
-                        (
-                          <span className={Styles.ProductDetailL_divMiddle_count2}>
-                            استعلام قیمت
-                          </span>
-                        ) :
-                        (
-                          ///ناموجود ===> استعلام قیمت
-                          <span className={Styles.ProductDetailL_divMiddle_count}>
-                            استعلام قیمت
-                          </span>
-                        )}
-                  </div>
-
-                  {flagSupply && (
-                    <div
-                      className={`${Styles.ProductDetailL_left} centerc mt-5`}
-                    >
-                      <button
-                        className={`${Styles.addButton} btn btn-light`}
-                        onClick={() => {
-                          xtFlagLogin
-                            ? addToBasket()
-                            : addToCart(detail.id, "1", setCartCounter);
-                        }}
+            <div className={Styles.priceRow}>
+              {detail.supply != 0 && detail.isToSale ? (
+                <>
+                  {offer.offerType == NOOffer &&
+                  detail.noOffPrice == detail.price ? (
+                    <span className={Styles.priceMain}>
+                      {(Number(detail.price) / 10)?.toLocaleString()} تومان
+                    </span>
+                  ) : (
+                    <>
+                      <span className={Styles.priceMain}>
+                        {(Number(detail.resultPrice) / 10)?.toLocaleString()}{" "}
+                        تومان
+                      </span>
+                      <span
+                        className={`${Styles.priceOld} ${Styles.underline}`}
                       >
-                        افزودن به سبد خرید
-                      </button>
-                    </div>
+                        {(Number(detail.noOffPrice) / 10)?.toLocaleString()}{" "}
+                        تومان
+                      </span>
+                    </>
                   )}
-                </div>
-              </div>
+                </>
+              ) : detail.supply != 0 && !detail.isToSale ? (
+                <span className={Styles.inquiry}>استعلام قیمت</span>
+              ) : (
+                <span className={Styles.inquiry}>استعلام قیمت</span>
+              )}
+            </div>
 
-              <div
-                className={`${Styles.ProductDetailL_divright_swiper} col-12 col-md-6`}
+            {flagSupply && (
+              <button
+                className={Styles.addButton}
+                onClick={() => {
+                  xtFlagLogin
+                    ? addToBasket()
+                    : addToCart(detail.id, "1", setCartCounter);
+                }}
               >
-
-                <div className={`${Styles.favorite}`}>
-                  <Favorite id={detail.id} isFavorite={detail.isFavorite} />
-
-                </div>
-
-                <div className={`${Styles.share}`}>
-                  <ShareButton productId={detail.id} type={product} />
-                </div>
-
-                <SwiperProduct
-                  src={detail.mainImage}
-                  srcB={detail.images?.split("*,*")}
-                />
-
-                {flagSupply && (
-                  <button
-                    className={`${Styles.ProductDetailL_divright_swiper_button} btn btn-light`}
-
-                    onClick={() => {
-                      xtFlagLogin
-                        ? addToBasket()
-                        : // updateBasket(getLocalStorage,obj,setBasketFlag,AlertA)
-                        addToCart(detail.id, "1", setCartCounter);
-                    }}
-                  >
-                    {" "}
-                    افزودن به سبد خرید
-                  </button>
-                )}
-              </div>
-
-              <div
-                className={`${Styles.ProductDetailL_divright_swiper_bottom} col-12`}
-              >
-                <div className="container">
-                  <div className="row">
-                    <div className="col-6 centerc">
-                      <span className={Styles.ProductDetailL_div__title}>
-                        {detail.name}
-                      </span>
-                      <span className={Styles.ProductDetailL_div__description}>
-                        {detail.description}
-                      </span>
-                      <div
-                        className={`${Styles.ProductDetailL_detail} centerc mt-5`}
-                      >
-                        {detail.spec?.slice(0, 3).map((item) => (
-                          <span> {`${item.name} : ${item.value}`}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="col-6">
-                      <div
-                        className={`${Styles.ProductDetailL_left_price} centerc mt-5`}
-                      >
-                        {(detail.supply != 0 && detail.isToSale) ? (
-                          <>
-
-                            {/* /////حالت screen < 900 */}
-                            {(offer.offerType == NOOffer && (detail.noOffPrice == detail.price)) ?
-                              <span
-                                className={
-                                  Styles.ProductDetailL_divMiddle_offprice
-                                }
-                              >
-                                {(Number(detail.price) / 10)?.toLocaleString()}{" "}
-                                تومان
-                              </span>
-
-                              :
-                              <>
-                                <span
-                                  className={
-                                    `${Styles.ProductDetailL_divMiddle_offprice}`
-                                  }
-                                >
-                                  {((detail.resultPrice) / 10)?.toLocaleString()}{" "}
-                                  تومان
-                                </span>
-                                <span
-                                  className={`${Styles.ProductDetailL_divMiddle_offpriceB}  ${Styles.underline}`}
-                                >
-                                  {(
-                                    Number(detail.noOffPrice) / 10
-                                  )?.toLocaleString()}{" "}
-                                  تومان
-                                </span>
-                              </>
-                            }
-
-                          </>
-                        )
-                          :
-                          (detail.supply != 0 && !detail.isToSale) ?
-                            (
-                              <span className={Styles.ProductDetailL_divMiddle_count2}>
-                                استعلام قیمت
-                              </span>
-                            )
-                            : (
-
-                              ///ناموجود ===> استعلام قیمت
-                              <span
-                                className={Styles.ProductDetailL_divMiddle_count}
-                              >
-                                استعلام قیمت                              </span>
-                            )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
+                <ShoppingCart size={20} weight="fill" />
+                افزودن به سبد خرید
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
