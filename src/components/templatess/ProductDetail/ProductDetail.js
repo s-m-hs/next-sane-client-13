@@ -32,7 +32,6 @@ export default function ProductDetail({ param }) {
   const [laptopSubject, setLaptopSubject] = useState(null)
   const revercBrad = braCram?.slice().reverse();
   let { nameCategory, setXtFlagSpinnerShow, offer } = useContext(MainContext);
-  console.log(laptopReview)
   const getProductById = (id) => {
     async function myAppPost() {
       const res = await fetch(`${apiUrl}/api/CyProducts/${id}`, {
@@ -77,7 +76,6 @@ export default function ProductDetail({ param }) {
     }
     myApp();
   };
-  console.log(laptopSubject, subjectId)
   const getsubjectDetail = () => {
     // const getLocalStorage = localStorage.getItem("loginToken");
     async function myApp() {
@@ -101,6 +99,13 @@ export default function ProductDetail({ param }) {
     }
     myApp();
   };
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
   useEffect(() => {
     if (subjectId) {
       getsubjectDetail()
@@ -115,9 +120,9 @@ export default function ProductDetail({ param }) {
 
   useEffect(() => {
     setXtFlagSpinnerShow(false);
+    goToTop()
   }, []);
 
-  console.log(productDetail, productDetailB)
   return (
     <div className={`container ${Styles.page}`}>
       {/* ===== نوار مسیر ===== */}
@@ -211,13 +216,13 @@ export default function ProductDetail({ param }) {
                   <tbody>
                     {laptopReview == null && productDetail?.length != 0
                       ? productDetail?.map((item) => (
-                          <tr key={item.id}>
-                            <th>{item.name}</th>
-                            <td>{item.value}</td>
-                          </tr>
-                        ))
+                        <tr key={item.id}>
+                          <th>{item.name}</th>
+                          <td>{item.value}</td>
+                        </tr>
+                      ))
                       : laptopReview != null
-                      ? laptopItems.map((item) => (
+                        ? laptopItems.map((item) => (
                           <tr key={item.id}>
                             <td
                               style={{
@@ -239,7 +244,7 @@ export default function ProductDetail({ param }) {
                             </td>
                           </tr>
                         ))
-                      : ""}
+                        : ""}
                   </tbody>
                 </table>
               </div>

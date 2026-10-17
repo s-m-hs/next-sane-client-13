@@ -34,7 +34,8 @@ import alertAA from "@/utils/Alert/AlertAA";
 import requestCoupon from "@/utils/Functions/requestCoupon";
 import requstedCouponSetToFalse from "@/utils/Functions/requstedCouponSetToFalse";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { provinces } from "@/utils/DataStore";
+import { useForm } from "react-hook-form";
 export default function BasketDetail() {
   let {
     setXtFlagSpinnerShow,
@@ -55,6 +56,7 @@ export default function BasketDetail() {
     setCoupon,
     couponState,
     setCouponState,
+    name, cyUserID, setFlagAddress
   } = useContext(MainContext);
   const [toBuy, setToBuy] = useState([]);
   const [isApiCalled, setIsApiCalled] = useState(false);
@@ -90,6 +92,15 @@ export default function BasketDetail() {
   const handleShowB = () => setShowB(true);
   const handleShowC = () => setShowC(true);
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {},
+  });
   const rout = useRouter();
 
   const AlertA = () =>
@@ -119,7 +130,7 @@ export default function BasketDetail() {
     );
   const goToTop = () => {
     window.scrollTo({
-      top: 600,
+      top: 0,
       behavior: 'smooth'
     })
   }
@@ -149,6 +160,66 @@ export default function BasketDetail() {
     }).then((res) => {
       rout.push("/register");
     });
+
+  const addNameToProfile = (Usname) => {
+    ///=>  برای گرفتن نام کاربر در صورتی ک پروفایل کاربر فیلد نام برابر باشد با پیشفرض سیستم
+    //  =SaneUser
+    async function myApp() {
+      const res = await fetch(`${apiUrl}/api/Customer/updateOnlyName?Usid=${cyUserID}&name=${Usname}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).catch((err) => console.log(err));
+    }
+    myApp();
+  };
+
+  const handleRegistration = (data) => {
+    console.log(data)
+    // const getLocalStorage = localStorage.getItem("loginToken");
+    if (name === "SaneUser" && data.name) {
+      addNameToProfile(data.name);
+    }
+    let obj = {
+      id: 0,
+      address: data.address,
+      city: null,
+      state: data.state,
+      postalCode: null,
+      phone: null,
+      mobile: null,
+    };
+    async function myAppPost() {
+      const res = await fetch(
+        `${apiUrl}/api/CyAddress/PostAddress
+    `,
+        {
+          method: "POST",
+          credentials: "include",
+
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${getLocalStorage}`,
+          },
+          body: JSON.stringify(obj),
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            alertAA("");
+            return res.json();
+          }
+        })
+        .then((result) => {
+          setFlagAddress((prev) => !prev);
+          reset(setValue(""));
+        })
+        .catch((err) => console.log(err));
+    }
+    myAppPost();
+  };
 
   const directToZarin = () => {
     async function myApp() {
@@ -833,12 +904,16 @@ export default function BasketDetail() {
         dialogClassName={style.modalContent}
         centered
       >
-        <Modal.Header closeButton className={style.modalHeader}>
-          <h4 style={{ fontWeight: 800 }}>نهایی‌سازی سفارش</h4>
+        <Modal.Header className={style.modalHeader}>
+          <button className={style.modalBtnClose} onClick={handleClose}>
+            <X size={16} weight="duotone" />
+
+          </button>
+          <h4 >نهایی‌سازی سفارش</h4>
         </Modal.Header>
 
         <Modal.Body className={style.modalBody}>
-          {address?.length != 0 ? (
+          {address?.length != 0 && (
             <>
               <h5 style={{ fontWeight: 700, marginBottom: "1rem" }}>
                 آدرس تحویل سفارش
@@ -854,97 +929,160 @@ export default function BasketDetail() {
                 ))}
               </Form.Select>
             </>
-          ) : (
-            <div style={{ textAlign: "center", padding: "2rem 0" }}>
-              <h5 style={{ fontWeight: 700, marginBottom: "1.2rem" }}>
-                شما آدرس ثبت شده‌ای ندارید
-              </h5>
-              <Link
-                href={"./p-user/address"}
-                onClick={() => setXtFlagSpinnerShow(true)}
-              >
-                <button className={style.checkoutBtn} style={{ width: "auto", padding: "0.8rem 2.4rem", fontSize: "1.4rem" }}>
-                  ثبت آدرس جدید
-                </button>
-              </Link>
-            </div>
           )}
+          {address?.length == 0 ?
+            <form action="" onSubmit={handleSubmit(handleRegistration)}>
+              <div className={`${style.address_div} boxSh`} >
 
-          <div className={style.paymentSection}>
-            <h5 style={{ fontWeight: 700, marginBottom: "1rem" }}>روش پرداخت</h5>
-            <label className={style.paymentOption}>
-              <input
-                type="radio"
-                name="payment"
-                defaultChecked
-                value={1}
-                onChange={(e) => setPayState(e.target.value)}
-              />
-              <CreditCard size={20} weight="fill" style={{ color: "var(--sd-primary)" }} />
-              <span style={{ fontWeight: 600 }}>پرداخت آنلاین (درگاه بانکی)</span>
-            </label>
+                {name === "SaneUser" &&
+                  <>
+                    <input type="text"
+                      name="name"
+                      placeholder=" نام خانوادگی خود را وارد کنید"
+                      {...register(`name`, {
+                        required: "وارد کردن نام کاربری الزامی است...",
+                        minLength: {
+                          value: 3,
+                          message: "نام کاربری باید حداقل ۳ حرف باشد",
+                        },
+                      })}
+                    />
+                    {errors.name &&
+                      <span
+                        style={{
+                          color: "red",
+                          fontSize: "12px",
+                          position: "absolute",
+                          bottom: "0px",
+                          right: "30px",
+                        }}
+                      >
+                        {errors.name.message}
+                      </span>}
+                  </>
+                }
+                <div>
+                  <select  {...register("state", {
+                    required: " وارد کردن استان الزامی است ...",
+                  })}>
+                    <option value="" key="">
+                      استان ...
+                    </option>
+                    {provinces.map((item, index) => (
+                      <option key={index} value={`${item.name}`}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.state && (
+                    <span
+                      style={{
+                        width: "100%",
+                        color: "red",
+                        fontSize: "12px",
+                        position: "absolute",
+                        bottom: "-10px",
+                        right: "30px",
+                      }}
+                    >
+                      {errors.state.message}
+                    </span>
+                  )}
+                  <textarea  {...register(`address`)} cols="30" rows="1" placeholder="آدرس خود را وارد کنید"></textarea>
+                </div>
 
-            <h5
-              style={{
-                fontWeight: 700,
-                marginTop: "1.6rem",
-                marginBottom: "1rem",
-              }}
-            >
-              روش ارسال
-            </h5>
+                <button
+                  type="submit" className={`${style.modalBtnConfirm}`} >ثبت آدرس </button>
 
-            <div
-              className={`${style.postOption} ${postState == 1 ? style.postOptionActive : ""
-                }`}
-              onClick={() => setPostState(1)}
-            >
-              {postState == 1 ? (
-                <FiCheckSquare color="var(--sd-primary)" fontSize="20px" />
-              ) : (
-                <MdOutlineCheckBoxOutlineBlank fontSize="20px" />
-              )}
+
+              </div>
+            </form>
+            :
+            <div className={style.paymentSection}>
+              <h5 style={{ fontWeight: 700, marginBottom: "1rem" }}>روش پرداخت</h5>
+              <label className={style.paymentOption}>
+                <input
+                  type="radio"
+                  name="payment"
+                  defaultChecked
+                  value={1}
+                  onChange={(e) => setPayState(e.target.value)}
+                />
+                <CreditCard size={20} weight="fill" style={{ color: "var(--sd-primary)" }} />
+                <span style={{ fontWeight: 600 }}>پرداخت آنلاین (درگاه بانکی)</span>
+              </label>
+
+              <h5
+                style={{
+                  fontWeight: 700,
+                  marginTop: "1.6rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                روش ارسال
+              </h5>
+
               <div
-                className={style.postEditor}
-                dangerouslySetInnerHTML={{ __html: `${postA?.value}` }}
-              />
+                className={`${style.postOption} ${postState == 1 ? style.postOptionActive : ""
+                  }`}
+                onClick={() => setPostState(1)}
+              >
+                <div>                {postState == 1 ? (
+                  <FiCheckSquare color="var(--sd-primary)" fontSize="20px" />
+                ) : (
+                  <MdOutlineCheckBoxOutlineBlank fontSize="20px" />
+                )}
+                  <div
+                    className={style.postEditor}
+                    dangerouslySetInnerHTML={{ __html: `${postA?.value}` }}
+                  /></div>
+
+              </div>
+
+              <div
+                className={`${style.postOption} ${postState == 2 ? style.postOptionActive : ""
+                  }`}
+                onClick={() => setPostState(2)}
+              >
+
+                <div>                {postState == 2 ? (
+
+                  <FiCheckSquare color="var(--sd-primary)" fontSize="20px" />
+                ) : (
+                  <MdOutlineCheckBoxOutlineBlank fontSize="20px" />
+                )}
+                  <div
+                    className={style.postEditor}
+                    dangerouslySetInnerHTML={{ __html: `${postB?.value}` }}
+                  /></div>
+
+              </div>
+
+              <p className={style.postNote}>
+                در صورت ارسال کالا از طریق پست ،سفارش پس از تایید نهایی واحد فروش حداکثر طی ۴۸ ساعت کاری تحویل پست میگردد.
+              </p>
             </div>
 
-            <div
-              className={`${style.postOption} ${postState == 2 ? style.postOptionActive : ""
-                }`}
-              onClick={() => setPostState(2)}
-            >
-              {postState == 2 ? (
-                <FiCheckSquare color="var(--sd-primary)" fontSize="20px" />
-              ) : (
-                <MdOutlineCheckBoxOutlineBlank fontSize="20px" />
-              )}
-              <div
-                className={style.postEditor}
-                dangerouslySetInnerHTML={{ __html: `${postB?.value}` }}
-              />
-            </div>
-
-            <p className={style.postNote}>
-              سفارش پس از تایید نهایی واحد فروش حداکثر طی ۴۸ ساعت کاری تحویل پست میگردد.
-            </p>
-          </div>
+          }
         </Modal.Body>
 
         <Modal.Footer className={style.modalFooter}>
-          <button className={style.modalBtnClose} onClick={handleClose}>
-            <X size={16} weight="duotone" />
-            بستن
-          </button>
-          <button
-            className={`${style.modalBtnConfirm} ${address?.length === 0 ? style.modalBtnConfirmDisabled : ""
-              }`}
-            onClick={postState == 0 ? alertF : payState == 1 ? payment : handleRegisterShop}
-          >
-            <CheckCircle size={18} weight="fill" />
-            تایید و پرداخت
-          </button>
+          {address?.length != 0 &&
+            <>
+              {/* <button className={style.modalBtnClose} onClick={handleClose}>
+              <X size={16} weight="duotone" />
+              بستن
+            </button> */}
+              <button
+                className={`${style.modalBtnConfirm} ${address?.length === 0 ? style.modalBtnConfirmDisabled : ""
+                  }`}
+                onClick={postState == 0 ? alertF : payState == 1 ? payment : handleRegisterShop}
+              >
+                <CheckCircle size={18} weight="fill" />
+                تایید و پرداخت
+              </button></>
+
+          }
         </Modal.Footer>
       </Modal>
 

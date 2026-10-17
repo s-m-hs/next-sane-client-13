@@ -512,6 +512,11 @@
   border: none !important;
   padding: 1.6rem 2rem 0 !important;
 }
+.modalHeader  h4{
+  color: var(--sd-primary);
+  font-weight: 800;
+
+}
 .modalBody {
   padding: 1.6rem 2rem !important;
   font-size: 1.5rem;
@@ -586,13 +591,13 @@
 }
 
 .postEditor {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: var(--sd-text, #1e293b);
 }
 
 .postNote {
-  font-size: 1.2rem;
-  color: var(--sd-text-soft, #64748b);
+  font-size: 1.4rem;
+  color: var(--sd-text-soft, #92969b);
   margin-top: 1.2rem;
   line-height: 1.8;
   font-weight: 600;
@@ -600,7 +605,8 @@
 
 /* دکمه‌های مودال */
 .modalBtnClose {
-  padding: 0.8rem 2rem;
+  margin: 5px;
+  padding: 0.4rem 1rem;
   border: 1px solid var(--sd-border, #e2e8f0);
   background: var(--sd-surface, #fff);
   color: var(--sd-text, #1e293b);
@@ -652,6 +658,42 @@
   font-weight: 600;
   color: var(--sd-danger, #ef4444);
 }
+
+.address_div{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+.address_div input{
+  width: 250px;
+  border-radius: 1rem;
+  outline-color: var(--sd-accent, #06b6d4);;
+ border: 1px solid var(--sd-border, #e2e8f0);
+ padding: 0.8rem 1rem;
+}
+.address_div textarea{
+   padding: 0.8rem 1rem;
+min-width: 250px;
+  margin: 5px;
+  width: 80%;
+    border-radius: 1rem;
+  outline-color: var(--sd-accent, #06b6d4);;
+ border: 1px solid var(--sd-border, #e2e8f0);
+}
+.address_div select{
+    width: 250px;
+  border-radius: 1rem;
+  outline-color: var(--sd-accent, #06b6d4);;
+ border: 1px solid var(--sd-border, #e2e8f0);
+ padding: 0.8rem 1rem;
+}
+.address_div button{
+  align-self: center;
+}
+
+
+
+
 
 /* ---------- اسپینر تمام‌صفحه ---------- */
 .spinnerOverlay {
