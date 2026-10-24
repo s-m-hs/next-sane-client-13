@@ -19,6 +19,7 @@ import {
 import Link from "next/link";
 import { MainContext } from "@/context/MainContext";
 import { laptopItems } from "@/utils/DataStore";
+import LoadingA from "@/utils/Loading/LoadingA";
 
 // import ProductDetailL from '../../Components/ProductDetail/ProductDetailL'
 
@@ -31,6 +32,7 @@ export default function ProductDetail({ param }) {
   const [subjectId, setSubjectId] = useState(null)
   const [laptopSubject, setLaptopSubject] = useState(null)
   const revercBrad = braCram?.slice().reverse();
+  const [isShow, setIsShow] = useState(true)
   let { nameCategory, setXtFlagSpinnerShow, offer } = useContext(MainContext);
   const getProductById = (id) => {
     async function myAppPost() {
@@ -51,6 +53,7 @@ export default function ProductDetail({ param }) {
             setProductDetailB(result);
             setLaptopReview(result?.cyLaptop)
             setSubjectId(result?.cyLaptop?.cySubjectId)
+            setIsShow(false)
           }
         })
         .catch((err) => console.log(err));
@@ -126,6 +129,7 @@ export default function ProductDetail({ param }) {
   return (
     <div className={`container ${Styles.page}`}>
       {/* ===== نوار مسیر ===== */}
+      <LoadingA isShow={isShow} />
       <div className={Styles.breadcrumbWrap}>
         {revercBrad.length != 0 && (
           <Breadcrumb className={Styles.breadcrumb}>
