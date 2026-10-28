@@ -96,11 +96,10 @@ export default function ProductDetailLeft({ detail }) {
           <div className={Styles.infoCol}>
             <div className={Styles.badges}>
               <span
-                className={`${Styles.availBadge} ${
-                  inStock ? Styles.availBadgeIn : Styles.availBadgeOut
-                }`}
+                className={`${Styles.availBadge} ${inStock ? Styles.availBadgeIn : Styles.availBadgeOut
+                  }`}
               >
-                <CheckCircle size={14} weight="fill" />
+                <CheckCircle size={25} weight="fill" />
                 {inStock ? "موجود" : "ناموجود"}
               </span>
 
@@ -118,6 +117,7 @@ export default function ProductDetailLeft({ detail }) {
             </div>
 
             <h1 className={Styles.title}>{detail.name}</h1>
+
             {detail.description && (
               <span className={Styles.description}>{detail.description}</span>
             )}
@@ -138,7 +138,7 @@ export default function ProductDetailLeft({ detail }) {
               {detail.supply != 0 && detail.isToSale ? (
                 <>
                   {offer.offerType == NOOffer &&
-                  detail.noOffPrice == detail.price ? (
+                    detail.noOffPrice == detail.price ? (
                     <span className={Styles.priceMain}>
                       {(Number(detail.price) / 10)?.toLocaleString()} تومان
                     </span>
