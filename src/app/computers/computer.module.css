@@ -39,6 +39,47 @@
   padding: 2px;
   text-align: center;
 }
+
+/* ---------- توضیحات تاپیک (لپ‌تاپ) ---------- */
+.listhardware_p {
+  border: 1px dashed var(--sd-border, #d0d5dd) !important;
+  border-radius: 0.8rem;
+  padding: 1.2rem 1.6rem !important;
+  margin-top: 0.8rem;
+  background: var(--sd-surface, #fff);
+  direction: rtl;
+}
+.listhardware_p p {
+  text-align: justify;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--sd-text, #1e293b);
+}
+.listhardware_p h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  color: var(--sd-primary, #7c3aed);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.listhardware_p h3 {
+  color: var(--sd-text, #1e293b);
+  font-weight: 600;
+  margin-top: 1.2rem;
+}
+.listhardware_p table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+.listhardware_p table > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--sd-border, #dee2e6);
+}
+.listhardware_p table > tbody > tr:nth-of-type(odd) > * {
+  background: rgba(0, 0, 0, 0.03);
+}
+
 @media only screen and (max-width: 500px) {
     .listhardware_p{
     font-size: 15px !important;

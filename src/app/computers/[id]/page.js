@@ -223,7 +223,12 @@ export default function ProductDetailPage({ params }) {
           items={[
             { title: "مشخصات کامل سیستم", content: <SpecsTable specs={hardWareList} /> },
             { title: "معرفی اجمالی سیستم", content: <p className={` ${Style.listhardware_p} mb-0`} style={{ justifyContent: "center !important" }} >{product.cySubject?.describtion}</p> },
-            { title: "بررسی کامل سیستم", content: <p className={`${Style.listhardware_p}mb-0 `} dangerouslySetInnerHTML={{ __html: product.cySubject?.body }}></p> },
+
+            {
+              title: "بررسی کامل سیستم",
+              content:
+                <div className={`${Style.listhardware_p} mb-0 `} dangerouslySetInnerHTML={{ __html: product.cySubject?.body }}></div>
+            },
           ]}
         />
       </section>
